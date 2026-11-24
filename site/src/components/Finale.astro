@@ -14,7 +14,7 @@ const s = t(lang).finale;
 <section class="finale has-rails" id="early-access" aria-labelledby="finale-title">
   <Rails />
   <div class="wrap inner">
-    <figure class="scene" aria-hidden="true">
+    <figure class="scene" aria-hidden="true" data-frame>
       <Window tabs={[{ ai: s.prompt.tab, icon: 'claude-color' }]}>
         <div class="body" data-sv data-steps="4" data-interval="900" data-gaps=",900,2200" data-step="0">
           <p class="t-body bubble">{s.prompt.said}</p>
@@ -36,7 +36,7 @@ const s = t(lang).finale;
   /* A picture, not a control: a chat with bleib's card, styled exactly like the hero's. */
   .scene { margin: 0 0 clamp(40px, 6vw, 64px); width: min(440px, 100%); }
   /* Like the hero: you type, you send, bleib offers to save it, Save is pressed (scripts/story.ts). */
-  .body { --bleib-card-margin: 0 0 8px; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
+  .body { --bleib-card-margin: 0 0 8px; display: flex; flex-direction: column; padding: 16px; }
   .bubble { align-self: flex-end; max-width: 80%; margin: 0 0 12px; padding: 8px 14px; border-radius: 18px; background: var(--fill); opacity: 0; transform: translateY(8px); transition: opacity 0.35s var(--ease), transform 0.35s var(--ease); }
   .s2 .bubble { opacity: 1; transform: none; }
 

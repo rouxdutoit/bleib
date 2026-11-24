@@ -112,17 +112,18 @@ export function play(sv: HTMLElement): void {
   }
 }
 
+const heightOf = (el: HTMLElement) => parseFloat(getComputedStyle(el).height) || 0;
+
 /** A scene's height once it has played: its last step and typed text, measured without transitions. */
 const finalHeight = (sv: HTMLElement): number => {
   const { hidden, className } = sv;
   const typer = sv.querySelector<HTMLElement>('[data-type]');
   const typed = typer?.textContent ?? '';
-  sv.style.minHeight = '';
   sv.hidden = false;
   sv.classList.add('measuring');
   for (let k = 1; k <= Number(sv.dataset.steps ?? '0'); k++) sv.classList.add(`s${k}`);
   if (typer) typer.textContent = typer.dataset.type ?? '';
-  const height = Math.ceil(parseFloat(getComputedStyle(sv).height));
+  const height = heightOf(sv);
   sv.className = `${className} measuring`;
   if (typer) typer.textContent = typed;
   sv.hidden = hidden;
@@ -132,14 +133,22 @@ const finalHeight = (sv: HTMLElement): number => {
 };
 
 /**
- * Reserves every scene's finished height before it plays, so the page around it never moves.
- * Scenes that share a parent (the hero's tabs) all take the tallest one's height, so switching tabs doesn't move it either.
+ * Reserves the space each scene needs once it has played, so the page around it never moves while the card grows.
+ * The space is held by the scene's [data-frame] (the hero's and the closer's window grows inside it) or by the scene itself.
+ * Scenes that share a frame (the hero's tabs) reserve the tallest one, so switching tabs doesn't move the page either.
  */
 const reserve = () => {
-  const scenes = [...document.querySelectorAll<HTMLElement>('[data-steps]')];
-  const tallest = new Map<Element | null, number>();
-  scenes.forEach((sv) => tallest.set(sv.parentElement, Math.max(tallest.get(sv.parentElement) ?? 0, finalHeight(sv))));
-  scenes.forEach((sv) => (sv.style.minHeight = `${tallest.get(sv.parentElement)}px`));
+  const frames = new Map<HTMLElement, HTMLElement[]>();
+  document.querySelectorAll<HTMLElement>('[data-steps]').forEach((sv) => {
+    const frame = sv.closest<HTMLElement>('[data-frame]') ?? sv;
+    frames.set(frame, [...(frames.get(frame) ?? []), sv]);
+  });
+  frames.forEach((scenes, frame) => {
+    frame.style.minHeight = '';
+    const shown = scenes.find((sv) => !sv.hidden) ?? scenes[0];
+    const around = frame === shown ? 0 : heightOf(frame) - heightOf(shown);
+    frame.style.minHeight = `${Math.ceil(around + Math.max(...scenes.map(finalHeight)))}px`;
+  });
 };
 
 /** Plays every [data-sv] scene once, when it comes into view (and, for data-sv="scroll", once the page has scrolled). */
