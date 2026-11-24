@@ -167,7 +167,7 @@ const en = {
     },
   },
   finale: {
-    prompt: { site: 'claude.ai', said: 'I always book an aisle seat.', title: 'Save to bleib?', fact: 'Prefers aisle seats', notNow: 'Not Now', save: 'Save' },
+    prompt: { site: 'claude.ai', said: 'I always book an aisle seat.', title: 'Save to bleib?', fact: 'Prefers aisle seats', notNow: 'Not Now', save: 'Save', saved: 'Saved' },
     h: 'Tell it once.',
     p: 'Every AI gets what it needs. Nothing more.',
   },
@@ -350,7 +350,7 @@ const de: Strings = {
     },
   },
   finale: {
-    prompt: { site: 'claude.ai', said: 'Ich buche immer einen Gangplatz.', title: 'In bleib sichern?', fact: 'Bevorzugt Gangplätze', notNow: 'Nicht jetzt', save: 'Sichern' },
+    prompt: { site: 'claude.ai', said: 'Ich buche immer einen Gangplatz.', title: 'In bleib sichern?', fact: 'Bevorzugt Gangplätze', notNow: 'Nicht jetzt', save: 'Sichern', saved: 'Gesichert' },
     h: 'Einmal sagen.',
     p: 'Jede KI bekommt, was sie braucht. Mehr nicht.',
   },

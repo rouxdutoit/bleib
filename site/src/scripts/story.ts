@@ -1,6 +1,6 @@
 /**
  * Plays each scene's card morph once, when the scene comes into view: data-step="n" plus
- * cumulative classes s1..sn (see StoryVisual.astro). With reduced motion the final state shows at once.
+ * cumulative classes s1..sn (see StoryVisual.astro and Finale.astro). With reduced motion the final state shows at once.
  */
 const START = 500;
 const STEP = 900;
