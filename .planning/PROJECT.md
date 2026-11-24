@@ -30,7 +30,7 @@ You can change AI without losing who you are to it, and you can always see exact
 - [ ] "Open source" and "free until you want convenience" are visible near the top
 - [ ] Simple single page that links to subpages (How it works, Developers, Pricing, Privacy) and an early-access signup
 - [ ] Accessible (WCAG 2.2 AA / BITV 2.0), responsive to phone width, respects reduced motion, works in German and English
-- [ ] Deployed to the existing Cloudflare Pages project `bleib` (bleib.pages.dev)
+- [ ] Deployed to Bunny.net (EU) at bleib.dev
 
 **Milestone 2: MVP (single person, day-one value), to be sharpened with the competitor teardown**
 - [ ] An encrypted local wallet of plain-text context, compatible with OpenClaw/Hermes workspace files
@@ -69,7 +69,7 @@ You can change AI without losing who you are to it, and you can always see exact
 - **Privacy**: local first, no telemetry, we never hold keys that let us read data, fail closed
 - **Language**: plain words in the interface; German and English written natively
 - **Accessibility**: WCAG 2.2 AA / BITV 2.0 from day one
-- **Hosting**: Cloudflare Pages (existing project `bleib`) for the site
+- **Hosting**: Bunny.net in the EU (storage in Frankfurt with a Stockholm copy, EU-only delivery, Bunny DNS for bleib.dev), deployed by GitHub Actions like Fazit
 - **Brand**: keep the bleib mark (gold #f6e79a, black tile) and name; trademark still to be checked
 - **Website licensing**: follow Roze's structure and feel, but no copying of its text, images, code or assets
 

@@ -1,0 +1,56 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+name: Deploy website
+
+"on":
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/deploy-site.yml'
+      - '.github/scripts/site-deploy.sh'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-site
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Get the site files without retaining the GitHub token.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+      # Build the static site before making any storage changes.
+      - name: Build the website
+        working-directory: site
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+      # Sync Bunny Storage (Frankfurt, replicated to Stockholm), then purge the CDN cache.
+      - name: Deploy to Bunny.net
+        env:
+          BUNNY_STORAGE_PASSWORD: ${{ secrets.BUNNY_STORAGE_PASSWORD }}
+          BUNNY_API_KEY: ${{ secrets.BUNNY_API_KEY }}
+        run: bash .github/scripts/site-deploy.sh
+      # Give the CDN a short window to serve both home pages.
+      - name: Smoke test the public website
+        shell: bash
+        run: |
+          for url in 'https://bleib.dev/' 'https://bleib.dev/de/'; do
+            for delay in 0 2 4; do
+              sleep "$delay"
+              if status=$(curl --fail -sS -o /dev/null --max-time 5 --write-out '%{http_code}' "$url") &&
+                [[ "$status" == 200 ]]; then
+                continue 2
+              fi
+            done
+            printf '::warning::%s did not return HTTP 200 within the retry window.\n' "$url"
+          done
