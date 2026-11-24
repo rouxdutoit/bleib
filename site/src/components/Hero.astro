@@ -43,10 +43,12 @@ const githubHref = GITHUB_URL || routes.developers[lang];
           <ul class="rows">
             {pv.rows.map((r) => (
               <li class="row">
-                <img src={r.icon} alt="" width="29" height="29" />
-                <span class="r-who"><span class="t-headline">{r.who}</span><span class="t-sub c-2">{r.where}</span></span>
-                <span class="r-what"><span class="t-body">{r.what}</span><span class="t-sub c-2">{r.why}</span></span>
-                <span class="t-foot c-2 r-when">{r.when}</span>
+                <img src={r.icon} alt="" width="32" height="32" />
+                <div class="r-main">
+                  <p class="r-top"><span class="t-headline">{r.who}</span><span class="t-foot c-2">{r.when}</span></p>
+                  <p class="t-body">{r.what}</p>
+                  <p class="t-sub c-2">{r.where} · {r.why}</p>
+                </div>
               </li>
             ))}
           </ul>
@@ -70,7 +72,9 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   /* macOS window chrome: traffic lights left, title centred. */
   .bar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 44px; padding: 0 16px; border-bottom: 0.5px solid var(--separator); }
   .lights { display: inline-flex; gap: 8px; }
-  .lights i { width: 12px; height: 12px; border-radius: 50%; background: var(--fill-2); }
+  .lights i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; box-shadow: inset 0 0 0 0.5px rgb(0 0 0 / 0.12); }
+  .lights i:nth-child(2) { background: #febc2e; }
+  .lights i:nth-child(3) { background: #28c840; }
   .lights.ghost { visibility: hidden; justify-self: end; }
   .bar-title { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--label-2); }
   .mm { width: 16px; height: 16px; border-radius: 4px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
@@ -81,17 +85,17 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .tile { display: grid; gap: 2px; padding: 14px 16px; border-radius: 16px; background: var(--fill); }
   .rows-label { margin-top: 24px; }
   .rows { list-style: none; margin: 6px 0 0; padding: 0; }
-  .row { display: grid; grid-template-columns: 29px minmax(0, 1fr) minmax(0, 1.6fr) auto; align-items: center; gap: 12px; min-height: 56px; padding: 8px 0; position: relative; }
-  .row + .row::before { content: ''; position: absolute; top: 0; right: 0; left: 41px; height: 0.5px; background: var(--separator); }
-  .row img { border-radius: 7px; background: var(--fill); padding: 4px; }
-  .r-who, .r-what { display: grid; min-width: 0; }
-  .r-when { white-space: nowrap; }
+  /* Mail-style list: title + trailing time, content line, secondary line; separators inset to the text. */
+  .row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; position: relative; }
+  .row + .row::before { content: ''; position: absolute; top: 0; right: 0; left: 44px; height: 0.5px; background: var(--separator); }
+  .row img { flex: none; margin-top: 2px; border-radius: 8px; background: var(--fill); padding: 5px; }
+  .r-main { flex: 1; min-width: 0; }
+  .r-main p { margin: 0; }
+  .r-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .r-top .t-foot { white-space: nowrap; }
 
   @media (max-width: 720px) {
     .tiles { grid-template-columns: 1fr; }
-    .row { grid-template-columns: 29px minmax(0, 1fr); }
-    .r-what { grid-column: 2; }
-    .r-when { grid-column: 2; }
   }
 </style>
 <style is:global>
