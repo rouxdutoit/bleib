@@ -228,8 +228,9 @@ const cx = (n: number) => `reveal at-${n}`;
   .switch-card .cell { min-height: 56px; }
   .sec-f { padding: 8px 16px 0; display: flex; align-items: center; justify-content: center; gap: 5px; }
   .group { list-style: none; margin: 0; padding: 0; }
+  /* A border, not a 1px box: phones always draw it, even on the slightly scaled-down cards. */
   .cell { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 16px; position: relative; }
-  .group > li + li .cell::before, .group > li.cell + li.cell::before, .group > li.cell + li .cell::before { content: ''; position: absolute; top: 0; right: 0; left: 57px; height: 1px; background: var(--hairline); }
+  .group > li + li .cell::before, .group > li.cell + li.cell::before, .group > li.cell + li .cell::before { content: ''; position: absolute; top: 0; right: 0; left: 57px; border-top: 1px solid var(--hairline); }
   .ico { flex: none; width: 29px; height: 29px; border-radius: 7px; display: grid; place-items: center; background: var(--fill); color: var(--label); }
   .ico :global(.g) { width: 17px; height: 17px; }
   .cell-k { flex: 1; min-width: 0; }
