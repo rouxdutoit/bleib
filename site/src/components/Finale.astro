@@ -61,11 +61,12 @@ const s = t(lang).finale;
   .s2 .grow { grid-template-rows: 1fr; opacity: 1; }
   .b-2 { transition: opacity 0.4s var(--ease); }
   .s3 .b-2 { opacity: 0.38; }
-  /* Both labels share one cell, so the button keeps its width; the press crossfades and the tick settles in. */
-  .b-1 > span { grid-area: 1 / 1; transition: opacity 0.35s var(--ease), transform 0.45s var(--ease); }
-  .to-saved { display: inline-flex; align-items: center; gap: 4px; opacity: 0; transform: scale(0.92); }
-  .s3 .to-save { opacity: 0; transform: scale(0.92); }
-  .s3 .to-saved { opacity: 1; transform: none; }
+  /* As Apple does it: both labels share one cell and only crossfade, so the text never moves.
+     Only the tick animates, inside space that is already reserved for it. */
+  .b-1 > span { grid-area: 1 / 1; transition: opacity 0.35s var(--ease); }
+  .to-saved { display: inline-flex; align-items: center; gap: 4px; opacity: 0; }
+  .s3 .to-save { opacity: 0; }
+  .s3 .to-saved { opacity: 1; }
   .tick { display: grid; transform: scale(0.4); transition: transform 0.5s var(--ease) 0.1s; }
   .s3 .tick { transform: none; }
   .tick :global(svg) { width: 14px; height: 14px; display: block; }
