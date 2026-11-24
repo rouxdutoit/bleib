@@ -94,8 +94,8 @@ const en = {
         more: { to: 'works', hash: '' },
       },
       {
-        h: ['Your AI suggests.', 'You decide.'],
-        p: 'AIs can propose what to remember. Nothing is saved until you say so.',
+        h: ['It remembers', 'as you chat.'],
+        p: 'Mention a preference to any AI and bleib keeps it. One tap undoes it. Anything sensitive still asks first.',
         more: { to: 'how', hash: '#proposals' },
       },
       {
@@ -163,14 +163,12 @@ const en = {
     sealed: { note: 'What anyone without your key sees. Us included.' },
     propose: {
       app: 'Claude',
-      time: 'now',
-      title: 'Remember this?',
-      fact: 'Marek is vegetarian.',
-      why: 'He mentioned it while you planned dinner.',
-      save: 'Save',
-      newRow: { k: 'People', v: 'Marek is vegetarian' },
+      said: 'I like green tea.',
+      title: 'Saved to bleib',
+      fact: 'Likes green tea',
+      undo: 'Undo',
       newTag: 'New',
-      saved: 'Saved. No AI can read it until you allow it.',
+      footer: 'Encrypted on this device.',
     },
   },
   finale: {
@@ -284,8 +282,8 @@ const de: Strings = {
         more: { to: 'works', hash: '' },
       },
       {
-        h: ['Deine KI schlägt vor.', 'Du entscheidest.'],
-        p: 'KIs können vorschlagen, was sie sich merken möchten. Gespeichert wird erst, wenn du zustimmst.',
+        h: ['bleib merkt sich,', 'was du magst.'],
+        p: 'Erwähnst du im Chat eine Vorliebe, speichert bleib sie. Mit einem Tipp machst du das rückgängig. Bei sensiblen Angaben fragt bleib vorher.',
         more: { to: 'how', hash: '#proposals' },
       },
       {
@@ -353,14 +351,12 @@ const de: Strings = {
     sealed: { note: 'So sieht es jeder ohne deinen Schlüssel. Auch wir.' },
     propose: {
       app: 'Claude',
-      time: 'jetzt',
-      title: 'Merken?',
-      fact: 'Marek ist Vegetarier.',
-      why: 'Er hat es erwähnt, als ihr das Abendessen geplant habt.',
-      save: 'Speichern',
-      newRow: { k: 'Menschen', v: 'Marek ist Vegetarier' },
+      said: 'Ich mag grünen Tee.',
+      title: 'In bleib gespeichert',
+      fact: 'Mag grünen Tee',
+      undo: 'Rückgängig',
       newTag: 'Neu',
-      saved: 'Gespeichert. Keine KI kann es lesen, bis du es erlaubst.',
+      footer: 'Auf diesem Gerät verschlüsselt.',
     },
   },
   finale: {
