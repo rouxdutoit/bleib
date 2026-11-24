@@ -49,7 +49,7 @@ const en = {
     eyebrow: 'In development',
     h1a: 'Your AI memory.',
     h1b: 'In your hands.',
-    sub: ['Stop repeating yourself to every AI.', 'Like a password manager, it remembers for you.', 'Each AI sees only what it needs.'],
+    sub: ['Stop repeating yourself to every AI.', 'Think Bitwarden, for your preferences.', 'Each AI sees only what it needs.'],
     primary: 'Get early access',
     secondary: 'View on GitHub',
     trust: [
@@ -232,7 +232,7 @@ const de: Strings = {
     eyebrow: 'In Entwicklung',
     h1a: 'Dein KI-Gedächtnis.',
     h1b: 'In deiner Hand.',
-    sub: ['Schluss damit, jeder KI alles neu zu erzählen.', 'Wie ein Passwort-Manager merkt es sich alles für dich.', 'Jede KI sieht nur, was sie braucht.'],
+    sub: ['Schluss damit, jeder KI alles neu zu erzählen.', 'Wie Bitwarden, nur für deine Vorlieben.', 'Jede KI sieht nur, was sie braucht.'],
     primary: 'Frühen Zugang sichern',
     secondary: 'Auf GitHub ansehen',
     trust: [
