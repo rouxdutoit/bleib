@@ -18,21 +18,86 @@ const deHref = new URL(routes[page].de, site).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
     <meta name="description" content={desc} />
-    <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="en" href={enHref} />
-    <link rel="alternate" hreflang="de" href={deHref} />
-    <link rel="alternate" hreflang="x-default" href={enHref} />
+    {/^\/404(?:\.html|\/)?$/.test(Astro.url.pathname) ? (
+      <>
+        <title>{title ?? pageTitle}</title>
+        <meta name="robots" content="noindex" />
+        <link rel="canonical" href={new URL('/404.html', site).href} />
+      </>
+    ) : (
+      <>
+        <title>{pageTitle}</title>
+        <link rel="canonical" href={canonical} />
+        <link rel="alternate" hreflang="en" href={enHref} />
+        <link rel="alternate" hreflang="de" href={deHref} />
+        <link rel="alternate" hreflang="x-default" href={enHref} />
+        <link rel="describedby" href="/llms.txt" type="text/plain" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="bleib" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={desc} />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_GB'} />
+        <meta property="og:locale:alternate" content={lang === 'de' ? 'en_GB' : 'de_DE'} />
+        <meta property="og:image" content={new URL('/og.png', site).href} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={lang === 'de' ? 'bleib-Logo' : 'bleib logo'} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={desc} />
+        <meta name="twitter:image" content={new URL('/og.png', site).href} />
+        <meta name="twitter:image:alt" content={lang === 'de' ? 'bleib-Logo' : 'bleib logo'} />
+        <script is:inline type="application/ld+json" set:html={JSON.stringify({
+          '@context': 'https://schema.org',
+          ...(page === 'home' ? {
+            '@graph': [
+              {
+                '@type': 'Organization',
+                '@id': new URL('/#organization', site).href,
+                name: 'bleib',
+                url: new URL('/', site).href,
+                logo: new URL('/apple-touch-icon.png', site).href,
+              },
+              {
+                '@type': 'WebSite',
+                '@id': new URL('/#website', site).href,
+                name: 'bleib',
+                url: new URL('/', site).href,
+                inLanguage: ['en', 'de'],
+                publisher: { '@id': new URL('/#organization', site).href },
+                mainEntity: { '@id': new URL('/#software', site).href },
+              },
+              {
+                '@type': 'SoftwareApplication',
+                '@id': new URL('/#software', site).href,
+                name: 'bleib',
+                url: canonical,
+                inLanguage: lang,
+                description: desc,
+                isAccessibleForFree: true,
+                license: 'https://spdx.org/licenses/AGPL-3.0-or-later.html',
+                creativeWorkStatus: s.hero.eyebrow,
+                publisher: { '@id': new URL('/#organization', site).href },
+              },
+            ],
+          } : {
+            '@type': 'WebPage',
+            url: canonical,
+            name: title ?? pageTitle,
+            description: desc,
+            inLanguage: lang,
+            isPartOf: { '@id': new URL('/#website', site).href },
+          }),
+        }).replaceAll('<', '\\u003c')} />
+      </>
+    )}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
     <link rel="preload" href="/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin />
     <meta name="theme-color" content="#f6e79a" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={desc} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_GB'} />
     <script is:inline>
       (function () {
         try {

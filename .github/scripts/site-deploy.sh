@@ -30,7 +30,7 @@ content_type() {
 }
 
 list_remote_files() {
-  local directory="$1" url listing name
+  local directory="$1" url listing name checksum
   url=$(storage_url "$directory")
   listing=$(storage_request "$url")
   jq -js '
@@ -41,38 +41,65 @@ list_remote_files() {
     | if ($name | type != "string" or . == "" or . == "." or . == ".." or
           contains("/") or contains("\u0000")) or (.IsDirectory | type != "boolean") then
         error("Invalid Bunny Storage directory entry")
-      else (if .IsDirectory then $name + "/" else $name end), "\u0000" end
+      else
+        (if .IsDirectory then $name + "/" else $name end), "\u0000",
+        (.Checksum | if type == "string" and test("^[0-9a-fA-F]{64}$")
+                     then ascii_downcase else "" end), "\u0000"
+      end
   ' <<< "$listing" |
-    while IFS= read -r -d '' name; do
+    while IFS= read -r -d '' name && IFS= read -r -d '' checksum; do
       if [[ "$name" == */ ]]; then
         list_remote_files "$directory$name"
       else
-        printf '%s\0' "$directory$name"
+        printf '%s\0%s\0' "$directory$name" "$checksum"
       fi
     done
 }
 
-# Publish the new files before pruning old ones.
-cd site/dist
-find . -type f -print0 |
-  while IFS= read -r -d '' file; do
-    file=${file#./}
-    url=$(storage_url "$file")
-    mime=$(content_type "$file")
-    storage_request --request PUT --header "Content-Type: $mime" \
-      --upload-file "$file" --output /dev/null "$url"
-  done
+is_page() {
+  [[ "$1" == index.html || "$1" == */index.html ]]
+}
 
-# Finish listing every directory before deleting any files.
-remote_files=$(mktemp)
-trap 'rm -f -- "$remote_files"' EXIT
-list_remote_files '' > "$remote_files"
-while IFS= read -r -d '' path; do
+# Snapshot storage before replacing files so unchanged pages stay out of IndexNow.
+cd site/dist
+snapshot=$(mktemp -d)
+trap 'rm -rf -- "$snapshot"' EXIT
+list_remote_files '' > "$snapshot/remote"
+find . -type f -print0 > "$snapshot/local"
+declare -A remote_checksums=()
+changed_paths=()
+while IFS= read -r -d '' path && IFS= read -r -d '' checksum; do
+  remote_checksums["$path"]=$checksum
+done < "$snapshot/remote"
+
+# Publish the new files before pruning old ones.
+while IFS= read -r -d '' file; do
+  file=${file#./}
+  url=$(storage_url "$file")
+  if is_page "$file"; then
+    checksum=$(sha256sum < "$file")
+    previous=${remote_checksums[$file]-}
+    if [[ -z "$previous" && -n "${remote_checksums[$file]+present}" ]]; then
+      previous=$(storage_request "$url" | sha256sum)
+    fi
+    if [[ "${checksum%% *}" != "${previous%% *}" ]]; then
+      changed_paths+=("${file%index.html}")
+    fi
+  fi
+  mime=$(content_type "$file")
+  storage_request --request PUT --header "Content-Type: $mime" \
+    --upload-file "$file" --output /dev/null "$url"
+done < "$snapshot/local"
+
+for path in "${!remote_checksums[@]}"; do
   if [[ ! -f "$path" ]]; then
     url=$(storage_url "$path")
     storage_request --request DELETE --output /dev/null "$url"
+    if is_page "$path"; then
+      changed_paths+=("${path%index.html}")
+    fi
   fi
-done < "$remote_files"
+done
 
 # Clear cached copies after the storage zone is up to date.
 if [[ -n "${BUNNY_API_KEY:-}" ]]; then
@@ -80,7 +107,10 @@ if [[ -n "${BUNNY_API_KEY:-}" ]]; then
     --header 'Content-Type: application/json' --data '{}' --output /dev/null \
     'https://api.bunny.net/pullzone/7075333/purgeCache'
   if [[ -n "${GITHUB_OUTPUT:-}" ]]; then
-    printf '%s\n' 'purged=true' >> "$GITHUB_OUTPUT"
+    changed_urls=$(jq -cn --args '
+      $ARGS.positional | sort | map("https://bleib.dev/" + (split("/") | map(@uri) | join("/")))
+    ' -- "${changed_paths[@]}")
+    printf 'purged=true\nchanged_urls=%s\n' "$changed_urls" >> "$GITHUB_OUTPUT"
   fi
 else
   printf '%s\n' '::notice::The CDN cache was not purged because BUNNY_API_KEY is unset.'

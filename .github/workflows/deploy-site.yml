@@ -36,6 +36,7 @@ jobs:
           npm run build
       # Sync Bunny Storage (Frankfurt, replicated to Stockholm), then purge the CDN cache.
       - name: Deploy to Bunny.net
+        id: bunny
         env:
           BUNNY_STORAGE_PASSWORD: ${{ secrets.BUNNY_STORAGE_PASSWORD }}
           BUNNY_API_KEY: ${{ secrets.BUNNY_API_KEY }}
@@ -54,3 +55,25 @@ jobs:
             done
             printf '::warning::%s did not return HTTP 200 within the retry window.\n' "$url"
           done
+      - name: Notify IndexNow of changed pages
+        if: steps.bunny.outputs.purged == 'true' && steps.bunny.outputs.changed_urls != '[]'
+        continue-on-error: true
+        shell: bash
+        env:
+          CHANGED_URLS: ${{ steps.bunny.outputs.changed_urls }}
+          INDEXNOW_KEY_FILE: site/dist/a267414f723913ef23feef5d8f7d28ae.txt
+        run: |
+          key=$(< "$INDEXNOW_KEY_FILE")
+          [[ "$key" =~ ^[a-f0-9]{32}$ && "${INDEXNOW_KEY_FILE##*/}" == "$key.txt" ]]
+          payload=$(jq -cn --arg key "$key" --argjson urls "$CHANGED_URLS" '{
+            host: "bleib.dev",
+            key: $key,
+            keyLocation: ("https://bleib.dev/" + $key + ".txt"),
+            urlList: $urls
+          }')
+          status=$(curl --disable --fail --silent --show-error --connect-timeout 5 \
+            --max-time 15 --retry 2 --retry-max-time 30 \
+            --header 'Content-Type: application/json; charset=utf-8' \
+            --output /dev/null --write-out '%{http_code}' --data-binary "$payload" \
+            https://api.indexnow.org/indexnow)
+          [[ "$status" == 200 || "$status" == 202 ]]
