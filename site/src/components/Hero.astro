@@ -5,6 +5,7 @@ import BleibCard from './BleibCard.astro';
 import Composer from './Composer.astro';
 import Rails from './Rails.astro';
 import { icon } from './icons';
+import reserveScenes from '../scripts/reserve.js?raw';
 import { GITHUB_URL, routes, t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -13,6 +14,8 @@ const pv = t(lang).preview;
 const githubHref = GITHUB_URL || routes.developers[lang];
 const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
 ---
+{/* Scenes reserve their finished height the moment each is drawn (scripts/reserve.js). */}
+<script is:inline set:html={reserveScenes} />
 <section class="hero has-rails" aria-labelledby="hero-title">
   <Rails top={false} />
   <div class="wrap hero-inner">
@@ -51,6 +54,7 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
         })}
       </Window>
     </figure>
+    <script is:inline>bleibReserve(document.currentScript.previousElementSibling)</script>
   </div>
 </section>
 
