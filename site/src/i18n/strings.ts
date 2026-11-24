@@ -66,7 +66,7 @@ const en = {
     tabs: [
       {
         ai: 'Gemini', icon: 'gemini-color', typed: 'Plan a weekend in Lisbon for me.',
-        facts: [{ t: 'Aisle seat', icon: 'flight' }, { t: 'Vegetarian', icon: 'eco' }], private: 'Health and work stay private.',
+        facts: [{ t: 'Aisle seat', icon: 'event_seat' }, { t: 'Vegetarian', icon: 'eco' }], private: 'Health and work stay private.',
       },
       {
         ai: 'Claude', icon: 'claude-color', typed: 'Write a cover letter for this job.',
@@ -258,7 +258,7 @@ const de: Strings = {
     tabs: [
       {
         ai: 'Gemini', icon: 'gemini-color', typed: 'Plane ein Wochenende in Lissabon für mich.',
-        facts: [{ t: 'Gangplatz', icon: 'flight' }, { t: 'Vegetarisch', icon: 'eco' }], private: 'Gesundheit und Arbeit bleiben privat.',
+        facts: [{ t: 'Gangplatz', icon: 'event_seat' }, { t: 'Vegetarisch', icon: 'eco' }], private: 'Gesundheit und Arbeit bleiben privat.',
       },
       {
         ai: 'Claude', icon: 'claude-color', typed: 'Schreib ein Anschreiben für diese Stelle.',
