@@ -1,7 +1,7 @@
 ---
 /** The closer: the password-manager moment the hero promises, and one action. */
 import Mark from './Mark.astro';
-import { icon } from './icons';
+import DrawTick from './DrawTick.astro';
 import Rails from './Rails.astro';
 import EarlyAccessForm from './EarlyAccessForm.astro';
 import { t, type Lang } from '../i18n/strings';
@@ -21,7 +21,7 @@ const s = t(lang).finale;
             <span class="app"><Mark size={14} /></span>
             <span class="save-text"><span class="t-foot save-title">{s.prompt.title}</span><span class="t-sub fact">{s.prompt.fact}</span></span>
             <span class="b b-2">{s.prompt.notNow}</span>
-            <span class="b b-1"><span class="to-save">{s.prompt.save}</span><span class="to-saved"><span class="tick" set:html={icon('check')} />{s.prompt.saved}</span></span>
+            <span class="b b-1"><span class="to-save">{s.prompt.save}</span><span class="to-saved"><span class="tick"><DrawTick /></span>{s.prompt.saved}</span></span>
           </div>
         </div></div>
       </div>
@@ -67,9 +67,7 @@ const s = t(lang).finale;
   .to-saved { display: inline-flex; align-items: center; gap: 4px; opacity: 0; }
   .s3 .to-save { opacity: 0; }
   .s3 .to-saved { opacity: 1; }
-  .tick { display: grid; transform: scale(0.4); transition: transform 0.5s var(--ease) 0.1s; }
-  .s3 .tick { transform: none; }
-  .tick :global(svg) { width: 14px; height: 14px; display: block; }
+  .tick { display: grid; }
   .b { flex: none; display: inline-grid; place-items: center; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 13px; line-height: 1; font-weight: 600; }
   .b-2 { color: var(--label-2); }
   /* Like the story cards' chosen action: the label colour, then bleib yellow once saved. */

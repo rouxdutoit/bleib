@@ -1,5 +1,6 @@
 ---
 import Mark from './Mark.astro';
+import DrawTick from './DrawTick.astro';
 import Rails from './Rails.astro';
 import { icon, type IconName } from './icons';
 import { GITHUB_URL, routes, t, type Lang } from '../i18n/strings';
@@ -36,7 +37,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
               <p class="fill-head"><span class="app"><Mark size={12} /></span><span class="t-foot fill-title">{pv.title}</span></p>
               <div class="fill-row">
                 <ul class="facts">{pv.facts.map((x) => <li class="t-sub"><span class="yes" set:html={icon('check')} />{x}</li>)}</ul>
-                <span class="b"><span class="to-add">{pv.add}</span><span class="to-added"><span class="tick" set:html={icon('check')} />{pv.added}</span></span>
+                <span class="b"><span class="to-add">{pv.add}</span><span class="to-added"><span class="tick"><DrawTick /></span>{pv.added}</span></span>
               </div>
             </div>
           </div></div>
@@ -95,9 +96,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .s3 .b { background: #f6e79a; color: #0a0a0a; }
   .s3 .to-add { opacity: 0; }
   .s3 .to-added { opacity: 1; }
-  .tick { display: grid; transform: scale(0.4); transition: transform 0.5s var(--ease) 0.1s; }
-  .s3 .tick { transform: none; }
-  .tick :global(svg) { width: 14px; height: 14px; display: block; }
+  .tick { display: grid; }
 
   .composer { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 8px 8px 16px; border-radius: 22px; box-shadow: inset 0 0 0 1px var(--hairline); }
   /* Typed out at step 1 (scripts/story.ts), with a macOS text caret that blinks once focused. */
