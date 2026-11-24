@@ -59,14 +59,14 @@ const en = {
   },
   preview: {
     examples: 'Examples',
-    title: 'Just what {ai} needs',
+    title: 'Share only what {ai} needs',
     add: 'Add',
     added: 'Added',
     attachment: 'About me',
     tabs: [
       {
         ai: 'Gemini', icon: 'gemini-color', typed: 'Plan a weekend in Lisbon for me.',
-        facts: [{ t: 'Aisle seat', icon: 'event_seat' }, { t: 'Vegetarian', icon: 'eco' }], private: 'Health and work stay private.',
+        facts: [{ t: 'Aisle seat', icon: 'airline_seat' }, { t: 'Vegetarian', icon: 'eco' }], private: 'Health and work stay private.',
       },
       {
         ai: 'Claude', icon: 'claude-color', typed: 'Write a cover letter for this job.',
@@ -251,14 +251,14 @@ const de: Strings = {
   },
   preview: {
     examples: 'Beispiele',
-    title: 'Nur, was {ai} braucht',
+    title: 'Nur teilen, was {ai} braucht',
     add: 'Hinzufügen',
     added: 'Hinzugefügt',
     attachment: 'Über mich',
     tabs: [
       {
         ai: 'Gemini', icon: 'gemini-color', typed: 'Plane ein Wochenende in Lissabon für mich.',
-        facts: [{ t: 'Gangplatz', icon: 'event_seat' }, { t: 'Vegetarisch', icon: 'eco' }], private: 'Gesundheit und Arbeit bleiben privat.',
+        facts: [{ t: 'Gangplatz', icon: 'airline_seat' }, { t: 'Vegetarisch', icon: 'eco' }], private: 'Gesundheit und Arbeit bleiben privat.',
       },
       {
         ai: 'Claude', icon: 'claude-color', typed: 'Schreib ein Anschreiben für diese Stelle.',
