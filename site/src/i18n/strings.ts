@@ -373,7 +373,7 @@ const de: Strings = {
   },
   form: {
     label: 'E-Mail-Adresse',
-    submit: 'Frühen Zugang sichern',
+    submit: 'Eintragen',
     sending: 'Wird gesendet…',
     success: 'Danke, du stehst auf der Liste.',
     invalid: 'Bitte gib eine gültige E-Mail-Adresse ein.',

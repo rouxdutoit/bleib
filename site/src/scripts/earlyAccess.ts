@@ -8,8 +8,9 @@ export function initEarlyAccess(): void {
     const status = form.querySelector<HTMLElement>('.ea-status');
     const message = status?.querySelector<HTMLElement>('.ea-msg');
     const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-    if (!input || !status || !message || !button) return;
-    const label = button.textContent ?? '';
+    const buttonLabel = button?.querySelector<HTMLElement>('.ea-label');
+    if (!input || !status || !message || !button || !buttonLabel) return;
+    const label = buttonLabel.textContent ?? '';
 
     const say = (msg: string, ok = false) => {
       message.textContent = msg;
@@ -27,7 +28,7 @@ export function initEarlyAccess(): void {
       }
       input.removeAttribute('aria-invalid');
       button.disabled = true;
-      button.textContent = form.dataset.msgSending ?? label;
+      buttonLabel.textContent = form.dataset.msgSending ?? label;
       const data = Object.fromEntries(new FormData(form).entries());
       try {
         const res = await fetch(form.action, {
@@ -50,7 +51,7 @@ export function initEarlyAccess(): void {
         say(form.dataset.msgError ?? '');
       } finally {
         button.disabled = false;
-        button.textContent = label;
+        buttonLabel.textContent = label;
       }
     });
   });
