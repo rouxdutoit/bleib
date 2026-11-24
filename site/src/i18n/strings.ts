@@ -108,7 +108,7 @@ const en = {
       },
       {
         h: ['Turn their memory off.', 'bleib keeps yours.'],
-        p: 'Every new chat starts fresh. bleib adds what each chat needs. Only you hold the key.',
+        p: 'Remember as much as you like. Each chat gets just what it needs. Only you hold the key.',
         more: { to: 'security', hash: '', label: 'Private by design' },
         dark: true,
       },
@@ -298,7 +298,7 @@ const de: Strings = {
       },
       {
         h: ['Schalte ihr Gedächtnis aus.', 'bleib behält deins.'],
-        p: 'Jeder neue Chat beginnt frisch. bleib ergänzt, was jeder Chat braucht. Den Schlüssel hast nur du.',
+        p: 'Merk dir so viel du willst. Jeder Chat bekommt nur, was er braucht. Den Schlüssel hast nur du.',
         more: { to: 'security', hash: '', label: 'Privat von Grund auf' },
         dark: true,
       },
