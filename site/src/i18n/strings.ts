@@ -197,6 +197,7 @@ const en = {
     honeypot: 'Leave this field empty',
   },
   footer: {
+    dictionary: { language: 'German', pronounced: 'pronounced', meaning: 'stay; remain.' },
     cols: { product: 'Product', project: 'Project', legal: 'Legal' },
     fine: 'AGPL-3.0-or-later · Spec Apache-2.0 · No cookies or analytics',
     email: 'Email',
@@ -392,6 +393,7 @@ const de: Strings = {
     honeypot: 'Dieses Feld leer lassen',
   },
   footer: {
+    dictionary: { language: 'Deutsch', pronounced: 'Aussprache', meaning: 'Imperativ von „bleiben“.' },
     cols: { product: 'Produkt', project: 'Projekt', legal: 'Rechtliches' },
     fine: 'AGPL-3.0-or-later · Spezifikation Apache-2.0 · Keine Cookies, keine Analyse',
     email: 'E-Mail',
