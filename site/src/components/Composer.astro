@@ -17,7 +17,8 @@ const { typed, sentAt } = Astro.props;
   .input { margin: 0; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 8px 8px 16px; }
   .field { flex: 1; min-width: 0; }
   .caret { display: inline-block; width: 2px; height: 1.15em; margin-left: 1px; vertical-align: -0.2em; border-radius: 1px; background: var(--label); opacity: 0; }
-  :global(.s1) .caret { opacity: 1; animation: caret 1.06s steps(1, end) infinite; }
+  /* The caret shows only while the message is typed, so the finished box never looks like it is waiting for you. */
+  :global(.s1:not(.s2)) .caret { opacity: 1; animation: caret 1.06s steps(1, end) infinite; }
   @keyframes caret { 50% { opacity: 0; } }
   :global(.s2) [data-sent-at='2'] .field { display: none; }
   .send { flex: none; width: 28px; height: 28px; margin-inline-start: auto; border-radius: 50%; display: grid; place-items: center; background: var(--fill); color: var(--label-2); }

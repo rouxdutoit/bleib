@@ -55,7 +55,7 @@ function renderBlock(block: Block, site: URL) {
 }
 
 function renderHome(lang: Lang, site: URL) {
-  const { hero, story, finale, footer, nav } = t(lang);
+  const { hero, story, finale, footer } = t(lang);
   return [
     `### ${hero.h1a} ${hero.h1b}`,
     new URL(routes.home[lang], site).href,
@@ -66,7 +66,7 @@ function renderHome(lang: Lang, site: URL) {
     ...story.scenes.flatMap(({ h, p, more }) => [
       `##### ${h.join(' ')}`,
       p,
-      link(nav.more, routes[more.to as RouteKey][lang] + more.hash, site),
+      link(more.label, routes[more.to as RouteKey][lang] + more.hash, site),
     ]),
     `#### ${finale.h}`,
     finale.p,

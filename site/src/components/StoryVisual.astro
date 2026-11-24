@@ -194,13 +194,12 @@ const cx = (n: number) => `reveal at-${n}`;
       )}
 
       {scene === 5 && (
-        <div class="card list-card">
-          <p class="head"><span class="t-headline">{c.off.title}</span></p>
+        <div class="card list-card switch-card">
           <ul class="group">
             {c.any.providers.map((p, i) => (
               <li class="cell">
                 <img class="app-sm" src={p.icon} alt="" width="29" height="29" />
-                <span class="t-body cell-k">{p.name}</span>
+                <span class="cell-k"><span class="t-body">{p.name}</span><span class="t-sub c-2 blk">{c.off.setting}</span></span>
                 <span class="toggle at-1" style={`--delay: ${i * 0.3}s`} />
               </li>
             ))}
@@ -237,6 +236,8 @@ const cx = (n: number) => `reveal at-${n}`;
   [data-step='0'] .cnt .c0, [data-step='1'] .cnt .c1, [data-step='2'] .cnt .c2, [data-step='3'] .cnt .c3, [data-step='4'] .cnt .c4, [data-step='5'] .cnt .c4 { display: inline; }
   .sec-h { padding: 0 16px 6px; font-weight: 600; }
   .sec-h.inner { padding: 14px 0 6px; }
+  /* Each AI's own memory switch, as it sits in that AI's settings. */
+  .switch-card .cell { min-height: 56px; }
   .sec-f { padding: 8px 16px 0; display: flex; align-items: center; justify-content: center; gap: 5px; }
   .group { list-style: none; margin: 0; padding: 0; }
   .cell { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 16px; position: relative; }

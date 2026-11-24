@@ -17,7 +17,7 @@ const SYMBOLS: IconName[] = ['visibility', 'chat_bubble', 'sync_alt', 'back_hand
       <span class="sym" set:html={icon(SYMBOLS[i])} />
       <h2 class="h2"><span>{x.h[0]}</span><br /><span>{x.h[1]}</span></h2>
       <p class="lead"><Lines text={x.p} /></p>
-      <a class="more" href={`${routes[x.more.to as keyof typeof routes][lang]}${x.more.hash}`}>{t(lang).nav.more}<span set:html={icon('chevron_right')} /></a>
+      <a class="more" href={`${routes[x.more.to as keyof typeof routes][lang]}${x.more.hash}`}>{x.more.label}<span set:html={icon('chevron_right')} /></a>
     </div>
   </div>
 </article>
