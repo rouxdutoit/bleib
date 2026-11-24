@@ -11,6 +11,7 @@ const { lang } = Astro.props;
 const s = t(lang).hero;
 const pv = t(lang).preview;
 const githubHref = GITHUB_URL || routes.developers[lang];
+const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
 ---
 <section class="hero has-rails" aria-labelledby="hero-title">
   <Rails top={false} />
@@ -30,16 +31,24 @@ const githubHref = GITHUB_URL || routes.developers[lang];
       <Window tabs={pv.tabs} tablist={pv.examples} id="ex">
         {pv.tabs.map((x, i) => {
           const title = pv.title.replace('{ai}', x.ai);
+          const facts = x.facts.join(' · ');
+          const gaps = [readFor(x.typed), readFor([title, ...x.facts, pv.add].join(' ')), readFor(`${pv.added} ${pv.attachment} ${x.private}`)];
           return (
-            <div class="body" role="tabpanel" id={`ex-${i}`} aria-labelledby={`ex-tab-${i}`} hidden={i !== 0} data-steps="3" data-interval="800" data-gaps=",2600" data-step="0" {...(i === 0 ? { 'data-sv': 'scroll' } : {})}>
-              <p class="sr-only">{x.typed} {title}: {x.facts.join(', ')}. {x.private}</p>
+            <div class="body" role="tabpanel" id={`ex-${i}`} aria-labelledby={`ex-tab-${i}`} hidden={i !== 0} data-steps="4" data-start="500" data-gaps={gaps.join(',')} data-step="0" {...(i === 0 ? { 'data-sv': 'scroll' } : {})}>
+              <p class="sr-only">{x.typed} {title}: {x.facts.join(', ')}. {x.private} {x.ai}: {x.reply.join('')}</p>
               <div aria-hidden="true">
-                <BleibCard title={title} facts={x.facts} action={pv.add} done={pv.added} />
-                <Composer typed={x.typed}>
-                  <div class="attach"><div class="grow-in">
+                <div class="offer"><div class="clip">
+                  <BleibCard title={title} facts={x.facts} action={pv.add} done={pv.added} />
+                </div></div>
+                <div class="conversation"><div class="clip">
+                  <p class="t-body bubble">{x.typed}</p>
+                  <p class="t-body reply">{x.reply.map((text, j) => j % 2 === 1 ? <mark>{text}</mark> : text)}</p>
+                </div></div>
+                <Composer typed={x.typed} sentAt={4}>
+                  <div class="attach"><div class="clip">
                     <div class="chip">
                       <span class="chip-app"><Mark size={14} /></span>
-                      <span class="chip-text"><span class="t-foot chip-title">{pv.attachment}</span><span class="t-foot chip-facts">{x.facts.join(' · ')}</span></span>
+                      <span class="chip-text"><span class="t-foot chip-title">{pv.attachment}</span><span class="t-foot chip-facts">{facts}</span></span>
                       <span class="chip-x" set:html={icon('close')} />
                     </div>
                   </div></div>
@@ -73,11 +82,18 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .body { --bleib-card-margin: 0 0 8px; padding: 16px; }
   .body p { margin: 0; }
 
-  .grow-in { min-height: 0; overflow: hidden; }
+  .clip { min-height: 0; overflow: hidden; }
+  .offer, .attach, .conversation { display: grid; transition: grid-template-rows 0.4s var(--ease), opacity 0.3s var(--ease); }
+  .offer { grid-template-rows: 1fr; }
+  .attach, .conversation { grid-template-rows: 0fr; opacity: 0; }
+  .s3 .attach, .s4 .conversation { grid-template-rows: 1fr; opacity: 1; }
+  .s4 .offer, .s4 .attach { grid-template-rows: 0fr; opacity: 0; }
 
-  /* Once added, your memory sits in the message box as an attachment, like pasted text in a chat app. */
-  .attach { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.5s var(--ease) 0.2s, opacity 0.4s var(--ease) 0.3s; }
-  .s3 .attach { grid-template-rows: 1fr; opacity: 1; }
+  /* Once sent, show the prompt and the answer in their chat order. */
+  .body .bubble { width: fit-content; max-width: 85%; margin: 0 0 8px auto; padding: 8px 12px; border-radius: 18px; background: var(--fill); }
+  .body .reply { padding: 2px 0 12px; text-wrap: pretty; }
+  .reply mark { border-radius: 2px; background: #f6e79a; color: #0a0a0a; white-space: nowrap; }
+
   .chip { position: relative; display: flex; align-items: center; gap: 10px; width: fit-content; max-width: calc(100% - 16px); margin: 8px 8px 0; padding: 8px 30px 8px 8px; border-radius: 14px; background: var(--fill); }
   .chip-app { flex: none; width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
   .chip-text { min-width: 0; display: flex; flex-direction: column; }

@@ -1,6 +1,6 @@
 ---
 /**
- * One tray per scene. The tray never moves; the card inside morphs step by step to act out
+ * Each card morphs step by step to act out
  * the scene's headline (Rule No. 1: Apple HIG patterns throughout). It plays once when seen.
  * Every card reads top to bottom as cause, then result, so the eye ends on the outcome.
  * Steps are driven by scripts/story.ts: it sets data-step="n" and cumulative classes s1..sn.
@@ -13,20 +13,20 @@ import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang; scene: number }
 const { lang, scene } = Astro.props;
 const c = t(lang).cards;
-const STEPS = [4, 3, 4, 6, 3, 2];
-const INTERVAL = [900, 900, 900, 620, 900, 1000];
+const STEPS = [4, 2, c.any.providers.length - 1, 3, 4, 2];
+const INTERVAL = [900, 900, 1250, 900, 900, 1000];
 /** Reading time: before step 1, the card as it first appears; GAPS, what a step reveals (see scripts/story.ts). */
-const START = [1600, 2600, 1800, 1500, 2200, 1800];
-const GAPS = ['', '900,1600', '900,900,1500', '', '900,1300', ''];
-/** Scene 6: without the key, each character reads as a password dot. */
-const dots = (text: string) => '•'.repeat([...text].length);
+const START = [1600, 1700, 3750, 2600, 1800, 1800];
+const GAPS = ['', '2500', '', '900,1600', '900,900,1500', ''];
+/** Scene 6: the dots hide the fields' lengths too. */
+const dots = (length: number) => '•'.repeat(length);
 
 import { icon, type IconName } from './icons';
 const svg = (name: string, cls = 'g') => icon(name as IconName, cls);
 const cx = (n: number) => `cx at-${n}`;
 ---
 <div class="sv" data-sv data-steps={STEPS[scene]} data-interval={INTERVAL[scene]} data-start={START[scene]} data-gaps={GAPS[scene] || undefined} data-step="0">
-  <div class="tray">
+  <div class={scene === 5 ? undefined : 'tray'}>
     <div class="stack" aria-hidden="true">
       {scene === 0 && (
         <>
@@ -61,6 +61,75 @@ const cx = (n: number) => `cx at-${n}`;
       )}
 
       {scene === 1 && (
+        <>
+          <div class="card note">
+            <div class="note-head">
+              <img class="app-sm" src="/providers/claude.svg" alt="" width="29" height="29" />
+              <p class="t-headline">{c.propose.app}</p>
+            </div>
+            <p class="t-body chat-line">{c.propose.said}</p>
+          </div>
+          <div class={cx(1)}>
+            <div class="cx-in">
+              <div class="card note">
+                <p class="w-label t-foot c-2"><span class="w-mark"><Mark size={11} /></span>{c.propose.title}</p>
+                <div class="save-detail">
+                  <p class="t-sub"><span class="yes" set:html={svg('check')} />{c.propose.fact}</p>
+                  <span class="pill t-foot undo">{c.propose.undo}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card list-card">
+            <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2 grows"><span>2</span><span>3</span></span></p>
+            <ul class="group">
+              {c.wallet.rows.slice(0, 2).map((r) => (
+                <li class="cell"><span class="ico" set:html={svg(r.icon)} /><span class="t-body cell-k">{r.k}</span><span class="t-body c-2 cell-v">{r.v}</span></li>
+              ))}
+              <li class={cx(2)}>
+                <div class="cx-in"><div class="cell">
+                  <span class="ico" set:html={svg('restaurant')} />
+                  <span class="t-body cell-k">{c.propose.fact}</span>
+                  <span class="tag t-foot">{c.propose.newTag}</span>
+                </div></div>
+              </li>
+            </ul>
+            <p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.propose.footer}</p>
+          </div>
+        </>
+      )}
+
+      {scene === 2 && (
+        <>
+          <div class="card list-card">
+            <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2">3</span></p>
+            <ul class="group">
+              {c.wallet.rows.slice(0, 3).map((r) => (
+                <li class="cell"><span class="ico" set:html={svg(r.icon)} /><span class="t-body cell-k">{r.k}</span><span class="t-body c-2 cell-v">{r.v}</span></li>
+              ))}
+            </ul>
+            <p class="t-foot c-2 used">{c.any.usedBy} <span class="swap">{c.any.providers.map((p, i) => <span class={`u${i}`}>{p.name}</span>)}</span></p>
+          </div>
+          <div class="card strip">
+            <div class="pwin">
+              <div class="ptrack">
+                {c.any.providers.map((p, i) => (
+                  <span class={`pi pi-${i}`}>
+                    <span class="picon">
+                      <img class="pm" src={p.icon} alt="" width="28" height="28" draggable="false" />
+                      {p.color && <img class="pc" src={p.color} alt="" width="28" height="28" draggable="false" />}
+                    </span>
+                    <span class="t-foot pname">{p.name}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+            <p class="t-foot c-2 strip-cap">{c.any.caption}</p>
+          </div>
+        </>
+      )}
+
+      {scene === 3 && (
         <>
           <div class="dim-2">
             <div>
@@ -98,7 +167,7 @@ const cx = (n: number) => `cx at-${n}`;
         </>
       )}
 
-      {scene === 2 && (
+      {scene === 4 && (
         <>
           <div class="card note">
             <div class="note-head">
@@ -127,77 +196,6 @@ const cx = (n: number) => `cx at-${n}`;
         </>
       )}
 
-      {scene === 3 && (
-        <>
-          <div class="card list-card">
-            <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2">3</span></p>
-            <ul class="group">
-              {c.wallet.rows.slice(0, 3).map((r) => (
-                <li class="cell"><span class="ico" set:html={svg(r.icon)} /><span class="t-body cell-k">{r.k}</span><span class="t-body c-2 cell-v">{r.v}</span></li>
-              ))}
-            </ul>
-            <p class="t-foot c-2 used">{c.any.usedBy} <span class="swap">{c.any.providers.map((p, i) => <span class={`u${i}`}>{p.name}</span>)}</span></p>
-          </div>
-          <div class="card strip">
-            <div class="pwin">
-              <div class="ptrack">
-                {c.any.providers.map((p, i) => (
-                  <span class={`pi pi-${i}`}>
-                    <span class="picon">
-                      <img class="pm" src={p.icon} alt="" width="28" height="28" draggable="false" />
-                      {p.color && <img class="pc" src={p.color} alt="" width="28" height="28" draggable="false" />}
-                    </span>
-                    <span class="t-foot pname">{p.name}</span>
-                  </span>
-                ))}
-                <span class="pi">
-                  <span class="picon pmore"><i></i><i></i><i></i></span>
-                  <span class="t-foot pname">{c.any.more}</span>
-                </span>
-              </div>
-            </div>
-            <p class="t-foot c-2 strip-cap">{c.any.caption}</p>
-          </div>
-        </>
-      )}
-
-      {scene === 4 && (
-        <>
-          <div class="dim-2">
-            <div>
-              <div class="card note">
-                <div class="note-head">
-                  <img class="app" src="/providers/claude.svg" alt="" width="38" height="38" />
-                  <div class="note-id"><p class="t-headline">{c.propose.title}</p><p class="t-sub c-2">{c.propose.app}</p></div>
-                  <p class="t-foot c-2">{c.propose.time}</p>
-                </div>
-                <p class="t-body fact">{c.propose.fact}</p>
-                <p class="t-foot c-2">{c.propose.why}</p>
-                <div class="pills">
-                  <span class="pill t-body pick-at-1">{c.propose.save}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card list-card">
-            <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2 grows"><span>2</span><span>3</span></span></p>
-            <ul class="group">
-              {c.wallet.rows.slice(0, 2).map((r) => (
-                <li class="cell"><span class="ico" set:html={svg(r.icon)} /><span class="t-body cell-k">{r.k}</span><span class="t-body c-2 cell-v">{r.v}</span></li>
-              ))}
-              <li class={cx(2)}>
-                <div class="cx-in"><div class="cell">
-                  <span class="ico" set:html={svg('person')} />
-                  <span class="cell-k"><span class="t-body">{c.propose.newRow.v}</span></span>
-                  <span class="tag t-foot">{c.propose.newTag}</span>
-                </div></div>
-              </li>
-            </ul>
-            <div class={cx(3)}><div class="cx-in"><p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.propose.saved}</p></div></div>
-          </div>
-        </>
-      )}
-
       {scene === 5 && (
         <div class="card list-card sealed">
           <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2">3</span></p>
@@ -205,8 +203,8 @@ const cx = (n: number) => `cx at-${n}`;
             {c.wallet.rows.slice(0, 3).map((r) => (
               <li class="cell">
                 <span class="ico" set:html={svg(r.icon)} />
-                <span class="t-body cell-k"><span class="seal" data-scramble-at="2" data-cipher={dots(r.k)}>{r.k}</span></span>
-                <span class="t-body c-2 cell-v"><span class="seal" data-scramble-at="2" data-cipher={dots(r.v)}>{r.v}</span></span>
+                <span class="t-body cell-k"><span class="seal" data-scramble-at="2" data-cipher={dots(6)}>{r.k}</span></span>
+                <span class="t-body c-2 cell-v"><span class="seal" data-scramble-at="2" data-cipher={dots(8)}>{r.v}</span></span>
               </li>
             ))}
           </ul>
@@ -241,8 +239,7 @@ const cx = (n: number) => `cx at-${n}`;
   .list-card { padding: 14px 0 12px; }
   .head { display: flex; align-items: baseline; gap: 8px; padding: 0 16px 6px; }
   /* Every memory card has the same heading: the title, then how many groups it holds. */
-  .cnt span, .grows span + span, .s2 .grows span:first-child { display: none; }
-  .s2 .grows span + span { display: inline; }
+  .cnt span { display: none; }
   [data-step='0'] .cnt .c0, [data-step='1'] .cnt .c1, [data-step='2'] .cnt .c2, [data-step='3'] .cnt .c3, [data-step='4'] .cnt .c4, [data-step='5'] .cnt .c4 { display: inline; }
   .sec-h { padding: 0 16px 6px; font-weight: 600; }
   .sec-h.inner { padding: 14px 0 6px; }
@@ -254,41 +251,35 @@ const cx = (n: number) => `cx at-${n}`;
   .ico :global(.g) { width: 17px; height: 17px; }
   .cell-k { flex: 1; min-width: 0; }
   .blk { display: block; }
-  /* Scene 6: every character scrambles, then settles as a password dot (scripts/story.ts). */
-  .seal :global(.ch) { position: relative; }
+  /* Scene 6: glyphs cycle in place while the line adjusts to fit the dots (scripts/story.ts). */
+  .seal { white-space: pre; }
+  .seal :global(.ch) { display: inline-block; position: relative; vertical-align: top; text-align: center; }
   .seal :global(.ch.sg) { visibility: hidden; }
   .seal :global(.ct) { letter-spacing: 0.08em; }
-  .seal :global(.ch.sg::after) { content: attr(data-g); position: absolute; top: 0; left: 50%; transform: translateX(-50%); visibility: visible; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-weight: 400; color: var(--label-3); }
+  .seal :global(.ch[data-g]::after) { content: attr(data-g); position: absolute; top: 0; left: 50%; transform: translateX(-50%); visibility: visible; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-weight: 400; color: var(--label-3); opacity: 0; }
+  .seal :global(.ch.sg::after) { opacity: 1; }
+  .seal :global(.ch.ct:empty::after) { transition: opacity 140ms ease-out; }
   .cell-v { text-align: right; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
   .inline-g { display: inline-flex; }
   .inline-g :global(.g) { width: 13px; height: 13px; }
   .used { padding: 8px 16px 0; }
   .swap span { display: none; color: var(--label); font-weight: 600; }
-  [data-step='0'] .swap .u0, [data-step='1'] .swap .u1, [data-step='2'] .swap .u2, [data-step='3'] .swap .u3,
-  [data-step='4'] .swap .u4, [data-step='5'] .swap .u5, [data-step='6'] .swap .u6 { display: inline; }
+  [data-step='0'] .swap .u0, [data-step='1'] .swap .u1, [data-step='2'] .swap .u2 { display: inline; }
 
   /* Provider strip: models step past; the wallet above never moves. */
   .strip { padding: 14px 0 12px; }
   .pwin { width: 330px; max-width: 100%; margin: 0 auto; overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, #000 26%, #000 74%, transparent); mask-image: linear-gradient(to right, transparent, #000 26%, #000 74%, transparent); }
-  .ptrack { display: flex; width: max-content; padding-left: 110px; transform: translateX(calc(var(--i, 0) * -110px)); transition: transform 0.55s var(--ease); }
-  [data-step='1'] .ptrack { --i: 1; } [data-step='2'] .ptrack { --i: 2; } [data-step='3'] .ptrack { --i: 3; }
-  [data-step='4'] .ptrack { --i: 4; } [data-step='5'] .ptrack { --i: 5; } [data-step='6'] .ptrack { --i: 6; }
+  .ptrack { display: flex; width: max-content; position: relative; left: calc(50% - 55px); transform: translateX(calc(var(--i, 0) * -110px)); transition: transform 0.55s var(--ease); }
+  [data-step='1'] .ptrack { --i: 1; } [data-step='2'] .ptrack { --i: 2; }
   .pi { flex: 0 0 110px; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 64px; justify-content: center; }
   .picon { position: relative; width: 28px; height: 28px; }
   .picon img { position: absolute; inset: 0; width: 28px; height: 28px; object-fit: contain; transition: opacity 0.4s var(--ease); }
   .pm { opacity: 0.25; }
-  /* The strip doesn't end on the last model: a greyed "More" follows, and never becomes active. */
-  .pmore { display: flex; align-items: center; justify-content: center; gap: 3px; opacity: 0.25; }
-  .pmore i { width: 5px; height: 5px; border-radius: 50%; background: var(--label); }
   .pc { opacity: 0; }
   .pname { color: var(--label-3); transition: color 0.4s var(--ease); }
-  [data-step='0'] .pi-0 .pc, [data-step='1'] .pi-1 .pc, [data-step='2'] .pi-2 .pc, [data-step='3'] .pi-3 .pc,
-  [data-step='4'] .pi-4 .pc, [data-step='5'] .pi-5 .pc { opacity: 1; }
-  [data-step='0'] .pi-0 .pm, [data-step='1'] .pi-1 .pm, [data-step='2'] .pi-2 .pm, [data-step='3'] .pi-3 .pm,
-  [data-step='4'] .pi-4 .pm, [data-step='5'] .pi-5 .pm { opacity: 0; }
-  [data-step='6'] .pi-6 .pm { opacity: 1; }
-  [data-step='0'] .pi-0 .pname, [data-step='1'] .pi-1 .pname, [data-step='2'] .pi-2 .pname, [data-step='3'] .pi-3 .pname,
-  [data-step='4'] .pi-4 .pname, [data-step='5'] .pi-5 .pname, [data-step='6'] .pi-6 .pname { color: var(--label); font-weight: 600; }
+  [data-step='0'] .pi-0 .pc, [data-step='1'] .pi-1 .pc, [data-step='2'] .pi-2 .pm { opacity: 1; }
+  [data-step='0'] .pi-0 .pm, [data-step='1'] .pi-1 .pm { opacity: 0; }
+  [data-step='0'] .pi-0 .pname, [data-step='1'] .pi-1 .pname, [data-step='2'] .pi-2 .pname { color: var(--label); font-weight: 600; }
   .strip-cap { padding: 6px 16px 0; text-align: center; }
   .tag { padding: 2px 8px; border-radius: 999px; background: #f6e79a; color: #0a0a0a; font-weight: 600; }
 
@@ -323,7 +314,17 @@ const cx = (n: number) => `cx at-${n}`;
   .ok :global(.g) { width: 18px; height: 18px; }
   .ok { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--ok); color: #fff; }
   .not { padding-top: 10px; display: flex; align-items: center; gap: 5px; }
-  .fact { margin-top: 12px !important; font-weight: 500; }
+
+  /* Quiet saving */
+  .sv .chat-line { width: fit-content; margin: 8px 0 0 auto; padding: 8px 14px; border-radius: 18px; background: var(--fill); }
+  .save-detail { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; }
+  .save-detail p { display: flex; align-items: center; gap: 6px; }
+  .undo { flex: none; min-height: 28px; }
+  .grows { display: inline-grid; }
+  .grows span { grid-area: 1 / 1; transition: opacity 0.35s var(--ease); }
+  .grows span + span, .s2 .grows span:first-child { opacity: 0; }
+  .s2 .grows span + span { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { .cx { transition-delay: 0s; } }
 
   /* Widget */
   .widget { padding: 14px 16px 16px; }

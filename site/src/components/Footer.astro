@@ -8,6 +8,7 @@ import { GITHUB_URL, routes, t, otherLang, type Lang, type RouteKey } from '../i
 interface Props { lang: Lang; page: RouteKey }
 const { lang, page } = Astro.props;
 const s = t(lang);
+const dictionary = s.footer.dictionary;
 const L = s.footer.links;
 const other = otherLang(lang);
 type Item = { label: string; href: string; key?: RouteKey };
@@ -22,7 +23,16 @@ const cols: { h: string; items: Item[] }[] = [
   <Rails />
   <div class="wrap in">
     <div class="top">
-      <Logo lang={lang} />
+      <div class="brand">
+        <Logo lang={lang} />
+        <div class="dictionary">
+          <p class="pronunciation">
+            {dictionary.language} <span aria-hidden="true">[blaɪ̯p]</span>
+            <span class="sr-only">, {dictionary.pronounced} <span lang="de">bleib</span></span>
+          </p>
+          <p class="meaning">{dictionary.meaning}</p>
+        </div>
+      </div>
       <nav class="cols" aria-label="Footer">
         {cols.map((c) => (
           <div>
@@ -51,6 +61,14 @@ const cols: { h: string; items: Item[] }[] = [
   .site-footer { padding: clamp(48px, 6vw, 72px) 0 28px; }
   .in { position: relative; z-index: 1; }
   .top { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: start; }
+  :global(:root[data-theme='dark']) .brand :global(.logo) { color: #f6e79a; }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .brand :global(.logo) { color: #f6e79a; }
+  }
+  /* Align with the wordmark after the 22px mark and 8px gap. */
+  .dictionary { margin-top: 4px; margin-inline-start: 30px; }
+  .pronunciation { margin: 0; color: var(--muted); font-size: 13px; line-height: 18px; }
+  .meaning { margin: 4px 0 0; color: var(--ink); font-size: 15px; line-height: 20px; font-style: italic; }
   .cols { display: flex; gap: clamp(32px, 6vw, 88px); }
   .col-h { margin: 0 0 12px; font-size: 14px; font-weight: 600; }
   ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }

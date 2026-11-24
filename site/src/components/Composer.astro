@@ -4,10 +4,10 @@
  * with a macOS caret that blinks once focused. Anything that sits in the box above the text goes in the slot.
  */
 import { icon } from './icons';
-interface Props { typed: string }
-const { typed } = Astro.props;
+interface Props { typed: string; sentAt: 2 | 4 }
+const { typed, sentAt } = Astro.props;
 ---
-<div class="composer">
+<div class="composer" data-sent-at={sentAt}>
   <slot />
   <p class="t-body input"><span class="field"><span class="typed" data-type={typed}>{typed}</span><span class="caret"></span></span><span class="send" set:html={icon('arrow_outward')} /></p>
 </div>
@@ -19,6 +19,7 @@ const { typed } = Astro.props;
   .caret { display: inline-block; width: 2px; height: 1.15em; margin-left: 1px; vertical-align: -0.2em; border-radius: 1px; background: var(--label); opacity: 0; }
   :global(.s1) .caret { opacity: 1; animation: caret 1.06s steps(1, end) infinite; }
   @keyframes caret { 50% { opacity: 0; } }
-  .send { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--fill); color: var(--label-2); }
+  :global(.s2) [data-sent-at='2'] .field, :global(.s4) [data-sent-at='4'] .field { display: none; }
+  .send { flex: none; width: 28px; height: 28px; margin-inline-start: auto; border-radius: 50%; display: grid; place-items: center; background: var(--fill); color: var(--label-2); }
   .send :global(svg) { width: 16px; height: 16px; display: block; transform: rotate(-45deg); }
 </style>
