@@ -1,53 +1,115 @@
 ---
+/** Subpages, styled like fazit.dev's: big title and intro, then two-column sections (heading left). */
 import Base from './Base.astro';
 import Rails from '../components/Rails.astro';
+import { icon } from '../components/icons';
 import { docs, type Block } from '../i18n/pages';
 import type { Lang, RouteKey } from '../i18n/strings';
 interface Props { lang: Lang; page: Exclude<RouteKey, 'home'> }
 const { lang, page } = Astro.props;
 const d = docs[lang][page];
-const isList = (b: Block): b is { list: string[] } => 'list' in b;
-const isCode = (b: Block): b is { code: string } => 'code' in b;
-const isAddr = (b: Block): b is { address: string[] } => 'address' in b;
+const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unknown>> => k in b;
 ---
 <Base lang={lang} page={page} title={d.title} description={d.description}>
-  <article class="doc has-rails">
-    <Rails top={false} />
-    <div class="wrap inner">
-      <header class="doc-head">
+  <article class="doc">
+    <header class="doc-hero has-rails">
+      <Rails top={false} />
+      <div class="wrap hero-in">
         <h1 class="doc-h1">{d.title}</h1>
-        <p class="doc-intro">{d.intro}</p>
-      </header>
-      {d.sections.map((sec) => (
-        <section class="doc-sec">
-          <h2>{sec.h}</h2>
-          {sec.blocks.map((b) =>
-            isList(b) ? (
-              <ul>{b.list.map((li) => <li>{li}</li>)}</ul>
-            ) : isCode(b) ? (
-              <pre><code>{b.code}</code></pre>
-            ) : isAddr(b) ? (
-              <address>{b.address.map((line, i) => (<>{line}{i < b.address.length - 1 && <br />}</>))}</address>
-            ) : (
-              <p>{b.p}</p>
-            ),
-          )}
-        </section>
-      ))}
+        {d.intro.map((p) => <p class="doc-intro">{p}</p>)}
+        {d.cta && <a class="btn btn-secondary doc-cta" href={d.cta.href}>{d.cta.label}</a>}
+      </div>
+    </header>
+    <div class="doc-body has-rails">
+      <Rails />
+      <div class="wrap">
+        {d.sections.map((sec) => (
+          <section class="sec" id={sec.id}>
+            <h2 class="sec-h">{sec.h}</h2>
+            <div class="sec-c">
+              {sec.blocks.map((b) =>
+                is(b, 'never') ? (
+                  <ul class="never">{b.never.map((x) => <li><span class="ni" set:html={icon('verified_user')} /><span>{x}</span></li>)}</ul>
+                ) : is(b, 'rows') ? (
+                  <dl class="kv">{b.rows.map((r) => <div><dt>{r.k}</dt><dd>{r.v}</dd></div>)}</dl>
+                ) : is(b, 'tiles') ? (
+                  <ul class="tiles">
+                    {b.tiles.map((tl) => (
+                      <li class:list={['tile', { 'has-tag': tl.tag }]}>
+                        {tl.tag && <span class="tag">{tl.tag}</span>}
+                        {tl.icon && <span class="ti" set:html={icon(tl.icon)} />}
+                        <p class="tile-t">{tl.t}</p>
+                        <p class="tile-d">{tl.d}</p>
+                      </li>
+                    ))}
+                  </ul>
+                ) : is(b, 'list') ? (
+                  <ul class="bul">{b.list.map((li) => <li>{li}</li>)}</ul>
+                ) : is(b, 'code') ? (
+                  <pre><code>{b.code}</code></pre>
+                ) : is(b, 'address') ? (
+                  <address>{b.address.map((line, i) => (<>{line}{i < b.address.length - 1 && <br />}</>))}</address>
+                ) : (
+                  <p>{(b as { p: string }).p}</p>
+                ),
+              )}
+            </div>
+          </section>
+        ))}
+      </div>
     </div>
   </article>
 </Base>
 <style>
-  .doc { padding: clamp(120px, 16vh, 160px) 0 72px; }
-  .inner { position: relative; z-index: 1; max-width: 760px; }
-  .doc-h1 { font-size: clamp(34px, 4.4vw, 52px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.08; }
-  .doc-intro { margin: 16px 0 0; font-size: 19px; color: var(--muted); }
-  .doc-head { margin-bottom: 40px; }
-  .doc-sec { padding: 26px 0; border-top: 1px solid var(--rail); }
-  .doc-sec h2 { font-size: 21px; font-weight: 600; letter-spacing: -0.015em; margin: 0 0 10px; }
-  .doc-sec p, .doc-sec li, .doc-sec address { font-size: 17px; line-height: 1.6; font-style: normal; }
-  .doc-sec p { margin: 0 0 12px; }
-  .doc-sec ul { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; }
-  pre { margin: 0 0 8px; padding: 12px 16px; border-radius: 14px; background: var(--card); color: var(--on-card); border: var(--card-border); overflow-x: auto; }
+  .doc-hero { padding: clamp(140px, 18vh, 190px) 0 clamp(64px, 8vw, 104px); }
+  .hero-in { position: relative; z-index: 1; }
+  .doc-h1 { font-size: clamp(40px, 5.2vw, 60px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; max-width: 16ch; }
+  .doc-intro { margin: 18px 0 0; max-width: 36em; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.5; color: var(--muted); }
+  .doc-intro + .doc-intro { margin-top: 10px; }
+  .doc-cta { margin-top: 28px; }
+
+  .doc-body { padding: clamp(24px, 4vw, 48px) 0 clamp(64px, 8vw, 104px); }
+  .doc-body .wrap { position: relative; z-index: 1; }
+  .sec { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: clamp(24px, 5vw, 72px); padding: clamp(32px, 4.5vw, 52px) 0; scroll-margin-top: 96px; }
+  .sec + .sec { border-top: 1px solid var(--rail); }
+  .sec-h { font-size: 22px; line-height: 28px; font-weight: 600; letter-spacing: -0.02em; }
+  .sec-c { min-width: 0; max-width: 680px; }
+  .sec-c > * + * { margin-top: 16px; }
+  .sec-c p, .sec-c li, .sec-c address, .sec-c dd, .sec-c dt { font-size: 17px; line-height: 1.55; font-style: normal; }
+  .sec-c p { margin: 0; }
+
+  .never, .bul, .tiles { list-style: none; margin: 0; padding: 0; }
+  .never li { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-top: 1px solid var(--rail); }
+  .never li:first-child { border-top: 0; padding-top: 0; }
+  .ni { flex: none; margin-top: 2px; color: var(--muted); }
+  .ni :global(svg) { width: 20px; height: 20px; display: block; }
+  .bul { display: grid; gap: 8px; padding-left: 1.1em; list-style: disc; }
+
+  .kv { margin: 0; }
+  .kv div { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr); gap: 16px; padding: 11px 0; border-top: 1px solid var(--rail); }
+  .kv div:first-child { border-top: 0; padding-top: 0; }
+  .kv dt { color: var(--muted); }
+  .kv dd { margin: 0; }
+
+  .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  /* Tags sit in the corner so titles line up across a row, with or without a tag. */
+  .tile { position: relative; padding: 18px 20px; border-radius: 20px; background: var(--card); color: var(--on-card); border: var(--card-border); }
+  .tile.has-tag .tile-t { padding-right: 84px; }
+  .ti { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: var(--fill); color: var(--label); margin-bottom: 12px; }
+  .ti :global(svg) { width: 20px; height: 20px; display: block; }
+  .tag { position: absolute; top: 16px; right: 16px; padding: 2px 9px; border-radius: 999px; background: #f6e79a; color: #0a0a0a; font-size: 12px; line-height: 18px; font-weight: 600; }
+  .tile-t { font-weight: 600; letter-spacing: -0.015em; }
+  .tile-d { margin-top: 4px !important; color: var(--on-card-muted); font-size: 15px !important; line-height: 1.45 !important; }
+
+  pre { margin: 0; padding: 12px 16px; border-radius: 14px; background: var(--card); color: var(--on-card); border: var(--card-border); overflow-x: auto; }
+  .sec-c pre + pre { margin-top: 8px; }
   code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 14px; }
+
+  @media (max-width: 860px) {
+    .sec { grid-template-columns: 1fr; gap: 14px; }
+  }
+  @media (max-width: 560px) {
+    .tiles { grid-template-columns: 1fr; }
+    .kv div { grid-template-columns: 1fr; gap: 2px; }
+  }
 </style>

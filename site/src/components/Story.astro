@@ -1,10 +1,13 @@
 ---
 import StoryVisual from './StoryVisual.astro';
 import Rails from './Rails.astro';
-import { t, type Lang } from '../i18n/strings';
+import { t, routes, type Lang } from '../i18n/strings';
+import { icon } from './icons';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang).story;
+const more = t(lang).nav.more;
+const chev = icon('chevron_right');
 ---
 <section class="story has-rails" aria-label={s.label}>
   <Rails />
@@ -15,6 +18,7 @@ const s = t(lang).story;
         <div class="text">
           <h2 class="h2"><span>{scene.h[0]}</span><br /><span>{scene.h[1]}</span></h2>
           <p class="lead">{scene.p}</p>
+          <a class="more" href={`${routes[scene.more.to as keyof typeof routes][lang]}${scene.more.hash}`}>{more}<span set:html={chev} /></a>
         </div>
       </div>
     </article>
@@ -36,6 +40,12 @@ const s = t(lang).story;
   .scene[data-side='card-right'] .pair { grid-template-columns: min(420px, 34vw) min(500px, 44vw); }
   .scene[data-side='card-right'] .visual { order: 2; }
   .text .lead { margin: 18px 0 0; }
+  /* Apple-style "Learn more ›" */
+  .more { display: inline-flex; align-items: center; gap: 1px; margin-top: 14px; font-size: 17px; font-weight: 500; text-decoration: none; color: var(--ink); }
+  .more :global(svg) { width: 20px; height: 20px; display: block; transition: transform 0.2s var(--ease); }
+  .more:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .more:hover :global(svg) { transform: translateX(2px); }
+  :global(:root[data-theme='dark']) .more { color: #f6e79a; }
   /* Tray and text are centred together; the tray grows evenly and the text stays centred on it. */
 
   @media (max-width: 767px) {
