@@ -1,5 +1,7 @@
 # bleib website: design spec (Phase 1)
 
+**Rule No. 1:** all styling follows Apple's Human Interface Guidelines: type ramp, hierarchy, spacing, colour semantics and component patterns. See `.claude/CLAUDE.md`.
+
 Covers SITE-01 to SITE-12. It follows roze.ai's structure, pacing and restraint closely, but every word, image, illustration and line of code is bleib's own. Nothing is copied from roze.ai.
 
 ## What we observed on roze.ai (structure only)

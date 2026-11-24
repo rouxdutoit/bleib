@@ -1,3 +1,25 @@
+## Rule No. 1: Apple Human Interface Guidelines (founder instruction, 24 Nov 2026)
+
+All UI, on the website and in the product, follows Apple's Human Interface Guidelines as Apple itself would build it:
+
+- **Type:** the iOS type ramp and hierarchy.
+  - Large Title 34/41, Title 1 28/34, Title 2 22/28, Title 3 20/25;
+  - Headline 17/22 semibold, Body 17/22, Callout 16/21, Subheadline 15/20, Footnote 13/18, Caption 12/16;
+  - SF-style tracking;
+  - the system font stack first (`-apple-system`, `BlinkMacSystemFont`), with Inter as the fallback.
+- **Colour:** semantic label colours (label, secondaryLabel, tertiaryLabel), hairline separators, system fills, grouped backgrounds.
+- **Spacing and shape:** an 8pt grid, 16pt content margins, 44pt minimum hit targets, concentric corner radii (inner radius = outer radius − padding).
+- **Components:** use Apple's own patterns rather than inventing.
+  - inset grouped lists (Settings);
+  - alerts with capsule buttons (permission prompts);
+  - notifications (app icon, title, time, actions);
+  - widgets (large number, short label);
+  - selection lists with a trailing checkmark.
+- **Writing:** title-case buttons in alerts ("Allow Once", "Don't Allow"), questions as alert titles, sentence case elsewhere.
+- **Accessibility:** contrast, Dynamic Type-friendly sizes, reduced motion, no colour-only meaning.
+
+Reference: https://developer.apple.com/design/human-interface-guidelines/
+
 <!-- GSD:project-start source:PROJECT.md -->
 
 ## Project

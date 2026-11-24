@@ -1,133 +1,217 @@
 ---
+/**
+ * Product mock-ups for the story, built on Apple HIG patterns (Rule No. 1):
+ * 0 inset grouped list (Settings), 1 permission alert, 2 notification + widget,
+ * 3 selection list, 4 actionable notification.
+ */
 import Mark from './Mark.astro';
 import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang; scene: number }
 const { lang, scene } = Astro.props;
 const c = t(lang).cards;
-const lock = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M5 7V5a3 3 0 1 1 6 0v2h.5A1.5 1.5 0 0 1 13 8.5v5a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 3 13.5v-5A1.5 1.5 0 0 1 4.5 7H5Zm1.5 0h3V5a1.5 1.5 0 1 0-3 0v2Z"/></svg>';
+
+const glyph: Record<string, string> = {
+  person: '<path d="M10 10a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm0 1.5c-3.3 0-6 1.7-6 4v.5c0 .6.4 1 1 1h10c.6 0 1-.4 1-1v-.5c0-2.3-2.7-4-6-4Z"/>',
+  plane: '<path d="M17.3 9.2 12 7.6 8.4 2.6a.9.9 0 0 0-.7-.4h-.9l1.6 5.1-3.8-1.1-1.2-1.7h-.9l.6 3.5-.6 3.5h.9l1.2-1.7 3.8-1.1-1.6 5.1h.9c.3 0 .5-.1.7-.4L12 12.4l5.3-1.6c.8-.2.8-1.4 0-1.6Z"/>',
+  case: '<path d="M7.5 4V3.2c0-.7.5-1.2 1.2-1.2h2.6c.7 0 1.2.5 1.2 1.2V4h3.3c.9 0 1.7.8 1.7 1.7v8.6c0 .9-.8 1.7-1.7 1.7H4.2c-.9 0-1.7-.8-1.7-1.7V5.7C2.5 4.8 3.3 4 4.2 4h3.3Zm1.5 0h2V3.5H9V4Z"/>',
+  heart: '<path d="M10 17s-6.5-3.8-6.5-8.6A3.6 3.6 0 0 1 10 6.3a3.6 3.6 0 0 1 6.5 2.1C16.5 13.2 10 17 10 17Z"/>',
+  lock: '<path d="M6.5 8.5V6.5a3.5 3.5 0 1 1 7 0v2h.3c.9 0 1.7.8 1.7 1.7v5.6c0 .9-.8 1.7-1.7 1.7H6.2c-.9 0-1.7-.8-1.7-1.7v-5.6c0-.9.8-1.7 1.7-1.7h.3Zm1.6 0h3.8v-2a1.9 1.9 0 0 0-3.8 0v2Z"/>',
+  check: '<path d="M8.2 14.2a1 1 0 0 1-.7-.3L4.3 10.7a1 1 0 1 1 1.4-1.4l2.5 2.5 6.1-6.1a1 1 0 1 1 1.4 1.4l-6.8 6.8a1 1 0 0 1-.7.3Z"/>',
+  shield: '<path d="M10 2.2 4 4.6v4.6c0 3.9 2.6 7.2 6 8.6 3.4-1.4 6-4.7 6-8.6V4.6l-6-2.4Zm-1 10.9-2.6-2.6 1.1-1.1L9 10.9l3.5-3.5 1.1 1.1L9 13.1Z"/>',
+  chev: '<path d="M7.3 4.3a1 1 0 0 1 1.4 0l5 5a1 1 0 0 1 0 1.4l-5 5a1 1 0 1 1-1.4-1.4L11.6 10 7.3 5.7a1 1 0 0 1 0-1.4Z"/>',
+};
+const svg = (name: string, cls = 'g') => `<svg class="${cls}" viewBox="0 0 20 20" aria-hidden="true"><g fill="currentColor">${glyph[name]}</g></svg>`;
 ---
 <div class={`tray sv sv-${scene}`}>
   {scene === 0 && (
-    <div class="card c-pad">
-      <div class="c-head"><span class="mm"><Mark size={12} /></span>{c.wallet.title}</div>
-      <ul class="rows">
+    <div class="card list-card">
+      <p class="t-foot c-2 sec-h">{c.wallet.title}</p>
+      <ul class="group">
         {c.wallet.rows.map((r) => (
-          <li class:list={['row', { locked: r.locked }]}>
-            <span class="k">{r.k}</span>
-            <span class="v">{r.locked && <Fragment set:html={lock} />}{r.v}</span>
+          <li class="cell">
+            <span class="ico" set:html={svg(r.icon)} />
+            <span class="t-body cell-k">{r.k}</span>
+            <span class="t-body c-2 cell-v">{r.locked && <span class="inline-g" set:html={svg('lock')} />}{r.v}</span>
           </li>
         ))}
       </ul>
-      <p class="c-foot"><Fragment set:html={lock} />{c.wallet.footer}</p>
+      <p class="t-foot c-2 sec-f">{c.wallet.footer}</p>
     </div>
   )}
+
   {scene === 1 && (
-    <div class="card c-pad">
-      <div class="who"><img src="/providers/claude.svg" alt="" width="28" height="28" /><span>Claude</span></div>
-      <p class="c-title">{c.ask.title}</p>
-      <p class="c-meta">{c.ask.meta}</p>
-      <div class="choices">
-        <span class="choice">{c.ask.once}</span>
-        <span class="choice pick">{c.ask.always}</span>
-        <span class="choice">{c.ask.no}</span>
+    <div class="alert-wrap">
+      <div class="card alert" role="presentation">
+        <p class="t-headline alert-title">{c.ask.title}</p>
+        <p class="t-foot alert-msg">{c.ask.message}</p>
+        <div class="alert-actions">
+          <span class="pill t-body">{c.ask.once}</span>
+          <span class="pill t-body pick">{c.ask.always}</span>
+          <span class="pill t-body">{c.ask.no}</span>
+        </div>
       </div>
-      <p class="saved"><span class="dot" aria-hidden="true"></span>{c.ask.saved}</p>
+      <p class="card banner t-sub saved"><span class="ok" set:html={svg('check')} />{c.ask.saved}</p>
     </div>
   )}
+
   {scene === 2 && (
     <div class="stack">
-      <div class="card c-pad">
-        <p class="c-meta">{c.receipt.when}</p>
-        <div class="who"><img src="/providers/claude.svg" alt="" width="28" height="28" /><span>{c.receipt.who}</span></div>
-        <p class="c-meta">{c.receipt.why}</p>
-        <p class="label">{c.receipt.sharedLabel}</p>
-        <ul class="shared">{c.receipt.shared.map((x) => <li><mark>{x}</mark></li>)}</ul>
-        <p class="c-meta not"><Fragment set:html={lock} />{c.receipt.notShared}</p>
+      <div class="card note">
+        <div class="note-head">
+          <img class="app" src="/providers/claude.svg" alt="" width="38" height="38" />
+          <div class="note-id">
+            <p class="t-headline">{c.receipt.who}</p>
+            <p class="t-sub c-2">{c.receipt.where}</p>
+          </div>
+          <p class="t-foot c-2">{c.receipt.time}</p>
+        </div>
+        <p class="t-sub c-2 purpose">{c.receipt.purposeLabel} {c.receipt.purpose}</p>
+        <p class="t-foot c-2 sec-h inner">{c.receipt.sharedLabel}</p>
+        <ul class="group filled">
+          {c.receipt.shared.map((x) => (
+            <li class="cell"><span class="yes" set:html={svg('check')} /><span class="t-body">{x}</span></li>
+          ))}
+        </ul>
+        <p class="t-foot c-2 not"><span class="inline-g" set:html={svg('lock')} />{c.receipt.notShared}</p>
       </div>
-      <div class="card c-pad weekly"><span class="mm"><Mark size={12} /></span><p>{c.receipt.weekly}</p></div>
+      <div class="card widget">
+        <p class="t-foot c-2 w-label"><span class="w-mark" aria-hidden="true"><Mark size={11} /></span>{c.receipt.weeklyLabel}</p>
+        <p class="w-num"><span class="t-large">{c.receipt.weeklyN}</span><span class="t-sub">{c.receipt.weeklyText}</span></p>
+        <p class="t-foot c-2 w-note"><span class="inline-g ok-g" set:html={svg('shield')} />{c.receipt.weeklyNote}</p>
+      </div>
     </div>
   )}
+
   {scene === 3 && (
-    <div class="card c-pad">
-      <div class="c-head"><span class="mm"><Mark size={12} /></span>{c.any.title}</div>
-      <div class="kinds">{c.any.kinds.map((k) => <span class="kind">{k}</span>)}</div>
-      <p class="label">{c.any.using}</p>
-      <ul class="providers">
+    <div class="card list-card">
+      <div class="head-cell">
+        <span class="w-tile" aria-hidden="true"><Mark size={18} /></span>
+        <div>
+          <p class="t-headline">{c.any.title}</p>
+          <p class="t-sub c-2">{c.any.sub}</p>
+        </div>
+      </div>
+      <p class="t-foot c-2 sec-h">{c.any.sectionLabel}</p>
+      <ul class="group">
         {c.any.providers.map((p, i) => (
-          <li class:list={['prov', { on: i === 0 }]} data-prov={i}>
-            <img src={p.icon} alt="" width="26" height="26" /><span>{p.name}</span>
+          <li class:list={['cell prov', { on: i === 0 }]} data-prov={i}>
+            <img class="app-sm" src={p.icon} alt="" width="29" height="29" />
+            <span class="t-body cell-k">{p.name}</span>
+            <span class="t-sub c-2 cell-v">{p.note}</span>
+            <span class="tick" set:html={svg('check')} />
           </li>
         ))}
       </ul>
-      <p class="caption">{c.any.caption}</p>
+      <p class="t-foot c-2 sec-f">{c.any.caption}</p>
     </div>
   )}
+
   {scene === 4 && (
-    <div class="card c-pad">
-      <div class="who"><img src="/providers/claude.svg" alt="" width="28" height="28" /><span>{c.propose.title}</span></div>
-      <p class="fact">{c.propose.fact}</p>
-      <p class="c-meta">{c.propose.why}</p>
-      <div class="choices">
-        <span class="choice pick">{c.propose.save}</span>
-        <span class="choice">{c.propose.edit}</span>
-        <span class="choice">{c.propose.later}</span>
+    <div class="stack">
+      <div class="card note">
+        <div class="note-head">
+          <img class="app" src="/providers/claude.svg" alt="" width="38" height="38" />
+          <div class="note-id">
+            <p class="t-headline">{c.propose.title}</p>
+            <p class="t-sub c-2">{c.propose.app}</p>
+          </div>
+          <p class="t-foot c-2">{c.propose.time}</p>
+        </div>
+        <p class="t-body fact">{c.propose.fact}</p>
+        <p class="t-foot c-2">{c.propose.why}</p>
+        <div class="row-actions">
+          <span class="pill t-body pick">{c.propose.save}</span>
+          <span class="pill t-body">{c.propose.edit}</span>
+          <span class="pill t-body">{c.propose.later}</span>
+        </div>
       </div>
-      <p class="saved"><span class="dot" aria-hidden="true"></span>{c.propose.saved}</p>
+      <p class="card banner t-sub saved"><span class="ok" set:html={svg('check')} />{c.propose.saved}</p>
     </div>
   )}
 </div>
 
 <style>
   .sv { width: 100%; }
-  .c-pad { padding: 20px 22px; }
-  .stack { display: grid; gap: 14px; }
-  .c-head { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: var(--on-card-muted); letter-spacing: 0.01em; margin-bottom: 8px; }
-  .mm { width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; flex: none; }
-  .rows { list-style: none; margin: 0; padding: 0; }
-  .row { display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; border-top: 1px solid rgb(127 127 127 / 0.16); font-size: 15px; }
-  .row:first-child { border-top: 0; }
-  .k { color: var(--on-card-muted); }
-  .v { font-weight: 500; text-align: right; display: inline-flex; align-items: center; gap: 6px; }
-  .v :global(svg), .c-foot :global(svg), .not :global(svg) { width: 13px; height: 13px; flex: none; }
-  .locked .v { color: var(--on-card-muted); }
-  .c-foot { margin: 10px 0 0; padding: 7px 12px; border-radius: 999px; display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; background: var(--hl); color: var(--hl-ink); }
-  .who { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; }
-  .who img { border-radius: 8px; background: var(--card-sub); padding: 4px; }
-  .c-title { margin: 14px 0 4px; font-size: 18px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.3; }
-  .c-meta { margin: 0; font-size: 14px; color: var(--on-card-muted); }
-  .choices { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-  .choice { padding: 8px 14px; border-radius: 999px; font-size: 14px; box-shadow: inset 0 0 0 1px rgb(127 127 127 / 0.3); transition: background-color 0.35s var(--ease), color 0.35s var(--ease), box-shadow 0.35s var(--ease); }
-  .saved { margin: 16px 0 0; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; opacity: 0; transform: translateY(6px); transition: opacity 0.4s var(--ease), transform 0.4s var(--ease); }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: #2f9e57; flex: none; }
-  .label { margin: 16px 0 8px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--on-card-muted); }
-  .shared { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 6px; font-size: 16px; }
-  mark { background: var(--hl); color: var(--hl-ink); padding: 2px 6px; border-radius: 6px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
-  .not { display: flex; align-items: center; gap: 7px; }
-  .weekly { display: flex; gap: 12px; align-items: flex-start; }
-  .weekly p { margin: 0; font-size: 14px; line-height: 1.45; }
-  .kinds { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 4px; }
-  .kind { font-size: 13px; padding: 5px 11px; border-radius: 999px; background: var(--hl); color: var(--hl-ink); font-weight: 500; }
-  .providers { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-  .prov { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; font-size: 15px; opacity: 0.45; transition: opacity 0.4s var(--ease), background-color 0.4s var(--ease); }
-  .prov img { border-radius: 7px; background: var(--card-sub); padding: 3px; }
-  .prov.on { opacity: 1; background: var(--card-sub); font-weight: 500; }
-  .caption { margin: 14px 0 0; font-size: 14px; font-weight: 500; }
-  .fact { margin: 14px 0 6px; font-size: 22px; letter-spacing: -0.02em; font-weight: 500; }
+  .sv p { margin: 0; }
+  .stack { display: grid; gap: 12px; }
 
-  /* Played / final state: the highlighted choice is selected and the confirmation shows. */
+  /* Inset grouped list (Settings) */
+  .list-card { padding: 16px 0 14px; }
+  .sec-h { padding: 0 16px 6px; text-transform: uppercase; letter-spacing: 0.02em; }
+  .sec-h.inner { padding: 16px 0 6px; }
+  .sec-f { padding: 8px 16px 0; }
+  .group { list-style: none; margin: 0; padding: 0; }
+  .cell { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 16px; position: relative; }
+  .cell + .cell::before { content: ''; position: absolute; top: 0; right: 0; left: 57px; height: 0.5px; background: var(--separator); }
+  .ico { flex: none; width: 29px; height: 29px; border-radius: 7px; display: grid; place-items: center; background: var(--fill); color: var(--label); }
+  .ico :global(.g) { width: 17px; height: 17px; }
+  .cell-k { flex: 1; min-width: 0; }
+  .cell-v { text-align: right; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+  .inline-g { display: inline-flex; }
+  .inline-g :global(.g) { width: 13px; height: 13px; }
+  .head-cell { display: flex; align-items: center; gap: 12px; padding: 0 16px 16px; }
+  .w-tile { width: 44px; height: 44px; border-radius: 11px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; flex: none; }
+
+  /* Alert (permission prompt) with capsule buttons */
+  .alert-wrap { display: grid; gap: 12px; justify-items: center; }
+  .alert { width: min(100%, 320px); padding: 22px 16px 16px; text-align: center; border-radius: 22px; }
+  .alert-msg { margin-top: 4px !important; color: var(--label); }
+  .alert-actions { display: grid; gap: 8px; margin-top: 18px; }
+  .pill { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 16px; border-radius: 999px; background: var(--fill); color: var(--label); font-weight: 500; transition: background-color 0.35s var(--ease), color 0.35s var(--ease); }
+
+  /* Notification */
+  .note { padding: 14px 16px 16px; }
+  .note-head { display: flex; align-items: center; gap: 10px; }
+  .note-id { flex: 1; min-width: 0; }
+  .app { width: 38px; height: 38px; border-radius: 9px; padding: 6px; background: var(--fill); flex: none; }
+  .app-sm { width: 29px; height: 29px; border-radius: 7px; padding: 4px; background: var(--fill); flex: none; }
+  .purpose { margin-top: 12px !important; }
+  .group.filled { background: var(--fill); border-radius: 12px; }
+  .group.filled .cell { padding: 0 12px; }
+  .group.filled .cell + .cell::before { left: 44px; }
+  .yes { flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: #f6e79a; color: #0a0a0a; }
+  .yes :global(.g) { width: 13px; height: 13px; }
+  .not { margin-top: 10px !important; display: flex; align-items: center; gap: 5px; }
+  .fact { margin-top: 12px !important; font-weight: 500; }
+  .row-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
+  .row-actions .pill { padding: 0 8px; }
+
+  /* Widget */
+  .widget { padding: 14px 16px 16px; }
+  .w-label { display: flex; align-items: center; gap: 6px; font-weight: 600; }
+  .w-mark { width: 18px; height: 18px; border-radius: 5px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
+  .w-num { display: flex; align-items: baseline; gap: 8px; margin-top: 6px !important; }
+  .w-note { margin-top: 6px !important; display: flex; align-items: center; gap: 5px; }
+  .ok-g { color: var(--ok); }
+
+  /* Selection list */
+  .tick { margin-left: 4px; color: var(--label); opacity: 0; transition: opacity 0.3s var(--ease); }
+  .tick :global(.g) { width: 17px; height: 17px; }
+  .prov.on .tick { opacity: 1; }
+  .prov .cell-k { transition: font-weight 0.3s; }
+  .prov.on .cell-k { font-weight: 600; }
+
+  /* Banner confirmation */
+  .banner { display: flex; align-items: center; gap: 8px; padding: 12px 16px; width: 100%; opacity: 0; transform: translateY(6px); transition: opacity 0.4s var(--ease), transform 0.4s var(--ease); }
+  .alert-wrap .banner { width: min(100%, 320px); }
+  .ok { flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: var(--ok); color: #fff; }
+  .ok :global(.g) { width: 13px; height: 13px; }
+
+  /* Played / final state */
   :global(.is-final) .pick,
-  :global(.is-playing) .pick { background: var(--btn); color: var(--btn-ink); box-shadow: none; }
+  :global(.is-playing) .pick { background: var(--label); color: var(--cell); }
   :global(.is-final) .saved,
   :global(.is-playing) .saved { opacity: 1; transform: none; }
   :global(.is-playing) .pick { transition-delay: 0.9s; }
   :global(.is-playing) .saved { transition-delay: 1.6s; }
 </style>
 <style is:global>
-  :root[data-theme='dark'] .sv .who img,
-  :root[data-theme='dark'] .sv .prov img { background: #f5f1e6; }
+  :root[data-theme='dark'] .sv .app,
+  :root[data-theme='dark'] .sv .app-sm { background: #f5f1e6; }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme='light']) .sv .who img,
-    :root:not([data-theme='light']) .sv .prov img { background: #f5f1e6; }
+    :root:not([data-theme='light']) .sv .app,
+    :root:not([data-theme='light']) .sv .app-sm { background: #f5f1e6; }
   }
-  :root[data-theme='dark'] .sv .mm { box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.14); }
+  :root[data-theme='dark'] .sv .w-tile,
+  :root[data-theme='dark'] .sv .w-mark { box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.14); }
 </style>

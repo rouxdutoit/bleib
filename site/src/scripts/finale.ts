@@ -59,8 +59,15 @@ export function initFinale(): void {
     });
     chip.addEventListener('pointermove', (e) => {
       if (e.pointerId !== pid) return;
-      const dx = e.clientX - startX;
-      const dy = e.clientY - startY;
+      // Keep the chip inside the tray.
+      const a = area.getBoundingClientRect();
+      const box = chip.getBoundingClientRect();
+      const curX = Number.parseFloat(chip.style.getPropertyValue('--dx')) || 0;
+      const curY = Number.parseFloat(chip.style.getPropertyValue('--dy')) || 0;
+      const homeLeft = box.left - curX;
+      const homeTop = box.top - curY;
+      const dx = Math.min(Math.max(e.clientX - startX + baseX, a.left + 8 - homeLeft), a.right - 8 - box.width - homeLeft) - baseX;
+      const dy = Math.min(Math.max(e.clientY - startY + baseY, a.top + 8 - homeTop), a.bottom - 8 - box.height - homeTop) - baseY;
       if (Math.abs(dx) + Math.abs(dy) > 4) moved = true;
       chip.style.setProperty('--dx', `${baseX + dx}px`);
       chip.style.setProperty('--dy', `${baseY + dy}px`);
@@ -71,11 +78,15 @@ export function initFinale(): void {
       if (e.pointerId !== pid) return;
       pid = -1;
       chip.classList.remove('dragging');
+      const snapHome = () => {
+        chip.style.removeProperty('--dx');
+        chip.style.removeProperty('--dy');
+      };
       const w = wallet.getBoundingClientRect();
       const over = e.clientX > w.left && e.clientX < w.right && e.clientY > w.top && e.clientY < w.bottom;
       wallet.classList.remove('hot');
-      if (over) putIn(chip);
-      else if (!moved) putIn(chip); // a plain tap or click also puts it in
+      if (over || !moved) putIn(chip); // dropping on the wallet, or a plain tap, puts it in
+      else snapHome(); // anywhere else, it slides back into its place
     };
     chip.addEventListener('pointerup', end);
     chip.addEventListener('pointercancel', (e) => {

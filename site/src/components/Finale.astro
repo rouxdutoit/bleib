@@ -6,7 +6,6 @@ import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang).finale;
-// Slight rotations so the pile looks hand-placed; layout itself is a wrapping row, so nothing overlaps.
 const tilt = [-4, 3, -2, 2, -3, 4, -2, 4, -4, 3, -3, 2];
 ---
 <section class="finale has-rails" id="early-access" aria-labelledby="finale-title">
@@ -18,20 +17,21 @@ const tilt = [-4, 3, -2, 2, -3, 4, -2, 4, -4, 3, -3, 2];
       <EarlyAccessForm lang={lang} />
     </div>
     <div class="play" data-play data-count-tpl={s.count} data-total={s.items.length}>
-      <p class="prompt" data-prompt-text={s.playPrompt} data-done-text={s.done}>{s.playPrompt}</p>
+      <p class="prompt t-foot c-2" data-prompt-text={s.playPrompt} data-done-text={s.done}>{s.playPrompt}</p>
       <div class="area" data-area>
+        <div class="chips">
         {s.items.map((item, i) => (
           <button
             type="button"
             class="chip"
             data-chip
-            style={`--r:${tilt[i]}deg`}
             aria-label={s.putIn.replace('{item}', item)}
           >
             <span class:list={['chip-dot', { lockdot: item === s.lockedItem }]} aria-hidden="true"></span>
             <span>{item}</span>
           </button>
         ))}
+        </div>
         <div class="wallet" data-wallet>
           <span class="wallet-tile" aria-hidden="true"><Mark size={26} /></span>
           <span class="wallet-label">{s.walletLabel}</span>
@@ -50,39 +50,43 @@ const tilt = [-4, 3, -2, 2, -3, 4, -2, 4, -4, 3, -3, 2];
   .finale { padding: clamp(72px, 10vw, 140px) 0; }
   .grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
   .copy .lead { margin: 18px 0 28px; }
-  .prompt { margin: 0 0 12px; font-size: 14px; color: var(--muted); text-align: center; }
-  .area { position: relative; min-height: 440px; padding: 26px 22px 128px; border-radius: var(--radius-tray); background: var(--tray); display: flex; flex-wrap: wrap; justify-content: center; align-content: flex-start; gap: 14px 12px; }
+  .prompt { margin: 0 0 10px; text-align: center; }
+  /* Tray (radius 34, padding 16) wraps a grid of straight chips and the wallet; nothing can leave it. */
+  .area {
+    position: relative; overflow: hidden; touch-action: none;
+    padding: 16px; border-radius: 34px; background: var(--tray);
+    display: grid; gap: 16px;
+  }
+  .chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 168px), 1fr)); gap: 8px; }
   .chip {
-    position: relative; touch-action: none;
-    transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(var(--r));
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 9px 14px; border: 0; border-radius: 12px; cursor: grab;
-    background: var(--card); color: var(--on-card); box-shadow: var(--shadow); border: var(--card-border);
-    font-size: 14px; font-weight: 500; white-space: nowrap; user-select: none; -webkit-user-select: none;
+    position: relative; z-index: 1;
+    transform: translate(var(--dx, 0px), var(--dy, 0px));
+    display: flex; align-items: center; gap: 10px; min-height: 44px; width: 100%;
+    padding: 0 14px; border: 0; border-radius: 18px; cursor: grab; text-align: left;
+    background: var(--cell); color: var(--label); border: var(--card-border);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.06);
+    font-size: 15px; line-height: 20px; letter-spacing: -0.015em;
+    user-select: none; -webkit-user-select: none;
     transition: transform 0.45s var(--ease), opacity 0.35s var(--ease);
   }
-  .chip.dragging { cursor: grabbing; transition: none; z-index: 5; }
+  .chip.dragging { cursor: grabbing; transition: none; z-index: 5; box-shadow: 0 12px 28px -8px rgb(0 0 0 / 0.3); }
   .chip.in { opacity: 0; pointer-events: none; transform: translate(var(--tx, 0px), var(--ty, 0px)) scale(0.4); }
-  .chip-dot { width: 7px; height: 7px; border-radius: 50%; background: #c9a400; flex: none; }
-  .chip-dot.lockdot { background: #0a0a0a; box-shadow: 0 0 0 2px #f6e79a; }
+  .chip-dot { width: 8px; height: 8px; border-radius: 50%; background: #c9a400; flex: none; }
+  .chip-dot.lockdot { background: var(--label); }
   .wallet {
-    position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%);
-    width: min(280px, 80%); padding: 14px 16px; border-radius: 20px;
-    display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 12px; align-items: center;
-    background: #0a0a0a; color: #f5f1e6; box-shadow: 0 20px 40px -18px rgb(0 0 0 / 0.5);
+    display: grid; grid-template-columns: auto 1fr; column-gap: 12px; align-items: center;
+    padding: 12px 16px; border-radius: 18px; min-height: 64px;
+    background: #0a0a0a; color: #ffffff;
     transition: transform 0.25s var(--ease);
   }
-  .wallet.hot { transform: translateX(-50%) scale(1.04); }
-  .wallet-tile { grid-row: 1 / 3; width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: #1c1c1c; color: #f6e79a; }
-  .wallet-label { font-size: 14px; font-weight: 600; }
-  .wallet-count { font-size: 13px; color: rgb(245 241 230 / 0.72); }
-  .play-actions { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+  .wallet.hot { transform: scale(1.02); }
+  .wallet-tile { grid-row: 1 / 3; width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: #1c1c1e; color: #f6e79a; }
+  .wallet-label { font-size: 17px; line-height: 22px; font-weight: 600; letter-spacing: -0.025em; }
+  .wallet-count { font-size: 13px; line-height: 18px; color: rgb(235 235 245 / 0.6); }
+  .play-actions { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
 
   @media (max-width: 900px) {
     .grid { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 560px) {
-    .chip { font-size: 13px; padding: 8px 11px; }
   }
 </style>
 
