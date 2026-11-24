@@ -7,4 +7,4 @@
 | bleib mark (`src/components/markPath.ts`, `public/favicon.svg`) | bleib | © bleib |
 
 The site uses no photography and nothing from roze.ai.
-| Material Symbols (Rounded) | Google, `@material-symbols/svg-400` 0.49.0, bundled as inline SVG | Apache-2.0 |
+| Material Symbols (Rounded) | Google, `@material-symbols/svg-400` and `svg-700` 0.49.0, bundled as inline SVG | Apache-2.0 |

@@ -296,7 +296,8 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
   .group.filled .cell { padding: 0 12px; }
   .group.filled > li + li .cell::before { left: 44px; }
   .yes { flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: #f6e79a; color: #0a0a0a; }
-  .yes :global(.g), .ok :global(.g) { width: 13px; height: 13px; }
+  .yes :global(.g) { width: 15px; height: 15px; }
+  .ok :global(.g) { width: 18px; height: 18px; }
   .ok { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--ok); color: #fff; }
   .not { padding-top: 10px; display: flex; align-items: center; gap: 5px; }
   .fact { margin-top: 12px !important; font-weight: 500; }

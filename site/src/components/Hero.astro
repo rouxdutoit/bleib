@@ -1,6 +1,7 @@
 ---
 import Mark from './Mark.astro';
 import Rails from './Rails.astro';
+import { icon, type IconName } from './icons';
 import { GITHUB_URL, routes, t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -39,19 +40,35 @@ const githubHref = GITHUB_URL || routes.developers[lang];
               </li>
             ))}
           </ul>
-          <p class="t-foot c-2 pv-eyebrow rows-label">{pv.rowsLabel}</p>
-          <ul class="rows">
-            {pv.rows.map((r) => (
-              <li class="row">
-                <img src={r.icon} alt="" width="32" height="32" />
-                <div class="r-main">
-                  <p class="r-top"><span class="t-headline">{r.who}</span><span class="t-foot c-2">{r.when}</span></p>
-                  <p class="t-body">{r.what}</p>
-                  <p class="t-sub c-2">{r.where} · {r.why}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <div class="split">
+            <div class="list-pane">
+              <p class="t-foot c-2 pv-eyebrow">{pv.rowsLabel}</p>
+              <ul class="rows">
+                {pv.rows.map((r, i) => (
+                  <li class:list={['row', { selected: i === 0 }]}>
+                    <img src={r.icon} alt="" width="32" height="32" />
+                    <div class="r-main">
+                      <p class="r-top"><span class="t-headline">{r.who}</span><span class="t-foot c-2">{r.when}</span></p>
+                      <p class="chips">{r.kinds.map((k) => <span class="chip t-foot"><span set:html={icon(k.icon as IconName)} />{k.label}</span>)}</p>
+                      <p class="t-sub c-2">{r.where} · {r.why}</p>
+                    </div>
+                    <span class="chev c-3" set:html={icon('chevron_right')} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="inspector">
+              <p class="t-foot c-2 pv-eyebrow">{pv.inspector.label}</p>
+              <p class="t-title3 ins-title">{pv.inspector.title}</p>
+              <dl class="facts">
+                {pv.inspector.facts.map((f) => (<div class="fact"><dt class="t-sub c-2">{f.k}</dt><dd class="t-sub">{f.v}</dd></div>))}
+              </dl>
+              <p class="t-foot c-2 pv-eyebrow ex-label">{pv.inspector.exactLabel}</p>
+              <ul class="exact">{pv.inspector.exact.map((x) => <li class="t-body">{x}</li>)}</ul>
+              <p class="t-foot c-2 not">{pv.inspector.notShared}</p>
+              <p class="t-foot fp"><span class="fp-i c-2" set:html={icon('fingerprint')} /><code class="c-2">{pv.inspector.fingerprint}</code><span class="ver"><span set:html={icon('verified')} />{pv.inspector.verified}</span></p>
+            </div>
+          </div>
         </div>
       </div>
     </figure>
@@ -83,17 +100,44 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .pv-title { margin: 2px 0 16px; }
   .tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
   .tile { display: grid; gap: 2px; padding: 14px 16px; border-radius: 16px; background: var(--fill); }
-  .rows-label { margin-top: 24px; }
   .rows { list-style: none; margin: 6px 0 0; padding: 0; }
-  /* Mail-style list: title + trailing time, content line, secondary line; separators inset to the text. */
-  .row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; position: relative; }
-  .row + .row::before { content: ''; position: absolute; top: 0; right: 0; left: 44px; height: 1px; background: var(--hairline); }
+  /* Split view (Mail / App Privacy Report): list with category capsules, inspector for the selected receipt. */
+  .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 16px; margin-top: 24px; }
+  .rows { list-style: none; margin: 6px 0 0; padding: 0; }
+  .row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 10px; border-radius: 14px; position: relative; }
+  .row + .row::before { content: ''; position: absolute; top: 0; right: 10px; left: 54px; height: 1px; background: var(--hairline); }
+  .row.selected { background: var(--fill); }
+  .row.selected + .row::before { display: none; }
   .row img { flex: none; margin-top: 2px; border-radius: 8px; background: var(--fill); padding: 5px; }
+  .row.selected img { background: var(--cell); }
   .r-main { flex: 1; min-width: 0; }
   .r-main p { margin: 0; }
   .r-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
   .r-top .t-foot { white-space: nowrap; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 3px !important; }
+  .chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 9px 2px 7px; border-radius: 999px; background: #f6e79a; color: #0a0a0a; font-weight: 600; }
+  .chip :global(svg) { width: 14px; height: 14px; }
+  .chev { flex: none; align-self: center; }
+  .chev :global(svg) { width: 20px; height: 20px; display: block; }
+  .inspector { border-radius: 16px; background: var(--fill); padding: 16px 18px; }
+  .inspector p { margin: 0; }
+  .ins-title { margin: 2px 0 10px !important; }
+  .facts { margin: 0; }
+  .fact { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-top: 1px solid var(--hairline); }
+  .fact dd { margin: 0; text-align: right; }
+  .ex-label { margin-top: 14px !important; }
+  .exact { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 6px; }
+  .exact li { padding: 8px 12px; border-radius: 10px; background: var(--cell); border-left: 3px solid #f6e79a; }
+  .not { margin-top: 10px !important; }
+  .fp { margin-top: 12px !important; display: flex; align-items: center; gap: 6px; }
+  .fp-i :global(svg) { width: 16px; height: 16px; display: block; }
+  .fp code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 12px; }
+  .ver { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; color: var(--ok); font-weight: 600; }
+  .ver :global(svg) { width: 16px; height: 16px; display: block; }
 
+  @media (max-width: 860px) {
+    .split { grid-template-columns: 1fr; }
+  }
   @media (max-width: 720px) {
     .tiles { grid-template-columns: 1fr; }
   }
