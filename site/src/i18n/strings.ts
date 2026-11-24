@@ -87,8 +87,8 @@ const en = {
         more: { to: 'how', hash: '#proposals', label: 'Saves as you go' },
       },
       {
-        h: ['Free to switch.', 'Nothing left behind.'],
-        p: 'Your preferences stay in your bleib. Change your AI whenever you like.',
+        h: ['Switch anytime.', 'Keep your choices.'],
+        p: 'Your preferences stay in your bleib. The next AI picks up where you left off.',
         more: { to: 'works', hash: '', label: 'Works with your AI' },
       },
       {
@@ -273,8 +273,8 @@ const de: Strings = {
         more: { to: 'how', hash: '#proposals', label: 'Speichert nebenbei' },
       },
       {
-        h: ['Frei wechseln.', 'Nichts bleibt zurück.'],
-        p: 'Deine Vorlieben bleiben in deinem bleib. Wechsle deine KI, wann immer du willst.',
+        h: ['Jederzeit wechseln.', 'Behalte deine Vorlieben.'],
+        p: 'Alles bleibt in deinem bleib. Die nächste KI macht einfach weiter.',
         more: { to: 'works', hash: '', label: 'Funktioniert mit deiner KI' },
       },
       {
