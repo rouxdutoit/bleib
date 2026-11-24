@@ -2,6 +2,28 @@
   "name": "bleib",
   "version": "0.2.0",
   "description": "A local encrypted wallet for the information you share with your AI",
+  "license": "AGPL-3.0-or-later",
+  "author": "Ruan du Toit",
+  "homepage": "https://bleib.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rouxdutoit/bleib.git",
+    "directory": "wallet"
+  },
+  "bugs": {
+    "url": "https://github.com/rouxdutoit/bleib/issues"
+  },
+  "keywords": [
+    "ai",
+    "memory",
+    "privacy",
+    "mcp",
+    "consent",
+    "receipts",
+    "encryption",
+    "local-first",
+    "agents"
+  ],
   "type": "module",
   "bin": {
     "bleib": "dist/cli.js"
@@ -9,7 +31,8 @@
   "files": [
     "dist",
     "docs",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "engines": {
     "node": ">=20"
