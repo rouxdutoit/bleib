@@ -48,7 +48,7 @@ const en = {
     eyebrow: 'In development',
     h1a: 'Your AI memory.',
     h1b: 'In your hands.',
-    sub: ['Every AI knows you, on your terms.'],
+    sub: ['Every AI gets only what your bleib allows.'],
     primary: 'Get early access',
     secondary: 'View on GitHub',
     trust: [
@@ -240,7 +240,7 @@ const de: Strings = {
     eyebrow: 'In Entwicklung',
     h1a: 'Dein KI-Gedächtnis.',
     h1b: 'In deiner Hand.',
-    sub: ['Jede KI kennt dich, so weit du willst.'],
+    sub: ['Jede KI bekommt nur, was dein bleib erlaubt.'],
     primary: 'Frühen Zugang sichern',
     secondary: 'Auf GitHub ansehen',
     trust: [
