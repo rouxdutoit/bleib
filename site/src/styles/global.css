@@ -53,7 +53,7 @@
   --hl-ink: #f6e79a;
   --btn: #f6e79a;
   --btn-ink: #0a0a0a;
-  --btn2: rgb(255 255 255 / 0.08);
+  --btn2: rgb(255 255 255 / 0.12);
   --btn2-ink: #f5f1e6;
   --tick: rgb(245 241 230 / 0.35);
   --tick-on: #f6e79a;
@@ -77,7 +77,7 @@
     --hl-ink: #f6e79a;
     --btn: #f6e79a;
     --btn-ink: #0a0a0a;
-    --btn2: rgb(255 255 255 / 0.08);
+    --btn2: rgb(255 255 255 / 0.12);
     --btn2-ink: #f5f1e6;
     --tick: rgb(245 241 230 / 0.35);
     --tick-on: #f6e79a;
@@ -231,7 +231,6 @@ h3 {
   color: var(--btn2-ink);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-  box-shadow: inset 0 0 0 1px var(--line);
 }
 .btn svg {
   width: 14px;
