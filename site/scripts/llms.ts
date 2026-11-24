@@ -13,11 +13,12 @@ function link(label: string, path: string, site: URL) {
 }
 
 export function renderIndex(site: URL) {
-  const english = t('en');
   const sections = languages.map((lang) => {
-    const { meta } = t(lang);
+    const { hero } = t(lang);
+    const title = `${hero.h1a} ${hero.h1b}`;
+    const description = `${hero.eyebrow}. ${hero.sub.join(' ')}`;
     const links = [
-      `- ${link(meta.title, routes.home[lang], site)}: ${meta.description}`,
+      `- ${link(title, routes.home[lang], site)}: ${description}`,
       ...documentKeys.map((key) => {
         const { title, description } = docs[lang][key];
         return `- ${link(title, routes[key][lang], site)}: ${description}`;
@@ -28,7 +29,7 @@ export function renderIndex(site: URL) {
 
   return [
     '# bleib',
-    `> ${english.meta.description} ${english.hero.eyebrow}.`,
+    `> ${t('en').meta.description}`,
     ...sections,
     `## Full site text\n\n- ${link('English and German', '/llms-full.txt', site)}`,
   ].join('\n\n') + '\n';
@@ -54,7 +55,7 @@ function renderBlock(block: Block, site: URL) {
 }
 
 function renderHome(lang: Lang, site: URL) {
-  const { hero, story, privacy, finale, footer, nav } = t(lang);
+  const { hero, story, finale, footer, nav } = t(lang);
   return [
     `### ${hero.h1a} ${hero.h1b}`,
     new URL(routes.home[lang], site).href,
@@ -67,8 +68,6 @@ function renderHome(lang: Lang, site: URL) {
       p,
       link(nav.more, routes[more.to as RouteKey][lang] + more.hash, site),
     ]),
-    `#### ${privacy.h}`,
-    bullets(privacy.items.map(({ t, d }) => `${t}: ${d}`)),
     `#### ${finale.h}`,
     finale.p,
     footer.fine,
