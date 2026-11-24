@@ -88,7 +88,8 @@ const [symbol, effect] = SYMBOLS[i];
   /* The sliders' knobs glide to new places, one after another, and stay there. */
   .k1 { --to: -7px; } .k2 { --to: 8px; --delay: 0.1s; } .k3 { --to: 5px; --delay: 0.2s; }
   .fx-tune.on .knob { animation: fx-knob 0.8s var(--ease) calc(0.15s + var(--delay, 0s)) both; }
-  .text .lead { margin: 18px 0 0; color: var(--scene-muted, var(--muted)); text-wrap: balance; }
+  /* Lines fill the column and only avoid leaving one word alone, like body text. */
+  .text .lead { margin: 18px 0 0; color: var(--scene-muted, var(--muted)); text-wrap: pretty; }
   /* Apple-style "Learn more ›" */
   .more { display: inline-flex; align-items: center; gap: 1px; margin-top: 14px; font-size: 17px; font-weight: 500; text-decoration: none; color: var(--scene-ink, var(--ink)); }
   .more :global(svg) { width: 20px; height: 20px; display: block; transition: transform 0.2s var(--ease); }
