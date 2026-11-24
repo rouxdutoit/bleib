@@ -237,6 +237,7 @@ h3 {
    Press      .press.at-N                 dips as if tapped when its step comes
    Land       .land.at-N                  drops into place with a small spring, as it is revealed
    Toggle     .toggle.at-N                an iOS switch, on in bleib yellow, that turns off at step N
+   Symbol     .fx-blink, -bounce, -slide, -wave   a headline symbol's one small effect, like SF Symbols
    Scenes differ only in when things happen; --delay staggers a single move. */
 :root {
   --t-open: 0.55s;
@@ -330,6 +331,15 @@ h3 {
 .s1 .toggle.at-1::after, .s2 .toggle.at-2::after, .s3 .toggle.at-3::after, .s4 .toggle.at-4::after, .s5 .toggle.at-5::after, .s6 .toggle.at-6::after {
   transform: none;
 }
+.fx-blink { --fx: fx-blink; }
+.fx-bounce { --fx: fx-bounce; }
+.fx-slide { --fx: fx-slide; }
+.fx-wave { --fx: fx-wave; }
+.fx-wave svg { transform-origin: 50% 90%; }
+@keyframes fx-blink { 0%, 40%, 100% { transform: none; } 20% { transform: scaleY(0.1); } }
+@keyframes fx-bounce { 0%, 100% { transform: none; } 30% { transform: translateY(-4px) scale(1.06); } 60% { transform: translateY(1px); } }
+@keyframes fx-slide { 0%, 100% { transform: none; } 30% { transform: translateX(3px); } 65% { transform: translateX(-3px); } }
+@keyframes fx-wave { 0%, 100% { transform: none; } 25% { transform: rotate(14deg); } 50% { transform: rotate(-8deg); } 75% { transform: rotate(6deg); } }
 @keyframes press { 40% { transform: scale(0.92); } }
 @keyframes land { from { transform: translateY(-8px) scale(0.97); } }
 @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
