@@ -191,10 +191,11 @@ h3 {
   letter-spacing: -0.01em;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.2s var(--ease), background-color 0.2s var(--ease);
+  transition: background-color 0.2s var(--ease), opacity 0.1s var(--ease);
 }
+/* As on apple.com: hover only eases the colour; pressing dims, nothing moves. */
 .btn:active {
-  transform: scale(0.98);
+  opacity: 0.8;
 }
 .btn-primary {
   background: var(--btn);
@@ -205,6 +206,14 @@ h3 {
   color: var(--btn2-ink);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
+}
+@media (hover: hover) {
+  .btn-primary:hover {
+    background: color-mix(in srgb, var(--btn) 84%, #ffffff);
+  }
+  .btn-secondary:hover {
+    background: color-mix(in srgb, var(--btn2), var(--btn2-ink) 7%);
+  }
 }
 .btn svg {
   width: 14px;
