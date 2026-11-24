@@ -90,6 +90,8 @@ const [symbol, effect] = SYMBOLS[i];
   .fx-tune.on .knob { animation: fx-knob 0.8s var(--ease) calc(0.15s + var(--delay, 0s)) both; }
   /* Lines fill the column and only avoid leaving one word alone, like body text. */
   .text .lead { margin: 18px 0 0; color: var(--scene-muted, var(--muted)); text-wrap: pretty; }
+  /* On phones, Callout size like the hero, so each sentence sits on its own line. */
+  @media (max-width: 480px) { .text .lead { font-size: 16px; line-height: 22px; } }
   /* Apple-style "Learn more ›" */
   .more { display: inline-flex; align-items: center; gap: 1px; margin-top: 14px; font-size: 17px; font-weight: 500; text-decoration: none; color: var(--scene-ink, var(--ink)); }
   .more :global(svg) { width: 20px; height: 20px; display: block; transition: transform 0.2s var(--ease); }

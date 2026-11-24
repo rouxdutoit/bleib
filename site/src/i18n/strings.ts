@@ -83,12 +83,12 @@ const en = {
     scenes: [
       {
         h: ['Control what AI', 'knows about you.'],
-        p: "Bring over what your AIs already remember about you. Now it's all in one place, and all yours.",
+        p: "Bring over what your AIs remember. Now it's all in one place, and all yours.",
         more: { to: 'how', hash: '#memory', label: 'One memory, every AI' },
       },
       {
         h: ['It remembers', 'as you chat.'],
-        p: 'Mention a preference in chat and bleib saves it. One tap undoes it. bleib asks before saving anything sensitive.',
+        p: 'Mention a preference, and it’s saved. One tap undoes it. Anything sensitive asks first.',
         more: { to: 'how', hash: '#proposals', label: 'Saves as you go' },
       },
       {
@@ -103,7 +103,7 @@ const en = {
       },
       {
         h: ['Know exactly what', 'each AI was told.'],
-        p: 'Every share leaves a receipt, so you always know which AI got what.',
+        p: 'Every share leaves a receipt. You always know which AI got what.',
         more: { to: 'receipts', hash: '', label: 'A receipt for every share' },
       },
       {
@@ -273,7 +273,7 @@ const de: Strings = {
     scenes: [
       {
         h: ['Bestimme, was die KI', 'über dich weiß.'],
-        p: 'Hol dir, was deine KIs schon über dich wissen. Jetzt ist alles an einem Ort, und alles gehört dir.',
+        p: 'Hol dir, was sich deine KIs merken. Jetzt an einem Ort, und alles deins.',
         more: { to: 'how', hash: '#memory', label: 'Ein Gedächtnis, jede KI' },
       },
       {
@@ -288,12 +288,12 @@ const de: Strings = {
       },
       {
         h: ['bleib fragt,', 'wenn es darauf ankommt.'],
-        p: 'Alltägliches läuft von selbst. Bei Gesundheit und Geld fragt bleib dich immer zuerst.',
+        p: 'Alltägliches läuft von selbst. Gesundheit und Geld brauchen dein Ja.',
         more: { to: 'permissions', hash: '', label: 'Du entscheidest, was geteilt wird' },
       },
       {
         h: ['Sieh genau, was', 'jede KI erfahren hat.'],
-        p: 'Für jede Weitergabe gibt es einen Beleg, damit du immer weißt, welche KI was bekommen hat.',
+        p: 'Für jede Weitergabe gibt es einen Beleg. Du weißt immer, welche KI was bekam.',
         more: { to: 'receipts', hash: '', label: 'Ein Beleg für jede Weitergabe' },
       },
       {
