@@ -102,7 +102,10 @@ const deHref = new URL(routes[page].de, site).href;
       (function () {
         try {
           var v = localStorage.getItem('bleib-theme');
-          if (v === 'dark' || v === 'light') document.documentElement.setAttribute('data-theme', v);
+          if (v === 'dark' || v === 'light') {
+            document.documentElement.setAttribute('data-theme', v);
+            document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) { m.content = v === 'dark' ? '#0a0a0a' : '#f6e79a'; });
+          }
         } catch (e) {}
       })();
     </script>

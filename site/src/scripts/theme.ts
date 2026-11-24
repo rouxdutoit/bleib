@@ -8,8 +8,15 @@ function isDark(): boolean {
   return media.matches;
 }
 
+/** The browser bar follows the site's theme: yellow in light, black in dark, whichever the system says. */
+const barColour = (dark: boolean) => (dark ? '#0a0a0a' : '#f6e79a');
+
 function sync(): void {
   const dark = isDark();
+  const set = root.getAttribute('data-theme');
+  document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]').forEach((meta) => {
+    meta.content = barColour(set ? set === 'dark' : meta.media.includes('dark'));
+  });
   document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((btn) => {
     btn.setAttribute('aria-label', (dark ? btn.dataset.labelLight : btn.dataset.labelDark) ?? '');
   });
