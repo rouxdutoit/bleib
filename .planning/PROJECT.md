@@ -86,6 +86,7 @@ You can change AI without losing who you are to it, and you can always see exact
 | Site follows roze.ai's structure closely with bleib's own assets | Founder preference; proven clarity | — Pending |
 | Skip GSD research; use our own reports and the teardown | Research already done today | — Pending |
 | Licence: app AGPL-3.0-or-later; file format, spec and SDK Apache-2.0 | Keeps the app open against closed hosted forks, as with Fazit, while any AI app can integrate freely | ✓ Decided 24 Nov 2026 |
+| Automatic minimum by default: bleib shares only what a request needs, chosen locally; the person is asked only for sensitive kinds (health, money, people, location), a new AI, or hosted models for sensitive data; receipts let them check afterwards; rules are optional | Choosing per AI is draining (consent fatigue); password managers fill without asking | ✓ Decided 24 Nov 2026 |
 
 ## Evolution
 
