@@ -1,6 +1,8 @@
 /**
  * Plays each scene's card morph once, when the scene comes into view: data-step="n" plus
- * cumulative classes s1..sn (see StoryVisual.astro and Finale.astro). With reduced motion the final state shows at once.
+ * cumulative classes s1..sn (see StoryVisual.astro, Hero.astro and Finale.astro).
+ * A [data-type] element inside a scene is typed out at step 1, and later steps wait for it.
+ * With reduced motion the final state shows at once.
  */
 const START = 500;
 const STEP = 900;
@@ -8,6 +10,19 @@ const STEP = 900;
 const setStep = (sv: HTMLElement, n: number) => {
   sv.dataset.step = String(n);
   for (let k = 1; k <= 6; k++) sv.classList.toggle(`s${k}`, k <= n);
+};
+
+/** Types el's data-type text from `at` ms, with the rhythm of rouxdutoit.com; returns when it ends. */
+const type = (el: HTMLElement, at: number): number => {
+  const glyphs = [...(el.dataset.type ?? '')];
+  el.textContent = '';
+  let t = at;
+  glyphs.forEach((_, i) => {
+    t += 16 + ((i * 7) % 15) + (/[.,]/.test(glyphs[i - 1] ?? '') ? 35 : 0);
+    const text = glyphs.slice(0, i + 1).join('');
+    window.setTimeout(() => (el.textContent = text), t);
+  });
+  return t;
 };
 
 export function initStory(): void {
@@ -24,7 +39,12 @@ export function initStory(): void {
           continue;
         }
         const interval = Number(sv.dataset.interval ?? STEP);
-        for (let k = 1; k <= steps; k++) window.setTimeout(() => setStep(sv, k), START + (k - 1) * interval);
+        const typer = sv.querySelector<HTMLElement>('[data-type]');
+        let at = START;
+        for (let k = 1; k <= steps; k++) {
+          window.setTimeout(() => setStep(sv, k), at);
+          at = k === 1 && typer ? type(typer, at) + 300 : at + interval;
+        }
       }
     },
     { threshold: 0.6 },
