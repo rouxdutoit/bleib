@@ -88,7 +88,7 @@ const en = {
       },
       {
         h: ['Switch AI.', 'Keep everything.'],
-        p: 'Your preferences come with you. A new AI gets them after your yes.',
+        p: 'Your preferences stay in your bleib. A new AI gets them after your yes.',
         more: { to: 'works', hash: '', label: 'Works with your AI' },
       },
       {
@@ -274,7 +274,7 @@ const de: Strings = {
       },
       {
         h: ['Wechsle die KI.', 'Behalte alles.'],
-        p: 'Deine Vorlieben kommen mit. Eine neue KI bekommt sie nach deinem Ja.',
+        p: 'Deine Vorlieben bleiben in deinem bleib. Eine neue KI bekommt sie nach deinem Ja.',
         more: { to: 'works', hash: '', label: 'Funktioniert mit deiner KI' },
       },
       {
