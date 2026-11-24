@@ -1,5 +1,6 @@
 ---
 /** Subpages, styled like fazit.dev's: big title and intro, then two-column sections (heading left). */
+import Lines from '../components/Lines.astro';
 import Base from './Base.astro';
 import Rails from '../components/Rails.astro';
 import { icon } from '../components/icons';
@@ -16,7 +17,7 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
       <Rails top={false} />
       <div class="wrap hero-in">
         <h1 class="doc-h1">{d.title}</h1>
-        {d.intro.map((p) => <p class="doc-intro">{p}</p>)}
+        {d.intro.map((p) => <p class="doc-intro"><Lines text={p} /></p>)}
         {d.cta && <a class="btn btn-secondary doc-cta" href={d.cta.href}>{d.cta.label}</a>}
         {d.hub && (
           <ul class="hub">

@@ -196,7 +196,7 @@ const en: Docs = {
   security: {
     title: 'Security and privacy',
     description: 'How bleib protects your memory and what it trusts on your device.',
-    intro: ['We never see your memory. It’s encrypted on your device. No account. No tracking. A receipt for every share. The code is open.'],
+    intro: ['We never see your memory. It’s encrypted on your device, with no account and no tracking. Every share leaves a receipt, and the code is open.'],
     cta: { label: 'Report a vulnerability', href: SECURITY_MAIL },
     sections: [
       {
@@ -552,7 +552,7 @@ const de: Docs = {
   security: {
     title: 'Sicherheit und Datenschutz',
     description: 'Wie bleib dein Gedächtnis schützt und worauf es sich auf deinem Gerät verlässt.',
-    intro: ['Wir sehen dein Gedächtnis nie. Es ist auf deinem Gerät verschlüsselt. Kein Konto. Kein Tracking. Ein Beleg für jede Freigabe. Der Quellcode ist offen.'],
+    intro: ['Wir sehen dein Gedächtnis nie. Es ist auf deinem Gerät verschlüsselt, ohne Konto und ohne Tracking. Jede Freigabe hinterlässt einen Beleg, und der Quellcode ist offen.'],
     cta: { label: 'Sicherheitslücke melden', href: SECURITY_MAIL },
     sections: [
       {
@@ -704,7 +704,7 @@ const de: Docs = {
   appPrivacy: {
     title: 'Datenschutz in der App',
     description: 'Wie bleib und die Browser-Erweiterung mit deinem Gedächtnis umgehen.',
-    intro: ['Wir sehen dein Gedächtnis nie. bleib ist in Entwicklung. Für App und Erweiterung brauchst du kein bleib-Konto. Es gibt keine Telemetrie, keine Nutzungsanalyse und keine automatischen Absturzberichte.'],
+    intro: ['Wir sehen dein Gedächtnis nie. bleib ist in Entwicklung. App und Erweiterung kommen ohne bleib-Konto, Telemetrie, Nutzungsanalyse und automatische Absturzberichte aus.'],
     sections: [
       {
         h: 'Was die Erweiterung liest',

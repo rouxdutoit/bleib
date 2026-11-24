@@ -1,4 +1,5 @@
 ---
+import Lines from './Lines.astro';
 import StoryVisual from './StoryVisual.astro';
 import Rails from './Rails.astro';
 import { t, routes, type Lang } from '../i18n/strings';
@@ -17,7 +18,7 @@ const chev = icon('chevron_right');
         <div class="visual"><StoryVisual lang={lang} scene={i} /></div>
         <div class="text">
           <h2 class="h2"><span>{scene.h[0]}</span><br /><span>{scene.h[1]}</span></h2>
-          <p class="lead">{scene.p}</p>
+          <p class="lead"><Lines text={scene.p} /></p>
           <a class="more" href={`${routes[scene.more.to as keyof typeof routes][lang]}${scene.more.hash}`}>{more}<span set:html={chev} /></a>
         </div>
       </div>

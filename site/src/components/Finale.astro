@@ -1,4 +1,5 @@
 ---
+import Lines from './Lines.astro';
 /** The closer: the password-manager moment the hero promises, and one action. */
 import Mark from './Mark.astro';
 import DrawTick from './DrawTick.astro';
@@ -27,7 +28,7 @@ const s = t(lang).finale;
       </div>
     </figure>
     <h2 id="finale-title" class="title">{s.h}</h2>
-    <p class="sub">{s.p}</p>
+    <p class="sub"><Lines text={s.p} /></p>
     <div class="form"><EarlyAccessForm lang={lang} /></div>
   </div>
 </section>

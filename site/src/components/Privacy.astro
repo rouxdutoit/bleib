@@ -1,4 +1,5 @@
 ---
+import Lines from './Lines.astro';
 /** The privacy promise in one line, then four short proofs: Apple's privacy pages, in bleib's words. */
 import Rails from './Rails.astro';
 import { icon, type IconName } from './icons';
@@ -17,7 +18,7 @@ const s = t(lang).privacy;
         <li>
           <span class="ico" set:html={icon(x.icon as IconName)} />
           <p class="t-headline">{x.t}</p>
-          <p class="d">{x.d}</p>
+          <p class="d"><Lines text={x.d} /></p>
         </li>
       ))}
     </ul>
