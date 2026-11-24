@@ -223,7 +223,7 @@ const en: Docs = {
   developers: {
     title: 'Developers',
     description: 'Build with the bleib wallet, the local MCP API and open formats.',
-    intro: ['bleib is free, open source and in development. You can build the wallet and browser extension from source.'],
+    intro: ['bleib is free, open source and in development. The wallet works today: try it and tell us what you need.'],
     cta: { label: 'View on GitHub', href: GITHUB_URL },
     sections: [
       {
@@ -231,25 +231,40 @@ const en: Docs = {
         blocks: [
           { p: 'The wallet supports MCP over stdio and Streamable HTTP on 127.0.0.1. Pair each client with its own credential. Call bleib_status, then bleib_context_request with the question, purpose and kinds needed. If the result is approval_required, show the approval link and let the person decide.' },
           { p: 'The wallet matches locally. A plain MCP client supplies its own question and purpose. The browser extension uses the actual draft and connects through native messaging.' },
+          { p: 'Agents can never unlock the wallet, widen their own access or approve themselves.' },
         ],
       },
       {
-        h: 'Build the wallet',
+        h: 'Built on',
         blocks: [
-          { p: 'Use Node.js 20 or later. From the repository root, build the CLI and follow the setup guide for your client.' },
-          { code: 'npm --prefix wallet ci' },
-          { code: 'npm --prefix wallet run build' },
-          { code: 'node wallet/dist/cli.js init' },
+          { p: 'bleib stands on open work by others. Thank you.' },
           {
             refs: [
-              { name: 'Client setup', href: GITHUB_URL + '/blob/main/wallet/docs/setup.md', v: 'Configure and pair an MCP client.' },
+              { name: 'Model Context Protocol', href: 'https://modelcontextprotocol.io', v: 'How agents connect to the wallet.' },
+              { name: 'OpenClaw', href: 'https://docs.openclaw.ai/concepts/memory', v: 'The workspace memory format bleib reads and writes.' },
+              { name: 'Hermes Agent', href: 'https://hermes-agent.nousresearch.com', v: 'By Nous Research; uses the same workspace format.' },
+              { name: 'Human Context Protocol', href: 'https://github.com/loyalagents/hcp-spec', v: 'By Loyal Agents (Stanford Digital Economy Lab and Consumer Reports); the model for permissions and logs.' },
+              { name: 'ISO/IEC TS 27560', href: 'https://www.iso.org/standard/80392.html', v: 'The structure of consent records.' },
+              { name: 'W3C Data Privacy Vocabulary', href: 'https://w3id.org/dpv', v: 'The kinds of personal information.' },
+              { name: 'OSAP consent receipts', href: 'https://datatracker.ietf.org/doc/draft-zeng-osap-consent-receipts/', v: 'IETF draft; the receipt export.' },
+              { name: 'Memory Projection Record', href: 'https://datatracker.ietf.org/doc/draft-ferro-schrock-memory-projection-record/', v: 'IETF draft; a fingerprint of exactly what was released.' },
+              { name: 'age', href: 'https://age-encryption.org', v: 'By Filippo Valsorda; encrypts your files.' },
             ],
           },
-          { p: 'In a checkout with the extension source, see extension/README.md to build and load the add-on.' },
         ],
       },
       {
-        h: 'Licences',
+        h: 'Try it',
+        blocks: [
+          { p: 'Node 20 or newer, on Linux or macOS. Install from npm, then follow the setup guide for your AI app.' },
+          { code: 'npm install --global @bleib/wallet' },
+          { code: 'bleib init' },
+          { code: "bleib pair 'Claude Code' --destination provider:Anthropic" },
+          { code: 'bleib serve' },
+        ],
+      },
+      {
+        h: 'Licence',
         blocks: [
           {
             rows: [
@@ -257,8 +272,14 @@ const en: Docs = {
               { k: 'File format, spec and SDK', v: 'Apache-2.0' },
             ],
           },
+          { p: 'The app stays open: anyone who runs a changed version as a service must share their changes. The format and SDK are permissive, so any AI app can integrate bleib freely.' },
         ],
       },
+      {
+        h: 'Get involved',
+        blocks: [{ p: 'The code is on GitHub at github.com/rouxdutoit/bleib. Open an issue, send a pull request, or write to hello@rouxdutoit.com. Please report security issues by email, not in public.' }],
+      },
+
     ],
   },
   pricing: {
@@ -371,7 +392,7 @@ const en: Docs = {
       { h: 'Operator', blocks: [{ address: OPERATOR }] },
       { h: 'Contact', blocks: [{ address: ['Email hello@rouxdutoit.com', 'Telephone +49 162 7850608'] }] },
       { h: 'Responsible for content', blocks: [{ p: 'Under § 18(2) MStV.' }, { address: OPERATOR }] },
-      { h: 'About bleib', blocks: [{ p: 'bleib is free, open source and in development. A password manager, for your preferences. The app is licensed under AGPL-3.0-or-later. The file format, specification and SDK are under Apache-2.0.' }] },
+      { h: 'About bleib', blocks: [{ p: 'bleib is free, open source and in development. The app is licensed under AGPL-3.0-or-later. The file format, specification and SDK are under Apache-2.0.' }] },
     ],
   },
 };
@@ -558,7 +579,7 @@ const de: Docs = {
   developers: {
     title: 'Für Entwickler',
     description: 'Entwickle mit dem bleib-Wallet, der lokalen MCP-Schnittstelle und offenen Formaten.',
-    intro: ['bleib ist kostenlos, quelloffen und in Entwicklung. Du kannst das Wallet und die Browser-Erweiterung aus dem Quellcode bauen.'],
+    intro: ['bleib ist kostenlos, quelloffen und in Entwicklung. Das Wallet funktioniert schon: probier es aus und sag uns, was du brauchst.'],
     cta: { label: 'Auf GitHub ansehen', href: GITHUB_URL },
     sections: [
       {
@@ -566,25 +587,40 @@ const de: Docs = {
         blocks: [
           { p: 'Das Wallet unterstützt MCP über stdio und Streamable HTTP auf 127.0.0.1. Jeder verbundene Client bekommt eigene Zugangsdaten. Rufe zuerst bleib_status auf und dann bleib_context_request mit Frage, Zweck und den benötigten Kategorien. Gibt der Aufruf approval_required zurück, zeig den Link zur Freigabe an. Die Entscheidung trifft der Mensch.' },
           { p: 'Das Wallet sucht lokal nach passenden Einträgen. Ein MCP-Client gibt seine Frage und den Zweck selbst an. Die Browser-Erweiterung verwendet den tatsächlichen Entwurf und verbindet sich per Native Messaging.' },
+          { p: 'Agents können das Wallet nie entsperren, ihren Zugriff nie selbst erweitern und sich nie selbst freigeben.' },
         ],
       },
       {
-        h: 'Wallet bauen',
+        h: 'Baut auf',
         blocks: [
-          { p: 'Nutze Node.js ab Version 20. Führe die Befehle im Hauptverzeichnis des Repositorys aus. Folge dann der Anleitung für deinen Client.' },
-          { code: 'npm --prefix wallet ci' },
-          { code: 'npm --prefix wallet run build' },
-          { code: 'node wallet/dist/cli.js init' },
+          { p: 'bleib baut auf offener Arbeit anderer auf. Danke.' },
           {
             refs: [
-              { name: 'Client einrichten', href: GITHUB_URL + '/blob/main/wallet/docs/setup.md', v: 'Konfiguriere und verbinde einen MCP-Client.' },
+              { name: 'Model Context Protocol', href: 'https://modelcontextprotocol.io', v: 'Wie Agenten sich mit der Wallet verbinden.' },
+              { name: 'OpenClaw', href: 'https://docs.openclaw.ai/concepts/memory', v: 'Das Workspace-Format für Erinnerungen, das bleib liest und schreibt.' },
+              { name: 'Hermes Agent', href: 'https://hermes-agent.nousresearch.com', v: 'Von Nous Research; nutzt dasselbe Workspace-Format.' },
+              { name: 'Human Context Protocol', href: 'https://github.com/loyalagents/hcp-spec', v: 'Von Loyal Agents (Stanford Digital Economy Lab und Consumer Reports); das Modell für Berechtigungen und Protokolle.' },
+              { name: 'ISO/IEC TS 27560', href: 'https://www.iso.org/standard/80392.html', v: 'Der Aufbau von Einwilligungsnachweisen.' },
+              { name: 'W3C Data Privacy Vocabulary', href: 'https://w3id.org/dpv', v: 'Die Arten persönlicher Informationen.' },
+              { name: 'OSAP consent receipts', href: 'https://datatracker.ietf.org/doc/draft-zeng-osap-consent-receipts/', v: 'IETF-Entwurf; der Export der Belege.' },
+              { name: 'Memory Projection Record', href: 'https://datatracker.ietf.org/doc/draft-ferro-schrock-memory-projection-record/', v: 'IETF-Entwurf; ein Fingerabdruck genau dessen, was weitergegeben wurde.' },
+              { name: 'age', href: 'https://age-encryption.org', v: 'Von Filippo Valsorda; verschlüsselt deine Dateien.' },
             ],
           },
-          { p: 'Wenn die Quellen der Browser-Erweiterung vorliegen, findest du die Anleitung zum Bauen und Laden in extension/README.md.' },
         ],
       },
       {
-        h: 'Lizenzen',
+        h: 'Ausprobieren',
+        blocks: [
+          { p: 'Node 20 oder neuer, unter Linux oder macOS. Über npm installieren, dann der Anleitung für deine KI-App folgen.' },
+          { code: 'npm install --global @bleib/wallet' },
+          { code: 'bleib init' },
+          { code: "bleib pair 'Claude Code' --destination provider:Anthropic" },
+          { code: 'bleib serve' },
+        ],
+      },
+      {
+        h: 'Lizenz',
         blocks: [
           {
             rows: [
@@ -592,8 +628,14 @@ const de: Docs = {
               { k: 'Dateiformat, Spezifikation und SDK', v: 'Apache-2.0' },
             ],
           },
+          { p: 'Die App bleibt offen: Wer eine veränderte Version als Dienst betreibt, muss die Änderungen teilen. Format und SDK sind frei nutzbar, damit jede KI-App bleib einbinden kann.' },
         ],
       },
+      {
+        h: 'Mitmachen',
+        blocks: [{ p: 'Der Code liegt auf GitHub unter github.com/rouxdutoit/bleib. Eröffne ein Issue, schick einen Pull Request oder schreib an hello@rouxdutoit.com. Sicherheitslücken bitte per E-Mail melden, nicht öffentlich.' }],
+      },
+
     ],
   },
   pricing: {
@@ -706,7 +748,7 @@ const de: Docs = {
       { h: 'Anbieter', blocks: [{ address: OPERATOR_DE }] },
       { h: 'Kontakt', blocks: [{ address: ['E-Mail hello@rouxdutoit.com', 'Telefon +49 162 7850608'] }] },
       { h: 'Verantwortlich für den Inhalt', blocks: [{ p: 'Nach § 18 Abs. 2 MStV.' }, { address: OPERATOR_DE }] },
-      { h: 'Über bleib', blocks: [{ p: 'bleib ist kostenlos, quelloffen und in Entwicklung. Wie ein Passwortmanager, nur für deine Vorlieben. Die App steht unter AGPL-3.0-or-later. Dateiformat, Spezifikation und SDK stehen unter Apache-2.0.' }] },
+      { h: 'Über bleib', blocks: [{ p: 'bleib ist kostenlos, quelloffen und in Entwicklung. Die App steht unter AGPL-3.0-or-later. Dateiformat, Spezifikation und SDK stehen unter Apache-2.0.' }] },
     ],
   },
 };
