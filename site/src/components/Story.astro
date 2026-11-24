@@ -19,12 +19,8 @@ const all = s.scenes.map((x, i) => ({ i, dark: 'dark' in x }));
 <style>
   .story { position: relative; padding: clamp(24px, 4vw, 64px) 0; }
   /* The privacy scene has its own section: the whole box between the rails turns black with bleib yellow
-     (yellow with black in dark mode). Rails and joints on it turn yellow; the half of each joint outside stays. */
+     in both themes. Rails and joints on it turn yellow; the half of each joint outside stays. */
   .story-dark { --v-bg: #0a0a0a; --v-ink: #f6e79a; --v-muted: rgb(245 241 230 / 0.62); --focus: #f6e79a; --scene-ink: var(--v-ink); --scene-muted: var(--v-muted); }
-  :global(:root[data-theme='dark']) .story-dark { --v-bg: #f6e79a; --v-ink: #0a0a0a; --v-muted: rgb(10 10 10 / 0.64); --focus: #0a0a0a; --scene-ink: var(--v-ink); --scene-muted: var(--v-muted); }
-  @media (prefers-color-scheme: dark) {
-    :global(:root:not([data-theme='light'])) .story-dark { --v-bg: #f6e79a; --v-ink: #0a0a0a; --v-muted: rgb(10 10 10 / 0.64); --focus: #0a0a0a; --scene-ink: var(--v-ink); --scene-muted: var(--v-muted); }
-  }
   .story-dark::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: var(--rails-box); transform: translateX(-50%); background: var(--v-bg); }
   .story-dark :global(.rails) { border-color: color-mix(in srgb, var(--v-ink) 32%, transparent); }
   .story-dark :global(.rails::before), .story-dark :global(.rails::after) {
@@ -35,10 +31,6 @@ const all = s.scenes.map((x, i) => ({ i, dark: 'dark' in x }));
   .story-dark :global(.rails::after) { background-position: left center, center center; }
   /* The following section's joints reach up into the black, so their upper half turns yellow too. */
   .story-dark ~ :global(section) { --v-ink: #f6e79a; }
-  :global(:root[data-theme='dark']) .story-dark ~ :global(section) { --v-ink: #0a0a0a; }
-  @media (prefers-color-scheme: dark) {
-    :global(:root:not([data-theme='light'])) .story-dark ~ :global(section) { --v-ink: #0a0a0a; }
-  }
   .story-dark ~ :global(section .rails::before), .story-dark ~ :global(section .rails::after) {
     background:
       linear-gradient(var(--joint), var(--joint)) right center / 5px 1px no-repeat,

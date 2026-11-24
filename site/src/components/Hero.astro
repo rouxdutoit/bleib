@@ -31,7 +31,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
         {pv.tabs.map((x, i) => {
           const title = pv.title.replace('{ai}', x.ai);
           return (
-            <div class="body" role="tabpanel" id={`ex-${i}`} aria-labelledby={`ex-tab-${i}`} hidden={i !== 0} data-steps="3" data-interval="800" data-gaps=",2600" data-step="0" {...(i === 0 ? { 'data-sv': '' } : {})}>
+            <div class="body" role="tabpanel" id={`ex-${i}`} aria-labelledby={`ex-tab-${i}`} hidden={i !== 0} data-steps="3" data-interval="800" data-gaps=",2600" data-step="0" {...(i === 0 ? { 'data-sv': 'scroll' } : {})}>
               <p class="sr-only">{x.typed} {title}: {x.facts.join(', ')}. {x.private}</p>
               <div aria-hidden="true">
                 <BleibCard title={title} facts={x.facts} action={pv.add} done={pv.added} />
@@ -68,7 +68,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .trust :global(svg) { width: 15px; height: 15px; display: block; }
 
   /* The fill moment: a new AI, bleib offers only what it needs, like a password manager filling a login.
-     Plays once in view (scripts/story.ts); each tab is another everyday example and replays when chosen. */
+     Plays on the first scroll (scripts/story.ts); each tab is another everyday example and replays when chosen. */
   .preview { margin: clamp(40px, 6vw, 72px) 0 0; width: 100%; max-width: 520px; text-align: left; }
   .body { --bleib-card-margin: 0 0 8px; padding: 16px; }
   .body p { margin: 0; }

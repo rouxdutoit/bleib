@@ -5,6 +5,7 @@
  * data-gaps="a,b,…" sets the pause after each step (ms), so a reader can finish before the next change.
  * [data-scramble-at="n"] text scrambles at step n, like fazit.dev's wordmark in reverse: each character
  * cycles through glyphs, then settles on its character of data-cipher (the same text, encrypted).
+ * data-sv="scroll" waits for the person's first scroll before playing (the hero, which is in view on arrival).
  * With reduced motion the final state shows at once.
  */
 const START = 500;
@@ -95,17 +96,21 @@ export function play(sv: HTMLElement): void {
   }
 }
 
-/** Plays every [data-sv] scene once, when it comes into view. */
+/** Plays every [data-sv] scene once, when it comes into view (and, for data-sv="scroll", once the page has scrolled). */
 export function initStory(): void {
+  const scenes = document.querySelectorAll<HTMLElement>('[data-sv]');
+  scenes.forEach((sv) => sv.querySelectorAll<HTMLElement>('[data-type]').forEach((el) => (el.textContent = '')));
   const io = new IntersectionObserver(
     (entries) => {
       for (const e of entries) {
         if (!e.isIntersecting) continue;
-        io.unobserve(e.target);
-        play(e.target as HTMLElement);
+        const sv = e.target as HTMLElement;
+        io.unobserve(sv);
+        if (sv.dataset.sv !== 'scroll' || window.scrollY > 0) play(sv);
+        else window.addEventListener('scroll', () => !sv.hidden && sv.dataset.step === '0' && play(sv), { once: true, passive: true });
       }
     },
     { threshold: 0.6 },
   );
-  document.querySelectorAll<HTMLElement>('[data-sv]').forEach((sv) => io.observe(sv));
+  scenes.forEach((sv) => io.observe(sv));
 }
