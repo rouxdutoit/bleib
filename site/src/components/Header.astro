@@ -1,11 +1,10 @@
 ---
 import Logo from './Logo.astro';
-import { GITHUB_URL, routes, t, otherLang, type Lang, type RouteKey } from '../i18n/strings';
+import { GITHUB_URL, routes, t, type Lang, type RouteKey } from '../i18n/strings';
 import { icon } from './icons';
 interface Props { lang: Lang; page: RouteKey }
 const { lang, page } = Astro.props;
 const s = t(lang).nav;
-const other = otherLang(lang);
 const githubHref = GITHUB_URL || routes.developers[lang];
 const earlyHref = page === 'home' ? '#early-access' : `${routes.home[lang]}#early-access`;
 const links: { key: RouteKey; label: string }[] = [
@@ -30,7 +29,6 @@ const arrow = icon('arrow_outward');
             <li><a href={routes[l.key][lang]} aria-current={l.key === page ? 'page' : undefined}>{l.label}</a></li>
           ))}
           <li><a href={githubHref}>{s.github}</a></li>
-          <li class="lang-item"><a class="lang" href={routes[page][other]} hreflang={other} lang={other} aria-label={s.langSwitchLabel}><span class="ti" set:html={icon('translate')} />{s.langSwitch}</a></li>
         </ul>
         <a class="btn btn-primary cta" href={earlyHref}>{s.early}<span set:html={arrow} /></a>
       </div>
@@ -110,8 +108,6 @@ const arrow = icon('arrow_outward');
   .links { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: clamp(12px, 2.2vw, 30px); }
   .links a { font-size: 15px; text-decoration: none; color: var(--muted); padding: 10px 0; display: inline-flex; align-items: center; gap: 8px; }
   .links a:hover, .links a[aria-current='page'] { color: var(--ink); }
-  .lang-item { display: none; }
-  .ti :global(svg) { width: 18px; height: 18px; display: block; }
   .cta { gap: 10px; }
   .cta :global(svg) { width: 14px; height: 14px; }
 
@@ -170,9 +166,7 @@ const arrow = icon('arrow_outward');
     .links li + li { border-top: 1px solid var(--hairline); }
     .links a { display: flex; min-height: 48px; padding: 0; font-size: 17px; color: var(--ink); }
     .links a[aria-current='page'] { font-weight: 600; }
-    .lang-item { display: block; }
-    .links .lang { color: var(--muted); }
-    .cta { align-self: flex-start; margin: 16px 0 24px; }
+    .cta { align-self: flex-start; margin: 20px 0 24px; }
 
     .js .nav {
       grid-template-rows: 0fr;
