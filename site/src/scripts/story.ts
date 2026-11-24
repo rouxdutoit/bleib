@@ -15,29 +15,44 @@ const STEP = 900;
 const GLYPHS = '-_/\\|<>~^*+=:;!?#%&@0123456789';
 const glyph = () => GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
 
+/** Lets a character's space grow or shrink without shifting the rest of the line at once. */
+const setChar = (ch: HTMLElement, className: string, text: string) => {
+  const width = getComputedStyle(ch).width;
+  ch.getAnimations().forEach((animation) => animation.cancel());
+  ch.className = className;
+  ch.textContent = text;
+  const nextWidth = getComputedStyle(ch).width;
+  if (width !== nextWidth) ch.animate({ width: [width, nextWidth] }, { duration: 140, easing: 'ease-out' });
+};
+
 /** Cycles each character of el through glyphs, left to right, until it settles on its data-cipher character. */
 const scramble = (el: HTMLElement) => {
-  const text = (el.dataset.text ??= el.textContent ?? '');
+  const text = [...(el.dataset.text ??= el.textContent ?? '')];
   const cipher = [...(el.dataset.cipher ?? '')];
-  const chars = [...text].map((c) => Object.assign(document.createElement('span'), { className: 'ch', textContent: c }));
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const chars = Array.from({ length: reduced ? cipher.length : Math.max(text.length, cipher.length) }, (_, i) =>
+    Object.assign(document.createElement('span'), { className: reduced ? 'ch ct' : 'ch', textContent: (reduced ? cipher : text)[i] ?? '' }),
+  );
   el.replaceChildren(...chars);
-  const settle = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1;
+  if (reduced || !chars.length) return;
   let start = 0;
   let last = 0;
   const frame = (now: number) => {
+    if (chars[0].parentElement !== el) return;
     start ||= now;
+    const elapsed = now - start;
     const swap = now - last > 42;
     if (swap) last = now;
     let done = 0;
     chars.forEach((ch, i) => {
-      const from = i * 18 * settle;
+      const from = i * 18;
       if (ch.classList.contains('ct')) done += 1;
-      else if (now - start >= from + 260 * settle && ch.dataset.g) {
-        ch.className = 'ch ct';
-        ch.textContent = cipher[i] ?? '';
+      else if (elapsed >= from + 260 && ch.dataset.g) {
+        setChar(ch, 'ch ct', cipher[i] ?? '');
         done += 1;
-      } else if (now - start >= from && (swap || !ch.dataset.g)) {
-        ch.classList.add('sg');
+      } else if (elapsed >= from && (swap || !ch.dataset.g)) {
+        if (i < text.length) ch.classList.add('sg');
+        else if (!ch.dataset.g) setChar(ch, 'ch sg', cipher[i] ?? '');
         ch.dataset.g = glyph();
       }
     });
@@ -52,7 +67,7 @@ const setStep = (sv: HTMLElement, n: number) => {
   sv.querySelectorAll<HTMLElement>('[data-scramble-at]').forEach((el) => {
     if (Number(el.dataset.scrambleAt) <= n) {
       if (!el.querySelector('.ch')) scramble(el);
-    } else if (el.dataset.text) el.textContent = el.dataset.text;
+    } else if (el.dataset.text !== undefined) el.textContent = el.dataset.text;
   });
 };
 
