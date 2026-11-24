@@ -1,6 +1,8 @@
 import { canonical, kindSchema, labels, normalize, sha256, UserError } from './domain.js';
 import type { Agent, Ask, Kind } from './domain.js';
 
+const phrase = (input: string) => normalize(input).replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+
 type Policy =
   | { type: 'block'; kind: Kind; hosted: boolean }
   | { type: 'restrict'; kind: Kind; agentId: string; agentName: string }
@@ -24,7 +26,7 @@ export function parseRule(input: string, agents: Iterable<Agent>) {
     const matched = [...agents].filter(agent => !agent.revoked && normalize(agent.name) === restrict[1]);
     if (matched.length !== 1) throw new UserError('Use the unique name of a connected agent.');
     policy = { type: 'restrict', kind, agentId: matched[0]!.id, agentName: matched[0]!.name };
-  } else if (constraint) {
+  } else if (constraint && phrase(constraint[1]!)) {
     policy = {
       type: 'constraint', topic: constraint[1]!, currency: 'EUR',
       cents: Number(constraint[2]) * 100 + Number((constraint[3] ?? '').padEnd(2, '0')),
@@ -62,8 +64,8 @@ export function blocked(rules: Iterable<Rule>, agent: Agent, ask: Ask) {
 }
 
 export function constraints(rules: Iterable<Rule>, ask: Ask) {
-  const request = ` ${normalize(`${ask.purpose} ${ask.question ?? ''}`).replace(/[^\p{L}\p{N}]+/gu, ' ').trim()} `;
+  const request = ` ${phrase(`${ask.purpose} ${ask.question ?? ''}`)} `;
   const matched = [...rules].flatMap(({ policy }) =>
-    policy.type === 'constraint' && request.includes(` ${policy.topic} `) ? [policy] : []);
+    policy.type === 'constraint' && request.includes(` ${phrase(policy.topic)} `) ? [policy] : []);
   return matched.map(({ topic, cents }) => `Keep ${topic} under €${cents / 100}.`);
 }

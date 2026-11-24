@@ -146,8 +146,11 @@ it('traces owner rule confirmation, MCP reference, exact observed release and ti
     expect(await get('/receipts?kind=health')).not.toContain(`/receipts/${receipt!.receipt_id}`);
     expect(await get(`/receipts/${receipt!.receipt_id}`)).toContain('(observed)');
     expect(await callOwner(home, { action: 'summary' })).toMatchObject({ facts: 1, agents: 1 });
-    expect((await proxy(token, 'actual-model', marker)).status).toBe(409);
-    expect(upstreamRequests).toHaveLength(1);
+    expect((await proxy(token, 'actual-model', marker)).status).toBe(200);
+    expect(upstreamRequests).toHaveLength(2);
+    expect(upstreamRequests[1]!.raw.toString()).toContain('expired or already been shared');
+    expect(upstreamRequests[1]!.raw.toString()).not.toContain('My preferred tea');
+    expect(await daemon.wallet.receipts()).toHaveLength(1);
   } finally {
     await sdk.close();
   }
@@ -173,6 +176,8 @@ it('checks stored rules before existing grants and binds agent exceptions by ide
   const dinner = { ...preference, purpose: 'Make dinner plans' };
   await daemon.wallet.approve(pending(await daemon.wallet.ask(allowed, dinner)), 'always', false);
   expect(await daemon.wallet.ask(allowed, dinner)).toMatchObject({ state: 'released', constraints: ['Keep dinner plans under €30.'] });
+  expect(await daemon.wallet.ask(allowed, { ...dinner, question: 'Amethyst?' }))
+    .toMatchObject({ state: 'no_match', constraints: ['Keep dinner plans under €30.'] });
   expect(await daemon.wallet.ask(allowed, preference)).not.toHaveProperty('constraints');
 });
 

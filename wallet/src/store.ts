@@ -174,6 +174,10 @@ export class Store {
     this.#journalKey.fill(0);
   }
 
+  projectionProof(agentId: string, nonce: string) {
+    return createHmac('sha256', this.#journalKey).update(`bleib projection reference\0${agentId}\0${nonce}`).digest('base64url');
+  }
+
   private mac(transaction: Transaction) {
     return createHmac('sha256', this.#journalKey).update(canonical(transaction)).digest('hex');
   }

@@ -127,7 +127,8 @@ export interface Receipt {
   hash: string;
 }
 export type ToolReply =
-  | { state: 'locked' | 'denied' | 'unavailable' | 'no_match' }
+  | { state: 'locked' | 'denied' | 'unavailable' }
+  | { state: 'no_match'; constraints?: string[] }
   | { state: 'ready'; agent: string; destination: string; kinds: readonly Kind[] }
   | { state: 'approval_required'; grant_request_id: string; approve_url: string; fresh?: boolean }
   | { state: 'released'; receipt_id: string; content: string; constraints?: string[] }

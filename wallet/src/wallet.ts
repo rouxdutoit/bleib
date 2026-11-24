@@ -50,7 +50,8 @@ interface Reference {
   agentId: string; ask: Ask; fingerprint: string; grants: string[]; expires: number;
 }
 export const referencePrefix = 'bleib-projection:';
-export const referencePattern = /^bleib-projection:[A-Za-z0-9_-]{43}$/;
+export const referencePattern = /^bleib-projection:([A-Za-z0-9_-]{43})\.([A-Za-z0-9_-]{43})$/;
+const unavailableProjection = '[This bleib excerpt has expired or already been shared. Ask the wallet if you need it again.]';
 
 type OwnerGuard = () => boolean;
 
@@ -257,15 +258,15 @@ export class Wallet {
         await store.commit({ approvals: [approval] });
         return this.approvalReply(approval.id, true);
       }
+      const limits = constraints(store.rules.values(), ask);
       if (!projection.content) {
         // A once decision covers one attempt, even when the attempt had no matching excerpt.
         const used = Array.from(grants.values()).filter(grant => grant.consumePreview);
         if (used.length) await store.commit({ grants: used.map(grant => this.usedGrant(grant, now, false)) });
-        return { state: 'no_match' };
+        return { state: 'no_match', ...(limits.length ? { constraints: limits } : {}) };
       }
-      const limits = constraints(store.rules.values(), ask);
       if (agent.destination.proxy) {
-        return this.prepareReference(agent, ask, fingerprint, grants, now, limits);
+        return this.prepareReference(store, agent, ask, fingerprint, grants, now, limits);
       }
       const receipt = this.makeReceipt(agent, ask, projection, grants, now, store.lastReceipt);
       await store.commit({ receipts: [receipt], grants: this.usedGrants(grants, projection, now) });
@@ -306,7 +307,7 @@ export class Wallet {
     return { ...body, hash: sha256(canonical(body)) };
   }
 
-  private prepareReference(agent: Agent, ask: Ask, fingerprint: string, grants: Map<Kind, Grant>, now: number, limits: string[]): ToolReply {
+  private prepareReference(store: Store, agent: Agent, ask: Ask, fingerprint: string, grants: Map<Kind, Grant>, now: number, limits: string[]): ToolReply {
     for (const [key, saved] of this.#references) {
       if (saved.expires <= now) this.#references.delete(key);
     }
@@ -314,7 +315,8 @@ export class Wallet {
         [...this.#references.values()].filter(saved => saved.agentId === agent.id).length >= maxPendingPerAgent) {
       return { state: 'unavailable' };
     }
-    const reference = referencePrefix + secret();
+    const nonce = secret();
+    const reference = `${referencePrefix}${nonce}.${store.projectionProof(agent.id, nonce)}`;
     this.#references.set(reference, { agentId: agent.id, ask, fingerprint,
       grants: [...grants.values()].map(grant => grant.id), expires: now + tenMinutes });
     return { state: 'proxy_ready', reference, ...(limits.length ? { constraints: limits } : {}) };
@@ -340,11 +342,21 @@ export class Wallet {
       }
 
       const releases = [];
+      const replacements = [];
       const consumed = new Set<string>();
       for (const key of references) {
+        const parsed = referencePattern.exec(key);
+        if (!parsed || !equal(store.projectionProof(agent.id, parsed[1]!), parsed[2]!)) {
+          return { state: 'reference_unavailable' } as const;
+        }
         const reference = this.#references.get(key);
-        if (!reference || reference.agentId !== agent.id || reference.expires <= now ||
-            blocked(store.rules.values(), agent, reference.ask)) return { state: 'reference_unavailable' } as const;
+        if (!reference || reference.expires <= now) {
+          replacements.push(unavailableProjection);
+          continue;
+        }
+        if (reference.agentId !== agent.id || blocked(store.rules.values(), agent, reference.ask)) {
+          return { state: 'reference_unavailable' } as const;
+        }
         const { ask } = reference;
         const projection = await project(store, ask, now);
         const fingerprint = previewKey(projection);
@@ -359,9 +371,10 @@ export class Wallet {
           grants.set(kind, grant);
         }
         releases.push({ ask, projection, grants });
+        replacements.push(projection.content);
       }
 
-      const payload = encode(releases.map(item => item.projection.content));
+      const payload = encode(replacements);
       if (releases.length) {
         const digest = sha256(payload);
         const receipts = [];
