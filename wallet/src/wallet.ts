@@ -1,0 +1,389 @@
+import { randomUUID } from 'node:crypto';
+import {
+  askSchema, canonical, credentialPattern, destination, equal, kinds, kindSchema, normalize,
+  proposeSchema, secret, sensitiveKind, sha256, UserError,
+} from './domain.js';
+import type { Agent, Approval, Ask, Grant, Kind, Preview, Receipt, Scope, ToolReply } from './domain.js';
+import { formatMemory, maxMemoryBytes, project, readWorkspace, splitMarkdown, type ImportDialect } from './memory.js';
+import { recover, Store } from './store.js';
+
+const tenMinutes = 10 * 60 * 1000;
+const grantLifetime = 90 * 24 * 60 * 60 * 1000;
+const maxPendingPerAgent = 20;
+
+const scopeFor = (agent: Agent, kind: Kind, purpose: string): Scope => ({
+  agentId: agent.id, kind, destination: agent.destination.value, purpose: normalize(purpose),
+});
+const sameScope = (grant: Grant, scope: Scope) =>
+  grant.agentId === scope.agentId && grant.kind === scope.kind &&
+  grant.destination === scope.destination && grant.purpose === scope.purpose;
+const requestKey = (ask: Ask) => sha256(canonical({
+  purpose: normalize(ask.purpose), kinds: ask.kinds, question: normalize(ask.question ?? ''),
+}));
+const previewKey = (preview: Preview) => sha256(canonical({
+  content: preview.content, entries: preview.entries, sensitiveKinds: preview.sensitiveKinds,
+  releasedKinds: preview.releasedKinds,
+}));
+
+function currentGrant(store: Store, scope: Scope, now: number, sensitive: boolean, request: string, fingerprint: string) {
+  for (const grant of store.grants.values()) {
+    if (!sameScope(grant, scope) || grant.revoked) continue;
+    if (grant.duration === 'denied') return grant;
+    if (grant.duration === 'always' && now - grant.lastUsed >= grantLifetime) continue;
+    if (sensitive && !grant.sensitive) continue;
+    const preview = grant.consumePreview;
+    if (preview && (preview.expires <= now || preview.request !== request || preview.fingerprint !== fingerprint)) continue;
+    return grant;
+  }
+}
+
+type CommitHook = NonNullable<Parameters<typeof Store.unlock>[2]>;
+
+export class Wallet {
+  #state?: Store;
+  #queue = Promise.resolve();
+  #deadline = 0;
+  #timer?: NodeJS.Timeout;
+  #failedUnlockUntil = 0;
+
+  constructor(readonly home: string, private readonly origin: string, private readonly options: {
+    idleMs: number;
+    now?: () => number;
+    beforeCommit?: CommitHook;
+    onLock?: () => void;
+  }) {}
+
+  private now() {
+    return (this.options.now ?? Date.now)();
+  }
+
+  private serial<T>(action: () => Promise<T> | T): Promise<T> {
+    const work = this.#queue.then(async () => {
+      if (this.#state && this.#deadline <= this.now()) this.close();
+      try {
+        return await action();
+      } catch (error) {
+        if (!(error instanceof UserError)) this.close();
+        throw error;
+      }
+    });
+    this.#queue = work.then(() => {}, () => {});
+    return work;
+  }
+
+  private touch() {
+    clearTimeout(this.#timer);
+    this.#deadline = this.now() + this.options.idleMs;
+    this.#timer = setTimeout(() => {
+      void this.serial(() => {});
+    }, this.options.idleMs).unref();
+  }
+
+  private close() {
+    clearTimeout(this.#timer);
+    this.#state?.close();
+    this.#state = undefined;
+    this.options.onLock?.();
+  }
+
+  unlock(passphrase: string) {
+    return this.serial(async () => {
+      if (this.now() < this.#failedUnlockUntil) throw new UserError('Wait a moment before trying again.');
+      try {
+        const state = await Store.unlock(this.home, passphrase, this.options.beforeCommit);
+        this.close();
+        this.#state = state;
+        this.touch();
+      } catch (error) {
+        this.#failedUnlockUntil = this.now() + 1000;
+        throw error;
+      }
+    });
+  }
+
+  lock() {
+    return this.serial(() => this.close());
+  }
+
+  recover(identity: string, passphrase: string) {
+    return this.serial(async () => {
+      await recover(this.home, identity, passphrase);
+      this.close();
+    });
+  }
+
+  private owner<T>(action: (state: Store, now: number) => Promise<T> | T) {
+    return this.serial(() => {
+      if (!this.#state) throw new UserError('Unlock the wallet first.');
+      this.touch();
+      return action(this.#state, this.now());
+    });
+  }
+
+  ownerStatus() {
+    return this.serial(() => ({ unlocked: Boolean(this.#state) }));
+  }
+
+  importWorkspace(path: string, dialect: ImportDialect) {
+    return this.owner(async (state, now) => {
+      const files = await readWorkspace(path, dialect);
+      const entries = [];
+      const updated = new Date(now).toISOString();
+      for (const { body, metadata, name, ...entry } of files) {
+        const existing = Array.from(state.entries.values()).find(current => current.sourceId === entry.sourceId);
+        // Import is additive. The local editor owns existing notes, including recategorization.
+        if (existing) continue;
+        const id = randomUUID();
+        const markdown = formatMemory(body, metadata, {
+          id, title: entry.title, kind: entry.kind, sensitive: entry.sensitive,
+          updated, created: updated, origin: 'import', importedFrom: name,
+        });
+        entries.push(await state.putEntry({ ...entry, id, version: 1 }, markdown));
+      }
+      if (entries.length) await state.commit({ entries });
+      return { imported: entries.length, skipped: files.length - entries.length };
+    });
+  }
+
+  pair(name: string, place: string, model?: string) {
+    return this.owner(async (state, now) => {
+      const cleanName = name.trim();
+      if (!cleanName || cleanName.length > 100 || /\p{Cc}/u.test(cleanName)) {
+        throw new UserError('Enter an agent name of 1 to 100 characters.');
+      }
+      const code = secret(18);
+      await state.commit({ pairings: [{
+        id: randomUUID(), name: cleanName, destination: destination(place, model), codeHash: sha256(code),
+        expires: now + tenMinutes, used: false,
+      }] });
+      return { code, name: cleanName, expiresInMinutes: 10 };
+    });
+  }
+
+  redeem(code: string) {
+    return this.serial(async () => {
+      if (!this.#state) throw new UserError('Unlock the wallet first.');
+      const store = this.#state;
+      const digest = sha256(code.trim());
+      const pairing = Array.from(store.pairings.values()).find(item =>
+        item.expires > this.now() && !item.used && equal(item.codeHash, digest));
+      if (!pairing) throw new UserError('That pairing code is invalid, expired or already used.');
+      const credential = secret();
+      const agent: Agent = {
+        id: pairing.id, name: pairing.name, destination: pairing.destination,
+        credentialHash: sha256(credential), revoked: false,
+      };
+      await store.commit({ pairings: [{ ...pairing, used: true }], agents: [agent] });
+      return { credential, agent: agent.name, destination: agent.destination.value };
+    });
+  }
+
+  private withAgent(credential: string, action: (state: Store, agent: Agent) => Promise<ToolReply> | ToolReply) {
+    return this.serial((): Promise<ToolReply> | ToolReply => {
+      if (!credentialPattern.test(credential)) return { state: 'denied' };
+      const state = this.#state;
+      if (!state) return { state: 'locked' };
+      const digest = sha256(credential);
+      const agent = Array.from(state.agents.values()).find(item => equal(item.credentialHash, digest));
+      if (!agent || agent.revoked) return { state: 'denied' };
+      return action(state, agent);
+    });
+  }
+
+  status(credential: string) {
+    return this.withAgent(credential, (_state, agent) => ({
+      state: 'ready', agent: agent.name, destination: agent.destination.value, kinds,
+    }));
+  }
+
+  ask(credential: string, input: Ask) {
+    return this.withAgent(credential, async (store, agent) => {
+      const parsed = askSchema.parse(input);
+      const ask = { ...parsed, kinds: [...new Set(parsed.kinds)].sort() };
+      const now = this.now();
+      const projection = await project(store, ask, now);
+      const request = requestKey(ask);
+      const fingerprint = previewKey(projection);
+      const grants = new Map<Kind, Grant>();
+      const needed: Kind[] = [];
+      for (const kind of ask.kinds) {
+        const grant = currentGrant(store, scopeFor(agent, kind, ask.purpose), now,
+          projection.sensitiveKinds.includes(kind), request, fingerprint);
+        if (grant?.duration === 'denied') return { state: 'denied' };
+        if (grant) grants.set(kind, grant);
+        else needed.push(kind);
+      }
+      if (needed.length) {
+        const pending = Array.from(store.approvals.values()).filter(item =>
+          item.agentId === agent.id && !item.decided && item.expires > now);
+        const prior = pending.find(item => item.request === request && item.fingerprint === fingerprint &&
+          canonical(item.needed) === canonical(needed));
+        if (prior) return this.approvalReply(prior.id);
+        if (pending.length >= maxPendingPerAgent) return { state: 'unavailable' };
+        const approval: Approval = {
+          ...projection, id: randomUUID(), agentId: agent.id, agentName: agent.name, destination: agent.destination,
+          ask, needed, request, fingerprint, expires: now + tenMinutes, decided: false,
+        };
+        await store.commit({ approvals: [approval] });
+        return this.approvalReply(approval.id, true);
+      }
+      if (!projection.content) {
+        // A once decision covers one attempt, even when the attempt had no matching excerpt.
+        const used = Array.from(grants.values()).filter(grant => grant.consumePreview);
+        if (used.length) await store.commit({ grants: used.map(grant => this.usedGrant(grant, now)) });
+        return { state: 'no_match' };
+      }
+      return this.release(store, agent, ask, projection, grants, now);
+    });
+  }
+
+  private approvalReply(id: string, fresh = false): ToolReply {
+    return { state: 'approval_required', grant_request_id: id, approve_url: `${this.origin}/approvals/${id}`, fresh };
+  }
+
+  private usedGrant(grant: Grant, now: number): Grant {
+    return { ...grant, lastUsed: now, revoked: grant.duration === 'once', consumePreview: undefined };
+  }
+
+  private async release(store: Store, agent: Agent, ask: Ask, projection: Preview, grants: Map<Kind, Grant>, now: number): Promise<ToolReply> {
+    const grantIds = projection.releasedKinds.map(kind => grants.get(kind)!.id);
+    const body: Omit<Receipt, 'hash'> = {
+      receipt_id: randomUUID(), time: new Date(now).toISOString(), agent: agent.name, agent_id: agent.id,
+      destination: agent.destination.value, destination_basis: 'declared', provider: agent.destination.provider,
+      model: agent.destination.model, purpose: ask.purpose, kinds: projection.releasedKinds, grant_id: grantIds[0]!,
+      grant_ids: grantIds, content: projection.content, content_digest: sha256(projection.content),
+      entries: projection.entries, prev_hash: store.lastReceipt,
+    };
+    const receipt: Receipt = { ...body, hash: sha256(canonical(body)) };
+    const used = Array.from(grants.values()).filter(grant =>
+      grant.consumePreview || projection.releasedKinds.includes(grant.kind));
+    await store.commit({ receipts: [receipt], grants: used.map(grant => this.usedGrant(grant, now)) });
+    return { state: 'released', receipt_id: receipt.receipt_id, content: receipt.content };
+  }
+
+  approve(id: string, choice: 'once' | 'always' | 'no', confirmed: boolean) {
+    return this.owner(async (store, now) => {
+      const approval = store.approvals.get(id);
+      const agent = approval && store.agents.get(approval.agentId);
+      if (!approval || approval.decided || approval.expires <= now || !agent || agent.revoked) {
+        throw new UserError('This request is no longer active.');
+      }
+      const projection = await project(store, approval.ask, now);
+      if (previewKey(projection) !== approval.fingerprint) {
+        throw new UserError('The notes changed. Ask the agent to send a new request.');
+      }
+      if (choice === 'always' && approval.needed.some(kind => approval.sensitiveKinds.includes(kind)) && !confirmed) {
+        throw new UserError('Confirm ongoing access to sensitive information, or choose Allow once.');
+      }
+      const grants = [];
+      for (const kind of approval.needed) {
+        const scope = scopeFor(agent, kind, approval.ask.purpose);
+        const sensitive = approval.sensitiveKinds.includes(kind);
+        if (currentGrant(store, scope, now, sensitive, approval.request, approval.fingerprint)) {
+          throw new UserError('A decision already covers this request. Ask the agent to try again.');
+        }
+        if (choice === 'no') {
+          for (const grant of store.grants.values()) {
+            if (sameScope(grant, scope) && !grant.revoked) grants.push({ ...grant, revoked: true });
+          }
+        }
+        grants.push({
+          ...scope, id: randomUUID(), duration: choice === 'no' ? 'denied' : choice,
+          lastUsed: now, revoked: false, sensitive,
+          ...(choice === 'no' ? {} : { consumePreview: {
+            request: approval.request, fingerprint: approval.fingerprint, expires: approval.expires,
+          } }),
+        } satisfies Grant);
+      }
+      await store.commit({ grants, approvals: [{ ...approval, decided: true }] });
+    });
+  }
+
+  propose(credential: string, input: unknown) {
+    return this.withAgent(credential, async (store, agent) => {
+      const proposal = proposeSchema.parse(input);
+      const id = randomUUID();
+      await store.commit({ proposals: [{ ...proposal, id, agent: agent.name, time: new Date(this.now()).toISOString() }] });
+      return { state: 'proposal_pending', proposal_id: id };
+    });
+  }
+
+  revoke(idOrName: string) {
+    return this.owner(async (store, now) => {
+      const grant = store.grants.get(idOrName);
+      const exactAgent = store.agents.get(idOrName);
+      const agents = exactAgent ? [exactAgent] : [...store.agents.values()].filter(agent =>
+        !agent.revoked && agent.name === idOrName);
+      if (agents.length > 1 && !grant) throw new UserError('More than one agent has this name. Use its ID.');
+      const agent = agents[0];
+      if ((!grant || grant.revoked) && (!agent || agent.revoked)) throw new UserError('No active agent or decision matched.');
+      const approvals = [...store.approvals.values()].filter(item => !item.decided && item.expires > now &&
+        (agent && !grant ? item.agentId === agent.id : grant && item.agentId === grant.agentId &&
+          item.ask.kinds.includes(grant.kind) && normalize(item.ask.purpose) === grant.purpose));
+      await store.commit({
+        ...(grant ? { grants: [{ ...grant, revoked: true }] } : agent ? { agents: [{ ...agent, revoked: true }] } : {}),
+        approvals: approvals.map(item => ({ ...item, decided: true })),
+      });
+    });
+  }
+
+  entries() {
+    return this.owner(store => Array.from(store.entries.values()));
+  }
+
+  entry(id: string) {
+    return this.owner(async store => {
+      const entry = store.entries.get(id);
+      if (!entry) throw new UserError('That note was not found.');
+      return { ...entry, body: splitMarkdown(await store.readEntry(entry)).body };
+    });
+  }
+
+  edit(id: string, version: number, input: { title: string; body: string; kind: Kind; sensitive: boolean }) {
+    return this.owner(async (store, now) => {
+      const entry = store.entries.get(id);
+      if (!entry || entry.version !== version) throw new UserError('This note changed. Open it again before saving.');
+      const title = input.title.trim();
+      if (!title || title.length > 120 || Buffer.byteLength(input.body) > maxMemoryBytes) {
+        throw new UserError('Enter a title and keep the note at or below 128 KiB.');
+      }
+      const kind = kindSchema.parse(input.kind);
+      const { metadata } = splitMarkdown(await store.readEntry(entry));
+      const updated = new Date(now).toISOString();
+      const sensitive = input.sensitive || sensitiveKind(kind);
+      const markdown = formatMemory(input.body, metadata, {
+        id, title, kind, sensitive, updated, created: String(metadata.recorded_at ?? updated),
+      });
+      const saved = await store.putEntry({ ...entry, title, kind, sensitive, version: version + 1 }, markdown);
+      await store.commit({ entries: [saved] });
+    });
+  }
+
+  approvals() {
+    return this.owner((store, now) => Array.from(store.approvals.values()).filter(item =>
+      !item.decided && item.expires > now && !store.agents.get(item.agentId)?.revoked));
+  }
+
+  grants() {
+    return this.owner((store, now) => ({
+      agents: [...store.agents.values()].filter(agent => !agent.revoked).map(({ id, name, destination }) =>
+        ({ id, name, destination })),
+      grants: [...store.grants.values()].filter(grant => !grant.revoked && !store.agents.get(grant.agentId)?.revoked &&
+        (grant.duration !== 'always' || now - grant.lastUsed < grantLifetime) &&
+        (!grant.consumePreview || grant.consumePreview.expires > now)),
+    }));
+  }
+
+  proposals() {
+    return this.owner(store => Array.from(store.proposals.values()).reverse());
+  }
+
+  receipts(id?: string) {
+    return this.owner(store => {
+      if (!id) return Array.from(store.receipts.values()).reverse();
+      const receipt = store.receipts.get(id);
+      if (!receipt) throw new UserError('That receipt was not found.');
+      return [receipt];
+    });
+  }
+}
