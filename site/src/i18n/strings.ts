@@ -25,9 +25,9 @@ export type RouteKey = keyof typeof routes;
 
 const en = {
   meta: {
-    title: 'bleib: your AI memory, in your hands',
+    title: 'bleib: your AI memory wallet',
     description:
-      'bleib keeps one memory for all your AIs, encrypted on your device. You decide what each AI may see, and you can always check what it saw. Free and open source.',
+      'bleib is your AI memory wallet, encrypted on your device. You decide what each AI can know, and you can always check what it saw. Free and open source.',
   },
   skip: 'Skip to content',
   nav: {
@@ -46,9 +46,8 @@ const en = {
   },
   hero: {
     eyebrow: 'In development',
-    h1a: 'Your AI memory.',
-    h1b: 'In your hands.',
-    sub: ['You decide what each AI can know.'],
+    h1: 'Your AI memory wallet.',
+    sub: ['You control what each chat can know.'],
     primary: 'Get early access',
     secondary: 'View on GitHub',
     trust: [
@@ -216,9 +215,9 @@ export type Strings = typeof en;
 
 const de: Strings = {
   meta: {
-    title: 'bleib: dein KI-Gedächtnis, in deiner Hand',
+    title: 'bleib: dein Wallet für dein KI-Gedächtnis',
     description:
-      'bleib hält ein Gedächtnis für all deine KIs, verschlüsselt auf deinem Gerät. Du entscheidest, was jede KI sehen darf, und kannst jederzeit nachsehen, was sie gesehen hat. Kostenlos und Open Source.',
+      'bleib ist dein Wallet für dein KI-Gedächtnis, verschlüsselt auf deinem Gerät. Du entscheidest, was jede KI wissen darf, und kannst jederzeit nachsehen, was sie gesehen hat. Kostenlos und Open Source.',
   },
   skip: 'Zum Inhalt springen',
   nav: {
@@ -237,9 +236,8 @@ const de: Strings = {
   },
   hero: {
     eyebrow: 'In Entwicklung',
-    h1a: 'Dein KI-Gedächtnis.',
-    h1b: 'In deiner Hand.',
-    sub: ['Du entscheidest, was jede KI wissen darf.'],
+    h1: 'Dein Wallet für dein KI-Gedächtnis.',
+    sub: ['Du bestimmst, was jeder Chat wissen darf.'],
     primary: 'Frühen Zugang sichern',
     secondary: 'Auf GitHub ansehen',
     trust: [

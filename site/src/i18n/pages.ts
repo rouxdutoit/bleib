@@ -596,7 +596,7 @@ const de: Docs = {
           { p: 'bleib baut auf offener Arbeit anderer auf. Danke.' },
           {
             refs: [
-              { name: 'Model Context Protocol', href: 'https://modelcontextprotocol.io', v: 'Wie Agenten sich mit der Wallet verbinden.' },
+              { name: 'Model Context Protocol', href: 'https://modelcontextprotocol.io', v: 'Wie Agenten sich mit dem Wallet verbinden.' },
               { name: 'OpenClaw', href: 'https://docs.openclaw.ai/concepts/memory', v: 'Das Workspace-Format für Erinnerungen, das bleib liest und schreibt.' },
               { name: 'Hermes Agent', href: 'https://hermes-agent.nousresearch.com', v: 'Von Nous Research; nutzt dasselbe Workspace-Format.' },
               { name: 'Human Context Protocol', href: 'https://github.com/loyalagents/hcp-spec', v: 'Von Loyal Agents (Stanford Digital Economy Lab und Consumer Reports); das Modell für Berechtigungen und Protokolle.' },

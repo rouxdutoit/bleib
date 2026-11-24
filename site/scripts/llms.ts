@@ -15,7 +15,7 @@ function link(label: string, path: string, site: URL) {
 export function renderIndex(site: URL) {
   const sections = languages.map((lang) => {
     const { hero } = t(lang);
-    const title = `${hero.h1a} ${hero.h1b}`;
+    const title = `${hero.h1}`;
     const description = `${hero.eyebrow}. ${hero.sub.join(' ')}`;
     const links = [
       `- ${link(title, routes.home[lang], site)}: ${description}`,
@@ -57,7 +57,7 @@ function renderBlock(block: Block, site: URL) {
 function renderHome(lang: Lang, site: URL) {
   const { hero, story, finale, footer } = t(lang);
   return [
-    `### ${hero.h1a} ${hero.h1b}`,
+    `### ${hero.h1}`,
     new URL(routes.home[lang], site).href,
     hero.eyebrow,
     ...hero.sub,
