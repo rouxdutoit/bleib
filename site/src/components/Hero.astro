@@ -56,16 +56,21 @@ const githubHref = GITHUB_URL || routes.developers[lang];
                 ))}
               </ul>
             </div>
+            <div class="ins-pane">
+            <p class="t-foot c-2 pv-eyebrow">{pv.inspector.label}</p>
             <div class="inspector">
-              <p class="t-foot c-2 pv-eyebrow">{pv.inspector.label}</p>
-              <p class="t-title3 ins-title">{pv.inspector.title}</p>
+              <div class="ins-head">
+                <p class="t-title3 ins-title">{pv.inspector.title}</p>
+                <span class="ver t-foot"><span set:html={icon('verified')} />{pv.inspector.verified}</span>
+              </div>
               <dl class="facts">
                 {pv.inspector.facts.map((f) => (<div class="fact"><dt class="t-sub c-2">{f.k}</dt><dd class="t-sub">{f.v}</dd></div>))}
               </dl>
               <p class="t-foot c-2 pv-eyebrow ex-label">{pv.inspector.exactLabel}</p>
               <ul class="exact">{pv.inspector.exact.map((x) => <li class="t-body">{x}</li>)}</ul>
               <p class="t-foot c-2 not">{pv.inspector.notShared}</p>
-              <p class="t-foot fp"><span class="fp-i c-2" set:html={icon('fingerprint')} /><code class="c-2">{pv.inspector.fingerprint}</code><span class="ver"><span set:html={icon('verified')} />{pv.inspector.verified}</span></p>
+              <p class="t-foot fp"><span class="fp-i c-2" set:html={icon('fingerprint')} /><code class="c-2">{pv.inspector.fingerprint}</code></p>
+            </div>
             </div>
           </div>
         </div>
@@ -99,10 +104,11 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .pv-title { margin: 2px 0 16px; }
   .tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
   .tile { display: grid; gap: 2px; padding: 14px 16px; border-radius: 16px; background: var(--fill); }
-  .rows { list-style: none; margin: 6px 0 0; padding: 0; }
+  .list-pane .pv-eyebrow, .ins-pane .pv-eyebrow { height: 18px; margin-bottom: 8px; }
+  .rows { list-style: none; margin: 0; padding: 0; }
   /* Split view (Mail / App Privacy Report): list with category capsules, inspector for the selected receipt. */
   .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 16px; margin-top: 24px; }
-  .rows { list-style: none; margin: 6px 0 0; padding: 0; }
+  .rows { list-style: none; margin: 0; padding: 0; }
   .row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 10px; border-radius: 14px; position: relative; }
   .row + .row::before { content: ''; position: absolute; top: 0; right: 10px; left: 54px; height: 1px; background: var(--hairline); }
   /* macOS selection: solid accent rounded rect, white text; separators hide next to it. */
@@ -121,7 +127,8 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .chip :global(svg) { width: 14px; height: 14px; }
   .inspector { border-radius: 16px; background: var(--fill); padding: 16px 18px; }
   .inspector p { margin: 0; }
-  .ins-title { margin: 2px 0 10px !important; }
+  .ins-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+  .ins-title { margin: 0 !important; }
   .facts { margin: 0; }
   .fact { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-top: 1px solid var(--hairline); }
   .fact dd { margin: 0; text-align: right; }
@@ -132,8 +139,9 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .fp { margin-top: 12px !important; display: flex; align-items: center; gap: 6px; }
   .fp-i :global(svg) { width: 16px; height: 16px; display: block; }
   .fp code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 12px; }
-  .ver { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; color: var(--ok); font-weight: 600; }
-  .ver :global(svg) { width: 16px; height: 16px; display: block; }
+  .ver { flex: none; display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px 3px 7px; border-radius: 999px; background: color-mix(in srgb, var(--ok) 16%, transparent); color: #1f8a3a; font-weight: 600; }
+  :global(:root[data-theme='dark']) .ver { color: var(--ok); }
+  .ver :global(svg) { width: 15px; height: 15px; display: block; }
 
   @media (max-width: 860px) {
     .split { grid-template-columns: 1fr; }
