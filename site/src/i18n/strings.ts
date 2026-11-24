@@ -59,14 +59,13 @@ const en = {
     ],
   },
   preview: {
-    file: 'bleib · Your memory',
-    title: 'What your AI saw',
-    rows: [
-      { who: 'Claude', where: 'Anthropic', when: 'Today 14:32', icon: '/providers/claude.svg', saw: ['Prefers aisle seats', 'Hotels under €250 a night'] },
-      { who: 'Codex', where: 'OpenAI', when: 'Mon 09:10', icon: '/providers/codex.svg', saw: ['Weekly review on Fridays'] },
-      { who: 'Ollama', where: 'On this device', when: 'Sun 18:45', icon: '/providers/ollama.svg', saw: ['Dinner with Marek'] },
-    ],
-    footer: 'Nothing about your health left this device.',
+    site: 'gemini.google.com',
+    typed: 'Plan a weekend in Lisbon for me.',
+    title: 'bleib can add what Gemini needs',
+    facts: ['Aisle seat', 'Hotels under €250', 'Vegetarian'],
+    add: 'Add',
+    added: 'Added',
+    private: 'Health and work stay private.',
   },
   story: {
     label: 'How bleib works',
@@ -242,14 +241,13 @@ const de: Strings = {
     ],
   },
   preview: {
-    file: 'bleib · Dein Gedächtnis',
-    title: 'Was deine KI gesehen hat',
-    rows: [
-      { who: 'Claude', where: 'Anthropic', when: 'Heute 14:32', icon: '/providers/claude.svg', saw: ['Bevorzugt Gangplätze', 'Hotels unter 250 € pro Nacht'] },
-      { who: 'Codex', where: 'OpenAI', when: 'Mo 09:10', icon: '/providers/codex.svg', saw: ['Wöchentliches Review am Freitag'] },
-      { who: 'Ollama', where: 'Auf diesem Gerät', when: 'So 18:45', icon: '/providers/ollama.svg', saw: ['Abendessen mit Marek'] },
-    ],
-    footer: 'Nichts über deine Gesundheit hat dieses Gerät verlassen.',
+    site: 'gemini.google.com',
+    typed: 'Plane ein Wochenende in Lissabon für mich.',
+    title: 'bleib kann ergänzen, was Gemini braucht',
+    facts: ['Gangplatz', 'Hotels unter 250 €', 'Vegetarisch'],
+    add: 'Hinzufügen',
+    added: 'Hinzugefügt',
+    private: 'Gesundheit und Arbeit bleiben privat.',
   },
   story: {
     label: 'So funktioniert bleib',
