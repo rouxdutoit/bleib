@@ -1,0 +1,52 @@
+---
+/** One story scene: the animated card and its text, side by side (Story.astro lays them out). */
+import Lines from './Lines.astro';
+import StoryVisual from './StoryVisual.astro';
+import { icon } from './icons';
+import { t, routes, type Lang } from '../i18n/strings';
+interface Props { lang: Lang; i: number }
+const { lang, i } = Astro.props;
+const x = t(lang).story.scenes[i];
+---
+<article class="scene" id={`scene-${i + 1}`} data-side={i % 2 === 0 ? 'card-left' : 'card-right'}>
+  <div class="pair">
+    <div class="visual"><StoryVisual lang={lang} scene={i} /></div>
+    <div class="text">
+      <h2 class="h2"><span>{x.h[0]}</span><br /><span>{x.h[1]}</span></h2>
+      <p class="lead"><Lines text={x.p} /></p>
+      <a class="more" href={`${routes[x.more.to as keyof typeof routes][lang]}${x.more.hash}`}>{t(lang).nav.more}<span set:html={icon('chevron_right')} /></a>
+    </div>
+  </div>
+</article>
+
+<style>
+  /* Calm, like a printed spread: each scene stays put; only the card inside it changes. */
+  .scene { position: relative; z-index: 1; min-height: min(88vh, 860px); display: flex; align-items: center; padding: clamp(40px, 6vw, 72px) 0; }
+  .pair {
+    width: min(calc(min(420px, 34vw) + clamp(48px, 6vw, 104px) + min(500px, 44vw)), var(--colw));
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: min(500px, 44vw) min(420px, 34vw);
+    justify-content: space-between;
+    align-items: center;
+  }
+  .scene[data-side='card-right'] .pair { grid-template-columns: min(420px, 34vw) min(500px, 44vw); }
+  .scene[data-side='card-right'] .visual { order: 2; }
+  /* --scene-ink and --scene-muted let a section recolour its scenes (the black privacy section). */
+  .text { color: var(--scene-ink, inherit); }
+  .text .lead { margin: 18px 0 0; color: var(--scene-muted, var(--muted)); }
+  /* Apple-style "Learn more ›" */
+  .more { display: inline-flex; align-items: center; gap: 1px; margin-top: 14px; font-size: 17px; font-weight: 500; text-decoration: none; color: var(--scene-ink, var(--ink)); }
+  .more :global(svg) { width: 20px; height: 20px; display: block; transition: transform 0.2s var(--ease); }
+  .more:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .more:hover :global(svg) { transform: translateX(2px); }
+  :global(:root[data-theme='dark']) .more { color: var(--scene-ink, #f6e79a); }
+
+  @media (max-width: 767px) {
+    .scene { min-height: 0; padding: 72px 0 40px; }
+    .pair, .scene[data-side='card-right'] .pair { width: var(--colw); grid-template-columns: minmax(0, 1fr); gap: 32px; }
+    .visual, .text { min-width: 0; }
+    .scene .text { order: -1; }
+    .scene[data-side='card-right'] .visual { order: 0; }
+  }
+</style>

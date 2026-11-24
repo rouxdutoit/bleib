@@ -3,14 +3,55 @@
  * cumulative classes s1..sn (see StoryVisual.astro, Hero.astro and Finale.astro).
  * A [data-type] element inside a scene is typed out at step 1, and later steps wait for it.
  * data-gaps="a,b,…" sets the pause after each step (ms), so a reader can finish before the next change.
+ * [data-scramble-at="n"] text scrambles at step n, like fazit.dev's wordmark in reverse: each character
+ * cycles through glyphs, then settles on its character of data-cipher (the same text, encrypted).
  * With reduced motion the final state shows at once.
  */
 const START = 500;
 const STEP = 900;
 
+const GLYPHS = '-_/\\|<>~^*+=:;!?#%&@0123456789';
+const glyph = () => GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+
+/** Cycles each character of el through glyphs, left to right, until it settles on its ciphertext character. */
+const scramble = (el: HTMLElement) => {
+  const text = (el.dataset.text ??= el.textContent ?? '');
+  const cipher = [...(el.dataset.cipher ?? '')];
+  const chars = [...text].map((c) => Object.assign(document.createElement('span'), { className: 'ch', textContent: c }));
+  el.replaceChildren(...chars);
+  const settle = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1;
+  let start = 0;
+  let last = 0;
+  const frame = (now: number) => {
+    start ||= now;
+    const swap = now - last > 42;
+    if (swap) last = now;
+    let done = 0;
+    chars.forEach((ch, i) => {
+      const from = i * 18 * settle;
+      if (ch.classList.contains('ct')) done += 1;
+      else if (now - start >= from + 260 * settle && ch.dataset.g) {
+        ch.className = 'ch ct';
+        ch.textContent = cipher[i] ?? '';
+        done += 1;
+      } else if (now - start >= from && (swap || !ch.dataset.g)) {
+        ch.classList.add('sg');
+        ch.dataset.g = glyph();
+      }
+    });
+    if (done < chars.length) requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+};
+
 const setStep = (sv: HTMLElement, n: number) => {
   sv.dataset.step = String(n);
   for (let k = 1; k <= 6; k++) sv.classList.toggle(`s${k}`, k <= n);
+  sv.querySelectorAll<HTMLElement>('[data-scramble-at]').forEach((el) => {
+    if (Number(el.dataset.scrambleAt) <= n) {
+      if (!el.querySelector('.ch')) scramble(el);
+    } else if (el.dataset.text) el.textContent = el.dataset.text;
+  });
 };
 
 const timers = new WeakMap<HTMLElement, number[]>();

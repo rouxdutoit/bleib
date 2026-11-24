@@ -3,6 +3,7 @@ import Lines from './Lines.astro';
 /** The closer: the password-manager moment the hero promises, and one action. */
 import Window from './Window.astro';
 import BleibCard from './BleibCard.astro';
+import Composer from './Composer.astro';
 import Rails from './Rails.astro';
 import EarlyAccessForm from './EarlyAccessForm.astro';
 import { t, type Lang } from '../i18n/strings';
@@ -13,11 +14,12 @@ const s = t(lang).finale;
 <section class="finale has-rails" id="early-access" aria-labelledby="finale-title">
   <Rails />
   <div class="wrap inner">
-    <figure class="scene" aria-hidden="true" data-sv data-steps="3" data-interval="900" data-gaps=",2200" data-step="0">
+    <figure class="scene" aria-hidden="true" data-sv data-steps="4" data-interval="900" data-gaps=",900,2200" data-step="0">
       <Window tabs={[{ ai: s.prompt.tab, icon: 'claude-color' }]}>
         <div class="body">
           <p class="t-body bubble">{s.prompt.said}</p>
-          <BleibCard title={s.prompt.title} facts={[s.prompt.fact]} action={s.prompt.save} done={s.prompt.saved} />
+          <BleibCard title={s.prompt.title} facts={[s.prompt.fact]} action={s.prompt.save} done={s.prompt.saved} at={3} />
+          <Composer typed={s.prompt.said} />
         </div>
       </Window>
     </figure>
@@ -33,12 +35,11 @@ const s = t(lang).finale;
 
   /* A picture, not a control: a chat with bleib's card, styled exactly like the hero's. */
   .scene { margin: 0 0 clamp(40px, 6vw, 64px); width: min(440px, 100%); }
-  .body { --bleib-card-margin: 12px 0 0; display: flex; flex-direction: column; align-items: flex-end; padding: 16px; }
-  .body > :global(*:last-child) { align-self: stretch; }
-  .bubble { margin: 0; max-width: 80%; padding: 8px 14px; border-radius: 18px; background: var(--fill); }
-  /* Plays once in view (scripts/story.ts): the message arrives, bleib's card grows in, Save is pressed. */
-  .bubble { opacity: 0; transform: translateY(6px); transition: opacity 0.4s var(--ease), transform 0.4s var(--ease); }
-  .s1 .bubble { opacity: 1; transform: none; }
+  /* Like the hero: you type, you send, bleib offers to save it, Save is pressed (scripts/story.ts). */
+  .body { --bleib-card-margin: 0 0 8px; display: flex; flex-direction: column; padding: 16px; }
+  .bubble { align-self: flex-end; max-width: 80%; margin: 0 0 12px; padding: 8px 14px; border-radius: 18px; background: var(--fill); opacity: 0; transform: translateY(8px); transition: opacity 0.35s var(--ease), transform 0.35s var(--ease); }
+  .s2 .bubble { opacity: 1; transform: none; }
+  .s2 :global(.typed) { visibility: hidden; }
 
   .title { font-size: clamp(44px, 7vw, 88px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 700; }
   .sub { margin: 18px 0 0; font-size: clamp(17px, 1.7vw, 21px); line-height: 1.45; color: var(--muted); text-wrap: balance; }

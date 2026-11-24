@@ -2,6 +2,7 @@
 import Mark from './Mark.astro';
 import Window from './Window.astro';
 import BleibCard from './BleibCard.astro';
+import Composer from './Composer.astro';
 import Rails from './Rails.astro';
 import { icon, type IconName } from './icons';
 import { GITHUB_URL, routes, t, type Lang } from '../i18n/strings';
@@ -34,7 +35,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
               <p class="sr-only">{x.typed} {title}: {x.facts.join(', ')}. {x.private}</p>
               <div aria-hidden="true">
                 <BleibCard title={title} facts={x.facts} action={pv.add} done={pv.added} />
-                <div class="composer">
+                <Composer typed={x.typed}>
                   <div class="attach"><div class="grow-in">
                     <div class="chip">
                       <span class="chip-app"><Mark size={14} /></span>
@@ -42,8 +43,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
                       <span class="chip-x" set:html={icon('close')} />
                     </div>
                   </div></div>
-                  <p class="t-body input"><span class="field"><span data-type={x.typed}>{x.typed}</span><span class="caret"></span></span><span class="send" set:html={icon('arrow_outward')} /></p>
-                </div>
+                </Composer>
                 <p class="t-foot private"><span class="lock" set:html={icon('lock')} />{x.private}</p>
               </div>
             </div>
@@ -75,9 +75,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
 
   .grow-in { min-height: 0; overflow: hidden; }
 
-  /* The message box. Once added, your memory sits in it as an attachment, like pasted text in a chat app. */
-  .composer { border-radius: 22px; box-shadow: inset 0 0 0 1px var(--hairline); }
-  .input { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 8px 8px 16px; }
+  /* Once added, your memory sits in the message box as an attachment, like pasted text in a chat app. */
   .attach { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.5s var(--ease) 0.2s, opacity 0.4s var(--ease) 0.3s; }
   .s3 .attach { grid-template-rows: 1fr; opacity: 1; }
   .chip { position: relative; display: flex; align-items: center; gap: 10px; width: fit-content; max-width: calc(100% - 16px); margin: 8px 8px 0; padding: 8px 30px 8px 8px; border-radius: 14px; background: var(--fill); }
@@ -87,13 +85,6 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .chip-facts { color: var(--label-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .chip-x { position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: var(--label); color: var(--cell); }
   .chip-x :global(svg) { width: 13px; height: 13px; display: block; }
-  /* Typed out at step 1 (scripts/story.ts), with a macOS text caret that blinks once focused. */
-  .field { flex: 1; min-width: 0; }
-  .caret { display: inline-block; width: 2px; height: 1.15em; margin-left: 1px; vertical-align: -0.2em; border-radius: 1px; background: var(--label); opacity: 0; }
-  .s1 .caret { opacity: 1; animation: caret 1.06s steps(1, end) infinite; }
-  @keyframes caret { 50% { opacity: 0; } }
-  .send { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--fill); color: var(--label-2); }
-  .send :global(svg) { width: 16px; height: 16px; display: block; transform: rotate(-45deg); }
   /* A standing promise, not a step: there from the start, centred under the field. */
   .private { margin-top: 10px !important; display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--label-2); }
   .lock :global(svg) { width: 13px; height: 13px; display: block; }

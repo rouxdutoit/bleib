@@ -1,70 +1,50 @@
 ---
-import Lines from './Lines.astro';
-import StoryVisual from './StoryVisual.astro';
+/** The story: one scene per idea, then the privacy scene in its own black section. */
+import StoryScene from './StoryScene.astro';
 import Rails from './Rails.astro';
-import { t, routes, type Lang } from '../i18n/strings';
-import { icon } from './icons';
+import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang).story;
-const more = t(lang).nav.more;
-const chev = icon('chevron_right');
+const all = s.scenes.map((x, i) => ({ i, dark: 'dark' in x }));
 ---
 <section class="story has-rails" aria-label={s.label}>
   <Rails />
-  {s.scenes.map((scene, i) => (
-    <article class="scene" id={`scene-${i + 1}`} data-side={i % 2 === 0 ? 'card-left' : 'card-right'} data-dark={'dark' in scene ? '' : undefined}>
-      <div class="pair">
-        <div class="visual"><StoryVisual lang={lang} scene={i} /></div>
-        <div class="text">
-          <h2 class="h2"><span>{scene.h[0]}</span><br /><span>{scene.h[1]}</span></h2>
-          <p class="lead"><Lines text={scene.p} /></p>
-          <a class="more" href={`${routes[scene.more.to as keyof typeof routes][lang]}${scene.more.hash}`}>{more}<span set:html={chev} /></a>
-        </div>
-      </div>
-    </article>
-  ))}
+  {all.filter((x) => !x.dark).map((x) => <StoryScene lang={lang} i={x.i} />)}
 </section>
+{all.filter((x) => x.dark).map((x) => (
+  <section class="story story-dark has-rails"><Rails /><StoryScene lang={lang} i={x.i} /></section>
+))}
 
 <style>
-  /* Calm, like a printed spread: each scene stays put; only the card inside it changes. */
   .story { position: relative; padding: clamp(24px, 4vw, 64px) 0; }
-  .scene { position: relative; z-index: 1; min-height: min(88vh, 860px); display: flex; align-items: center; padding: clamp(40px, 6vw, 72px) 0; }
-  .pair {
-    width: min(calc(min(420px, 34vw) + clamp(48px, 6vw, 104px) + min(500px, 44vw)), var(--colw));
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: min(500px, 44vw) min(420px, 34vw);
-    justify-content: space-between;
-    align-items: center;
-  }
-  .scene[data-side='card-right'] .pair { grid-template-columns: min(420px, 34vw) min(500px, 44vw); }
-  .scene[data-side='card-right'] .visual { order: 2; }
-  .text .lead { margin: 18px 0 0; }
-  /* Apple-style "Learn more ›" */
-  .more { display: inline-flex; align-items: center; gap: 1px; margin-top: 14px; font-size: 17px; font-weight: 500; text-decoration: none; color: var(--ink); }
-  .more :global(svg) { width: 20px; height: 20px; display: block; transition: transform 0.2s var(--ease); }
-  .more:hover { text-decoration: underline; text-underline-offset: 4px; }
-  .more:hover :global(svg) { transform: translateX(2px); }
-  :global(:root[data-theme='dark']) .more { color: #f6e79a; }
-  /* The privacy scene: the box between the rails turns black with bleib yellow (yellow with black in dark mode). */
-  .scene[data-dark] { --v-bg: #0a0a0a; --v-ink: #f6e79a; --v-muted: rgb(245 241 230 / 0.62); --focus: #f6e79a; }
-  :global(:root[data-theme='dark']) .scene[data-dark] { --v-bg: #f6e79a; --v-ink: #0a0a0a; --v-muted: rgb(10 10 10 / 0.64); --focus: #0a0a0a; }
+  /* The privacy scene has its own section: the whole box between the rails turns black with bleib yellow
+     (yellow with black in dark mode). Rails and joints on it turn yellow; the half of each joint outside stays. */
+  .story-dark { --v-bg: #0a0a0a; --v-ink: #f6e79a; --v-muted: rgb(245 241 230 / 0.62); --focus: #f6e79a; --scene-ink: var(--v-ink); --scene-muted: var(--v-muted); }
+  :global(:root[data-theme='dark']) .story-dark { --v-bg: #f6e79a; --v-ink: #0a0a0a; --v-muted: rgb(10 10 10 / 0.64); --focus: #0a0a0a; --scene-ink: var(--v-ink); --scene-muted: var(--v-muted); }
   @media (prefers-color-scheme: dark) {
-    :global(:root:not([data-theme='light'])) .scene[data-dark] { --v-bg: #f6e79a; --v-ink: #0a0a0a; --v-muted: rgb(10 10 10 / 0.64); --focus: #0a0a0a; }
+    :global(:root:not([data-theme='light'])) .story-dark { --v-bg: #f6e79a; --v-ink: #0a0a0a; --v-muted: rgb(10 10 10 / 0.64); --focus: #0a0a0a; --scene-ink: var(--v-ink); --scene-muted: var(--v-muted); }
   }
-  .scene[data-dark]::before { content: ''; position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%; width: var(--rails-box); transform: translateX(-50%); background: var(--v-bg); }
-  .scene[data-dark] .text, .scene[data-dark] .more { color: var(--v-ink); }
-  .scene[data-dark] .lead { color: var(--v-muted); }
-  /* Tray and text are centred together; the tray grows evenly and the text stays centred on it. */
-
-  @media (max-width: 767px) {
-    .scene { min-height: 0; padding: 72px 0 40px; }
-    .pair, .scene[data-side='card-right'] .pair { width: var(--colw); grid-template-columns: minmax(0, 1fr); gap: 32px; }
-    .visual, .text { min-width: 0; }
-    .scene .text { order: -1; }
-    .scene[data-side='card-right'] .visual { order: 0; }
+  .story-dark::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: var(--rails-box); transform: translateX(-50%); background: var(--v-bg); }
+  .story-dark :global(.rails) { border-color: color-mix(in srgb, var(--v-ink) 32%, transparent); }
+  .story-dark :global(.rails::before), .story-dark :global(.rails::after) {
+    background:
+      linear-gradient(var(--v-ink), var(--v-ink)) right center / 5px 1px no-repeat,
+      linear-gradient(to bottom, var(--joint) 5px, var(--v-ink) 5px) center / 1px 9px no-repeat;
   }
+  .story-dark :global(.rails::after) { background-position: left center, center center; }
+  /* The following section's joints reach up into the black, so their upper half turns yellow too. */
+  .story-dark ~ :global(section) { --v-ink: #f6e79a; }
+  :global(:root[data-theme='dark']) .story-dark ~ :global(section) { --v-ink: #0a0a0a; }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .story-dark ~ :global(section) { --v-ink: #0a0a0a; }
+  }
+  .story-dark ~ :global(section .rails::before), .story-dark ~ :global(section .rails::after) {
+    background:
+      linear-gradient(var(--joint), var(--joint)) right center / 5px 1px no-repeat,
+      linear-gradient(to bottom, var(--v-ink) 5px, var(--joint) 5px) center / 1px 9px no-repeat;
+  }
+  .story-dark ~ :global(section .rails::after) { background-position: left center, center center; }
 </style>
 
 <script>

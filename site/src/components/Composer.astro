@@ -1,0 +1,24 @@
+---
+/**
+ * A chat message box, as in the hero and the closer. `typed` is typed out at step 1 (scripts/story.ts),
+ * with a macOS caret that blinks once focused. Anything that sits in the box above the text goes in the slot.
+ */
+import { icon } from './icons';
+interface Props { typed: string }
+const { typed } = Astro.props;
+---
+<div class="composer">
+  <slot />
+  <p class="t-body input"><span class="field"><span class="typed" data-type={typed}>{typed}</span><span class="caret"></span></span><span class="send" set:html={icon('arrow_outward')} /></p>
+</div>
+
+<style>
+  .composer { border-radius: 22px; box-shadow: inset 0 0 0 1px var(--hairline); }
+  .input { margin: 0; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 8px 8px 16px; }
+  .field { flex: 1; min-width: 0; }
+  .caret { display: inline-block; width: 2px; height: 1.15em; margin-left: 1px; vertical-align: -0.2em; border-radius: 1px; background: var(--label); opacity: 0; }
+  :global(.s1) .caret { opacity: 1; animation: caret 1.06s steps(1, end) infinite; }
+  @keyframes caret { 50% { opacity: 0; } }
+  .send { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--fill); color: var(--label-2); }
+  .send :global(svg) { width: 16px; height: 16px; display: block; transform: rotate(-45deg); }
+</style>
