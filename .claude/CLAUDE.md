@@ -15,7 +15,7 @@ All UI, on the website and in the product, follows Apple's Human Interface Guide
   - notifications (app icon, title, time, actions);
   - widgets (large number, short label);
   - selection lists with a trailing checkmark.
-- **Writing:** title-case buttons in alerts ("Allow Once", "Don't Allow"), questions as alert titles, sentence case elsewhere.
+- **Writing:** never all caps (section labels are sentence case, semibold Footnote); title-case buttons in alerts ("Allow Once", "Don't Allow"), questions as alert titles, sentence case elsewhere.
 - **Accessibility:** contrast, Dynamic Type-friendly sizes, reduced motion, no colour-only meaning.
 
 Reference: https://developer.apple.com/design/human-interface-guidelines/
