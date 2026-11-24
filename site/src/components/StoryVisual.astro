@@ -16,9 +16,8 @@ const STEPS = [5, 3, 4, 6, 3];
 const INTERVAL = [900, 900, 900, 620, 900];
 
 import { icon, type IconName } from './icons';
-const alias: Record<string, IconName> = { person: 'person', plane: 'flight', case: 'work', heart: 'favorite', lock: 'lock', check: 'check', shield: 'verified_user' };
-const svg = (name: string, cls = 'g') => icon(alias[name] ?? (name as IconName), cls);
-const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
+const svg = (name: string, cls = 'g') => icon(name as IconName, cls);
+const cx = (n: number) => `cx at-${n}`;
 ---
 <div class="sv" data-sv data-steps={STEPS[scene]} data-interval={INTERVAL[scene]} data-step="0">
   <div class="tray">
@@ -29,7 +28,7 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
             <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2 cnt">{[0, 1, 2, 3, 4].map((n) => <span class={`c${n}`}>{n}</span>)}</span></p>
             <ul class="group">
               {c.wallet.rows.map((r, i) => (
-                <li class={cx(i + 1, 'at')}>
+                <li class={cx(i + 1)}>
                   <div class="cx-in"><div class="cell">
                     <span class="ico" set:html={svg(r.icon)} />
                     <span class="t-body cell-k">{r.k}</span>
@@ -38,7 +37,7 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
                 </li>
               ))}
             </ul>
-            <div class={cx(5, 'at')}><div class="cx-in"><p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.wallet.footer}</p></div></div>
+            <div class={cx(5)}><div class="cx-in"><p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.wallet.footer}</p></div></div>
           </div>
           <div>
             <div>
@@ -70,7 +69,7 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
               </div>
             </div>
           </div>
-          <div class={cx(2, 'at')}>
+          <div class={cx(2)}>
             <div class="cx-in">
               <div class="card list-card">
                 <p class="t-foot c-2 sec-h">{c.ask.rulesLabel}</p>
@@ -82,7 +81,7 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
               </div>
             </div>
           </div>
-          <div class={cx(3, 'at')}>
+          <div class={cx(3)}>
             <div class="cx-in">
               <div class="card note">
                 <div class="note-head">
@@ -107,17 +106,17 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
             <p class="t-foot c-2 sec-h inner">{c.receipt.sharedLabel}</p>
             <ul class="group filled">
               {c.receipt.shared.map((x, i) => (
-                <li class={cx(i + 1, 'at')}><div class="cx-in"><div class="cell"><span class="yes" set:html={svg('check')} /><span class="t-body">{x}</span></div></div></li>
+                <li class={cx(i + 1)}><div class="cx-in"><div class="cell"><span class="yes" set:html={svg('check')} /><span class="t-body">{x}</span></div></div></li>
               ))}
             </ul>
-            <div class={cx(3, 'at')}><div class="cx-in"><p class="t-foot c-2 not"><span class="inline-g" set:html={svg('lock')} />{c.receipt.notShared}</p></div></div>
+            <div class={cx(3)}><div class="cx-in"><p class="t-foot c-2 not"><span class="inline-g" set:html={svg('lock')} />{c.receipt.notShared}</p></div></div>
           </div>
-          <div class={cx(4, 'at')}>
+          <div class={cx(4)}>
             <div class="cx-in">
               <div class="card widget">
                 <p class="t-foot c-2 w-label"><span class="w-mark" aria-hidden="true"><Mark size={11} /></span>{c.receipt.weeklyLabel}</p>
                 <p class="w-num"><span class="t-large">{c.receipt.weeklyN}</span><span class="t-sub">{c.receipt.weeklyText}</span></p>
-                <p class="t-foot c-2 w-note"><span class="inline-g ok-g" set:html={svg('shield')} />{c.receipt.weeklyNote}</p>
+                <p class="t-foot c-2 w-note"><span class="inline-g ok-g" set:html={svg('verified_user')} />{c.receipt.weeklyNote}</p>
               </div>
             </div>
           </div>
@@ -186,7 +185,7 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
               {c.wallet.rows.slice(0, 2).map((r) => (
                 <li class="cell"><span class="ico" set:html={svg(r.icon)} /><span class="t-body cell-k">{r.k}</span><span class="t-body c-2 cell-v">{r.v}</span></li>
               ))}
-              <li class={cx(2, 'at')}>
+              <li class={cx(2)}>
                 <div class="cx-in"><div class="cell">
                   <span class="ico" set:html={svg('person')} />
                   <span class="cell-k"><span class="t-body">{c.propose.newRow.v}</span></span>
@@ -194,7 +193,7 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
                 </div></div>
               </li>
             </ul>
-            <div class={cx(3, 'at')}><div class="cx-in"><p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.propose.saved}</p></div></div>
+            <div class={cx(3)}><div class="cx-in"><p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.propose.saved}</p></div></div>
           </div>
         </>
       )}
@@ -211,11 +210,9 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
   /* Collapsible pieces: height and opacity morph in place, nothing jumps. */
   .cx { display: grid; grid-template-rows: 0fr; opacity: 0; margin-top: -12px; transition: grid-template-rows 0.55s var(--ease), opacity 0.4s var(--ease) 0.12s, margin-top 0.55s var(--ease); }
   .card { transform: translateZ(0); backface-visibility: hidden; }
-  .cx.until-1, .cx.until-2, .cx.until-3, .cx.until-4, .cx.until-5 { grid-template-rows: 1fr; opacity: 1; margin-top: 0; }
   li.cx, .card .cx { margin-top: 0; }
   .cx-in { overflow: hidden; min-height: 0; }
   .s1 .at-1, .s2 .at-2, .s3 .at-3, .s4 .at-4, .s5 .at-5 { grid-template-rows: 1fr; opacity: 1; margin-top: 0; }
-  .s1 .until-1, .s2 .until-2, .s3 .until-3, .s4 .until-4, .s5 .until-5 { grid-template-rows: 0fr; opacity: 0; margin-top: -12px; }
 
   /* Done steps stay in place and grey out. */
   [class*='dim-'] { transition: opacity 0.45s var(--ease); }
@@ -246,7 +243,7 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
   [data-step='0'] .swap .u0, [data-step='1'] .swap .u1, [data-step='2'] .swap .u2, [data-step='3'] .swap .u3,
   [data-step='4'] .swap .u4, [data-step='5'] .swap .u5, [data-step='6'] .swap .u6 { display: inline; }
 
-  /* Provider strip (from the October site): models step past; the wallet above never moves. */
+  /* Provider strip: models step past; the wallet above never moves. */
   .strip { padding: 14px 0 12px; }
   .pwin { width: 330px; max-width: 100%; margin: 0 auto; overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, #000 26%, #000 74%, transparent); mask-image: linear-gradient(to right, transparent, #000 26%, #000 74%, transparent); }
   .ptrack { display: flex; width: max-content; padding-left: 110px; transform: translateX(calc(var(--i, 0) * -110px)); transition: transform 0.55s var(--ease); }

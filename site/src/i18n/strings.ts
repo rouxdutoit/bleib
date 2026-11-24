@@ -66,35 +66,28 @@ const en = {
   },
   story: {
     label: 'How bleib works',
-    pause: 'Pause animations',
-    play: 'Play animations',
     scenes: [
       {
-        tick: 'Wallet',
         h: ['Your memory.', 'In one place.'],
         p: 'People, preferences and rules your AIs need, in plain text you can read and correct. Encrypted on your device.',
         more: { to: 'how', hash: '#wallet' },
       },
       {
-        tick: 'Asked once',
         h: ['Asked once.', 'Remembered.'],
         p: 'The first time an AI needs something new, bleib asks. Your answer becomes a rule.',
         more: { to: 'permissions', hash: '' },
       },
       {
-        tick: 'Receipts',
         h: ['See exactly what', 'each AI saw.'],
         p: 'Every share leaves a receipt: which AI, where it went, for what, and the exact words.',
         more: { to: 'receipts', hash: '' },
       },
       {
-        tick: 'Any AI',
         h: ['Switch AI.', 'No starting over.'],
         p: 'Your preferences and rules stay in bleib. A new AI gets what you allow from the first message.',
         more: { to: 'works', hash: '' },
       },
       {
-        tick: 'You decide',
         h: ['Your AI suggests.', 'You decide.'],
         p: 'AIs can propose what to remember. Nothing is saved until you say so.',
         more: { to: 'how', hash: '#proposals' },
@@ -102,14 +95,13 @@ const en = {
     ],
   },
   cards: {
-    replay: 'Replay',
     wallet: {
       title: 'Your Wallet',
       rows: [
         { k: 'People', v: 'Marek, Berlin', icon: 'person' },
-        { k: 'Travel', v: 'Aisle seat', icon: 'plane' },
-        { k: 'Work', v: 'Friday review', icon: 'case' },
-        { k: 'Health', v: 'Private', icon: 'heart', locked: true },
+        { k: 'Travel', v: 'Aisle seat', icon: 'flight' },
+        { k: 'Work', v: 'Friday review', icon: 'work' },
+        { k: 'Health', v: 'Private', icon: 'favorite', locked: true },
       ],
       sourcesLabel: 'Scattered across your AIs',
       sources: [
@@ -148,7 +140,6 @@ const en = {
       title: 'Your Wallet',
       sub: 'Travel, Work, People · 2 rules',
       usedBy: 'Now used by',
-      sectionLabel: 'AI in use',
       providers: [
         { name: 'Claude', icon: '/providers/claude.svg', color: '/providers/claude-color.svg' },
         { name: 'Codex', icon: '/providers/codex.svg', color: '/providers/codex-color.svg' },
@@ -181,12 +172,11 @@ const en = {
     trust: [
       { icon: 'lock', t: 'Encrypted on your device', d: 'Only you hold the key.' },
       { icon: 'code', t: 'Open source', d: 'Read every line. Run it yourself.' },
-      { icon: 'gift', t: 'Free, for good', d: 'Pay only for convenience, like hosted sync.' },
+      { icon: 'savings', t: 'Free, for good', d: 'Pay only for convenience, like hosted sync.' },
     ],
   },
   form: {
     label: 'Email address',
-    placeholder: 'you@example.com',
     submit: 'Get early access',
     sending: 'Sending…',
     success: "Thanks, you're on the list.",
@@ -201,7 +191,6 @@ const en = {
     cols: { product: 'Product', project: 'Project', legal: 'Legal' },
     fine: 'AGPL-3.0-or-later · Spec Apache-2.0 · No cookies or analytics',
     email: 'Email',
-    tagline: 'Your AI context, encrypted and yours.',
     links: {
       how: 'How it works',
       works: 'Works with',
@@ -216,7 +205,6 @@ const en = {
       impressum: 'Legal notice',
       github: 'GitHub',
     },
-    copyright: '© 2026 bleib',
   },
 };
 
@@ -265,35 +253,28 @@ const de: Strings = {
   },
   story: {
     label: 'So funktioniert bleib',
-    pause: 'Animationen anhalten',
-    play: 'Animationen abspielen',
     scenes: [
       {
-        tick: 'Wallet',
         h: ['Dein Gedächtnis.', 'An einem Ort.'],
         p: 'Menschen, Vorlieben und Regeln, die deine KIs brauchen, als Klartext, den du lesen und korrigieren kannst. Verschlüsselt auf deinem Gerät.',
         more: { to: 'how', hash: '#wallet' },
       },
       {
-        tick: 'Einmal gefragt',
         h: ['Einmal gefragt.', 'Gemerkt.'],
         p: 'Wenn eine KI zum ersten Mal etwas Neues braucht, fragt bleib nach. Deine Antwort wird zur Regel.',
         more: { to: 'permissions', hash: '' },
       },
       {
-        tick: 'Belege',
         h: ['Sieh genau, was', 'jede KI gesehen hat.'],
         p: 'Jede Weitergabe hinterlässt einen Beleg: welche KI, wohin, wofür und der genaue Wortlaut.',
         more: { to: 'receipts', hash: '' },
       },
       {
-        tick: 'Jede KI',
         h: ['KI wechseln.', 'Nicht von vorn anfangen.'],
         p: 'Deine Vorlieben und Regeln bleiben in bleib. Eine neue KI bekommt ab der ersten Nachricht, was du erlaubst.',
         more: { to: 'works', hash: '' },
       },
       {
-        tick: 'Du entscheidest',
         h: ['Deine KI schlägt vor.', 'Du entscheidest.'],
         p: 'KIs können vorschlagen, was sie sich merken möchten. Gespeichert wird erst, wenn du zustimmst.',
         more: { to: 'how', hash: '#proposals' },
@@ -301,14 +282,13 @@ const de: Strings = {
     ],
   },
   cards: {
-    replay: 'Nochmal abspielen',
     wallet: {
       title: 'Deine Wallet',
       rows: [
         { k: 'Menschen', v: 'Marek, Berlin', icon: 'person' },
-        { k: 'Reisen', v: 'Gangplatz', icon: 'plane' },
-        { k: 'Arbeit', v: 'Rückblick am Freitag', icon: 'case' },
-        { k: 'Gesundheit', v: 'Privat', icon: 'heart', locked: true },
+        { k: 'Reisen', v: 'Gangplatz', icon: 'flight' },
+        { k: 'Arbeit', v: 'Rückblick am Freitag', icon: 'work' },
+        { k: 'Gesundheit', v: 'Privat', icon: 'favorite', locked: true },
       ],
       sourcesLabel: 'Verstreut über deine KIs',
       sources: [
@@ -347,7 +327,6 @@ const de: Strings = {
       title: 'Deine Wallet',
       sub: 'Reisen, Arbeit, Menschen · 2 Regeln',
       usedBy: 'Gerade genutzt von',
-      sectionLabel: 'Aktive KI',
       providers: [
         { name: 'Claude', icon: '/providers/claude.svg', color: '/providers/claude-color.svg' },
         { name: 'Codex', icon: '/providers/codex.svg', color: '/providers/codex-color.svg' },
@@ -380,12 +359,11 @@ const de: Strings = {
     trust: [
       { icon: 'lock', t: 'Verschlüsselt auf deinem Gerät', d: 'Nur du hast den Schlüssel.' },
       { icon: 'code', t: 'Open Source', d: 'Jede Zeile lesbar. Selbst betreibbar.' },
-      { icon: 'gift', t: 'Dauerhaft kostenlos', d: 'Du zahlst nur für Komfort, etwa gehostete Synchronisierung.' },
+      { icon: 'savings', t: 'Dauerhaft kostenlos', d: 'Du zahlst nur für Komfort, etwa gehostete Synchronisierung.' },
     ],
   },
   form: {
     label: 'E-Mail-Adresse',
-    placeholder: 'du@beispiel.de',
     submit: 'Frühen Zugang sichern',
     sending: 'Wird gesendet…',
     success: 'Danke, du stehst auf der Liste.',
@@ -400,7 +378,6 @@ const de: Strings = {
     cols: { product: 'Produkt', project: 'Projekt', legal: 'Rechtliches' },
     fine: 'AGPL-3.0-or-later · Spezifikation Apache-2.0 · Keine Cookies, keine Analyse',
     email: 'E-Mail',
-    tagline: 'Dein KI-Kontext, verschlüsselt und deins.',
     links: {
       how: 'So funktioniert’s',
       works: 'Kompatibilität',
@@ -415,7 +392,6 @@ const de: Strings = {
       impressum: 'Impressum',
       github: 'GitHub',
     },
-    copyright: '© 2026 bleib',
   },
 };
 

@@ -9,34 +9,25 @@
 /* ---------- Tokens ---------- */
 :root {
   color-scheme: light;
-  --yellow: #f6e79a;
   --page: #f6e79a;
   --tray: #efdc7e;
   --card: #ffffff;
-  --card-sub: #f7f4ea;
   --ink: #0a0a0a;
   --ink-rgb: 10 10 10;
   --muted: rgb(var(--ink-rgb) / 0.68);
-  --faint: rgb(var(--ink-rgb) / 0.5);
   --line: rgb(var(--ink-rgb) / 0.1);
   --on-card: #0a0a0a;
   --on-card-muted: rgb(10 10 10 / 0.6);
-  --hl: #f6e79a;
-  --hl-ink: #0a0a0a;
   --btn: #0a0a0a;
   --btn-ink: #ffffff;
   --btn2: rgb(255 255 255 / 0.72);
   --btn2-ink: #0a0a0a;
-  --tick: rgb(var(--ink-rgb) / 0.35);
-  --tick-on: #0a0a0a;
   --shadow: 0 30px 80px -30px rgb(10 10 10 / 0.32), 0 2px 6px rgb(10 10 10 / 0.06);
   --card-border: 1px solid transparent;
   --focus: #0a0a0a;
   --radius-card: 22px;
   --radius-tray: 28px;
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --gutter: clamp(16px, 4vw, 48px);
-  --max: 1240px;
 }
 
 :root[data-theme='dark'] {
@@ -44,19 +35,14 @@
   --page: #0a0a0a;
   --tray: #121212;
   --card: #181818;
-  --card-sub: #202020;
   --ink: #f5f1e6;
   --ink-rgb: 245 241 230;
   --on-card: #f5f1e6;
   --on-card-muted: rgb(245 241 230 / 0.66);
-  --hl: rgb(246 231 154 / 0.18);
-  --hl-ink: #f6e79a;
   --btn: #f6e79a;
   --btn-ink: #0a0a0a;
   --btn2: rgb(255 255 255 / 0.12);
   --btn2-ink: #f5f1e6;
-  --tick: rgb(245 241 230 / 0.35);
-  --tick-on: #f6e79a;
   --shadow: none;
   --card-border: 1px solid rgb(255 255 255 / 0.07);
   --focus: #f6e79a;
@@ -68,19 +54,14 @@
     --page: #0a0a0a;
     --tray: #121212;
     --card: #181818;
-    --card-sub: #202020;
     --ink: #f5f1e6;
     --ink-rgb: 245 241 230;
     --on-card: #f5f1e6;
     --on-card-muted: rgb(245 241 230 / 0.66);
-    --hl: rgb(246 231 154 / 0.18);
-    --hl-ink: #f6e79a;
     --btn: #f6e79a;
     --btn-ink: #0a0a0a;
     --btn2: rgb(255 255 255 / 0.12);
     --btn2-ink: #f5f1e6;
-    --tick: rgb(245 241 230 / 0.35);
-    --tick-on: #f6e79a;
     --shadow: none;
     --card-border: 1px solid rgb(255 255 255 / 0.07);
     --focus: #f6e79a;
@@ -163,13 +144,6 @@ input {
 }
 .skip:focus {
   top: 12px;
-}
-
-.wrap {
-  width: 100%;
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 0 var(--gutter);
 }
 
 h1,
@@ -263,13 +237,18 @@ h3 {
 }
 
 
-/* ---------- Margin guides (carried over from the October site) ----------
-   Continuous page rails with a top line and "+" crosshairs at each section boundary. */
+/* ---------- Margin guides and the content column ----------
+   Two page rails frame every section. A section can draw a top line between them, with a
+   joiner on each rail: a short tick with an arm pointing inward. Content sits in one column,
+   inset from the rails. Percentages resolve against the element, so this works in any
+   full-width parent. */
 :root {
   --rail: rgb(10 10 10 / 0.24);
   --joint: rgb(10 10 10 / 0.7);
-  --rail-w: min(1440px, calc(100vw - 64px));
-  --rail-left: calc((100vw - var(--rail-w)) / 2);
+  --rail-gap: 32px;
+  --inset: clamp(20px, 5vw, 72px);
+  --rails-box: min(1440px, calc(100% - 2 * var(--rail-gap)));
+  --colw: calc(min(1440px, 100% - 2 * var(--rail-gap)) - 2 * var(--inset));
 }
 :root[data-theme='dark'] {
   --rail: #242424;
@@ -283,7 +262,8 @@ h3 {
 }
 @media (max-width: 767px) {
   :root {
-    --rail-w: calc(100vw - 32px);
+    --rail-gap: 16px;
+    --inset: 16px;
   }
 }
 .has-rails {
@@ -291,16 +271,15 @@ h3 {
 }
 .rails {
   position: absolute;
-  z-index: 0;
+  z-index: 3;
   pointer-events: none;
   top: 0;
   bottom: 0;
   left: 50%;
-  width: var(--rail-w);
+  width: var(--rails-box);
   transform: translateX(-50%);
-  border-top: 1px solid var(--rail);
-  border-left: 1px solid var(--rail);
-  border-right: 1px solid var(--rail);
+  border: 1px solid var(--rail);
+  border-bottom: 0;
 }
 .rails::before,
 .rails::after {
@@ -310,7 +289,7 @@ h3 {
   width: 9px;
   height: 9px;
   background:
-    linear-gradient(var(--joint), var(--joint)) center / 9px 1px no-repeat,
+    linear-gradient(var(--joint), var(--joint)) right center / 5px 1px no-repeat,
     linear-gradient(var(--joint), var(--joint)) center / 1px 9px no-repeat;
 }
 .rails::before {
@@ -318,6 +297,7 @@ h3 {
 }
 .rails::after {
   right: -5px;
+  background-position: left center, center center;
 }
 .rails.no-top {
   border-top: 0;
@@ -326,41 +306,8 @@ h3 {
 .rails.no-top::after {
   display: none;
 }
-
-/* Joiners, as on the October site: a vertical tick on the rail with a short arm pointing inward. */
-.rails {
-  z-index: 3;
-}
-.rails::before {
-  background-size: 5px 1px, 1px 9px;
-  background-position: right center, center center;
-}
-.rails::after {
-  background-size: 5px 1px, 1px 9px;
-  background-position: left center, center center;
-}
-
-/* ---------- One content column, inset from the rails ----------
-   Percentages resolve against the element using the variable, so these work in any full-width parent. */
-:root {
-  --rail-gap: 32px;
-  --inset: clamp(20px, 5vw, 72px);
-  --rails-box: min(1440px, calc(100% - 2 * var(--rail-gap)));
-  --colw: calc(min(1440px, 100% - 2 * var(--rail-gap)) - 2 * var(--inset));
-}
-@media (max-width: 767px) {
-  :root {
-    --rail-gap: 16px;
-    --inset: 16px;
-  }
-}
-.rails {
-  width: var(--rails-box);
-}
 .wrap {
   width: var(--colw);
-  max-width: none;
-  padding: 0;
   margin-left: auto;
   margin-right: auto;
 }
@@ -373,15 +320,8 @@ h3 {
   --label: #000000;
   --label-2: rgb(60 60 67 / 0.6);
   --label-3: rgb(60 60 67 / 0.3);
-  --separator: rgb(60 60 67 / 0.29);
   --hairline: rgb(60 60 67 / 0.16);
-  --sel: var(--fill);
-  --sel-ink: var(--label);
-  --sel-ink-2: var(--label-2);
-  --sel-chip: #f6e79a;
-  --sel-chip-ink: #0a0a0a;
   --fill: rgb(118 118 128 / 0.12);
-  --fill-2: rgb(120 120 128 / 0.16);
   --cell: #ffffff;
   --ok: #34c759;
 }
@@ -389,15 +329,8 @@ h3 {
   --label: #ffffff;
   --label-2: rgb(235 235 245 / 0.6);
   --label-3: rgb(235 235 245 / 0.3);
-  --separator: rgb(84 84 88 / 0.65);
   --hairline: rgb(84 84 88 / 0.45);
-  --sel: var(--fill);
-  --sel-ink: var(--label);
-  --sel-ink-2: var(--label-2);
-  --sel-chip: #f6e79a;
-  --sel-chip-ink: #0a0a0a;
   --fill: rgb(118 118 128 / 0.24);
-  --fill-2: rgb(118 118 128 / 0.32);
   --cell: #1c1c1e;
   --ok: #30d158;
 }
@@ -406,15 +339,8 @@ h3 {
     --label: #ffffff;
     --label-2: rgb(235 235 245 / 0.6);
     --label-3: rgb(235 235 245 / 0.3);
-    --separator: rgb(84 84 88 / 0.65);
   --hairline: rgb(84 84 88 / 0.45);
-  --sel: var(--fill);
-  --sel-ink: var(--label);
-  --sel-ink-2: var(--label-2);
-  --sel-chip: #f6e79a;
-  --sel-chip-ink: #0a0a0a;
     --fill: rgb(118 118 128 / 0.24);
-    --fill-2: rgb(118 118 128 / 0.32);
     --cell: #1c1c1e;
     --ok: #30d158;
   }
@@ -430,15 +356,11 @@ h2 {
 }
 .t-large { font-size: 34px; line-height: 41px; font-weight: 700; letter-spacing: 0.01em; }
 .t-title2 { font-size: 22px; line-height: 28px; font-weight: 700; letter-spacing: -0.012em; }
-.t-title3 { font-size: 20px; line-height: 25px; font-weight: 600; letter-spacing: -0.022em; }
 .t-headline { font-size: 17px; line-height: 22px; font-weight: 600; letter-spacing: -0.025em; }
 .t-body { font-size: 17px; line-height: 22px; font-weight: 400; letter-spacing: -0.025em; }
-.t-callout { font-size: 16px; line-height: 21px; font-weight: 400; letter-spacing: -0.02em; }
 .t-sub { font-size: 15px; line-height: 20px; font-weight: 400; letter-spacing: -0.015em; }
 .t-foot { font-size: 13px; line-height: 18px; font-weight: 400; letter-spacing: -0.006em; }
-.t-cap { font-size: 12px; line-height: 16px; font-weight: 400; letter-spacing: 0; }
 .c-2 { color: var(--label-2); }
-.c-3 { color: var(--label-3); }
 
 /* Product mock-ups sit in a tray; cards are cells with concentric radii (tray 50 − padding 28 = 22). */
 .tray {

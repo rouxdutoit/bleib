@@ -1,59 +1,33 @@
 /**
- * Plays each scene's card morph once, when the scene comes into view.
- * Steps are applied as data-step="n" plus cumulative classes s1..sn (see StoryVisual.astro).
- * With reduced motion, the final state is shown at once.
+ * Plays each scene's card morph once, when the scene comes into view: data-step="n" plus
+ * cumulative classes s1..sn (see StoryVisual.astro). With reduced motion the final state shows at once.
  */
 const START = 500;
 const STEP = 900;
 
+const setStep = (sv: HTMLElement, n: number) => {
+  sv.dataset.step = String(n);
+  for (let k = 1; k <= 6; k++) sv.classList.toggle(`s${k}`, k <= n);
+};
+
 export function initStory(): void {
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const visuals = Array.from(document.querySelectorAll<HTMLElement>('[data-sv]'));
-
-  visuals.forEach((sv) => {
-    const steps = Number(sv.dataset.steps ?? '0');
-    const interval = Number(sv.dataset.interval ?? STEP);
-    let timers: number[] = [];
-
-    const setStep = (n: number) => {
-      sv.dataset.step = String(n);
-      for (let k = 1; k <= 6; k++) sv.classList.toggle(`s${k}`, k <= n);
-    };
-    const clear = () => {
-      timers.forEach((id) => window.clearTimeout(id));
-      timers = [];
-    };
-    const finish = () => {
-      setStep(steps);
-      sv.classList.add('done');
-    };
-    const play = () => {
-      clear();
-      sv.classList.remove('done');
-      if (reduce.matches) {
-        finish();
-        return;
-      }
-      setStep(0);
-      for (let k = 1; k <= steps; k++) {
-        timers.push(window.setTimeout(() => setStep(k), START + (k - 1) * interval));
-      }
-      timers.push(window.setTimeout(() => sv.classList.add('done'), START + steps * interval));
-    };
-
-    let played = false;
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting && !played) {
-            played = true;
-            play();
-            io.disconnect();
-          }
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        const sv = e.target as HTMLElement;
+        io.unobserve(sv);
+        const steps = Number(sv.dataset.steps ?? '0');
+        if (reduce) {
+          setStep(sv, steps);
+          continue;
         }
-      },
-      { threshold: 0.6 },
-    );
-    io.observe(sv);
-  });
+        const interval = Number(sv.dataset.interval ?? STEP);
+        for (let k = 1; k <= steps; k++) window.setTimeout(() => setStep(sv, k), START + (k - 1) * interval);
+      }
+    },
+    { threshold: 0.6 },
+  );
+  document.querySelectorAll<HTMLElement>('[data-sv]').forEach((sv) => io.observe(sv));
 }

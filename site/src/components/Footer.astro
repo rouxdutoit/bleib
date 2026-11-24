@@ -42,7 +42,7 @@ const cols: { h: string; items: Item[] }[] = [
         <a href="https://rouxdutoit.com">rouxdutoit.com</a>
         <a class="ico-link" href="mailto:hello@rouxdutoit.com" aria-label={s.footer.email} title={s.footer.email} set:html={icon('mail')} />
         <a class="ico-link lang" href={routes[page][other]} hreflang={other} lang={other} aria-label={s.nav.langSwitchLabel}><span set:html={icon('translate')} />{s.nav.langSwitch}</a>
-        <ThemeToggle lang={lang} compact />
+        <ThemeToggle lang={lang} />
       </div>
     </div>
   </div>

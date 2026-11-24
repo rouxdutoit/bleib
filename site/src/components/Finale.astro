@@ -8,7 +8,6 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang).finale;
 import { icon, type IconName } from './icons';
-const trustIcon: Record<string, IconName> = { lock: 'lock', code: 'code', gift: 'savings' };
 ---
 <section class="finale has-rails" id="early-access" aria-labelledby="finale-title">
   <Rails />
@@ -16,11 +15,11 @@ const trustIcon: Record<string, IconName> = { lock: 'lock', code: 'code', gift: 
     <span class="mark" aria-hidden="true"><Mark size={56} /></span>
     <h2 id="finale-title" class="title">{s.h}</h2>
     <p class="sub">{s.p}</p>
-    <div class="form"><EarlyAccessForm lang={lang} centered /></div>
+    <div class="form"><EarlyAccessForm lang={lang} /></div>
     <ul class="trust">
       {s.trust.map((x) => (
         <li>
-          <span class="ti" set:html={icon(trustIcon[x.icon])} />
+          <span class="ti" set:html={icon(x.icon as IconName)} />
           <p class="t-headline">{x.t}</p>
           <p class="t-sub c-muted">{x.d}</p>
         </li>
@@ -40,8 +39,7 @@ const trustIcon: Record<string, IconName> = { lock: 'lock', code: 'code', gift: 
   .title { font-size: clamp(44px, 7vw, 88px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 700; }
   .sub { margin: 20px 0 0; max-width: 34em; font-size: clamp(17px, 1.7vw, 21px); line-height: 1.45; color: var(--muted); }
   .form { margin-top: 36px; width: 100%; display: flex; justify-content: center; }
-  .trust { list-style: none; margin: clamp(56px, 8vw, 96px) 0 0; padding: 0; width: 100%; max-width: 900px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); }
-  .trust { align-items: start; }
+  .trust { list-style: none; margin: clamp(56px, 8vw, 96px) 0 0; padding: 0; width: 100%; max-width: 900px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); align-items: start; }
   .trust li { display: flex; flex-direction: column; align-items: center; gap: 6px; }
   .trust .c-muted { max-width: 24ch; text-wrap: balance; }
   .trust p { margin: 0; }
