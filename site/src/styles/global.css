@@ -235,6 +235,7 @@ h3 {
    Draw       .draw (SVG path)            draws itself on when its .at-N turns on
    Press      .press.at-N                 dips as if tapped when its step comes
    Land       .land.at-N                  drops into place with a small spring, as it is revealed
+   Toggle     .toggle.at-N                an iOS switch, on in bleib yellow, that turns off at step N
    Scenes differ only in when things happen; --delay staggers a single move. */
 :root {
   --t-open: 0.55s;
@@ -298,6 +299,35 @@ h3 {
 }
 .s1 .land.at-1, .s2 .land.at-2, .s3 .land.at-3, .s4 .land.at-4, .s5 .land.at-5, .s6 .land.at-6 {
   animation: land 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) calc(var(--delay, 0s) + var(--t-lag)) both;
+}
+.toggle {
+  position: relative;
+  flex: none;
+  width: 51px;
+  height: 31px;
+  margin-inline-start: auto;
+  border-radius: 999px;
+  background: #f6e79a;
+  transition: background-color var(--t-fade) var(--ease) var(--delay, 0s);
+}
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 3px 8px rgb(0 0 0 / 0.15), 0 1px 1px rgb(0 0 0 / 0.16);
+  transform: translateX(20px);
+  transition: transform var(--t-open) var(--ease) var(--delay, 0s);
+}
+.s1 .toggle.at-1, .s2 .toggle.at-2, .s3 .toggle.at-3, .s4 .toggle.at-4, .s5 .toggle.at-5, .s6 .toggle.at-6 {
+  background: var(--fill);
+}
+.s1 .toggle.at-1::after, .s2 .toggle.at-2::after, .s3 .toggle.at-3::after, .s4 .toggle.at-4::after, .s5 .toggle.at-5::after, .s6 .toggle.at-6::after {
+  transform: none;
 }
 @keyframes press { 40% { transform: scale(0.92); } }
 @keyframes land { from { transform: translateY(-8px) scale(0.97); } }

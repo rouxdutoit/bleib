@@ -49,7 +49,7 @@ const en = {
     eyebrow: 'In development',
     h1a: 'Your AI memory.',
     h1b: 'In your hands.',
-    sub: ['Every AI knows you from the first message.', 'A password manager, for your preferences.', 'Each AI sees only what it needs.'],
+    sub: ['Every AI knows you from the first message.', 'A password manager, for your preferences.', 'Their memory can stay off. Yours stays with you.'],
     primary: 'Get early access',
     secondary: 'View on GitHub',
     trust: [
@@ -84,7 +84,7 @@ const en = {
     scenes: [
       {
         h: ['See what AI', 'knows about you.'],
-        p: "bleib brings what your AIs remember into one place. Fix what's wrong, keep what's right.",
+        p: "bleib brings what your AIs remember into one place. Fix what's wrong, keep what's right. Then turn their memory off.",
         more: { to: 'how', hash: '#memory' },
       },
       {
@@ -126,11 +126,12 @@ const en = {
       ],
       sourcesLabel: 'Scattered across your AIs',
       sources: [
-        { from: 'Notes', text: 'Marek, Berlin' },
-        { from: 'ChatGPT', text: 'Aisle seat' },
-        { from: 'Claude', text: 'Weekly review' },
-        { from: 'Notes', text: 'Health notes' },
+        { from: 'ChatGPT', text: 'Marek, Berlin' },
+        { from: 'Gemini', text: 'Aisle seat' },
+        { from: 'Claude', text: 'Friday review' },
+        { from: 'ChatGPT', text: 'Health notes' },
       ],
+      offLabel: 'Memory in each AI',
       footer: 'Encrypted on this device. Only you have access.',
     },
     ask: {
@@ -242,7 +243,7 @@ const de: Strings = {
     eyebrow: 'In Entwicklung',
     h1a: 'Dein KI-Gedächtnis.',
     h1b: 'In deiner Hand.',
-    sub: ['Jede KI kennt dich ab der ersten Nachricht.', 'Ein Passwort-Manager für deine Vorlieben.', 'Jede KI sieht nur, was sie braucht.'],
+    sub: ['Jede KI kennt dich ab der ersten Nachricht.', 'Ein Passwort-Manager für deine Vorlieben.', 'Ihr Gedächtnis kann aus bleiben. Deins bleibt bei dir.'],
     primary: 'Frühen Zugang sichern',
     secondary: 'Auf GitHub ansehen',
     trust: [
@@ -277,7 +278,7 @@ const de: Strings = {
     scenes: [
       {
         h: ['Sieh, was die KI', 'über dich weiß.'],
-        p: 'bleib sammelt an einem Ort, was sich deine KIs merken. Korrigiere, was nicht stimmt, und behalte, was passt.',
+        p: 'bleib sammelt an einem Ort, was sich deine KIs merken. Korrigiere, was nicht stimmt, und behalte, was passt. Dann schalte ihr Gedächtnis aus.',
         more: { to: 'how', hash: '#memory' },
       },
       {
@@ -319,11 +320,12 @@ const de: Strings = {
       ],
       sourcesLabel: 'Verstreut über deine KIs',
       sources: [
-        { from: 'Notizen', text: 'Marek, Berlin' },
-        { from: 'ChatGPT', text: 'Gangplatz' },
-        { from: 'Claude', text: 'Wochenrückblick' },
-        { from: 'Notizen', text: 'Gesundheit' },
+        { from: 'ChatGPT', text: 'Marek, Berlin' },
+        { from: 'Gemini', text: 'Gangplatz' },
+        { from: 'Claude', text: 'Rückblick am Freitag' },
+        { from: 'ChatGPT', text: 'Gesundheit' },
       ],
+      offLabel: 'Gedächtnis in jeder KI',
       footer: 'Verschlüsselt auf diesem Gerät. Nur du hast Zugriff.',
     },
     ask: {

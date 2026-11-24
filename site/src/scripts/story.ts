@@ -6,7 +6,6 @@
  * to read what is on screen (about 0.25 s a word), while each transition itself stays quick.
  * [data-scramble-at="n"] text scrambles at step n, like fazit.dev's wordmark in reverse: each character
  * cycles through glyphs, then settles on its character of data-cipher (how it reads without the key).
- * [data-count-at="n"] counts up from 0 to its number at step n, like an iOS widget.
  * data-sv="scroll" waits for the person's first scroll before playing (the hero, which is in view on arrival).
  * With reduced motion the final state shows at once.
  */
@@ -62,22 +61,6 @@ const scramble = (el: HTMLElement) => {
   requestAnimationFrame(frame);
 };
 
-/** Counts el up from 0 to its number, quickly at first and easing into the end. */
-const countUp = (el: HTMLElement) => {
-  const target = Number((el.dataset.count ??= el.textContent ?? '0'));
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  let start = 0;
-  const frame = (now: number) => {
-    start ||= now;
-    const t = Math.min((now - start) / 700, 1);
-    el.textContent = String(Math.round(target * (1 - (1 - t) ** 3)));
-    if (t < 1 && el.dataset.counting) requestAnimationFrame(frame);
-  };
-  el.dataset.counting = '1';
-  el.textContent = '0';
-  requestAnimationFrame(frame);
-};
-
 const setStep = (sv: HTMLElement, n: number) => {
   sv.dataset.step = String(n);
   for (let k = 1; k <= 6; k++) sv.classList.toggle(`s${k}`, k <= n);
@@ -85,14 +68,6 @@ const setStep = (sv: HTMLElement, n: number) => {
     if (Number(el.dataset.scrambleAt) <= n) {
       if (!el.querySelector('.ch')) scramble(el);
     } else if (el.dataset.text !== undefined) el.textContent = el.dataset.text;
-  });
-  sv.querySelectorAll<HTMLElement>('[data-count-at]').forEach((el) => {
-    if (Number(el.dataset.countAt) <= n) {
-      if (!el.dataset.counting) countUp(el);
-    } else if (el.dataset.count !== undefined) {
-      delete el.dataset.counting;
-      el.textContent = el.dataset.count;
-    }
   });
 };
 
