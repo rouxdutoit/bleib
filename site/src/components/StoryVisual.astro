@@ -257,7 +257,7 @@ const cx = (n: number) => `cx at-${n}`;
   /* Scene 6: every character scrambles, then settles as ciphertext (scripts/story.ts). */
   .seal :global(.ch) { position: relative; }
   .seal :global(.ch.sg) { visibility: hidden; }
-  .seal :global(.ct) { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.88em; color: var(--label-3); }
+  .seal :global(.ct) { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.88em; }
   .seal :global(.ch.sg::after) { content: attr(data-g); position: absolute; top: 0; left: 50%; transform: translateX(-50%); visibility: visible; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-weight: 400; color: var(--label-3); }
   .cell-v { text-align: right; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
   .inline-g { display: inline-flex; }
