@@ -141,8 +141,6 @@ const en = {
       weeklyNote: 'No health data left this device.',
     },
     any: {
-      title: 'Your Memory',
-      sub: 'Travel, Work, People · 2 rules',
       usedBy: 'Now used by',
       providers: [
         { name: 'Claude', icon: '/providers/claude.svg', color: '/providers/claude-color.svg' },
@@ -163,7 +161,6 @@ const en = {
       fact: 'Marek is vegetarian.',
       why: 'He mentioned it while you planned dinner.',
       save: 'Save',
-      walletLabel: 'Your Memory',
       newRow: { k: 'People', v: 'Marek is vegetarian' },
       newTag: 'New',
       saved: 'Saved. No AI can read it until you allow it.',
@@ -338,8 +335,6 @@ const de: Strings = {
       weeklyNote: 'Keine Gesundheitsdaten haben dieses Gerät verlassen.',
     },
     any: {
-      title: 'Dein Gedächtnis',
-      sub: 'Reisen, Arbeit, Menschen · 2 Regeln',
       usedBy: 'Gerade genutzt von',
       providers: [
         { name: 'Claude', icon: '/providers/claude.svg', color: '/providers/claude-color.svg' },
@@ -360,7 +355,6 @@ const de: Strings = {
       fact: 'Marek ist Vegetarier.',
       why: 'Er hat es erwähnt, als ihr das Abendessen geplant habt.',
       save: 'Speichern',
-      walletLabel: 'Dein Gedächtnis',
       newRow: { k: 'Menschen', v: 'Marek ist Vegetarier' },
       newTag: 'Neu',
       saved: 'Gespeichert. Keine KI kann es lesen, bis du es erlaubst.',

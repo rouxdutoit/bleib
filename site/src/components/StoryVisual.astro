@@ -125,13 +125,7 @@ const cx = (n: number) => `cx at-${n}`;
       {scene === 3 && (
         <>
           <div class="card list-card">
-            <div class="head-cell">
-              <span class="w-tile" aria-hidden="true"><Mark size={18} /></span>
-              <div>
-                <p class="t-headline">{c.any.title}</p>
-                <p class="t-sub c-2">{c.any.sub}</p>
-              </div>
-            </div>
+            <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2">3</span></p>
             <ul class="group">
               {c.wallet.rows.slice(0, 3).map((r) => (
                 <li class="cell"><span class="ico" set:html={svg(r.icon)} /><span class="t-body cell-k">{r.k}</span><span class="t-body c-2 cell-v">{r.v}</span></li>
@@ -181,7 +175,7 @@ const cx = (n: number) => `cx at-${n}`;
             </div>
           </div>
           <div class="card list-card">
-            <p class="t-foot c-2 sec-h">{c.propose.walletLabel}</p>
+            <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2 grows"><span>2</span><span>3</span></span></p>
             <ul class="group">
               {c.wallet.rows.slice(0, 2).map((r) => (
                 <li class="cell"><span class="ico" set:html={svg(r.icon)} /><span class="t-body cell-k">{r.k}</span><span class="t-body c-2 cell-v">{r.v}</span></li>
@@ -225,7 +219,9 @@ const cx = (n: number) => `cx at-${n}`;
   /* Lists (Settings) */
   .list-card { padding: 14px 0 12px; }
   .head { display: flex; align-items: baseline; gap: 8px; padding: 0 16px 6px; }
-  .cnt span { display: none; }
+  /* Every memory card has the same heading: the title, then how many groups it holds. */
+  .cnt span, .grows span + span, .s2 .grows span:first-child { display: none; }
+  .s2 .grows span + span { display: inline; }
   [data-step='0'] .cnt .c0, [data-step='1'] .cnt .c1, [data-step='2'] .cnt .c2, [data-step='3'] .cnt .c3, [data-step='4'] .cnt .c4, [data-step='5'] .cnt .c4 { display: inline; }
   .sec-h { padding: 0 16px 6px; font-weight: 600; }
   .sec-h.inner { padding: 14px 0 6px; }
@@ -240,8 +236,6 @@ const cx = (n: number) => `cx at-${n}`;
   .cell-v { text-align: right; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
   .inline-g { display: inline-flex; }
   .inline-g :global(.g) { width: 13px; height: 13px; }
-  .head-cell { display: flex; align-items: center; gap: 12px; padding: 2px 16px 4px; }
-  .w-tile { width: 44px; height: 44px; border-radius: 11px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; flex: none; }
   .used { padding: 8px 16px 0; }
   .swap span { display: none; color: var(--label); font-weight: 600; }
   [data-step='0'] .swap .u0, [data-step='1'] .swap .u1, [data-step='2'] .swap .u2, [data-step='3'] .swap .u3,
@@ -324,6 +318,5 @@ const cx = (n: number) => `cx at-${n}`;
     :root:not([data-theme='light']) .sv .pm { filter: invert(1); }
   }
   :root[data-theme='dark'] .sv .pm { filter: invert(1); }
-  :root[data-theme='dark'] .sv .w-tile,
   :root[data-theme='dark'] .sv .w-mark { box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.14); }
 </style>
