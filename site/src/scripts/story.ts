@@ -133,25 +133,16 @@ const finalHeight = (sv: HTMLElement): number => {
 };
 
 /**
- * Reserves the space each scene needs once it has played, so the page around it never moves.
- * A scene inside a [data-frame] lets the frame hold the space and grows within it (the closer's window);
- * otherwise the scene holds its own finished height. Scenes that share a parent (the hero's tabs) all hold
- * the tallest one's height, so switching tabs doesn't move the page either.
+ * Reserves every scene's finished height before it plays, so the page around it never moves.
+ * Scenes that share a parent (the hero's tabs) all take the tallest one's height, so switching tabs doesn't move it either.
  */
 const reserve = () => {
-  const groups = new Map<HTMLElement, HTMLElement[]>();
-  document.querySelectorAll<HTMLElement>('[data-steps]').forEach((sv) => {
-    const key = sv.closest<HTMLElement>('[data-frame]') ?? sv.parentElement ?? sv;
-    groups.set(key, [...(groups.get(key) ?? []), sv]);
-  });
-  groups.forEach((scenes, key) => {
-    const framed = key.hasAttribute('data-frame');
-    const holders = framed ? [key] : scenes;
-    holders.forEach((el) => (el.style.minHeight = ''));
-    const shown = scenes.find((sv) => !sv.hidden) ?? scenes[0];
-    const around = framed ? heightOf(key) - heightOf(shown) : 0;
-    const height = `${Math.ceil(around + Math.max(...scenes.map(finalHeight)))}px`;
-    holders.forEach((el) => (el.style.minHeight = height));
+  const groups = new Map<Element | null, HTMLElement[]>();
+  document.querySelectorAll<HTMLElement>('[data-steps]').forEach((sv) => groups.set(sv.parentElement, [...(groups.get(sv.parentElement) ?? []), sv]));
+  groups.forEach((scenes) => {
+    scenes.forEach((sv) => (sv.style.minHeight = ''));
+    const height = `${Math.ceil(Math.max(...scenes.map(finalHeight)))}px`;
+    scenes.forEach((sv) => (sv.style.minHeight = height));
   });
 };
 
