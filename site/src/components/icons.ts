@@ -21,6 +21,11 @@ import restaurant from '@material-symbols/svg-400/rounded/restaurant.svg?raw';
 import mail from '@material-symbols/svg-400/rounded/mail.svg?raw';
 import translate from '@material-symbols/svg-400/rounded/translate.svg?raw';
 import close from '@material-symbols/svg-400/rounded/close.svg?raw';
+import visibility from '@material-symbols/svg-400/rounded/visibility-fill.svg?raw';
+import chatBubble from '@material-symbols/svg-400/rounded/chat_bubble-fill.svg?raw';
+import syncAlt from '@material-symbols/svg-400/rounded/sync_alt.svg?raw';
+import backHand from '@material-symbols/svg-400/rounded/back_hand-fill.svg?raw';
+import receiptLong from '@material-symbols/svg-400/rounded/receipt_long-fill.svg?raw';
 
 const raw = {
   person,
@@ -41,6 +46,11 @@ const raw = {
   mail,
   translate,
   close,
+  visibility,
+  chat_bubble: chatBubble,
+  sync_alt: syncAlt,
+  back_hand: backHand,
+  receipt_long: receiptLong,
 } as const;
 
 export type IconName = keyof typeof raw;

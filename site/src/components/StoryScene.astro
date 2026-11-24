@@ -2,16 +2,19 @@
 /** One story scene: the animated card and its text, side by side (Story.astro lays them out). */
 import Lines from './Lines.astro';
 import StoryVisual from './StoryVisual.astro';
-import { icon } from './icons';
+import { icon, type IconName } from './icons';
 import { t, routes, type Lang } from '../i18n/strings';
 interface Props { lang: Lang; i: number }
 const { lang, i } = Astro.props;
 const x = t(lang).story.scenes[i];
+/** One symbol per scene, in scene order: see, remember, switch, ask, receipt, lock. */
+const SYMBOLS: IconName[] = ['visibility', 'chat_bubble', 'sync_alt', 'back_hand', 'receipt_long', 'lock'];
 ---
 <article class="scene" id={`scene-${i + 1}`} data-side={i % 2 === 0 ? 'card-left' : 'card-right'}>
   <div class="pair">
     <div class="visual"><StoryVisual lang={lang} scene={i} /></div>
     <div class="text">
+      <span class="sym" set:html={icon(SYMBOLS[i])} />
       <h2 class="h2"><span>{x.h[0]}</span><br /><span>{x.h[1]}</span></h2>
       <p class="lead"><Lines text={x.p} /></p>
       <a class="more" href={`${routes[x.more.to as keyof typeof routes][lang]}${x.more.hash}`}>{t(lang).nav.more}<span set:html={icon('chevron_right')} /></a>
@@ -34,6 +37,11 @@ const x = t(lang).story.scenes[i];
   .scene[data-side='card-right'] .visual { order: 2; }
   /* --scene-ink and --scene-muted let a section recolour its scenes (the black privacy section). */
   .text { color: var(--scene-ink, inherit); }
+  /* Like Apple's feature blocks: a symbol above the headline, in the headline's colour, no tile. */
+  .sym { display: block; width: 20px; height: 20px; margin-bottom: 12px; }
+  /* Each headline line wraps evenly on its own, so no word is left alone. */
+  .h2 span { display: inline-block; text-wrap: balance; }
+  .sym :global(svg) { width: 100%; height: 100%; display: block; }
   .text .lead { margin: 18px 0 0; color: var(--scene-muted, var(--muted)); text-wrap: balance; }
   /* Apple-style "Learn more ›" */
   .more { display: inline-flex; align-items: center; gap: 1px; margin-top: 14px; font-size: 17px; font-weight: 500; text-decoration: none; color: var(--scene-ink, var(--ink)); }

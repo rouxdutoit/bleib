@@ -60,7 +60,7 @@ const en = {
   },
   preview: {
     examples: 'Examples',
-    title: 'bleib can add what {ai} needs',
+    title: 'bleib picked just what {ai} needs',
     add: 'Add',
     added: 'Added',
     attachment: 'About me',
@@ -108,8 +108,8 @@ const en = {
         more: { to: 'receipts', hash: '' },
       },
       {
-        h: ['Let it know you.', 'Only you can read it.'],
-        p: 'The more your AI knows, the better it helps. Your memory is locked with a key only you hold, so being known never costs you.',
+        h: ['Helpful because it knows you.', 'Private because it’s yours.'],
+        p: 'The more your AI knows about you, the better it helps. Your memory stays locked with a key only you hold.',
         more: { to: 'security', hash: '' },
         dark: true,
       },
@@ -253,7 +253,7 @@ const de: Strings = {
   },
   preview: {
     examples: 'Beispiele',
-    title: 'bleib kann ergänzen, was {ai} braucht',
+    title: 'bleib wählt nur, was {ai} braucht',
     add: 'Hinzufügen',
     added: 'Hinzugefügt',
     attachment: 'Über mich',
@@ -301,8 +301,8 @@ const de: Strings = {
         more: { to: 'receipts', hash: '' },
       },
       {
-        h: ['Deine KI kennt dich.', 'Dein Gedächtnis bleibt privat.'],
-        p: 'Je besser dich deine KI kennt, desto besser hilft sie dir. Dein Gedächtnis bleibt dabei geschützt, mit einem Schlüssel, den nur du hast.',
+        h: ['Hilfreich, weil sie dich kennt.', 'Privat, weil es dir gehört.'],
+        p: 'Je mehr deine KI über dich weiß, desto besser hilft sie dir. Dein Gedächtnis bleibt verschlossen, mit einem Schlüssel, den nur du hast.',
         more: { to: 'security', hash: '' },
         dark: true,
       },
