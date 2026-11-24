@@ -93,7 +93,7 @@ const en = {
       },
       {
         h: ['Switch AI.', 'Keep everything.'],
-        p: 'Your preferences and rules stay in bleib. bleib asks before sharing with a new AI.',
+        p: 'Your preferences come with you. A new AI gets them after your yes.',
         more: { to: 'works', hash: '', label: 'Works with your AI' },
       },
       {
@@ -108,7 +108,7 @@ const en = {
       },
       {
         h: ['Turn their memory off.', 'bleib keeps yours.'],
-        p: 'Every new chat starts fresh. bleib adds what it needs. Only you hold the key.',
+        p: 'Every new chat starts fresh. bleib adds what each chat needs. Only you hold the key.',
         more: { to: 'security', hash: '', label: 'Private by design' },
         dark: true,
       },
@@ -152,7 +152,7 @@ const en = {
       weeklyLabel: 'This Week',
       weeklyN: '11',
       weeklyText: 'facts shared with 3 AIs',
-      weeklyNote: 'No health data left this device.',
+      weeklyNote: 'Health data stayed on this device.',
     },
     any: {
       usedBy: 'Now used by',
@@ -285,7 +285,7 @@ const de: Strings = {
       },
       {
         h: ['Wechsle die KI.', 'Behalte alles.'],
-        p: 'Deine Vorlieben und Regeln bleiben in bleib. Bei einer neuen KI fragt bleib zuerst.',
+        p: 'Deine Vorlieben kommen mit. Eine neue KI bekommt sie nach deinem Ja.',
         more: { to: 'works', hash: '', label: 'Funktioniert mit deiner KI' },
       },
       {
@@ -300,7 +300,7 @@ const de: Strings = {
       },
       {
         h: ['Schalte ihr Gedächtnis aus.', 'bleib behält deins.'],
-        p: 'Jeder neue Chat beginnt frisch. bleib ergänzt, was er braucht. Den Schlüssel hast nur du.',
+        p: 'Jeder neue Chat beginnt frisch. bleib ergänzt, was jeder Chat braucht. Den Schlüssel hast nur du.',
         more: { to: 'security', hash: '', label: 'Privat von Grund auf' },
         dark: true,
       },
@@ -344,7 +344,7 @@ const de: Strings = {
       weeklyLabel: 'Diese Woche',
       weeklyN: '11',
       weeklyText: 'Fakten an 3 KIs geteilt',
-      weeklyNote: 'Keine Gesundheitsdaten haben dieses Gerät verlassen.',
+      weeklyNote: 'Gesundheitsdaten sind auf diesem Gerät geblieben.',
     },
     any: {
       usedBy: 'Gerade genutzt von',
