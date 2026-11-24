@@ -14,7 +14,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   <div class="wrap hero-inner">
     <p class="eyebrow">{s.eyebrow}</p>
     <h1 id="hero-title" class="hero-h1"><span>{s.h1a}</span> <span>{s.h1b}</span></h1>
-    <p class="sub">{s.sub}</p>
+    <p class="sub">{s.sub.map((line) => <span>{line}</span>)}</p>
     <div class="cta">
       <a class="btn btn-primary" href="#early-access">{s.primary}</a>
       <a class="btn btn-secondary" href={githubHref}>{s.secondary}</a>
@@ -57,6 +57,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .hero-h1 span { display: block; }
   .sub { margin: 22px 0 0; font-size: clamp(17px, 1.6vw, 19px); line-height: 1.5; color: var(--muted); max-width: 40em; text-wrap: balance; }
   .cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 30px; }
+  .sub span { display: block; }
   .note { margin: 18px 0 0; font-size: 14px; color: var(--muted); }
 
   .preview { margin: clamp(48px, 7vw, 80px) 0 0; width: 100%; max-width: 560px; text-align: left; }
