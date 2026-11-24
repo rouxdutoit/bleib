@@ -72,7 +72,9 @@ const s = t(lang).finale;
   .tick :global(svg) { width: 14px; height: 14px; display: block; }
   .b { flex: none; display: inline-grid; place-items: center; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 13px; line-height: 1; font-weight: 600; }
   .b-2 { color: var(--label-2); }
-  .b-1 { background: #f6e79a; color: #0a0a0a; }
+  /* Like the story cards' chosen action: the label colour, then bleib yellow once saved. */
+  .b-1 { background: var(--label); color: var(--cell); transition: background-color 0.35s var(--ease), color 0.35s var(--ease); }
+  .s3 .b-1 { background: #f6e79a; color: #0a0a0a; }
 
   .title { font-size: clamp(44px, 7vw, 88px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 700; }
   .sub { margin: 18px 0 0; font-size: clamp(17px, 1.7vw, 21px); line-height: 1.45; color: var(--muted); text-wrap: balance; }
