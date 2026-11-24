@@ -175,7 +175,7 @@ export async function project(store: Store, ask: Ask, now: number): Promise<Prev
   const terms = [...new Set(query.filter(word => word.length > 1 && !stopWords.has(word)))];
   const matching = new Map<Kind, { entry: Entry; line: string; score: number }>();
   for (const entry of store.entries.values()) {
-    if (!ask.kinds.includes(entry.kind)) continue;
+    if (entry.ownerOnly || !ask.kinds.includes(entry.kind)) continue;
     const { body, metadata } = splitMarkdown(await store.readEntry(entry));
     if (metadata.lifecycle === 'archived' || metadata.lifecycle === 'stale' ||
         dateExpired(metadata.valid_until, now, true) || dateExpired(metadata.expires, now) ||

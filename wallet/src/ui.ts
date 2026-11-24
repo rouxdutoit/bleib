@@ -4,29 +4,14 @@ import { body, redirect, text, typeIs } from './http.js';
 import type { Destination, Grant, Receipt } from './domain.js';
 import { maxMemoryBytes } from './memory.js';
 import { describeRule } from './policy.js';
-import type { Wallet } from './wallet.js';
+import { css } from './ui-style.js';
+import { proposalTitle, type Wallet } from './wallet.js';
 
 export const escape = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, char =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]!);
 
-const css = `
-:root{font:100%/1.6 system-ui,sans-serif;color:#242018;background:#f7f4ea}
-*{box-sizing:border-box}body{margin:auto;max-width:54rem;padding:1rem 1.3rem 3rem}
-header{border-bottom:1px solid #9a8a5d;padding:.7rem 0}a{color:#264d37}
-a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #285d45;outline-offset:4px}
-button,input,textarea,select{font:inherit;color:inherit}button{background:#f6e79a;border:1px solid #594c24;border-radius:.3rem;padding:.35rem .75rem;cursor:pointer}
-button:hover{background:#f5db73}input:not([type=checkbox]):not([type=radio]),textarea,select{display:block;background:#fffdf7;border:1px solid #73664a;border-radius:.25rem;padding:.45rem;width:100%;margin-bottom:1rem}
-pre{background:#fffdf7;border:1px solid #9a8a5d;border-radius:.3rem;padding:1rem;white-space:pre-wrap;overflow-wrap:anywhere}
-nav ul{display:flex;gap:.5rem 1rem;flex-wrap:wrap;list-style:none;padding:0;margin:.3rem 0}
-li{margin:.35rem 0}textarea{min-height:12rem;resize:vertical}fieldset{border:1px solid #9a8a5d;margin:1rem 0;padding:1rem}
-fieldset label{display:block;margin:.45rem 0}.notice{border-left:4px solid #825630;padding:.3rem .8rem}
-dl{display:grid;grid-template-columns:max-content 1fr;gap:.25rem 1rem}dd{margin:0;overflow-wrap:anywhere}
-article{border-bottom:1px solid #9a8a5d;padding:0 0 1rem;margin-bottom:1rem}label{font-weight:600}
-@media(max-width:30rem){dl{display:block}dd{margin-bottom:.5rem}}
-.skip{position:absolute;top:-5rem}.skip:focus{top:0;background:#fffdf7;padding:.5rem;z-index:1}
-`;
 
-function page(res: ServerResponse, title: string, fragment: string, status = 200) {
+function page(res: ServerResponse, title: string, fragment: string, status = 200, alert = false) {
   res.writeHead(status, { 'Content-Type': 'text/html; charset=utf-8' });
   res.end(`<!doctype html>
 <html lang="en">
@@ -38,8 +23,8 @@ function page(res: ServerResponse, title: string, fragment: string, status = 200
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header><a href="/">bleib</a>
-<nav aria-label="Wallet"><ul>
+<header><div><a class="brand" href="/">bleib</a>
+<nav aria-label="Wallet"><ul role="list">
 <li><a href="/entries">Notes</a></li>
 <li><a href="/approvals">Requests</a></li>
 <li><a href="/grants">Access</a></li>
@@ -47,8 +32,9 @@ function page(res: ServerResponse, title: string, fragment: string, status = 200
 <li><a href="/receipts">Receipts</a></li>
 <li><a href="/proposals">Suggestions</a></li>
 </ul></nav>
-</header>
-<main id="main" tabindex="-1"><h1>${escape(title)}</h1>${fragment}</main>
+</div></header>
+<main id="main" tabindex="-1">${alert ? `<section class="approval-alert" aria-labelledby="approval-title">
+<h1 id="approval-title">${escape(title)}</h1>${fragment}</section>` : `<h1>${escape(title)}</h1>${fragment}`}</main>
 </body>
 </html>`);
 }
@@ -56,6 +42,7 @@ function page(res: ServerResponse, title: string, fragment: string, status = 200
 const validId = '[0-9a-f-]{36}';
 const approvalRoute = new RegExp(`^/approvals/(${validId})$`);
 const entryRoute = new RegExp(`^/entries/(${validId})$`);
+const proposalRoute = new RegExp(`^/proposals/(${validId})$`);
 const receiptRoute = new RegExp(`^/receipts/(${validId})$`);
 const sessionLife = 30 * 60 * 1000;
 interface Session { valid: boolean; csrf: string; owner: boolean; expires: number }
@@ -71,6 +58,9 @@ const destinationDetails = (destination: Destination, basis = 'declared', host?:
   detail('Provider', destination.provider ?? '—'),
   detail('Model', destination.model ?? '—'),
 ].join('');
+
+const optionsForKind = (selected: string) => kinds.map(kind =>
+  `<option value="${kind}" ${kind === selected ? 'selected' : ''}>${escape(labels[kind])}</option>`).join('');
 
 const field = (session: Session) => `<input type="hidden" name="csrf" value="${session.csrf}">`;
 
@@ -151,9 +141,10 @@ export class Browser {
     const approvalId = approvalRoute.exec(path)?.[1];
     const entryId = entryRoute.exec(path)?.[1];
     const receiptId = receiptRoute.exec(path)?.[1];
+    const proposalId = proposalRoute.exec(path)?.[1];
     const exportPath = path === '/receipts/export';
     if (!['/', '/approvals', '/entries', '/grants', '/receipts', '/proposals', '/rules'].includes(path) &&
-        !approvalId && !entryId && !receiptId && !exportPath) {
+        !approvalId && !entryId && !receiptId && !proposalId && !exportPath) {
       return page(res, 'Page not found', '<p>Choose a page from the menu.</p>', 404);
     }
 
@@ -183,8 +174,27 @@ export class Browser {
           await this.wallet.edit(entryId, Number(form.get('version')), {
             kind: kind.data, title: form.get('title') ?? '', body: (form.get('body') ?? '').replaceAll('\r\n', '\n'),
             sensitive: form.get('sensitive') === 'yes',
+            ...(form.has('sharing-setting') ? { ownerOnly: form.get('share') !== 'yes' } : {}),
           }, () => session.valid);
           return redirect(res, path);
+        }
+        if (path === '/proposals' && form.get('action') === 'paste') {
+          const app = form.get('app');
+          if (app !== 'ChatGPT' && app !== 'Claude') throw new UserError('Choose where you copied the memory.');
+          await this.wallet.pasteMemory(app, form.get('memory') ?? '', () => session.valid);
+          return redirect(res, '/proposals');
+        }
+        if (proposalId) {
+          const choice = form.get('action');
+          if (choice !== 'save' && choice !== 'dismiss' && choice !== 'save-edit') return text(res, 405, 'Method not allowed.');
+          let edit;
+          if (choice === 'save-edit') {
+            const kind = kindSchema.safeParse(form.get('kind'));
+            if (!kind.success) throw new UserError('Choose a kind of information.');
+            edit = { kind: kind.data, title: form.get('title') ?? '', content: (form.get('content') ?? '').replaceAll('\r\n', '\n') };
+          }
+          await this.wallet.decideProposal(proposalId, choice === 'dismiss' ? 'dismiss' : 'save', edit, () => session.valid);
+          return redirect(res, '/proposals');
         }
         if (path === '/rules') {
           const action = form.get('action');
@@ -194,7 +204,7 @@ export class Browser {
             return page(res, 'Save this rule?', `<section class="card"><p>${escape(describeRule(preview.policy))}</p>
 <form method="post">${field(session)}<input type="hidden" name="rule" value="${escape(preview.text)}">
 <input type="hidden" name="fingerprint" value="${preview.fingerprint}">
-<button name="action" value="save-rule">Save Rule</button> <a href="/rules">Cancel</a></form></section>`);
+<button class="primary" name="action" value="save-rule">Save Rule</button> <a class="action-link" href="/rules">Cancel</a></form></section>`);
           }
           if (action === 'save-rule') await this.wallet.saveRule(rule, form.get('fingerprint') ?? '', () => session.valid);
           else if (action === 'remove-rule') await this.wallet.removeRule(form.get('id') ?? '', () => session.valid);
@@ -219,9 +229,9 @@ export class Browser {
       let session = this.getSession(req);
       if (!session?.owner || !(await this.wallet.ownerStatus()).unlocked) {
         session = !session || session.owner ? this.createSession(res, false) : session;
-        return page(res, 'Unlock your wallet', `<form method="post">${field(session)}
+        return page(res, 'Unlock your wallet', `<form class="card" method="post">${field(session)}
 <input type="hidden" name="action" value="unlock"><label for="passphrase">Passphrase</label>
-<input id="passphrase" name="passphrase" type="password" autocomplete="current-password" required><button>Unlock</button></form>`);
+<input id="passphrase" name="passphrase" type="password" autocomplete="current-password" required><button class="primary">Unlock</button></form>`);
       }
 
       if (path === '/' || path === '/entries' || entryId) return await this.notes(res, session, entryId, path === '/');
@@ -235,11 +245,11 @@ export class Browser {
         return res.end(JSON.stringify(value, null, 2));
       }
       if (path === '/receipts' || receiptId) return await this.receipts(res, session, query, receiptId);
-      if (path === '/proposals') return await this.proposals(res, session);
+      if (path === '/proposals' || proposalId) return await this.proposals(res, session, proposalId);
       return await this.approvals(res, session, approvalId);
     } catch (error) {
       if (error instanceof UserError) return page(res, 'Could not complete that step',
-        `<p class="notice" role="alert">${escape(error.message)}</p><p><a href="${path}">Try again</a></p>`, 400);
+        `<p class="notice" role="alert">${escape(error.message)}</p><p><a class="action-link" href="${path}">Try Again</a></p>`, 400);
       throw error;
     }
   }
@@ -247,19 +257,25 @@ export class Browser {
   private async notes(res: ServerResponse, session: Session, id?: string, home = false) {
     if (!id) {
       const entries = await this.wallet.entries(() => session.valid);
-      const list = entries.length ? `<ul>${entries.map(entry => `<li><a href="/entries/${entry.id}">${escape(entry.title)}</a> · ${escape(labels[entry.kind])}</li>`).join('')}</ul>`
+      const alerts = home ? await this.wallet.destinationAlerts(() => session.valid) : [];
+      const list = entries.length ? `<ul class="group" role="list">${entries.map(entry =>
+        `<li><a class="row" href="/entries/${entry.id}"><strong>${escape(entry.title)}</strong><span class="secondary">
+${escape(labels[entry.kind])}${entry.ownerOnly ? ' · Only you' : ''}</span></a></li>`).join('')}</ul>`
         : '<p>There are no notes yet. Import a workspace in the terminal to get started.</p>';
-      return page(res, 'Your notes', `${list}${home ? `<form action="/" method="post">${field(session)}<button name="action" value="lock">Lock wallet</button></form>` : ''}`);
+      const notice = alerts.length ? '<p class="notice"><a class="action-link" href="/approvals">Review blocked sharing</a></p>' : '';
+      return page(res, 'Your notes', `${notice}${list}${home ? `<form action="/" method="post">${field(session)}
+<button name="action" value="lock">Lock Wallet</button></form>` : ''}`);
     }
     const entry = await this.wallet.entry(id, () => session.valid);
-    return page(res, 'Edit note', `<form method="post">${field(session)}
+    return page(res, 'Edit note', `<form class="card" method="post">${field(session)}
 <input type="hidden" name="version" value="${entry.version}">
 <label for="title">Title</label><input id="title" name="title" required maxlength="120" value="${escape(entry.title)}">
-<label for="kind">Kind of information</label><select id="kind" name="kind">
-${kinds.map(kind => `<option value="${kind}" ${kind === entry.kind ? 'selected' : ''}>${escape(labels[kind])}</option>`).join('')}</select>
+<label for="kind">Kind of information</label><select id="kind" name="kind">${optionsForKind(entry.kind)}</select>
 <label for="note">Note</label><textarea name="body" id="note" rows="12">${'\n' + escape(entry.body)}</textarea>
-<p><label><input type="checkbox" name="sensitive" value="yes" ${entry.sensitive ? 'checked' : ''}> Treat as sensitive</label></p>
-<button name="action" value="edit">Save note</button></form>`);
+<label class="check"><input type="checkbox" name="sensitive" value="yes" ${entry.sensitive ? 'checked' : ''}> Treat as sensitive</label>
+<input type="hidden" name="sharing-setting" value="yes">
+<label class="check"><input type="checkbox" name="share" value="yes" ${entry.ownerOnly ? '' : 'checked'}> Share when an agent has permission</label>
+<button class="primary" name="action" value="edit">Save Note</button></form>`);
   }
 
   private async approvals(res: ServerResponse, session: Session, id?: string) {
@@ -270,35 +286,38 @@ ${kinds.map(kind => `<option value="${kind}" ${kind === entry.kind ? 'selected' 
 ${alerts.map(item => `<p>bleib blocked ${escape(item.name)} because its model destination differed from the pairing.</p>`).join('')}
 <form method="post">${field(session)}<button name="action" value="dismiss-destinations">Dismiss</button></form></section>` : '';
       return page(res, 'Sharing requests', notice + (pending.length ?
-        `<ul class="group">${pending.map(item => `<li><a class="row" href="/approvals/${item.id}">${escape(item.agentName)} · ${escape(item.ask.purpose)}</a></li>`).join('')}</ul>`
+        `<ul class="group" role="list">${pending.map(item => `<li><a class="row" href="/approvals/${item.id}">${escape(item.agentName)} · ${escape(item.ask.purpose)}</a></li>`).join('')}</ul>`
         : '<p>No requests are waiting.</p>'));
     }
     const approval = pending.find(item => item.id === id);
     if (!approval) return page(res, 'Request unavailable', '<p>This request has expired or already has a decision.</p>', 404);
     const sensitive = approval.needed.some(kind => approval.sensitiveKinds.includes(kind));
-    return page(res, 'Review a sharing request', `
-<dl>${detail('Agent', approval.agentName)}${destinationDetails(approval.destination)}${detail('Purpose', approval.ask.purpose)}${detail('New permission for', approval.needed.map(kind => labels[kind]).join(', '))}</dl>
-<h2>What the agent would receive</h2>${approval.content ? `<pre>${escape(approval.content)}</pre>` : '<p>No matching excerpt.</p>'}
+    return page(res, `Share with ${approval.agentName}?`, `
+<dl>${destinationDetails(approval.destination)}${detail('Purpose', approval.ask.purpose)}
+${detail('Information', approval.needed.map(kind => labels[kind]).join(', '))}</dl>
+<h2>What would be shared</h2>${approval.content ? `<pre>${escape(approval.content)}</pre>` : '<p>No matching excerpt.</p>'}
 <form method="post">${field(session)}<input type="hidden" name="action" value="approve">
-<fieldset><legend>Choose access</legend>
-<label><input type="radio" name="choice" value="once" ${sensitive ? 'checked' : ''} required> Allow once</label>
-<label><input type="radio" name="choice" value="always"> Always for this agent</label>
-<label><input type="radio" name="choice" value="no"> No</label>
-${sensitive ? '<label><input type="checkbox" name="confirmed" value="yes"> I confirm ongoing access to sensitive information for this purpose and destination.</label>' : ''}
-</fieldset><button>Save decision</button></form>`);
+${sensitive ? '<label class="check"><input type="checkbox" name="confirmed" value="yes"> Confirm ongoing access to sensitive information</label>' : ''}
+<div class="actions">
+<button class="primary" name="choice" value="once">Allow Once</button>
+<button name="choice" value="always">Always for ${escape(approval.agentName)}</button>
+<button class="destructive" name="choice" value="no">Don't Allow</button>
+</div></form>`, 200, true);
   }
 
   private async access(res: ServerResponse, session: Session) {
     const { agents, grants } = await this.wallet.grants(() => session.valid);
     const revoke = (id: string, label: string) => `<form method="post">${field(session)}
-<input type="hidden" name="target" value="${id}"><button name="action" value="revoke">${label}</button></form>`;
+<input type="hidden" name="target" value="${id}"><button class="destructive" name="action" value="revoke">${label}</button></form>`;
     const duration: Record<Grant['duration'], string> = { once: 'One request', always: 'Ongoing', denied: 'Denied' };
     return page(res, 'Agent access', agents.length ? agents.map(agent =>
-      `<article><h2>${escape(agent.name)}</h2><dl>${destinationDetails(agent.destination)}${detail('Agent ID', agent.id)}</dl>
-${revoke(agent.id, 'Revoke agent')}${grants.filter(grant => grant.agentId === agent.id).map(grant =>
-    `<section><h3>${escape(labels[grant.kind])} · ${duration[grant.duration]}</h3>
-<dl>${grant.duration === 'denied' && grant.purpose ? detail('Purpose', grant.purpose) : ''}${detail('Permission ID', grant.id)}</dl>
-${revoke(grant.id, grant.duration === 'denied' ? 'Remove denial' : 'Revoke permission')}</section>`).join('')}</article>`).join('')
+      `<section><h2>${escape(agent.name)}</h2><ul class="group" role="list"><li class="cell">
+<dl>${destinationDetails(agent.destination)}${detail('Agent ID', agent.id)}</dl>${revoke(agent.id, 'Revoke Agent')}</li>
+${grants.filter(grant => grant.agentId === agent.id).map(grant =>
+    `<li class="cell"><h3>${escape(labels[grant.kind])}</h3>
+<p class="secondary">${duration[grant.duration]}${grant.duration === 'denied' && grant.purpose ? ` · ${escape(grant.purpose)}` : ''}</p>
+<dl>${detail('Permission ID', grant.id)}</dl>
+${revoke(grant.id, grant.duration === 'denied' ? 'Remove Denial' : 'Revoke Permission')}</li>`).join('')}</ul></section>`).join('')
       : '<p>No agents are connected.</p>');
   }
 
@@ -308,16 +327,15 @@ ${revoke(grant.id, grant.duration === 'denied' ? 'Remove denial' : 'Revoke permi
 <label for="rule">Write a rule in your own words</label>
 <input id="rule" name="rule" placeholder="Never share health with hosted models" maxlength="240" required>
 <button name="action" value="preview-rule">Review Rule</button></form>
-${rules.length ? `<ul class="group">${rules.map(rule => `<li class="cell">
+${rules.length ? `<ul class="group" role="list">${rules.map(rule => `<li class="cell">
 <p><strong>${escape(rule.text)}</strong></p><p class="secondary">${escape(describeRule(rule.policy))}</p>
 <form method="post">${field(session)}<input type="hidden" name="id" value="${rule.id}">
 <button name="action" value="remove-rule" aria-label="Remove rule: ${escape(rule.text)}">Remove</button></form></li>`).join('')}</ul>` : ''}`);
   }
 
   private async receipts(res: ServerResponse, session: Session, query: URLSearchParams, id?: string) {
-    const receipts = await this.wallet.receipts(id, () => session.valid);
     if (!id) {
-      const report = await this.wallet.summary(() => session.valid);
+      const { receipts, report } = await this.wallet.timeline(() => session.valid);
       const agent = query.get('agent') ?? '';
       const kind = kindSchema.safeParse(query.get('kind')).data;
       const agents = new Map(receipts.map(receipt => [receipt.agent_id, receipt.agent]));
@@ -325,21 +343,21 @@ ${rules.length ? `<ul class="group">${rules.map(rule => `<li class="cell">
         (!agent || receipt.agent_id === agent) && (!kind || receipt.kinds.includes(kind)));
       return page(res, 'What your AI saw', `<section class="widget" aria-labelledby="week">
 <h2 id="week">This week</h2><div class="widget-count">${report.facts} <span>${report.facts === 1 ? 'fact shared' : 'facts shared'}</span></div>
-<p>${escape(report.summary)} ${escape(report.health)}</p></section>
+<p class="secondary">${escape(report.summary)} ${escape(report.health)}</p></section>
 <form class="filters" method="get">
-<label for="filter-agent">Agent</label><select id="filter-agent" name="agent"><option value="">All agents</option>
-${[...agents].map(([id, name]) => `<option value="${escape(id)}" ${agent === id ? 'selected' : ''}>${escape(name)}</option>`).join('')}</select>
-<label for="filter-kind">Kind</label><select id="filter-kind" name="kind"><option value="">All kinds</option>
-${kinds.map(item => `<option value="${item}" ${item === kind ? 'selected' : ''}>${escape(labels[item])}</option>`).join('')}</select>
+<div><label for="filter-agent">Agent</label><select id="filter-agent" name="agent"><option value="">All agents</option>
+${[...agents].map(([id, name]) => `<option value="${escape(id)}" ${agent === id ? 'selected' : ''}>${escape(name)}</option>`).join('')}</select></div>
+<div><label for="filter-kind">Kind</label><select id="filter-kind" name="kind"><option value="">All kinds</option>
+${kinds.map(item => `<option value="${item}" ${item === kind ? 'selected' : ''}>${escape(labels[item])}</option>`).join('')}</select></div>
 <button>Filter</button></form>
 <h2>Timeline</h2><p><a class="action-link" href="/receipts/export">Export Receipts</a></p>
-${visible.length ? `<ul class="group">${visible.map(receipt =>
+${visible.length ? `<ul class="group" role="list">${visible.map(receipt =>
   `<li><a class="row receipt-row" href="/receipts/${receipt.receipt_id}"><strong>${escape(receipt.agent)}</strong>
 <span>${escape(receipt.purpose)}</span><span class="secondary">${escape(receipt.kinds.map(item => labels[item]).join(', '))} · ${receipt.destination_basis}</span>
 <time datetime="${receipt.time}">${escape(new Date(receipt.time).toLocaleString('en', { dateStyle: 'medium', timeStyle: 'short' }))}</time>
 </a></li>`).join('')}</ul>` : '<p>No matching receipts.</p>'}`);
     }
-    const receipt = receipts[0] as Receipt;
+    const [receipt] = await this.wallet.receipts(id, () => session.valid) as [Receipt];
     return page(res, 'Sharing receipt', `<section class="card"><dl>${detail('Agent', receipt.agent)}
 ${destinationDetails({ ...receipt, value: receipt.destination }, receipt.destination_basis, receipt.destination_host)}${detail('Purpose', receipt.purpose)}
 ${detail('Information', receipt.kinds.map(kind => labels[kind]).join(', '))}
@@ -349,11 +367,31 @@ ${receipt.outbound_digest ? detail('Model request fingerprint (SHA-256)', receip
 <h2>Exactly what was shared</h2><pre>${escape(receipt.content)}</pre></section>`);
   }
 
-  private async proposals(res: ServerResponse, session: Session) {
+  private async proposals(res: ServerResponse, session: Session, id?: string) {
     const proposals = await this.wallet.proposals(() => session.valid);
-    return page(res, 'Suggested notes', proposals.length ? proposals.map(item =>
-      `<article><h2>${escape(labels[item.kind])}</h2><dl>${detail('Agent', item.agent)}${detail('Reason', item.reason)}
-${detail('Time (UTC)', item.time)}</dl><pre>${escape(item.content)}</pre></article>`).join('')
-      : '<p>No agents have suggested a note.</p>');
+    if (id) {
+      const item = proposals.find(proposal => proposal.id === id);
+      if (!item) return page(res, 'Suggestion unavailable', '<p>This suggestion has already been reviewed.</p>', 404);
+      return page(res, 'Edit suggestion', `<form class="card" method="post">${field(session)}
+<p class="secondary">${escape(item.agent)} · ${escape(item.reason)}</p>
+<label for="title">Title</label><input id="title" name="title" value="${escape(proposalTitle(item))}" maxlength="120" required>
+<label for="kind">Kind of information</label><select id="kind" name="kind">${optionsForKind(item.kind)}</select>
+<label for="content">Note</label><textarea id="content" name="content" rows="8" required>${'\n' + escape(item.content)}</textarea>
+<div class="actions"><button class="primary" name="action" value="save-edit">Save</button>
+<a class="action-link" href="/proposals">Cancel</a></div></form>`);
+    }
+    return page(res, 'Suggested notes', `<form class="card" method="post">${field(session)}
+<h2>Paste memory</h2><label for="app">Copied from</label><select id="app" name="app"><option>ChatGPT</option><option>Claude</option></select>
+<label for="memory">Memory text</label><textarea id="memory" name="memory" rows="4" required></textarea>
+<button name="action" value="paste">Add to Review</button></form>
+<h2>Review queue</h2>
+${proposals.length ? `<p>Saved suggestions are visible only to you until you enable sharing in the note.</p>
+<ul class="group" role="list">${proposals.map(item =>
+      `<li class="cell"><h3>${escape(labels[item.kind])} · ${escape(item.agent)}</h3>
+<p class="secondary">${escape(item.reason)}</p><pre>${escape(item.content)}</pre>
+<div class="actions"><form action="/proposals/${item.id}" method="post">${field(session)}
+<button class="primary" name="action" value="save">Save</button><a class="action-link"
+href="/proposals/${item.id}">Edit</a><button name="action" value="dismiss">Not Now</button></form></div></li>`).join('')}</ul>`
+      : '<p>There are no suggestions to review.</p>'}`);
   }
 }

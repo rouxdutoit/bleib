@@ -39,7 +39,7 @@ afterAll(async () => {
 
 function cli(args: string[], input = '') {
   const child = spawn(process.execPath, [bin, '--home', home, ...args], {
-    env: { ...process.env, HOME: root }, stdio: ['pipe', 'pipe', 'pipe'],
+    cwd: root, stdio: ['pipe', 'pipe', 'pipe'],
   });
   let output = '';
   child.stdout.setEncoding('utf8').on('data', chunk => { output += chunk; });

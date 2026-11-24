@@ -52,6 +52,7 @@ export function destination(value: string, model?: string): Destination {
 
 export interface EntryRef { id: string; version: number }
 export interface Entry extends EntryRef {
+  ownerOnly?: boolean;
   file: string;
   digest: string;
   title: string;
@@ -103,7 +104,10 @@ export interface Approval extends Preview {
   expires: number;
   decided: boolean;
 }
-export interface Proposal extends Proposed { id: string; agent: string; time: string }
+export interface Proposal extends Proposed {
+  id: string; agent: string; agentId?: string; time: string;
+  pastedFrom?: 'ChatGPT' | 'Claude'; status?: 'saved' | 'dismissed';
+}
 export interface Receipt {
   receipt_id: string;
   time: string;

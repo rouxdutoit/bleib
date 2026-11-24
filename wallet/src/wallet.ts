@@ -3,9 +3,10 @@ import {
   askSchema, canonical, credentialPattern, destination, equal, kinds, kindSchema, normalize,
   proposeSchema, secret, sensitiveKind, sha256, UserError,
 } from './domain.js';
-import type { Agent, Approval, Ask, Destination, Grant, Kind, ObservedDestination, Preview, ProxyProtocol, Receipt, Scope, ToolReply } from './domain.js';
+import type { Agent, Approval, Ask, Destination, Grant, Kind, ObservedDestination, Preview, ProxyProtocol, Proposal, Receipt, Scope, ToolReply } from './domain.js';
 import { formatMemory, maxMemoryBytes, project, readWorkspace, splitMarkdown, type ImportDialect } from './memory.js';
 import { recover, Store } from './store.js';
+import { splitPastedMemory, type MemoryApp } from './paste.js';
 import { blocked, constraints, parseRule } from './policy.js';
 import { exportReceipts } from './receipt-export.js';
 import { summarize } from './summary.js';
@@ -13,6 +14,7 @@ import { summarize } from './summary.js';
 const tenMinutes = 10 * 60 * 1000;
 const grantLifetime = 90 * 24 * 60 * 60 * 1000;
 const maxPendingPerAgent = 20;
+const maxPendingProposals = 256;
 
 const scopeFor = (agent: Agent, kind: Kind, purpose: string): Scope => ({
   agentId: agent.id, kind, destination: agent.destination.value, purpose: normalize(purpose),
@@ -52,6 +54,11 @@ interface Reference {
 export const referencePrefix = 'bleib-projection:';
 export const referencePattern = /^bleib-projection:([A-Za-z0-9_-]{43})\.([A-Za-z0-9_-]{43})$/;
 const unavailableProjection = '[This bleib excerpt has expired or already been shared. Ask the wallet if you need it again.]';
+
+export function proposalTitle(item: Proposal) {
+  return item.content.split(/\r?\n/).find(line => line.trim())?.trim().replace(/[\p{Cc}\p{Cf}]/gu, '')
+    .slice(0, 80) || 'Suggested note';
+}
 
 type OwnerGuard = () => boolean;
 
@@ -428,6 +435,12 @@ export class Wallet {
     return this.owner(store => store.commit({ clearedDestinationBlocks: [...store.destinationBlocks.keys()] }), authorize);
   }
 
+  timeline(authorize?: OwnerGuard) {
+    return this.owner((store, now) => ({
+      receipts: [...store.receipts.values()].reverse(), report: summarize(store.receipts.values(), now),
+    }), authorize);
+  }
+
   summary(authorize?: OwnerGuard) {
     return this.owner((store, now) => summarize(store.receipts.values(), now), authorize);
   }
@@ -477,10 +490,59 @@ export class Wallet {
   propose(credential: string, input: unknown) {
     return this.withAgent<ToolReply>(credential, async (store, agent) => {
       const proposal = proposeSchema.parse(input);
+      const pending = [...store.proposals.values()].filter(item => !item.status);
+      if (pending.length >= maxPendingProposals ||
+          pending.filter(item => item.agentId === agent.id || (!item.agentId && item.agent === agent.name)).length >= maxPendingPerAgent) {
+        return { state: 'unavailable' };
+      }
       const id = randomUUID();
-      await store.commit({ proposals: [{ ...proposal, id, agent: agent.name, time: new Date(this.now()).toISOString() }] });
+      await store.commit({ proposals: [{
+        ...proposal, id, agent: agent.name, agentId: agent.id, time: new Date(this.now()).toISOString(),
+      }] });
       return { state: 'proposal_pending', proposal_id: id };
     });
+  }
+
+  pasteMemory(app: MemoryApp, text: string, authorize?: OwnerGuard) {
+    return this.owner(async (store, now) => {
+      const entries = splitPastedMemory(text);
+      const count = [...store.proposals.values()].filter(item => !item.status).length;
+      if (count + entries.length > maxPendingProposals) throw new UserError('Review some pending suggestions before pasting more.');
+      const time = new Date(now).toISOString();
+      await store.commit({ proposals: entries.map(entry => ({
+        ...entry, id: randomUUID(), agent: app, reason: `Copied from ${app} memory by you.`, pastedFrom: app, time,
+      })) });
+    }, authorize);
+  }
+
+  decideProposal(id: string, decision: 'save' | 'dismiss',
+    edit?: { title: string; content: string; kind: Kind }, authorize?: OwnerGuard) {
+    return this.owner(async (store, now) => {
+      const item = store.proposals.get(id);
+      if (!item || item.status) throw new UserError('This suggestion has already been reviewed.');
+      if (decision === 'dismiss') {
+        await store.commit({ proposals: [{ ...item, status: 'dismissed' }] });
+        return;
+      }
+
+      const kind = kindSchema.parse(edit?.kind ?? item.kind);
+      const content = edit?.content ?? item.content;
+      const title = edit?.title.trim() ?? proposalTitle(item);
+      if (!title || title.length > 120 || !content.trim() || Buffer.byteLength(content) > maxMemoryBytes) {
+        throw new UserError('Enter a title and keep the note between 1 character and 128 KiB.');
+      }
+
+      const entryId = randomUUID();
+      const time = new Date(now).toISOString();
+      const sensitive = sensitiveKind(kind);
+      const metadata = {
+        source: { origin: item.pastedFrom ? 'import' : 'agent', basis: 'provided', at: item.time },
+        ...(item.pastedFrom ? { x_import: { format: item.pastedFrom } } : {}),
+      };
+      const markdown = formatMemory(content, metadata, { id: entryId, title, kind, sensitive, updated: time, created: time });
+      const entry = await store.putEntry({ id: entryId, title, kind, sensitive, version: 1, ownerOnly: true }, markdown);
+      await store.commit({ entries: [entry], proposals: [{ ...item, status: 'saved' }] });
+    }, authorize);
   }
 
   revoke(idOrName: string, authorize?: OwnerGuard) {
@@ -515,7 +577,7 @@ export class Wallet {
     }, authorize);
   }
 
-  edit(id: string, version: number, input: { title: string; body: string; kind: Kind; sensitive: boolean }, authorize?: OwnerGuard) {
+  edit(id: string, version: number, input: { title: string; body: string; kind: Kind; sensitive: boolean; ownerOnly?: boolean }, authorize?: OwnerGuard) {
     return this.owner(async (store, now) => {
       const entry = store.entries.get(id);
       if (!entry || entry.version !== version) throw new UserError('This note changed. Open it again before saving.');
@@ -530,7 +592,8 @@ export class Wallet {
       const markdown = formatMemory(input.body, metadata, {
         id, title, kind, sensitive, updated, created: String(metadata.recorded_at ?? updated),
       });
-      const saved = await store.putEntry({ ...entry, title, kind, sensitive, version: version + 1 }, markdown);
+      const saved = await store.putEntry({ ...entry, title, kind, sensitive, version: version + 1,
+        ownerOnly: input.ownerOnly ?? entry.ownerOnly }, markdown);
       await store.commit({ entries: [saved] });
     }, authorize);
   }
@@ -551,7 +614,7 @@ export class Wallet {
   }
 
   proposals(authorize?: OwnerGuard) {
-    return this.owner(store => Array.from(store.proposals.values()).reverse(), authorize);
+    return this.owner(store => Array.from(store.proposals.values()).filter(item => !item.status).reverse(), authorize);
   }
 
   verifyReceipts(authorize?: OwnerGuard) {

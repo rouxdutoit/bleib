@@ -360,3 +360,71 @@ describe('pairing and consent', { timeout: 15_000 }, () => {
     }
   });
 });
+
+describe('reviewing proposed and pasted memories', { timeout: 15_000 }, () => {
+  it('saves or edits suggestions privately even when multiple agents have ongoing read grants', async () => {
+    const x = await fresh();
+    try {
+      await x.wallet.importWorkspace(fixture('openclaw'), 'openclaw');
+      const author = await paired(x.wallet, 'Suggesting agent');
+      const other = await paired(x.wallet, 'Another agent');
+      for (const token of [author.credential, other.credential]) {
+        await x.wallet.approve(pending(await x.wallet.ask(token, ask)), 'always', false);
+      }
+      const grants = (await x.wallet.grants()).grants;
+      const proposal = await x.wallet.propose(author.credential, {
+        kind: 'preferences', content: 'My tea is cardamom.', reason: 'For future tea selection.',
+      });
+      if (proposal.state !== 'proposal_pending') throw new Error('Missing suggestion');
+      await x.wallet.decideProposal(proposal.proposal_id, 'save', {
+        content: 'My favorite tea is saffron.', kind: 'preferences', title: 'New tea preference',
+      });
+      await expect(x.wallet.decideProposal(proposal.proposal_id, 'save')).rejects.toThrow('already been reviewed');
+      expect(await x.wallet.proposals()).toHaveLength(0);
+      expect((await x.wallet.grants()).grants).toEqual(grants);
+      const note = (await x.wallet.entries()).find(entry => entry.title === 'New tea preference')!;
+      expect(note.ownerOnly).toBe(true);
+      const saffron = { ...ask, purpose: 'Find the new tea', question: 'Saffron?' };
+      for (const token of [author.credential, other.credential]) {
+        expect(await x.wallet.ask(token, saffron)).toEqual({ state: 'no_match' });
+      }
+      expect(await x.wallet.receipts()).toEqual([]);
+      await x.wallet.edit(note.id, note.version, {
+        title: note.title, body: 'My favorite tea is saffron.', kind: note.kind, sensitive: false, ownerOnly: false,
+      });
+      expect(await x.wallet.ask(author.credential, saffron)).toMatchObject({ state: 'released', content: 'My favorite tea is saffron.' });
+    } finally {
+      await x.close();
+    }
+  });
+
+  it('splits ChatGPT and Claude text into one review queue and preserves provided provenance', async () => {
+    const x = await fresh();
+    try {
+      await x.wallet.pasteMemory('ChatGPT',
+        '# Saved memories\n- I prefer peppermint tea.\n- My dentist is in town.\n  I go twice a year.\n');
+      await x.wallet.pasteMemory('Claude', 'What Claude remembers about you\n1. My work is with Team Acme.\n2. Unclassified fact.');
+      const queue = await x.wallet.proposals();
+      expect(queue.map(item => [item.kind, item.pastedFrom])).toEqual([
+        ['private', 'Claude'], ['work', 'Claude'], ['health', 'ChatGPT'], ['preferences', 'ChatGPT'],
+      ]);
+      expect(queue[2]?.content).toBe('My dentist is in town.\nI go twice a year.');
+      expect(await x.wallet.entries()).toEqual([]);
+      await x.wallet.decideProposal(queue[0]!.id, 'dismiss');
+      await x.wallet.decideProposal(queue[1]!.id, 'save');
+      const [saved] = await x.wallet.entries();
+      expect(saved).toMatchObject({ ownerOnly: true, kind: 'work' });
+      const store = await Store.unlock(x.home, passphrase);
+      try {
+        const { metadata } = splitMarkdown(await store.readEntry(saved!));
+        expect(metadata.source).toMatchObject({ origin: 'import', basis: 'provided' });
+        expect(metadata.x_import).toEqual({ format: 'Claude' });
+      } finally {
+        store.close();
+      }
+      expect(await x.wallet.proposals()).toHaveLength(2);
+    } finally {
+      await x.close();
+    }
+  });
+});
