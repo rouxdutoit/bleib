@@ -108,8 +108,8 @@ const en = {
         more: { to: 'receipts', hash: '' },
       },
       {
-        h: ['Helpful because it knows you.', 'Private because it’s yours.'],
-        p: 'The more your AI knows about you, the better it helps. Your memory stays locked with a key only you hold.',
+        h: ['Like a diary with a lock.', 'Only you have the key.'],
+        p: 'Your memory stays locked on your device. Tell bleib as much as you like. Only you can open it.',
         more: { to: 'security', hash: '' },
         dark: true,
       },
@@ -301,8 +301,8 @@ const de: Strings = {
         more: { to: 'receipts', hash: '' },
       },
       {
-        h: ['Hilfreich, weil sie dich kennt.', 'Privat, weil es dir gehört.'],
-        p: 'Je mehr deine KI über dich weiß, desto besser hilft sie dir. Dein Gedächtnis bleibt verschlossen, mit einem Schlüssel, den nur du hast.',
+        h: ['Wie ein Tagebuch mit Schloss.', 'Den Schlüssel hast nur du.'],
+        p: 'Dein Gedächtnis bleibt verschlossen auf deinem Gerät. Erzähl bleib so viel du willst. Öffnen kannst es nur du.',
         more: { to: 'security', hash: '' },
         dark: true,
       },
