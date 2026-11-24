@@ -18,7 +18,7 @@ export const sensitiveKind = (kind: Kind) =>
 
 export const kindSchema = z.enum(kinds);
 export const askSchema = z.object({
-  purpose: z.string().trim().min(1).max(240),
+  purpose: z.string().trim().min(1).max(240).regex(/^[^\p{Cc}\p{Cf}]+$/u),
   kinds: z.array(kindSchema).min(1).max(kinds.length),
   question: z.string().trim().max(500).optional(),
 }).strict();
@@ -32,11 +32,11 @@ export type Proposed = z.infer<typeof proposeSchema>;
 
 export type Destination = { value: string; provider: string | null; model: string | null };
 export function destination(value: string, model?: string): Destination {
-  if (model !== undefined && (!model.trim() || model.length > 100 || /\p{Cc}/u.test(model))) {
+  if (model !== undefined && (!model.trim() || model.length > 100 || /[\p{Cc}\p{Cf}]/u.test(model))) {
     throw new UserError('Enter a model name of 1 to 100 characters.');
   }
   if (value === 'local') return { value, provider: null, model: model?.trim() ?? null };
-  const match = /^(provider|third-party):([^\p{Cc}]{1,100})$/u.exec(value);
+  const match = /^(provider|third-party):([^\p{Cc}\p{Cf}]{1,100})$/u.exec(value);
   const provider = match?.[2]?.trim();
   if (!provider) throw new UserError('Use local, provider:<name> or third-party:<name>.');
   return { value: `${match?.[1]}:${provider}`, provider, model: model?.trim() ?? null };
@@ -50,7 +50,6 @@ export interface Entry extends EntryRef {
   kind: Kind;
   sensitive: boolean;
   sourceId?: string;
-  sourceDigest?: string;
 }
 
 export interface Pairing {

@@ -3,19 +3,27 @@
   "version": "0.2.0",
   "description": "A local encrypted wallet for the information you share with your AI",
   "type": "module",
-  "bin": { "bleib": "dist/cli.js" },
-  "files": ["dist", "README.md"],
-  "engines": { "node": ">=20" },
+  "bin": {
+    "bleib": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "lint": "eslint src test",
     "typecheck": "tsc --noEmit",
+    "pretest": "npm run build",
     "test": "vitest run",
     "prepack": "npm run build"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.32.2",
-    "age-encryption": "0.3.1",
+    "age-encryption": "0.2.4",
     "yaml": "2.9.1",
     "zod": "4.6.7"
   },

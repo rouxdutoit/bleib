@@ -1,8 +1,10 @@
 import { randomUUID } from 'node:crypto';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { isInitializeRequest, type CallToolResult } from '@modelcontextprotocol/sdk/types.js';
+import { z } from 'zod';
 import { askSchema, credentialPattern, equal, proposeSchema, sha256 } from './domain.js';
 import type { Ask, Proposed, ToolReply } from './domain.js';
 import { json, jsonBody } from './http.js';
@@ -50,7 +52,29 @@ export function createMcp(ops: AgentOperations) {
   server.registerTool('bleib_context_request', {
     description: 'Ask for brief matching excerpts. Use a consistent, specific purpose for a repeated task.',
     inputSchema: askSchema,
-  }, async input => format(await safe(() => ops.ask(input))));
+  }, async (input, extra) => {
+    const result = await safe(() => ops.ask(input));
+    if (result.state !== 'approval_required' || !result.fresh) return format(result);
+    const capability = server.server.getClientCapabilities()?.elicitation;
+    if (!capability || extra.signal.aborted) return format(result);
+    const options = { relatedRequestId: extra.requestId, signal: extra.signal, timeout: 45_000 };
+    try {
+      const reply = capability.url
+        ? await server.server.elicitInput({
+          mode: 'url', elicitationId: result.grant_request_id, url: result.approve_url,
+          message: 'Open your bleib wallet to review a sharing request.',
+        }, options)
+        : await server.server.elicitInput({
+          mode: 'form', requestedSchema: { type: 'object', properties: {} },
+          message: `Review the sharing request in your bleib wallet: ${result.approve_url}`,
+        }, options);
+      // Elicitation only surfaces the link. The wallet checks the independent owner decision.
+      if (reply.action === 'accept' && !extra.signal.aborted) return format(await safe(() => ops.ask(input)));
+    } catch {
+      // The same link remains actionable if the client dismisses or cannot render the prompt.
+    }
+    return format(result);
+  });
   server.registerTool('bleib_propose_memory', {
     description: 'Suggest a note for the owner to review. This gives no permission to read anything.',
     inputSchema: proposeSchema,
@@ -122,4 +146,50 @@ export class McpHttp {
     await Promise.all([...this.sessions.values()].map(session => session.server.close()));
     this.sessions.clear();
   }
+}
+
+const bridgeSchema = z.discriminatedUnion('action', [
+  z.object({ action: z.literal('status') }).strict(),
+  z.object({ action: z.literal('ask'), input: askSchema }).strict(),
+  z.object({ action: z.literal('propose'), input: proposeSchema }).strict(),
+]);
+type BridgeRequest = z.infer<typeof bridgeSchema>;
+
+export async function handleBridge(wallet: Wallet, req: IncomingMessage, res: ServerResponse) {
+  const credential = bearer(req);
+  if (!credential) return json(res, 401, { state: 'denied' });
+  const parsed = bridgeSchema.safeParse(await jsonBody(req));
+  if (!parsed.success) return json(res, 400, { state: 'denied' });
+  const ops = operations(wallet, credential);
+  const request = parsed.data;
+  const result = await safe(() => {
+    switch (request.action) {
+      case 'status': return ops.status();
+      case 'ask': return ops.ask(request.input);
+      case 'propose': return ops.propose(request.input);
+    }
+  });
+  return json(res, 200, result);
+}
+
+export async function serveStdio(origin: string, credential: string) {
+  async function send(request: BridgeRequest): Promise<ToolReply> {
+    if (!credentialPattern.test(credential)) return { state: 'denied' };
+    return safe(async () => {
+      const response = await fetch(`${origin}/stdio`, {
+        method: 'POST', redirect: 'error', signal: AbortSignal.timeout(20_000),
+        headers: { Authorization: `Bearer ${credential}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(request),
+      });
+      if (!response.ok) return { state: response.status === 401 ? 'denied' : 'unavailable' };
+      return await response.json() as ToolReply;
+    });
+  }
+
+  const server = createMcp({
+    status: () => send({ action: 'status' }),
+    ask: input => send({ action: 'ask', input }),
+    propose: input => send({ action: 'propose', input }),
+  });
+  await server.connect(new StdioServerTransport());
 }

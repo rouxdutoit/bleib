@@ -1,14 +1,14 @@
 import { constants } from 'node:fs';
-import { lstat, open, readdir, realpath } from 'node:fs/promises';
+import { lstat, open, readdir, realpath, stat } from 'node:fs/promises';
 import { basename, join, relative } from 'node:path';
 import { parse, stringify } from 'yaml';
+import { z } from 'zod';
 import { kindSchema, normalize, sensitiveKind, sha256, UserError } from './domain.js';
 import type { Ask, Entry, Kind, Preview } from './domain.js';
 import { missing, type Store } from './store.js';
 
 export const maxMemoryBytes = 128 * 1024;
 type Metadata = Record<string, unknown>;
-const basisValues = ['provided', 'observed', 'inferred'];
 
 function object(value: unknown): Metadata {
   return value && typeof value === 'object' && !Array.isArray(value) ? value as Metadata : {};
@@ -22,30 +22,50 @@ export function splitMarkdown(markdown: string) {
   })) };
 }
 
-const pcpKeys = new Set([
-  'type', 'tags', 'lifecycle', 'confidence', 'importance', 'valid_from', 'valid_until', 'expires',
-  'partition', 'derived_from', 'relations',
-]);
+const pcpDate = z.string().regex(/^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2}))?$/)
+  .refine(value => Number.isFinite(Date.parse(value)));
+const weight = z.number().min(0).max(1);
+const pcpFields: Readonly<Record<string, z.ZodType | undefined>> = {
+  type: z.enum(['episodic', 'semantic', 'procedural']),
+  tags: z.array(z.string()),
+  lifecycle: z.enum(['active', 'validated', 'stale', 'archived']),
+  confidence: weight, importance: weight,
+  valid_from: pcpDate, valid_until: pcpDate, expires: z.iso.datetime(),
+  partition: z.string().regex(/^[a-z0-9][a-z0-9_-]{0,63}$/),
+  derived_from: z.array(z.string()),
+  relations: z.array(z.object({ rel: z.string(), target: z.string(), confidence: weight.optional() }).strict()),
+};
+const pcpSource = z.object({
+  origin: z.enum(['chat', 'agent', 'connector', 'import', 'user', 'consolidation']).optional(),
+  basis: z.enum(['provided', 'observed', 'inferred']).optional(),
+  at: pcpDate.optional(),
+});
 
 export function formatMemory(body: string, metadata: Metadata, options: {
   id: string; title: string; kind: Kind; sensitive: boolean; updated: string; created: string;
-  origin?: 'import'; importedFrom?: string;
+  importedFrom?: { format: ImportDialect; file: string; digest: string };
 }) {
   if (Buffer.byteLength(body) > maxMemoryBytes) throw new UserError('This note is too large.');
-  const { id, title, kind, sensitive, updated, created, origin, importedFrom } = options;
+  const { id, title, kind, sensitive, updated, created, importedFrom } = options;
   const source = object(metadata.source);
-  const inputBasis = typeof source.basis === 'string' ? source.basis : '';
-  const attributes: Metadata = Object.fromEntries(Object.entries(metadata).filter(([key]) =>
-    pcpKeys.has(key) || /^x[_-]/.test(key)));
-  const provenance = origin ? { file: importedFrom, original: metadata } : attributes.x_import;
+  const basis = pcpSource.shape.basis.safeParse(source.basis).data;
+  const origin = pcpSource.shape.origin.safeParse(source.origin).data;
+  const at = pcpSource.shape.at.safeParse(source.at).data;
+  const attributes: Metadata = Object.fromEntries(Object.entries(metadata).filter(([key, value]) =>
+    /^x[_-]/.test(key) || (Object.hasOwn(pcpFields, key) && pcpFields[key]?.safeParse(value).success)));
+  // An unrecognized validity limit should never make a note eligible for sharing.
+  if (['valid_from', 'valid_until', 'expires'].some(key => Object.hasOwn(metadata, key) && !Object.hasOwn(attributes, key))) {
+    attributes.lifecycle = 'archived';
+  }
+  const provenance = importedFrom ? { ...importedFrom, original: metadata } : attributes.x_import;
   const frontmatter = {
     ...attributes,
     id, title, updated, recorded_at: created, x_category: kind, x_created: created,
     sensitivity: sensitive || sensitiveKind(kind) ? 'sensitive' : 'normal',
     source: {
-      ...source,
-      origin: origin ?? source.origin ?? 'user',
-      basis: basisValues.includes(inputBasis) ? inputBasis : 'provided',
+      origin: importedFrom ? 'import' : origin ?? 'user',
+      basis: basis ?? 'provided',
+      ...(at ? { at } : {}),
     },
     ...(provenance === undefined ? {} : { x_import: provenance }),
   };
@@ -65,15 +85,25 @@ async function safeImportFile(path: string) {
         throw new UserError('A workspace note is larger than 128 KiB or is not a regular file.');
       }
       const buffer = Buffer.alloc(maxMemoryBytes + 1);
-      const { bytesRead } = await file.read(buffer);
-      if (bytesRead > maxMemoryBytes) throw new UserError('A workspace note is larger than 128 KiB.');
-      return new TextDecoder('utf-8', { fatal: true }).decode(buffer.subarray(0, bytesRead));
+      let size = 0;
+      while (size < buffer.length) {
+        const { bytesRead } = await file.read(buffer, size, buffer.length - size);
+        if (!bytesRead) break;
+        size += bytesRead;
+      }
+      if (size > maxMemoryBytes) throw new UserError('A workspace note is larger than 128 KiB.');
+      try {
+        return new TextDecoder('utf-8', { fatal: true, ignoreBOM: true }).decode(buffer.subarray(0, size));
+      } catch {
+        throw new UserError('Workspace notes must use UTF-8.');
+      }
     } finally {
       await file.close();
     }
   } catch (error) {
-    if (missing(error)) return;
-    throw error;
+    if (missing(error) || (error as NodeJS.ErrnoException).code === 'ELOOP') return;
+    if (error instanceof UserError) throw error;
+    throw new UserError('A workspace note could not be read.');
   }
 }
 
@@ -95,6 +125,7 @@ async function workspaceFiles(root: string, dialect: ImportDialect) {
 
 export async function readWorkspace(path: string, dialect: ImportDialect) {
   const root = await realpath(path).catch(() => { throw new UserError('That workspace could not be opened.'); });
+  if (!(await stat(root)).isDirectory()) throw new UserError('Choose a workspace directory.');
   const files = [];
   for (const file of await workspaceFiles(root, dialect)) {
     const markdown = await safeImportFile(file);
@@ -121,11 +152,16 @@ export async function readWorkspace(path: string, dialect: ImportDialect) {
   return files;
 }
 
-const stopWords = new Set(['what', 'which', 'where', 'when', 'please', 'with', 'from', 'about', 'this', 'that', 'does']);
+const stopWords = new Set([
+  'a', 'an', 'and', 'are', 'about', 'be', 'can', 'could', 'does', 'for', 'from', 'have', 'how',
+  'in', 'is', 'it', 'my', 'of', 'on', 'or', 'please', 'that', 'the', 'this', 'to', 'was', 'what',
+  'when', 'where', 'which', 'with', 'you', 'your',
+  'das', 'der', 'die', 'ein', 'eine', 'für', 'ist', 'mein', 'mit', 'und', 'von', 'was', 'welche',
+]);
 const words = (text: string) => normalize(text).match(/[\p{L}\p{N}]+/gu) ?? [];
 const eligibleLine = (line: string) => line.length >= 2 && line.length <= 240 &&
   /[\p{L}\p{N}]/u.test(line) && !/[\p{Cc}\p{Cf}]/u.test(line) &&
-  !/^(?:[#>`~]|(?:\+|-){3}|\|)/.test(line);
+  !/^(?:[#><`~]|(?:\+|-){3}|\|)/.test(line);
 const dateExpired = (input: unknown, now: number, endOfDay = false) => {
   if (input === undefined) return false;
   if (typeof input !== 'string') return true;
@@ -135,7 +171,8 @@ const dateExpired = (input: unknown, now: number, endOfDay = false) => {
 };
 
 export async function project(store: Store, ask: Ask, now: number): Promise<Preview> {
-  const terms = [...new Set(words(ask.question || '').filter(word => word.length > 2 && !stopWords.has(word)))];
+  const query = words(ask.question || ask.purpose);
+  const terms = [...new Set(query.filter(word => word.length > 1 && !stopWords.has(word)))];
   const matching = new Map<Kind, { entry: Entry; line: string; score: number }>();
   for (const entry of store.entries.values()) {
     if (!ask.kinds.includes(entry.kind)) continue;
@@ -156,7 +193,7 @@ export async function project(store: Store, ask: Ask, now: number): Promise<Prev
       if (fence || !eligibleLine(trimmed)) continue;
       const line = trimmed.replace(/^(?:[-*+] |\d+\. )/, '');
       const tokens = new Set(words(line));
-      const score = terms.length ? terms.filter(term => tokens.has(term)).length : 1;
+      const score = terms.filter(term => tokens.has(term)).length + (ask.question ? 0 : 1);
       if (score > (matching.get(entry.kind)?.score ?? 0)) matching.set(entry.kind, { entry, line, score });
     }
   }

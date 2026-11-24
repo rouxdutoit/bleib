@@ -1,11 +1,11 @@
-import { chmod, realpath, rm } from 'node:fs/promises';
+import { chmod, lstat, realpath, rm } from 'node:fs/promises';
 import { createServer, request, type IncomingMessage, type Server, type ServerResponse } from 'node:http';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { z } from 'zod';
 import { credentialPattern, sha256, UserError } from './domain.js';
 import { json, jsonBody, text } from './http.js';
-import { McpHttp } from './mcp.js';
+import { handleBridge, McpHttp } from './mcp.js';
 import { verifyHome } from './store.js';
 import { Browser } from './ui.js';
 import { Wallet } from './wallet.js';
@@ -24,13 +24,14 @@ const command = z.discriminatedUnion('action', [
   z.object({ action: z.literal('import'), path: z.string().max(4096), dialect: z.enum(['openclaw', 'hermes']) }),
   z.object({ action: z.literal('pair'), name: z.string().max(100), destination: z.string().max(115), model: z.string().max(100).optional() }),
   z.object({ action: z.literal('revoke'), target: z.string().max(100) }),
+  z.object({ action: z.literal('ui') }),
   z.object({ action: z.literal('receipts'), id: z.string().max(100).optional() }),
 ]);
 
 type OwnerCommand = z.infer<typeof command>;
 const redeemSchema = z.object({ code: z.string().regex(/^[A-Za-z0-9_-]{24}$/) }).strict();
 
-async function runOwner(wallet: Wallet, req: IncomingMessage, res: ServerResponse) {
+async function runOwner(wallet: Wallet, browser: Browser, req: IncomingMessage, res: ServerResponse) {
   if (req.method !== 'POST' || req.url !== '/owner') return text(res, 404, 'Page not found.');
   const parsed = command.safeParse(await jsonBody(req));
   if (!parsed.success) throw new UserError('The wallet command was not understood.');
@@ -43,6 +44,7 @@ async function runOwner(wallet: Wallet, req: IncomingMessage, res: ServerRespons
     case 'import': value = await wallet.importWorkspace(cmd.path, cmd.dialect); break;
     case 'pair': value = await wallet.pair(cmd.name, cmd.destination, cmd.model); break;
     case 'revoke': value = await wallet.revoke(cmd.target); break;
+    case 'ui': value = await browser.openFromCli(); break;
     case 'receipts': value = await wallet.receipts(cmd.id); break;
   }
   json(res, 200, { value: value ?? null });
@@ -84,12 +86,16 @@ export async function startDaemon(directory: string, options: Omit<ConstructorPa
   const wallet = new Wallet(home, origin, { ...options, onLock: () => browser.clear() });
   const browser = new Browser(wallet, origin);
   const mcp = new McpHttp(wallet);
+  let stopping = false;
   const ui = createServer({ requestTimeout: 15_000, headersTimeout: 10_000 }, handle(async (req, res) => {
+    if (stopping) return text(res, 503, 'The wallet is stopping.');
     if (req.headers.host !== address.host || (req.headers.origin && req.headers.origin !== origin)) {
       return text(res, 403, 'This address is blocked.');
     }
     if (!req.url?.startsWith('/') || req.url.startsWith('//')) return text(res, 400, 'Invalid address.');
-    const { pathname } = new URL(req.url, origin);
+    const { pathname, origin: requestOrigin } = new URL(req.url, origin);
+    if (requestOrigin !== origin) return text(res, 400, 'Invalid address.');
+    if (pathname === '/stdio' && req.method === 'POST') return handleBridge(wallet, req, res);
     if (pathname === '/mcp') return mcp.handle(req, res);
     if (pathname === '/pair' && req.method === 'POST') {
       const parsed = redeemSchema.safeParse(await jsonBody(req));
@@ -100,7 +106,10 @@ export async function startDaemon(directory: string, options: Omit<ConstructorPa
   }));
 
   const owner = createServer({ requestTimeout: 15_000, headersTimeout: 10_000 },
-    handle((req, res) => runOwner(wallet, req, res)));
+    handle(async (req, res) => {
+      if (stopping) return text(res, 503, 'The wallet is stopping.');
+      return runOwner(wallet, browser, req, res);
+    }));
   try {
     await listen(ui, { host: '127.0.0.1', port: Number(address.port) });
   } catch (error) {
@@ -123,19 +132,26 @@ export async function startDaemon(directory: string, options: Omit<ConstructorPa
     origin,
     wallet,
     async close() {
+      stopping = true;
       await close(owner);
       await mcp.close();
-      await close(ui);
       await wallet.lock();
+      await close(ui);
     },
   };
 }
 
 export async function callOwner(home: string, input: OwnerCommand): Promise<unknown> {
+  await verifyHome(home);
+  const socket = socketPath(home);
+  const info = await lstat(socket).catch(() => undefined);
+  if (!info?.isSocket() || (process.getuid && (info.uid !== process.getuid() || (info.mode & 0o077) !== 0))) {
+    throw new UserError('Start bleib serve in another terminal, then try again.');
+  }
   const packet = JSON.stringify(input);
   return new Promise((resolve, reject) => {
     const req = request({
-      socketPath: socketPath(home), method: 'POST', path: '/owner',
+      socketPath: socket, method: 'POST', path: '/owner',
       headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(packet) },
     }, res => {
       const parts: Buffer[] = [];

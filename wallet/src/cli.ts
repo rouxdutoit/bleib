@@ -8,6 +8,7 @@ import { Writable } from 'node:stream';
 import { parseArgs } from 'node:util';
 import { callOwner, redeemCode, startDaemon, walletOrigin } from './daemon.js';
 import { UserError, type Receipt } from './domain.js';
+import { serveStdio } from './mcp.js';
 import { prepareKit } from './store.js';
 
 const help = `bleib — a local wallet for what you share with your AI
@@ -26,6 +27,7 @@ Usage: bleib [--home <directory>] <command>
   ui                                    Open the local wallet page
   revoke <agent-or-permission-id>        Revoke access
   receipts [receipt-id]                 List receipts or open one
+  mcp                                   Start the paired stdio connection
 
 Places: local, provider:<name>, third-party:<name>
 `;
@@ -56,8 +58,8 @@ async function newPassphrase(ask: (label: string) => Promise<string>) {
 
 function settings(home: string, origin: string, credential: string) {
   return {
-    stdio: { command: 'bleib', args: ['mcp'], env: { BLEIB_HOME: home, BLEIB_AGENT_TOKEN: credential } },
-    http: { url: `${origin}/mcp`, headers: { Authorization: `Bearer ${credential}` } },
+    stdio: { type: 'stdio', command: 'bleib', args: ['mcp'], env: { BLEIB_HOME: home, BLEIB_AGENT_TOKEN: credential } },
+    http: { type: 'http', url: `${origin}/mcp`, headers: { Authorization: `Bearer ${credential}` } },
   };
 }
 
@@ -140,10 +142,14 @@ async function main(argv: string[]) {
     }
     case 'ui': {
       const origin = walletOrigin(home);
+      const path = await callOwner(home, { action: 'ui' }) as string;
       console.log(origin);
-      openBrowser(origin);
+      openBrowser(new URL(path, origin).href);
       break;
     }
+    case 'mcp':
+      await serveStdio(walletOrigin(home), process.env.BLEIB_AGENT_TOKEN ?? '');
+      break;
     case 'revoke':
       if (!first) throw new UserError('Usage: bleib revoke <agent-or-permission-id>');
       await callOwner(home, { action: 'revoke', target: first });

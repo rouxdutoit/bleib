@@ -37,6 +37,8 @@ function currentGrant(store: Store, scope: Scope, now: number, sensitive: boolea
   }
 }
 
+type OwnerGuard = () => boolean;
+
 type CommitHook = NonNullable<Parameters<typeof Store.unlock>[2]>;
 
 export class Wallet {
@@ -101,8 +103,11 @@ export class Wallet {
     });
   }
 
-  lock() {
-    return this.serial(() => this.close());
+  lock(authorize?: OwnerGuard) {
+    return this.serial(() => {
+      if (authorize && !authorize()) throw new UserError('Unlock the wallet first.');
+      this.close();
+    });
   }
 
   recover(identity: string, passphrase: string) {
@@ -112,9 +117,9 @@ export class Wallet {
     });
   }
 
-  private owner<T>(action: (state: Store, now: number) => Promise<T> | T) {
+  private owner<T>(action: (state: Store, now: number) => Promise<T> | T, authorize?: OwnerGuard) {
     return this.serial(() => {
-      if (!this.#state) throw new UserError('Unlock the wallet first.');
+      if (!this.#state || (authorize && !authorize())) throw new UserError('Unlock the wallet first.');
       this.touch();
       return action(this.#state, this.now());
     });
@@ -129,14 +134,14 @@ export class Wallet {
       const files = await readWorkspace(path, dialect);
       const entries = [];
       const updated = new Date(now).toISOString();
-      for (const { body, metadata, name, ...entry } of files) {
+      for (const { body, metadata, name, sourceDigest, ...entry } of files) {
         const existing = Array.from(state.entries.values()).find(current => current.sourceId === entry.sourceId);
         // Import is additive. The local editor owns existing notes, including recategorization.
         if (existing) continue;
         const id = randomUUID();
         const markdown = formatMemory(body, metadata, {
           id, title: entry.title, kind: entry.kind, sensitive: entry.sensitive,
-          updated, created: updated, origin: 'import', importedFrom: name,
+          updated, created: updated, importedFrom: { format: dialect, file: name, digest: sourceDigest },
         });
         entries.push(await state.putEntry({ ...entry, id, version: 1 }, markdown));
       }
@@ -148,7 +153,7 @@ export class Wallet {
   pair(name: string, place: string, model?: string) {
     return this.owner(async (state, now) => {
       const cleanName = name.trim();
-      if (!cleanName || cleanName.length > 100 || /\p{Cc}/u.test(cleanName)) {
+      if (!cleanName || cleanName.length > 100 || /[\p{Cc}\p{Cf}]/u.test(cleanName)) {
         throw new UserError('Enter an agent name of 1 to 100 characters.');
       }
       const code = secret(18);
@@ -230,7 +235,7 @@ export class Wallet {
       if (!projection.content) {
         // A once decision covers one attempt, even when the attempt had no matching excerpt.
         const used = Array.from(grants.values()).filter(grant => grant.consumePreview);
-        if (used.length) await store.commit({ grants: used.map(grant => this.usedGrant(grant, now)) });
+        if (used.length) await store.commit({ grants: used.map(grant => this.usedGrant(grant, now, false)) });
         return { state: 'no_match' };
       }
       return this.release(store, agent, ask, projection, grants, now);
@@ -241,8 +246,8 @@ export class Wallet {
     return { state: 'approval_required', grant_request_id: id, approve_url: `${this.origin}/approvals/${id}`, fresh };
   }
 
-  private usedGrant(grant: Grant, now: number): Grant {
-    return { ...grant, lastUsed: now, revoked: grant.duration === 'once', consumePreview: undefined };
+  private usedGrant(grant: Grant, now: number, disclosed = true): Grant {
+    return { ...grant, lastUsed: disclosed ? now : grant.lastUsed, revoked: grant.duration === 'once', consumePreview: undefined };
   }
 
   private async release(store: Store, agent: Agent, ask: Ask, projection: Preview, grants: Map<Kind, Grant>, now: number): Promise<ToolReply> {
@@ -257,11 +262,14 @@ export class Wallet {
     const receipt: Receipt = { ...body, hash: sha256(canonical(body)) };
     const used = Array.from(grants.values()).filter(grant =>
       grant.consumePreview || projection.releasedKinds.includes(grant.kind));
-    await store.commit({ receipts: [receipt], grants: used.map(grant => this.usedGrant(grant, now)) });
+    await store.commit({
+      receipts: [receipt],
+      grants: used.map(grant => this.usedGrant(grant, now, projection.releasedKinds.includes(grant.kind))),
+    });
     return { state: 'released', receipt_id: receipt.receipt_id, content: receipt.content };
   }
 
-  approve(id: string, choice: 'once' | 'always' | 'no', confirmed: boolean) {
+  approve(id: string, choice: 'once' | 'always' | 'no', confirmed: boolean, authorize?: OwnerGuard) {
     return this.owner(async (store, now) => {
       const approval = store.approvals.get(id);
       const agent = approval && store.agents.get(approval.agentId);
@@ -282,21 +290,20 @@ export class Wallet {
         if (currentGrant(store, scope, now, sensitive, approval.request, approval.fingerprint)) {
           throw new UserError('A decision already covers this request. Ask the agent to try again.');
         }
-        if (choice === 'no') {
-          for (const grant of store.grants.values()) {
-            if (sameScope(grant, scope) && !grant.revoked) grants.push({ ...grant, revoked: true });
-          }
+        for (const grant of store.grants.values()) {
+          if (sameScope(grant, scope) && !grant.revoked) grants.push({ ...grant, revoked: true });
         }
         grants.push({
           ...scope, id: randomUUID(), duration: choice === 'no' ? 'denied' : choice,
           lastUsed: now, revoked: false, sensitive,
           ...(choice === 'no' ? {} : { consumePreview: {
-            request: approval.request, fingerprint: approval.fingerprint, expires: approval.expires,
+            request: approval.request, fingerprint: approval.fingerprint,
+            expires: choice === 'always' ? now + grantLifetime : approval.expires,
           } }),
         } satisfies Grant);
       }
       await store.commit({ grants, approvals: [{ ...approval, decided: true }] });
-    });
+    }, authorize);
   }
 
   propose(credential: string, input: unknown) {
@@ -308,7 +315,7 @@ export class Wallet {
     });
   }
 
-  revoke(idOrName: string) {
+  revoke(idOrName: string, authorize?: OwnerGuard) {
     return this.owner(async (store, now) => {
       const grant = store.grants.get(idOrName);
       const exactAgent = store.agents.get(idOrName);
@@ -324,22 +331,22 @@ export class Wallet {
         ...(grant ? { grants: [{ ...grant, revoked: true }] } : agent ? { agents: [{ ...agent, revoked: true }] } : {}),
         approvals: approvals.map(item => ({ ...item, decided: true })),
       });
-    });
+    }, authorize);
   }
 
-  entries() {
-    return this.owner(store => Array.from(store.entries.values()));
+  entries(authorize?: OwnerGuard) {
+    return this.owner(store => Array.from(store.entries.values()), authorize);
   }
 
-  entry(id: string) {
+  entry(id: string, authorize?: OwnerGuard) {
     return this.owner(async store => {
       const entry = store.entries.get(id);
       if (!entry) throw new UserError('That note was not found.');
       return { ...entry, body: splitMarkdown(await store.readEntry(entry)).body };
-    });
+    }, authorize);
   }
 
-  edit(id: string, version: number, input: { title: string; body: string; kind: Kind; sensitive: boolean }) {
+  edit(id: string, version: number, input: { title: string; body: string; kind: Kind; sensitive: boolean }, authorize?: OwnerGuard) {
     return this.owner(async (store, now) => {
       const entry = store.entries.get(id);
       if (!entry || entry.version !== version) throw new UserError('This note changed. Open it again before saving.');
@@ -356,34 +363,34 @@ export class Wallet {
       });
       const saved = await store.putEntry({ ...entry, title, kind, sensitive, version: version + 1 }, markdown);
       await store.commit({ entries: [saved] });
-    });
+    }, authorize);
   }
 
-  approvals() {
+  approvals(authorize?: OwnerGuard) {
     return this.owner((store, now) => Array.from(store.approvals.values()).filter(item =>
-      !item.decided && item.expires > now && !store.agents.get(item.agentId)?.revoked));
+      !item.decided && item.expires > now && !store.agents.get(item.agentId)?.revoked), authorize);
   }
 
-  grants() {
+  grants(authorize?: OwnerGuard) {
     return this.owner((store, now) => ({
       agents: [...store.agents.values()].filter(agent => !agent.revoked).map(({ id, name, destination }) =>
         ({ id, name, destination })),
       grants: [...store.grants.values()].filter(grant => !grant.revoked && !store.agents.get(grant.agentId)?.revoked &&
         (grant.duration !== 'always' || now - grant.lastUsed < grantLifetime) &&
         (!grant.consumePreview || grant.consumePreview.expires > now)),
-    }));
+    }), authorize);
   }
 
-  proposals() {
-    return this.owner(store => Array.from(store.proposals.values()).reverse());
+  proposals(authorize?: OwnerGuard) {
+    return this.owner(store => Array.from(store.proposals.values()).reverse(), authorize);
   }
 
-  receipts(id?: string) {
+  receipts(id?: string, authorize?: OwnerGuard) {
     return this.owner(store => {
       if (!id) return Array.from(store.receipts.values()).reverse();
       const receipt = store.receipts.get(id);
       if (!receipt) throw new UserError('That receipt was not found.');
       return [receipt];
-    });
+    }, authorize);
   }
 }

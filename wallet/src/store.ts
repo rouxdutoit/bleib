@@ -1,7 +1,7 @@
 import { createHmac, randomUUID } from 'node:crypto';
 import { link, mkdir, open, readFile, readdir, realpath, rename, rm, stat } from 'node:fs/promises';
 import { basename, dirname, join, relative, isAbsolute, resolve } from 'node:path';
-import { generateX25519Identity, identityToRecipient, journalKey, parseEnvelope, seal, unseal, unwrapIdentity, wrapIdentity } from './crypto.js';
+import { generateIdentity, identityToRecipient, journalKey, parseEnvelope, seal, unseal, unwrapIdentity, wrapIdentity } from './crypto.js';
 import { canonical, equal, secret, sha256, UserError } from './domain.js';
 import type { Agent, Approval, Entry, Grant, Pairing, Proposal, Receipt } from './domain.js';
 
@@ -59,7 +59,7 @@ export async function prepareKit(home: string, kitPath: string) {
   if (separation !== '..' && !separation.startsWith('../') && !isAbsolute(separation)) {
     throw new UserError('Save the recovery kit outside the wallet directory.');
   }
-  const identity = await generateX25519Identity();
+  const identity = await generateIdentity();
   const word = `bleib-${secret(9)}`;
   try {
     await publish(kitTarget, [

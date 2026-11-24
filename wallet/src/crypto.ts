@@ -1,10 +1,10 @@
 import { createCipheriv, createDecipheriv, createHmac, randomBytes, scrypt } from 'node:crypto';
 import { promisify } from 'node:util';
-import { Decrypter, Encrypter, generateX25519Identity, identityToRecipient } from 'age-encryption';
+import { Decrypter, Encrypter, generateIdentity, identityToRecipient } from 'age-encryption';
 import { z } from 'zod';
 import { UserError } from './domain.js';
 
-export { generateX25519Identity, identityToRecipient };
+export { generateIdentity, identityToRecipient };
 
 const envelopeSchema = z.object({
   version: z.literal(1),
