@@ -18,7 +18,7 @@ const [symbol, effect] = SYMBOLS[i];
     <div class="visual"><StoryVisual lang={lang} scene={i} /></div>
     <div class="text">
       {symbol === 'sliders' ? (
-        <span class="sym fx-tune">
+        <span class="sym fx-tune" data-fx>
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
             {[6, 12, 18].map((y) => <rect x="3" y={y - 0.75} width="18" height="1.5" rx="0.75" />)}
             <rect class="knob k1" x="13.5" y="2.5" width="3" height="7" rx="1.5" />
@@ -27,7 +27,7 @@ const [symbol, effect] = SYMBOLS[i];
           </svg>
         </span>
       ) : symbol === 'receipt' ? (
-        <span class="sym fx-receipt">
+        <span class="sym fx-receipt" data-fx>
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path class="paper" d="M6 3h12a1 1 0 0 1 1 1v17l-2.3-1.5-2.4 1.5-2.3-1.5-2.3 1.5-2.4-1.5L5 21V4a1 1 0 0 1 1-1z" />
             <path class="line l1" d="M9 8.5h6" pathLength="1" />
@@ -35,14 +35,14 @@ const [symbol, effect] = SYMBOLS[i];
           </svg>
         </span>
       ) : symbol === 'padlock' ? (
-        <span class="sym fx-lock">
+        <span class="sym fx-lock" data-fx>
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
             <path class="shackle" d="M8 12V9a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
             <rect class="lock-body" x="5" y="11.5" width="14" height="10" rx="2.5" />
           </svg>
         </span>
       ) : (
-        <span class={`sym fx-${effect}`} set:html={icon(symbol)} />
+        <span class={`sym fx-${effect}`} data-fx set:html={icon(symbol)} />
       )}
       <h2 class="h2"><span>{x.h[0]}</span><br /><span>{x.h[1]}</span></h2>
       <p class="lead"><Lines text={x.p} /></p>
@@ -71,24 +71,23 @@ const [symbol, effect] = SYMBOLS[i];
   /* Each headline line wraps evenly on its own, so no word is left alone. */
   .h2 span { display: inline-block; text-wrap: balance; }
   .sym :global(svg) { width: 100%; height: 100%; display: block; }
-  /* As the scene starts, its symbol plays first, in the pause before the card moves. */
-  .scene:has([data-playing]) .sym :global(svg) { animation: var(--fx) 0.8s var(--fx-ease, var(--ease)) 0.15s both; }
-  /* While a scene waits, its symbol shows complete (the lock stands open, the receipt has no lines yet); the effect
-     starts from its own first frame when the scene plays. */
-  .fx-pop :global(svg) { transform-origin: 15% 90%; }
-  .paper { transform-box: fill-box; transform-origin: 50% 0; }
+  /* Each symbol plays once as it comes into view (.on, scripts/story.ts). The chat bubble and the receipt arrive from
+     nothing; the others act on the symbol as it stands, and the lock waits open. */
+  .sym.on :global(svg) { animation: var(--fx) 0.8s var(--fx-ease, var(--ease)) 0.15s both; }
+  .fx-pop :global(svg) { transform: scale(0); transform-origin: 15% 90%; }
+  .paper { transform-box: fill-box; transform-origin: 50% 0; transform: scaleY(0); }
   .line { stroke-dasharray: 1; stroke-dashoffset: 1; }
-  .scene:has([data-playing]) .paper { animation: fx-unroll 0.5s var(--ease) 0.15s both; }
-  .scene:has([data-playing]) .line { animation: fx-write 0.35s var(--ease) var(--at) both; }
+  .fx-receipt.on .paper { animation: fx-unroll 0.5s var(--ease) 0.15s both; }
+  .fx-receipt.on .line { animation: fx-write 0.35s var(--ease) var(--at) both; }
   .l1 { --at: 0.6s; } .l2 { --at: 0.8s; }
   /* The lock stands open, then the shackle drops shut and the body clicks. */
   .shackle { transform: translateY(-3.5px); }
   .lock-body { transform-box: fill-box; transform-origin: 50% 100%; }
-  .scene:has([data-playing]) .shackle { animation: fx-shackle 0.4s cubic-bezier(0.55, 0, 0.75, 0) 0.35s both; }
-  .scene:has([data-playing]) .lock-body { animation: fx-click 0.3s var(--ease) 0.75s both; }
+  .fx-lock.on .shackle { animation: fx-shackle 0.4s cubic-bezier(0.55, 0, 0.75, 0) 0.35s both; }
+  .fx-lock.on .lock-body { animation: fx-click 0.3s var(--ease) 0.75s both; }
   /* The sliders' knobs glide to new places, one after another, and stay there. */
   .k1 { --to: -7px; } .k2 { --to: 8px; --delay: 0.1s; } .k3 { --to: 5px; --delay: 0.2s; }
-  .scene:has([data-playing]) .knob { animation: fx-knob 0.8s var(--ease) calc(0.15s + var(--delay, 0s)) both; }
+  .fx-tune.on .knob { animation: fx-knob 0.8s var(--ease) calc(0.15s + var(--delay, 0s)) both; }
   .text .lead { margin: 18px 0 0; color: var(--scene-muted, var(--muted)); text-wrap: balance; }
   /* Apple-style "Learn more ›" */
   .more { display: inline-flex; align-items: center; gap: 1px; margin-top: 14px; font-size: 17px; font-weight: 500; text-decoration: none; color: var(--scene-ink, var(--ink)); }

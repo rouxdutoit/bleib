@@ -339,7 +339,7 @@ h3 {
 @keyframes fx-pop { from { transform: scale(0); } to { transform: none; } }
 @keyframes fx-spin { to { transform: rotate(-360deg); } }
 @keyframes fx-wave { 20% { transform: rotate(16deg); } 40% { transform: rotate(-6deg); } 60% { transform: rotate(14deg); } 80% { transform: rotate(-3deg); } }
-@keyframes fx-unroll { from { transform: scaleY(0.15); } }
+@keyframes fx-unroll { to { transform: none; } }
 @keyframes fx-write { to { stroke-dashoffset: 0; } }
 @keyframes fx-knob { to { transform: translateX(var(--to)); } }
 @keyframes fx-shackle { to { transform: none; } }

@@ -5,7 +5,7 @@
  * data-start sets the pause before step 1 and data-gaps="a,b,…" the pause after each step (ms): long enough
  * to read what is on screen (about 0.25 s a word), while each transition itself stays quick.
  * data-sv="scroll" waits for the person's first scroll before playing (the hero, which is in view on arrival).
- * A playing scene carries data-playing, so its headline symbol can do its small effect first (StoryScene.astro).
+ * Each headline symbol ([data-fx]) plays its effect once, as it comes into view (StoryScene.astro).
  * With reduced motion the final state shows at once.
  */
 const START = 500;
@@ -37,13 +37,11 @@ export function reset(sv: HTMLElement): void {
   timers.get(sv)?.forEach((id) => window.clearTimeout(id));
   timers.set(sv, []);
   setStep(sv, 0);
-  delete sv.dataset.playing;
 }
 
 /** Plays a scene from the start (or shows it finished, with reduced motion). */
 export function play(sv: HTMLElement): void {
   reset(sv);
-  sv.dataset.playing = '';
   const steps = Number(sv.dataset.steps ?? '0');
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     sv.querySelectorAll<HTMLElement>('[data-type]').forEach((el) => (el.textContent = el.dataset.type ?? ''));
@@ -63,10 +61,21 @@ export function play(sv: HTMLElement): void {
 /** Plays every [data-sv] scene once, when it comes into view (and, for data-sv="scroll", once the page has scrolled). */
 export function initStory(): void {
   const scenes = document.querySelectorAll<HTMLElement>('[data-sv]');
+  const symbols = document.querySelectorAll<HTMLElement>('[data-fx]');
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     scenes.forEach(play);
+    symbols.forEach((el) => el.classList.add('on'));
     return;
   }
+  const seen = new IntersectionObserver(
+    (entries) => entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('on');
+      seen.unobserve(e.target);
+    }),
+    { rootMargin: '0px 0px -12% 0px', threshold: 1 },
+  );
+  symbols.forEach((el) => seen.observe(el));
   const io = new IntersectionObserver(
     (entries) => {
       for (const e of entries) {
