@@ -11,7 +11,8 @@ const links: { key: RouteKey; label: string }[] = [
   { key: 'developers', label: s.developers },
   { key: 'pricing', label: s.pricing },
 ];
-const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+import { icon } from './icons';
+const arrow = icon('arrow_outward');
 ---
 <header class="site-header">
   <div class="frame">

@@ -1,10 +1,10 @@
 ---
 /**
  * One tray per scene. The tray never moves; the card inside morphs step by step to act out
- * the scene's headline (Rule No. 1: Apple HIG patterns throughout).
+ * the scene's headline (Rule No. 1: Apple HIG patterns throughout). It plays once when seen.
  * Steps are driven by scripts/story.ts: it sets data-step="n" and cumulative classes s1..sn.
  *   .at-N     collapsed until step N, then open
- *   .until-N  open until step N, then collapsed
+ *   .dim-N    greys out at step N (nothing ever disappears, so the progression stays readable)
  *   .pick-at-N  capsule turns prominent at step N
  */
 import Mark from './Mark.astro';
@@ -12,22 +12,15 @@ import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang; scene: number }
 const { lang, scene } = Astro.props;
 const c = t(lang).cards;
-const STEPS = [5, 3, 4, 2, 3];
+const STEPS = [5, 3, 4, 6, 3];
+const INTERVAL = [900, 900, 900, 620, 900];
 
-const glyph: Record<string, string> = {
-  person: '<path d="M10 10a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm0 1.5c-3.3 0-6 1.7-6 4v.5c0 .6.4 1 1 1h10c.6 0 1-.4 1-1v-.5c0-2.3-2.7-4-6-4Z"/>',
-  plane: '<path d="M17.3 9.2 12 7.6 8.4 2.6a.9.9 0 0 0-.7-.4h-.9l1.6 5.1-3.8-1.1-1.2-1.7h-.9l.6 3.5-.6 3.5h.9l1.2-1.7 3.8-1.1-1.6 5.1h.9c.3 0 .5-.1.7-.4L12 12.4l5.3-1.6c.8-.2.8-1.4 0-1.6Z"/>',
-  case: '<path d="M7.5 4V3.2c0-.7.5-1.2 1.2-1.2h2.6c.7 0 1.2.5 1.2 1.2V4h3.3c.9 0 1.7.8 1.7 1.7v8.6c0 .9-.8 1.7-1.7 1.7H4.2c-.9 0-1.7-.8-1.7-1.7V5.7C2.5 4.8 3.3 4 4.2 4h3.3Zm1.5 0h2V3.5H9V4Z"/>',
-  heart: '<path d="M10 17s-6.5-3.8-6.5-8.6A3.6 3.6 0 0 1 10 6.3a3.6 3.6 0 0 1 6.5 2.1C16.5 13.2 10 17 10 17Z"/>',
-  lock: '<path d="M6.5 8.5V6.5a3.5 3.5 0 1 1 7 0v2h.3c.9 0 1.7.8 1.7 1.7v5.6c0 .9-.8 1.7-1.7 1.7H6.2c-.9 0-1.7-.8-1.7-1.7v-5.6c0-.9.8-1.7 1.7-1.7h.3Zm1.6 0h3.8v-2a1.9 1.9 0 0 0-3.8 0v2Z"/>',
-  check: '<path d="M8.2 14.2a1 1 0 0 1-.7-.3L4.3 10.7a1 1 0 1 1 1.4-1.4l2.5 2.5 6.1-6.1a1 1 0 1 1 1.4 1.4l-6.8 6.8a1 1 0 0 1-.7.3Z"/>',
-  shield: '<path d="M10 2.2 4 4.6v4.6c0 3.9 2.6 7.2 6 8.6 3.4-1.4 6-4.7 6-8.6V4.6l-6-2.4Zm-1 10.9-2.6-2.6 1.1-1.1L9 10.9l3.5-3.5 1.1 1.1L9 13.1Z"/>',
-  replay: '<path d="M10 3.5a6.5 6.5 0 1 1-6.3 8.1 1 1 0 0 1 1.9-.5A4.5 4.5 0 1 0 6.8 6.8l1 .9a.6.6 0 0 1-.4 1H4.1a.6.6 0 0 1-.6-.6V4.9a.6.6 0 0 1 1-.4l.8.8A6.5 6.5 0 0 1 10 3.5Z"/>',
-};
-const svg = (name: string, cls = 'g') => `<svg class="${cls}" viewBox="0 0 20 20" aria-hidden="true"><g fill="currentColor">${glyph[name]}</g></svg>`;
+import { icon, type IconName } from './icons';
+const alias: Record<string, IconName> = { person: 'person', plane: 'flight', case: 'work', heart: 'favorite', lock: 'lock', check: 'check', shield: 'verified_user' };
+const svg = (name: string, cls = 'g') => icon(alias[name] ?? (name as IconName), cls);
 const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
 ---
-<div class="sv" data-sv data-steps={STEPS[scene]} data-step="0">
+<div class="sv" data-sv data-steps={STEPS[scene]} data-interval={INTERVAL[scene]} data-step="0">
   <div class="tray">
     <div class="stack" aria-hidden="true">
       {scene === 0 && (
@@ -47,15 +40,15 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
             </ul>
             <div class={cx(5, 'at')}><div class="cx-in"><p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.wallet.footer}</p></div></div>
           </div>
-          <div class={cx(5, 'until')}>
-            <div class="cx-in">
+          <div>
+            <div>
               <div class="sources">
                 <p class="t-foot c-2 src-h">{c.wallet.sourcesLabel}</p>
-                <div class="src-grid">
+                <ul class="src-list">
                   {c.wallet.sources.map((m, i) => (
-                    <div class={`card mini gone-${i + 1}`}><p class="t-foot c-2">{m.from}</p><p class="t-sub">{m.text}</p></div>
+                    <li class={`dim-${i + 1}`}><div class="src-item"><div class="card mini"><span class="t-foot c-2 from">{m.from}</span><span class="t-sub">{m.text}</span></div></div></li>
                   ))}
-                </div>
+                </ul>
               </div>
             </div>
           </div>
@@ -64,8 +57,8 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
 
       {scene === 1 && (
         <>
-          <div class={cx(2, 'until')}>
-            <div class="cx-in">
+          <div class="dim-2">
+            <div>
               <div class="card alert">
                 <p class="t-headline">{c.ask.title}</p>
                 <p class="t-foot msg">{c.ask.message}</p>
@@ -141,29 +134,36 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
                 <p class="t-sub c-2">{c.any.sub}</p>
               </div>
             </div>
-            <p class="t-foot c-2 used">{c.any.usedBy} <span class="swap">{c.any.providers.map((p, i) => <span class={`u${i}`}>{p.name}</span>)}</span></p>
-          </div>
-          <div class="card list-card">
-            <p class="t-foot c-2 sec-h">{c.any.sectionLabel}</p>
             <ul class="group">
-              {c.any.providers.map((p, i) => (
-                <li class={`cell prov p${i}`}>
-                  <img class="app-sm" src={p.icon} alt="" width="29" height="29" />
-                  <span class="t-body cell-k">{p.name}</span>
-                  <span class="t-sub c-2 cell-v">{p.note}</span>
-                  <span class="tick" set:html={svg('check')} />
-                </li>
+              {c.wallet.rows.slice(0, 3).map((r) => (
+                <li class="cell"><span class="ico" set:html={svg(r.icon)} /><span class="t-body cell-k">{r.k}</span><span class="t-body c-2 cell-v">{r.v}</span></li>
               ))}
             </ul>
-            <p class="t-foot c-2 sec-f">{c.any.caption}</p>
+            <p class="t-foot c-2 used">{c.any.usedBy} <span class="swap">{c.any.providers.map((p, i) => <span class={`u${i}`}>{p.name}</span>)}</span></p>
+          </div>
+          <div class="card strip">
+            <div class="pwin">
+              <div class="ptrack">
+                {c.any.providers.map((p, i) => (
+                  <span class={`pi pi-${i}`}>
+                    <span class="picon">
+                      <img class="pm" src={p.icon} alt="" width="28" height="28" draggable="false" />
+                      {p.color && <img class="pc" src={p.color} alt="" width="28" height="28" draggable="false" />}
+                    </span>
+                    <span class="t-foot pname">{p.name}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+            <p class="t-foot c-2 strip-cap">{c.any.caption}</p>
           </div>
         </>
       )}
 
       {scene === 4 && (
         <>
-          <div class={cx(2, 'until')}>
-            <div class="cx-in">
+          <div class="dim-2">
+            <div>
               <div class="card note">
                 <div class="note-head">
                   <img class="app" src="/providers/claude.svg" alt="" width="38" height="38" />
@@ -199,7 +199,6 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
         </>
       )}
     </div>
-    <button class="replay" type="button" data-replay aria-label={c.replay} title={c.replay}><span set:html={svg('replay')} /></button>
   </div>
 </div>
 
@@ -210,12 +209,17 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
   .stack { display: flex; flex-direction: column; gap: 12px; }
 
   /* Collapsible pieces: height and opacity morph in place, nothing jumps. */
-  .cx { display: grid; grid-template-rows: 0fr; opacity: 0; margin-top: -12px; transition: grid-template-rows 0.55s var(--ease), opacity 0.4s var(--ease), margin-top 0.55s var(--ease); }
+  .cx { display: grid; grid-template-rows: 0fr; opacity: 0; margin-top: -12px; transition: grid-template-rows 0.55s var(--ease), opacity 0.4s var(--ease) 0.12s, margin-top 0.55s var(--ease); }
+  .card { transform: translateZ(0); backface-visibility: hidden; }
   .cx.until-1, .cx.until-2, .cx.until-3, .cx.until-4, .cx.until-5 { grid-template-rows: 1fr; opacity: 1; margin-top: 0; }
   li.cx, .card .cx { margin-top: 0; }
   .cx-in { overflow: hidden; min-height: 0; }
   .s1 .at-1, .s2 .at-2, .s3 .at-3, .s4 .at-4, .s5 .at-5 { grid-template-rows: 1fr; opacity: 1; margin-top: 0; }
   .s1 .until-1, .s2 .until-2, .s3 .until-3, .s4 .until-4, .s5 .until-5 { grid-template-rows: 0fr; opacity: 0; margin-top: -12px; }
+
+  /* Done steps stay in place and grey out. */
+  [class*='dim-'] { transition: opacity 0.45s var(--ease); }
+  .s1 .dim-1, .s2 .dim-2, .s3 .dim-3, .s4 .dim-4, .s5 .dim-5 { opacity: 0.38; }
 
   /* Lists (Settings) */
   .list-card { padding: 14px 0 12px; }
@@ -227,7 +231,7 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
   .sec-f { padding: 8px 16px 0; display: flex; align-items: center; gap: 5px; }
   .group { list-style: none; margin: 0; padding: 0; }
   .cell { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 16px; position: relative; }
-  .group > li + li .cell::before, .group > li.cell + li.cell::before, .group > li.cell + li .cell::before { content: ''; position: absolute; top: 0; right: 0; left: 57px; height: 0.5px; background: var(--separator); }
+  .group > li + li .cell::before, .group > li.cell + li.cell::before, .group > li.cell + li .cell::before { content: ''; position: absolute; top: 0; right: 0; left: 57px; height: 1px; background: var(--hairline); }
   .ico { flex: none; width: 29px; height: 29px; border-radius: 7px; display: grid; place-items: center; background: var(--fill); color: var(--label); }
   .ico :global(.g) { width: 17px; height: 17px; }
   .cell-k { flex: 1; min-width: 0; }
@@ -239,15 +243,40 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
   .w-tile { width: 44px; height: 44px; border-radius: 11px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; flex: none; }
   .used { padding: 8px 16px 0; }
   .swap span { display: none; color: var(--label); font-weight: 600; }
-  [data-step='0'] .swap .u0, [data-step='1'] .swap .u1, [data-step='2'] .swap .u2 { display: inline; }
+  [data-step='0'] .swap .u0, [data-step='1'] .swap .u1, [data-step='2'] .swap .u2, [data-step='3'] .swap .u3,
+  [data-step='4'] .swap .u4, [data-step='5'] .swap .u5, [data-step='6'] .swap .u6 { display: inline; }
+
+  /* Provider strip (from the October site): models step past; the wallet above never moves. */
+  .strip { padding: 14px 0 12px; }
+  .pwin { width: 330px; max-width: 100%; margin: 0 auto; overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, #000 26%, #000 74%, transparent); mask-image: linear-gradient(to right, transparent, #000 26%, #000 74%, transparent); }
+  .ptrack { display: flex; width: max-content; padding-left: 110px; transform: translateX(calc(var(--i, 0) * -110px)); transition: transform 0.55s var(--ease); }
+  [data-step='1'] .ptrack { --i: 1; } [data-step='2'] .ptrack { --i: 2; } [data-step='3'] .ptrack { --i: 3; }
+  [data-step='4'] .ptrack { --i: 4; } [data-step='5'] .ptrack { --i: 5; } [data-step='6'] .ptrack { --i: 6; }
+  .pi { flex: 0 0 110px; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 64px; justify-content: center; }
+  .picon { position: relative; width: 28px; height: 28px; }
+  .picon img { position: absolute; inset: 0; width: 28px; height: 28px; object-fit: contain; transition: opacity 0.4s var(--ease); }
+  .pm { opacity: 0.25; }
+  .pc { opacity: 0; }
+  .pname { color: var(--label-3); transition: color 0.4s var(--ease); }
+  [data-step='0'] .pi-0 .pc, [data-step='1'] .pi-1 .pc, [data-step='2'] .pi-2 .pc, [data-step='3'] .pi-3 .pc,
+  [data-step='4'] .pi-4 .pc, [data-step='5'] .pi-5 .pc { opacity: 1; }
+  [data-step='0'] .pi-0 .pm, [data-step='1'] .pi-1 .pm, [data-step='2'] .pi-2 .pm, [data-step='3'] .pi-3 .pm,
+  [data-step='4'] .pi-4 .pm, [data-step='5'] .pi-5 .pm { opacity: 0; }
+  [data-step='6'] .pi-6 .pm { opacity: 1; }
+  [data-step='0'] .pi-0 .pname, [data-step='1'] .pi-1 .pname, [data-step='2'] .pi-2 .pname, [data-step='3'] .pi-3 .pname,
+  [data-step='4'] .pi-4 .pname, [data-step='5'] .pi-5 .pname, [data-step='6'] .pi-6 .pname { color: var(--label); font-weight: 600; }
+  .strip-cap { padding: 6px 16px 0; text-align: center; }
   .tag { padding: 2px 8px; border-radius: 999px; background: #f6e79a; color: #0a0a0a; font-weight: 600; }
 
   /* Sources tray (like a stack of notifications) */
-  .sources { border-radius: 22px; background: var(--fill); padding: 12px; }
+  /* Sources: a stack that shrinks as each item moves up into the wallet. */
+  .sources { border-radius: 22px; background: var(--fill); padding: 12px 12px 4px; }
   .src-h { padding: 0 4px 8px; }
-  .src-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .mini { padding: 10px 12px; border-radius: 14px; transition: opacity 0.45s var(--ease), transform 0.45s var(--ease); }
-  .s1 .gone-1, .s2 .gone-2, .s3 .gone-3, .s4 .gone-4 { opacity: 0; transform: translateY(-10px) scale(0.96); }
+  .src-list { list-style: none; margin: 0; padding: 0; }
+  .src-list > li.cx { margin-top: 0; }
+  .src-item { padding-bottom: 8px; }
+  .mini { display: flex; align-items: baseline; gap: 8px; padding: 10px 12px; border-radius: 14px; }
+  .from { flex: none; min-width: 58px; }
 
   /* Alert */
   .alert { padding: 22px 16px 16px; text-align: center; }
@@ -281,22 +310,7 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
   .w-note { margin-top: 6px !important; display: flex; align-items: center; gap: 5px; }
   .ok-g { color: var(--ok); }
 
-  /* Selection list: the check mark moves with the step */
-  .tick { margin-left: 4px; color: var(--label); opacity: 0; transition: opacity 0.35s var(--ease); }
-  .tick :global(.g) { width: 17px; height: 17px; }
-  [data-step='0'] .p0 .tick, [data-step='1'] .p1 .tick, [data-step='2'] .p2 .tick { opacity: 1; }
 
-  /* Replay, shown once the morph has finished */
-  .replay {
-    position: absolute; right: 14px; bottom: 14px;
-    width: 36px; height: 36px; border-radius: 50%; border: 0; cursor: pointer;
-    display: grid; place-items: center;
-    background: var(--cell); color: var(--label); box-shadow: 0 2px 8px rgb(0 0 0 / 0.12);
-    opacity: 0; visibility: hidden; transition: opacity 0.3s var(--ease), visibility 0.3s;
-  }
-  .replay::after { content: ''; position: absolute; inset: -4px; }
-  .replay :global(.g) { width: 16px; height: 16px; }
-  .done .replay { opacity: 1; visibility: visible; }
 </style>
 <style is:global>
   :root[data-theme='dark'] .sv .app,
@@ -304,7 +318,9 @@ const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme='light']) .sv .app,
     :root:not([data-theme='light']) .sv .app-sm { background: #f5f1e6; }
+    :root:not([data-theme='light']) .sv .pm { filter: invert(1); }
   }
+  :root[data-theme='dark'] .sv .pm { filter: invert(1); }
   :root[data-theme='dark'] .sv .w-tile,
   :root[data-theme='dark'] .sv .w-mark { box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.14); }
 </style>

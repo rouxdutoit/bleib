@@ -1,11 +1,11 @@
 ---
 import { routes, t, type Lang } from '../i18n/strings';
-interface Props { lang: Lang }
-const { lang } = Astro.props;
+interface Props { lang: Lang; centered?: boolean }
+const { lang, centered = false } = Astro.props;
 const f = t(lang).form;
 ---
 <form
-  class="ea"
+  class:list={['ea', { centered }]}
   method="post"
   action="/api/early-access"
   novalidate
@@ -20,7 +20,7 @@ const f = t(lang).form;
   <div class="hp" aria-hidden="true">
     <label>{f.honeypot}<input type="text" name="company" tabindex="-1" autocomplete="off" /></label>
   </div>
-  <label class="ea-label" for={`ea-email-${lang}`}>{f.label}</label>
+  <label class:list={['ea-label', { 'sr-only': centered }]} for={`ea-email-${lang}`}>{f.label}</label>
   <div class="ea-row">
     <input
       id={`ea-email-${lang}`}
@@ -31,7 +31,7 @@ const f = t(lang).form;
       autocomplete="email"
       required
       maxlength="254"
-      placeholder={f.placeholder}
+      placeholder={centered ? f.label : f.placeholder}
       aria-describedby={`ea-status-${lang} ea-note-${lang}`}
     />
     <button class="btn btn-primary ea-btn" type="submit">{f.submit}</button>
@@ -59,6 +59,10 @@ const f = t(lang).form;
   .ea-note { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
   .ea-note a { color: inherit; }
   .ea.is-done .ea-row { display: none; }
+  .ea.centered { max-width: 480px; }
+  .ea.centered .ea-row { justify-content: center; }
+  .ea.centered .ea-status, .ea.centered .ea-note { text-align: center; }
+  .ea.centered .ea-input { text-align: left; }
 </style>
 <script>
   import { initEarlyAccess } from '../scripts/earlyAccess';

@@ -36,14 +36,12 @@ const s = t(lang).story;
   .scene[data-side='card-right'] .pair { grid-template-columns: min(420px, 34vw) min(500px, 44vw); }
   .scene[data-side='card-right'] .visual { order: 2; }
   .text .lead { margin: 18px 0 0; }
-  /* The visual column keeps its place; the tray inside starts at the top and grows downward. */
-  .visual { min-height: 560px; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 24px; }
+  /* Tray and text are centred together; the tray grows evenly and the text stays centred on it. */
 
   @media (max-width: 767px) {
     .scene { min-height: 0; padding: 48px 0 8px; }
     .pair, .scene[data-side='card-right'] .pair { width: var(--colw); grid-template-columns: 1fr; gap: 24px; }
     .scene .text { order: -1; }
-    .visual { min-height: 0; padding-top: 0; }
     .scene[data-side='card-right'] .visual { order: 0; }
   }
 </style>

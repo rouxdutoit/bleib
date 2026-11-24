@@ -1,5 +1,5 @@
 /**
- * Plays each scene's card morph once, when the scene comes into view, then offers Replay.
+ * Plays each scene's card morph once, when the scene comes into view.
  * Steps are applied as data-step="n" plus cumulative classes s1..sn (see StoryVisual.astro).
  * With reduced motion, the final state is shown at once.
  */
@@ -12,6 +12,7 @@ export function initStory(): void {
 
   visuals.forEach((sv) => {
     const steps = Number(sv.dataset.steps ?? '0');
+    const interval = Number(sv.dataset.interval ?? STEP);
     let timers: number[] = [];
 
     const setStep = (n: number) => {
@@ -35,12 +36,10 @@ export function initStory(): void {
       }
       setStep(0);
       for (let k = 1; k <= steps; k++) {
-        timers.push(window.setTimeout(() => setStep(k), START + (k - 1) * STEP));
+        timers.push(window.setTimeout(() => setStep(k), START + (k - 1) * interval));
       }
-      timers.push(window.setTimeout(() => sv.classList.add('done'), START + steps * STEP));
+      timers.push(window.setTimeout(() => sv.classList.add('done'), START + steps * interval));
     };
-
-    sv.querySelector<HTMLButtonElement>('[data-replay]')?.addEventListener('click', play);
 
     let played = false;
     const io = new IntersectionObserver(
