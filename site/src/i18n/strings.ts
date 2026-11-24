@@ -107,7 +107,7 @@ const en = {
         more: { to: 'receipts', hash: '', label: 'A receipt for every share' },
       },
       {
-        h: ['Turn their memory off.', 'bleib remembers for you.'],
+        h: ['Turn their memory off.', 'bleib keeps yours.'],
         p: 'Every new chat starts fresh. bleib adds what it needs. Only you hold the key.',
         more: { to: 'security', hash: '', label: 'Private by design' },
         dark: true,
@@ -299,7 +299,7 @@ const de: Strings = {
         more: { to: 'receipts', hash: '', label: 'Ein Beleg für jede Weitergabe' },
       },
       {
-        h: ['Schalte ihr Gedächtnis aus.', 'bleib merkt es sich für dich.'],
+        h: ['Schalte ihr Gedächtnis aus.', 'bleib behält deins.'],
         p: 'Jeder neue Chat beginnt frisch. bleib ergänzt, was er braucht. Den Schlüssel hast nur du.',
         more: { to: 'security', hash: '', label: 'Privat von Grund auf' },
         dark: true,
