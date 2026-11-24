@@ -113,7 +113,7 @@ const en = {
         { from: 'Claude', text: 'Weekly review' },
         { from: 'Notes', text: 'Health notes' },
       ],
-      footer: 'Encrypted. Unlocks with your face or fingerprint.',
+      footer: 'Encrypted on this device. Only you have access.',
     },
     ask: {
       title: 'Share your health notes with Claude?',
@@ -295,7 +295,7 @@ const de: Strings = {
         { from: 'Claude', text: 'Wochenrückblick' },
         { from: 'Notizen', text: 'Gesundheitsnotizen' },
       ],
-      footer: 'Verschlüsselt. Entsperrt mit Gesicht oder Fingerabdruck.',
+      footer: 'Verschlüsselt auf diesem Gerät. Nur du hast Zugriff.',
     },
     ask: {
       title: 'Gesundheitsnotizen mit Claude teilen?',
