@@ -25,9 +25,9 @@ export type RouteKey = keyof typeof routes;
 
 const en = {
   meta: {
-    title: 'bleib: your AI context, encrypted and yours',
+    title: 'bleib: your AI memory, in your hands',
     description:
-      'bleib is the open source wallet for what your AI knows about you. Encrypted on your side, asked before anything is shared, with a receipt of exactly what each AI saw.',
+      'bleib keeps one memory for all your AIs, encrypted on your device. You decide what each AI may see, and you can always check what it saw. Free and open source.',
   },
   skip: 'Skip to content',
   nav: {
@@ -46,43 +46,23 @@ const en = {
     themeToLight: 'Switch to light mode',
   },
   hero: {
-    eyebrow: 'Open source · Free · Your keys',
-    h1a: 'One memory for every AI.',
-    h1b: 'Kept by you.',
-    sub: 'bleib is a free, open source wallet for what your AIs know about you. Any AI or agent can use it. You decide what each one sees, and get a receipt every time something is shared.',
+    eyebrow: 'Free and open source',
+    h1a: 'Your AI memory.',
+    h1b: 'In your hands.',
+    sub: 'ChatGPT, Claude and other AIs each keep their own memory of you, on their servers. bleib keeps one memory for all of them, encrypted on your device. You decide what each AI may see, and you can always check what it saw.',
     primary: 'Get early access',
     secondary: 'View on GitHub',
-    note: 'In development. Free and open source.',
+    note: 'In development. Get early access to try it first.',
   },
   preview: {
     file: 'bleib · Your wallet',
-    eyebrow: 'This week',
     title: 'What your AI saw',
-    tiles: [
-      { n: '3', label: 'AIs connected', note: 'Claude, Codex, Ollama' },
-      { n: '11', label: 'Facts shared', note: 'Each with a receipt' },
-      { n: '0', label: 'Health details', note: 'Nothing left this device' },
-    ],
-    rowsLabel: 'Latest receipts',
     rows: [
-      { who: 'Claude', where: 'Anthropic (hosted)', why: 'Lisbon trip', when: 'Today 14:32', icon: '/providers/claude.svg', kinds: [{ icon: 'flight', label: 'Travel' }] },
-      { who: 'Codex', where: 'OpenAI (hosted)', why: 'Planning', when: 'Mon 09:10', icon: '/providers/codex.svg', kinds: [{ icon: 'work', label: 'Work' }] },
-      { who: 'Ollama', where: 'On this device', why: 'Dinner', when: 'Sun 18:45', icon: '/providers/ollama.svg', kinds: [{ icon: 'person', label: 'People' }, { icon: 'restaurant', label: 'Food' }] },
+      { who: 'Claude', where: 'Anthropic', when: 'Today 14:32', icon: '/providers/claude.svg', saw: ['Prefers aisle seats', 'Hotels under €250 a night'] },
+      { who: 'Codex', where: 'OpenAI', when: 'Mon 09:10', icon: '/providers/codex.svg', saw: ['Weekly review on Fridays'] },
+      { who: 'Ollama', where: 'On this device', when: 'Sun 18:45', icon: '/providers/ollama.svg', saw: ['Dinner with Marek'] },
     ],
-    inspector: {
-      label: 'Receipt',
-      title: 'Claude · Today 14:32',
-      facts: [
-        { k: 'Sent to', v: 'Anthropic (hosted)' },
-        { k: 'For', v: 'Planning your Lisbon trip' },
-        { k: 'Permission', v: 'Always for Claude' },
-      ],
-      exactLabel: 'Exactly what was shared',
-      exact: ['Prefers aisle seats', 'Hotels under €250 a night'],
-      notShared: 'Not shared: Health, People, Work',
-      fingerprint: 'a3f9 2c71 · · · 9b04',
-      verified: 'Verified',
-    },
+    footer: 'Nothing about your health left this device.',
   },
   story: {
     label: 'How bleib works',
@@ -91,7 +71,7 @@ const en = {
     scenes: [
       {
         tick: 'Wallet',
-        h: ['Your context.', 'In one place.'],
+        h: ['Your memory.', 'In one place.'],
         p: 'People, preferences and rules your AIs need, in plain text you can read and correct. Encrypted on your device.',
         more: { to: 'how', hash: '#wallet' },
       },
@@ -244,9 +224,9 @@ export type Strings = typeof en;
 
 const de: Strings = {
   meta: {
-    title: 'bleib: dein KI-Kontext, verschlüsselt und deins',
+    title: 'bleib: dein KI-Gedächtnis, in deiner Hand',
     description:
-      'bleib ist die Open-Source-Wallet für das, was deine KI über dich weiß. Verschlüsselt auf deiner Seite, gefragt, bevor etwas geteilt wird, mit einem Beleg darüber, was jede KI gesehen hat.',
+      'bleib hält ein Gedächtnis für all deine KIs, verschlüsselt auf deinem Gerät. Du entscheidest, was jede KI sehen darf, und kannst jederzeit nachsehen, was sie gesehen hat. Kostenlos und Open Source.',
   },
   skip: 'Zum Inhalt springen',
   nav: {
@@ -265,43 +245,23 @@ const de: Strings = {
     themeToLight: 'Helles Design einschalten',
   },
   hero: {
-    eyebrow: 'Open Source · Kostenlos · Deine Schlüssel',
-    h1a: 'Ein Gedächtnis für jede KI.',
+    eyebrow: 'Kostenlos und Open Source',
+    h1a: 'Dein KI-Gedächtnis.',
     h1b: 'In deiner Hand.',
-    sub: 'bleib ist eine kostenlose Open-Source-Wallet für das, was deine KIs über dich wissen. Jede KI und jeder Agent kann sie nutzen. Du entscheidest, was jede sieht, und bekommst bei jeder Weitergabe einen Beleg.',
+    sub: 'ChatGPT, Claude und andere KIs speichern jeweils ihr eigenes Wissen über dich, auf ihren Servern. bleib hält ein Gedächtnis für alle, verschlüsselt auf deinem Gerät. Du entscheidest, was jede KI sehen darf, und kannst jederzeit nachsehen, was sie gesehen hat.',
     primary: 'Frühen Zugang sichern',
     secondary: 'Auf GitHub ansehen',
-    note: 'In Entwicklung. Kostenlos und Open Source.',
+    note: 'In Entwicklung. Sichere dir frühen Zugang und probiere es zuerst.',
   },
   preview: {
     file: 'bleib · Deine Wallet',
-    eyebrow: 'Diese Woche',
     title: 'Was deine KI gesehen hat',
-    tiles: [
-      { n: '3', label: 'KIs verbunden', note: 'Claude, Codex, Ollama' },
-      { n: '11', label: 'Fakten geteilt', note: 'Jeder mit Beleg' },
-      { n: '0', label: 'Gesundheitsdaten', note: 'Nichts hat dieses Gerät verlassen' },
-    ],
-    rowsLabel: 'Neueste Belege',
     rows: [
-      { who: 'Claude', where: 'Anthropic (gehostet)', why: 'Reise nach Lissabon', when: 'Heute 14:32', icon: '/providers/claude.svg', kinds: [{ icon: 'flight', label: 'Reisen' }] },
-      { who: 'Codex', where: 'OpenAI (gehostet)', why: 'Planung', when: 'Mo 09:10', icon: '/providers/codex.svg', kinds: [{ icon: 'work', label: 'Arbeit' }] },
-      { who: 'Ollama', where: 'Auf diesem Gerät', why: 'Abendessen', when: 'So 18:45', icon: '/providers/ollama.svg', kinds: [{ icon: 'person', label: 'Menschen' }, { icon: 'restaurant', label: 'Essen' }] },
+      { who: 'Claude', where: 'Anthropic', when: 'Heute 14:32', icon: '/providers/claude.svg', saw: ['Bevorzugt Gangplätze', 'Hotels unter 250 € pro Nacht'] },
+      { who: 'Codex', where: 'OpenAI', when: 'Mo 09:10', icon: '/providers/codex.svg', saw: ['Wöchentliches Review am Freitag'] },
+      { who: 'Ollama', where: 'Auf diesem Gerät', when: 'So 18:45', icon: '/providers/ollama.svg', saw: ['Abendessen mit Marek'] },
     ],
-    inspector: {
-      label: 'Beleg',
-      title: 'Claude · Heute 14:32',
-      facts: [
-        { k: 'Gesendet an', v: 'Anthropic (gehostet)' },
-        { k: 'Für', v: 'Planung deiner Reise nach Lissabon' },
-        { k: 'Erlaubnis', v: 'Immer für Claude' },
-      ],
-      exactLabel: 'Genau das wurde geteilt',
-      exact: ['Bevorzugt Gangplätze', 'Hotels unter 250 € pro Nacht'],
-      notShared: 'Nicht geteilt: Gesundheit, Menschen, Arbeit',
-      fingerprint: 'a3f9 2c71 · · · 9b04',
-      verified: 'Geprüft',
-    },
+    footer: 'Nichts über deine Gesundheit hat dieses Gerät verlassen.',
   },
   story: {
     label: 'So funktioniert bleib',
@@ -310,7 +270,7 @@ const de: Strings = {
     scenes: [
       {
         tick: 'Wallet',
-        h: ['Dein Kontext.', 'An einem Ort.'],
+        h: ['Dein Gedächtnis.', 'An einem Ort.'],
         p: 'Menschen, Vorlieben und Regeln, die deine KIs brauchen, als Klartext, den du lesen und korrigieren kannst. Verschlüsselt auf deinem Gerät.',
         more: { to: 'how', hash: '#wallet' },
       },
