@@ -233,7 +233,7 @@ h3 {
    Appear     .appear.at-N                fades in with a small rise, in space it already holds
    Crossfade  .crossfade.at-N > a + b     a gives way to b in place (Add → Added)
    Settle     .dim-N                      greys out once done; nothing ever disappears
-   Draw       .draw (SVG path)            draws itself on when its .at-N turns on
+   Draw       .draw (SVG path)            draws itself on as its crossfade (.crossfade.at-N) turns on
    Press      .press.at-N                 dips as if tapped when its step comes
    Land       .land.at-N                  drops into place with a small spring, as it is revealed
    Toggle     .toggle.at-N                an iOS switch, on in bleib yellow, that turns off at step N
@@ -291,7 +291,8 @@ h3 {
 .s4 .crossfade.at-4 > :last-child, .s5 .crossfade.at-5 > :last-child, .s6 .crossfade.at-6 > :last-child {
   opacity: 1;
 }
-.s1 .at-1 .draw, .s2 .at-2 .draw, .s3 .at-3 .draw, .s4 .at-4 .draw, .s5 .at-5 .draw, .s6 .at-6 .draw {
+.s1 .crossfade.at-1 .draw, .s2 .crossfade.at-2 .draw, .s3 .crossfade.at-3 .draw,
+.s4 .crossfade.at-4 .draw, .s5 .crossfade.at-5 .draw, .s6 .crossfade.at-6 .draw {
   stroke-dashoffset: 0;
 }
 .s1 .dim-1, .s2 .dim-2, .s3 .dim-3, .s4 .dim-4, .s5 .dim-5, .s6 .dim-6 {

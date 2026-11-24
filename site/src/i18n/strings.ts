@@ -136,6 +136,7 @@ const en = {
       title: 'Share your health notes with Claude?',
       message: 'For your running plan. Health is sensitive, so bleib asks first.',
       action: 'Allow Once',
+      allowed: 'Allowed',
       later: { title: 'Claude used Travel', sub: 'Hotels in Porto', tag: 'Automatic' },
     },
     receipt: {
@@ -326,6 +327,7 @@ const de: Strings = {
       title: 'Gesundheitsnotizen mit Claude teilen?',
       message: 'Für deinen Laufplan. Gesundheit ist sensibel, darum fragt bleib vorher.',
       action: 'Einmal erlauben',
+      allowed: 'Erlaubt',
       later: { title: 'Claude nutzte Reisen', sub: 'Hotels in Porto', tag: 'Automatisch' },
     },
     receipt: {

@@ -5,9 +5,10 @@
  * Every card reads top to bottom as cause, then result, so the eye ends on the outcome.
  * Steps are driven by scripts/story.ts: it sets data-step="n" and cumulative classes s1..sn.
  * Moves come from the motion kit in global.css (Reveal, Crossfade, Settle via .at-N and .dim-N);
- *   .pick-at-N  capsule turns prominent at step N
+ *   .pick-at-N  a choice is pressed at step N and turns bleib yellow, done
  */
 import Mark from './Mark.astro';
+import DrawTick from './DrawTick.astro';
 import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang; scene: number }
 const { lang, scene } = Astro.props;
@@ -143,7 +144,7 @@ const cx = (n: number) => `reveal at-${n}`;
                 <p class="t-headline">{c.ask.title}</p>
                 <p class="t-foot msg">{c.ask.message}</p>
                 <div class="pills">
-                  <span class="pill t-body press pick-at-2 at-2">{c.ask.action}</span>
+                  <span class="pill t-body crossfade press pick-at-2 at-2"><span>{c.ask.action}</span><span class="done"><span class="tick"><DrawTick /></span>{c.ask.allowed}</span></span>
                 </div>
               </div>
             </div>
@@ -278,7 +279,12 @@ const cx = (n: number) => `reveal at-${n}`;
   .msg { margin-top: 4px !important; }
   .pills { display: grid; gap: 8px; margin-top: 18px; }
   .pill { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 12px; border-radius: 999px; background: var(--fill); color: var(--label); font-weight: 500; transition: background-color var(--t-fade) var(--ease), color var(--t-fade) var(--ease); }
-  .s2 .pick-at-2 { background: var(--label); color: var(--cell); }
+  /* Like Added: the pressed choice crossfades to its done label and turns bleib yellow as a tick draws. */
+  .pill.crossfade { display: grid; place-items: center; }
+  .done { display: inline-flex; align-items: center; gap: 6px; }
+  .tick { display: grid; }
+  .tick :global(.draw-tick) { width: 16px; height: 16px; }
+  .s2 .pick-at-2 { background: #f6e79a; color: #0a0a0a; }
 
   /* Notification */
   .note { padding: 14px 16px 16px; }
