@@ -89,6 +89,8 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
   /* A standing promise, not a step: there from the start, centred under the field. */
   .private { margin-top: 10px !important; display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--label-2); }
   .lock :global(svg) { width: 13px; height: 13px; display: block; }
+  /* On phones the lines use Callout size, so each fits on one row about as wide as the headline. */
+  @media (max-width: 480px) { .sub { font-size: 16px; line-height: 21px; text-wrap: pretty; } }
   @media (max-width: 767px) {
     .preview { zoom: 0.92; }
     .body :global(.facts li) { white-space: normal; }

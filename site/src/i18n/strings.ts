@@ -48,7 +48,7 @@ const en = {
     eyebrow: 'In development',
     h1a: 'Your AI memory.',
     h1b: 'In your hands.',
-    sub: ['Every AI knows you from the first message.', 'A password manager, for your preferences.', 'Their memory can stay off. Yours stays with you.'],
+    sub: ['Every AI knows you from the first message.', 'A password manager, for your preferences.', 'Their memory can stay off.', 'Yours stays with you.'],
     primary: 'Get early access',
     secondary: 'View on GitHub',
     trust: [
@@ -82,7 +82,7 @@ const en = {
     label: 'How bleib works',
     scenes: [
       {
-        h: ['See what AI', 'knows about you.'],
+        h: ['Control what AI', 'knows about you.'],
         p: "bleib brings what your AIs remember into one place. Fix what's wrong, keep what's right.",
         more: { to: 'how', hash: '#memory', label: 'One memory, every AI' },
       },
@@ -240,7 +240,7 @@ const de: Strings = {
     eyebrow: 'In Entwicklung',
     h1a: 'Dein KI-Gedächtnis.',
     h1b: 'In deiner Hand.',
-    sub: ['Jede KI kennt dich ab der ersten Nachricht.', 'Ein Passwort-Manager für deine Vorlieben.', 'Ihr Gedächtnis kann aus bleiben. Deins bleibt bei dir.'],
+    sub: ['Jede KI kennt dich ab der ersten Nachricht.', 'Ein Passwort-Manager für deine Vorlieben.', 'Ihr Gedächtnis kann aus bleiben.', 'Deins bleibt bei dir.'],
     primary: 'Frühen Zugang sichern',
     secondary: 'Auf GitHub ansehen',
     trust: [
@@ -274,7 +274,7 @@ const de: Strings = {
     label: 'So funktioniert bleib',
     scenes: [
       {
-        h: ['Sieh, was die KI', 'über dich weiß.'],
+        h: ['Bestimme, was die KI', 'über dich weiß.'],
         p: 'bleib sammelt an einem Ort, was sich deine KIs merken. Korrigiere, was nicht stimmt, und behalte, was passt.',
         more: { to: 'how', hash: '#memory', label: 'Ein Gedächtnis, jede KI' },
       },
