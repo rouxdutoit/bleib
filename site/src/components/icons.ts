@@ -12,6 +12,7 @@ import check from '@material-symbols/svg-700/rounded/check.svg?raw';
 import verifiedUser from '@material-symbols/svg-400/rounded/verified_user-fill.svg?raw';
 import code from '@material-symbols/svg-400/rounded/code.svg?raw';
 import redeem from '@material-symbols/svg-400/rounded/redeem-fill.svg?raw';
+import savings from '@material-symbols/svg-400/rounded/savings-fill.svg?raw';
 import arrowOutward from '@material-symbols/svg-400/rounded/arrow_outward.svg?raw';
 import darkMode from '@material-symbols/svg-400/rounded/dark_mode-fill.svg?raw';
 import lightMode from '@material-symbols/svg-400/rounded/light_mode-fill.svg?raw';
@@ -32,6 +33,7 @@ const raw = {
   verified_user: verifiedUser,
   code,
   redeem,
+  savings,
   arrow_outward: arrowOutward,
   dark_mode: darkMode,
   light_mode: lightMode,

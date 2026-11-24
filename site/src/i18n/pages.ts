@@ -16,7 +16,8 @@ export type Block =
   | { address: string[] }
   | { never: string[] }
   | { rows: { k: string; v: string }[] }
-  | { tiles: Tile[] };
+  | { tiles: Tile[] }
+  | { refs: { name: string; href: string; v: string }[] };
 
 export interface Section {
   id?: string;
@@ -431,6 +432,25 @@ const en: Docs = {
               'Permissions and logs follow the Human Context Protocol, with destination and exact-content receipts added.',
               'Receipts align with ISO/IEC TS 27560 and the W3C Data Privacy Vocabulary.',
               'Files are encrypted with age; keys come from your passphrase and never leave your device.',
+            ],
+          },
+        ],
+      },
+      {
+        h: 'Built on',
+        blocks: [
+          { p: 'bleib stands on open work by others. Thank you.' },
+          {
+            refs: [
+              { name: 'Model Context Protocol', href: 'https://modelcontextprotocol.io', v: 'How agents connect to the wallet.' },
+              { name: 'OpenClaw', href: 'https://docs.openclaw.ai/concepts/memory', v: 'The workspace memory format bleib reads and writes.' },
+              { name: 'Hermes Agent', href: 'https://hermes-agent.nousresearch.com', v: 'By Nous Research; uses the same workspace format.' },
+              { name: 'Human Context Protocol', href: 'https://github.com/loyalagents/hcp-spec', v: 'By Loyal Agents (Stanford Digital Economy Lab and Consumer Reports); the model for permissions and logs.' },
+              { name: 'ISO/IEC TS 27560', href: 'https://www.iso.org/standard/80392.html', v: 'The structure of consent records.' },
+              { name: 'W3C Data Privacy Vocabulary', href: 'https://w3id.org/dpv', v: 'The kinds of personal information.' },
+              { name: 'OSAP consent receipts', href: 'https://datatracker.ietf.org/doc/draft-zeng-osap-consent-receipts/', v: 'IETF draft; the receipt export.' },
+              { name: 'Memory Projection Record', href: 'https://datatracker.ietf.org/doc/draft-ferro-schrock-memory-projection-record/', v: 'IETF draft; a fingerprint of exactly what was released.' },
+              { name: 'age', href: 'https://age-encryption.org', v: 'By Filippo Valsorda; encrypts your files.' },
             ],
           },
         ],
@@ -1025,6 +1045,25 @@ const de: Docs = {
               'Berechtigungen und Protokolle folgen dem Human Context Protocol, ergänzt um Ziel und Belege mit genauem Inhalt.',
               'Belege orientieren sich an ISO/IEC TS 27560 und am W3C Data Privacy Vocabulary.',
               'Dateien werden mit age verschlüsselt. Die Schlüssel entstehen aus deiner Passphrase und verlassen dein Gerät nie.',
+            ],
+          },
+        ],
+      },
+      {
+        h: 'Baut auf',
+        blocks: [
+          { p: 'bleib baut auf offener Arbeit anderer auf. Danke.' },
+          {
+            refs: [
+              { name: 'Model Context Protocol', href: 'https://modelcontextprotocol.io', v: 'Wie Agenten sich mit der Wallet verbinden.' },
+              { name: 'OpenClaw', href: 'https://docs.openclaw.ai/concepts/memory', v: 'Das Workspace-Format für Erinnerungen, das bleib liest und schreibt.' },
+              { name: 'Hermes Agent', href: 'https://hermes-agent.nousresearch.com', v: 'Von Nous Research; nutzt dasselbe Workspace-Format.' },
+              { name: 'Human Context Protocol', href: 'https://github.com/loyalagents/hcp-spec', v: 'Von Loyal Agents (Stanford Digital Economy Lab und Consumer Reports); das Modell für Berechtigungen und Protokolle.' },
+              { name: 'ISO/IEC TS 27560', href: 'https://www.iso.org/standard/80392.html', v: 'Der Aufbau von Einwilligungsnachweisen.' },
+              { name: 'W3C Data Privacy Vocabulary', href: 'https://w3id.org/dpv', v: 'Die Arten persönlicher Informationen.' },
+              { name: 'OSAP consent receipts', href: 'https://datatracker.ietf.org/doc/draft-zeng-osap-consent-receipts/', v: 'IETF-Entwurf; der Export der Belege.' },
+              { name: 'Memory Projection Record', href: 'https://datatracker.ietf.org/doc/draft-ferro-schrock-memory-projection-record/', v: 'IETF-Entwurf; ein Fingerabdruck genau dessen, was weitergegeben wurde.' },
+              { name: 'age', href: 'https://age-encryption.org', v: 'Von Filippo Valsorda; verschlüsselt deine Dateien.' },
             ],
           },
         ],

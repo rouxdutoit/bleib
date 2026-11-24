@@ -43,6 +43,8 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
               {sec.blocks.map((b) =>
                 is(b, 'never') ? (
                   <ul class="never">{b.never.map((x) => <li><span class="ni" set:html={icon('verified_user')} /><span>{x}</span></li>)}</ul>
+                ) : is(b, 'refs') ? (
+                  <dl class="kv refs">{b.refs.map((r) => <div><dt><a href={r.href} rel="noopener">{r.name}</a></dt><dd>{r.v}</dd></div>)}</dl>
                 ) : is(b, 'rows') ? (
                   <dl class="kv">{b.rows.map((r) => <div><dt>{r.k}</dt><dd>{r.v}</dd></div>)}</dl>
                 ) : is(b, 'tiles') ? (
@@ -112,6 +114,9 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
   .kv div:first-child { border-top: 0; padding-top: 0; }
   .kv dt { color: var(--muted); }
   .kv dd { margin: 0; }
+  .refs dt a { color: var(--ink); font-weight: 500; text-decoration: underline; text-decoration-color: var(--rail); text-underline-offset: 3px; }
+  .refs dt a:hover { text-decoration-color: currentColor; }
+  .refs dd { color: var(--muted); }
 
   .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   /* Tags sit in the corner so titles line up across a row, with or without a tag. */

@@ -1,9 +1,11 @@
 ---
 import Logo from './Logo.astro';
-import { GITHUB_URL, routes, t, type Lang, type RouteKey } from '../i18n/strings';
+import { GITHUB_URL, routes, t, otherLang, type Lang, type RouteKey } from '../i18n/strings';
+import { icon } from './icons';
 interface Props { lang: Lang; page: RouteKey }
 const { lang, page } = Astro.props;
 const s = t(lang).nav;
+const other = otherLang(lang);
 const githubHref = GITHUB_URL || routes.developers[lang];
 const earlyHref = page === 'home' ? '#early-access' : `${routes.home[lang]}#early-access`;
 const links: { key: RouteKey; label: string }[] = [
@@ -12,23 +14,57 @@ const links: { key: RouteKey; label: string }[] = [
   { key: 'developers', label: s.developers },
   { key: 'pricing', label: s.pricing },
 ];
-import { icon } from './icons';
 const arrow = icon('arrow_outward');
 ---
-<header class="site-header">
+<header class="site-header" data-header>
   <div class="frame">
     <Logo lang={lang} />
-    <nav class="nav" aria-label="Primary">
-      <ul class="links">
-        {links.map((l) => (
-          <li><a href={routes[l.key][lang]} aria-current={l.key === page ? 'page' : undefined}>{l.label}</a></li>
-        ))}
-        <li><a href={githubHref}>{s.github}</a></li>
-      </ul>
-      <a class="btn btn-primary cta" href={earlyHref}>{s.early}<span set:html={arrow} /></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" hidden>
+      <span class="menu-icon" aria-hidden="true"><span></span><span></span></span>
+      <span class="sr-only">{s.menu}</span>
+    </button>
+    <nav class="nav" id="site-nav" aria-label="Primary">
+      <div class="nav-in">
+        <ul class="links">
+          {links.map((l) => (
+            <li><a href={routes[l.key][lang]} aria-current={l.key === page ? 'page' : undefined}>{l.label}</a></li>
+          ))}
+          <li><a href={githubHref}>{s.github}</a></li>
+          <li class="lang-item"><a class="lang" href={routes[page][other]} hreflang={other} lang={other} aria-label={s.langSwitchLabel}><span class="ti" set:html={icon('translate')} />{s.langSwitch}</a></li>
+        </ul>
+        <a class="btn btn-primary cta" href={earlyHref}>{s.early}<span set:html={arrow} /></a>
+      </div>
     </nav>
   </div>
 </header>
+<script>
+  // Mobile menu, as on fazit.dev: closes on a link, Escape, focus leaving the header, or a wider screen.
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const button = header?.querySelector<HTMLButtonElement>('.menu-btn');
+  if (header && button) {
+    const setOpen = (open: boolean) => {
+      button.setAttribute('aria-expanded', String(open));
+      header.toggleAttribute('data-open', open);
+    };
+    header.classList.add('js');
+    button.hidden = false;
+    button.addEventListener('click', () => setOpen(!header.hasAttribute('data-open')));
+    header.querySelector('nav')?.addEventListener('click', (e) => {
+      if ((e.target as Element).closest('a')) setOpen(false);
+    });
+    header.addEventListener('focusout', (e) => {
+      const next = (e as FocusEvent).relatedTarget as Node | null;
+      if (next && !header.contains(next)) setOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && header.hasAttribute('data-open')) {
+        setOpen(false);
+        button.focus();
+      }
+    });
+    matchMedia('(min-width: 861px)').addEventListener('change', () => setOpen(false));
+  }
+</script>
 <style>
   .site-header {
     position: fixed;
@@ -38,7 +74,7 @@ const arrow = icon('arrow_outward');
     -webkit-backdrop-filter: blur(14px) saturate(1.2);
     backdrop-filter: blur(14px) saturate(1.2);
   }
-  /* The header sits inside the page rails; its bottom edge is a guide line with crosshairs. */
+  /* The header sits inside the page rails; its bottom edge is a guide line with joiners. */
   .frame {
     position: relative;
     width: var(--rails-box);
@@ -54,7 +90,9 @@ const arrow = icon('arrow_outward');
     border-bottom: 1px solid var(--rail);
   }
   .frame::before,
-  .frame::after {
+  .frame::after,
+  .nav::before,
+  .nav::after {
     content: '';
     position: absolute;
     bottom: -5px;
@@ -66,17 +104,94 @@ const arrow = icon('arrow_outward');
   }
   .frame::before { left: -5px; background-size: 5px 1px, 1px 9px; background-position: right center, center center; }
   .frame::after { right: -5px; background-size: 5px 1px, 1px 9px; background-position: left center, center center; }
-  .nav { display: flex; align-items: center; gap: clamp(12px, 2.2vw, 30px); }
+  .nav::before, .nav::after { display: none; }
+
+  .nav-in { display: flex; align-items: center; gap: clamp(12px, 2.2vw, 30px); }
   .links { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: clamp(12px, 2.2vw, 30px); }
-  .links a { font-size: 15px; text-decoration: none; color: var(--muted); padding: 10px 0; display: inline-block; }
+  .links a { font-size: 15px; text-decoration: none; color: var(--muted); padding: 10px 0; display: inline-flex; align-items: center; gap: 8px; }
   .links a:hover, .links a[aria-current='page'] { color: var(--ink); }
+  .lang-item { display: none; }
+  .ti :global(svg) { width: 18px; height: 18px; display: block; }
   .cta { gap: 10px; }
   .cta :global(svg) { width: 14px; height: 14px; }
+
+  .menu-btn { display: none; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
   @media (max-width: 860px) {
-    .links { display: none; }
-  }
-  @media (max-width: 767px) {
-    .frame { height: 64px; padding: 0 12px; }
-    .cta { padding: 10px 14px; font-size: 14px; }
+    .frame { height: 64px; padding: 0 12px 0 var(--inset); }
+    .menu-btn:not([hidden]) {
+      display: inline-grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 0;
+      border-radius: 12px;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+    }
+    .menu-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    .menu-icon { position: relative; width: 18px; height: 12px; }
+    .menu-icon > span {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 1.5px;
+      height: 1.5px;
+      border-radius: 999px;
+      background: currentColor;
+      transition: transform 0.4s var(--ease);
+    }
+    .menu-icon > span + span { top: auto; bottom: 1.5px; }
+    [aria-expanded='true'] > .menu-icon > span { transform: translateY(3.75px) rotate(45deg); }
+    [aria-expanded='true'] > .menu-icon > span + span { transform: translateY(-3.75px) rotate(-45deg); }
+
+    /* The menu drops down between the two rails, not across the full screen. */
+    .nav {
+      position: absolute;
+      top: calc(100% + 1px);
+      left: 0;
+      right: 0;
+      display: grid;
+      grid-template-rows: 1fr;
+      background: var(--page);
+    }
+    .nav-in {
+      min-height: 0;
+      overflow: hidden;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 0 var(--inset);
+    }
+    .links { flex-direction: column; align-items: stretch; gap: 0; padding-top: 8px; }
+    .links li + li { border-top: 1px solid var(--hairline); }
+    .links a { display: flex; min-height: 48px; padding: 0; font-size: 17px; color: var(--ink); }
+    .links a[aria-current='page'] { font-weight: 600; }
+    .lang-item { display: block; }
+    .links .lang { color: var(--muted); }
+    .cta { align-self: flex-start; margin: 16px 0 24px; }
+
+    .js .nav {
+      grid-template-rows: 0fr;
+      opacity: 0;
+      visibility: hidden;
+      transition: grid-template-rows 0.45s var(--ease), opacity 0.3s ease, visibility 0s linear 0.45s;
+    }
+    .js[data-open] .nav {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      visibility: visible;
+      transition-delay: 0s;
+      border-bottom: 1px solid var(--rail);
+      box-shadow: 0 24px 32px -16px rgb(0 0 0 / 0.18);
+    }
+    .js[data-open] .nav::before,
+    .js[data-open] .nav::after { display: block; }
+    .nav::before { left: -6px; background-size: 5px 1px, 1px 9px; background-position: right center, center center; }
+    .nav::after { right: -6px; background-size: 5px 1px, 1px 9px; background-position: left center, center center; }
+    .js[data-open] { background: var(--page); }
   }
 </style>

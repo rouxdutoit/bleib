@@ -73,7 +73,10 @@ async function signup(request: Request): Promise<Response> {
   if (await rateLimited(ip.trim())) return json({ ok: false, error: 'rate_limited' }, 429);
 
   const key = process.env.SIGNUPS_STORAGE_KEY;
-  if (!key) return json({ ok: false, error: 'unavailable' }, 503);
+  if (!key) {
+    console.error('signup storage failed: SIGNUPS_STORAGE_KEY is not set');
+    return json({ ok: false, error: 'unavailable' }, 503);
+  }
   const url = STORAGE + hex(await sha256(email)) + '.json';
   const headers = { AccessKey: key };
 
@@ -84,7 +87,10 @@ async function signup(request: Request): Promise<Response> {
     headers: { ...headers, 'content-type': 'application/octet-stream' },
     body: JSON.stringify({ email, lang, createdAt: new Date().toISOString() }),
   });
-  return saved.ok ? json({ ok: true }) : json({ ok: false, error: 'unavailable' }, 503);
+  if (saved.ok) return json({ ok: true });
+  // Log only the storage status codes: never the address, the key or the IP.
+  console.error(`signup storage failed: lookup ${existing.status}, write ${saved.status}`);
+  return json({ ok: false, error: 'unavailable' }, 503);
 }
 
 BunnySDK.net.http
