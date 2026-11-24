@@ -18,7 +18,7 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
   <div class="wrap hero-inner">
     <p class="eyebrow">{s.eyebrow}</p>
     <h1 id="hero-title" class="hero-h1"><span>{s.h1a}</span> <span>{s.h1b}</span></h1>
-    <p class="sub">{s.sub.map((line) => <span>{line}</span>)}</p>
+    <p class="sub">{s.sub.map((line) => <span>{line.split(/(?<=,) /).map((part, i) => [i > 0 && ' ', <span class="phrase">{part}</span>])}</span>)}</p>
     <div class="cta">
       <a class="btn btn-primary" href="#early-access">{s.primary}</a>
       <a class="btn btn-secondary" href={githubHref}>{s.secondary}</a>
@@ -65,7 +65,9 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
   .hero-h1 span { display: block; }
   .sub { margin: 22px 0 0; font-size: clamp(17px, 1.6vw, 19px); line-height: 1.5; color: var(--muted); max-width: 40em; text-wrap: balance; }
   .cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 30px; }
-  .sub span { display: block; }
+  .sub > span { display: block; }
+  /* A wrapped line breaks only at its comma, never mid-phrase. */
+  .phrase { display: inline-block; }
   .trust { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; color: var(--muted); }
   .trust li { display: inline-flex; align-items: center; gap: 6px; }
   .trust :global(svg) { width: 15px; height: 15px; display: block; }
@@ -89,8 +91,8 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
   /* A standing promise, not a step: there from the start, centred under the field. */
   .private { margin-top: 10px !important; display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--label-2); }
   .lock :global(svg) { width: 13px; height: 13px; display: block; }
-  /* On phones the lines use Callout size, so each fits on one row about as wide as the headline. */
-  @media (max-width: 480px) { .sub { font-size: 16px; line-height: 21px; text-wrap: pretty; } }
+  /* On phones the lines use Callout size; a line that still wraps breaks evenly, at its natural pause. */
+  @media (max-width: 480px) { .sub { font-size: 16px; line-height: 21px; } }
   @media (max-width: 767px) { .preview { zoom: 0.92; } }
 </style>
 
