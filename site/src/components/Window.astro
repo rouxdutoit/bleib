@@ -1,0 +1,54 @@
+---
+/**
+ * A Safari window, as in the hero and the closer: traffic lights, then equal tabs. The open tab is a raised
+ * tile; others sit flat on the bar in the secondary colour, with hairlines between them. With `tablist`
+ * the tabs are buttons that switch panels (Hero.astro does the switching); otherwise it's one open tab.
+ * The window's contents go in the slot.
+ */
+interface Props { tabs: { ai: string; icon: string }[]; tablist?: string; id?: string }
+const { tabs, tablist, id = 'tab' } = Astro.props;
+---
+<div class="window">
+  <div class="bar" aria-hidden={tablist ? undefined : 'true'}>
+    <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+    <div class="tabs" role={tablist ? 'tablist' : undefined} aria-label={tablist}>
+      {tabs.map((x, i) => {
+        const fav = x.icon.endsWith('-color')
+          ? <img class="fav" src={`/providers/${x.icon}.svg`} alt="" width="14" height="14" />
+          : <span class="fav mono" style={`--fav: url(/providers/${x.icon}.svg)`} />;
+        return tablist ? (
+          <button type="button" role="tab" class="tab t-foot" id={`${id}-tab-${i}`} aria-controls={`${id}-${i}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>
+            {fav}<span class="tab-t">{x.ai}</span>
+          </button>
+        ) : (
+          <span class="tab t-foot on">{fav}<span class="tab-t">{x.ai}</span></span>
+        );
+      })}
+    </div>
+  </div>
+  <slot />
+</div>
+
+<style>
+  .window { overflow: hidden; border-radius: 20px; background: var(--cell); color: var(--label); box-shadow: var(--shadow); text-align: left; }
+  .bar { display: flex; align-items: center; gap: 12px; height: 42px; padding: 0 7px 0 14px; background: var(--fill); }
+  .lights { flex: none; display: inline-flex; gap: 6px; }
+  .lights i { width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; }
+  .lights i:nth-child(2) { background: #febc2e; }
+  .lights i:nth-child(3) { background: #28c840; }
+  .tabs { flex: 1; min-width: 0; display: flex; }
+  .tab { position: relative; flex: 0 1 33.333%; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 6px; height: 28px; padding: 0 8px; border: 0; border-radius: 8px; background: none; color: var(--label-2); font-family: inherit; cursor: pointer; }
+  .tab + .tab::before { content: ''; position: absolute; left: 0; top: 7px; bottom: 7px; width: 1px; background: var(--hairline); }
+  .tab.on, .tab[aria-selected='true'] { background: var(--cell); color: var(--label); box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 2px rgb(0 0 0 / 0.08); cursor: default; }
+  .tab[aria-selected='true']::before, .tab[aria-selected='true'] + .tab::before { opacity: 0; }
+  @media (hover: hover) {
+    .tab[aria-selected='false']:hover { background: var(--fill); }
+    .tab:hover::before, .tab:hover + .tab::before { opacity: 0; }
+  }
+  .tab-t { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .fav { flex: none; display: block; width: 14px; height: 14px; }
+  .mono { background: currentColor; mask: var(--fav) center / contain no-repeat; }
+  .tab[aria-selected='false'] .fav { opacity: 0.7; }
+  /* Like Safari on a phone: no window controls, so the tabs get the room. */
+  @media (max-width: 480px) { .lights { display: none; } .bar { padding-left: 7px; } }
+</style>

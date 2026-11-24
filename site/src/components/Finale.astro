@@ -1,8 +1,8 @@
 ---
 import Lines from './Lines.astro';
 /** The closer: the password-manager moment the hero promises, and one action. */
-import Mark from './Mark.astro';
-import DrawTick from './DrawTick.astro';
+import Window from './Window.astro';
+import BleibCard from './BleibCard.astro';
 import Rails from './Rails.astro';
 import EarlyAccessForm from './EarlyAccessForm.astro';
 import { t, type Lang } from '../i18n/strings';
@@ -14,18 +14,12 @@ const s = t(lang).finale;
   <Rails />
   <div class="wrap inner">
     <figure class="scene" aria-hidden="true" data-sv data-steps="3" data-interval="900" data-gaps=",2200" data-step="0">
-      <div class="win">
-        <div class="bar"><span class="lights"><i></i><i></i><i></i></span><span class="t-foot tab"><img class="fav" src="/providers/claude-color.svg" alt="" width="14" height="14" />{s.prompt.tab}</span></div>
-        <div class="chat"><p class="t-body bubble">{s.prompt.said}</p></div>
-        <div class="grow"><div class="grow-in">
-          <div class="save">
-            <span class="app"><Mark size={14} /></span>
-            <span class="save-text"><span class="t-foot save-title">{s.prompt.title}</span><span class="t-sub fact">{s.prompt.fact}</span></span>
-            <span class="b b-2">{s.prompt.notNow}</span>
-            <span class="b b-1"><span class="to-save">{s.prompt.save}</span><span class="to-saved"><span class="tick"><DrawTick /></span>{s.prompt.saved}</span></span>
-          </div>
-        </div></div>
-      </div>
+      <Window tabs={[{ ai: s.prompt.tab, icon: 'claude-color' }]}>
+        <div class="body">
+          <p class="t-body bubble">{s.prompt.said}</p>
+          <BleibCard title={s.prompt.title} facts={[s.prompt.fact]} action={s.prompt.save} done={s.prompt.saved} />
+        </div>
+      </Window>
     </figure>
     <h2 id="finale-title" class="title">{s.h}</h2>
     <p class="sub"><Lines text={s.p} /></p>
@@ -37,44 +31,14 @@ const s = t(lang).finale;
   .finale { padding: clamp(96px, 12vw, 160px) 0 clamp(72px, 9vw, 120px); }
   .inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
 
-  /* A picture, not a control: a chat with bleib's save bar, as a password manager shows it. */
+  /* A picture, not a control: a chat with bleib's card, styled exactly like the hero's. */
   .scene { margin: 0 0 clamp(40px, 6vw, 64px); width: min(440px, 100%); }
-  .win { border-radius: 18px; background: var(--cell); color: var(--label); box-shadow: var(--shadow); overflow: hidden; text-align: left; }
-  /* A browser window: traffic lights, then the active tab (favicon and page title) on a darker strip. */
-  .bar { display: flex; align-items: flex-end; gap: 14px; height: 38px; padding: 0 12px; background: var(--fill); }
-  .lights { display: inline-flex; gap: 6px; align-self: center; }
-  .lights i { width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; }
-  .lights i:nth-child(2) { background: #febc2e; }
-  .lights i:nth-child(3) { background: #28c840; }
-  .tab { display: inline-flex; align-items: center; gap: 7px; width: min(180px, 50%); height: 30px; padding: 0 12px; border-radius: 9px 9px 0 0; background: var(--cell); color: var(--label); }
-  .fav { flex: none; display: block; width: 14px; height: 14px; }
-  .chat { display: flex; justify-content: flex-end; padding: 18px 16px 14px; }
+  .body { --bleib-card-margin: 12px 0 0; display: flex; flex-direction: column; align-items: flex-end; padding: 16px; }
+  .body > :global(*:last-child) { align-self: stretch; }
   .bubble { margin: 0; max-width: 80%; padding: 8px 14px; border-radius: 18px; background: var(--fill); }
-  .save { display: flex; align-items: center; gap: 10px; margin: 0 10px 10px; padding: 8px 8px 8px 10px; border-radius: 14px; background: var(--fill); }
-  .app { flex: none; width: 28px; height: 28px; border-radius: 7px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
-  .save-text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-  .save-title { color: var(--label-2); }
-  .fact { color: var(--label); }
-  /* Plays once in view (scripts/story.ts): the message arrives, the save bar grows in, Save is pressed. */
+  /* Plays once in view (scripts/story.ts): the message arrives, bleib's card grows in, Save is pressed. */
   .bubble { opacity: 0; transform: translateY(6px); transition: opacity 0.4s var(--ease), transform 0.4s var(--ease); }
   .s1 .bubble { opacity: 1; transform: none; }
-  .grow { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.55s var(--ease), opacity 0.4s var(--ease) 0.12s; }
-  .grow-in { min-height: 0; overflow: hidden; }
-  .s2 .grow { grid-template-rows: 1fr; opacity: 1; }
-  .b-2 { transition: opacity 0.4s var(--ease); }
-  .s3 .b-2 { opacity: 0.38; }
-  /* As Apple does it: both labels share one cell and only crossfade, so the text never moves.
-     Only the tick animates, inside space that is already reserved for it. */
-  .b-1 > span { grid-area: 1 / 1; transition: opacity 0.35s var(--ease); }
-  .to-saved { display: inline-flex; align-items: center; gap: 4px; opacity: 0; }
-  .s3 .to-save { opacity: 0; }
-  .s3 .to-saved { opacity: 1; }
-  .tick { display: grid; }
-  .b { flex: none; display: inline-grid; place-items: center; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 13px; line-height: 1; font-weight: 600; }
-  .b-2 { color: var(--label-2); }
-  /* Like the story cards' chosen action: the label colour, then bleib yellow once saved. */
-  .b-1 { background: var(--label); color: var(--cell); transition: background-color 0.35s var(--ease), color 0.35s var(--ease); }
-  .s3 .b-1 { background: #f6e79a; color: #0a0a0a; }
 
   .title { font-size: clamp(44px, 7vw, 88px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 700; }
   .sub { margin: 18px 0 0; font-size: clamp(17px, 1.7vw, 21px); line-height: 1.45; color: var(--muted); text-wrap: balance; }

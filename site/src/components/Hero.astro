@@ -1,6 +1,7 @@
 ---
 import Mark from './Mark.astro';
-import DrawTick from './DrawTick.astro';
+import Window from './Window.astro';
+import BleibCard from './BleibCard.astro';
 import Rails from './Rails.astro';
 import { icon, type IconName } from './icons';
 import { GITHUB_URL, routes, t, type Lang } from '../i18n/strings';
@@ -25,39 +26,18 @@ const githubHref = GITHUB_URL || routes.developers[lang];
     </ul>
 
     <figure class="preview">
-      <div class="window card">
-        <div class="bar">
-          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
-          <div class="tabs" role="tablist" aria-label={pv.examples}>
-            {pv.tabs.map((x, i) => (
-              <button type="button" role="tab" class="tab t-foot" id={`ex-tab-${i}`} aria-controls={`ex-${i}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>
-                {x.icon.endsWith('-color')
-                  ? <img class="fav" src={`/providers/${x.icon}.svg`} alt="" width="14" height="14" />
-                  : <span class="fav mono" style={`--fav: url(/providers/${x.icon}.svg)`} />}
-                <span class="tab-t">{x.ai}</span>
-              </button>
-            ))}
-          </div>
-        </div>
+      <Window tabs={pv.tabs} tablist={pv.examples} id="ex">
         {pv.tabs.map((x, i) => {
           const title = pv.title.replace('{ai}', x.ai);
           return (
             <div class="body" role="tabpanel" id={`ex-${i}`} aria-labelledby={`ex-tab-${i}`} hidden={i !== 0} data-steps="3" data-interval="800" data-gaps=",2600" data-step="0" {...(i === 0 ? { 'data-sv': '' } : {})}>
               <p class="sr-only">{x.typed} {title}: {x.facts.join(', ')}. {x.private}</p>
               <div aria-hidden="true">
-                <div class="grow"><div class="grow-in">
-                  <div class="fill">
-                    <p class="fill-head"><span class="app"><Mark size={12} /></span><span class="t-foot fill-title">{title}</span></p>
-                    <div class="fill-row">
-                      <ul class="facts">{x.facts.map((f) => <li class="t-sub"><span class="yes" set:html={icon('check')} />{f}</li>)}</ul>
-                      <span class="b"><span class="to-add">{pv.add}</span><span class="to-added"><span class="tick"><DrawTick /></span>{pv.added}</span></span>
-                    </div>
-                  </div>
-                </div></div>
+                <BleibCard title={title} facts={x.facts} action={pv.add} done={pv.added} />
                 <div class="composer">
                   <div class="attach"><div class="grow-in">
                     <div class="chip">
-                      <span class="app chip-app"><Mark size={14} /></span>
+                      <span class="chip-app"><Mark size={14} /></span>
                       <span class="chip-text"><span class="t-foot chip-title">{pv.attachment}</span><span class="t-foot chip-facts">{x.facts.join(' · ')}</span></span>
                       <span class="chip-x" set:html={icon('close')} />
                     </div>
@@ -69,7 +49,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
             </div>
           );
         })}
-      </div>
+      </Window>
     </figure>
   </div>
 </section>
@@ -90,51 +70,10 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   /* The fill moment: a new AI, bleib offers only what it needs, like a password manager filling a login.
      Plays once in view (scripts/story.ts); each tab is another everyday example and replays when chosen. */
   .preview { margin: clamp(40px, 6vw, 72px) 0 0; width: 100%; max-width: 520px; text-align: left; }
-  .window { overflow: hidden; border-radius: 20px; box-shadow: var(--shadow); }
-  /* A Safari window: traffic lights, then equal tabs. The open tab is a raised tile; the others sit flat
-     on the bar in the secondary colour, with hairlines between them. Switching is instant, as in Safari. */
-  .bar { display: flex; align-items: center; gap: 12px; height: 42px; padding: 0 7px 0 14px; background: var(--fill); }
-  .lights { flex: none; display: inline-flex; gap: 6px; }
-  .lights i { width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; }
-  .lights i:nth-child(2) { background: #febc2e; }
-  .lights i:nth-child(3) { background: #28c840; }
-  .tabs { flex: 1; min-width: 0; display: flex; }
-  .tab { position: relative; flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 6px; height: 28px; padding: 0 8px; border: 0; border-radius: 8px; background: none; color: var(--label-2); font-family: inherit; cursor: pointer; }
-  .tab + .tab::before { content: ''; position: absolute; left: 0; top: 7px; bottom: 7px; width: 1px; background: var(--hairline); }
-  .tab[aria-selected='true'] { background: var(--cell); color: var(--label); box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 2px rgb(0 0 0 / 0.08); cursor: default; }
-  .tab[aria-selected='true']::before, .tab[aria-selected='true'] + .tab::before { opacity: 0; }
-  @media (hover: hover) {
-    .tab[aria-selected='false']:hover { background: var(--fill); }
-    .tab:hover::before, .tab:hover + .tab::before { opacity: 0; }
-  }
-  .tab-t { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .fav { flex: none; display: block; width: 14px; height: 14px; }
-  .mono { background: currentColor; mask: var(--fav) center / contain no-repeat; }
-  .tab[aria-selected='false'] .fav { opacity: 0.7; }
-  .body { padding: 16px; }
+  .body { --bleib-card-margin: 0 0 8px; padding: 16px; }
   .body p { margin: 0; }
 
-  .grow { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.55s var(--ease), opacity 0.4s var(--ease) 0.12s; }
   .grow-in { min-height: 0; overflow: hidden; }
-  .s2 .grow { grid-template-rows: 1fr; opacity: 1; }
-  .fill { margin-bottom: 8px; padding: 10px 12px 12px; border-radius: 14px; background: var(--fill); }
-  .fill-head { display: flex; align-items: center; gap: 8px; }
-  .app { flex: none; width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
-  .fill-title { color: var(--label-2); }
-  .fill-row { margin-top: 8px; display: flex; align-items: center; gap: 12px; }
-  .facts { flex: 1; min-width: 0; list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; }
-  .facts li { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
-  .yes { flex: none; width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; background: #f6e79a; color: #0a0a0a; }
-  .yes :global(svg) { width: 13px; height: 13px; display: block; }
-
-  /* Like the story cards: the action in the label colour, bleib yellow once done; labels crossfade in place. */
-  .b { flex: none; display: inline-grid; place-items: center; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 13px; line-height: 1; font-weight: 600; background: var(--label); color: var(--cell); transition: background-color 0.35s var(--ease), color 0.35s var(--ease); }
-  .b > span { grid-area: 1 / 1; transition: opacity 0.35s var(--ease); }
-  .to-added { display: inline-flex; align-items: center; gap: 4px; opacity: 0; }
-  .s3 .b { background: #f6e79a; color: #0a0a0a; }
-  .s3 .to-add { opacity: 0; }
-  .s3 .to-added { opacity: 1; }
-  .tick { display: grid; }
 
   /* The message box. Once added, your memory sits in it as an attachment, like pasted text in a chat app. */
   .composer { border-radius: 22px; box-shadow: inset 0 0 0 1px var(--hairline); }
@@ -142,7 +81,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .attach { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.5s var(--ease) 0.2s, opacity 0.4s var(--ease) 0.3s; }
   .s3 .attach { grid-template-rows: 1fr; opacity: 1; }
   .chip { position: relative; display: flex; align-items: center; gap: 10px; width: fit-content; max-width: calc(100% - 16px); margin: 8px 8px 0; padding: 8px 30px 8px 8px; border-radius: 14px; background: var(--fill); }
-  .chip-app { width: 32px; height: 32px; border-radius: 8px; }
+  .chip-app { flex: none; width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
   .chip-text { min-width: 0; display: flex; flex-direction: column; }
   .chip-title { font-weight: 600; color: var(--label); }
   .chip-facts { color: var(--label-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -159,8 +98,6 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .private { margin-top: 10px !important; display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--label-2); }
   .lock :global(svg) { width: 13px; height: 13px; display: block; }
   @media (max-width: 767px) { .preview { zoom: 0.92; } }
-  /* Like Safari on a phone: no window controls, so the tabs get the room. */
-  @media (max-width: 480px) { .lights { display: none; } .bar { padding-left: 7px; } }
 </style>
 
 <script>

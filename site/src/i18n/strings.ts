@@ -178,7 +178,7 @@ const en = {
     more: 'How bleib keeps you safe',
   },
   finale: {
-    prompt: { tab: 'Claude', said: 'I always book an aisle seat.', title: 'Save to bleib?', fact: 'Prefers aisle seats', notNow: 'Not Now', save: 'Save', saved: 'Saved' },
+    prompt: { tab: 'Claude', said: 'I always book an aisle seat.', title: 'Save to bleib?', fact: 'Prefers aisle seats', save: 'Save', saved: 'Saved' },
     h: 'Tell it once.',
     p: 'Every AI gets what it needs. Nothing more.',
   },
@@ -372,7 +372,7 @@ const de: Strings = {
     more: 'Wie bleib dich schützt',
   },
   finale: {
-    prompt: { tab: 'Claude', said: 'Ich buche immer einen Gangplatz.', title: 'In bleib sichern?', fact: 'Bevorzugt Gangplätze', notNow: 'Nicht jetzt', save: 'Sichern', saved: 'Gesichert' },
+    prompt: { tab: 'Claude', said: 'Ich buche immer einen Gangplatz.', title: 'In bleib sichern?', fact: 'Bevorzugt Gangplätze', save: 'Sichern', saved: 'Gesichert' },
     h: 'Einmal sagen.',
     p: 'Jede KI bekommt, was sie braucht. Mehr nicht.',
   },
