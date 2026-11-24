@@ -67,8 +67,8 @@ const githubHref = GITHUB_URL || routes.developers[lang];
                 {pv.inspector.facts.map((f) => (<div class="fact"><dt class="t-sub c-2">{f.k}</dt><dd class="t-sub">{f.v}</dd></div>))}
               </dl>
               <p class="t-foot c-2 pv-eyebrow ex-label">{pv.inspector.exactLabel}</p>
-              <ul class="exact">{pv.inspector.exact.map((x) => <li class="t-body">{x}</li>)}</ul>
-              <p class="t-foot c-2 not">{pv.inspector.notShared}</p>
+              <ul class="exact">{pv.inspector.exact.map((x) => <li><span class="yes" set:html={icon('check')} /><span class="t-body">{x}</span></li>)}</ul>
+              <p class="t-foot c-2 not"><span class="not-i" set:html={icon('lock')} />{pv.inspector.notShared}</p>
               <p class="t-foot fp"><span class="fp-i c-2" set:html={icon('fingerprint')} /><code class="c-2">{pv.inspector.fingerprint}</code></p>
             </div>
             </div>
@@ -134,9 +134,14 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .fact { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-top: 1px solid var(--hairline); }
   .fact dd { margin: 0; text-align: right; }
   .ex-label { margin-top: 14px !important; }
-  .exact { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 6px; }
-  .exact li { padding: 8px 12px; border-radius: 10px; background: var(--cell); border-left: 3px solid #f6e79a; }
-  .not { margin-top: 10px !important; }
+  /* Same pattern as the story receipt: one grouped list, yellow ticks, hairlines between rows. */
+  .exact { list-style: none; margin: 6px 0 0; padding: 0; border-radius: 12px; background: var(--cell); }
+  .exact li { position: relative; display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; }
+  .exact li + li::before { content: ''; position: absolute; top: 0; right: 0; left: 44px; height: 1px; background: var(--hairline); }
+  .yes { flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: #f6e79a; color: #0a0a0a; }
+  .yes :global(svg) { width: 15px; height: 15px; display: block; }
+  .not { margin-top: 10px !important; display: flex; align-items: center; gap: 5px; }
+  .not-i :global(svg) { width: 13px; height: 13px; display: block; }
   .fp { margin-top: 12px !important; display: flex; align-items: center; gap: 6px; }
   .fp-i :global(svg) { width: 16px; height: 16px; display: block; }
   .fp code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 12px; }
