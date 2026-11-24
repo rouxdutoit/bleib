@@ -298,7 +298,8 @@ const cx = (n: number) => `cx at-${n}`;
   .ok { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--ok); color: #fff; }
   .not { padding-top: 10px; display: flex; align-items: center; gap: 5px; }
   .fact { margin-top: 12px !important; font-weight: 500; }
-  .row-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
+  /* Three choices stack, as in an Apple alert: the main action first, Not Now last. */
+  .row-actions { display: grid; gap: 8px; margin-top: 14px; }
 
   /* Widget */
   .widget { padding: 14px 16px 16px; }
