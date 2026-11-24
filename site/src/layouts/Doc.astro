@@ -1,0 +1,53 @@
+---
+import Base from './Base.astro';
+import Rails from '../components/Rails.astro';
+import { docs, type Block } from '../i18n/pages';
+import type { Lang, RouteKey } from '../i18n/strings';
+interface Props { lang: Lang; page: Exclude<RouteKey, 'home'> }
+const { lang, page } = Astro.props;
+const d = docs[lang][page];
+const isList = (b: Block): b is { list: string[] } => 'list' in b;
+const isCode = (b: Block): b is { code: string } => 'code' in b;
+const isAddr = (b: Block): b is { address: string[] } => 'address' in b;
+---
+<Base lang={lang} page={page} title={d.title} description={d.description}>
+  <article class="doc has-rails">
+    <Rails top={false} />
+    <div class="wrap inner">
+      <header class="doc-head">
+        <h1 class="doc-h1">{d.title}</h1>
+        <p class="doc-intro">{d.intro}</p>
+      </header>
+      {d.sections.map((sec) => (
+        <section class="doc-sec">
+          <h2>{sec.h}</h2>
+          {sec.blocks.map((b) =>
+            isList(b) ? (
+              <ul>{b.list.map((li) => <li>{li}</li>)}</ul>
+            ) : isCode(b) ? (
+              <pre><code>{b.code}</code></pre>
+            ) : isAddr(b) ? (
+              <address>{b.address.map((line, i) => (<>{line}{i < b.address.length - 1 && <br />}</>))}</address>
+            ) : (
+              <p>{b.p}</p>
+            ),
+          )}
+        </section>
+      ))}
+    </div>
+  </article>
+</Base>
+<style>
+  .doc { padding: clamp(120px, 16vh, 160px) 0 72px; }
+  .inner { position: relative; z-index: 1; max-width: 760px; }
+  .doc-h1 { font-size: clamp(34px, 4.4vw, 52px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.08; }
+  .doc-intro { margin: 16px 0 0; font-size: 19px; color: var(--muted); }
+  .doc-head { margin-bottom: 40px; }
+  .doc-sec { padding: 26px 0; border-top: 1px solid var(--rail); }
+  .doc-sec h2 { font-size: 21px; font-weight: 600; letter-spacing: -0.015em; margin: 0 0 10px; }
+  .doc-sec p, .doc-sec li, .doc-sec address { font-size: 17px; line-height: 1.6; font-style: normal; }
+  .doc-sec p { margin: 0 0 12px; }
+  .doc-sec ul { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; }
+  pre { margin: 0 0 8px; padding: 12px 16px; border-radius: 14px; background: var(--card); color: var(--on-card); border: var(--card-border); overflow-x: auto; }
+  code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 14px; }
+</style>
