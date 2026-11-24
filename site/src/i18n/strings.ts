@@ -49,7 +49,7 @@ const en = {
     eyebrow: 'In development',
     h1a: 'Your AI memory.',
     h1b: 'In your hands.',
-    sub: ['Stop repeating yourself to every AI.', 'A password manager, for your preferences.', 'Each AI sees only what it needs.'],
+    sub: ['Every AI knows you from the first message.', 'A password manager, for your preferences.', 'Each AI sees only what it needs.'],
     primary: 'Get early access',
     secondary: 'View on GitHub',
     trust: [
@@ -64,43 +64,56 @@ const en = {
     add: 'Add',
     added: 'Added',
     attachment: 'About me',
+    // Reply fragments alternate plain text and details drawn from the person's memory.
     tabs: [
-      { ai: 'Gemini', icon: 'gemini-color', typed: 'Plan a weekend in Lisbon for me.', facts: ['Aisle seat', 'Hotels under €250', 'Vegetarian'], private: 'Health and work stay private.' },
-      { ai: 'Claude', icon: 'claude-color', typed: 'Write a cover letter for this job.', facts: ['Product designer', 'Berlin', 'Short and plain'], private: 'Health and money stay private.' },
-      { ai: 'ChatGPT', icon: 'openai', typed: 'What should I cook tonight?', facts: ['Vegetarian', 'Cooks for two', 'Under 30 minutes'], private: 'Work and travel stay private.' },
+      {
+        ai: 'Gemini', icon: 'gemini-color', typed: 'Plan a weekend in Lisbon for me.',
+        facts: ['Aisle seat', 'Hotels under €250', 'Vegetarian'], private: 'Health and work stay private.',
+        reply: ['', 'Aisle seat', ' on Friday, ', 'vegetarian spots', ' in Alfama, and ', 'hotels under €250', '.'],
+      },
+      {
+        ai: 'Claude', icon: 'claude-color', typed: 'Write a cover letter for this job.',
+        facts: ['Product designer', 'Berlin', 'Short and plain'], private: 'Health and money stay private.',
+        reply: ['Hi, I’m a ', 'product designer', ' in ', 'Berlin', '. ', 'I make apps easier to use.'],
+      },
+      {
+        ai: 'ChatGPT', icon: 'openai', typed: 'What should I cook tonight?',
+        facts: ['Vegetarian', 'Cooks for two', 'Under 30 minutes'], private: 'Work and travel stay private.',
+        reply: ['Try ', 'vegetarian chickpea tacos', ' ', 'for two', ', ready in ', '20 minutes', '.'],
+      },
     ],
   },
   story: {
     label: 'How bleib works',
     scenes: [
       {
-        h: ['Your memory.', 'In one place.'],
-        p: 'People, preferences and rules your AIs need, in plain text you can read and correct. Encrypted on your device.',
+        h: ['See what AI', 'knows about you.'],
+        p: "bleib brings what your AIs remember into one place. Fix what's wrong, keep what's right.",
         more: { to: 'how', hash: '#memory' },
       },
       {
-        h: ['Asked only', 'when it matters.'],
-        p: 'Everyday things flow on their own. For anything sensitive, like your health, bleib asks first.',
-        more: { to: 'permissions', hash: '' },
-      },
-      {
-        h: ['See exactly what', 'each AI saw.'],
-        p: 'Every share leaves a receipt: which AI, where it went, for what, and the exact words.',
-        more: { to: 'receipts', hash: '' },
-      },
-      {
-        h: ['Switch AI.', 'No starting over.'],
-        p: 'Your preferences and rules stay in bleib. A new AI gets what you allow from the first message.',
-        more: { to: 'works', hash: '' },
-      },
-      {
         h: ['It remembers', 'as you chat.'],
-        p: 'Mention a preference to any AI and bleib keeps it. One tap undoes it. Anything sensitive still asks first.',
+        p: 'Mention a preference in chat and bleib saves it. One tap undoes it. bleib asks before saving anything sensitive.',
         more: { to: 'how', hash: '#proposals' },
       },
       {
-        h: ['Only you', 'can read it.'],
-        p: 'Your memory is encrypted on your device, with a key only you hold. No account, no tracking, nothing to sell.',
+        h: ['Switch AI.', 'Keep everything.'],
+        p: 'Your preferences and rules stay in bleib. bleib asks before sharing with a new AI.',
+        more: { to: 'works', hash: '' },
+      },
+      {
+        h: ['Asked only', 'when it matters.'],
+        p: 'Everyday things just work. Health and money always need your yes.',
+        more: { to: 'permissions', hash: '' },
+      },
+      {
+        h: ['Know exactly what', 'each AI was told.'],
+        p: 'Every share leaves a receipt, so you always know which AI got what.',
+        more: { to: 'receipts', hash: '' },
+      },
+      {
+        h: ['Let it know you.', 'Only you can read it.'],
+        p: 'The more your AI knows, the better it helps. Your memory is locked with a key only you hold, so being known never costs you.',
         more: { to: 'security', hash: '' },
         dark: true,
       },
@@ -150,15 +163,10 @@ const en = {
       usedBy: 'Now used by',
       providers: [
         { name: 'Claude', icon: '/providers/claude.svg', color: '/providers/claude-color.svg' },
-        { name: 'Codex', icon: '/providers/codex.svg', color: '/providers/codex-color.svg' },
         { name: 'Gemini', icon: '/providers/gemini.svg', color: '/providers/gemini-color.svg' },
-        { name: 'Perplexity', icon: '/providers/perplexity.svg', color: '/providers/perplexity-color.svg' },
-        { name: 'DeepSeek', icon: '/providers/deepseek.svg', color: '/providers/deepseek-color.svg' },
-        { name: 'GLM', icon: '/providers/zhipu.svg', color: '/providers/zhipu-color.svg' },
-        { name: 'Ollama', icon: '/providers/ollama.svg', color: '' },
+        { name: 'ChatGPT', icon: '/providers/openai.svg', color: '' },
       ],
-      more: 'More',
-      caption: 'Different AI. Same preferences and rules.',
+      caption: 'Different AI. Same memory.',
     },
     sealed: { note: 'What anyone without your key sees. Us included.' },
     propose: {
@@ -237,7 +245,7 @@ const de: Strings = {
     eyebrow: 'In Entwicklung',
     h1a: 'Dein KI-Gedächtnis.',
     h1b: 'In deiner Hand.',
-    sub: ['Schluss damit, jeder KI alles neu zu erzählen.', 'Ein Passwort-Manager für deine Vorlieben.', 'Jede KI sieht nur, was sie braucht.'],
+    sub: ['Jede KI kennt dich ab der ersten Nachricht.', 'Ein Passwort-Manager für deine Vorlieben.', 'Jede KI sieht nur, was sie braucht.'],
     primary: 'Frühen Zugang sichern',
     secondary: 'Auf GitHub ansehen',
     trust: [
@@ -253,42 +261,54 @@ const de: Strings = {
     added: 'Hinzugefügt',
     attachment: 'Über mich',
     tabs: [
-      { ai: 'Gemini', icon: 'gemini-color', typed: 'Plane ein Wochenende in Lissabon für mich.', facts: ['Gangplatz', 'Hotels unter 250 €', 'Vegetarisch'], private: 'Gesundheit und Arbeit bleiben privat.' },
-      { ai: 'Claude', icon: 'claude-color', typed: 'Schreib ein Anschreiben für diese Stelle.', facts: ['Produktdesign', 'Berlin', 'Kurz und klar'], private: 'Gesundheit und Finanzen bleiben privat.' },
-      { ai: 'ChatGPT', icon: 'openai', typed: 'Was soll ich heute Abend kochen?', facts: ['Vegetarisch', 'Kocht für zwei', 'Unter 30 Minuten'], private: 'Arbeit und Reisen bleiben privat.' },
+      {
+        ai: 'Gemini', icon: 'gemini-color', typed: 'Plane ein Wochenende in Lissabon für mich.',
+        facts: ['Gangplatz', 'Hotels unter 250 €', 'Vegetarisch'], private: 'Gesundheit und Arbeit bleiben privat.',
+        reply: ['', 'Gangplatz', ', ', 'vegetarisch', ' in Alfama essen und ', 'Hotels unter 250 €', '.'],
+      },
+      {
+        ai: 'Claude', icon: 'claude-color', typed: 'Schreib ein Anschreiben für diese Stelle.',
+        facts: ['Produktdesign', 'Berlin', 'Kurz und klar'], private: 'Gesundheit und Finanzen bleiben privat.',
+        reply: ['Hallo, ich arbeite im ', 'Produktdesign', ' in ', 'Berlin', '. ', 'Ich mache Apps einfacher.'],
+      },
+      {
+        ai: 'ChatGPT', icon: 'openai', typed: 'Was soll ich heute Abend kochen?',
+        facts: ['Vegetarisch', 'Kocht für zwei', 'Unter 30 Minuten'], private: 'Arbeit und Reisen bleiben privat.',
+        reply: ['', 'Vegetarische Bohnen-Tacos', ' ', 'für zwei', '. In ', '20 Minuten', ' fertig.'],
+      },
     ],
   },
   story: {
     label: 'So funktioniert bleib',
     scenes: [
       {
-        h: ['Dein Gedächtnis.', 'An einem Ort.'],
-        p: 'Menschen, Vorlieben und Regeln, die deine KIs brauchen, als Klartext, den du lesen und korrigieren kannst. Verschlüsselt auf deinem Gerät.',
+        h: ['Sieh, was die KI', 'über dich weiß.'],
+        p: 'bleib sammelt an einem Ort, was sich deine KIs merken. Korrigiere, was nicht stimmt, und behalte, was passt.',
         more: { to: 'how', hash: '#memory' },
       },
       {
-        h: ['Gefragt nur,', 'wenn es zählt.'],
-        p: 'Alltägliches läuft von selbst. Bei Sensiblem, etwa deiner Gesundheit, fragt bleib vorher.',
-        more: { to: 'permissions', hash: '' },
-      },
-      {
-        h: ['Sieh genau, was', 'jede KI gesehen hat.'],
-        p: 'Jede Weitergabe hinterlässt einen Beleg: welche KI, wohin, wofür und der genaue Wortlaut.',
-        more: { to: 'receipts', hash: '' },
-      },
-      {
-        h: ['KI wechseln.', 'Nicht von vorn anfangen.'],
-        p: 'Deine Vorlieben und Regeln bleiben in bleib. Eine neue KI bekommt ab der ersten Nachricht, was du erlaubst.',
-        more: { to: 'works', hash: '' },
-      },
-      {
-        h: ['bleib merkt sich,', 'was du magst.'],
-        p: 'Erwähnst du im Chat eine Vorliebe, speichert bleib sie. Mit einem Tipp machst du das rückgängig. Bei sensiblen Angaben fragt bleib vorher.',
+        h: ['Du chattest.', 'bleib merkt es sich.'],
+        p: 'bleib speichert Vorlieben aus dem Chat. Ein Tipp macht das rückgängig. Bei sensiblen Angaben fragt bleib vorher.',
         more: { to: 'how', hash: '#proposals' },
       },
       {
-        h: ['Nur du', 'kannst es lesen.'],
-        p: 'Dein Gedächtnis ist auf deinem Gerät verschlüsselt, mit einem Schlüssel, den nur du hast. Kein Konto, kein Tracking, nichts zu verkaufen.',
+        h: ['Wechsle die KI.', 'Behalte alles.'],
+        p: 'Deine Vorlieben und Regeln bleiben in bleib. Bei einer neuen KI fragt bleib zuerst.',
+        more: { to: 'works', hash: '' },
+      },
+      {
+        h: ['bleib fragt,', 'wenn es darauf ankommt.'],
+        p: 'Alltägliches läuft von selbst. Bei Gesundheit und Geld fragt bleib dich immer zuerst.',
+        more: { to: 'permissions', hash: '' },
+      },
+      {
+        h: ['Sieh genau, was', 'jede KI erfahren hat.'],
+        p: 'Für jede Weitergabe gibt es einen Beleg, damit du immer weißt, welche KI was bekommen hat.',
+        more: { to: 'receipts', hash: '' },
+      },
+      {
+        h: ['Deine KI kennt dich.', 'Dein Gedächtnis bleibt privat.'],
+        p: 'Je besser dich deine KI kennt, desto besser hilft sie dir. Dein Gedächtnis bleibt dabei geschützt, mit einem Schlüssel, den nur du hast.',
         more: { to: 'security', hash: '' },
         dark: true,
       },
@@ -308,7 +328,7 @@ const de: Strings = {
         { from: 'Notizen', text: 'Marek, Berlin' },
         { from: 'ChatGPT', text: 'Gangplatz' },
         { from: 'Claude', text: 'Wochenrückblick' },
-        { from: 'Notizen', text: 'Gesundheitsnotizen' },
+        { from: 'Notizen', text: 'Gesundheit' },
       ],
       footer: 'Verschlüsselt auf diesem Gerät. Nur du hast Zugriff.',
     },
@@ -338,15 +358,10 @@ const de: Strings = {
       usedBy: 'Gerade genutzt von',
       providers: [
         { name: 'Claude', icon: '/providers/claude.svg', color: '/providers/claude-color.svg' },
-        { name: 'Codex', icon: '/providers/codex.svg', color: '/providers/codex-color.svg' },
         { name: 'Gemini', icon: '/providers/gemini.svg', color: '/providers/gemini-color.svg' },
-        { name: 'Perplexity', icon: '/providers/perplexity.svg', color: '/providers/perplexity-color.svg' },
-        { name: 'DeepSeek', icon: '/providers/deepseek.svg', color: '/providers/deepseek-color.svg' },
-        { name: 'GLM', icon: '/providers/zhipu.svg', color: '/providers/zhipu-color.svg' },
-        { name: 'Ollama', icon: '/providers/ollama.svg', color: '' },
+        { name: 'ChatGPT', icon: '/providers/openai.svg', color: '' },
       ],
-      more: 'Mehr',
-      caption: 'Andere KI. Gleiche Vorlieben und Regeln.',
+      caption: 'Andere KI. Dasselbe Gedächtnis.',
     },
     sealed: { note: 'So sieht es jeder ohne deinen Schlüssel. Auch wir.' },
     propose: {

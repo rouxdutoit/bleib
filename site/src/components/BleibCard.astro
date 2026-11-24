@@ -41,4 +41,5 @@ const { title, facts, action, done, at = 2 } = Astro.props;
   :global(.s3) [data-at='2'] .to-do, :global(.s4) [data-at='3'] .to-do { opacity: 0; }
   :global(.s3) [data-at='2'] .to-done, :global(.s4) [data-at='3'] .to-done { opacity: 1; }
   .tick { display: grid; }
+  @media (prefers-reduced-motion: reduce) { .grow { transition-delay: 0s; } }
 </style>

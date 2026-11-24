@@ -1,7 +1,7 @@
 /**
  * Plays each scene's card morph once, when the scene comes into view: data-step="n" plus
  * cumulative classes s1..sn (see StoryVisual.astro, Hero.astro and Finale.astro).
- * A [data-type] element inside a scene is typed out at step 1, and later steps wait for it.
+ * A [data-type] element is typed out at step 1, and the first gap starts once typing ends.
  * data-start sets the pause before step 1 and data-gaps="a,b,…" the pause after each step (ms): long enough
  * to read what is on screen (about 0.25 s a word), while each transition itself stays quick.
  * [data-scramble-at="n"] text scrambles at step n, like fazit.dev's wordmark in reverse: each character
@@ -108,13 +108,17 @@ export function play(sv: HTMLElement): void {
   let at = Number(sv.dataset.start ?? START);
   for (let k = 1; k <= steps; k++) {
     later(sv, () => setStep(sv, k), at);
-    at = k === 1 && typer ? type(sv, typer, at) + 300 : at + (gaps[k - 1] || interval);
+    at = k === 1 && typer ? type(sv, typer, at) + (gaps[0] || 300) : at + (gaps[k - 1] || interval);
   }
 }
 
 /** Plays every [data-sv] scene once, when it comes into view (and, for data-sv="scroll", once the page has scrolled). */
 export function initStory(): void {
   const scenes = document.querySelectorAll<HTMLElement>('[data-sv]');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    scenes.forEach(play);
+    return;
+  }
   scenes.forEach((sv) => sv.querySelectorAll<HTMLElement>('[data-type]').forEach((el) => (el.textContent = '')));
   const io = new IntersectionObserver(
     (entries) => {
@@ -122,8 +126,9 @@ export function initStory(): void {
         if (!e.isIntersecting) continue;
         const sv = e.target as HTMLElement;
         io.unobserve(sv);
+        if (timers.has(sv)) continue;
         if (sv.dataset.sv !== 'scroll' || window.scrollY > 0) play(sv);
-        else window.addEventListener('scroll', () => !sv.hidden && sv.dataset.step === '0' && play(sv), { once: true, passive: true });
+        else window.addEventListener('scroll', () => !sv.hidden && !timers.has(sv) && play(sv), { once: true, passive: true });
       }
     },
     { threshold: 0.6 },

@@ -34,7 +34,7 @@ const x = t(lang).story.scenes[i];
   .scene[data-side='card-right'] .visual { order: 2; }
   /* --scene-ink and --scene-muted let a section recolour its scenes (the black privacy section). */
   .text { color: var(--scene-ink, inherit); }
-  .text .lead { margin: 18px 0 0; color: var(--scene-muted, var(--muted)); }
+  .text .lead { margin: 18px 0 0; color: var(--scene-muted, var(--muted)); text-wrap: balance; }
   /* Apple-style "Learn more ›" */
   .more { display: inline-flex; align-items: center; gap: 1px; margin-top: 14px; font-size: 17px; font-weight: 500; text-decoration: none; color: var(--scene-ink, var(--ink)); }
   .more :global(svg) { width: 20px; height: 20px; display: block; transition: transform 0.2s var(--ease); }
