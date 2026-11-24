@@ -2,6 +2,7 @@
 /**
  * One tray per scene. The tray never moves; the card inside morphs step by step to act out
  * the scene's headline (Rule No. 1: Apple HIG patterns throughout). It plays once when seen.
+ * Every card reads top to bottom as cause, then result, so the eye ends on the outcome.
  * Steps are driven by scripts/story.ts: it sets data-step="n" and cumulative classes s1..sn.
  *   .at-N     collapsed until step N, then open
  *   .dim-N    greys out at step N (nothing ever disappears, so the progression stays readable)
@@ -24,6 +25,18 @@ const cx = (n: number) => `cx at-${n}`;
     <div class="stack" aria-hidden="true">
       {scene === 0 && (
         <>
+          <div>
+            <div>
+              <div class="sources">
+                <p class="t-foot c-2 src-h">{c.wallet.sourcesLabel}</p>
+                <ul class="src-list">
+                  {c.wallet.sources.map((m, i) => (
+                    <li class={`dim-${i + 1}`}><div class="src-item"><div class="card mini"><span class="t-foot c-2 from">{m.from}</span><span class="t-sub">{m.text}</span></div></div></li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
           <div class="card list-card">
             <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2 cnt">{[0, 1, 2, 3, 4].map((n) => <span class={`c${n}`}>{n}</span>)}</span></p>
             <ul class="group">
@@ -38,18 +51,6 @@ const cx = (n: number) => `cx at-${n}`;
               ))}
             </ul>
             <div class={cx(5)}><div class="cx-in"><p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.wallet.footer}</p></div></div>
-          </div>
-          <div>
-            <div>
-              <div class="sources">
-                <p class="t-foot c-2 src-h">{c.wallet.sourcesLabel}</p>
-                <ul class="src-list">
-                  {c.wallet.sources.map((m, i) => (
-                    <li class={`dim-${i + 1}`}><div class="src-item"><div class="card mini"><span class="t-foot c-2 from">{m.from}</span><span class="t-sub">{m.text}</span></div></div></li>
-                  ))}
-                </ul>
-              </div>
-            </div>
           </div>
         </>
       )}

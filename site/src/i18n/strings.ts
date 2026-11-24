@@ -59,7 +59,7 @@ const en = {
     ],
   },
   preview: {
-    file: 'bleib · Your wallet',
+    file: 'bleib · Your memory',
     title: 'What your AI saw',
     rows: [
       { who: 'Claude', where: 'Anthropic', when: 'Today 14:32', icon: '/providers/claude.svg', saw: ['Prefers aisle seats', 'Hotels under €250 a night'] },
@@ -74,7 +74,7 @@ const en = {
       {
         h: ['Your memory.', 'In one place.'],
         p: 'People, preferences and rules your AIs need, in plain text you can read and correct. Encrypted on your device.',
-        more: { to: 'how', hash: '#wallet' },
+        more: { to: 'how', hash: '#memory' },
       },
       {
         h: ['Asked only', 'when it matters.'],
@@ -100,7 +100,7 @@ const en = {
   },
   cards: {
     wallet: {
-      title: 'Your Wallet',
+      title: 'Your Memory',
       rows: [
         { k: 'People', v: 'Marek, Berlin', icon: 'person' },
         { k: 'Travel', v: 'Aisle seat', icon: 'flight' },
@@ -139,7 +139,7 @@ const en = {
       weeklyNote: 'No health data left this device.',
     },
     any: {
-      title: 'Your Wallet',
+      title: 'Your Memory',
       sub: 'Travel, Work, People · 2 rules',
       usedBy: 'Now used by',
       providers: [
@@ -160,7 +160,7 @@ const en = {
       fact: 'Marek is vegetarian.',
       why: 'He mentioned it while you planned dinner.',
       save: 'Save',
-      walletLabel: 'Your Wallet',
+      walletLabel: 'Your Memory',
       newRow: { k: 'People', v: 'Marek is vegetarian' },
       newTag: 'New',
       saved: 'Saved. No AI can read it until you allow it.',
@@ -242,7 +242,7 @@ const de: Strings = {
     ],
   },
   preview: {
-    file: 'bleib · Deine Wallet',
+    file: 'bleib · Dein Gedächtnis',
     title: 'Was deine KI gesehen hat',
     rows: [
       { who: 'Claude', where: 'Anthropic', when: 'Heute 14:32', icon: '/providers/claude.svg', saw: ['Bevorzugt Gangplätze', 'Hotels unter 250 € pro Nacht'] },
@@ -257,7 +257,7 @@ const de: Strings = {
       {
         h: ['Dein Gedächtnis.', 'An einem Ort.'],
         p: 'Menschen, Vorlieben und Regeln, die deine KIs brauchen, als Klartext, den du lesen und korrigieren kannst. Verschlüsselt auf deinem Gerät.',
-        more: { to: 'how', hash: '#wallet' },
+        more: { to: 'how', hash: '#memory' },
       },
       {
         h: ['Gefragt nur,', 'wenn es zählt.'],
@@ -283,7 +283,7 @@ const de: Strings = {
   },
   cards: {
     wallet: {
-      title: 'Deine Wallet',
+      title: 'Dein Gedächtnis',
       rows: [
         { k: 'Menschen', v: 'Marek, Berlin', icon: 'person' },
         { k: 'Reisen', v: 'Gangplatz', icon: 'flight' },
@@ -322,7 +322,7 @@ const de: Strings = {
       weeklyNote: 'Keine Gesundheitsdaten haben dieses Gerät verlassen.',
     },
     any: {
-      title: 'Deine Wallet',
+      title: 'Dein Gedächtnis',
       sub: 'Reisen, Arbeit, Menschen · 2 Regeln',
       usedBy: 'Gerade genutzt von',
       providers: [
@@ -343,7 +343,7 @@ const de: Strings = {
       fact: 'Marek ist Vegetarier.',
       why: 'Er hat es erwähnt, als ihr das Abendessen geplant habt.',
       save: 'Speichern',
-      walletLabel: 'Deine Wallet',
+      walletLabel: 'Dein Gedächtnis',
       newRow: { k: 'Menschen', v: 'Marek ist Vegetarier' },
       newTag: 'Neu',
       saved: 'Gespeichert. Keine KI kann es lesen, bis du es erlaubst.',

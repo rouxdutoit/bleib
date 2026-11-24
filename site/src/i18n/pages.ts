@@ -57,8 +57,8 @@ const en: Docs = {
     ],
     sections: [
       {
-        id: 'wallet',
-        h: 'Your wallet',
+        id: 'memory',
+        h: 'Your memory',
         blocks: [
           { p: 'Everything your AIs should know about you lives in one folder on your device: people, preferences, projects and rules. It is plain text you can read and correct, encrypted with a key only you hold.' },
           { p: 'Bring in what your AIs already know: import an OpenClaw or Hermes workspace, or paste your ChatGPT or Claude memory and review each entry.' },
@@ -233,7 +233,7 @@ const en: Docs = {
   receipts: {
     title: 'Receipts',
     description: 'What a bleib receipt records, and how you can check it.',
-    intro: ['Every time an AI gets something from your wallet, bleib writes a receipt first. You can always see exactly what each AI saw.'],
+    intro: ['Every time an AI gets something from your memory, bleib writes a receipt first. You can always see exactly what each AI saw.'],
     sections: [
       {
         h: 'What a receipt contains',
@@ -253,7 +253,7 @@ const en: Docs = {
       },
       {
         h: 'Written before anything leaves',
-        blocks: [{ p: 'The receipt is saved in your encrypted wallet before the AI receives anything. If saving fails, nothing is shared.' }],
+        blocks: [{ p: 'The receipt is saved, encrypted, on your device before the AI receives anything. If saving fails, nothing is shared.' }],
       },
       {
         h: 'Tamper-evident',
@@ -370,7 +370,7 @@ const en: Docs = {
           {
             never: [
               'Hold a key that lets us read your memory.',
-              'Let an AI unlock your wallet or approve its own access.',
+              'Let an AI unlock bleib or approve its own access.',
               'Share anything without writing a receipt first.',
               'Send telemetry or analytics.',
               'Charge you to see your own data.',
@@ -493,7 +493,7 @@ const en: Docs = {
         blocks: [
           {
             never: [
-              'The wallet and every AI connection',
+              'Your memory and every AI connection',
               'Permissions, rules and receipts',
               'Importers and the recovery kit',
               'Syncing through your own cloud, and running it yourself',
@@ -587,7 +587,7 @@ const en: Docs = {
             never: [
               'Your memory, permissions and receipts stay on your device, encrypted.',
               'bleib sends nothing to us: no telemetry, no analytics, no crash reports, no accounts.',
-              'An AI gets something from your wallet only when you allow it, and only after a receipt is written.',
+              'An AI gets something from your memory only when you allow it, and only after a receipt is written.',
               'We hold no key that can read your data, so we can’t see it, sell it or hand it over.',
             ],
           },
@@ -605,7 +605,7 @@ const en: Docs = {
               { k: 'Suggestions', v: 'Memories AIs propose, until you save or dismiss them' },
             ],
           },
-          { p: 'All of it is encrypted with age, using a key derived from your passphrase. Plain text never touches the disk. While the wallet is unlocked, the key is held in memory until you lock it, restart, or it locks itself after a period of inactivity.' },
+          { p: 'All of it is encrypted with age, using a key derived from your passphrase. Plain text never touches the disk. While bleib is unlocked, the key is held in memory until you lock it, restart, or it locks itself after a period of inactivity.' },
         ],
       },
       {
@@ -625,7 +625,7 @@ const en: Docs = {
       },
       {
         h: 'Deleting your data',
-        blocks: [{ p: 'Delete any entry, receipt or permission in the app, or delete the whole wallet folder. Because we never have a copy, deleting it on your devices deletes it everywhere we could reach. Copies that AI providers already received are governed by their own policies.' }],
+        blocks: [{ p: 'Delete any entry, receipt or permission in the app, or delete the whole bleib folder. Because we never have a copy, deleting it on your devices deletes it everywhere we could reach. Copies that AI providers already received are governed by their own policies.' }],
       },
       {
         h: 'Who is responsible',
@@ -636,7 +636,7 @@ const en: Docs = {
       },
       {
         h: 'Later: hosted sync',
-        blocks: [{ p: 'We plan an optional, paid sync and backup service. Your wallet would be encrypted on your device before upload, so we would store only data we cannot read. It will come with its own privacy notice and data processing terms before it launches.' }],
+        blocks: [{ p: 'We plan an optional, paid sync and backup service. Your memory would be encrypted on your device before upload, so we would store only data we cannot read. It will come with its own privacy notice and data processing terms before it launches.' }],
       },
       { h: 'Changes', blocks: [{ p: 'We update this notice when the app changes. Last updated: 24 November 2026.' }] },
     ],
@@ -649,7 +649,7 @@ const en: Docs = {
       { h: 'Operator', blocks: [{ address: OPERATOR }] },
       { h: 'Contact', blocks: [{ address: ['Email hello@rouxdutoit.com', 'Telephone +49 162 7850608'] }] },
       { h: 'Responsible for content', blocks: [{ p: 'Under § 18(2) MStV:' }, { address: OPERATOR }] },
-      { h: 'About this site', blocks: [{ p: 'This website describes bleib, a free and open source wallet for your AI context. bleib is in development. Its source code will be open under AGPL-3.0-or-later; the file format, specification and SDK under Apache-2.0.' }] },
+      { h: 'About this site', blocks: [{ p: 'This website describes bleib, a free and open source password manager for your AI memory. bleib is in development. Its source code is open under AGPL-3.0-or-later; the file format, specification and SDK under Apache-2.0.' }] },
     ],
   },
 };
@@ -670,8 +670,8 @@ const de: Docs = {
     ],
     sections: [
       {
-        id: 'wallet',
-        h: 'Deine Wallet',
+        id: 'memory',
+        h: 'Dein Gedächtnis',
         blocks: [
           { p: 'Alles, was deine KIs über dich wissen sollen, liegt in einem Ordner auf deinem Gerät: Menschen, Vorlieben, Projekte und Regeln. Als Klartext, den du lesen und korrigieren kannst, verschlüsselt mit einem Schlüssel, den nur du hast.' },
           { p: 'Bring mit, was deine KIs schon wissen: Importiere einen OpenClaw- oder Hermes-Workspace oder füge dein Gedächtnis aus ChatGPT oder Claude ein und prüfe jeden Eintrag.' },
@@ -846,7 +846,7 @@ const de: Docs = {
   receipts: {
     title: 'Belege',
     description: 'Was ein Beleg von bleib festhält und wie du ihn prüfen kannst.',
-    intro: ['Jedes Mal, wenn eine KI etwas aus deiner Wallet bekommt, schreibt bleib zuerst einen Beleg. Du siehst jederzeit genau, was jede KI gesehen hat.'],
+    intro: ['Jedes Mal, wenn eine KI etwas aus deinem Gedächtnis bekommt, schreibt bleib zuerst einen Beleg. Du siehst jederzeit genau, was jede KI gesehen hat.'],
     sections: [
       {
         h: 'Was ein Beleg enthält',
@@ -866,7 +866,7 @@ const de: Docs = {
       },
       {
         h: 'Geschrieben, bevor etwas rausgeht',
-        blocks: [{ p: 'Der Beleg wird in deiner verschlüsselten Wallet gespeichert, bevor die KI etwas bekommt. Schlägt das Speichern fehl, wird nichts geteilt.' }],
+        blocks: [{ p: 'Der Beleg wird verschlüsselt auf deinem Gerät gespeichert, bevor die KI etwas bekommt. Schlägt das Speichern fehl, wird nichts geteilt.' }],
       },
       {
         h: 'Manipulationssicher',
@@ -983,7 +983,7 @@ const de: Docs = {
           {
             never: [
               'Einen Schlüssel halten, mit dem wir dein Gedächtnis lesen könnten.',
-              'Eine KI deine Wallet entsperren oder sich selbst Zugriff erteilen lassen.',
+              'Eine KI bleib entsperren oder sich selbst Zugriff erteilen lassen.',
               'Etwas teilen, ohne vorher einen Beleg zu schreiben.',
               'Telemetrie oder Analysedaten senden.',
               'Geld dafür verlangen, dass du deine eigenen Daten siehst.',
@@ -1106,7 +1106,7 @@ const de: Docs = {
         blocks: [
           {
             never: [
-              'Die Wallet und jede KI-Verbindung',
+              'Dein Gedächtnis und jede KI-Verbindung',
               'Berechtigungen, Regeln und Belege',
               'Importe und das Wiederherstellungs-Kit',
               'Synchronisierung über deine eigene Cloud und Betrieb auf eigener Hardware',
@@ -1200,7 +1200,7 @@ const de: Docs = {
             never: [
               'Dein Gedächtnis, deine Berechtigungen und Belege bleiben verschlüsselt auf deinem Gerät.',
               'bleib schickt uns nichts: keine Telemetrie, keine Analyse, keine Absturzberichte, keine Konten.',
-              'Eine KI bekommt nur etwas aus deiner Wallet, wenn du es erlaubst, und erst nachdem ein Beleg geschrieben ist.',
+              'Eine KI bekommt nur etwas aus deinem Gedächtnis, wenn du es erlaubst, und erst nachdem ein Beleg geschrieben ist.',
               'Wir haben keinen Schlüssel, mit dem wir deine Daten lesen könnten. Wir können sie also weder sehen noch verkaufen noch herausgeben.',
             ],
           },
@@ -1218,7 +1218,7 @@ const de: Docs = {
               { k: 'Vorschläge', v: 'Erinnerungen, die KIs vorschlagen, bis du sie speicherst oder verwirfst' },
             ],
           },
-          { p: 'Alles ist mit age verschlüsselt, mit einem Schlüssel, der aus deiner Passphrase entsteht. Klartext landet nie auf der Festplatte. Solange die Wallet entsperrt ist, liegt der Schlüssel im Arbeitsspeicher, bis du sie sperrst, neu startest oder sie sich nach einer Weile ohne Nutzung selbst sperrt.' },
+          { p: 'Alles ist mit age verschlüsselt, mit einem Schlüssel, der aus deiner Passphrase entsteht. Klartext landet nie auf der Festplatte. Solange bleib entsperrt ist, liegt der Schlüssel im Arbeitsspeicher, bis du es sperrst, neu startest oder es sich nach einer Weile ohne Nutzung selbst sperrt.' },
         ],
       },
       {
@@ -1238,7 +1238,7 @@ const de: Docs = {
       },
       {
         h: 'Deine Daten löschen',
-        blocks: [{ p: 'Lösche einzelne Einträge, Belege oder Berechtigungen in der App oder den ganzen Wallet-Ordner. Da wir nie eine Kopie haben, ist es damit überall gelöscht, wo wir es erreichen könnten. Für Kopien, die KI-Anbieter bereits erhalten haben, gelten deren Regeln.' }],
+        blocks: [{ p: 'Lösche einzelne Einträge, Belege oder Berechtigungen in der App oder den ganzen bleib-Ordner. Da wir nie eine Kopie haben, ist es damit überall gelöscht, wo wir es erreichen könnten. Für Kopien, die KI-Anbieter bereits erhalten haben, gelten deren Regeln.' }],
       },
       {
         h: 'Wer verantwortlich ist',
@@ -1249,7 +1249,7 @@ const de: Docs = {
       },
       {
         h: 'Später: gehostete Synchronisierung',
-        blocks: [{ p: 'Wir planen einen optionalen, kostenpflichtigen Dienst für Synchronisierung und Sicherung. Deine Wallet würde vor dem Hochladen auf deinem Gerät verschlüsselt, wir würden also nur Daten speichern, die wir nicht lesen können. Vor dem Start bekommt er eine eigene Datenschutzerklärung und eigene Bedingungen zur Auftragsverarbeitung.' }],
+        blocks: [{ p: 'Wir planen einen optionalen, kostenpflichtigen Dienst für Synchronisierung und Sicherung. Dein Gedächtnis würde vor dem Hochladen auf deinem Gerät verschlüsselt, wir würden also nur Daten speichern, die wir nicht lesen können. Vor dem Start bekommt er eine eigene Datenschutzerklärung und eigene Bedingungen zur Auftragsverarbeitung.' }],
       },
       { h: 'Änderungen', blocks: [{ p: 'Wir passen diesen Hinweis an, wenn sich die App ändert. Stand: 24. November 2026.' }] },
     ],
@@ -1262,7 +1262,7 @@ const de: Docs = {
       { h: 'Anbieter', blocks: [{ address: OPERATOR_DE }] },
       { h: 'Kontakt', blocks: [{ address: ['E-Mail hello@rouxdutoit.com', 'Telefon +49 162 7850608'] }] },
       { h: 'Verantwortlich für den Inhalt', blocks: [{ p: 'Nach § 18 Abs. 2 MStV:' }, { address: OPERATOR_DE }] },
-      { h: 'Über diese Website', blocks: [{ p: 'Diese Website beschreibt bleib, eine kostenlose Open-Source-Wallet für deinen KI-Kontext. bleib ist in Entwicklung. Der Quellcode wird unter AGPL-3.0-or-later veröffentlicht, Dateiformat, Spezifikation und SDK unter Apache-2.0.' }] },
+      { h: 'Über diese Website', blocks: [{ p: 'Diese Website beschreibt bleib, einen kostenlosen Open-Source-Passwort-Manager für dein KI-Gedächtnis. bleib ist in Entwicklung. Der Quellcode ist unter AGPL-3.0-or-later veröffentlicht, Dateiformat, Spezifikation und SDK unter Apache-2.0.' }] },
     ],
   },
 };
