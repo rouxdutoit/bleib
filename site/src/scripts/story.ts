@@ -112,8 +112,46 @@ export function play(sv: HTMLElement): void {
   }
 }
 
+/** A scene's height once it has played: its last step and typed text, measured without transitions. */
+const finalHeight = (sv: HTMLElement): number => {
+  const { hidden, className } = sv;
+  const typer = sv.querySelector<HTMLElement>('[data-type]');
+  const typed = typer?.textContent ?? '';
+  sv.style.minHeight = '';
+  sv.hidden = false;
+  sv.classList.add('measuring');
+  for (let k = 1; k <= Number(sv.dataset.steps ?? '0'); k++) sv.classList.add(`s${k}`);
+  if (typer) typer.textContent = typer.dataset.type ?? '';
+  const height = Math.ceil(parseFloat(getComputedStyle(sv).height));
+  sv.className = `${className} measuring`;
+  if (typer) typer.textContent = typed;
+  sv.hidden = hidden;
+  void sv.offsetHeight; // settle the current state before transitions return, so nothing animates back
+  sv.classList.remove('measuring');
+  return height;
+};
+
+/**
+ * Reserves every scene's finished height before it plays, so the page around it never moves.
+ * Scenes that share a parent (the hero's tabs) all take the tallest one's height, so switching tabs doesn't move it either.
+ */
+const reserve = () => {
+  const scenes = [...document.querySelectorAll<HTMLElement>('[data-steps]')];
+  const tallest = new Map<Element | null, number>();
+  scenes.forEach((sv) => tallest.set(sv.parentElement, Math.max(tallest.get(sv.parentElement) ?? 0, finalHeight(sv))));
+  scenes.forEach((sv) => (sv.style.minHeight = `${tallest.get(sv.parentElement)}px`));
+};
+
 /** Plays every [data-sv] scene once, when it comes into view (and, for data-sv="scroll", once the page has scrolled). */
 export function initStory(): void {
+  reserve();
+  document.fonts.ready.then(reserve);
+  let width = window.innerWidth;
+  window.addEventListener('resize', () => {
+    if (window.innerWidth === width) return;
+    width = window.innerWidth;
+    reserve();
+  }, { passive: true });
   const scenes = document.querySelectorAll<HTMLElement>('[data-sv]');
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     scenes.forEach(play);

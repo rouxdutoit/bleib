@@ -73,7 +73,8 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
   /* The fill moment: a new AI, bleib offers only what it needs, like a password manager filling a login.
      Plays on the first scroll (scripts/story.ts); each tab is another everyday example and replays when chosen. */
   .preview { margin: clamp(40px, 6vw, 72px) 0 0; width: 100%; max-width: 520px; text-align: left; }
-  .body { --bleib-card-margin: 0 0 8px; padding: 16px; }
+  /* The window keeps its finished height from the start (scripts/story.ts); like a chat, the message box sits at the bottom. */
+  .body { --bleib-card-margin: 0 0 8px; padding: 16px; display: flex; flex-direction: column; justify-content: flex-end; }
   .body p { margin: 0; }
 
   .grow-in { min-height: 0; overflow: hidden; }
