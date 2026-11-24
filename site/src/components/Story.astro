@@ -13,7 +13,7 @@ const chev = icon('chevron_right');
 <section class="story has-rails" aria-label={s.label}>
   <Rails />
   {s.scenes.map((scene, i) => (
-    <article class="scene" id={`scene-${i + 1}`} data-side={i % 2 === 0 ? 'card-left' : 'card-right'}>
+    <article class="scene" id={`scene-${i + 1}`} data-side={i % 2 === 0 ? 'card-left' : 'card-right'} data-dark={'dark' in scene ? '' : undefined}>
       <div class="pair">
         <div class="visual"><StoryVisual lang={lang} scene={i} /></div>
         <div class="text">
@@ -47,6 +47,15 @@ const chev = icon('chevron_right');
   .more:hover { text-decoration: underline; text-underline-offset: 4px; }
   .more:hover :global(svg) { transform: translateX(2px); }
   :global(:root[data-theme='dark']) .more { color: #f6e79a; }
+  /* The privacy scene: the box between the rails turns black with bleib yellow (yellow with black in dark mode). */
+  .scene[data-dark] { --v-bg: #0a0a0a; --v-ink: #f6e79a; --v-muted: rgb(245 241 230 / 0.62); --focus: #f6e79a; }
+  :global(:root[data-theme='dark']) .scene[data-dark] { --v-bg: #f6e79a; --v-ink: #0a0a0a; --v-muted: rgb(10 10 10 / 0.64); --focus: #0a0a0a; }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .scene[data-dark] { --v-bg: #f6e79a; --v-ink: #0a0a0a; --v-muted: rgb(10 10 10 / 0.64); --focus: #0a0a0a; }
+  }
+  .scene[data-dark]::before { content: ''; position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%; width: var(--rails-box); transform: translateX(-50%); background: var(--v-bg); }
+  .scene[data-dark] .text, .scene[data-dark] .more { color: var(--v-ink); }
+  .scene[data-dark] .lead { color: var(--v-muted); }
   /* Tray and text are centred together; the tray grows evenly and the text stays centred on it. */
 
   @media (max-width: 767px) {

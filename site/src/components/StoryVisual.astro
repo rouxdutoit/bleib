@@ -13,8 +13,10 @@ import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang; scene: number }
 const { lang, scene } = Astro.props;
 const c = t(lang).cards;
-const STEPS = [4, 3, 4, 6, 3];
-const INTERVAL = [900, 900, 900, 620, 900];
+const STEPS = [4, 3, 4, 6, 3, 3];
+const INTERVAL = [900, 900, 900, 620, 900, 1000];
+/** Scene 6: how your memory looks without your key. A fixed, harmless stand-in for ciphertext. */
+const noise = (text: string) => btoa(encodeURIComponent(text)).replace(/[^A-Za-z0-9]/g, '').slice(0, Math.max(6, text.length + 2));
 
 import { icon, type IconName } from './icons';
 const svg = (name: string, cls = 'g') => icon(name as IconName, cls);
@@ -192,6 +194,22 @@ const cx = (n: number) => `cx at-${n}`;
           </div>
         </>
       )}
+
+      {scene === 5 && (
+        <div class="card list-card sealed">
+          <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2">3</span></p>
+          <ul class="group">
+            {c.wallet.rows.slice(0, 3).map((r) => (
+              <li class="cell">
+                <span class="ico" set:html={svg(r.icon)} />
+                <span class="t-body cell-k seal"><span class="plain">{r.k}</span><span class="noise">{noise(r.k)}</span></span>
+                <span class="t-body c-2 cell-v seal"><span class="plain">{r.v}</span><span class="noise">{noise(r.v)}</span></span>
+              </li>
+            ))}
+          </ul>
+          <div class={cx(3)}><div class="cx-in"><p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.sealed.note}</p></div></div>
+        </div>
+      )}
     </div>
   </div>
 </div>
@@ -233,6 +251,13 @@ const cx = (n: number) => `cx at-${n}`;
   .ico :global(.g) { width: 17px; height: 17px; }
   .cell-k { flex: 1; min-width: 0; }
   .blk { display: block; }
+  /* Scene 6: each value blurs out and its ciphertext blurs in, in the same place. */
+  .seal { display: inline-grid; }
+  .seal > span { grid-area: 1 / 1; transition: opacity 0.6s var(--ease), filter 0.6s var(--ease); }
+  .cell-v.seal { justify-items: end; }
+  .noise { opacity: 0; filter: blur(6px); font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.86em; letter-spacing: 0.02em; color: var(--label-3); }
+  .s2 .plain { opacity: 0; filter: blur(6px); }
+  .s2 .noise { opacity: 1; filter: none; }
   .cell-v { text-align: right; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
   .inline-g { display: inline-flex; }
   .inline-g :global(.g) { width: 13px; height: 13px; }

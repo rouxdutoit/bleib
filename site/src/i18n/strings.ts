@@ -98,6 +98,12 @@ const en = {
         p: 'AIs can propose what to remember. Nothing is saved until you say so.',
         more: { to: 'how', hash: '#proposals' },
       },
+      {
+        h: ['We never see', 'your memory.'],
+        p: 'It’s encrypted on your device. Without your key, it’s noise. No account, no tracking, nothing to sell.',
+        more: { to: 'security', hash: '' },
+        dark: true,
+      },
     ],
   },
   cards: {
@@ -154,6 +160,7 @@ const en = {
       more: 'More',
       caption: 'Different AI. Same preferences and rules.',
     },
+    sealed: { note: 'What anyone without your key sees. Us included.' },
     propose: {
       app: 'Claude',
       time: 'now',
@@ -165,17 +172,6 @@ const en = {
       newTag: 'New',
       saved: 'Saved. No AI can read it until you allow it.',
     },
-  },
-  privacy: {
-    eyebrow: 'Privacy',
-    h: 'We never see your memory.',
-    items: [
-      { icon: 'devices', t: 'On your device', d: 'Encrypted where you use it. No bleib server can read it.' },
-      { icon: 'visibility_off', t: 'No account, no tracking', d: 'No sign-up, no analytics, no ads. Nothing to sell.' },
-      { icon: 'tune', t: 'Only what’s needed', d: 'Each AI gets the minimum it needs. Anything sensitive needs your yes.' },
-      { icon: 'receipt_long', t: 'Proof, not promises', d: 'Every share leaves a receipt. The code is open to check.' },
-    ],
-    more: 'How bleib keeps you safe',
   },
   finale: {
     prompt: { tab: 'Claude', said: 'I always book an aisle seat.', title: 'Save to bleib?', fact: 'Prefers aisle seats', save: 'Save', saved: 'Saved' },
@@ -292,6 +288,12 @@ const de: Strings = {
         p: 'KIs können vorschlagen, was sie sich merken möchten. Gespeichert wird erst, wenn du zustimmst.',
         more: { to: 'how', hash: '#proposals' },
       },
+      {
+        h: ['Wir sehen dein', 'Gedächtnis nie.'],
+        p: 'Es ist auf deinem Gerät verschlüsselt. Ohne deinen Schlüssel ist es Rauschen. Kein Konto, kein Tracking, nichts zu verkaufen.',
+        more: { to: 'security', hash: '' },
+        dark: true,
+      },
     ],
   },
   cards: {
@@ -348,6 +350,7 @@ const de: Strings = {
       more: 'Mehr',
       caption: 'Andere KI. Gleiche Vorlieben und Regeln.',
     },
+    sealed: { note: 'So sieht es jeder ohne deinen Schlüssel. Auch wir.' },
     propose: {
       app: 'Claude',
       time: 'jetzt',
@@ -359,17 +362,6 @@ const de: Strings = {
       newTag: 'Neu',
       saved: 'Gespeichert. Keine KI kann es lesen, bis du es erlaubst.',
     },
-  },
-  privacy: {
-    eyebrow: 'Datenschutz',
-    h: 'Wir sehen dein Gedächtnis nie.',
-    items: [
-      { icon: 'devices', t: 'Auf deinem Gerät', d: 'Verschlüsselt, wo du es nutzt. Kein Server von bleib kann es lesen.' },
-      { icon: 'visibility_off', t: 'Kein Konto, kein Tracking', d: 'Keine Anmeldung, keine Analyse, keine Werbung. Nichts zu verkaufen.' },
-      { icon: 'tune', t: 'Nur das Nötige', d: 'Jede KI bekommt nur das Nötigste. Sensibles nur mit deinem Ja.' },
-      { icon: 'receipt_long', t: 'Belege statt Versprechen', d: 'Jede Weitergabe hinterlässt einen Beleg. Der Code ist offen und prüfbar.' },
-    ],
-    more: 'Wie bleib dich schützt',
   },
   finale: {
     prompt: { tab: 'Claude', said: 'Ich buche immer einen Gangplatz.', title: 'In bleib sichern?', fact: 'Bevorzugt Gangplätze', save: 'Sichern', saved: 'Gesichert' },
