@@ -36,7 +36,7 @@ const f = t(lang).form;
       placeholder={f.label}
       aria-describedby={`ea-status-${lang} ea-note-${lang}`}
     />
-    <button class="btn btn-primary ea-btn" type="submit"><span class="ea-label">{f.submit}</span><span class="ea-send" aria-hidden="true" set:html={icon('arrow_outward')} /></button>
+    <button class="btn btn-primary ea-btn" type="submit"><span class="ea-label">{f.submit}</span><span class="ea-send" aria-hidden="true" set:html={icon('send')} /></button>
   </div>
   <p class="ea-status" id={`ea-status-${lang}`} role="status" aria-live="polite"><span class="ea-tick" aria-hidden="true"><DrawTick /></span><span class="ea-msg"></span></p>
   <p class="ea-note" id={`ea-note-${lang}`}>
@@ -58,7 +58,7 @@ const f = t(lang).form;
   .ea-btn { position: relative; flex: none; min-height: 48px; max-width: 16em; overflow: hidden; white-space: nowrap; transition: max-width var(--t-open) var(--ease), padding var(--t-open) var(--ease); }
   .ea-label { transition: opacity var(--t-fade) var(--ease); }
   .ea-send { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; transition: opacity var(--t-fade) var(--ease); }
-  .ea-send :global(svg) { width: 22px; height: 22px; transform: rotate(-45deg); }
+  .ea-send :global(svg) { width: 20px; height: 20px; margin-left: 2px; }
   .ea-row:focus-within .ea-btn { max-width: 48px; padding-inline: 0; }
   .ea-row:focus-within .ea-label { opacity: 0; }
   .ea-row:focus-within .ea-send { opacity: 1; }

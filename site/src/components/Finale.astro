@@ -19,7 +19,7 @@ const s = t(lang).finale;
       <Window tabs={[{ ai: s.prompt.tab, icon: 'claude-color' }]}>
         <div class="body" data-sv data-steps="4" data-interval="900" data-gaps=",900,2200" data-step="0">
           <p class="t-body bubble appear at-2">{s.prompt.said}</p>
-          <BleibCard title={s.prompt.title} facts={[s.prompt.fact]} action={s.prompt.save} done={s.prompt.saved} at={3} />
+          <BleibCard title={s.prompt.title} facts={[{ t: s.prompt.fact, icon: 'flight' }]} action={s.prompt.save} done={s.prompt.saved} at={3} />
           <Composer typed={s.prompt.said} sentAt={2} />
         </div>
       </Window>

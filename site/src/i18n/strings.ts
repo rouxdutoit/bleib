@@ -59,22 +59,22 @@ const en = {
   },
   preview: {
     examples: 'Examples',
-    title: 'bleib picked just what {ai} needs',
+    title: 'Just what {ai} needs',
     add: 'Add',
     added: 'Added',
     attachment: 'About me',
     tabs: [
       {
         ai: 'Gemini', icon: 'gemini-color', typed: 'Plan a weekend in Lisbon for me.',
-        facts: ['Aisle seat', 'Vegetarian'], private: 'Health and work stay private.',
+        facts: [{ t: 'Aisle seat', icon: 'flight' }, { t: 'Vegetarian', icon: 'eco' }], private: 'Health and work stay private.',
       },
       {
         ai: 'Claude', icon: 'claude-color', typed: 'Write a cover letter for this job.',
-        facts: ['Product designer', 'Berlin'], private: 'Health and money stay private.',
+        facts: [{ t: 'Product designer', icon: 'work' }, { t: 'Berlin', icon: 'location_on' }], private: 'Health and money stay private.',
       },
       {
         ai: 'ChatGPT', icon: 'openai', typed: 'What should I cook tonight?',
-        facts: ['Vegetarian', 'Cooks for two'], private: 'Work and travel stay private.',
+        facts: [{ t: 'Vegetarian', icon: 'eco' }, { t: 'Cooks for two', icon: 'group' }], private: 'Work and travel stay private.',
       },
     ],
   },
@@ -251,22 +251,22 @@ const de: Strings = {
   },
   preview: {
     examples: 'Beispiele',
-    title: 'bleib wählt nur, was {ai} braucht',
+    title: 'Nur, was {ai} braucht',
     add: 'Hinzufügen',
     added: 'Hinzugefügt',
     attachment: 'Über mich',
     tabs: [
       {
         ai: 'Gemini', icon: 'gemini-color', typed: 'Plane ein Wochenende in Lissabon für mich.',
-        facts: ['Gangplatz', 'Vegetarisch'], private: 'Gesundheit und Arbeit bleiben privat.',
+        facts: [{ t: 'Gangplatz', icon: 'flight' }, { t: 'Vegetarisch', icon: 'eco' }], private: 'Gesundheit und Arbeit bleiben privat.',
       },
       {
         ai: 'Claude', icon: 'claude-color', typed: 'Schreib ein Anschreiben für diese Stelle.',
-        facts: ['Produktdesign', 'Berlin'], private: 'Gesundheit und Finanzen bleiben privat.',
+        facts: [{ t: 'Produktdesign', icon: 'work' }, { t: 'Berlin', icon: 'location_on' }], private: 'Gesundheit und Finanzen bleiben privat.',
       },
       {
         ai: 'ChatGPT', icon: 'openai', typed: 'Was soll ich heute Abend kochen?',
-        facts: ['Vegetarisch', 'Kocht für zwei'], private: 'Arbeit und Reisen bleiben privat.',
+        facts: [{ t: 'Vegetarisch', icon: 'eco' }, { t: 'Kocht für zwei', icon: 'group' }], private: 'Arbeit und Reisen bleiben privat.',
       },
     ],
   },

@@ -21,6 +21,10 @@ import restaurant from '@material-symbols/svg-400/rounded/restaurant.svg?raw';
 import mail from '@material-symbols/svg-400/rounded/mail.svg?raw';
 import translate from '@material-symbols/svg-400/rounded/translate.svg?raw';
 import close from '@material-symbols/svg-400/rounded/close.svg?raw';
+import send from '@material-symbols/svg-400/rounded/send-fill.svg?raw';
+import eco from '@material-symbols/svg-400/rounded/eco-fill.svg?raw';
+import locationOn from '@material-symbols/svg-400/rounded/location_on-fill.svg?raw';
+import group from '@material-symbols/svg-400/rounded/group-fill.svg?raw';
 import chatBubble from '@material-symbols/svg-400/rounded/chat_bubble-fill.svg?raw';
 import backHand from '@material-symbols/svg-400/rounded/back_hand-fill.svg?raw';
 
@@ -43,6 +47,10 @@ const raw = {
   mail,
   translate,
   close,
+  send,
+  eco,
+  location_on: locationOn,
+  group,
   chat_bubble: chatBubble,
   back_hand: backHand,
 } as const;
