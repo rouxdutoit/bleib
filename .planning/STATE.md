@@ -48,6 +48,9 @@ Progress: [░░░░░░░░░░] 0%
 
 ## Accumulated Context
 
+### Roadmap Evolution
+- Phase 4 added (24 Nov 2026): Browser extension: save and fill, like a password manager. Founder: the extension is crucial to reaching ordinary users.
+
 ### Decisions
 
 Decisions are logged in PROJECT.md Key Decisions table.

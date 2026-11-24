@@ -15,6 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 1: Website** - A bilingual, accessible landing site in roze.ai's structure with bleib's own assets, live on Cloudflare Pages with early-access signup
 - [ ] **Phase 2: Wallet Core Loop** - Encrypted wallet with workspace import, one agent connected over MCP, consent asked once, and a receipt of exactly what was shared
 - [ ] **Phase 3: Full Control and Proof** - All agent setups, plain-word rules, observed destinations, "What your AI saw" timeline, weekly summary and export, and the proposals review queue
+- [ ] **Phase 4: Browser extension: save and fill**
 
 ## Phase Details
 
@@ -80,3 +81,14 @@ Phases execute in numeric order: 1 → 2 → 3
 | 1. Website | 0/TBD | Not started | - |
 | 2. Wallet Core Loop | 0/TBD | Not started | - |
 | 3. Full Control and Proof | 0/TBD | Not started | - |
+
+### Phase 4: Browser extension: save and fill
+
+**Goal:** An ordinary person who chats with ChatGPT, Claude or Gemini in the browser uses bleib like a password manager: when they tell an AI something worth remembering, bleib offers "Save this to bleib?"; in any chat, a "Use from bleib" button inserts only the memory they approve for that AI, and every insert leaves a receipt. Everything is processed locally against their encrypted wallet.
+**Scope notes:** Manifest V3 for Chrome and Firefox first, Safari after; host permissions only for chatgpt.com, claude.ai and gemini.google.com; talks to the local wallet (native messaging or the 127.0.0.1 door); no remote servers. Research first: existing memory extensions (Mem0 OpenMemory, Supermemory, MemoryPlugin) and how bleib differs, MV3 limits, store review rules, minimal permissions, resilience to chat-site UI changes.
+**Requirements**: TBD (EXT-*)
+**Depends on:** Phase 3
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd-plan-phase 4 to break down)
