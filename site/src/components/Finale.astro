@@ -1,52 +1,58 @@
 ---
-/** The closer: Apple-style. A promise, one action, and the reasons to trust it. */
+/** The closer: the password-manager moment the hero promises, one action, and a quiet line of trust. */
 import Mark from './Mark.astro';
 import Rails from './Rails.astro';
 import EarlyAccessForm from './EarlyAccessForm.astro';
+import { icon, type IconName } from './icons';
 import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang).finale;
-import { icon, type IconName } from './icons';
 ---
 <section class="finale has-rails" id="early-access" aria-labelledby="finale-title">
   <Rails />
   <div class="wrap inner">
-    <span class="mark" aria-hidden="true"><Mark size={56} /></span>
+    <figure class="prompt" aria-hidden="true">
+      <span class="app"><Mark size={22} /></span>
+      <p class="t-headline p-title">{s.prompt.title}</p>
+      <p class="t-body fact"><span class="yes" set:html={icon('check')} />{s.prompt.fact}</p>
+      <p class="t-foot p-from">{s.prompt.from}</p>
+      <span class="actions"><span class="b b-2">{s.prompt.notNow}</span><span class="b b-1">{s.prompt.save}</span></span>
+    </figure>
     <h2 id="finale-title" class="title">{s.h}</h2>
     <p class="sub">{s.p}</p>
     <div class="form"><EarlyAccessForm lang={lang} /></div>
-    <ul class="trust">
-      {s.trust.map((x) => (
-        <li>
-          <span class="ti" set:html={icon(x.icon as IconName)} />
-          <p class="t-headline">{x.t}</p>
-          <p class="t-sub c-muted">{x.d}</p>
-        </li>
-      ))}
+    <ul class="trust t-foot">
+      {s.trust.map((x) => <li><span set:html={icon(x.icon as IconName)} />{x.t}</li>)}
     </ul>
   </div>
 </section>
 
 <style>
-  .finale { padding: clamp(96px, 14vw, 180px) 0 clamp(80px, 10vw, 140px); }
+  .finale { padding: clamp(96px, 12vw, 160px) 0 clamp(72px, 9vw, 120px); }
   .inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
-  .mark { color: var(--ink); margin-bottom: 28px; }
-  :global(:root[data-theme='dark']) .mark { color: #f6e79a; }
+
+  /* A macOS save prompt, as a password manager shows it. Decorative; the headline carries the meaning. */
+  .prompt { margin: 0 0 clamp(40px, 6vw, 64px); width: min(300px, 100%); padding: 20px 20px 16px; border-radius: 22px; background: var(--cell); color: var(--label); box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; }
+  .prompt p { margin: 0; }
+  .app { width: 44px; height: 44px; border-radius: 11px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; margin-bottom: 10px; }
+  .fact { margin-top: 10px !important; width: 100%; display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: var(--fill); text-align: left; }
+  .yes { flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: #f6e79a; color: #0a0a0a; }
+  .yes :global(svg) { width: 15px; height: 15px; display: block; }
+  .p-from { margin-top: 8px !important; color: var(--label-2); }
+  .actions { margin-top: 16px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .b { display: grid; place-items: center; min-height: 36px; border-radius: 999px; font-size: 15px; font-weight: 600; }
+  .b-2 { background: var(--fill); color: var(--label); }
+  .b-1 { background: #0a0a0a; color: #ffffff; }
+  :global(:root[data-theme='dark']) .b-1 { background: #f6e79a; color: #0a0a0a; }
   @media (prefers-color-scheme: dark) {
-    :global(:root:not([data-theme='light'])) .mark { color: #f6e79a; }
+    :global(:root:not([data-theme='light'])) .b-1 { background: #f6e79a; color: #0a0a0a; }
   }
+
   .title { font-size: clamp(44px, 7vw, 88px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 700; }
-  .sub { margin: 20px 0 0; max-width: 34em; font-size: clamp(17px, 1.7vw, 21px); line-height: 1.45; color: var(--muted); }
-  .form { margin-top: 36px; width: 100%; display: flex; justify-content: center; }
-  .trust { list-style: none; margin: clamp(56px, 8vw, 96px) 0 0; padding: 0; width: 100%; max-width: 900px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); align-items: start; }
-  .trust li { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-  .trust .c-muted { max-width: 24ch; text-wrap: balance; }
-  .trust p { margin: 0; }
-  .ti { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--fill); color: var(--ink); margin-bottom: 6px; }
-  .ti :global(svg) { width: 22px; height: 22px; }
-  .c-muted { color: var(--muted); }
-  @media (max-width: 720px) {
-    .trust { grid-template-columns: 1fr; gap: 28px; }
-  }
+  .sub { margin: 18px 0 0; font-size: clamp(17px, 1.7vw, 21px); line-height: 1.45; color: var(--muted); text-wrap: balance; }
+  .form { margin-top: 32px; width: 100%; display: flex; justify-content: center; }
+  .trust { list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; color: var(--muted); }
+  .trust li { display: inline-flex; align-items: center; gap: 6px; }
+  .trust :global(svg) { width: 15px; height: 15px; display: block; }
 </style>

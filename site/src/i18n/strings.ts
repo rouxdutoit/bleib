@@ -167,12 +167,13 @@ const en = {
     },
   },
   finale: {
-    h: "Keep what's yours.",
-    p: 'bleib is in development. Join early access and help shape it.',
+    prompt: { title: 'Save to bleib?', fact: 'Prefers aisle seats', from: 'From your chat with Claude', notNow: 'Not Now', save: 'Save' },
+    h: 'Tell it once.',
+    p: 'Every AI gets what it needs. Nothing more.',
     trust: [
-      { icon: 'lock', t: 'Encrypted on your device', d: 'Only you hold the key.' },
-      { icon: 'code', t: 'Open source', d: 'Read every line. Run it yourself.' },
-      { icon: 'savings', t: 'Free, for good', d: 'Pay only for convenience, like hosted sync.' },
+      { icon: 'lock', t: 'Encrypted on your device' },
+      { icon: 'code', t: 'Open source' },
+      { icon: 'savings', t: 'Free, for good' },
     ],
   },
   form: {
@@ -354,12 +355,13 @@ const de: Strings = {
     },
   },
   finale: {
-    h: 'Behalte, was deins ist.',
-    p: 'bleib ist in Entwicklung. Sichere dir frühen Zugang und gestalte mit.',
+    prompt: { title: 'In bleib sichern?', fact: 'Bevorzugt Gangplätze', from: 'Aus deinem Chat mit Claude', notNow: 'Nicht jetzt', save: 'Sichern' },
+    h: 'Einmal sagen.',
+    p: 'Jede KI bekommt, was sie braucht. Mehr nicht.',
     trust: [
-      { icon: 'lock', t: 'Verschlüsselt auf deinem Gerät', d: 'Nur du hast den Schlüssel.' },
-      { icon: 'code', t: 'Open Source', d: 'Jede Zeile lesbar. Selbst betreibbar.' },
-      { icon: 'savings', t: 'Dauerhaft kostenlos', d: 'Du zahlst nur für Komfort, etwa gehostete Synchronisierung.' },
+      { icon: 'lock', t: 'Verschlüsselt auf deinem Gerät' },
+      { icon: 'code', t: 'Open Source' },
+      { icon: 'savings', t: 'Dauerhaft kostenlos' },
     ],
   },
   form: {
