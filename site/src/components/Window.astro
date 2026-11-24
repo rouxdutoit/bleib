@@ -36,10 +36,13 @@ const { tabs, tablist, id = 'tab' } = Astro.props;
   .lights i { width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; }
   .lights i:nth-child(2) { background: #febc2e; }
   .lights i:nth-child(3) { background: #28c840; }
-  .tabs { flex: 1; min-width: 0; display: flex; }
+  .tabs { position: relative; flex: 1; min-width: 0; display: flex; }
+  /* Switchable tabs share one raised tile that slides to the chosen tab, like a segmented control (Hero.astro sets --sel). */
+  .tabs[role='tablist']::before { content: ''; position: absolute; top: 0; left: 0; width: 33.333%; height: 28px; border-radius: 8px; background: var(--cell); box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 2px rgb(0 0 0 / 0.08); transform: translateX(calc(var(--sel, 0) * 100%)); transition: transform var(--t-open) var(--ease); }
   .tab { position: relative; flex: 0 1 33.333%; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 6px; height: 28px; padding: 0 8px; border: 0; border-radius: 8px; background: none; color: var(--label-2); font-family: inherit; cursor: pointer; }
-  .tab + .tab::before { content: ''; position: absolute; left: 0; top: 7px; bottom: 7px; width: 1px; background: var(--hairline); }
-  .tab.on, .tab[aria-selected='true'] { background: var(--cell); color: var(--label); box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 2px rgb(0 0 0 / 0.08); cursor: default; }
+  .tab + .tab::before { content: ''; position: absolute; left: 0; top: 7px; bottom: 7px; width: 1px; background: var(--hairline); transition: opacity var(--t-fade) var(--ease); }
+  .tab.on { background: var(--cell); box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 2px rgb(0 0 0 / 0.08); }
+  .tab.on, .tab[aria-selected='true'] { color: var(--label); cursor: default; }
   .tab[aria-selected='true']::before, .tab[aria-selected='true'] + .tab::before { opacity: 0; }
   @media (hover: hover) {
     .tab[aria-selected='false']:hover { background: var(--fill); }

@@ -6,12 +6,13 @@ export function initEarlyAccess(): void {
     form.dataset.bound = '1';
     const input = form.querySelector<HTMLInputElement>('input[name="email"]');
     const status = form.querySelector<HTMLElement>('.ea-status');
+    const message = status?.querySelector<HTMLElement>('.ea-msg');
     const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-    if (!input || !status || !button) return;
+    if (!input || !status || !message || !button) return;
     const label = button.textContent ?? '';
 
     const say = (msg: string, ok = false) => {
-      status.textContent = msg;
+      message.textContent = msg;
       status.classList.toggle('ok', ok);
     };
 

@@ -14,7 +14,7 @@ const { title, facts, action, done, at = 2 } = Astro.props;
   <div class="fill">
     <p class="fill-head"><span class="app"><Mark size={12} /></span><span class="t-foot fill-title">{title}</span></p>
     <ul class="facts">{facts.map((f) => <li class="t-sub"><span class="yes" set:html={icon('check')} />{f}</li>)}</ul>
-    <span class={`b crossfade at-${at + 1}`}><span>{action}</span><span class="to-done"><span class="tick"><DrawTick /></span>{done}</span></span>
+    <span class={`b crossfade press at-${at + 1}`}><span>{action}</span><span class="to-done"><span class="tick"><DrawTick /></span>{done}</span></span>
   </div>
 </div></div>
 

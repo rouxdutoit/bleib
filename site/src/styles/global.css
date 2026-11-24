@@ -233,6 +233,8 @@ h3 {
    Crossfade  .crossfade.at-N > a + b     a gives way to b in place (Add → Added)
    Settle     .dim-N                      greys out once done; nothing ever disappears
    Draw       .draw (SVG path)            draws itself on when its .at-N turns on
+   Press      .press.at-N                 dips as if tapped when its step comes
+   Land       .land.at-N                  drops into place with a small spring, as it is revealed
    Scenes differ only in when things happen; --delay staggers a single move. */
 :root {
   --t-open: 0.55s;
@@ -291,6 +293,15 @@ h3 {
 .s1 .dim-1, .s2 .dim-2, .s3 .dim-3, .s4 .dim-4, .s5 .dim-5, .s6 .dim-6 {
   opacity: 0.38;
 }
+.s1 .press.at-1, .s2 .press.at-2, .s3 .press.at-3, .s4 .press.at-4, .s5 .press.at-5, .s6 .press.at-6 {
+  animation: press 0.3s var(--ease);
+}
+.s1 .land.at-1, .s2 .land.at-2, .s3 .land.at-3, .s4 .land.at-4, .s5 .land.at-5, .s6 .land.at-6 {
+  animation: land 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) calc(var(--delay, 0s) + var(--t-lag)) both;
+}
+@keyframes press { 40% { transform: scale(0.92); } }
+@keyframes land { from { transform: translateY(-8px) scale(0.97); } }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 
 /* ---------- Card primitives (shared by story + finale) ---------- */
 .tray {
