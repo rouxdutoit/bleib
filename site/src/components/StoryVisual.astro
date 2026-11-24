@@ -62,9 +62,7 @@ const cx = (n: number) => `cx at-${n}`;
                 <p class="t-headline">{c.ask.title}</p>
                 <p class="t-foot msg">{c.ask.message}</p>
                 <div class="pills">
-                  <span class="pill t-body">{c.ask.once}</span>
-                  <span class="pill t-body pick-at-1">{c.ask.always}</span>
-                  <span class="pill t-body">{c.ask.no}</span>
+                  <span class="pill t-body pick-at-1">{c.ask.action}</span>
                 </div>
               </div>
             </div>
@@ -171,10 +169,8 @@ const cx = (n: number) => `cx at-${n}`;
                 </div>
                 <p class="t-body fact">{c.propose.fact}</p>
                 <p class="t-foot c-2">{c.propose.why}</p>
-                <div class="row-actions">
+                <div class="pills">
                   <span class="pill t-body pick-at-1">{c.propose.save}</span>
-                  <span class="pill t-body">{c.propose.edit}</span>
-                  <span class="pill t-body">{c.propose.later}</span>
                 </div>
               </div>
             </div>
@@ -203,6 +199,9 @@ const cx = (n: number) => `cx at-${n}`;
 
 <style>
   .sv { width: 100%; }
+  /* Cards are pictures of the product: on phones and short screens they shrink so the finished card fits in view. */
+  @media (max-width: 767px) { .sv { zoom: 0.86; } }
+  @media (min-width: 768px) and (max-height: 760px) { .sv { zoom: 0.9; } }
   .sv p { margin: 0; }
   .tray { position: relative; }
   .stack { display: flex; flex-direction: column; gap: 12px; }
@@ -298,8 +297,6 @@ const cx = (n: number) => `cx at-${n}`;
   .ok { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--ok); color: #fff; }
   .not { padding-top: 10px; display: flex; align-items: center; gap: 5px; }
   .fact { margin-top: 12px !important; font-weight: 500; }
-  /* Three choices stack, as in an Apple alert: the main action first, Not Now last. */
-  .row-actions { display: grid; gap: 8px; margin-top: 14px; }
 
   /* Widget */
   .widget { padding: 14px 16px 16px; }

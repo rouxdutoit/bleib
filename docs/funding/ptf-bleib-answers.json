@@ -5,7 +5,7 @@
   "first": "Ruan",
   "last": "du Toit",
   "github": "https://github.com/rouxdutoit",
-  "link": "https://github.com/rouxdutoit/bleib and https://bleib.dev",
+  "link": "https://github.com/rouxdutoit/bleib",
   "hours": "760",
   "q1": "bleib is a free, open source password manager for what AI knows about you: it remembers your preferences, encrypted on your device, and gives each AI only what it needs.",
   "q2": "Every AI keeps its own memory of you, and you repeat yourself to each one. Nobody can see what each was sent.\n\nbleib works like a password manager. When you tell an AI something worth remembering, it offers to save it, encrypted on your device. When you start a chat with another AI, it adds only what that request needs. Sensitive things like health or money are only shared after you say yes, and every share leaves a receipt.\n\nIt comes as a browser extension for ChatGPT, Claude and Gemini, on a local wallet that agents can use too.",
