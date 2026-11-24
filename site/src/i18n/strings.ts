@@ -48,7 +48,7 @@ const en = {
     eyebrow: 'In development',
     h1a: 'Your AI memory.',
     h1b: 'In your hands.',
-    sub: ['Every AI knows you from the first message.', 'bleib fills in the details, like a password manager.', 'Your memory stays with you, not with the AI.'],
+    sub: ['Every AI knows you from the first message.', 'Like a password manager, bleib only gives it what it needs.', 'Your memory stays with you, not with the AI.'],
     primary: 'Get early access',
     secondary: 'View on GitHub',
     trust: [
@@ -240,7 +240,7 @@ const de: Strings = {
     eyebrow: 'In Entwicklung',
     h1a: 'Dein KI-Gedächtnis.',
     h1b: 'In deiner Hand.',
-    sub: ['Jede KI kennt dich ab der ersten Nachricht.', 'bleib ergänzt die Details, wie ein Passwort-Manager.', 'Dein Gedächtnis bleibt bei dir, nicht bei der KI.'],
+    sub: ['Jede KI kennt dich ab der ersten Nachricht.', 'Wie ein Passwort-Manager gibt bleib ihr nur, was sie braucht.', 'Dein Gedächtnis bleibt bei dir, nicht bei der KI.'],
     primary: 'Frühen Zugang sichern',
     secondary: 'Auf GitHub ansehen',
     trust: [
