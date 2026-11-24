@@ -39,7 +39,7 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
               <div aria-hidden="true">
                 <BleibCard title={title} facts={x.facts} action={pv.add} done={pv.added} />
                 <Composer typed={x.typed}>
-                  <div class="attach"><div class="grow-in">
+                  <div class="attach reveal at-3"><div class="reveal-in">
                     <div class="chip">
                       <span class="chip-app"><Mark size={14} /></span>
                       <span class="chip-text"><span class="t-foot chip-title">{pv.attachment}</span><span class="t-foot chip-facts">{facts}</span></span>
@@ -77,9 +77,8 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
   .body { --bleib-card-margin: 0 0 8px; padding: 16px; display: flex; flex-direction: column; justify-content: flex-end; }
   .body p { margin: 0; }
 
-  .grow-in { min-height: 0; overflow: hidden; }
-  .attach { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.5s var(--ease) 0.2s, opacity 0.4s var(--ease) 0.3s; }
-  .s3 .attach { grid-template-rows: 1fr; opacity: 1; }
+  /* The chip follows "Added" a moment later, into the message box. */
+  .attach { --delay: 0.2s; }
   .chip { position: relative; display: flex; align-items: center; gap: 10px; width: fit-content; max-width: calc(100% - 16px); margin: 8px 8px 0; padding: 8px 30px 8px 8px; border-radius: 14px; background: var(--fill); }
   .chip-app { flex: none; width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
   .chip-text { min-width: 0; display: flex; flex-direction: column; }
@@ -94,7 +93,6 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
     .preview { zoom: 0.92; }
     .body :global(.facts li) { white-space: normal; }
   }
-  @media (prefers-reduced-motion: reduce) { .attach { transition: none; } }
 </style>
 
 <script>

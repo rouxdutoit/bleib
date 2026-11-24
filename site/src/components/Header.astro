@@ -35,6 +35,14 @@ const arrow = icon('arrow_outward');
     </nav>
   </div>
 </header>
+{/* Closes the menu before the page first appears, so it never flashes open; without JavaScript it stays open. */}
+<script is:inline>
+  (function () {
+    var header = document.querySelector('[data-header]');
+    header.classList.add('js');
+    header.querySelector('.menu-btn').hidden = false;
+  })();
+</script>
 <script>
   // Mobile menu, as on fazit.dev: closes on a link, Escape, focus leaving the header, or a wider screen.
   const header = document.querySelector<HTMLElement>('[data-header]');
@@ -44,8 +52,6 @@ const arrow = icon('arrow_outward');
       button.setAttribute('aria-expanded', String(open));
       header.toggleAttribute('data-open', open);
     };
-    header.classList.add('js');
-    button.hidden = false;
     button.addEventListener('click', () => setOpen(!header.hasAttribute('data-open')));
     header.querySelector('nav')?.addEventListener('click', (e) => {
       if ((e.target as Element).closest('a')) setOpen(false);
@@ -137,7 +143,7 @@ const arrow = icon('arrow_outward');
       height: 1.5px;
       border-radius: 999px;
       background: currentColor;
-      transition: transform 0.4s var(--ease);
+      transition: transform var(--t-fade) var(--ease);
     }
     .menu-icon > span + span { top: auto; bottom: 1.5px; }
     [aria-expanded='true'] > .menu-icon > span { transform: translateY(3.75px) rotate(45deg); }
@@ -171,7 +177,8 @@ const arrow = icon('arrow_outward');
       grid-template-rows: 0fr;
       opacity: 0;
       visibility: hidden;
-      transition: grid-template-rows 0.45s var(--ease), opacity 0.3s ease, visibility 0s linear 0.45s;
+      /* Opens like a Reveal from the motion kit (global.css). */
+      transition: grid-template-rows var(--t-open) var(--ease), opacity var(--t-fade) var(--ease), visibility 0s linear var(--t-open);
     }
     .js[data-open] .nav {
       grid-template-rows: 1fr;

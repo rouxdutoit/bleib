@@ -18,7 +18,7 @@ const s = t(lang).finale;
     <figure class="scene" aria-hidden="true">
       <Window tabs={[{ ai: s.prompt.tab, icon: 'claude-color' }]}>
         <div class="body" data-sv data-steps="4" data-interval="900" data-gaps=",900,2200" data-step="0">
-          <p class="t-body bubble">{s.prompt.said}</p>
+          <p class="t-body bubble appear at-2">{s.prompt.said}</p>
           <BleibCard title={s.prompt.title} facts={[s.prompt.fact]} action={s.prompt.save} done={s.prompt.saved} at={3} />
           <Composer typed={s.prompt.said} sentAt={2} />
         </div>
@@ -40,8 +40,7 @@ const s = t(lang).finale;
   .scene { margin: 0 0 clamp(40px, 6vw, 64px); width: min(440px, 100%); }
   /* Like the hero: you type, you send, bleib offers to save it, Save is pressed (scripts/story.ts). */
   .body { --bleib-card-margin: 0 0 8px; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
-  .bubble { align-self: flex-end; max-width: 80%; margin: 0 0 12px; padding: 8px 14px; border-radius: 18px; background: var(--fill); opacity: 0; transform: translateY(8px); transition: opacity 0.35s var(--ease), transform 0.35s var(--ease); }
-  .s2 .bubble { opacity: 1; transform: none; }
+  .bubble { align-self: flex-end; max-width: 80%; margin: 0 0 12px; padding: 8px 14px; border-radius: 18px; background: var(--fill); }
 
   .title { font-size: clamp(44px, 7vw, 88px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 700; }
   .sub { margin: 18px 0 0; font-size: clamp(17px, 1.7vw, 21px); line-height: 1.45; color: var(--muted); text-wrap: balance; }

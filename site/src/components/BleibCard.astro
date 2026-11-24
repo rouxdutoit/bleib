@@ -1,7 +1,7 @@
 ---
 /**
  * bleib's card inside a chat, as in the hero and the closer: what bleib offers, with one action that turns
- * bleib yellow when done. It grows in at step `at` (2 or 3) and its action completes one step later (scripts/story.ts).
+ * bleib yellow when done. It reveals at step `at` (2 or 3) and its action completes one step later (motion kit in global.css).
  * Spacing around it comes from --bleib-card-margin on the parent.
  */
 import Mark from './Mark.astro';
@@ -10,18 +10,15 @@ import { icon } from './icons';
 interface Props { title: string; facts: string[]; action: string; done: string; at?: 2 | 3 }
 const { title, facts, action, done, at = 2 } = Astro.props;
 ---
-<div class="grow" data-at={at}><div class="grow-in">
+<div class={`reveal at-${at}`}><div class="reveal-in">
   <div class="fill">
     <p class="fill-head"><span class="app"><Mark size={12} /></span><span class="t-foot fill-title">{title}</span></p>
     <ul class="facts">{facts.map((f) => <li class="t-sub"><span class="yes" set:html={icon('check')} />{f}</li>)}</ul>
-    <span class="b"><span class="to-do">{action}</span><span class="to-done"><span class="tick"><DrawTick /></span>{done}</span></span>
+    <span class={`b crossfade at-${at + 1}`}><span>{action}</span><span class="to-done"><span class="tick"><DrawTick /></span>{done}</span></span>
   </div>
 </div></div>
 
 <style>
-  .grow { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.55s var(--ease), opacity 0.4s var(--ease) 0.12s; }
-  .grow-in { min-height: 0; overflow: hidden; }
-  :global(.s2) .grow[data-at='2'], :global(.s3) .grow[data-at='3'] { grid-template-rows: 1fr; opacity: 1; }
   /* Like a notification row: the action sits at the end, centred on the whole card. */
   .fill { margin: var(--bleib-card-margin, 0); padding: 10px 12px 12px; border-radius: 14px; background: var(--fill); display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; align-items: center; }
   .fill-head { margin: 0; display: flex; align-items: center; gap: 8px; }
@@ -32,17 +29,13 @@ const { title, facts, action, done, at = 2 } = Astro.props;
   .yes { flex: none; width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; background: #f6e79a; color: #0a0a0a; }
   .yes :global(svg) { width: 13px; height: 13px; display: block; }
   /* Like the story cards: the action in the label colour, bleib yellow once done; labels crossfade in place. */
-  .b { grid-column: 2; grid-row: 1 / span 2; display: inline-grid; place-items: center; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 13px; line-height: 1; font-weight: 600; background: var(--label); color: var(--cell); transition: background-color 0.35s var(--ease), color 0.35s var(--ease); }
-  .b > span { grid-area: 1 / 1; transition: opacity 0.35s var(--ease); }
-  .to-done { display: inline-flex; align-items: center; gap: 4px; opacity: 0; }
-  :global(.s3) [data-at='2'] .b, :global(.s4) [data-at='3'] .b { background: #f6e79a; color: #0a0a0a; }
-  :global(.s3) [data-at='2'] .to-do, :global(.s4) [data-at='3'] .to-do { opacity: 0; }
-  :global(.s3) [data-at='2'] .to-done, :global(.s4) [data-at='3'] .to-done { opacity: 1; }
+  .b { grid-column: 2; grid-row: 1 / span 2; place-items: center; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 13px; line-height: 1; font-weight: 600; background: var(--label); color: var(--cell); transition: background-color var(--t-fade) var(--ease), color var(--t-fade) var(--ease); }
+  .to-done { display: inline-flex; align-items: center; gap: 4px; }
+  :global(.s3) .b.at-3, :global(.s4) .b.at-4 { background: #f6e79a; color: #0a0a0a; }
   .tick { display: grid; }
   /* On phones the title keeps the full width; the action sits beside the facts. */
   @media (max-width: 480px) {
     .fill-head { grid-column: 1 / -1; }
     .b { grid-row: 2; }
   }
-  @media (prefers-reduced-motion: reduce) { .grow { transition-delay: 0s; } }
 </style>

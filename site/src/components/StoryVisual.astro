@@ -4,8 +4,7 @@
  * the scene's headline (Rule No. 1: Apple HIG patterns throughout). It plays once when seen.
  * Every card reads top to bottom as cause, then result, so the eye ends on the outcome.
  * Steps are driven by scripts/story.ts: it sets data-step="n" and cumulative classes s1..sn.
- *   .at-N     collapsed until step N, then open
- *   .dim-N    greys out at step N (nothing ever disappears, so the progression stays readable)
+ * Moves come from the motion kit in global.css (Reveal, Crossfade, Settle via .at-N and .dim-N);
  *   .pick-at-N  capsule turns prominent at step N
  */
 import Mark from './Mark.astro';
@@ -23,7 +22,7 @@ const dots = (length: number) => '•'.repeat(length);
 
 import { icon, type IconName } from './icons';
 const svg = (name: string, cls = 'g') => icon(name as IconName, cls);
-const cx = (n: number) => `cx at-${n}`;
+const cx = (n: number) => `reveal at-${n}`;
 ---
 <div class="sv" data-sv data-steps={STEPS[scene]} data-interval={INTERVAL[scene]} data-start={START[scene]} data-gaps={GAPS[scene] || undefined} data-step="0">
   <div class={scene === 5 ? undefined : 'tray'}>
@@ -47,7 +46,7 @@ const cx = (n: number) => `cx at-${n}`;
             <ul class="group">
               {c.wallet.rows.map((r, i) => (
                 <li class={cx(i + 1)}>
-                  <div class="cx-in"><div class="cell">
+                  <div class="reveal-in"><div class="cell">
                     <span class="ico" set:html={svg(r.icon)} />
                     <span class="t-body cell-k">{r.k}</span>
                     <span class="t-body c-2 cell-v">{r.locked && <span class="inline-g" set:html={svg('lock')} />}{r.v}</span>
@@ -70,7 +69,7 @@ const cx = (n: number) => `cx at-${n}`;
             <p class="t-body chat-line">{c.propose.said}</p>
           </div>
           <div class={cx(1)}>
-            <div class="cx-in">
+            <div class="reveal-in">
               <div class="card note">
                 <p class="w-label t-foot c-2"><span class="w-mark"><Mark size={11} /></span>{c.propose.title}</p>
                 <div class="save-detail">
@@ -81,13 +80,13 @@ const cx = (n: number) => `cx at-${n}`;
             </div>
           </div>
           <div class="card list-card">
-            <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2 grows"><span>2</span><span>3</span></span></p>
+            <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2 crossfade at-2"><span>2</span><span>3</span></span></p>
             <ul class="group">
               {c.wallet.rows.slice(0, 2).map((r) => (
                 <li class="cell"><span class="ico" set:html={svg(r.icon)} /><span class="t-body cell-k">{r.k}</span><span class="t-body c-2 cell-v">{r.v}</span></li>
               ))}
               <li class={cx(2)}>
-                <div class="cx-in"><div class="cell">
+                <div class="reveal-in"><div class="cell">
                   <span class="ico" set:html={svg('restaurant')} />
                   <span class="t-body cell-k">{c.propose.fact}</span>
                   <span class="tag t-foot">{c.propose.newTag}</span>
@@ -143,7 +142,7 @@ const cx = (n: number) => `cx at-${n}`;
             </div>
           </div>
           <div class={cx(2)}>
-            <div class="cx-in">
+            <div class="reveal-in">
               <div class="card list-card">
                 <p class="t-foot c-2 sec-h">{c.ask.rulesLabel}</p>
                 <div class="cell">
@@ -155,7 +154,7 @@ const cx = (n: number) => `cx at-${n}`;
             </div>
           </div>
           <div class={cx(3)}>
-            <div class="cx-in">
+            <div class="reveal-in">
               <div class="card note">
                 <div class="note-head">
                   <span class="ok" set:html={svg('check')} />
@@ -179,13 +178,13 @@ const cx = (n: number) => `cx at-${n}`;
             <p class="t-foot c-2 sec-h inner">{c.receipt.sharedLabel}</p>
             <ul class="group filled">
               {c.receipt.shared.map((x, i) => (
-                <li class={cx(i + 1)}><div class="cx-in"><div class="cell"><span class="yes" set:html={svg('check')} /><span class="t-body">{x}</span></div></div></li>
+                <li class={cx(i + 1)}><div class="reveal-in"><div class="cell"><span class="yes" set:html={svg('check')} /><span class="t-body">{x}</span></div></div></li>
               ))}
             </ul>
             <p class="t-foot c-2 not"><span class="inline-g" set:html={svg('lock')} />{c.receipt.notShared}</p>
           </div>
           <div class={cx(3)}>
-            <div class="cx-in">
+            <div class="reveal-in">
               <div class="card widget">
                 <p class="t-foot c-2 w-label"><span class="w-mark" aria-hidden="true"><Mark size={11} /></span>{c.receipt.weeklyLabel}</p>
                 <p class="w-num"><span class="t-large">{c.receipt.weeklyN}</span><span class="t-sub">{c.receipt.weeklyText}</span></p>
@@ -225,15 +224,12 @@ const cx = (n: number) => `cx at-${n}`;
   .stack { display: flex; flex-direction: column; gap: 12px; }
 
   /* Collapsible pieces: height and opacity morph in place, nothing jumps. */
-  .cx { display: grid; grid-template-rows: 0fr; opacity: 0; margin-top: -12px; transition: grid-template-rows 0.55s var(--ease), opacity 0.4s var(--ease) 0.12s, margin-top 0.55s var(--ease); }
+  /* A reveal in the stack also closes the stack's gap until it opens. */
+  .stack > .reveal { margin-top: -12px; transition-property: grid-template-rows, opacity, margin-top; }
+  .s1 .stack > .at-1, .s2 .stack > .at-2, .s3 .stack > .at-3, .s4 .stack > .at-4, .s5 .stack > .at-5 { margin-top: 0; }
   .card { transform: translateZ(0); backface-visibility: hidden; }
-  li.cx, .card .cx { margin-top: 0; }
-  .cx-in { overflow: hidden; min-height: 0; }
-  .s1 .at-1, .s2 .at-2, .s3 .at-3, .s4 .at-4, .s5 .at-5 { grid-template-rows: 1fr; opacity: 1; margin-top: 0; }
 
   /* Done steps stay in place and grey out. */
-  [class*='dim-'] { transition: opacity 0.45s var(--ease); }
-  .s1 .dim-1, .s2 .dim-2, .s3 .dim-3, .s4 .dim-4, .s5 .dim-5 { opacity: 0.38; }
 
   /* Lists (Settings) */
   .list-card { padding: 14px 0 12px; }
@@ -263,20 +259,22 @@ const cx = (n: number) => `cx at-${n}`;
   .inline-g { display: inline-flex; }
   .inline-g :global(.g) { width: 13px; height: 13px; }
   .used { padding: 8px 16px 0; }
-  .swap span { display: none; color: var(--label); font-weight: 600; }
-  [data-step='0'] .swap .u0, [data-step='1'] .swap .u1, [data-step='2'] .swap .u2 { display: inline; }
+  /* The provider's name crossfades in step with the strip. */
+  .swap { display: inline-grid; }
+  .swap span { grid-area: 1 / 1; opacity: 0; color: var(--label); font-weight: 600; transition: opacity var(--t-fade) var(--ease); }
+  [data-step='0'] .swap .u0, [data-step='1'] .swap .u1, [data-step='2'] .swap .u2 { opacity: 1; }
 
   /* Provider strip: models step past; the wallet above never moves. */
   .strip { padding: 14px 0 12px; }
   .pwin { width: 330px; max-width: 100%; margin: 0 auto; overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, #000 26%, #000 74%, transparent); mask-image: linear-gradient(to right, transparent, #000 26%, #000 74%, transparent); }
-  .ptrack { display: flex; width: max-content; position: relative; left: calc(50% - 55px); transform: translateX(calc(var(--i, 0) * -110px)); transition: transform 0.55s var(--ease); }
+  .ptrack { display: flex; width: max-content; position: relative; left: calc(50% - 55px); transform: translateX(calc(var(--i, 0) * -110px)); transition: transform var(--t-open) var(--ease); }
   [data-step='1'] .ptrack { --i: 1; } [data-step='2'] .ptrack { --i: 2; }
   .pi { flex: 0 0 110px; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 64px; justify-content: center; }
   .picon { position: relative; width: 28px; height: 28px; }
-  .picon img { position: absolute; inset: 0; width: 28px; height: 28px; object-fit: contain; transition: opacity 0.4s var(--ease); }
+  .picon img { position: absolute; inset: 0; width: 28px; height: 28px; object-fit: contain; transition: opacity var(--t-fade) var(--ease); }
   .pm { opacity: 0.25; }
   .pc { opacity: 0; }
-  .pname { color: var(--label-3); transition: color 0.4s var(--ease); }
+  .pname { color: var(--label-3); transition: color var(--t-fade) var(--ease); }
   [data-step='0'] .pi-0 .pc, [data-step='1'] .pi-1 .pc, [data-step='2'] .pi-2 .pm { opacity: 1; }
   [data-step='0'] .pi-0 .pm, [data-step='1'] .pi-1 .pm { opacity: 0; }
   [data-step='0'] .pi-0 .pname, [data-step='1'] .pi-1 .pname, [data-step='2'] .pi-2 .pname { color: var(--label); font-weight: 600; }
@@ -296,7 +294,7 @@ const cx = (n: number) => `cx at-${n}`;
   .alert { padding: 22px 16px 16px; text-align: center; }
   .msg { margin-top: 4px !important; }
   .pills { display: grid; gap: 8px; margin-top: 18px; }
-  .pill { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 12px; border-radius: 999px; background: var(--fill); color: var(--label); font-weight: 500; transition: background-color 0.35s var(--ease), color 0.35s var(--ease); }
+  .pill { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 12px; border-radius: 999px; background: var(--fill); color: var(--label); font-weight: 500; transition: background-color var(--t-fade) var(--ease), color var(--t-fade) var(--ease); }
   .s1 .pick-at-1 { background: var(--label); color: var(--cell); }
 
   /* Notification */
@@ -320,11 +318,6 @@ const cx = (n: number) => `cx at-${n}`;
   .save-detail { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; }
   .save-detail p { display: flex; align-items: center; gap: 6px; }
   .undo { flex: none; min-height: 28px; }
-  .grows { display: inline-grid; }
-  .grows span { grid-area: 1 / 1; transition: opacity 0.35s var(--ease); }
-  .grows span + span, .s2 .grows span:first-child { opacity: 0; }
-  .s2 .grows span + span { opacity: 1; }
-  @media (prefers-reduced-motion: reduce) { .cx { transition-delay: 0s; } }
 
   /* Widget */
   .widget { padding: 14px 16px 16px; }

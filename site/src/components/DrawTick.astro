@@ -1,14 +1,13 @@
 ---
 /**
  * A tick that draws itself on, bottom left to top right, like an SF Symbol's draw-on effect.
- * It draws when an ancestor gets the class `s3` (see scripts/story.ts).
+ * It draws when its step turns on (Draw in the motion kit, global.css).
  */
 ---
 <svg class="draw-tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-  <path d="M5.5 12.5 10 17 18.5 7.5" pathLength="1" />
+  <path class="draw" d="M5.5 12.5 10 17 18.5 7.5" pathLength="1" />
 </svg>
 <style>
   .draw-tick { width: 14px; height: 14px; display: block; }
-  path { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 0.45s var(--ease) 0.15s; }
-  :global(.s3) path { stroke-dashoffset: 0; }
+  path { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
 </style>

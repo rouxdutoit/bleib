@@ -226,6 +226,72 @@ h3 {
   height: 14px;
 }
 
+/* ---------- Motion: one set of moves for every scene (hero, story, closer) ----------
+   scripts/story.ts adds s1…s6 to a scene as it plays; .at-N marks what changes at step N.
+   Reveal     .reveal.at-N > .reveal-in   its space opens, then it fades in
+   Appear     .appear.at-N                fades in with a small rise, in space it already holds
+   Crossfade  .crossfade.at-N > a + b     a gives way to b in place (Add → Added)
+   Settle     .dim-N                      greys out once done; nothing ever disappears
+   Draw       .draw (SVG path)            draws itself on when its .at-N turns on
+   Scenes differ only in when things happen; --delay staggers a single move. */
+:root {
+  --t-open: 0.55s;
+  --t-fade: 0.4s;
+  --t-lag: 0.12s;
+}
+.reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows var(--t-open) var(--ease) var(--delay, 0s), opacity var(--t-fade) var(--ease) calc(var(--delay, 0s) + var(--t-lag));
+}
+.reveal-in {
+  min-height: 0;
+  overflow: hidden;
+}
+.appear {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--t-fade) var(--ease) var(--delay, 0s), transform var(--t-fade) var(--ease) var(--delay, 0s);
+}
+.crossfade {
+  display: inline-grid;
+}
+.crossfade > * {
+  grid-area: 1 / 1;
+  transition: opacity var(--t-fade) var(--ease) var(--delay, 0s);
+}
+.crossfade > :last-child {
+  opacity: 0;
+}
+[class*='dim-'] {
+  transition: opacity var(--t-fade) var(--ease);
+}
+.draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset var(--t-fade) var(--ease) var(--t-lag);
+}
+.s1 .at-1, .s2 .at-2, .s3 .at-3, .s4 .at-4, .s5 .at-5, .s6 .at-6 {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: none;
+}
+.s1 .crossfade.at-1 > :first-child, .s2 .crossfade.at-2 > :first-child, .s3 .crossfade.at-3 > :first-child,
+.s4 .crossfade.at-4 > :first-child, .s5 .crossfade.at-5 > :first-child, .s6 .crossfade.at-6 > :first-child {
+  opacity: 0;
+}
+.s1 .crossfade.at-1 > :last-child, .s2 .crossfade.at-2 > :last-child, .s3 .crossfade.at-3 > :last-child,
+.s4 .crossfade.at-4 > :last-child, .s5 .crossfade.at-5 > :last-child, .s6 .crossfade.at-6 > :last-child {
+  opacity: 1;
+}
+.s1 .at-1 .draw, .s2 .at-2 .draw, .s3 .at-3 .draw, .s4 .at-4 .draw, .s5 .at-5 .draw, .s6 .at-6 .draw {
+  stroke-dashoffset: 0;
+}
+.s1 .dim-1, .s2 .dim-2, .s3 .dim-3, .s4 .dim-4, .s5 .dim-5, .s6 .dim-6 {
+  opacity: 0.38;
+}
+
 /* ---------- Card primitives (shared by story + finale) ---------- */
 .tray {
   background: var(--tray);
