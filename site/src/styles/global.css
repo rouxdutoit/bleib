@@ -491,7 +491,6 @@ h2 {
   font-family: var(--font-display);
 }
 .t-large { font-size: 34px; line-height: 41px; font-weight: 700; letter-spacing: 0.01em; }
-.t-title2 { font-size: 22px; line-height: 28px; font-weight: 700; letter-spacing: -0.012em; }
 .t-headline { font-size: 17px; line-height: 22px; font-weight: 600; letter-spacing: -0.025em; }
 .t-body { font-size: 17px; line-height: 22px; font-weight: 400; letter-spacing: -0.025em; }
 .t-sub { font-size: 15px; line-height: 20px; font-weight: 400; letter-spacing: -0.015em; }

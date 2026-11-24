@@ -59,14 +59,14 @@ const en: Docs = {
       {
         id: 'memory',
         h: 'Your memory',
-        blocks: [{ p: 'Keep your preferences and other things you want your AIs to know in one place. Your memory is encrypted on your device. You can read it and make changes in bleib.' }],
+        blocks: [{ p: 'Your preferences and the things you want your AIs to know, all in one place. Your memory is encrypted on your device, and it’s always yours to read and change.' }],
       },
       {
         id: 'proposals',
         h: 'Save as you go',
         blocks: [
           { p: 'Type “I prefer aisle seats” in a chat. The browser extension quietly saves preferences it recognises and gives you an Undo button. Other things you tell the AI can go into review.' },
-          { p: 'You can also bring in the visible entries from the memory pages on ChatGPT, Claude and Gemini. Review what bleib found and decide what to keep.' },
+          { p: 'You can also bring in the visible entries from the memory pages on ChatGPT, Claude and Gemini. bleib shows you what it found, and you keep what you like.' },
         ],
       },
       {
@@ -77,7 +77,7 @@ const en: Docs = {
       {
         id: 'door',
         h: 'Start a new chat',
-        blocks: [{ p: 'Start typing your first request. If there’s a match and sharing is allowed, bleib adds a short “About me” line to your draft. You decide when to send it. If bleib can’t recognise the page after a change, it pauses.' }],
+        blocks: [{ p: 'Start typing your first request. If there’s a match and sharing is allowed, bleib adds a short “About me” line to your draft. You decide when to send it. If a site changes, bleib pauses until it recognises the page again.' }],
       },
       {
         id: 'receipts',
@@ -91,8 +91,8 @@ const en: Docs = {
       },
       {
         id: 'recovery',
-        h: 'If you lose a device',
-        blocks: [{ p: 'Keep your recovery kit and an encrypted backup somewhere safe off your device. Together they can help you get your memory back.' }],
+        h: 'Get your memory back',
+        blocks: [{ p: 'Keep your recovery kit and an encrypted backup somewhere safe, away from your device. Together they bring your memory back on a new one.' }],
       },
     ],
   },
@@ -111,12 +111,12 @@ const en: Docs = {
               { t: 'Gemini', d: 'gemini.google.com' },
             ],
           },
-          { p: 'On these sites bleib can save everyday preferences with Undo, add a line about you to a new chat draft, and bring visible saved memories into bleib for review. It pauses when it can no longer recognise the page.' },
+          { p: 'On these sites bleib can save everyday preferences with Undo, add a line about you to a new chat draft, and bring visible saved memories into bleib for review. If a site changes, bleib pauses until it recognises the page again.' },
         ],
       },
       {
         h: 'Installed AI tools',
-        blocks: [{ p: 'In bleib, you can connect Claude Desktop, Claude Code, Cursor, OpenClaw and Hermes when it finds them on your computer. Check where each tool sends data when you connect it.' }],
+        blocks: [{ p: 'In bleib, you can connect Claude Desktop, Claude Code, Cursor, OpenClaw and Hermes when it finds them on your computer. Each tool decides where its data goes, so it’s worth a look as you connect it.' }],
       },
     ],
   },
@@ -150,7 +150,7 @@ const en: Docs = {
   receipts: {
     title: 'Receipts',
     description: 'See what bleib shared from your memory.',
-    intro: ['bleib saves a receipt on your device before every share. If the receipt can’t be saved, sharing stops.'],
+    intro: ['Before every share, bleib saves a receipt on your device. Sharing only happens once the receipt is saved.'],
     sections: [
       {
         h: 'What a receipt shows',
@@ -415,14 +415,14 @@ const de: Docs = {
       {
         id: 'memory',
         h: 'Dein Gedächtnis',
-        blocks: [{ p: 'Sammle deine Vorlieben und alles, was deine KIs über dich wissen sollen, an einem Ort. Dein Gedächtnis ist auf deinem Gerät verschlüsselt. In bleib kannst du alles lesen und ändern.' }],
+        blocks: [{ p: 'Deine Vorlieben und alles, was deine KIs über dich wissen sollen, an einem Ort. Dein Gedächtnis ist auf deinem Gerät verschlüsselt, und du kannst es jederzeit lesen und ändern.' }],
       },
       {
         id: 'proposals',
         h: 'Beim Schreiben speichern',
         blocks: [
           { p: 'Schreib im Chat zum Beispiel „Ich mag grünen Tee“. Die Erweiterung speichert solche Vorlieben im Hintergrund. Du kannst das Speichern rückgängig machen. Andere Angaben kann bleib dir zur Prüfung vorlegen.' },
-          { p: 'Du kannst auch die sichtbaren Einträge von den Gedächtnisseiten bei ChatGPT, Claude und Gemini mitnehmen. Sieh sie dir in bleib an und entscheide, was du behalten willst.' },
+          { p: 'Du kannst auch die sichtbaren Einträge von den Gedächtnisseiten bei ChatGPT, Claude und Gemini mitnehmen. bleib zeigt dir, was es gefunden hat, und du behältst, was dir gefällt.' },
         ],
       },
       {
@@ -433,7 +433,7 @@ const de: Docs = {
       {
         id: 'door',
         h: 'Einen neuen Chat beginnen',
-        blocks: [{ p: 'Schreib deine erste Anfrage. Wenn etwas passt und die Freigabe vorliegt, ergänzt bleib eine kurze „Über mich“-Zeile im Entwurf. Du entscheidest, wann du ihn abschickst. Wenn bleib die Seite nach einer Änderung nicht mehr erkennt, pausiert es.' }],
+        blocks: [{ p: 'Schreib deine erste Anfrage. Wenn etwas passt und die Freigabe vorliegt, ergänzt bleib eine kurze „Über mich“-Zeile im Entwurf. Du entscheidest, wann du ihn abschickst. Ändert sich eine Seite, pausiert bleib, bis es sie wieder erkennt.' }],
       },
       {
         id: 'receipts',
@@ -447,8 +447,8 @@ const de: Docs = {
       },
       {
         id: 'recovery',
-        h: 'Wenn du ein Gerät verlierst',
-        blocks: [{ p: 'Bewahre dein Wiederherstellungs-Kit und eine verschlüsselte Sicherung an einem sicheren Ort außerhalb deines Geräts auf. Damit kannst du dein Gedächtnis wiederherstellen.' }],
+        h: 'Dein Gedächtnis zurückholen',
+        blocks: [{ p: 'Bewahre dein Wiederherstellungs-Kit und eine verschlüsselte Sicherung an einem sicheren Ort außerhalb deines Geräts auf. Zusammen holen sie dein Gedächtnis auf ein neues Gerät zurück.' }],
       },
     ],
   },
@@ -467,12 +467,12 @@ const de: Docs = {
               { t: 'Gemini', d: 'gemini.google.com' },
             ],
           },
-          { p: 'Auf diesen Seiten kann bleib Vorlieben speichern, eine Zeile über dich in neue Chatentwürfe einfügen und sichtbare Einträge zur Prüfung importieren. Das Speichern kannst du rückgängig machen. Wenn bleib die Seite nicht mehr erkennt, pausiert es.' },
+          { p: 'Auf diesen Seiten kann bleib Vorlieben speichern, eine Zeile über dich in neue Chatentwürfe einfügen und sichtbare Einträge zur Prüfung importieren. Das Speichern kannst du rückgängig machen. Ändert sich eine Seite, pausiert bleib, bis es sie wieder erkennt.' },
         ],
       },
       {
         h: 'Installierte KI-Tools',
-        blocks: [{ p: 'Wenn bleib Claude Desktop, Claude Code, Cursor, OpenClaw oder Hermes auf deinem Rechner findet, kannst du sie direkt verbinden. Prüfe dabei, wohin das jeweilige Tool deine Daten sendet.' }],
+        blocks: [{ p: 'Wenn bleib Claude Desktop, Claude Code, Cursor, OpenClaw oder Hermes auf deinem Rechner findet, kannst du sie direkt verbinden. Jedes Tool entscheidet selbst, wohin seine Daten gehen. Ein Blick darauf lohnt sich beim Verbinden.' }],
       },
     ],
   },
@@ -506,7 +506,7 @@ const de: Docs = {
   receipts: {
     title: 'Belege',
     description: 'Sieh nach, was bleib aus deinem Gedächtnis geteilt hat.',
-    intro: ['Vor jeder Freigabe speichert bleib einen Beleg auf deinem Gerät. Kann bleib den Beleg nicht speichern, stoppt die Freigabe.'],
+    intro: ['Vor jeder Freigabe speichert bleib einen Beleg auf deinem Gerät. Geteilt wird erst, wenn der Beleg gespeichert ist.'],
     sections: [
       {
         h: 'Was auf dem Beleg steht',
