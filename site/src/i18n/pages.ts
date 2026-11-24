@@ -444,6 +444,18 @@ const en: Docs = {
         ],
       },
       {
+        h: 'Licence',
+        blocks: [
+          {
+            rows: [
+              { k: 'The bleib app', v: 'AGPL-3.0-or-later' },
+              { k: 'File format, spec and SDK', v: 'Apache-2.0' },
+            ],
+          },
+          { p: 'The app stays open: anyone who runs a changed version as a service must share their changes. The format and SDK are permissive, so any AI app can integrate bleib freely.' },
+        ],
+      },
+      {
         h: 'Get involved',
         blocks: [{ p: 'The repository will open on GitHub soon. Until then, write to hello@rouxdutoit.com, or join early access on the home page.' }],
       },
@@ -521,7 +533,7 @@ const en: Docs = {
       { h: 'Operator', blocks: [{ address: OPERATOR }] },
       { h: 'Contact', blocks: [{ address: ['Email hello@rouxdutoit.com', 'Telephone +49 162 7850608'] }] },
       { h: 'Responsible for content', blocks: [{ p: 'Under § 18(2) MStV:' }, { address: OPERATOR }] },
-      { h: 'About this site', blocks: [{ p: 'This website describes bleib, a free and open source wallet for your AI context. bleib is in development.' }] },
+      { h: 'About this site', blocks: [{ p: 'This website describes bleib, a free and open source wallet for your AI context. bleib is in development. Its source code will be open under AGPL-3.0-or-later; the file format, specification and SDK under Apache-2.0.' }] },
     ],
   },
 };
@@ -930,6 +942,18 @@ const de: Docs = {
         ],
       },
       {
+        h: 'Lizenz',
+        blocks: [
+          {
+            rows: [
+              { k: 'Die App bleib', v: 'AGPL-3.0-or-later' },
+              { k: 'Dateiformat, Spezifikation und SDK', v: 'Apache-2.0' },
+            ],
+          },
+          { p: 'Die App bleibt offen: Wer eine veränderte Version als Dienst betreibt, muss die Änderungen teilen. Format und SDK sind frei nutzbar, damit jede KI-App bleib einbinden kann.' },
+        ],
+      },
+      {
         h: 'Mitmachen',
         blocks: [{ p: 'Das Repository wird bald auf GitHub veröffentlicht. Bis dahin schreib an hello@rouxdutoit.com oder sichere dir auf der Startseite frühen Zugang.' }],
       },
@@ -1007,7 +1031,7 @@ const de: Docs = {
       { h: 'Anbieter', blocks: [{ address: OPERATOR_DE }] },
       { h: 'Kontakt', blocks: [{ address: ['E-Mail hello@rouxdutoit.com', 'Telefon +49 162 7850608'] }] },
       { h: 'Verantwortlich für den Inhalt', blocks: [{ p: 'Nach § 18 Abs. 2 MStV:' }, { address: OPERATOR_DE }] },
-      { h: 'Über diese Website', blocks: [{ p: 'Diese Website beschreibt bleib, eine kostenlose Open-Source-Wallet für deinen KI-Kontext. bleib ist in Entwicklung.' }] },
+      { h: 'Über diese Website', blocks: [{ p: 'Diese Website beschreibt bleib, eine kostenlose Open-Source-Wallet für deinen KI-Kontext. bleib ist in Entwicklung. Der Quellcode wird unter AGPL-3.0-or-later veröffentlicht, Dateiformat, Spezifikation und SDK unter Apache-2.0.' }] },
     ],
   },
 };

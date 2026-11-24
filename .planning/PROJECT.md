@@ -85,6 +85,7 @@ You can change AI without losing who you are to it, and you can always see exact
 | Single-player MVP before social coordination | Day-one value without network effects | — Pending |
 | Site follows roze.ai's structure closely with bleib's own assets | Founder preference; proven clarity | — Pending |
 | Skip GSD research; use our own reports and the teardown | Research already done today | — Pending |
+| Licence: app AGPL-3.0-or-later; file format, spec and SDK Apache-2.0 | Keeps the app open against closed hosted forks, as with Fazit, while any AI app can integrate freely | ✓ Decided 24 Nov 2026 |
 
 ## Evolution
 

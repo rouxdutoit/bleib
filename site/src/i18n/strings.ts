@@ -217,7 +217,7 @@ const en = {
   },
   footer: {
     cols: { product: 'Product', project: 'Project', legal: 'Legal' },
-    fine: 'Open source · No cookies or analytics',
+    fine: 'AGPL-3.0-or-later · Spec Apache-2.0 · No cookies or analytics',
     email: 'Email',
     tagline: 'Your AI context, encrypted and yours.',
     links: {
@@ -434,7 +434,7 @@ const de: Strings = {
   },
   footer: {
     cols: { product: 'Produkt', project: 'Projekt', legal: 'Rechtliches' },
-    fine: 'Open Source · Keine Cookies, keine Analyse',
+    fine: 'AGPL-3.0-or-later · Spezifikation Apache-2.0 · Keine Cookies, keine Analyse',
     email: 'E-Mail',
     tagline: 'Dein KI-Kontext, verschlüsselt und deins.',
     links: {
