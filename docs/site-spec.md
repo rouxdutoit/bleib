@@ -12,23 +12,26 @@ Covers SITE-01 to SITE-12. It follows roze.ai's structure, pacing and restraint 
 - **Finale:** a big headline plus CTA on the left. On the right, a playful interactive pile of small cards the visitor can scatter, with "put it back".
 - **Footer:** one quiet row of links. Body copy is muted ink at about 42–62% opacity. Font: Inter.
 
-## bleib design tokens
+## bleib design tokens (updated 24 Nov 2026: founder chose the bleib yellow as the page colour)
 
-- **Background:** warm paper `#F3EFE7`, with optional subtle grain at 2–3% opacity. Cards: `#FFFFFF`. Tray: `#ECE7DD`.
-- **Ink:** `#15120F`; muted ink at 62%; faint ink at 42%.
-- **Brand:**
-  - bleib gold `#F6E79A` for highlights, the selected state, and the marked text in receipts (a gold tint background with dark ink on top, never gold text on light).
-  - Deep olive `#5C4B00` for small accent text and links where colour is needed, provided it reaches AA contrast.
-  - Primary buttons are ink `#15120F` with white text.
-- **The mark:** `_archive/bleib-v0/bleib-landing/dist/images/bleib-symbol.svg`, shown in gold on a black rounded tile (as in `favicon.svg`). Header: tile (24px) plus the wordmark "bleib" in Inter 500, 20px, tracking -0.03em.
-- **Type:** Inter variable (OFL; the file is in the archive `dist/fonts`).
-  - H1 clamp(34px, 4.6vw, 64px), weight 400, tracking -0.03em.
-  - H2 about 37px, weight 400, tracking -0.04em.
-  - Body 17px/1.5.
-  - UI text 13–17px.
+- **Light mode (default when the system is light):**
+  - page background: bleib yellow `#F6E79A`;
+  - cards `#FFFFFF`; tray a deeper yellow `#EFDC7E`;
+  - ink `#0A0A0A` for text, the mark tile and primary buttons (white text on ink buttons), with muted ink at 66% and faint at 46% (check AA on yellow).
+- **Dark mode (`prefers-color-scheme: dark`, plus a manual toggle in the header and footer):** the October site's look.
+  - page `#0A0A0A`, cards `#161616`, tray `#111111`, text `#F5F1E6`, muted text at 66%;
+  - bleib yellow `#F6E79A` for the mark, primary buttons (yellow with ink text), highlights and the active tick.
+- **Highlights in receipts:** on white cards, a yellow tint `#F6E79A` behind ink text; in dark mode, yellow text or a yellow underline on dark cards.
+- **Never** yellow text on a light background.
+- **The mark:** `bleib-symbol.svg` in ink on yellow (light) or yellow on ink (dark). The black rounded tile from `favicon.svg` is used for the favicon and app-icon chip.
+- **Type:** Inter variable (OFL).
+  - H1 clamp(34px, 4.6vw, 64px), weight 400, tracking -0.03em;
+  - H2 about 37px, weight 400, tracking -0.04em;
+  - body 17px/1.5; UI 13–17px.
 - **Radius:** cards 22px, tray 28px, pills 999px.
-- **Shadow:** `0 30px 80px -30px rgba(21,18,15,.25)`.
-- **Motion:** short and eased (cubic-bezier(.2,.8,.2,1), 300–600ms). Everything pausable. With reduced motion there are no transforms, only crossfades or static states.
+- **Shadow:** light mode `0 30px 80px -30px rgba(10,10,10,.30)`; in dark mode use a 1px `rgba(255,255,255,.06)` border instead of a shadow.
+- **Motion:** short and eased (cubic-bezier(.2,.8,.2,1), 300–600ms). Everything pausable; with reduced motion, crossfades or static states only.
+- **The hero photo panel** sits framed on the yellow (light) or black (dark) page.
 
 ## Page: `/` (and `/de/`)
 
@@ -119,7 +122,7 @@ Same header and footer. Simple text pages, max width 680px:
   - Organisations (later).
   - Line: "We never charge you to see your own data."
 - `/privacy`: the site's own data handling (early-access emails only, no tracking, no cookies beyond essentials) and the product's principles.
-- `/impressum`: legal page with clearly marked placeholders for the founders' details (`[Name]`, `[Address]`, `[Email]`). Must not go live with placeholders: flag it to the founders.
+- `/impressum`: legal notice using the details in `docs/legal.md` (same operator as fazit.dev).
 - Each subpage also exists in German under `/de/...`.
 
 ## Early access (SITE-06)
