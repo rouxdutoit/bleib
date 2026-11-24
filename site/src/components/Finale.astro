@@ -14,7 +14,7 @@ const s = t(lang).finale;
   <div class="wrap inner">
     <figure class="scene" aria-hidden="true" data-sv data-steps="3" data-interval="900" data-step="0">
       <div class="win">
-        <div class="bar"><span class="lights"><i></i><i></i><i></i></span><span class="t-foot site">{s.prompt.site}</span><span class="lights ghost"><i></i><i></i><i></i></span></div>
+        <div class="bar"><span class="lights"><i></i><i></i><i></i></span><span class="t-foot site"><img class="fav" src="/providers/claude-color.svg" alt="" width="14" height="14" />{s.prompt.site}</span><span class="lights ghost"><i></i><i></i><i></i></span></div>
         <div class="chat"><p class="t-body bubble">{s.prompt.said}</p></div>
         <div class="grow"><div class="grow-in">
           <div class="save">
@@ -45,7 +45,8 @@ const s = t(lang).finale;
   .lights i:nth-child(2) { background: #febc2e; }
   .lights i:nth-child(3) { background: #28c840; }
   .lights.ghost { visibility: hidden; justify-self: end; }
-  .site { color: var(--label-2); }
+  .site { display: inline-flex; align-items: center; gap: 6px; color: var(--label-2); }
+  .fav { display: block; width: 14px; height: 14px; }
   .chat { display: flex; justify-content: flex-end; padding: 18px 16px 14px; }
   .bubble { margin: 0; max-width: 80%; padding: 8px 14px; border-radius: 18px; background: var(--fill); }
   .save { display: flex; align-items: center; gap: 10px; margin: 0 10px 10px; padding: 8px 8px 8px 10px; border-radius: 14px; background: var(--fill); }
