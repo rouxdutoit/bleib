@@ -1,57 +1,70 @@
 ---
+/** Footer in the fazit.dev pattern: wordmark, grouped columns, then one fine-print row. */
 import Logo from './Logo.astro';
 import Rails from './Rails.astro';
 import ThemeToggle from './ThemeToggle.astro';
+import { icon } from './icons';
 import { GITHUB_URL, routes, t, otherLang, type Lang, type RouteKey } from '../i18n/strings';
 interface Props { lang: Lang; page: RouteKey }
 const { lang, page } = Astro.props;
 const s = t(lang);
+const L = s.footer.links;
 const other = otherLang(lang);
-const links: { key: RouteKey; label: string }[] = [
-  { key: 'how', label: s.footer.links.how },
-  { key: 'works', label: s.footer.links.works },
-  { key: 'permissions', label: s.footer.links.permissions },
-  { key: 'receipts', label: s.footer.links.receipts },
-  { key: 'standards', label: s.footer.links.standards },
-  { key: 'security', label: s.footer.links.security },
-  { key: 'developers', label: s.footer.links.developers },
-  { key: 'pricing', label: s.footer.links.pricing },
-  { key: 'privacy', label: s.footer.links.privacy },
-  { key: 'impressum', label: s.footer.links.impressum },
+type Item = { label: string; href: string; key?: RouteKey };
+const r = (key: RouteKey, label: string): Item => ({ key, label, href: routes[key][lang] });
+const cols: { h: string; items: Item[] }[] = [
+  { h: s.footer.cols.product, items: [r('how', L.how), r('works', L.works), r('permissions', L.permissions), r('receipts', L.receipts), r('standards', L.standards), r('security', L.security)] },
+  { h: s.footer.cols.project, items: [r('developers', L.developers), r('pricing', L.pricing), { label: L.github, href: GITHUB_URL || routes.developers[lang] }] },
+  { h: s.footer.cols.legal, items: [r('impressum', L.impressum), r('privacy', L.privacy)] },
 ];
 ---
 <footer class="site-footer has-rails">
   <Rails />
-  <div class="wrap row">
-    <div class="brand">
+  <div class="wrap in">
+    <div class="top">
       <Logo lang={lang} />
-      <p class="tag">{s.footer.tagline}</p>
-    </div>
-    <nav aria-label="Footer">
-      <ul>
-        {links.map((l) => (
-          <li><a href={routes[l.key][lang]} aria-current={l.key === page ? 'page' : undefined}>{l.label}</a></li>
+      <nav class="cols" aria-label="Footer">
+        {cols.map((c) => (
+          <div>
+            <p class="col-h">{c.h}</p>
+            <ul>
+              {c.items.map((it) => (
+                <li><a href={it.href} aria-current={it.key === page ? 'page' : undefined}>{it.label}</a></li>
+              ))}
+            </ul>
+          </div>
         ))}
-        <li><a href={GITHUB_URL || routes.developers[lang]}>{s.footer.links.github}</a></li>
-      </ul>
-    </nav>
-  </div>
-  <div class="wrap fine">
-    <span>{s.footer.copyright}</span>
-    <div class="prefs">
-      <a class="lang" href={routes[page][other]} hreflang={other} lang={other} aria-label={s.nav.langSwitchLabel}>{s.nav.langSwitch}</a>
-      <ThemeToggle lang={lang} />
+      </nav>
+    </div>
+    <div class="fine">
+      <p>{s.footer.fine}</p>
+      <div class="end">
+        <a href="https://rouxdutoit.com">rouxdutoit.com</a>
+        <a class="ico-link" href="mailto:hello@rouxdutoit.com" aria-label={s.footer.email} title={s.footer.email} set:html={icon('mail')} />
+        <a class="ico-link lang" href={routes[page][other]} hreflang={other} lang={other} aria-label={s.nav.langSwitchLabel}><span set:html={icon('translate')} />{s.nav.langSwitch}</a>
+        <ThemeToggle lang={lang} compact />
+      </div>
     </div>
   </div>
 </footer>
 <style>
-  .site-footer { padding: 56px 0 40px; }
-  .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 28px; }
-  .tag { margin: 12px 0 0; color: var(--muted); font-size: 15px; }
-  ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; }
-  a { font-size: 15px; text-decoration: none; color: var(--muted); display: inline-block; padding: 8px 0; }
-  a:hover, a[aria-current='page'] { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
-  .fine { margin-top: 28px; font-size: 13px; color: var(--muted); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  .prefs { display: flex; align-items: center; gap: 8px; }
-  .prefs .lang { padding: 10px 14px; min-height: 44px; display: inline-flex; align-items: center; border-radius: 999px; background: var(--btn2); color: var(--btn2-ink); }
+  .site-footer { padding: clamp(48px, 6vw, 72px) 0 28px; }
+  .in { position: relative; z-index: 1; }
+  .top { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: start; }
+  .cols { display: flex; gap: clamp(32px, 6vw, 88px); }
+  .col-h { margin: 0 0 12px; font-size: 14px; font-weight: 600; }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  a { color: var(--muted); text-decoration: none; }
+  ul a { font-size: 13px; line-height: 18px; }
+  a:hover, a[aria-current='page'] { color: var(--ink); }
+  .fine { margin-top: clamp(40px, 6vw, 64px); padding-top: 16px; border-top: 1px solid var(--rail); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
+  .fine p { margin: 0; }
+  .end { display: flex; align-items: center; gap: 18px; }
+  .end a { font-size: 12px; }
+  .ico-link { display: inline-flex; align-items: center; gap: 4px; min-height: 32px; }
+  .ico-link :global(svg) { width: 16px; height: 16px; display: block; }
+  @media (max-width: 760px) {
+    .top { grid-template-columns: 1fr; }
+    .cols { flex-wrap: wrap; gap: 28px 40px; }
+  }
 </style>

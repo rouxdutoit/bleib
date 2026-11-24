@@ -1,11 +1,12 @@
 ---
 import { t, type Lang } from '../i18n/strings';
 import { icon } from './icons';
-interface Props { lang: Lang }
+interface Props { lang: Lang; compact?: boolean }
+const { compact = false } = Astro.props;
 const s = t(Astro.props.lang).nav;
 ---
 <button
-  class="theme-toggle"
+  class:list={['theme-toggle', { compact }]}
   type="button"
   data-theme-toggle
   data-label-dark={s.themeToDark}
@@ -22,6 +23,9 @@ const s = t(Astro.props.lang).nav;
     -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
   }
   .theme-toggle :global(svg) { width: 20px; height: 20px; display: block; }
+  .theme-toggle.compact { width: 32px; height: 32px; background: none; color: var(--muted); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .theme-toggle.compact:hover { color: var(--ink); }
+  .theme-toggle.compact :global(svg) { width: 16px; height: 16px; }
   .i-sun { display: none; }
   :global(:root[data-theme='dark']) .i-sun { display: block; }
   :global(:root[data-theme='dark']) .i-moon { display: none; }

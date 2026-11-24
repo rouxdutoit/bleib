@@ -19,6 +19,8 @@ import fingerprint from '@material-symbols/svg-400/rounded/fingerprint.svg?raw';
 import chevronRight from '@material-symbols/svg-400/rounded/chevron_right.svg?raw';
 import verified from '@material-symbols/svg-400/rounded/verified-fill.svg?raw';
 import restaurant from '@material-symbols/svg-400/rounded/restaurant.svg?raw';
+import mail from '@material-symbols/svg-400/rounded/mail.svg?raw';
+import translate from '@material-symbols/svg-400/rounded/translate.svg?raw';
 
 const raw = {
   person,
@@ -37,6 +39,8 @@ const raw = {
   chevron_right: chevronRight,
   verified,
   restaurant,
+  mail,
+  translate,
 } as const;
 
 export type IconName = keyof typeof raw;

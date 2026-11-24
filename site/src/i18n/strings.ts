@@ -216,6 +216,9 @@ const en = {
     honeypot: 'Leave this field empty',
   },
   footer: {
+    cols: { product: 'Product', project: 'Project', legal: 'Legal' },
+    fine: 'Open source · No cookies or analytics',
+    email: 'Email',
     tagline: 'Your AI context, encrypted and yours.',
     links: {
       how: 'How it works',
@@ -430,6 +433,9 @@ const de: Strings = {
     honeypot: 'Dieses Feld leer lassen',
   },
   footer: {
+    cols: { product: 'Produkt', project: 'Projekt', legal: 'Rechtliches' },
+    fine: 'Open Source · Keine Cookies, keine Analyse',
+    email: 'E-Mail',
     tagline: 'Dein KI-Kontext, verschlüsselt und deins.',
     links: {
       how: 'So funktioniert’s',
