@@ -165,6 +165,17 @@ const en = {
       saved: 'Saved. No AI can read it until you allow it.',
     },
   },
+  privacy: {
+    eyebrow: 'Privacy',
+    h: 'We never see your memory.',
+    items: [
+      { icon: 'lock', t: 'On your device', d: 'Your memory is encrypted where you use it. No bleib server can read it.' },
+      { icon: 'visibility_off', t: 'No account, no tracking', d: 'No sign-up, no analytics, no ads. Nothing to sell.' },
+      { icon: 'tune', t: 'Only what’s needed', d: 'Each AI gets the minimum for that request. Sensitive things only with your yes.' },
+      { icon: 'receipt_long', t: 'Proof, not promises', d: 'Every share leaves a receipt. The code is open for anyone to check.' },
+    ],
+    more: 'How bleib keeps you safe',
+  },
   finale: {
     prompt: { tab: 'Claude', said: 'I always book an aisle seat.', title: 'Save to bleib?', fact: 'Prefers aisle seats', notNow: 'Not Now', save: 'Save', saved: 'Saved' },
     h: 'Tell it once.',
@@ -346,6 +357,17 @@ const de: Strings = {
       newTag: 'Neu',
       saved: 'Gespeichert. Keine KI kann es lesen, bis du es erlaubst.',
     },
+  },
+  privacy: {
+    eyebrow: 'Datenschutz',
+    h: 'Wir sehen dein Gedächtnis nie.',
+    items: [
+      { icon: 'lock', t: 'Auf deinem Gerät', d: 'Dein Gedächtnis ist dort verschlüsselt, wo du es nutzt. Kein Server von bleib kann es lesen.' },
+      { icon: 'visibility_off', t: 'Kein Konto, kein Tracking', d: 'Keine Anmeldung, keine Analyse, keine Werbung. Nichts zu verkaufen.' },
+      { icon: 'tune', t: 'Nur das Nötige', d: 'Jede KI bekommt das Minimum für diese Anfrage. Sensibles nur mit deinem Ja.' },
+      { icon: 'receipt_long', t: 'Belege statt Versprechen', d: 'Jede Weitergabe hinterlässt einen Beleg. Der Code ist offen, jeder kann ihn prüfen.' },
+    ],
+    more: 'Wie bleib dich schützt',
   },
   finale: {
     prompt: { tab: 'Claude', said: 'Ich buche immer einen Gangplatz.', title: 'In bleib sichern?', fact: 'Bevorzugt Gangplätze', notNow: 'Nicht jetzt', save: 'Sichern', saved: 'Gesichert' },

@@ -1,0 +1,49 @@
+---
+/** The privacy promise in one line, then four short proofs: Apple's privacy pages, in bleib's words. */
+import Rails from './Rails.astro';
+import { icon, type IconName } from './icons';
+import { routes, t, type Lang } from '../i18n/strings';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang).privacy;
+---
+<section class="privacy has-rails" aria-labelledby="privacy-title">
+  <Rails />
+  <div class="wrap inner">
+    <p class="eyebrow">{s.eyebrow}</p>
+    <h2 id="privacy-title" class="title">{s.h}</h2>
+    <ul class="items">
+      {s.items.map((x) => (
+        <li>
+          <span class="ico" set:html={icon(x.icon as IconName)} />
+          <p class="t-headline">{x.t}</p>
+          <p class="d">{x.d}</p>
+        </li>
+      ))}
+    </ul>
+    <a class="more" href={routes.security[lang]}>{s.more}<span set:html={icon('chevron_right')} /></a>
+  </div>
+</section>
+
+<style>
+  .privacy { padding: clamp(96px, 12vw, 160px) 0; }
+  .inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .eyebrow { margin: 0 0 14px; font-size: 15px; font-weight: 600; color: var(--muted); }
+  .title { font-size: clamp(40px, 6vw, 72px); line-height: 1.04; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance; }
+  .items { list-style: none; margin: clamp(48px, 7vw, 80px) 0 0; padding: 0; width: 100%; max-width: 1040px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(28px, 4vw, 48px); text-align: left; }
+  .items li { display: flex; flex-direction: column; gap: 6px; }
+  .items p { margin: 0; }
+  .ico { color: var(--ink); margin-bottom: 6px; }
+  .ico :global(svg) { width: 28px; height: 28px; display: block; }
+  .d { font-size: 15px; line-height: 1.45; color: var(--muted); }
+  .more { display: inline-flex; align-items: center; gap: 1px; margin-top: clamp(40px, 6vw, 64px); font-size: 17px; font-weight: 500; text-decoration: none; color: var(--ink); }
+  .more :global(svg) { width: 20px; height: 20px; display: block; transition: transform 0.2s var(--ease); }
+  .more:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .more:hover :global(svg) { transform: translateX(2px); }
+  :global(:root[data-theme='dark']) .more { color: #f6e79a; }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .more { color: #f6e79a; }
+  }
+  @media (max-width: 960px) { .items { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .items { grid-template-columns: 1fr; } }
+</style>

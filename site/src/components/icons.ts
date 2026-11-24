@@ -20,6 +20,9 @@ import chevronRight from '@material-symbols/svg-400/rounded/chevron_right.svg?ra
 import restaurant from '@material-symbols/svg-400/rounded/restaurant.svg?raw';
 import mail from '@material-symbols/svg-400/rounded/mail.svg?raw';
 import translate from '@material-symbols/svg-400/rounded/translate.svg?raw';
+import visibilityOff from '@material-symbols/svg-400/rounded/visibility_off.svg?raw';
+import tune from '@material-symbols/svg-400/rounded/tune.svg?raw';
+import receiptLong from '@material-symbols/svg-400/rounded/receipt_long.svg?raw';
 
 const raw = {
   person,
@@ -39,6 +42,9 @@ const raw = {
   restaurant,
   mail,
   translate,
+  visibility_off: visibilityOff,
+  tune,
+  receipt_long: receiptLong,
 } as const;
 
 export type IconName = keyof typeof raw;
