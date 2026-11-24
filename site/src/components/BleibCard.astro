@@ -13,10 +13,8 @@ const { title, facts, action, done, at = 2 } = Astro.props;
 <div class="grow" data-at={at}><div class="grow-in">
   <div class="fill">
     <p class="fill-head"><span class="app"><Mark size={12} /></span><span class="t-foot fill-title">{title}</span></p>
-    <div class="fill-row">
-      <ul class="facts">{facts.map((f) => <li class="t-sub"><span class="yes" set:html={icon('check')} />{f}</li>)}</ul>
-      <span class="b"><span class="to-do">{action}</span><span class="to-done"><span class="tick"><DrawTick /></span>{done}</span></span>
-    </div>
+    <ul class="facts">{facts.map((f) => <li class="t-sub"><span class="yes" set:html={icon('check')} />{f}</li>)}</ul>
+    <span class="b"><span class="to-do">{action}</span><span class="to-done"><span class="tick"><DrawTick /></span>{done}</span></span>
   </div>
 </div></div>
 
@@ -24,22 +22,27 @@ const { title, facts, action, done, at = 2 } = Astro.props;
   .grow { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.55s var(--ease), opacity 0.4s var(--ease) 0.12s; }
   .grow-in { min-height: 0; overflow: hidden; }
   :global(.s2) .grow[data-at='2'], :global(.s3) .grow[data-at='3'] { grid-template-rows: 1fr; opacity: 1; }
-  .fill { margin: var(--bleib-card-margin, 0); padding: 10px 12px 12px; border-radius: 14px; background: var(--fill); }
+  /* Like a notification row: the action sits at the end, centred on the whole card. */
+  .fill { margin: var(--bleib-card-margin, 0); padding: 10px 12px 12px; border-radius: 14px; background: var(--fill); display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; align-items: center; }
   .fill-head { margin: 0; display: flex; align-items: center; gap: 8px; }
   .app { flex: none; width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
   .fill-title { color: var(--label-2); }
-  .fill-row { margin-top: 8px; display: flex; align-items: center; gap: 12px; }
-  .facts { flex: 1; min-width: 0; list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; }
+  .facts { grid-column: 1; min-width: 0; list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; }
   .facts li { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
   .yes { flex: none; width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; background: #f6e79a; color: #0a0a0a; }
   .yes :global(svg) { width: 13px; height: 13px; display: block; }
   /* Like the story cards: the action in the label colour, bleib yellow once done; labels crossfade in place. */
-  .b { flex: none; display: inline-grid; place-items: center; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 13px; line-height: 1; font-weight: 600; background: var(--label); color: var(--cell); transition: background-color 0.35s var(--ease), color 0.35s var(--ease); }
+  .b { grid-column: 2; grid-row: 1 / span 2; display: inline-grid; place-items: center; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 13px; line-height: 1; font-weight: 600; background: var(--label); color: var(--cell); transition: background-color 0.35s var(--ease), color 0.35s var(--ease); }
   .b > span { grid-area: 1 / 1; transition: opacity 0.35s var(--ease); }
   .to-done { display: inline-flex; align-items: center; gap: 4px; opacity: 0; }
   :global(.s3) [data-at='2'] .b, :global(.s4) [data-at='3'] .b { background: #f6e79a; color: #0a0a0a; }
   :global(.s3) [data-at='2'] .to-do, :global(.s4) [data-at='3'] .to-do { opacity: 0; }
   :global(.s3) [data-at='2'] .to-done, :global(.s4) [data-at='3'] .to-done { opacity: 1; }
   .tick { display: grid; }
+  /* On phones the title keeps the full width; the action sits beside the facts. */
+  @media (max-width: 480px) {
+    .fill-head { grid-column: 1 / -1; }
+    .b { grid-row: 2; }
+  }
   @media (prefers-reduced-motion: reduce) { .grow { transition-delay: 0s; } }
 </style>
