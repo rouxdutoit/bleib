@@ -64,22 +64,18 @@ const en = {
     add: 'Add',
     added: 'Added',
     attachment: 'About me',
-    // Reply fragments alternate plain text and details drawn from the person's memory.
     tabs: [
       {
         ai: 'Gemini', icon: 'gemini-color', typed: 'Plan a weekend in Lisbon for me.',
         facts: ['Aisle seat', 'Hotels under €250', 'Vegetarian'], private: 'Health and work stay private.',
-        reply: ['', 'Aisle seat', ' on Friday, ', 'vegetarian spots', ' in Alfama, and ', 'hotels under €250', '.'],
       },
       {
         ai: 'Claude', icon: 'claude-color', typed: 'Write a cover letter for this job.',
         facts: ['Product designer', 'Berlin', 'Short and plain'], private: 'Health and money stay private.',
-        reply: ['Hi, I’m a ', 'product designer', ' in ', 'Berlin', '. ', 'I make apps easier to use.'],
       },
       {
         ai: 'ChatGPT', icon: 'openai', typed: 'What should I cook tonight?',
         facts: ['Vegetarian', 'Cooks for two', 'Under 30 minutes'], private: 'Work and travel stay private.',
-        reply: ['Try ', 'vegetarian chickpea tacos', ' ', 'for two', ', ready in ', '20 minutes', '.'],
       },
     ],
   },
@@ -265,17 +261,14 @@ const de: Strings = {
       {
         ai: 'Gemini', icon: 'gemini-color', typed: 'Plane ein Wochenende in Lissabon für mich.',
         facts: ['Gangplatz', 'Hotels unter 250 €', 'Vegetarisch'], private: 'Gesundheit und Arbeit bleiben privat.',
-        reply: ['', 'Gangplatz', ', ', 'vegetarisch', ' in Alfama essen und ', 'Hotels unter 250 €', '.'],
       },
       {
         ai: 'Claude', icon: 'claude-color', typed: 'Schreib ein Anschreiben für diese Stelle.',
         facts: ['Produktdesign', 'Berlin', 'Kurz und klar'], private: 'Gesundheit und Finanzen bleiben privat.',
-        reply: ['Hallo, ich arbeite im ', 'Produktdesign', ' in ', 'Berlin', '. ', 'Ich mache Apps einfacher.'],
       },
       {
         ai: 'ChatGPT', icon: 'openai', typed: 'Was soll ich heute Abend kochen?',
         facts: ['Vegetarisch', 'Kocht für zwei', 'Unter 30 Minuten'], private: 'Arbeit und Reisen bleiben privat.',
-        reply: ['', 'Vegetarische Bohnen-Tacos', ' ', 'für zwei', '. In ', '20 Minuten', ' fertig.'],
       },
     ],
   },
