@@ -6,7 +6,7 @@ import { routes, t, type Lang, type RouteKey } from '../i18n/strings';
 interface Props { lang: Lang; page: RouteKey; title?: string; description?: string }
 const { lang, page, title, description } = Astro.props;
 const s = t(lang);
-const site = Astro.site ?? new URL('https://bleib.pages.dev');
+const site = Astro.site ?? new URL('https://bleib.dev');
 const pageTitle = title ? `${title} · bleib` : s.meta.title;
 const desc = description ?? s.meta.description;
 const canonical = new URL(routes[page][lang], site).href;

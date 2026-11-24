@@ -4,7 +4,7 @@ export type Lang = 'en' | 'de';
  * The public repository doesn't exist yet. Until it does, "GitHub" links go to the
  * Developers page. Set this to the repository URL once it is public.
  */
-export const GITHUB_URL: string = '';
+export const GITHUB_URL: string = 'https://github.com/rouxdutoit/bleib';
 
 export const routes = {
   home: { en: '/', de: '/de/' },
