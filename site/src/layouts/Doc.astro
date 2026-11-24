@@ -4,7 +4,7 @@ import Base from './Base.astro';
 import Rails from '../components/Rails.astro';
 import { icon } from '../components/icons';
 import { docs, type Block } from '../i18n/pages';
-import type { Lang, RouteKey } from '../i18n/strings';
+import { routes, type Lang, type RouteKey } from '../i18n/strings';
 interface Props { lang: Lang; page: Exclude<RouteKey, 'home'> }
 const { lang, page } = Astro.props;
 const d = docs[lang][page];
@@ -18,6 +18,19 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
         <h1 class="doc-h1">{d.title}</h1>
         {d.intro.map((p) => <p class="doc-intro">{p}</p>)}
         {d.cta && <a class="btn btn-secondary doc-cta" href={d.cta.href}>{d.cta.label}</a>}
+        {d.hub && (
+          <ul class="hub">
+            {d.hub.map((h) => (
+              <li>
+                <a href={routes[h.to][lang]}>
+                  <span class="ti" set:html={icon(h.icon)} />
+                  <span class="hub-t">{h.t}<span class="hub-chev" set:html={icon('chevron_right')} /></span>
+                  <span class="hub-d">{h.d}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </header>
     <div class="doc-body has-rails">
@@ -67,6 +80,15 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
   .doc-intro { margin: 18px 0 0; max-width: 36em; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.5; color: var(--muted); }
   .doc-intro + .doc-intro { margin-top: 10px; }
   .doc-cta { margin-top: 28px; }
+  /* Hub: Apple-style link tiles to the deeper pages */
+  .hub { list-style: none; margin: clamp(36px, 5vw, 56px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .hub a { display: grid; gap: 4px; height: 100%; padding: 18px 18px 20px; border-radius: 20px; background: var(--card); color: var(--on-card); border: var(--card-border); text-decoration: none; transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease); }
+  .hub a:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .hub .ti { margin-bottom: 8px; }
+  .hub-t { display: inline-flex; align-items: center; font-weight: 600; letter-spacing: -0.015em; }
+  .hub-chev :global(svg) { width: 18px; height: 18px; display: block; }
+  .hub-d { color: var(--on-card-muted); font-size: 15px; line-height: 1.4; }
+  @media (max-width: 860px) { .hub { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
   .doc-body { padding: clamp(24px, 4vw, 48px) 0 clamp(64px, 8vw, 104px); }
   .doc-body .wrap { position: relative; z-index: 1; }

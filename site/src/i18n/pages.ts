@@ -28,6 +28,8 @@ export interface DocPage {
   title: string;
   description: string;
   intro: string[];
+  /** Hub links shown under the intro (How it works). */
+  hub?: { to: RouteKey; t: string; d: string; icon: IconName }[];
   cta?: { label: string; href: string };
   sections: Section[];
 }
@@ -45,6 +47,12 @@ const en: Docs = {
     intro: [
       'bleib sits between you and the AIs you use. They get what a task needs, when you allow it, and you can always see what they were given.',
       'bleib is in development. This page describes how it works.',
+    ],
+    hub: [
+      { to: 'permissions', t: 'Permissions', d: 'What bleib asks, and when.', icon: 'check' },
+      { to: 'receipts', t: 'Receipts', d: 'Exactly what each AI saw.', icon: 'fingerprint' },
+      { to: 'works', t: 'Works with', d: 'Claude, Cursor, OpenClaw and more.', icon: 'code' },
+      { to: 'standards', t: 'Standards', d: 'The open formats underneath.', icon: 'verified_user' },
     ],
     sections: [
       {
@@ -525,6 +533,12 @@ const de: Docs = {
     intro: [
       'bleib sitzt zwischen dir und den KIs, die du nutzt. Sie bekommen, was eine Aufgabe braucht, wenn du es erlaubst, und du siehst jederzeit, was sie bekommen haben.',
       'bleib ist in Entwicklung. Diese Seite beschreibt, wie es funktioniert.',
+    ],
+    hub: [
+      { to: 'permissions', t: 'Berechtigungen', d: 'Was bleib fragt und wann.', icon: 'check' },
+      { to: 'receipts', t: 'Belege', d: 'Genau, was jede KI gesehen hat.', icon: 'fingerprint' },
+      { to: 'works', t: 'Kompatibilität', d: 'Claude, Cursor, OpenClaw und mehr.', icon: 'code' },
+      { to: 'standards', t: 'Standards', d: 'Die offenen Formate darunter.', icon: 'verified_user' },
     ],
     sections: [
       {
