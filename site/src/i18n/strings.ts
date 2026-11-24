@@ -65,6 +65,7 @@ const en = {
     facts: ['Aisle seat', 'Hotels under €250', 'Vegetarian'],
     add: 'Add',
     added: 'Added',
+    attachment: 'About me',
     private: 'Health and work stay private.',
   },
   story: {
@@ -258,6 +259,7 @@ const de: Strings = {
     facts: ['Gangplatz', 'Hotels unter 250 €', 'Vegetarisch'],
     add: 'Hinzufügen',
     added: 'Hinzugefügt',
+    attachment: 'Über mich',
     private: 'Gesundheit und Arbeit bleiben privat.',
   },
   story: {

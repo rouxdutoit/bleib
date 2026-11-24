@@ -22,6 +22,7 @@ import mail from '@material-symbols/svg-400/rounded/mail.svg?raw';
 import translate from '@material-symbols/svg-400/rounded/translate.svg?raw';
 import visibilityOff from '@material-symbols/svg-400/rounded/visibility_off.svg?raw';
 import tune from '@material-symbols/svg-400/rounded/tune.svg?raw';
+import close from '@material-symbols/svg-400/rounded/close.svg?raw';
 import receiptLong from '@material-symbols/svg-400/rounded/receipt_long.svg?raw';
 
 const raw = {
@@ -44,6 +45,7 @@ const raw = {
   translate,
   visibility_off: visibilityOff,
   tune,
+  close,
   receipt_long: receiptLong,
 } as const;
 
