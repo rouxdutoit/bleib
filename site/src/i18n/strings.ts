@@ -59,7 +59,7 @@ const en = {
     ],
   },
   preview: {
-    site: 'gemini.google.com',
+    tab: 'Gemini',
     typed: 'Plan a weekend in Lisbon for me.',
     title: 'bleib can add what Gemini needs',
     facts: ['Aisle seat', 'Hotels under €250', 'Vegetarian'],
@@ -166,7 +166,7 @@ const en = {
     },
   },
   finale: {
-    prompt: { site: 'claude.ai', said: 'I always book an aisle seat.', title: 'Save to bleib?', fact: 'Prefers aisle seats', notNow: 'Not Now', save: 'Save', saved: 'Saved' },
+    prompt: { tab: 'Claude', said: 'I always book an aisle seat.', title: 'Save to bleib?', fact: 'Prefers aisle seats', notNow: 'Not Now', save: 'Save', saved: 'Saved' },
     h: 'Tell it once.',
     p: 'Every AI gets what it needs. Nothing more.',
   },
@@ -241,7 +241,7 @@ const de: Strings = {
     ],
   },
   preview: {
-    site: 'gemini.google.com',
+    tab: 'Gemini',
     typed: 'Plane ein Wochenende in Lissabon für mich.',
     title: 'bleib kann ergänzen, was Gemini braucht',
     facts: ['Gangplatz', 'Hotels unter 250 €', 'Vegetarisch'],
@@ -348,7 +348,7 @@ const de: Strings = {
     },
   },
   finale: {
-    prompt: { site: 'claude.ai', said: 'Ich buche immer einen Gangplatz.', title: 'In bleib sichern?', fact: 'Bevorzugt Gangplätze', notNow: 'Nicht jetzt', save: 'Sichern', saved: 'Gesichert' },
+    prompt: { tab: 'Claude', said: 'Ich buche immer einen Gangplatz.', title: 'In bleib sichern?', fact: 'Bevorzugt Gangplätze', notNow: 'Nicht jetzt', save: 'Sichern', saved: 'Gesichert' },
     h: 'Einmal sagen.',
     p: 'Jede KI bekommt, was sie braucht. Mehr nicht.',
   },

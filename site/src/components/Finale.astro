@@ -14,7 +14,7 @@ const s = t(lang).finale;
   <div class="wrap inner">
     <figure class="scene" aria-hidden="true" data-sv data-steps="3" data-interval="900" data-step="0">
       <div class="win">
-        <div class="bar"><span class="lights"><i></i><i></i><i></i></span><span class="t-foot site"><img class="fav" src="/providers/claude-color.svg" alt="" width="14" height="14" />{s.prompt.site}</span><span class="lights ghost"><i></i><i></i><i></i></span></div>
+        <div class="bar"><span class="lights"><i></i><i></i><i></i></span><span class="t-foot tab"><img class="fav" src="/providers/claude-color.svg" alt="" width="14" height="14" />{s.prompt.tab}</span></div>
         <div class="chat"><p class="t-body bubble">{s.prompt.said}</p></div>
         <div class="grow"><div class="grow-in">
           <div class="save">
@@ -39,14 +39,14 @@ const s = t(lang).finale;
   /* A picture, not a control: a chat with bleib's save bar, as a password manager shows it. */
   .scene { margin: 0 0 clamp(40px, 6vw, 64px); width: min(440px, 100%); }
   .win { border-radius: 18px; background: var(--cell); color: var(--label); box-shadow: var(--shadow); overflow: hidden; text-align: left; }
-  .bar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 34px; padding: 0 12px; border-bottom: 1px solid var(--hairline); }
-  .lights { display: inline-flex; gap: 6px; }
-  .lights i { width: 9px; height: 9px; border-radius: 50%; background: #ff5f57; }
+  /* A browser window: traffic lights, then the active tab (favicon and page title) on a darker strip. */
+  .bar { display: flex; align-items: flex-end; gap: 14px; height: 38px; padding: 0 12px; background: var(--fill); }
+  .lights { display: inline-flex; gap: 6px; align-self: center; }
+  .lights i { width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; }
   .lights i:nth-child(2) { background: #febc2e; }
   .lights i:nth-child(3) { background: #28c840; }
-  .lights.ghost { visibility: hidden; justify-self: end; }
-  .site { display: inline-flex; align-items: center; gap: 6px; color: var(--label-2); }
-  .fav { display: block; width: 14px; height: 14px; }
+  .tab { display: inline-flex; align-items: center; gap: 7px; width: min(180px, 50%); height: 30px; padding: 0 12px; border-radius: 9px 9px 0 0; background: var(--cell); color: var(--label); }
+  .fav { flex: none; display: block; width: 14px; height: 14px; }
   .chat { display: flex; justify-content: flex-end; padding: 18px 16px 14px; }
   .bubble { margin: 0; max-width: 80%; padding: 8px 14px; border-radius: 18px; background: var(--fill); }
   .save { display: flex; align-items: center; gap: 10px; margin: 0 10px 10px; padding: 8px 8px 8px 10px; border-radius: 14px; background: var(--fill); }
