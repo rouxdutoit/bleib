@@ -4,71 +4,15 @@
  * A [data-type] element is typed out at step 1, and the first gap starts once typing ends.
  * data-start sets the pause before step 1 and data-gaps="a,b,…" the pause after each step (ms): long enough
  * to read what is on screen (about 0.25 s a word), while each transition itself stays quick.
- * [data-scramble-at="n"] text scrambles at step n, like fazit.dev's wordmark in reverse: each character
- * cycles through glyphs, then settles on its character of data-cipher (how it reads without the key).
  * data-sv="scroll" waits for the person's first scroll before playing (the hero, which is in view on arrival).
  * With reduced motion the final state shows at once.
  */
 const START = 500;
 const STEP = 900;
 
-const GLYPHS = '-_/\\|<>~^*+=:;!?#%&@0123456789';
-const glyph = () => GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-
-/** Lets a character's space grow or shrink without shifting the rest of the line at once. */
-const setChar = (ch: HTMLElement, className: string, text: string) => {
-  const width = getComputedStyle(ch).width;
-  ch.getAnimations().forEach((animation) => animation.cancel());
-  ch.className = className;
-  ch.textContent = text;
-  const nextWidth = getComputedStyle(ch).width;
-  if (width !== nextWidth) ch.animate({ width: [width, nextWidth] }, { duration: 140, easing: 'ease-out' });
-};
-
-/** Cycles each character of el through glyphs, left to right, until it settles on its data-cipher character. */
-const scramble = (el: HTMLElement) => {
-  const text = [...(el.dataset.text ??= el.textContent ?? '')];
-  const cipher = [...(el.dataset.cipher ?? '')];
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const chars = Array.from({ length: reduced ? cipher.length : Math.max(text.length, cipher.length) }, (_, i) =>
-    Object.assign(document.createElement('span'), { className: reduced ? 'ch ct' : 'ch', textContent: (reduced ? cipher : text)[i] ?? '' }),
-  );
-  el.replaceChildren(...chars);
-  if (reduced || !chars.length) return;
-  let start = 0;
-  let last = 0;
-  const frame = (now: number) => {
-    if (chars[0].parentElement !== el) return;
-    start ||= now;
-    const elapsed = now - start;
-    const swap = now - last > 42;
-    if (swap) last = now;
-    let done = 0;
-    chars.forEach((ch, i) => {
-      const from = i * 18;
-      if (ch.classList.contains('ct')) done += 1;
-      else if (elapsed >= from + 260 && ch.dataset.g) {
-        setChar(ch, 'ch ct', cipher[i] ?? '');
-        done += 1;
-      } else if (elapsed >= from && (swap || !ch.dataset.g)) {
-        if (i < text.length) ch.classList.add('sg');
-        else if (!ch.dataset.g) setChar(ch, 'ch sg', cipher[i] ?? '');
-        ch.dataset.g = glyph();
-      }
-    });
-    if (done < chars.length) requestAnimationFrame(frame);
-  };
-  requestAnimationFrame(frame);
-};
-
 const setStep = (sv: HTMLElement, n: number) => {
   sv.dataset.step = String(n);
   for (let k = 1; k <= 6; k++) sv.classList.toggle(`s${k}`, k <= n);
-  sv.querySelectorAll<HTMLElement>('[data-scramble-at]').forEach((el) => {
-    if (Number(el.dataset.scrambleAt) <= n) {
-      if (!el.querySelector('.ch')) scramble(el);
-    } else if (el.dataset.text !== undefined) el.textContent = el.dataset.text;
-  });
 };
 
 const timers = new WeakMap<HTMLElement, number[]>();

@@ -12,13 +12,11 @@ import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang; scene: number }
 const { lang, scene } = Astro.props;
 const c = t(lang).cards;
-const STEPS = [6, 2, c.any.providers.length - 1, 3, 3, 2];
+const STEPS = [4, 2, c.any.providers.length - 1, 3, 3, 1];
 const INTERVAL = [900, 900, 1250, 900, 900, 1000];
 /** Reading time: before step 1, the card as it first appears; GAPS, what a step reveals (see scripts/story.ts). */
 const START = [900, 1000, 2200, 1500, 1000, 1000];
-const GAPS = ['900,900,900,1500,1300', '2500', '', '900,1600', '900,1500', ''];
-/** Scene 6: the dots hide the fields' lengths too. */
-const dots = (length: number) => '•'.repeat(length);
+const GAPS = ['', '2500', '', '900,1600', '900,1500', ''];
 
 import { icon, type IconName } from './icons';
 const svg = (name: string, cls = 'g') => icon(name as IconName, cls);
@@ -29,27 +27,16 @@ const cx = (n: number) => `reveal at-${n}`;
     <div class="stack" aria-hidden="true">
       {scene === 0 && (
         <>
-          {/* Gathered into bleib, the scattered memories give way to each AI's memory switch, which then turns off. */}
-          <div class="panels crossfade at-5">
-            <div class="sources">
-              <p class="t-foot c-2 src-h">{c.wallet.sourcesLabel}</p>
-              <ul class="src-list">
-                {c.wallet.sources.map((m, i) => (
-                  <li class={`dim-${i + 1}`}><div class="src-item"><div class="card mini"><span class="t-foot c-2 from">{m.from}</span><span class="t-sub">{m.text}</span></div></div></li>
-                ))}
-              </ul>
-            </div>
-            <div class="sources">
-              <p class="t-foot c-2 src-h">{c.wallet.offLabel}</p>
-              <ul class="group card switches">
-                {c.any.providers.map((p, i) => (
-                  <li class="cell">
-                    <img class="app-sm" src={p.icon} alt="" width="29" height="29" />
-                    <span class="t-body cell-k">{p.name}</span>
-                    <span class="toggle at-6" style={`--delay: ${i * 0.3}s`} />
-                  </li>
-                ))}
-              </ul>
+          <div>
+            <div>
+              <div class="sources">
+                <p class="t-foot c-2 src-h">{c.wallet.sourcesLabel}</p>
+                <ul class="src-list">
+                  {c.wallet.sources.map((m, i) => (
+                    <li class={`dim-${i + 1}`}><div class="src-item"><div class="card mini"><span class="t-foot c-2 from">{m.from}</span><span class="t-sub">{m.text}</span></div></div></li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
           <div class="card list-card">
@@ -207,18 +194,18 @@ const cx = (n: number) => `reveal at-${n}`;
       )}
 
       {scene === 5 && (
-        <div class="card list-card sealed">
-          <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2">3</span></p>
+        <div class="card list-card">
+          <p class="head"><span class="t-headline">{c.off.title}</span></p>
           <ul class="group">
-            {c.wallet.rows.slice(0, 3).map((r) => (
+            {c.any.providers.map((p, i) => (
               <li class="cell">
-                <span class="ico" set:html={svg(r.icon)} />
-                <span class="t-body cell-k"><span class="seal" data-scramble-at="2" data-cipher={dots(6)}>{r.k}</span></span>
-                <span class="t-body c-2 cell-v"><span class="seal" data-scramble-at="2" data-cipher={dots(8)}>{r.v}</span></span>
+                <img class="app-sm" src={p.icon} alt="" width="29" height="29" />
+                <span class="t-body cell-k">{p.name}</span>
+                <span class="toggle at-1" style={`--delay: ${i * 0.3}s`} />
               </li>
             ))}
           </ul>
-          <p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.sealed.note}</p>
+          <p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.off.note}</p>
         </div>
       )}
     </div>
@@ -247,7 +234,7 @@ const cx = (n: number) => `reveal at-${n}`;
   .head { display: flex; align-items: baseline; gap: 8px; padding: 0 16px 6px; }
   /* Every memory card has the same heading: the title, then how many groups it holds. */
   .cnt span { display: none; }
-  [data-step='0'] .cnt .c0, [data-step='1'] .cnt .c1, [data-step='2'] .cnt .c2, [data-step='3'] .cnt .c3, [data-step='4'] .cnt .c4, [data-step='5'] .cnt .c4, [data-step='6'] .cnt .c4 { display: inline; }
+  [data-step='0'] .cnt .c0, [data-step='1'] .cnt .c1, [data-step='2'] .cnt .c2, [data-step='3'] .cnt .c3, [data-step='4'] .cnt .c4, [data-step='5'] .cnt .c4 { display: inline; }
   .sec-h { padding: 0 16px 6px; font-weight: 600; }
   .sec-h.inner { padding: 14px 0 6px; }
   .sec-f { padding: 8px 16px 0; display: flex; align-items: center; justify-content: center; gap: 5px; }
@@ -258,14 +245,6 @@ const cx = (n: number) => `reveal at-${n}`;
   .ico :global(.g) { width: 17px; height: 17px; }
   .cell-k { flex: 1; min-width: 0; }
   .blk { display: block; }
-  /* Scene 6: glyphs cycle in place while the line adjusts to fit the dots (scripts/story.ts). */
-  .seal { white-space: pre; }
-  .seal :global(.ch) { display: inline-block; position: relative; vertical-align: top; text-align: center; }
-  .seal :global(.ch.sg) { visibility: hidden; }
-  .seal :global(.ct) { letter-spacing: 0.08em; }
-  .seal :global(.ch[data-g]::after) { content: attr(data-g); position: absolute; top: 0; left: 50%; transform: translateX(-50%); visibility: visible; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-weight: 400; color: var(--label-3); opacity: 0; }
-  .seal :global(.ch.sg::after) { opacity: 1; }
-  .seal :global(.ch.ct:empty::after) { transition: opacity 140ms ease-out; }
   .cell-v { text-align: right; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
   .inline-g { display: inline-flex; }
   .inline-g :global(.g) { width: 13px; height: 13px; }
@@ -299,8 +278,6 @@ const cx = (n: number) => `reveal at-${n}`;
   /* Two by two: four scattered facts read at a glance, at half the height of a list. */
   .src-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   .src-item, .mini { height: 100%; }
-  .panels { display: grid; }
-  .switches { border-radius: 14px; }
   .mini { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 14px; }
 
   /* Alert */

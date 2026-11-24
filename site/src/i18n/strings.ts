@@ -84,7 +84,7 @@ const en = {
     scenes: [
       {
         h: ['See what AI', 'knows about you.'],
-        p: "bleib brings what your AIs remember into one place. Fix what's wrong, keep what's right. Then turn their memory off.",
+        p: "bleib brings what your AIs remember into one place. Fix what's wrong, keep what's right.",
         more: { to: 'how', hash: '#memory' },
       },
       {
@@ -108,8 +108,8 @@ const en = {
         more: { to: 'receipts', hash: '' },
       },
       {
-        h: ['Like a diary with a lock.', 'Only you have the key.'],
-        p: 'Your memory stays locked on your device. Tell bleib as much as you like. Only you can open it.',
+        h: ['Every chat starts fresh.', 'bleib brings you along.'],
+        p: 'Turn off memory in each AI. bleib adds what each chat needs. Only you hold the key.',
         more: { to: 'security', hash: '' },
         dark: true,
       },
@@ -131,7 +131,6 @@ const en = {
         { from: 'Claude', text: 'Friday review' },
         { from: 'ChatGPT', text: 'Health notes' },
       ],
-      offLabel: 'Memory in each AI',
       footer: 'Encrypted on this device. Only you have access.',
     },
     ask: {
@@ -165,7 +164,7 @@ const en = {
       ],
       caption: 'Different AI. Same memory.',
     },
-    sealed: { note: 'What anyone without your key sees. Us included.' },
+    off: { title: 'Memory in each AI', note: 'Your memory stays with you.' },
     propose: {
       app: 'Claude',
       said: 'I like green tea.',
@@ -278,7 +277,7 @@ const de: Strings = {
     scenes: [
       {
         h: ['Sieh, was die KI', 'über dich weiß.'],
-        p: 'bleib sammelt an einem Ort, was sich deine KIs merken. Korrigiere, was nicht stimmt, und behalte, was passt. Dann schalte ihr Gedächtnis aus.',
+        p: 'bleib sammelt an einem Ort, was sich deine KIs merken. Korrigiere, was nicht stimmt, und behalte, was passt.',
         more: { to: 'how', hash: '#memory' },
       },
       {
@@ -302,8 +301,8 @@ const de: Strings = {
         more: { to: 'receipts', hash: '' },
       },
       {
-        h: ['Wie ein Tagebuch mit Schloss.', 'Den Schlüssel hast nur du.'],
-        p: 'Dein Gedächtnis bleibt verschlossen auf deinem Gerät. Erzähl bleib so viel du willst. Öffnen kannst es nur du.',
+        h: ['Jeder Chat beginnt neu.', 'bleib bringt dich mit.'],
+        p: 'Schalte das Gedächtnis in jeder KI aus. bleib ergänzt, was jeder Chat braucht. Den Schlüssel hast nur du.',
         more: { to: 'security', hash: '' },
         dark: true,
       },
@@ -325,7 +324,6 @@ const de: Strings = {
         { from: 'Claude', text: 'Rückblick am Freitag' },
         { from: 'ChatGPT', text: 'Gesundheit' },
       ],
-      offLabel: 'Gedächtnis in jeder KI',
       footer: 'Verschlüsselt auf diesem Gerät. Nur du hast Zugriff.',
     },
     ask: {
@@ -359,7 +357,7 @@ const de: Strings = {
       ],
       caption: 'Andere KI. Dasselbe Gedächtnis.',
     },
-    sealed: { note: 'So sieht es jeder ohne deinen Schlüssel. Auch wir.' },
+    off: { title: 'Gedächtnis in jeder KI', note: 'Dein Gedächtnis bleibt bei dir.' },
     propose: {
       app: 'Claude',
       said: 'Ich mag grünen Tee.',
