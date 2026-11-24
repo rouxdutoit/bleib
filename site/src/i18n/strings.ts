@@ -51,8 +51,8 @@ const en = {
     title: 'What your AI saw',
     tiles: [
       { n: '3', label: 'AIs connected', note: 'Claude, Codex, Ollama' },
-      { n: '11', label: 'facts shared', note: 'Each with a receipt' },
-      { n: '0', label: 'health details', note: 'Nothing left this device' },
+      { n: '11', label: 'Facts shared', note: 'Each with a receipt' },
+      { n: '0', label: 'Health details', note: 'Nothing left this device' },
     ],
     rowsLabel: 'Latest receipts',
     rows: [
