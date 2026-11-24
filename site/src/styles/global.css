@@ -327,3 +327,16 @@ h3 {
 .rails.no-top::after {
   display: none;
 }
+
+/* Joiners, as on the October site: a vertical tick on the rail with a short arm pointing inward. */
+.rails {
+  z-index: 3;
+}
+.rails::before {
+  background-size: 5px 1px, 1px 9px;
+  background-position: right center, center center;
+}
+.rails::after {
+  background-size: 5px 1px, 1px 9px;
+  background-position: left center, center center;
+}

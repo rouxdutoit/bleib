@@ -6,29 +6,75 @@ const { lang, page } = Astro.props;
 const s = t(lang).nav;
 const githubHref = GITHUB_URL || routes.developers[lang];
 const earlyHref = page === 'home' ? '#early-access' : `${routes.home[lang]}#early-access`;
+const links: { key: RouteKey; label: string }[] = [
+  { key: 'how', label: s.how },
+  { key: 'developers', label: s.developers },
+  { key: 'pricing', label: s.pricing },
+];
+const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 ---
 <header class="site-header">
-  <div class="bar">
+  <div class="frame">
     <Logo lang={lang} />
-    <nav class="actions" aria-label="Primary">
-      <a class="btn btn-secondary hide-sm" href={githubHref}>{s.github}</a>
-      <a class="btn btn-primary" href={earlyHref}>{s.early}</a>
+    <nav class="nav" aria-label="Primary">
+      <ul class="links">
+        {links.map((l) => (
+          <li><a href={routes[l.key][lang]} aria-current={l.key === page ? 'page' : undefined}>{l.label}</a></li>
+        ))}
+        <li><a href={githubHref}>{s.github}</a></li>
+      </ul>
+      <a class="btn btn-primary cta" href={earlyHref}>{s.early}<span set:html={arrow} /></a>
     </nav>
   </div>
 </header>
 <style>
   .site-header {
-    position: fixed; inset: 0 0 auto 0; z-index: 50;
-    padding: 12px 0;
-    background: color-mix(in srgb, var(--page) 84%, transparent);
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--page) 88%, transparent);
     -webkit-backdrop-filter: blur(14px) saturate(1.2);
     backdrop-filter: blur(14px) saturate(1.2);
+  }
+  /* The header sits inside the page rails; its bottom edge is a guide line with crosshairs. */
+  .frame {
+    position: relative;
+    width: var(--rail-w);
+    height: 76px;
+    margin: 0 auto;
+    padding: 0 clamp(16px, 3.6vw, 54px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-left: 1px solid var(--rail);
+    border-right: 1px solid var(--rail);
     border-bottom: 1px solid var(--rail);
   }
-  .bar { width: var(--rail-w); margin: 0 auto; padding: 0 clamp(0px, 1.5vw, 16px); display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: none; }
-  .actions { display: flex; align-items: center; gap: 8px; }
-  @media (max-width: 640px) {
-    .hide-sm { display: none; }
-    .site-header :global(.btn) { padding: 10px 14px; font-size: 14px; }
+  .frame::before,
+  .frame::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    width: 9px;
+    height: 9px;
+    background:
+      linear-gradient(var(--joint), var(--joint)) center / 9px 1px no-repeat,
+      linear-gradient(var(--joint), var(--joint)) center / 1px 9px no-repeat;
+  }
+  .frame::before { left: -5px; background-size: 5px 1px, 1px 9px; background-position: right center, center center; }
+  .frame::after { right: -5px; background-size: 5px 1px, 1px 9px; background-position: left center, center center; }
+  .nav { display: flex; align-items: center; gap: clamp(12px, 2.2vw, 30px); }
+  .links { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: clamp(12px, 2.2vw, 30px); }
+  .links a { font-size: 15px; text-decoration: none; color: var(--muted); padding: 10px 0; display: inline-block; }
+  .links a:hover, .links a[aria-current='page'] { color: var(--ink); }
+  .cta { gap: 10px; }
+  .cta :global(svg) { width: 14px; height: 14px; }
+  @media (max-width: 860px) {
+    .links { display: none; }
+  }
+  @media (max-width: 767px) {
+    .frame { height: 64px; padding: 0 12px; }
+    .cta { padding: 10px 14px; font-size: 14px; }
   }
 </style>
