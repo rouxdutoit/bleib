@@ -83,7 +83,7 @@ const en = {
     scenes: [
       {
         h: ['Control what AI', 'knows about you.'],
-        p: "bleib gathers what your AIs already know about you. Now it's all in one place, and all yours.",
+        p: "Bring over what your AIs already remember about you. Now it's all in one place, and all yours.",
         more: { to: 'how', hash: '#memory', label: 'One memory, every AI' },
       },
       {
@@ -275,7 +275,7 @@ const de: Strings = {
     scenes: [
       {
         h: ['Bestimme, was die KI', 'über dich weiß.'],
-        p: 'bleib sammelt, was deine KIs schon über dich wissen. Jetzt ist alles an einem Ort, und alles gehört dir.',
+        p: 'Hol dir, was deine KIs schon über dich wissen. Jetzt ist alles an einem Ort, und alles gehört dir.',
         more: { to: 'how', hash: '#memory', label: 'Ein Gedächtnis, jede KI' },
       },
       {

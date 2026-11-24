@@ -100,7 +100,15 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
   import { play, reset } from '../scripts/story';
   const tabs = [...document.querySelectorAll<HTMLButtonElement>('.preview [role="tab"]')];
   const select = (tab: HTMLButtonElement) => {
-    tab.parentElement?.style.setProperty('--sel', String(tabs.indexOf(tab)));
+    const strip = tab.parentElement;
+    if (strip) {
+      strip.style.setProperty('--sel', String(tabs.indexOf(tab)));
+      // On narrow screens the strip overflows; slide it so the chosen tab shows in full.
+      const end = tab.offsetLeft + tab.offsetWidth > strip.clientWidth + 1;
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      strip.scrollTo({ left: end ? strip.scrollWidth - strip.clientWidth : 0, behavior: reduced ? 'auto' : 'smooth' });
+      strip.classList.toggle('at-end', end);
+    }
     for (const t of tabs) {
       const on = t === tab;
       const panel = document.getElementById(t.getAttribute('aria-controls') ?? '');

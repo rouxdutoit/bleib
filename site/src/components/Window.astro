@@ -36,10 +36,10 @@ const { tabs, tablist, id = 'tab' } = Astro.props;
   .lights i { width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; }
   .lights i:nth-child(2) { background: #febc2e; }
   .lights i:nth-child(3) { background: #28c840; }
-  .tabs { position: relative; flex: 1; min-width: 0; display: flex; }
+  .tabs { --tab-w: 33.333%; position: relative; flex: 1; min-width: 0; display: flex; }
   /* Switchable tabs share one raised tile that slides to the chosen tab, like a segmented control (Hero.astro sets --sel). */
-  .tabs[role='tablist']::before { content: ''; position: absolute; top: 0; left: 0; width: 33.333%; height: 28px; border-radius: 8px; background: var(--cell); box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 2px rgb(0 0 0 / 0.08); transform: translateX(calc(var(--sel, 0) * 100%)); transition: transform var(--t-open) var(--ease); }
-  .tab { position: relative; flex: 0 1 33.333%; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 6px; height: 28px; padding: 0 8px; border: 0; border-radius: 8px; background: none; color: var(--label-2); font-family: inherit; cursor: pointer; }
+  .tabs[role='tablist']::before { content: ''; position: absolute; top: 0; left: 0; width: var(--tab-w); height: 28px; border-radius: 8px; background: var(--cell); box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 2px rgb(0 0 0 / 0.08); transform: translateX(calc(var(--sel, 0) * 100%)); transition: transform var(--t-open) var(--ease); }
+  .tab { position: relative; flex: 0 0 var(--tab-w); min-width: 0; display: flex; align-items: center; justify-content: center; gap: 6px; height: 28px; padding: 0 8px; border: 0; border-radius: 8px; background: none; color: var(--label-2); font-family: inherit; cursor: pointer; }
   .tab + .tab::before { content: ''; position: absolute; left: 0; top: 7px; bottom: 7px; width: 1px; background: var(--hairline); transition: opacity var(--t-fade) var(--ease); }
   .tab.on { background: var(--cell); box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 2px rgb(0 0 0 / 0.08); }
   .tab.on, .tab[aria-selected='true'] { color: var(--label); cursor: default; }
@@ -52,6 +52,10 @@ const { tabs, tablist, id = 'tab' } = Astro.props;
   .fav { flex: none; display: block; width: 14px; height: 14px; }
   .mono { background: currentColor; mask: var(--fav) center / contain no-repeat; }
   .tab[aria-selected='false'] .fav { opacity: 0.7; }
-  /* Like Safari on a phone: no window controls, so the tabs get the room. */
-  @media (max-width: 480px) { .lights { display: none; } .bar { padding-left: 7px; } }
+  /* Like Safari on a narrow screen: the tabs keep their size and the strip runs off the edge with a fade;
+     choosing a tab slides the strip so it shows in full (Hero.astro). */
+  @media (max-width: 480px) {
+    .tabs[role='tablist'] { --tab-w: 40%; overflow: hidden; -webkit-mask-image: linear-gradient(to right, #000 78%, transparent); mask-image: linear-gradient(to right, #000 78%, transparent); }
+    .tabs[role='tablist'].at-end { -webkit-mask-image: linear-gradient(to left, #000 78%, transparent); mask-image: linear-gradient(to left, #000 78%, transparent); }
+  }
 </style>
