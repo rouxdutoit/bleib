@@ -237,12 +237,13 @@ h3 {
    Press      .press.at-N                 dips as if tapped when its step comes
    Land       .land.at-N                  drops into place with a small spring, as it is revealed
    Toggle     .toggle.at-N                an iOS switch, on in bleib yellow, that turns off at step N
-   Symbol     .fx-bounce, -slide, -wave   a headline symbol's one small effect, like SF Symbols
+   Symbol     .fx-pop, -raise (+ fx-knob, fx-arrow, fx-unroll, fx-write, fx-shackle)   a headline symbol acts out what it means
    Scenes differ only in when things happen; --delay staggers a single move. */
 :root {
   --t-open: 0.55s;
   --t-fade: 0.4s;
   --t-lag: 0.12s;
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .reveal {
   display: grid;
@@ -300,7 +301,7 @@ h3 {
   animation: press 0.3s var(--ease);
 }
 .s1 .land.at-1, .s2 .land.at-2, .s3 .land.at-3, .s4 .land.at-4, .s5 .land.at-5, .s6 .land.at-6 {
-  animation: land 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) calc(var(--delay, 0s) + var(--t-lag)) both;
+  animation: land 0.6s var(--spring) calc(var(--delay, 0s) + var(--t-lag)) both;
 }
 .toggle {
   position: relative;
@@ -331,13 +332,16 @@ h3 {
 .s1 .toggle.at-1::after, .s2 .toggle.at-2::after, .s3 .toggle.at-3::after, .s4 .toggle.at-4::after, .s5 .toggle.at-5::after, .s6 .toggle.at-6::after {
   transform: none;
 }
-.fx-bounce { --fx: fx-bounce; }
-.fx-slide { --fx: fx-slide; }
-.fx-wave { --fx: fx-wave; }
-.fx-wave svg { transform-origin: 50% 90%; }
-@keyframes fx-bounce { 0%, 100% { transform: none; } 30% { transform: translateY(-4px) scale(1.06); } 60% { transform: translateY(1px); } }
-@keyframes fx-slide { 0%, 100% { transform: none; } 30% { transform: translateX(3px); } 65% { transform: translateX(-3px); } }
-@keyframes fx-wave { 0%, 100% { transform: none; } 25% { transform: rotate(14deg); } 50% { transform: rotate(-8deg); } 75% { transform: rotate(6deg); } }
+.fx-pop { --fx: fx-pop; --fx-ease: var(--spring); }
+.fx-raise { --fx: fx-raise; --fx-ease: var(--spring); }
+.fx-raise svg { transform-origin: 50% 100%; }
+@keyframes fx-pop { from { transform: scale(0); } to { transform: none; } }
+@keyframes fx-arrow { 45% { transform: translateX(calc(var(--way) * 6px)); opacity: 0; } 55% { transform: translateX(calc(var(--way) * -6px)); opacity: 0; } }
+@keyframes fx-raise { from { transform: translateY(5px) rotate(-12deg); } to { transform: none; } }
+@keyframes fx-unroll { to { transform: none; } }
+@keyframes fx-write { to { stroke-dashoffset: 0; } }
+@keyframes fx-knob { to { transform: translateX(var(--to)); } }
+@keyframes fx-shackle { to { transform: none; } }
 @keyframes press { 40% { transform: scale(0.92); } }
 @keyframes land { from { transform: translateY(-8px) scale(0.97); } }
 @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
