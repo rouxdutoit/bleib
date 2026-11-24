@@ -151,8 +151,9 @@ export class Browser {
     const approvalId = approvalRoute.exec(path)?.[1];
     const entryId = entryRoute.exec(path)?.[1];
     const receiptId = receiptRoute.exec(path)?.[1];
+    const exportPath = path === '/receipts/export';
     if (!['/', '/approvals', '/entries', '/grants', '/receipts', '/proposals', '/rules'].includes(path) &&
-        !approvalId && !entryId && !receiptId) {
+        !approvalId && !entryId && !receiptId && !exportPath) {
       return page(res, 'Page not found', '<p>Choose a page from the menu.</p>', 404);
     }
 
@@ -226,6 +227,13 @@ export class Browser {
       if (path === '/' || path === '/entries' || entryId) return await this.notes(res, session, entryId, path === '/');
       if (path === '/rules') return await this.rules(res, session);
       if (path === '/grants') return await this.access(res, session);
+      if (exportPath) {
+        const value = await this.wallet.exportReceipts(query.get('id') ?? undefined, () => session.valid);
+        res.writeHead(200, {
+          'Content-Type': 'application/json; charset=utf-8', 'Content-Disposition': 'attachment; filename="bleib-receipts.json"',
+        });
+        return res.end(JSON.stringify(value, null, 2));
+      }
       if (path === '/receipts' || receiptId) return await this.receipts(res, session, query, receiptId);
       if (path === '/proposals') return await this.proposals(res, session);
       return await this.approvals(res, session, approvalId);
@@ -324,7 +332,7 @@ ${[...agents].map(([id, name]) => `<option value="${escape(id)}" ${agent === id 
 <label for="filter-kind">Kind</label><select id="filter-kind" name="kind"><option value="">All kinds</option>
 ${kinds.map(item => `<option value="${item}" ${item === kind ? 'selected' : ''}>${escape(labels[item])}</option>`).join('')}</select>
 <button>Filter</button></form>
-<h2>Timeline</h2>
+<h2>Timeline</h2><p><a class="action-link" href="/receipts/export">Export Receipts</a></p>
 ${visible.length ? `<ul class="group">${visible.map(receipt =>
   `<li><a class="row receipt-row" href="/receipts/${receipt.receipt_id}"><strong>${escape(receipt.agent)}</strong>
 <span>${escape(receipt.purpose)}</span><span class="secondary">${escape(receipt.kinds.map(item => labels[item]).join(', '))} · ${receipt.destination_basis}</span>

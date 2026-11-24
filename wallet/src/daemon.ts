@@ -27,6 +27,8 @@ const command = z.discriminatedUnion('action', [
   z.object({ action: z.literal('revoke'), target: z.string().max(100) }),
   z.object({ action: z.literal('ui') }),
   z.object({ action: z.literal('summary') }),
+  z.object({ action: z.literal('verify-receipts') }),
+  z.object({ action: z.literal('export-receipts'), id: z.string().max(100).optional() }),
   z.object({ action: z.literal('receipts'), id: z.string().max(100).optional() }),
 ]);
 
@@ -47,6 +49,8 @@ async function runOwner(wallet: Wallet, browser: Browser, req: IncomingMessage, 
     case 'pair': value = await wallet.pair(cmd.name, cmd.destination, cmd.model, cmd.proxy); break;
     case 'revoke': value = await wallet.revoke(cmd.target); break;
     case 'ui': value = await browser.openFromCli(); break;
+    case 'verify-receipts': value = await wallet.verifyReceipts(); break;
+    case 'export-receipts': value = await wallet.exportReceipts(cmd.id); break;
     case 'summary': value = await wallet.summary(); break;
     case 'receipts': value = await wallet.receipts(cmd.id); break;
   }

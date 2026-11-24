@@ -1,6 +1,7 @@
 import { createHmac, randomUUID } from 'node:crypto';
 import { link, mkdir, open, readFile, readdir, realpath, rename, rm, stat } from 'node:fs/promises';
 import { basename, dirname, join, relative, isAbsolute, resolve } from 'node:path';
+import { z } from 'zod';
 import { generateIdentity, identityToRecipient, journalKey, parseEnvelope, seal, unseal, unwrapIdentity, wrapIdentity } from './crypto.js';
 import { canonical, equal, secret, sha256, UserError } from './domain.js';
 import type { Rule } from './policy.js';
@@ -123,7 +124,11 @@ interface Change {
   proposals?: Proposal[];
   receipts?: Receipt[];
 }
-interface Transaction { sequence: number; previous: string | null; change: Change }
+interface Transaction { sequence: number; previous: string | null; change: Change; receiptCheckpoint?: true }
+const receiptHeadSchema = z.object({
+  count: z.number().int().nonnegative(), hash: z.string().regex(/^[a-f0-9]{64}$/).nullable(),
+}).strict();
+type ReceiptHead = z.infer<typeof receiptHeadSchema>;
 type BeforeCommit = (change: Readonly<Change>) => void;
 
 export class Store {
@@ -155,7 +160,8 @@ export class Store {
     const identity = await unwrapIdentity(envelope, passphrase);
     const store = new Store(home, identity, envelope.recipient, beforeCommit);
     try {
-      await store.replay();
+      const checkpoint = await store.replay();
+      if (checkpoint?.count !== store.receipts.size) await store.writeReceiptHead();
       return store;
     } catch {
       store.close();
@@ -172,7 +178,37 @@ export class Store {
     return createHmac('sha256', this.#journalKey).update(canonical(transaction)).digest('hex');
   }
 
+  private get receiptHeadPath() {
+    return join(this.home, 'receipt-head.age');
+  }
+
+  private headMac(head: ReceiptHead) {
+    return createHmac('sha256', this.#journalKey).update('bleib receipt checkpoint\0').update(canonical(head)).digest('hex');
+  }
+
+  private async readReceiptHead() {
+    const bytes = await readFile(this.receiptHeadPath).catch(error => {
+      if (missing(error)) return undefined;
+      throw error;
+    });
+    if (!bytes) return undefined;
+    const data = JSON.parse(await unseal(this.identity, bytes)) as { head: unknown; mac: string };
+    const head = receiptHeadSchema.parse(data.head);
+    if (!equal(this.headMac(head), data.mac) || (head.count === 0 && head.hash !== null)) {
+      throw new Error('Receipt checkpoint authentication failed');
+    }
+    return head;
+  }
+
+  private async writeReceiptHead() {
+    const head = { count: this.receipts.size, hash: this.lastReceipt };
+    const bytes = await seal(this.recipient, JSON.stringify({ head, mac: this.headMac(head) }));
+    await publish(this.receiptHeadPath, bytes, true);
+  }
+
   private async replay() {
+    const checkpoint = await this.readReceiptHead();
+    let checkpointMatched = !checkpoint || checkpoint.count === 0;
     const dir = join(this.home, 'journal');
     const files = (await readdir(dir)).filter(name => !name.startsWith('.')).sort();
     for (const file of files) {
@@ -181,7 +217,25 @@ export class Store {
       const { transaction, mac } = JSON.parse(raw) as { transaction: Transaction; mac: string };
       if (transaction.sequence !== this.#sequence + 1 || transaction.previous !== this.#head ||
           !equal(this.mac(transaction), mac)) throw new Error('Journal authentication failed');
+      if (!checkpoint && transaction.receiptCheckpoint) throw new Error('Receipt checkpoint is missing');
       this.apply(transaction, mac);
+      if (checkpoint?.count === this.receipts.size && checkpoint.hash === this.lastReceipt) checkpointMatched = true;
+    }
+    if (!checkpointMatched) throw new Error('Receipt history differs from its checkpoint');
+    return checkpoint;
+  }
+
+  async verifyReceipts() {
+    const copy = new Store(this.home, this.identity, this.recipient);
+    try {
+      const checkpoint = await copy.replay();
+      if (!checkpoint || checkpoint.count !== this.receipts.size || checkpoint.hash !== this.lastReceipt ||
+          copy.receipts.size !== this.receipts.size || copy.lastReceipt !== this.lastReceipt) {
+        throw new Error('Receipt history changed on disk');
+      }
+      return { count: copy.receipts.size, head: copy.lastReceipt };
+    } finally {
+      copy.close();
     }
   }
 
@@ -203,7 +257,7 @@ export class Store {
     for (const proposal of change.proposals ?? []) this.proposals.set(proposal.id, proposal);
     for (const receipt of change.receipts ?? []) {
       const { hash, ...body } = receipt;
-      if (body.prev_hash !== this.lastReceipt || sha256(canonical(body)) !== hash ||
+      if (this.receipts.has(receipt.receipt_id) || body.prev_hash !== this.lastReceipt || sha256(canonical(body)) !== hash ||
           sha256(body.content) !== body.content_digest) throw new Error('Receipt chain verification failed');
       this.receipts.set(receipt.receipt_id, receipt);
       this.lastReceipt = hash;
@@ -213,12 +267,16 @@ export class Store {
   }
 
   async commit(change: Change) {
-    const transaction = { sequence: this.#sequence + 1, previous: this.#head, change };
+    const hasReceipts = Boolean(change.receipts?.length);
+    const transaction: Transaction = {
+      sequence: this.#sequence + 1, previous: this.#head, change, ...(hasReceipts ? { receiptCheckpoint: true } : {}),
+    };
     const mac = this.mac(transaction);
     const ciphertext = await seal(this.recipient, JSON.stringify({ transaction, mac }) + '\n');
     await publish(join(this.home, 'journal', this.segment(transaction.sequence)), ciphertext, false,
       () => this.beforeCommit?.(change));
     this.apply(transaction, mac);
+    if (hasReceipts) await this.writeReceiptHead();
   }
 
   async putEntry(entry: Omit<Entry, 'file' | 'digest'>, markdown: string): Promise<Entry> {

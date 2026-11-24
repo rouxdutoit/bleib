@@ -7,9 +7,10 @@ import { createInterface } from 'node:readline/promises';
 import { Writable } from 'node:stream';
 import { parseArgs } from 'node:util';
 import { callOwner, redeemCode, startDaemon, walletOrigin } from './daemon.js';
-import { UserError, type ProxyProtocol, type Receipt } from './domain.js';
+import { credentialPattern, UserError, type ProxyProtocol, type Receipt } from './domain.js';
 import { proxyRoutes } from './proxy.js';
 import { serveStdio } from './mcp.js';
+import { clientName, setupSnippet } from './setup.js';
 import { prepareKit } from './store.js';
 
 const help = `bleib — a local wallet for what you share with your AI
@@ -25,10 +26,13 @@ Usage: bleib [--home <directory>] <command>
   pair <agent> --destination <place> [--model <name>] [--via-proxy openai|anthropic]
                                         Create a one-time pairing code
   connect                               Redeem a pairing code for an agent credential
+  setup <client> [--paired]             Print a client config. Enter a credential with --paired
   ui                                    Open the local wallet page
   revoke <agent-or-permission-id>        Revoke access
   summary                               See what your AI saw this week
   receipts [receipt-id]                 List receipts or open one
+  verify-receipts                       Verify the receipt chain on disk
+  export-receipts [receipt-id]          Export disclosure records as JSON
   mcp                                   Start the paired stdio connection
 
 Places: local, provider:<name>, third-party:<name>
@@ -77,7 +81,7 @@ async function main(argv: string[]) {
   const { values, positionals } = parseArgs({
     args: argv, allowPositionals: true, options: {
       home: { type: 'string' }, 'recovery-kit': { type: 'string' }, 'idle-minutes': { type: 'string' },
-      destination: { type: 'string' }, 'via-proxy': { type: 'string' }, model: { type: 'string' }, help: { type: 'boolean', short: 'h' },
+      destination: { type: 'string' }, 'via-proxy': { type: 'string' }, paired: { type: 'boolean' }, model: { type: 'string' }, help: { type: 'boolean', short: 'h' },
     },
   });
   const [command, first, second] = positionals;
@@ -145,6 +149,17 @@ async function main(argv: string[]) {
       console.log(JSON.stringify(settings(home, result.origin, result.credential, result.proxy), null, 2));
       break;
     }
+    case 'setup': {
+      const client = clientName(first);
+      const credential = values.paired ? await prompt(ask => ask('Agent credential: ')) : '<credential from bleib connect>';
+      if (values.paired && !credentialPattern.test(credential)) throw new UserError('Enter the credential from bleib connect.');
+      const { location, snippet } = setupSnippet(
+        client, home, walletOrigin(home), credential, process.execPath, await realpath(process.argv[1]!),
+      );
+      process.stderr.write(`Merge the bleib entry into ${location}. Keep your other entries and store the credential privately.\n`);
+      console.log(snippet);
+      break;
+    }
     case 'ui': {
       const origin = walletOrigin(home);
       const path = await callOwner(home, { action: 'ui' }) as string;
@@ -165,6 +180,15 @@ async function main(argv: string[]) {
       console.log(`${result.summary} ${result.health}`);
       break;
     }
+    case 'verify-receipts': {
+      const report = await callOwner(home, { action: 'verify-receipts' }) as { count: number; head: string | null };
+      console.log(`Verified ${report.count} ${report.count === 1 ? 'receipt' : 'receipts'}.`);
+      if (report.head) console.log(`Latest receipt fingerprint ${report.head}`);
+      break;
+    }
+    case 'export-receipts':
+      console.log(JSON.stringify(await callOwner(home, { action: 'export-receipts', id: first }), null, 2));
+      break;
     case 'receipts': {
       const receipts = await callOwner(home, { action: 'receipts', id: first }) as Receipt[];
       if (first) console.log(JSON.stringify(receipts[0], null, 2));

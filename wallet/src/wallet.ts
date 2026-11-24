@@ -7,6 +7,7 @@ import type { Agent, Approval, Ask, Destination, Grant, Kind, ObservedDestinatio
 import { formatMemory, maxMemoryBytes, project, readWorkspace, splitMarkdown, type ImportDialect } from './memory.js';
 import { recover, Store } from './store.js';
 import { blocked, constraints, parseRule } from './policy.js';
+import { exportReceipts } from './receipt-export.js';
 import { summarize } from './summary.js';
 
 const tenMinutes = 10 * 60 * 1000;
@@ -538,6 +539,28 @@ export class Wallet {
 
   proposals(authorize?: OwnerGuard) {
     return this.owner(store => Array.from(store.proposals.values()).reverse(), authorize);
+  }
+
+  verifyReceipts(authorize?: OwnerGuard) {
+    return this.owner(store => this.verified(store), authorize);
+  }
+
+  exportReceipts(id?: string, authorize?: OwnerGuard) {
+    return this.owner(async store => {
+      const proof = await this.verified(store);
+      const receipt = id ? store.receipts.get(id) : undefined;
+      if (id && !receipt) throw new UserError('That receipt was not found.');
+      return exportReceipts(receipt ? [receipt] : store.receipts.values(), proof);
+    }, authorize);
+  }
+
+  private async verified(store: Store) {
+    try {
+      return await store.verifyReceipts();
+    } catch {
+      this.close();
+      throw new UserError('Receipt verification failed. The wallet was locked.');
+    }
   }
 
   receipts(id?: string, authorize?: OwnerGuard) {
