@@ -1,0 +1,133 @@
+---
+import Mark from './Mark.astro';
+import { t, type Lang } from '../i18n/strings';
+interface Props { lang: Lang; scene: number }
+const { lang, scene } = Astro.props;
+const c = t(lang).cards;
+const lock = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M5 7V5a3 3 0 1 1 6 0v2h.5A1.5 1.5 0 0 1 13 8.5v5a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 3 13.5v-5A1.5 1.5 0 0 1 4.5 7H5Zm1.5 0h3V5a1.5 1.5 0 1 0-3 0v2Z"/></svg>';
+---
+<div class={`tray sv sv-${scene}`}>
+  {scene === 0 && (
+    <div class="card c-pad">
+      <div class="c-head"><span class="mm"><Mark size={12} /></span>{c.wallet.title}</div>
+      <ul class="rows">
+        {c.wallet.rows.map((r) => (
+          <li class:list={['row', { locked: r.locked }]}>
+            <span class="k">{r.k}</span>
+            <span class="v">{r.locked && <Fragment set:html={lock} />}{r.v}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="c-foot"><Fragment set:html={lock} />{c.wallet.footer}</p>
+    </div>
+  )}
+  {scene === 1 && (
+    <div class="card c-pad">
+      <div class="who"><img src="/providers/claude.svg" alt="" width="28" height="28" /><span>Claude</span></div>
+      <p class="c-title">{c.ask.title}</p>
+      <p class="c-meta">{c.ask.meta}</p>
+      <div class="choices">
+        <span class="choice">{c.ask.once}</span>
+        <span class="choice pick">{c.ask.always}</span>
+        <span class="choice">{c.ask.no}</span>
+      </div>
+      <p class="saved"><span class="dot" aria-hidden="true"></span>{c.ask.saved}</p>
+    </div>
+  )}
+  {scene === 2 && (
+    <div class="stack">
+      <div class="card c-pad">
+        <p class="c-meta">{c.receipt.when}</p>
+        <div class="who"><img src="/providers/claude.svg" alt="" width="28" height="28" /><span>{c.receipt.who}</span></div>
+        <p class="c-meta">{c.receipt.why}</p>
+        <p class="label">{c.receipt.sharedLabel}</p>
+        <ul class="shared">{c.receipt.shared.map((x) => <li><mark>{x}</mark></li>)}</ul>
+        <p class="c-meta not"><Fragment set:html={lock} />{c.receipt.notShared}</p>
+      </div>
+      <div class="card c-pad weekly"><span class="mm"><Mark size={12} /></span><p>{c.receipt.weekly}</p></div>
+    </div>
+  )}
+  {scene === 3 && (
+    <div class="card c-pad">
+      <div class="c-head"><span class="mm"><Mark size={12} /></span>{c.any.title}</div>
+      <div class="kinds">{c.any.kinds.map((k) => <span class="kind">{k}</span>)}</div>
+      <p class="label">{c.any.using}</p>
+      <ul class="providers">
+        {c.any.providers.map((p, i) => (
+          <li class:list={['prov', { on: i === 0 }]} data-prov={i}>
+            <img src={p.icon} alt="" width="26" height="26" /><span>{p.name}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="caption">{c.any.caption}</p>
+    </div>
+  )}
+  {scene === 4 && (
+    <div class="card c-pad">
+      <div class="who"><img src="/providers/claude.svg" alt="" width="28" height="28" /><span>{c.propose.title}</span></div>
+      <p class="fact">{c.propose.fact}</p>
+      <p class="c-meta">{c.propose.why}</p>
+      <div class="choices">
+        <span class="choice pick">{c.propose.save}</span>
+        <span class="choice">{c.propose.edit}</span>
+        <span class="choice">{c.propose.later}</span>
+      </div>
+      <p class="saved"><span class="dot" aria-hidden="true"></span>{c.propose.saved}</p>
+    </div>
+  )}
+</div>
+
+<style>
+  .sv { width: 100%; }
+  .c-pad { padding: 20px 22px; }
+  .stack { display: grid; gap: 14px; }
+  .c-head { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: var(--on-card-muted); letter-spacing: 0.01em; margin-bottom: 8px; }
+  .mm { width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; flex: none; }
+  .rows { list-style: none; margin: 0; padding: 0; }
+  .row { display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; border-top: 1px solid rgb(127 127 127 / 0.16); font-size: 15px; }
+  .row:first-child { border-top: 0; }
+  .k { color: var(--on-card-muted); }
+  .v { font-weight: 500; text-align: right; display: inline-flex; align-items: center; gap: 6px; }
+  .v :global(svg), .c-foot :global(svg), .not :global(svg) { width: 13px; height: 13px; flex: none; }
+  .locked .v { color: var(--on-card-muted); }
+  .c-foot { margin: 10px 0 0; padding: 7px 12px; border-radius: 999px; display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; background: var(--hl); color: var(--hl-ink); }
+  .who { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; }
+  .who img { border-radius: 8px; background: var(--card-sub); padding: 4px; }
+  .c-title { margin: 14px 0 4px; font-size: 18px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.3; }
+  .c-meta { margin: 0; font-size: 14px; color: var(--on-card-muted); }
+  .choices { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .choice { padding: 8px 14px; border-radius: 999px; font-size: 14px; box-shadow: inset 0 0 0 1px rgb(127 127 127 / 0.3); transition: background-color 0.35s var(--ease), color 0.35s var(--ease), box-shadow 0.35s var(--ease); }
+  .saved { margin: 16px 0 0; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; opacity: 0; transform: translateY(6px); transition: opacity 0.4s var(--ease), transform 0.4s var(--ease); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #2f9e57; flex: none; }
+  .label { margin: 16px 0 8px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--on-card-muted); }
+  .shared { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 6px; font-size: 16px; }
+  mark { background: var(--hl); color: var(--hl-ink); padding: 2px 6px; border-radius: 6px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .not { display: flex; align-items: center; gap: 7px; }
+  .weekly { display: flex; gap: 12px; align-items: flex-start; }
+  .weekly p { margin: 0; font-size: 14px; line-height: 1.45; }
+  .kinds { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 4px; }
+  .kind { font-size: 13px; padding: 5px 11px; border-radius: 999px; background: var(--hl); color: var(--hl-ink); font-weight: 500; }
+  .providers { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .prov { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; font-size: 15px; opacity: 0.45; transition: opacity 0.4s var(--ease), background-color 0.4s var(--ease); }
+  .prov img { border-radius: 7px; background: var(--card-sub); padding: 3px; }
+  .prov.on { opacity: 1; background: var(--card-sub); font-weight: 500; }
+  .caption { margin: 14px 0 0; font-size: 14px; font-weight: 500; }
+  .fact { margin: 14px 0 6px; font-size: 22px; letter-spacing: -0.02em; font-weight: 500; }
+
+  /* Played / final state: the highlighted choice is selected and the confirmation shows. */
+  :global(.is-final) .pick,
+  :global(.is-playing) .pick { background: var(--btn); color: var(--btn-ink); box-shadow: none; }
+  :global(.is-final) .saved,
+  :global(.is-playing) .saved { opacity: 1; transform: none; }
+  :global(.is-playing) .pick { transition-delay: 0.9s; }
+  :global(.is-playing) .saved { transition-delay: 1.6s; }
+</style>
+<style is:global>
+  :root[data-theme='dark'] .sv .who img,
+  :root[data-theme='dark'] .sv .prov img { background: #f5f1e6; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .sv .who img,
+    :root:not([data-theme='light']) .sv .prov img { background: #f5f1e6; }
+  }
+  :root[data-theme='dark'] .sv .mm { box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.14); }
+</style>

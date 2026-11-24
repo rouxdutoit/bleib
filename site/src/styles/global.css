@@ -1,0 +1,265 @@
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-latin-variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Tokens ---------- */
+:root {
+  color-scheme: light;
+  --yellow: #f6e79a;
+  --page: #f6e79a;
+  --tray: #efdc7e;
+  --card: #ffffff;
+  --card-sub: #f7f4ea;
+  --ink: #0a0a0a;
+  --ink-rgb: 10 10 10;
+  --muted: rgb(var(--ink-rgb) / 0.68);
+  --faint: rgb(var(--ink-rgb) / 0.5);
+  --line: rgb(var(--ink-rgb) / 0.1);
+  --on-card: #0a0a0a;
+  --on-card-muted: rgb(10 10 10 / 0.6);
+  --hl: #f6e79a;
+  --hl-ink: #0a0a0a;
+  --btn: #0a0a0a;
+  --btn-ink: #ffffff;
+  --btn2: rgb(255 255 255 / 0.72);
+  --btn2-ink: #0a0a0a;
+  --tick: rgb(var(--ink-rgb) / 0.35);
+  --tick-on: #0a0a0a;
+  --shadow: 0 30px 80px -30px rgb(10 10 10 / 0.32), 0 2px 6px rgb(10 10 10 / 0.06);
+  --card-border: 1px solid transparent;
+  --focus: #0a0a0a;
+  --radius-card: 22px;
+  --radius-tray: 28px;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --gutter: clamp(16px, 4vw, 48px);
+  --max: 1240px;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --page: #0a0a0a;
+  --tray: #121212;
+  --card: #181818;
+  --card-sub: #202020;
+  --ink: #f5f1e6;
+  --ink-rgb: 245 241 230;
+  --on-card: #f5f1e6;
+  --on-card-muted: rgb(245 241 230 / 0.66);
+  --hl: rgb(246 231 154 / 0.18);
+  --hl-ink: #f6e79a;
+  --btn: #f6e79a;
+  --btn-ink: #0a0a0a;
+  --btn2: rgb(255 255 255 / 0.08);
+  --btn2-ink: #f5f1e6;
+  --tick: rgb(245 241 230 / 0.35);
+  --tick-on: #f6e79a;
+  --shadow: none;
+  --card-border: 1px solid rgb(255 255 255 / 0.07);
+  --focus: #f6e79a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --page: #0a0a0a;
+    --tray: #121212;
+    --card: #181818;
+    --card-sub: #202020;
+    --ink: #f5f1e6;
+    --ink-rgb: 245 241 230;
+    --on-card: #f5f1e6;
+    --on-card-muted: rgb(245 241 230 / 0.66);
+    --hl: rgb(246 231 154 / 0.18);
+    --hl-ink: #f6e79a;
+    --btn: #f6e79a;
+    --btn-ink: #0a0a0a;
+    --btn2: rgb(255 255 255 / 0.08);
+    --btn2-ink: #f5f1e6;
+    --tick: rgb(245 241 230 / 0.35);
+    --tick-on: #f6e79a;
+    --shadow: none;
+    --card-border: 1px solid rgb(255 255 255 / 0.07);
+    --focus: #f6e79a;
+  }
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 17px;
+  line-height: 1.5;
+  font-feature-settings: 'ss01', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 100;
+  padding: 10px 14px;
+  background: var(--btn);
+  color: var(--btn-ink);
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 500;
+}
+.skip:focus {
+  top: 12px;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 400;
+  margin: 0;
+}
+
+.h1 {
+  font-size: clamp(36px, 4.8vw, 66px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+.h1 {
+  font-weight: 600;
+}
+
+.h2 {
+  font-size: clamp(30px, 3vw, 40px);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+.lead {
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 36ch;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 0;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s var(--ease), background-color 0.2s var(--ease);
+}
+.btn:active {
+  transform: scale(0.98);
+}
+.btn-primary {
+  background: var(--btn);
+  color: var(--btn-ink);
+}
+.btn-secondary {
+  background: var(--btn2);
+  color: var(--btn2-ink);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ---------- Card primitives (shared by story + finale) ---------- */
+.tray {
+  background: var(--tray);
+  border-radius: var(--radius-tray);
+  padding: clamp(16px, 2.2vw, 28px);
+}
+.card {
+  background: var(--card);
+  color: var(--on-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow);
+  border: var(--card-border);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

@@ -1,0 +1,18 @@
+---
+import { MARK_PATH, MARK_VIEWBOX } from './markPath';
+interface Props { size?: number; class?: string; title?: string }
+const { size = 24, class: cls = '', title } = Astro.props;
+---
+<svg
+  class={cls}
+  width={size}
+  height={Math.round(size * 1.125)}
+  viewBox={MARK_VIEWBOX}
+  fill="none"
+  role={title ? 'img' : undefined}
+  aria-hidden={title ? undefined : 'true'}
+  focusable="false"
+>
+  {title && <title>{title}</title>}
+  <path fill="currentColor" fill-rule="evenodd" d={MARK_PATH} />
+</svg>

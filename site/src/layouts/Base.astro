@@ -1,0 +1,56 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { routes, t, type Lang, type RouteKey } from '../i18n/strings';
+interface Props { lang: Lang; page: RouteKey; title?: string; description?: string }
+const { lang, page, title, description } = Astro.props;
+const s = t(lang);
+const site = Astro.site ?? new URL('https://bleib.pages.dev');
+const pageTitle = title ? `${title} · bleib` : s.meta.title;
+const desc = description ?? s.meta.description;
+const canonical = new URL(routes[page][lang], site).href;
+const enHref = new URL(routes[page].en, site).href;
+const deHref = new URL(routes[page].de, site).href;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={desc} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={enHref} />
+    <link rel="alternate" hreflang="de" href={deHref} />
+    <link rel="alternate" hreflang="x-default" href={enHref} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="theme-color" content="#f6e79a" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_GB'} />
+    <script is:inline>
+      (function () {
+        try {
+          var v = localStorage.getItem('bleib-theme');
+          if (v === 'dark' || v === 'light') document.documentElement.setAttribute('data-theme', v);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">{s.skip}</a>
+    <Header lang={lang} page={page} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer lang={lang} page={page} />
+    <script>
+      import '../scripts/theme';
+    </script>
+  </body>
+</html>

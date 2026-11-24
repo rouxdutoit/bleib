@@ -1,0 +1,5 @@
+---
+interface Props { top?: boolean }
+const { top = true } = Astro.props;
+---
+<div class:list={['rails', { 'no-top': !top }]} aria-hidden="true"></div>

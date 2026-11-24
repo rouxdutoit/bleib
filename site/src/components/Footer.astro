@@ -1,0 +1,52 @@
+---
+import Logo from './Logo.astro';
+import Rails from './Rails.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { GITHUB_URL, routes, t, otherLang, type Lang, type RouteKey } from '../i18n/strings';
+interface Props { lang: Lang; page: RouteKey }
+const { lang, page } = Astro.props;
+const s = t(lang);
+const other = otherLang(lang);
+const links: { key: RouteKey; label: string }[] = [
+  { key: 'how', label: s.footer.links.how },
+  { key: 'developers', label: s.footer.links.developers },
+  { key: 'pricing', label: s.footer.links.pricing },
+  { key: 'privacy', label: s.footer.links.privacy },
+  { key: 'impressum', label: s.footer.links.impressum },
+];
+---
+<footer class="site-footer has-rails">
+  <Rails />
+  <div class="wrap row">
+    <div class="brand">
+      <Logo lang={lang} />
+      <p class="tag">{s.footer.tagline}</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul>
+        {links.map((l) => (
+          <li><a href={routes[l.key][lang]} aria-current={l.key === page ? 'page' : undefined}>{l.label}</a></li>
+        ))}
+        <li><a href={GITHUB_URL || routes.developers[lang]}>{s.footer.links.github}</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap fine">
+    <span>{s.footer.copyright}</span>
+    <div class="prefs">
+      <a class="lang" href={routes[page][other]} hreflang={other} lang={other} aria-label={s.nav.langSwitchLabel}>{s.nav.langSwitch}</a>
+      <ThemeToggle lang={lang} />
+    </div>
+  </div>
+</footer>
+<style>
+  .site-footer { padding: 56px 0 40px; }
+  .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 28px; }
+  .tag { margin: 12px 0 0; color: var(--muted); font-size: 15px; }
+  ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; }
+  a { font-size: 15px; text-decoration: none; color: var(--muted); display: inline-block; padding: 8px 0; }
+  a:hover, a[aria-current='page'] { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+  .fine { margin-top: 28px; font-size: 13px; color: var(--muted); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .prefs { display: flex; align-items: center; gap: 8px; }
+  .prefs .lang { padding: 10px 14px; min-height: 44px; display: inline-flex; align-items: center; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); color: var(--ink); }
+</style>

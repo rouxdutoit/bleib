@@ -1,0 +1,103 @@
+---
+import Mark from './Mark.astro';
+import Rails from './Rails.astro';
+import { GITHUB_URL, routes, t, type Lang } from '../i18n/strings';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang).hero;
+const pv = t(lang).preview;
+const githubHref = GITHUB_URL || routes.developers[lang];
+---
+<section class="hero has-rails" aria-labelledby="hero-title">
+  <Rails top={false} />
+  <div class="wrap hero-inner">
+    <p class="eyebrow">{s.eyebrow}</p>
+    <h1 id="hero-title" class="hero-h1">{s.h1a}<br />{s.h1b}</h1>
+    <p class="sub">{s.sub}</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#early-access">{s.primary}</a>
+      <a class="btn btn-secondary" href={githubHref}>{s.secondary}</a>
+    </div>
+    <p class="note">{s.note}</p>
+
+    <figure class="preview">
+      <div class="window card">
+        <div class="bar">
+          <span class="bar-title"><span class="mm" aria-hidden="true"><Mark size={10} /></span>{pv.file}</span>
+          <span class="bar-ctl" aria-hidden="true"><i></i><i></i><i></i></span>
+        </div>
+        <div class="body">
+          <p class="pv-eyebrow">{pv.eyebrow}</p>
+          <h2 class="pv-title">{pv.title}</h2>
+          <ul class="tiles">
+            {pv.tiles.map((tile) => (
+              <li class="tile">
+                <span class="tile-n">{tile.n}</span>
+                <span class="tile-label">{tile.label}</span>
+                <span class="tile-note">{tile.note}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="pv-eyebrow rows-label">{pv.rowsLabel}</p>
+          <ul class="rows">
+            {pv.rows.map((r) => (
+              <li class="row">
+                <img src={r.icon} alt="" width="28" height="28" />
+                <span class="r-who"><strong>{r.who}</strong><span>{r.where}</span></span>
+                <span class="r-what"><mark>{r.what}</mark><span>{r.why}</span></span>
+                <span class="r-when">{r.when}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .hero { padding: clamp(120px, 16vh, 168px) 0 clamp(64px, 9vw, 120px); }
+  .hero-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .eyebrow { margin: 0 0 18px; font-size: 15px; font-weight: 500; color: var(--muted); }
+  .hero-h1 { font-size: clamp(38px, 5.4vw, 64px); font-weight: 600; line-height: 1.07; letter-spacing: -0.03em; max-width: 16ch; }
+  .sub { margin: 22px 0 0; font-size: clamp(17px, 1.6vw, 19px); line-height: 1.5; color: var(--muted); max-width: 40em; text-wrap: balance; }
+  .cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 30px; }
+  .note { margin: 18px 0 0; font-size: 14px; color: var(--muted); }
+
+  .preview { margin: clamp(48px, 7vw, 80px) 0 0; width: 100%; max-width: 980px; text-align: left; }
+  .window { overflow: hidden; }
+  .bar { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid rgb(127 127 127 / 0.16); font-size: 13px; color: var(--on-card-muted); }
+  .bar-title { display: inline-flex; align-items: center; gap: 8px; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; }
+  .mm { width: 18px; height: 18px; border-radius: 5px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
+  .bar-ctl { display: inline-flex; gap: 6px; }
+  .bar-ctl i { width: 10px; height: 10px; border-radius: 50%; background: rgb(127 127 127 / 0.25); }
+  .body { padding: clamp(20px, 3vw, 32px); }
+  .pv-eyebrow { margin: 0; font-size: 13px; font-weight: 500; color: var(--on-card-muted); }
+  .pv-title { margin: 4px 0 20px; font-size: clamp(22px, 2.4vw, 28px); font-weight: 600; letter-spacing: -0.02em; }
+  .tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .tile { display: grid; gap: 2px; padding: 16px 18px; border-radius: 16px; background: var(--card-sub); }
+  .tile-n { font-size: 30px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; }
+  .tile-label { font-size: 15px; font-weight: 500; }
+  .tile-note { font-size: 13px; color: var(--on-card-muted); }
+  .rows-label { margin-top: 24px; }
+  .rows { list-style: none; margin: 8px 0 0; padding: 0; }
+  .row { display: grid; grid-template-columns: 28px minmax(0, 1.1fr) minmax(0, 2fr) auto; align-items: center; gap: 14px; padding: 12px 0; border-top: 1px solid rgb(127 127 127 / 0.16); font-size: 14px; }
+  .row img { border-radius: 8px; background: var(--card-sub); padding: 4px; }
+  .r-who, .r-what { display: grid; gap: 2px; min-width: 0; }
+  .r-who span, .r-what > span { font-size: 13px; color: var(--on-card-muted); }
+  .r-what mark { justify-self: start; background: var(--hl); color: var(--hl-ink); padding: 1px 6px; border-radius: 6px; }
+  .r-when { font-size: 13px; color: var(--on-card-muted); white-space: nowrap; }
+
+  @media (max-width: 720px) {
+    .tiles { grid-template-columns: 1fr; }
+    .row { grid-template-columns: 28px minmax(0, 1fr); }
+    .r-what { grid-column: 2; }
+    .r-when { grid-column: 2; }
+  }
+</style>
+<style is:global>
+  :root[data-theme='dark'] .hero .row img { background: #f5f1e6; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .hero .row img { background: #f5f1e6; }
+  }
+</style>

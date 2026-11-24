@@ -1,0 +1,92 @@
+---
+import Mark from './Mark.astro';
+import Rails from './Rails.astro';
+import EarlyAccessForm from './EarlyAccessForm.astro';
+import { t, type Lang } from '../i18n/strings';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang).finale;
+// Slight rotations so the pile looks hand-placed; layout itself is a wrapping row, so nothing overlaps.
+const tilt = [-4, 3, -2, 2, -3, 4, -2, 4, -4, 3, -3, 2];
+---
+<section class="finale has-rails" id="early-access" aria-labelledby="finale-title">
+  <Rails />
+  <div class="wrap grid">
+    <div class="copy">
+      <h2 id="finale-title" class="h1">{s.h}</h2>
+      <p class="lead">{s.p}</p>
+      <EarlyAccessForm lang={lang} />
+    </div>
+    <div class="play" data-play data-count-tpl={s.count} data-total={s.items.length}>
+      <p class="prompt" data-prompt-text={s.playPrompt} data-done-text={s.done}>{s.playPrompt}</p>
+      <div class="area" data-area>
+        {s.items.map((item, i) => (
+          <button
+            type="button"
+            class="chip"
+            data-chip
+            style={`--r:${tilt[i]}deg`}
+            aria-label={s.putIn.replace('{item}', item)}
+          >
+            <span class:list={['chip-dot', { lockdot: item === s.lockedItem }]} aria-hidden="true"></span>
+            <span>{item}</span>
+          </button>
+        ))}
+        <div class="wallet" data-wallet>
+          <span class="wallet-tile" aria-hidden="true"><Mark size={26} /></span>
+          <span class="wallet-label">{s.walletLabel}</span>
+          <span class="wallet-count" data-count aria-live="polite">{s.count.replace('{n}', '0').replace('{total}', String(s.items.length))}</span>
+        </div>
+      </div>
+      <div class="play-actions">
+        <button class="btn btn-secondary" type="button" data-all-in>{s.allIn}</button>
+        <button class="btn btn-secondary" type="button" data-reset hidden>{s.reset}</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .finale { padding: clamp(72px, 10vw, 140px) 0; }
+  .grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .copy .lead { margin: 18px 0 28px; }
+  .prompt { margin: 0 0 12px; font-size: 14px; color: var(--muted); text-align: center; }
+  .area { position: relative; min-height: 440px; padding: 26px 22px 128px; border-radius: var(--radius-tray); background: var(--tray); display: flex; flex-wrap: wrap; justify-content: center; align-content: flex-start; gap: 14px 12px; }
+  .chip {
+    position: relative; touch-action: none;
+    transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(var(--r));
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 14px; border: 0; border-radius: 12px; cursor: grab;
+    background: var(--card); color: var(--on-card); box-shadow: var(--shadow); border: var(--card-border);
+    font-size: 14px; font-weight: 500; white-space: nowrap; user-select: none; -webkit-user-select: none;
+    transition: transform 0.45s var(--ease), opacity 0.35s var(--ease);
+  }
+  .chip.dragging { cursor: grabbing; transition: none; z-index: 5; }
+  .chip.in { opacity: 0; pointer-events: none; transform: translate(var(--tx, 0px), var(--ty, 0px)) scale(0.4); }
+  .chip-dot { width: 7px; height: 7px; border-radius: 50%; background: #c9a400; flex: none; }
+  .chip-dot.lockdot { background: #0a0a0a; box-shadow: 0 0 0 2px #f6e79a; }
+  .wallet {
+    position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%);
+    width: min(280px, 80%); padding: 14px 16px; border-radius: 20px;
+    display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 12px; align-items: center;
+    background: #0a0a0a; color: #f5f1e6; box-shadow: 0 20px 40px -18px rgb(0 0 0 / 0.5);
+    transition: transform 0.25s var(--ease);
+  }
+  .wallet.hot { transform: translateX(-50%) scale(1.04); }
+  .wallet-tile { grid-row: 1 / 3; width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: #1c1c1c; color: #f6e79a; }
+  .wallet-label { font-size: 14px; font-weight: 600; }
+  .wallet-count { font-size: 13px; color: rgb(245 241 230 / 0.72); }
+  .play-actions { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .chip { font-size: 13px; padding: 8px 11px; }
+  }
+</style>
+
+<script>
+  import { initFinale } from '../scripts/finale';
+  initFinale();
+</script>
