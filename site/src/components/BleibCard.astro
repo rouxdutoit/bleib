@@ -33,9 +33,12 @@ const { title, facts, action, done, at = 2 } = Astro.props;
   .to-done { display: inline-flex; align-items: center; gap: 4px; }
   :global(.s3) .b.at-3, :global(.s4) .b.at-4 { background: #f6e79a; color: #0a0a0a; }
   .tick { display: grid; }
-  /* On phones the title keeps the full width; the action sits beside the facts. */
+  /* On phones the title keeps the full width. The action sits beside the facts when there is room
+     and otherwise moves to its own line at the end, so it never crowds them. */
   @media (max-width: 480px) {
-    .fill-head { grid-column: 1 / -1; }
-    .b { grid-row: 2; }
+    .fill { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 24px; }
+    .fill-head { flex-basis: 100%; }
+    .facts { margin: 0; }
+    .b { margin-inline-start: auto; }
   }
 </style>
