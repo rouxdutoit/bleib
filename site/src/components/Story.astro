@@ -50,7 +50,8 @@ const chev = icon('chevron_right');
 
   @media (max-width: 767px) {
     .scene { min-height: 0; padding: 48px 0 8px; }
-    .pair, .scene[data-side='card-right'] .pair { width: var(--colw); grid-template-columns: 1fr; gap: 24px; }
+    .pair, .scene[data-side='card-right'] .pair { width: var(--colw); grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    .visual, .text { min-width: 0; }
     .scene .text { order: -1; }
     .scene[data-side='card-right'] .visual { order: 0; }
   }
