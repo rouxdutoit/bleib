@@ -263,3 +263,67 @@ h3 {
   }
 }
 
+
+/* ---------- Margin guides (carried over from the October site) ----------
+   Continuous page rails with a top line and "+" crosshairs at each section boundary. */
+:root {
+  --rail: rgb(10 10 10 / 0.24);
+  --joint: rgb(10 10 10 / 0.7);
+  --rail-w: min(1440px, calc(100vw - 64px));
+  --rail-left: calc((100vw - var(--rail-w)) / 2);
+}
+:root[data-theme='dark'] {
+  --rail: #242424;
+  --joint: #62625d;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --rail: #242424;
+    --joint: #62625d;
+  }
+}
+@media (max-width: 767px) {
+  :root {
+    --rail-w: calc(100vw - 32px);
+  }
+}
+.has-rails {
+  position: relative;
+}
+.rails {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: var(--rail-w);
+  transform: translateX(-50%);
+  border-top: 1px solid var(--rail);
+  border-left: 1px solid var(--rail);
+  border-right: 1px solid var(--rail);
+}
+.rails::before,
+.rails::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  width: 9px;
+  height: 9px;
+  background:
+    linear-gradient(var(--joint), var(--joint)) center / 9px 1px no-repeat,
+    linear-gradient(var(--joint), var(--joint)) center / 1px 9px no-repeat;
+}
+.rails::before {
+  left: -5px;
+}
+.rails::after {
+  right: -5px;
+}
+.rails.no-top {
+  border-top: 0;
+}
+.rails.no-top::before,
+.rails.no-top::after {
+  display: none;
+}

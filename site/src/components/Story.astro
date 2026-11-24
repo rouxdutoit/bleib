@@ -89,11 +89,16 @@ const playIcon = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v
     transform: translateX(var(--x, 54vw));
     transition: transform 0.8s var(--ease);
   }
+  /* Content column: --max wide, centred; the card sits at its inner edges. */
+  .stage-card {
+    --col-left: max(0px, calc((100vw - var(--max)) / 2));
+    --col-w: min(var(--max), 100vw);
+  }
   .stage-card[data-side='right'] {
-    --x: max(52vw, calc(100vw - var(--gutter) - min(440px, 38vw) - 64px));
+    --x: calc(var(--col-left) + var(--col-w) - var(--gutter) - min(440px, 38vw));
   }
   .stage-card[data-side='left'] {
-    --x: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
+    --x: calc(var(--col-left) + var(--gutter));
   }
   .slot {
     position: absolute;
@@ -127,7 +132,7 @@ const playIcon = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v
     width: min(460px, 40vw);
   }
   .frame[data-side='right'] .frame-text {
-    margin-right: 64px;
+    margin-right: 0;
   }
   .frame-text .lead {
     margin: 18px 0 0;
@@ -143,7 +148,7 @@ const playIcon = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v
   }
   .ticks {
     position: fixed;
-    right: 18px;
+    right: max(18px, calc(var(--rail-left) + 14px));
     top: 50%;
     transform: translateY(-50%);
     z-index: 40;
