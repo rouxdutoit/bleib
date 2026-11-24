@@ -268,11 +268,10 @@ const cx = (n: number) => `cx at-${n}`;
   /* Sources: a stack that shrinks as each item moves up into the wallet. */
   .sources { border-radius: 22px; background: var(--fill); padding: 12px 12px 4px; }
   .src-h { padding: 0 4px 8px; }
-  .src-list { list-style: none; margin: 0; padding: 0; }
-  .src-list > li.cx { margin-top: 0; }
-  .src-item { padding-bottom: 8px; }
-  .mini { display: flex; align-items: baseline; gap: 8px; padding: 10px 12px; border-radius: 14px; }
-  .from { flex: none; min-width: 58px; }
+  /* Two by two: four scattered facts read at a glance, at half the height of a list. */
+  .src-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .src-item, .mini { height: 100%; }
+  .mini { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 14px; }
 
   /* Alert */
   .alert { padding: 22px 16px 16px; text-align: center; }
