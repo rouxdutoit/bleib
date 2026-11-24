@@ -136,8 +136,6 @@ const en = {
       title: 'Share your health notes with Claude?',
       message: 'For your running plan. Health is sensitive, so bleib asks first.',
       action: 'Allow Once',
-      rulesLabel: 'Shared automatically',
-      rule: { who: 'Claude', kind: 'Travel', scope: 'Automatic' },
       later: { title: 'Claude used Travel', sub: 'Hotels in Porto · No question needed' },
     },
     receipt: {
@@ -328,8 +326,6 @@ const de: Strings = {
       title: 'Gesundheitsnotizen mit Claude teilen?',
       message: 'Für deinen Laufplan. Gesundheit ist sensibel, darum fragt bleib vorher.',
       action: 'Einmal erlauben',
-      rulesLabel: 'Automatisch geteilt',
-      rule: { who: 'Claude', kind: 'Reisen', scope: 'Automatisch' },
       later: { title: 'Claude hat Reisen genutzt', sub: 'Hotels in Porto · Keine Nachfrage nötig' },
     },
     receipt: {

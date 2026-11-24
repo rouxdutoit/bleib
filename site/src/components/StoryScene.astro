@@ -73,9 +73,10 @@ const [symbol, effect] = SYMBOLS[i];
   .sym :global(svg) { width: 100%; height: 100%; display: block; }
   /* As the scene starts, its symbol plays first, in the pause before the card moves. */
   .scene:has([data-playing]) .sym :global(svg) { animation: var(--fx) 0.8s var(--fx-ease, var(--ease)) 0.15s both; }
-  /* Waiting to play: the bubble and the receipt are still to come; the lock stands open. */
-  .fx-pop :global(svg) { transform: scale(0); transform-origin: 15% 90%; }
-  .paper { transform-box: fill-box; transform-origin: 50% 0; transform: scaleY(0.15); }
+  /* While a scene waits, its symbol shows complete (the lock stands open, the receipt has no lines yet); the effect
+     starts from its own first frame when the scene plays. */
+  .fx-pop :global(svg) { transform-origin: 15% 90%; }
+  .paper { transform-box: fill-box; transform-origin: 50% 0; }
   .line { stroke-dasharray: 1; stroke-dashoffset: 1; }
   .scene:has([data-playing]) .paper { animation: fx-unroll 0.5s var(--ease) 0.15s both; }
   .scene:has([data-playing]) .line { animation: fx-write 0.35s var(--ease) var(--at) both; }
