@@ -85,6 +85,7 @@ Phases execute in numeric order: 1 → 2 → 3
 ### Phase 4: Browser extension: save and fill
 
 **Goal:** An ordinary person who chats with ChatGPT, Claude or Gemini in the browser uses bleib like a password manager: when they tell an AI something worth remembering, bleib offers "Save this to bleib?"; in any chat, a "Use from bleib" button inserts only the memory they approve for that AI, and every insert leaves a receipt. Everything is processed locally against their encrypted wallet.
+**Import:** on each provider's own memory page (ChatGPT saved memories, Claude memory, Gemini saved info) the extension offers "Import into bleib"; every entry goes through the existing review queue (Save / Edit / Not Now), marked as provided by that provider. Fallbacks: official data exports and pasted "what do you remember about me" answers (IMPT-02 already handles pasted text).
 **Scope notes:** Manifest V3 for Chrome and Firefox first, Safari after; host permissions only for chatgpt.com, claude.ai and gemini.google.com; talks to the local wallet (native messaging or the 127.0.0.1 door); no remote servers. Research first: existing memory extensions (Mem0 OpenMemory, Supermemory, MemoryPlugin) and how bleib differs, MV3 limits, store review rules, minimal permissions, resilience to chat-site UI changes.
 **Requirements**: TBD (EXT-*)
 **Depends on:** Phase 3
