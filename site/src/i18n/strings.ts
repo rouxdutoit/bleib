@@ -89,8 +89,8 @@ const en = {
       },
       {
         tick: 'Any AI',
-        h: ['Change AI.', 'Keep yourself.'],
-        p: 'Your preferences and rules stay in bleib. A new AI gets what you allow, without starting over.',
+        h: ['Switch AI.', 'No starting over.'],
+        p: 'Your preferences and rules stay in bleib. A new AI gets what you allow from the first message.',
         more: { to: 'works', hash: '' },
       },
       {
@@ -288,8 +288,8 @@ const de: Strings = {
       },
       {
         tick: 'Jede KI',
-        h: ['KI wechseln.', 'Du bleibst.'],
-        p: 'Deine Vorlieben und Regeln bleiben in bleib. Eine neue KI bekommt, was du erlaubst, ohne Neuanfang.',
+        h: ['KI wechseln.', 'Nicht von vorn anfangen.'],
+        p: 'Deine Vorlieben und Regeln bleiben in bleib. Eine neue KI bekommt ab der ersten Nachricht, was du erlaubst.',
         more: { to: 'works', hash: '' },
       },
       {
