@@ -133,21 +133,25 @@ const finalHeight = (sv: HTMLElement): number => {
 };
 
 /**
- * Reserves the space each scene needs once it has played, so the page around it never moves while the card grows.
- * The space is held by the scene's [data-frame] (the hero's and the closer's window grows inside it) or by the scene itself.
- * Scenes that share a frame (the hero's tabs) reserve the tallest one, so switching tabs doesn't move the page either.
+ * Reserves the space each scene needs once it has played, so the page around it never moves.
+ * A scene inside a [data-frame] lets the frame hold the space and grows within it (the closer's window);
+ * otherwise the scene holds its own finished height. Scenes that share a parent (the hero's tabs) all hold
+ * the tallest one's height, so switching tabs doesn't move the page either.
  */
 const reserve = () => {
-  const frames = new Map<HTMLElement, HTMLElement[]>();
+  const groups = new Map<HTMLElement, HTMLElement[]>();
   document.querySelectorAll<HTMLElement>('[data-steps]').forEach((sv) => {
-    const frame = sv.closest<HTMLElement>('[data-frame]') ?? sv;
-    frames.set(frame, [...(frames.get(frame) ?? []), sv]);
+    const key = sv.closest<HTMLElement>('[data-frame]') ?? sv.parentElement ?? sv;
+    groups.set(key, [...(groups.get(key) ?? []), sv]);
   });
-  frames.forEach((scenes, frame) => {
-    frame.style.minHeight = '';
+  groups.forEach((scenes, key) => {
+    const framed = key.hasAttribute('data-frame');
+    const holders = framed ? [key] : scenes;
+    holders.forEach((el) => (el.style.minHeight = ''));
     const shown = scenes.find((sv) => !sv.hidden) ?? scenes[0];
-    const around = frame === shown ? 0 : heightOf(frame) - heightOf(shown);
-    frame.style.minHeight = `${Math.ceil(around + Math.max(...scenes.map(finalHeight)))}px`;
+    const around = framed ? heightOf(key) - heightOf(shown) : 0;
+    const height = `${Math.ceil(around + Math.max(...scenes.map(finalHeight)))}px`;
+    holders.forEach((el) => (el.style.minHeight = height));
   });
 };
 
