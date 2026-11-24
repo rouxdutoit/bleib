@@ -97,7 +97,7 @@ const en = {
         more: { to: 'works', hash: '', label: 'Works with your AI' },
       },
       {
-        h: ['Asked only', 'when it matters.'],
+        h: ['It only asks', 'when it matters.'],
         p: 'Everyday things just work. Health and money always need your yes.',
         more: { to: 'permissions', hash: '', label: 'You decide what’s shared' },
       },

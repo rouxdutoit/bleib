@@ -7,8 +7,8 @@ import { t, routes, type Lang } from '../i18n/strings';
 interface Props { lang: Lang; i: number }
 const { lang, i } = Astro.props;
 const x = t(lang).story.scenes[i];
-/** One symbol per scene, in scene order, each with the small effect it plays as its scene starts (Symbol in global.css). */
-const SYMBOLS: [IconName, string][] = [['visibility', 'blink'], ['chat_bubble', 'bounce'], ['sync_alt', 'slide'], ['back_hand', 'wave'], ['receipt_long', 'bounce'], ['lock', 'bounce']];
+/** One symbol per scene, in scene order (adjust, remember, switch, ask, receipt, lock), each with the small effect it plays as its scene starts (Symbol in global.css). */
+const SYMBOLS: [IconName, string][] = [['tune', 'slide'], ['chat_bubble', 'bounce'], ['sync_alt', 'slide'], ['back_hand', 'wave'], ['receipt_long', 'bounce'], ['lock', 'bounce']];
 const [symbol, effect] = SYMBOLS[i];
 ---
 <article class="scene" id={`scene-${i + 1}`} data-side={i % 2 === 0 ? 'card-left' : 'card-right'}>
