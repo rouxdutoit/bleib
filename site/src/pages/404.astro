@@ -1,0 +1,22 @@
+---
+/** Not-found page, served by Bunny Storage for missing paths. Bilingual, since it can't know the language. */
+import Base from '../layouts/Base.astro';
+import Rails from '../components/Rails.astro';
+---
+<Base lang="en" page="home" title="Page not found · bleib" description="This page doesn't exist.">
+  <section class="nf has-rails">
+    <Rails top={false} />
+    <div class="wrap nf-in">
+      <h1>This page doesn't exist.</h1>
+      <p>It may have moved. Start from the <a href="/">home page</a>.</p>
+      <p lang="de">Diese Seite gibt es nicht. Weiter zur <a href="/de/">Startseite</a>.</p>
+    </div>
+  </section>
+</Base>
+<style>
+  .nf { padding: clamp(160px, 22vh, 220px) 0 clamp(96px, 12vw, 160px); }
+  .nf-in { position: relative; z-index: 1; }
+  h1 { font-size: clamp(34px, 4.6vw, 52px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.08; }
+  p { margin: 16px 0 0; font-size: 17px; line-height: 1.5; color: var(--muted); }
+  a { color: var(--ink); }
+</style>
