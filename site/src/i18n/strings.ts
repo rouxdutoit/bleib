@@ -45,16 +45,12 @@ const en = {
     themeToLight: 'Switch to light mode',
   },
   hero: {
-    eyebrow: 'In development',
+    eyebrow: 'Free · Open source · Private',
+    status: 'In development',
     h1: 'Your AI memory wallet.',
     sub: ['Each task gets just what it needs.'],
     primary: 'Get early access',
     secondary: 'View on GitHub',
-    trust: [
-      { icon: 'lock', t: 'Encrypted on your device' },
-      { icon: 'code', t: 'Open source' },
-      { icon: 'savings', t: 'Free, for good' },
-    ],
   },
   preview: {
     examples: 'Examples',
@@ -235,16 +231,12 @@ const de: Strings = {
     themeToLight: 'Helles Design einschalten',
   },
   hero: {
-    eyebrow: 'In Entwicklung',
+    eyebrow: 'Kostenlos · Open Source · Privat',
+    status: 'In Entwicklung',
     h1: 'Dein Wallet für dein KI-Gedächtnis.',
     sub: ['Jede Aufgabe bekommt nur, was sie braucht.'],
     primary: 'Frühen Zugang sichern',
     secondary: 'Auf GitHub ansehen',
-    trust: [
-      { icon: 'lock', t: 'Verschlüsselt auf deinem Gerät' },
-      { icon: 'code', t: 'Open Source' },
-      { icon: 'savings', t: 'Dauerhaft kostenlos' },
-    ],
   },
   preview: {
     examples: 'Beispiele',

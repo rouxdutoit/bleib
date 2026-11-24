@@ -4,7 +4,7 @@ import Window from './Window.astro';
 import BleibCard from './BleibCard.astro';
 import Composer from './Composer.astro';
 import Rails from './Rails.astro';
-import { icon, type IconName } from './icons';
+import { icon } from './icons';
 import { GITHUB_URL, routes, t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -23,9 +23,6 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
       <a class="btn btn-primary" href="#early-access">{s.primary}</a>
       <a class="btn btn-secondary" href={githubHref}>{s.secondary}</a>
     </div>
-    <ul class="trust t-foot">
-      {s.trust.map((x) => <li><span set:html={icon(x.icon as IconName)} />{x.t}</li>)}
-    </ul>
 
     <figure class="preview">
       <Window tabs={pv.tabs} tablist={pv.examples} id="ex">
@@ -67,9 +64,6 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
   .sub > span { display: block; }
   /* A wrapped line breaks only at its comma, never mid-phrase. */
   .phrase { display: inline-block; }
-  .trust { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; color: var(--muted); }
-  .trust li { display: inline-flex; align-items: center; gap: 6px; }
-  .trust :global(svg) { width: 15px; height: 15px; display: block; }
 
   /* The fill moment: a new AI, bleib offers only what it needs, like a password manager filling a login.
      Plays on the first scroll (scripts/story.ts); each tab is another everyday example and replays when chosen. */
