@@ -9,7 +9,7 @@ const { typed, sentAt } = Astro.props;
 ---
 <div class="composer" data-sent-at={sentAt}>
   <slot />
-  <p class="t-body input"><span class="field"><span class="typed" data-type={typed}>{typed}</span><span class="caret"></span></span><span class="send" set:html={icon('arrow_outward')} /></p>
+  <p class="t-body input"><span class="field"><span class="typed" data-type={typed}></span><span class="caret"></span></span><span class="send" set:html={icon('arrow_outward')} /></p>
 </div>
 
 <style>

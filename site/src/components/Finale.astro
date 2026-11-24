@@ -7,6 +7,7 @@ import Composer from './Composer.astro';
 import Rails from './Rails.astro';
 import EarlyAccessForm from './EarlyAccessForm.astro';
 import { t, type Lang } from '../i18n/strings';
+import reserveScenes from '../scripts/reserve.js?raw';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang).finale;
@@ -28,6 +29,8 @@ const s = t(lang).finale;
     <div class="form"><EarlyAccessForm lang={lang} /></div>
   </div>
 </section>
+{/* The closer is the last scene: from here every scene reserves its height before the page appears. */}
+<script is:inline set:html={reserveScenes} />
 
 <style>
   .finale { padding: clamp(96px, 12vw, 160px) 0 clamp(72px, 9vw, 120px); }
