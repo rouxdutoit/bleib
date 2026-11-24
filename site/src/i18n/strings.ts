@@ -107,8 +107,8 @@ const en = {
         more: { to: 'receipts', hash: '', label: 'A receipt for every share' },
       },
       {
-        h: ['Every chat starts fresh.', 'bleib brings you along.'],
-        p: 'Turn off memory in each AI. bleib adds what each chat needs. Only you hold the key.',
+        h: ['Turn their memory off.', 'bleib remembers for you.'],
+        p: 'Every new chat starts fresh. bleib adds what it needs. Only you hold the key.',
         more: { to: 'security', hash: '', label: 'Private by design' },
         dark: true,
       },
@@ -299,8 +299,8 @@ const de: Strings = {
         more: { to: 'receipts', hash: '', label: 'Ein Beleg für jede Weitergabe' },
       },
       {
-        h: ['Jeder Chat beginnt neu.', 'bleib bringt dich mit.'],
-        p: 'Schalte das Gedächtnis in jeder KI aus. bleib ergänzt, was jeder Chat braucht. Den Schlüssel hast nur du.',
+        h: ['Schalte ihr Gedächtnis aus.', 'bleib merkt es sich für dich.'],
+        p: 'Jeder neue Chat beginnt frisch. bleib ergänzt, was er braucht. Den Schlüssel hast nur du.',
         more: { to: 'security', hash: '', label: 'Privat von Grund auf' },
         dark: true,
       },

@@ -120,7 +120,8 @@ input {
 
 /* scripts/story.ts measures a scene's finished state instantly, then puts it back. */
 .measuring,
-.measuring * {
+.measuring *,
+.measuring *::after {
   transition: none !important;
 }
 
@@ -308,7 +309,7 @@ h3 {
   margin-inline-start: auto;
   border-radius: 999px;
   background: #f6e79a;
-  transition: background-color var(--t-fade) var(--ease) var(--delay, 0s);
+  transition: background-color 0.7s var(--ease) var(--delay, 0s);
 }
 .toggle::after {
   content: '';
@@ -321,7 +322,7 @@ h3 {
   background: #fff;
   box-shadow: 0 3px 8px rgb(0 0 0 / 0.15), 0 1px 1px rgb(0 0 0 / 0.16);
   transform: translateX(20px);
-  transition: transform var(--t-open) var(--ease) var(--delay, 0s);
+  transition: transform 0.7s var(--ease) var(--delay, 0s);
 }
 .s1 .toggle.at-1, .s2 .toggle.at-2, .s3 .toggle.at-3, .s4 .toggle.at-4, .s5 .toggle.at-5, .s6 .toggle.at-6 {
   background: var(--fill);
