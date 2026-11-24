@@ -8,7 +8,6 @@ export function initStory(): void {
   const stageCard = story.querySelector<HTMLElement>('.stage-card');
   const slots = Array.from(story.querySelectorAll<HTMLElement>('[data-slot]'));
   const frames = Array.from(story.querySelectorAll<HTMLElement>('[data-frame]'));
-  const ticks = Array.from(story.querySelectorAll<HTMLAnchorElement>('[data-tick]'));
   const pauseBtn = story.querySelector<HTMLButtonElement>('[data-pause]');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   let active = -1;
@@ -54,10 +53,6 @@ export function initStory(): void {
       if (n !== i) s.classList.remove('is-playing', 'is-final');
     });
     if (stageCard) stageCard.dataset.side = i % 2 === 0 ? 'right' : 'left';
-    ticks.forEach((t, n) => {
-      if (n === i) t.setAttribute('aria-current', 'step');
-      else t.removeAttribute('aria-current');
-    });
     play(slots[i]);
   };
 
@@ -78,14 +73,6 @@ export function initStory(): void {
     { rootMargin: '-40% 0px -40% 0px' },
   );
   visible.observe(story);
-
-  ticks.forEach((tick) => {
-    tick.addEventListener('click', (ev) => {
-      ev.preventDefault();
-      const n = Number(tick.dataset.tick);
-      frames[n]?.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth', block: 'center' });
-    });
-  });
 
   const setPaused = (p: boolean) => {
     paused = p;

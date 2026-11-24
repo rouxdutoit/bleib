@@ -34,18 +34,6 @@ const playIcon = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v
     ))}
   </div>
 
-  <nav class="ticks" aria-label={s.label} data-ticks>
-    <ul>
-      {s.scenes.map((scene, i) => (
-        <li>
-          <a href={`#scene-${i + 1}`} data-tick={i} aria-current={i === 0 ? 'step' : undefined}>
-            <span class="tick-bar" aria-hidden="true"></span>
-            <span class="tick-label">{scene.tick}</span>
-          </a>
-        </li>
-      ))}
-    </ul>
-  </nav>
 
   <button
     class="pause"
@@ -81,24 +69,19 @@ const playIcon = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v
     pointer-events: none;
   }
   .stage-card {
+    --card-w: min(440px, 38vw);
     position: absolute;
     top: 50%;
-    left: 0;
     height: 0;
-    width: min(440px, 38vw);
-    transform: translateX(var(--x, 54vw));
-    transition: transform 0.8s var(--ease);
+    width: var(--card-w);
+    transition: left 0.8s var(--ease);
   }
-  /* Content column: --max wide, centred; the card sits at its inner edges. */
-  .stage-card {
-    --col-left: max(0px, calc((100vw - var(--max)) / 2));
-    --col-w: min(var(--max), 100vw);
-  }
+  /* The card sits at the inner edges of the shared content column (see --colw). */
   .stage-card[data-side='right'] {
-    --x: calc(var(--col-left) + var(--col-w) - var(--gutter) - min(440px, 38vw));
+    left: calc((100% + var(--colw)) / 2 - var(--card-w));
   }
   .stage-card[data-side='left'] {
-    --x: calc(var(--col-left) + var(--gutter));
+    left: calc((100% - var(--colw)) / 2);
   }
   .slot {
     position: absolute;
@@ -120,16 +103,14 @@ const playIcon = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v
     min-height: 100svh;
     display: flex;
     align-items: center;
-    padding: 0 var(--gutter);
-    max-width: var(--max);
+    width: var(--colw);
     margin: 0 auto;
-    width: 100%;
   }
   .frame[data-side='right'] {
     justify-content: flex-end;
   }
   .frame-text {
-    width: min(460px, 40vw);
+    width: min(460px, 44%);
   }
   .frame[data-side='right'] .frame-text {
     margin-right: 0;
@@ -145,61 +126,6 @@ const playIcon = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v
     overflow: hidden;
     clip: rect(0 0 0 0);
     white-space: nowrap;
-  }
-  .ticks {
-    position: fixed;
-    right: max(18px, calc(var(--rail-left) + 14px));
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 40;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s var(--ease), visibility 0.3s;
-  }
-  .story.in-view .ticks {
-    opacity: 1;
-    visibility: visible;
-  }
-  .ticks ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 2px;
-  }
-  .ticks a {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 10px;
-    min-height: 28px;
-    min-width: 44px;
-    text-decoration: none;
-    color: var(--muted);
-  }
-  .tick-bar {
-    display: block;
-    width: 14px;
-    height: 2px;
-    border-radius: 2px;
-    background: var(--tick);
-    transition: width 0.3s var(--ease), background-color 0.3s var(--ease);
-  }
-  .tick-label {
-    font-size: 13px;
-    opacity: 0;
-    transform: translateX(6px);
-    transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
-    white-space: nowrap;
-  }
-  .ticks a:hover .tick-label,
-  .ticks a:focus-visible .tick-label {
-    opacity: 1;
-    transform: none;
-  }
-  .ticks a[aria-current='step'] .tick-bar {
-    width: 28px;
-    background: var(--tick-on);
   }
   .pause {
     position: absolute;
@@ -219,7 +145,7 @@ const playIcon = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v
     grid-area: 1 / 1;
     align-self: end;
     justify-self: end;
-    margin: 0 28px 28px 0;
+    margin: 0 calc(max(var(--rail-gap), (100vw - 1440px) / 2) + 10px) 24px 0;
     z-index: 2;
     opacity: 0;
     visibility: hidden;
@@ -245,7 +171,6 @@ const playIcon = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v
 
   @media (max-width: 767px) {
     .stage,
-    .ticks,
     .pause {
       display: none;
     }

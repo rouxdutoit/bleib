@@ -340,3 +340,28 @@ h3 {
   background-size: 5px 1px, 1px 9px;
   background-position: left center, center center;
 }
+
+/* ---------- One content column, inset from the rails ----------
+   Percentages resolve against the element using the variable, so these work in any full-width parent. */
+:root {
+  --rail-gap: 32px;
+  --inset: clamp(20px, 5vw, 72px);
+  --rails-box: min(1440px, calc(100% - 2 * var(--rail-gap)));
+  --colw: calc(min(1440px, 100% - 2 * var(--rail-gap)) - 2 * var(--inset));
+}
+@media (max-width: 767px) {
+  :root {
+    --rail-gap: 16px;
+    --inset: 16px;
+  }
+}
+.rails {
+  width: var(--rails-box);
+}
+.wrap {
+  width: var(--colw);
+  max-width: none;
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
