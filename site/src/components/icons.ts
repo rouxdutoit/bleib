@@ -22,6 +22,7 @@ import mail from '@material-symbols/svg-400/rounded/mail.svg?raw';
 import translate from '@material-symbols/svg-400/rounded/translate.svg?raw';
 import close from '@material-symbols/svg-400/rounded/close.svg?raw';
 import send from '@material-symbols/svg-400/rounded/send-fill.svg?raw';
+import sync from '@material-symbols/svg-400/rounded/sync.svg?raw';
 import airlineSeat from '@material-symbols/svg-400/rounded/airline_seat_recline_normal-fill.svg?raw';
 import eco from '@material-symbols/svg-400/rounded/eco-fill.svg?raw';
 import locationOn from '@material-symbols/svg-400/rounded/location_on-fill.svg?raw';
@@ -49,6 +50,7 @@ const raw = {
   translate,
   close,
   send,
+  sync,
   airline_seat: airlineSeat,
   eco,
   location_on: locationOn,

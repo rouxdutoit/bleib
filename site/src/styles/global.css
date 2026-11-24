@@ -237,7 +237,7 @@ h3 {
    Press      .press.at-N                 dips as if tapped when its step comes
    Land       .land.at-N                  drops into place with a small spring, as it is revealed
    Toggle     .toggle.at-N                an iOS switch, on in bleib yellow, that turns off at step N
-   Symbol     .fx-pop, -wave (+ fx-knob, fx-arrow, fx-unroll, fx-write, fx-shackle, fx-click)   a headline symbol acts out what it means
+   Symbol     .fx-pop, -spin, -wave (+ fx-knob, fx-unroll, fx-write, fx-shackle, fx-click)   a headline symbol acts out what it means
    Scenes differ only in when things happen; --delay staggers a single move. */
 :root {
   --t-open: 0.55s;
@@ -333,10 +333,11 @@ h3 {
   transform: none;
 }
 .fx-pop { --fx: fx-pop; --fx-ease: var(--spring); }
+.fx-spin { --fx: fx-spin; }
 .fx-wave { --fx: fx-wave; }
 .fx-wave svg { transform-origin: 50% 90%; }
 @keyframes fx-pop { from { transform: scale(0); } to { transform: none; } }
-@keyframes fx-arrow { 45% { transform: translateX(calc(var(--way) * 6px)); opacity: 0; } 55% { transform: translateX(calc(var(--way) * -6px)); opacity: 0; } }
+@keyframes fx-spin { to { transform: rotate(-360deg); } }
 @keyframes fx-wave { 20% { transform: rotate(16deg); } 40% { transform: rotate(-6deg); } 60% { transform: rotate(14deg); } 80% { transform: rotate(-3deg); } }
 @keyframes fx-unroll { to { transform: none; } }
 @keyframes fx-write { to { stroke-dashoffset: 0; } }

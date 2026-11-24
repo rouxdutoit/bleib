@@ -8,10 +8,9 @@ interface Props { lang: Lang; i: number }
 const { lang, i } = Astro.props;
 const x = t(lang).story.scenes[i];
 /** One symbol per scene, in scene order (adjust, remember, switch, ask, receipt, lock), each with the small effect it plays
- *  as its scene starts, acting out what it means (Symbol in global.css). The sliders, arrows, receipt and lock are drawn
- *  here so their parts can move: the knobs glide, each arrow slides its own way, the receipt unrolls and its lines write
- *  themselves, the shackle snaps shut. */
-const SYMBOLS: [IconName | 'sliders' | 'arrows' | 'receipt' | 'padlock', string][] = [['sliders', 'tune'], ['chat_bubble', 'pop'], ['arrows', 'arrows'], ['back_hand', 'wave'], ['receipt', 'receipt'], ['padlock', 'lock']];
+ *  as its scene starts, acting out what it means (Symbol in global.css). The sliders, receipt and lock are drawn here so
+ *  their parts can move: the knobs glide, the receipt unrolls and its lines write themselves, the shackle snaps shut. */
+const SYMBOLS: [IconName | 'sliders' | 'receipt' | 'padlock', string][] = [['sliders', 'tune'], ['chat_bubble', 'pop'], ['sync', 'spin'], ['back_hand', 'wave'], ['receipt', 'receipt'], ['padlock', 'lock']];
 const [symbol, effect] = SYMBOLS[i];
 ---
 <article class="scene" id={`scene-${i + 1}`} data-side={i % 2 === 0 ? 'card-left' : 'card-right'}>
@@ -25,13 +24,6 @@ const [symbol, effect] = SYMBOLS[i];
             <rect class="knob k1" x="13.5" y="2.5" width="3" height="7" rx="1.5" />
             <rect class="knob k2" x="6.5" y="8.5" width="3" height="7" rx="1.5" />
             <rect class="knob k3" x="10.5" y="14.5" width="3" height="7" rx="1.5" />
-          </svg>
-        </span>
-      ) : symbol === 'arrows' ? (
-        <span class="sym fx-arrows">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path class="arrow to-right" d="M4 8h15M15 4l4 4-4 4" />
-            <path class="arrow to-left" d="M20 16H5M9 12l-4 4 4 4" />
           </svg>
         </span>
       ) : symbol === 'receipt' ? (
@@ -93,8 +85,6 @@ const [symbol, effect] = SYMBOLS[i];
   .lock-body { transform-box: fill-box; transform-origin: 50% 100%; }
   .scene:has([data-playing]) .shackle { animation: fx-shackle 0.4s cubic-bezier(0.55, 0, 0.75, 0) 0.35s both; }
   .scene:has([data-playing]) .lock-body { animation: fx-click 0.3s var(--ease) 0.75s both; }
-  .to-right { --way: 1; } .to-left { --way: -1; }
-  .scene:has([data-playing]) .arrow { animation: fx-arrow 0.8s var(--ease) 0.15s both; }
   /* The sliders' knobs glide to new places, one after another, and stay there. */
   .k1 { --to: -7px; } .k2 { --to: 8px; --delay: 0.1s; } .k3 { --to: 5px; --delay: 0.2s; }
   .scene:has([data-playing]) .knob { animation: fx-knob 0.8s var(--ease) calc(0.15s + var(--delay, 0s)) both; }
