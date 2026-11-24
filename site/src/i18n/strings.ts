@@ -59,14 +59,16 @@ const en = {
     ],
   },
   preview: {
-    tab: 'Gemini',
-    typed: 'Plan a weekend in Lisbon for me.',
-    title: 'bleib can add what Gemini needs',
-    facts: ['Aisle seat', 'Hotels under €250', 'Vegetarian'],
+    examples: 'Examples',
+    title: 'bleib can add what {ai} needs',
     add: 'Add',
     added: 'Added',
     attachment: 'About me',
-    private: 'Health and work stay private.',
+    tabs: [
+      { ai: 'Gemini', icon: 'gemini-color', typed: 'Plan a weekend in Lisbon for me.', facts: ['Aisle seat', 'Hotels under €250', 'Vegetarian'], private: 'Health and work stay private.' },
+      { ai: 'Claude', icon: 'claude-color', typed: 'Write a cover letter for this job.', facts: ['Product designer', 'Berlin', 'Short and plain'], private: 'Health and money stay private.' },
+      { ai: 'ChatGPT', icon: 'openai', typed: 'What should I cook tonight?', facts: ['Vegetarian', 'Cooks for two', 'Under 30 minutes'], private: 'Work and travel stay private.' },
+    ],
   },
   story: {
     label: 'How bleib works',
@@ -253,14 +255,16 @@ const de: Strings = {
     ],
   },
   preview: {
-    tab: 'Gemini',
-    typed: 'Plane ein Wochenende in Lissabon für mich.',
-    title: 'bleib kann ergänzen, was Gemini braucht',
-    facts: ['Gangplatz', 'Hotels unter 250 €', 'Vegetarisch'],
+    examples: 'Beispiele',
+    title: 'bleib kann ergänzen, was {ai} braucht',
     add: 'Hinzufügen',
     added: 'Hinzugefügt',
     attachment: 'Über mich',
-    private: 'Gesundheit und Arbeit bleiben privat.',
+    tabs: [
+      { ai: 'Gemini', icon: 'gemini-color', typed: 'Plane ein Wochenende in Lissabon für mich.', facts: ['Gangplatz', 'Hotels unter 250 €', 'Vegetarisch'], private: 'Gesundheit und Arbeit bleiben privat.' },
+      { ai: 'Claude', icon: 'claude-color', typed: 'Schreib ein Anschreiben für diese Stelle.', facts: ['Produktdesign', 'Berlin', 'Kurz und klar'], private: 'Gesundheit und Finanzen bleiben privat.' },
+      { ai: 'ChatGPT', icon: 'openai', typed: 'Was soll ich heute Abend kochen?', facts: ['Vegetarisch', 'Kocht für zwei', 'Unter 30 Minuten'], private: 'Arbeit und Reisen bleiben privat.' },
+    ],
   },
   story: {
     label: 'So funktioniert bleib',

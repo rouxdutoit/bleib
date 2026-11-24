@@ -24,33 +24,51 @@ const githubHref = GITHUB_URL || routes.developers[lang];
       {s.trust.map((x) => <li><span set:html={icon(x.icon as IconName)} />{x.t}</li>)}
     </ul>
 
-    <figure class="preview" aria-hidden="true" data-sv data-steps="3" data-interval="800" data-gaps=",2600" data-step="0">
+    <figure class="preview">
       <div class="window card">
         <div class="bar">
-          <span class="lights"><i></i><i></i><i></i></span><span class="t-foot tab"><img class="fav" src="/providers/gemini-color.svg" alt="" width="14" height="14" />{pv.tab}</span>
+          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <div class="tabs" role="tablist" aria-label={pv.examples}>
+            {pv.tabs.map((x, i) => (
+              <button type="button" role="tab" class="tab t-foot" id={`ex-tab-${i}`} aria-controls={`ex-${i}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>
+                {x.icon.endsWith('-color')
+                  ? <img class="fav" src={`/providers/${x.icon}.svg`} alt="" width="14" height="14" />
+                  : <span class="fav mono" style={`--fav: url(/providers/${x.icon}.svg)`} />}
+                <span class="tab-t">{x.ai}</span>
+              </button>
+            ))}
+          </div>
         </div>
-        <div class="body">
-          <div class="grow"><div class="grow-in">
-            <div class="fill">
-              <p class="fill-head"><span class="app"><Mark size={12} /></span><span class="t-foot fill-title">{pv.title}</span></p>
-              <div class="fill-row">
-                <ul class="facts">{pv.facts.map((x) => <li class="t-sub"><span class="yes" set:html={icon('check')} />{x}</li>)}</ul>
-                <span class="b"><span class="to-add">{pv.add}</span><span class="to-added"><span class="tick"><DrawTick /></span>{pv.added}</span></span>
+        {pv.tabs.map((x, i) => {
+          const title = pv.title.replace('{ai}', x.ai);
+          return (
+            <div class="body" role="tabpanel" id={`ex-${i}`} aria-labelledby={`ex-tab-${i}`} hidden={i !== 0} data-steps="3" data-interval="800" data-gaps=",2600" data-step="0" {...(i === 0 ? { 'data-sv': '' } : {})}>
+              <p class="sr-only">{x.typed} {title}: {x.facts.join(', ')}. {x.private}</p>
+              <div aria-hidden="true">
+                <div class="grow"><div class="grow-in">
+                  <div class="fill">
+                    <p class="fill-head"><span class="app"><Mark size={12} /></span><span class="t-foot fill-title">{title}</span></p>
+                    <div class="fill-row">
+                      <ul class="facts">{x.facts.map((f) => <li class="t-sub"><span class="yes" set:html={icon('check')} />{f}</li>)}</ul>
+                      <span class="b"><span class="to-add">{pv.add}</span><span class="to-added"><span class="tick"><DrawTick /></span>{pv.added}</span></span>
+                    </div>
+                  </div>
+                </div></div>
+                <div class="composer">
+                  <div class="attach"><div class="grow-in">
+                    <div class="chip">
+                      <span class="app chip-app"><Mark size={14} /></span>
+                      <span class="chip-text"><span class="t-foot chip-title">{pv.attachment}</span><span class="t-foot chip-facts">{x.facts.join(' · ')}</span></span>
+                      <span class="chip-x" set:html={icon('close')} />
+                    </div>
+                  </div></div>
+                  <p class="t-body input"><span class="field"><span data-type={x.typed}>{x.typed}</span><span class="caret"></span></span><span class="send" set:html={icon('arrow_outward')} /></p>
+                </div>
+                <p class="t-foot private"><span class="lock" set:html={icon('lock')} />{x.private}</p>
               </div>
             </div>
-          </div></div>
-          <div class="composer">
-            <div class="attach"><div class="grow-in">
-              <div class="chip">
-                <span class="app chip-app"><Mark size={14} /></span>
-                <span class="chip-text"><span class="t-foot chip-title">{pv.attachment}</span><span class="t-foot chip-facts">{pv.facts.join(' · ')}</span></span>
-                <span class="chip-x" set:html={icon('close')} />
-              </div>
-            </div></div>
-            <p class="t-body input"><span class="field"><span data-type={pv.typed}>{pv.typed}</span><span class="caret"></span></span><span class="send" set:html={icon('arrow_outward')} /></p>
-          </div>
-          <p class="t-foot private"><span class="lock" set:html={icon('lock')} />{pv.private}</p>
-        </div>
+          );
+        })}
       </div>
     </figure>
   </div>
@@ -70,17 +88,29 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .trust :global(svg) { width: 15px; height: 15px; display: block; }
 
   /* The fill moment: a new AI, bleib offers only what it needs, like a password manager filling a login.
-     Plays once in view (scripts/story.ts); with reduced motion it shows finished. */
+     Plays once in view (scripts/story.ts); each tab is another everyday example and replays when chosen. */
   .preview { margin: clamp(40px, 6vw, 72px) 0 0; width: 100%; max-width: 520px; text-align: left; }
   .window { overflow: hidden; border-radius: 20px; box-shadow: var(--shadow); }
-  /* A browser window: traffic lights, then the active tab (favicon and page title) on a darker strip. */
-  .bar { display: flex; align-items: flex-end; gap: 14px; height: 38px; padding: 0 12px; background: var(--fill); }
-  .lights { display: inline-flex; gap: 6px; align-self: center; }
+  /* A Safari window: traffic lights, then equal tabs. The open tab is a raised tile; the others sit flat
+     on the bar in the secondary colour, with hairlines between them. Switching is instant, as in Safari. */
+  .bar { display: flex; align-items: center; gap: 12px; height: 42px; padding: 0 7px 0 14px; background: var(--fill); }
+  .lights { flex: none; display: inline-flex; gap: 6px; }
   .lights i { width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; }
   .lights i:nth-child(2) { background: #febc2e; }
   .lights i:nth-child(3) { background: #28c840; }
-  .tab { display: inline-flex; align-items: center; gap: 7px; width: min(180px, 50%); height: 30px; padding: 0 12px; border-radius: 9px 9px 0 0; background: var(--cell); color: var(--label); }
+  .tabs { flex: 1; min-width: 0; display: flex; }
+  .tab { position: relative; flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 6px; height: 28px; padding: 0 8px; border: 0; border-radius: 8px; background: none; color: var(--label-2); font-family: inherit; cursor: pointer; }
+  .tab + .tab::before { content: ''; position: absolute; left: 0; top: 7px; bottom: 7px; width: 1px; background: var(--hairline); }
+  .tab[aria-selected='true'] { background: var(--cell); color: var(--label); box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 2px rgb(0 0 0 / 0.08); cursor: default; }
+  .tab[aria-selected='true']::before, .tab[aria-selected='true'] + .tab::before { opacity: 0; }
+  @media (hover: hover) {
+    .tab[aria-selected='false']:hover { background: var(--fill); }
+    .tab:hover::before, .tab:hover + .tab::before { opacity: 0; }
+  }
+  .tab-t { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .fav { flex: none; display: block; width: 14px; height: 14px; }
+  .mono { background: currentColor; mask: var(--fav) center / contain no-repeat; }
+  .tab[aria-selected='false'] .fav { opacity: 0.7; }
   .body { padding: 16px; }
   .body p { margin: 0; }
 
@@ -93,7 +123,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .fill-title { color: var(--label-2); }
   .fill-row { margin-top: 8px; display: flex; align-items: center; gap: 12px; }
   .facts { flex: 1; min-width: 0; list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; }
-  .facts li { display: inline-flex; align-items: center; gap: 6px; }
+  .facts li { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
   .yes { flex: none; width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; background: #f6e79a; color: #0a0a0a; }
   .yes :global(svg) { width: 13px; height: 13px; display: block; }
 
@@ -129,4 +159,34 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .private { margin-top: 10px !important; display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--label-2); }
   .lock :global(svg) { width: 13px; height: 13px; display: block; }
   @media (max-width: 767px) { .preview { zoom: 0.92; } }
+  /* Like Safari on a phone: no window controls, so the tabs get the room. */
+  @media (max-width: 480px) { .lights { display: none; } .bar { padding-left: 7px; } }
 </style>
+
+<script>
+  import { play, reset } from '../scripts/story';
+  const tabs = [...document.querySelectorAll<HTMLButtonElement>('.preview [role="tab"]')];
+  const select = (tab: HTMLButtonElement) => {
+    for (const t of tabs) {
+      const on = t === tab;
+      const panel = document.getElementById(t.getAttribute('aria-controls') ?? '');
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      if (!panel || panel.hidden !== on) continue;
+      panel.hidden = !on;
+      if (on) play(panel);
+      else reset(panel);
+    }
+  };
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => select(tab));
+    tab.addEventListener('keydown', (e) => {
+      const to = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+      if (to === undefined) return;
+      e.preventDefault();
+      const next = tabs[(to + tabs.length) % tabs.length];
+      select(next);
+      next.focus();
+    });
+  });
+</script>
