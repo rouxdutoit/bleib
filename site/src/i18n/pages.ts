@@ -438,9 +438,8 @@ const en: Docs = {
       {
         h: 'Try it',
         blocks: [
-          { p: 'Node 20 or newer, on Linux or macOS. Build and install from the repository, then follow the setup guide for your AI app.' },
-          { code: 'git clone https://github.com/rouxdutoit/bleib && cd bleib/wallet' },
-          { code: 'npm ci && npm pack && npm install --global ./bleib-*.tgz' },
+          { p: 'Node 20 or newer, on Linux or macOS. Install from npm, then follow the setup guide for your AI app.' },
+          { code: 'npm install --global @bleib/wallet' },
           { code: 'bleib init' },
           { code: "bleib pair 'Claude Code' --destination provider:Anthropic" },
           { code: 'bleib serve' },
@@ -1033,9 +1032,8 @@ const de: Docs = {
       {
         h: 'Ausprobieren',
         blocks: [
-          { p: 'Node 20 oder neuer, unter Linux oder macOS. Aus dem Repository bauen und installieren, dann der Anleitung für deine KI-App folgen.' },
-          { code: 'git clone https://github.com/rouxdutoit/bleib && cd bleib/wallet' },
-          { code: 'npm ci && npm pack && npm install --global ./bleib-*.tgz' },
+          { p: 'Node 20 oder neuer, unter Linux oder macOS. Über npm installieren, dann der Anleitung für deine KI-App folgen.' },
+          { code: 'npm install --global @bleib/wallet' },
           { code: 'bleib init' },
           { code: "bleib pair 'Claude Code' --destination provider:Anthropic" },
           { code: 'bleib serve' },

@@ -20,9 +20,8 @@ bleib is a free, open source wallet for what your AIs know about you. Your notes
 ## Try it
 
 ```sh
-cd wallet
-npm ci
-npm test
+npm install --global @bleib/wallet
+bleib init
 ```
 
 Then follow [`wallet/README.md`](wallet/README.md) and the [client setup guide](wallet/docs/setup.md) for Claude Desktop, Claude Code, OpenClaw, Hermes and Cursor.

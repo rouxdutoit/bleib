@@ -1,5 +1,5 @@
 {
-  "name": "bleib",
+  "name": "@bleib/wallet",
   "version": "0.2.0",
   "description": "A local encrypted wallet for the information you share with your AI",
   "license": "AGPL-3.0-or-later",
@@ -60,5 +60,8 @@
     "typescript": "5.9.3",
     "typescript-eslint": "8.74.0",
     "vitest": "3.2.7"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

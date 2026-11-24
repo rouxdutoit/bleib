@@ -6,15 +6,14 @@ bleib keeps your notes in an encrypted local wallet. An agent can ask for a shor
 
 Run these from the repository root on Linux or macOS with Node 20 or newer.
 
-1. Build and install the local package. Then run `bleib init`, save a separate copy of the private recovery kit, and type its confirmation word.
+1. Install bleib from npm. Then run `bleib init`, save a separate copy of the private recovery kit, and type its confirmation word.
 
    ```sh
-   cd wallet
-   npm ci
-   npm pack
-   npm install --global ./bleib-0.2.0.tgz
+   npm install --global @bleib/wallet
    bleib init
    ```
+
+   To build from source instead: `cd wallet && npm ci && npm pack && npm install --global ./bleib-wallet-*.tgz`.
 
 2. Run `bleib serve` in one terminal. In another terminal, unlock and import the supplied synthetic workspace. `bleib ui` opens the page in your existing unlocked session.
 
