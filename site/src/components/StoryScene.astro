@@ -46,7 +46,7 @@ const [symbol, effect] = SYMBOLS[i];
         <span class="sym fx-lock">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
             <path class="shackle" d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
-            <rect x="5" y="10.5" width="14" height="10.5" rx="2.5" />
+            <rect class="lock-body" x="5" y="10.5" width="14" height="10.5" rx="2.5" />
           </svg>
         </span>
       ) : (
@@ -88,8 +88,11 @@ const [symbol, effect] = SYMBOLS[i];
   .scene:has([data-playing]) .paper { animation: fx-unroll 0.5s var(--ease) 0.15s both; }
   .scene:has([data-playing]) .line { animation: fx-write 0.35s var(--ease) var(--at) both; }
   .l1 { --at: 0.6s; } .l2 { --at: 0.8s; }
-  .shackle { transform: translateY(-3px); }
-  .scene:has([data-playing]) .shackle { animation: fx-shackle 0.6s var(--spring) 0.3s both; }
+  /* The lock stands open, then the shackle drops shut and the body clicks. */
+  .shackle { transform: translateY(-4.5px); }
+  .lock-body { transform-box: fill-box; transform-origin: 50% 100%; }
+  .scene:has([data-playing]) .shackle { animation: fx-shackle 0.4s cubic-bezier(0.55, 0, 0.75, 0) 0.35s both; }
+  .scene:has([data-playing]) .lock-body { animation: fx-click 0.3s var(--ease) 0.75s both; }
   .to-right { --way: 1; } .to-left { --way: -1; }
   .scene:has([data-playing]) .arrow { animation: fx-arrow 0.8s var(--ease) 0.15s both; }
   /* The sliders' knobs glide to new places, one after another, and stay there. */
