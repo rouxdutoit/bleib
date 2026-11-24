@@ -50,3 +50,7 @@ Run from the repository root unless the row specifies `wallet/`.
 - An encrypted, synchronized receipt records the exact text prepared before handoff. A process or transport failure after the commit can interrupt delivery. Model consumption is outside the Phase 2 boundary.
 - The hash chain detects changed or reordered history during replay. Detecting a complete rollback needs an external anchor.
 - The trust boundary for the browser and CLI is the owner's OS account. Stdio and HTTP MCP callers are limited to agent operations. OS isolation is required for an agent with arbitrary local account access.
+
+## Review dispositions
+
+The independent `02-REVIEW.md` was absent at the Phase 3 verification cut on 24 November 2026. The review remains pending, with no findings, fix commits or regression tests to map at this cut.
