@@ -24,7 +24,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
       {s.trust.map((x) => <li><span set:html={icon(x.icon as IconName)} />{x.t}</li>)}
     </ul>
 
-    <figure class="preview" aria-hidden="true" data-sv data-steps="3" data-interval="800" data-step="0">
+    <figure class="preview" aria-hidden="true" data-sv data-steps="3" data-interval="800" data-gaps=",2600" data-step="0">
       <div class="window card">
         <div class="bar">
           <span class="lights"><i></i><i></i><i></i></span><span class="t-foot tab"><img class="fav" src="/providers/gemini-color.svg" alt="" width="14" height="14" />{pv.tab}</span>

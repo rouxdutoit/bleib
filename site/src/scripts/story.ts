@@ -2,6 +2,7 @@
  * Plays each scene's card morph once, when the scene comes into view: data-step="n" plus
  * cumulative classes s1..sn (see StoryVisual.astro, Hero.astro and Finale.astro).
  * A [data-type] element inside a scene is typed out at step 1, and later steps wait for it.
+ * data-gaps="a,b,…" sets the pause after each step (ms), so a reader can finish before the next change.
  * With reduced motion the final state shows at once.
  */
 const START = 500;
@@ -39,11 +40,12 @@ export function initStory(): void {
           continue;
         }
         const interval = Number(sv.dataset.interval ?? STEP);
+        const gaps = (sv.dataset.gaps ?? '').split(',').map(Number);
         const typer = sv.querySelector<HTMLElement>('[data-type]');
         let at = START;
         for (let k = 1; k <= steps; k++) {
           window.setTimeout(() => setStep(sv, k), at);
-          at = k === 1 && typer ? type(typer, at) + 300 : at + interval;
+          at = k === 1 && typer ? type(typer, at) + 300 : at + (gaps[k - 1] || interval);
         }
       }
     },
