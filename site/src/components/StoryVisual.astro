@@ -133,6 +133,7 @@ const cx = (n: number) => `reveal at-${n}`;
             <div class="note-head">
               <span class="ok" set:html={svg('check')} />
               <div class="note-id"><p class="t-headline">{c.ask.later.title}</p><p class="t-sub c-2">{c.ask.later.sub}</p></div>
+              <span class="t-foot auto">{c.ask.later.tag}</span>
             </div>
           </div>
           <div class={cx(1)}>
@@ -277,6 +278,8 @@ const cx = (n: number) => `reveal at-${n}`;
   .note { padding: 14px 16px 16px; }
   .note-head { display: flex; align-items: center; gap: 10px; }
   .note-id { flex: 1; min-width: 0; }
+  /* A quiet status capsule, as iOS marks a state. */
+  .auto { flex: none; padding: 3px 10px; border-radius: 999px; background: var(--fill); color: var(--label-2); font-weight: 600; }
   .app { width: 38px; height: 38px; border-radius: 9px; padding: 6px; background: var(--fill); flex: none; }
   .app-sm { width: 29px; height: 29px; border-radius: 7px; padding: 4px; background: var(--fill); flex: none; }
   .purpose { margin-top: 12px !important; }
