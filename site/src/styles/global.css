@@ -375,6 +375,11 @@ h3 {
   --label-3: rgb(60 60 67 / 0.3);
   --separator: rgb(60 60 67 / 0.29);
   --hairline: rgb(60 60 67 / 0.16);
+  --sel: #1d1d1f;
+  --sel-ink: #ffffff;
+  --sel-ink-2: rgb(255 255 255 / 0.72);
+  --sel-chip: #f6e79a;
+  --sel-chip-ink: #0a0a0a;
   --fill: rgb(118 118 128 / 0.12);
   --fill-2: rgb(120 120 128 / 0.16);
   --cell: #ffffff;
@@ -386,6 +391,11 @@ h3 {
   --label-3: rgb(235 235 245 / 0.3);
   --separator: rgb(84 84 88 / 0.65);
   --hairline: rgb(84 84 88 / 0.45);
+  --sel: #f6e79a;
+  --sel-ink: #0a0a0a;
+  --sel-ink-2: rgb(10 10 10 / 0.68);
+  --sel-chip: #0a0a0a;
+  --sel-chip-ink: #f6e79a;
   --fill: rgb(118 118 128 / 0.24);
   --fill-2: rgb(118 118 128 / 0.32);
   --cell: #1c1c1e;
@@ -398,6 +408,11 @@ h3 {
     --label-3: rgb(235 235 245 / 0.3);
     --separator: rgb(84 84 88 / 0.65);
   --hairline: rgb(84 84 88 / 0.45);
+  --sel: #f6e79a;
+  --sel-ink: #0a0a0a;
+  --sel-ink-2: rgb(10 10 10 / 0.68);
+  --sel-chip: #0a0a0a;
+  --sel-chip-ink: #f6e79a;
     --fill: rgb(118 118 128 / 0.24);
     --fill-2: rgb(118 118 128 / 0.32);
     --cell: #1c1c1e;

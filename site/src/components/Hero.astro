@@ -52,7 +52,6 @@ const githubHref = GITHUB_URL || routes.developers[lang];
                       <p class="chips">{r.kinds.map((k) => <span class="chip t-foot"><span set:html={icon(k.icon as IconName)} />{k.label}</span>)}</p>
                       <p class="t-sub c-2">{r.where} · {r.why}</p>
                     </div>
-                    <span class="chev c-3" set:html={icon('chevron_right')} />
                   </li>
                 ))}
               </ul>
@@ -106,10 +105,13 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .rows { list-style: none; margin: 6px 0 0; padding: 0; }
   .row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 10px; border-radius: 14px; position: relative; }
   .row + .row::before { content: ''; position: absolute; top: 0; right: 10px; left: 54px; height: 1px; background: var(--hairline); }
-  .row.selected { background: var(--fill); }
+  /* macOS selection: solid accent rounded rect, white text; separators hide next to it. */
+  .row.selected { background: var(--sel); color: var(--sel-ink); }
+  .row.selected .c-2 { color: var(--sel-ink-2); }
+  .row.selected .chip { background: var(--sel-chip); color: var(--sel-chip-ink); }
   .row.selected + .row::before { display: none; }
   .row img { flex: none; margin-top: 2px; border-radius: 8px; background: var(--fill); padding: 5px; }
-  .row.selected img { background: var(--cell); }
+  .row.selected img { background: #ffffff; }
   .r-main { flex: 1; min-width: 0; }
   .r-main p { margin: 0; }
   .r-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
@@ -117,8 +119,6 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 3px !important; }
   .chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 9px 2px 7px; border-radius: 999px; background: #f6e79a; color: #0a0a0a; font-weight: 600; }
   .chip :global(svg) { width: 14px; height: 14px; }
-  .chev { flex: none; align-self: center; }
-  .chev :global(svg) { width: 20px; height: 20px; display: block; }
   .inspector { border-radius: 16px; background: var(--fill); padding: 16px 18px; }
   .inspector p { margin: 0; }
   .ins-title { margin: 2px 0 10px !important; }
