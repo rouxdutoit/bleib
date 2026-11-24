@@ -85,3 +85,10 @@ Items acknowledged and deferred at milestone close, most recent first:
 Last session: 2026-11-24
 Stopped at: Roadmap created; Phase 1 ready to plan
 Resume file: None
+
+## Phase 2 — Parallel wallet worktree
+
+- Branch `wallet` completed plans 02-01 and 02-02 on 24 November 2026. Claude review is pending.
+- The SDK tracer completed wallet setup, import, pairing, browser approval and a durable exact-text receipt. Both transports, lint, typecheck, packaging and browser verification passed.
+- Vitest passed 20 of 20 tests on Node 20.0.0 and Node 24.22.2. See [Phase 2 verification](phases/02-wallet-core-loop/02-VERIFICATION.md).
+- Founder review should confirm purpose-scoped re-asking, the authenticated browser handoff for elicitation, and how strongly to require a declared model in the pairing prompt.
