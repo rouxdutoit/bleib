@@ -192,7 +192,7 @@ describe('pairing and consent', { timeout: 15_000 }, () => {
     }
   });
 
-  it('matches grants by agent, information kind, declared destination and normalized purpose', async () => {
+  it('matches remembered grants by agent, information kind and destination across purposes', async () => {
     const x = await fresh();
     try {
       await x.wallet.importWorkspace(fixture('openclaw'), 'openclaw');
@@ -205,9 +205,10 @@ describe('pairing and consent', { timeout: 15_000 }, () => {
       for (const token of [b.credential, c.credential]) {
         pending(await x.wallet.ask(token, ask));
       }
-      pending(await x.wallet.ask(a.credential, { ...ask, purpose: 'Write an ad' }));
+      expect((await x.wallet.ask(a.credential, { ...ask, purpose: 'Write an ad' })).state).toBe('released');
       pending(await x.wallet.ask(a.credential, { ...ask, kinds: ['identity'] }));
-      expect((await x.wallet.receipts()).map(receipt => receipt.destination)).toEqual(['local', 'local']);
+      expect((await x.wallet.receipts()).map(receipt => receipt.destination)).toEqual(['local', 'local', 'local']);
+      expect((await x.wallet.receipts())[0]?.purpose).toBe('Write an ad');
     } finally {
       await x.close();
     }
@@ -262,12 +263,13 @@ describe('pairing and consent', { timeout: 15_000 }, () => {
       const used = ask;
       const neverUsed = { ...ask, purpose: 'An unused purpose' };
       await x.wallet.approve(pending(await x.wallet.ask(credential, used)), 'always', false);
-      await x.wallet.approve(pending(await x.wallet.ask(credential, neverUsed)), 'always', false);
+      const unusedAgent = await paired(x.wallet, 'Unused grant');
+      await x.wallet.approve(pending(await x.wallet.ask(unusedAgent.credential, neverUsed)), 'always', false);
       x.advance(89 * day);
       await x.wallet.unlock(passphrase);
       expect((await x.wallet.ask(credential, used)).state).toBe('released');
       x.advance(day);
-      pending(await x.wallet.ask(credential, neverUsed));
+      pending(await x.wallet.ask(unusedAgent.credential, neverUsed));
       expect((await x.wallet.ask(credential, used)).state).toBe('released');
     } finally {
       await x.close();

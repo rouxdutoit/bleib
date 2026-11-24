@@ -3,6 +3,7 @@ import { equal, kindSchema, kinds, labels, secret, UserError } from './domain.js
 import { body, redirect, text, typeIs } from './http.js';
 import type { Destination, Grant, Receipt } from './domain.js';
 import { maxMemoryBytes } from './memory.js';
+import { describeRule } from './policy.js';
 import type { Wallet } from './wallet.js';
 
 export const escape = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, char =>
@@ -42,6 +43,7 @@ function page(res: ServerResponse, title: string, fragment: string, status = 200
 <li><a href="/entries">Notes</a></li>
 <li><a href="/approvals">Requests</a></li>
 <li><a href="/grants">Access</a></li>
+<li><a href="/rules">Rules</a></li>
 <li><a href="/receipts">Receipts</a></li>
 <li><a href="/proposals">Suggestions</a></li>
 </ul></nav>
@@ -63,8 +65,9 @@ function place(value: string) {
 }
 
 const detail = (label: string, value: string) => `<dt>${escape(label)}</dt><dd>${escape(value)}</dd>`;
-const destinationDetails = (destination: Destination) => [
-  detail('Destination', `${place(destination.value)} (declared)`),
+const destinationDetails = (destination: Destination, basis = 'declared', host?: string) => [
+  detail('Destination', `${place(destination.value)} (${basis})`),
+  ...(host || destination.proxy ? [detail('Host', host ?? new URL(destination.proxy!.origin).host)] : []),
   detail('Provider', destination.provider ?? '—'),
   detail('Model', destination.model ?? '—'),
 ].join('');
@@ -144,10 +147,11 @@ export class Browser {
       return redirect(res, '/');
     }
 
+    const query = new URL(req.url ?? '/', this.origin).searchParams;
     const approvalId = approvalRoute.exec(path)?.[1];
     const entryId = entryRoute.exec(path)?.[1];
     const receiptId = receiptRoute.exec(path)?.[1];
-    if (!['/', '/approvals', '/entries', '/grants', '/receipts', '/proposals'].includes(path) &&
+    if (!['/', '/approvals', '/entries', '/grants', '/receipts', '/proposals', '/rules'].includes(path) &&
         !approvalId && !entryId && !receiptId) {
       return page(res, 'Page not found', '<p>Choose a page from the menu.</p>', 404);
     }
@@ -181,6 +185,25 @@ export class Browser {
           }, () => session.valid);
           return redirect(res, path);
         }
+        if (path === '/rules') {
+          const action = form.get('action');
+          const rule = form.get('rule') ?? '';
+          if (action === 'preview-rule') {
+            const preview = await this.wallet.previewRule(rule, () => session.valid);
+            return page(res, 'Save this rule?', `<section class="card"><p>${escape(describeRule(preview.policy))}</p>
+<form method="post">${field(session)}<input type="hidden" name="rule" value="${escape(preview.text)}">
+<input type="hidden" name="fingerprint" value="${preview.fingerprint}">
+<button name="action" value="save-rule">Save Rule</button> <a href="/rules">Cancel</a></form></section>`);
+          }
+          if (action === 'save-rule') await this.wallet.saveRule(rule, form.get('fingerprint') ?? '', () => session.valid);
+          else if (action === 'remove-rule') await this.wallet.removeRule(form.get('id') ?? '', () => session.valid);
+          else return text(res, 405, 'Method not allowed.');
+          return redirect(res, '/rules');
+        }
+        if (path === '/approvals' && form.get('action') === 'dismiss-destinations') {
+          await this.wallet.clearDestinationAlerts(() => session.valid);
+          return redirect(res, '/approvals');
+        }
         if (path === '/grants' && form.get('action') === 'revoke') {
           await this.wallet.revoke(form.get('target') ?? '', () => session.valid);
           return redirect(res, '/grants');
@@ -201,8 +224,9 @@ export class Browser {
       }
 
       if (path === '/' || path === '/entries' || entryId) return await this.notes(res, session, entryId, path === '/');
+      if (path === '/rules') return await this.rules(res, session);
       if (path === '/grants') return await this.access(res, session);
-      if (path === '/receipts' || receiptId) return await this.receipts(res, session, receiptId);
+      if (path === '/receipts' || receiptId) return await this.receipts(res, session, query, receiptId);
       if (path === '/proposals') return await this.proposals(res, session);
       return await this.approvals(res, session, approvalId);
     } catch (error) {
@@ -233,9 +257,13 @@ ${kinds.map(kind => `<option value="${kind}" ${kind === entry.kind ? 'selected' 
   private async approvals(res: ServerResponse, session: Session, id?: string) {
     const pending = await this.wallet.approvals(() => session.valid);
     if (!id) {
-      return page(res, 'Sharing requests', pending.length ?
-        `<ul>${pending.map(item => `<li><a href="/approvals/${item.id}">${escape(item.agentName)} · ${escape(item.ask.purpose)}</a></li>`).join('')}</ul>`
-        : '<p>No requests are waiting.</p>');
+      const alerts = await this.wallet.destinationAlerts(() => session.valid);
+      const notice = alerts.length ? `<section class="notice"><h2>Sharing blocked</h2>
+${alerts.map(item => `<p>bleib blocked ${escape(item.name)} because its model destination differed from the pairing.</p>`).join('')}
+<form method="post">${field(session)}<button name="action" value="dismiss-destinations">Dismiss</button></form></section>` : '';
+      return page(res, 'Sharing requests', notice + (pending.length ?
+        `<ul class="group">${pending.map(item => `<li><a class="row" href="/approvals/${item.id}">${escape(item.agentName)} · ${escape(item.ask.purpose)}</a></li>`).join('')}</ul>`
+        : '<p>No requests are waiting.</p>'));
     }
     const approval = pending.find(item => item.id === id);
     if (!approval) return page(res, 'Request unavailable', '<p>This request has expired or already has a decision.</p>', 404);
@@ -261,25 +289,56 @@ ${sensitive ? '<label><input type="checkbox" name="confirmed" value="yes"> I con
       `<article><h2>${escape(agent.name)}</h2><dl>${destinationDetails(agent.destination)}${detail('Agent ID', agent.id)}</dl>
 ${revoke(agent.id, 'Revoke agent')}${grants.filter(grant => grant.agentId === agent.id).map(grant =>
     `<section><h3>${escape(labels[grant.kind])} · ${duration[grant.duration]}</h3>
-<dl>${detail('Purpose', grant.purpose)}${detail('Permission ID', grant.id)}</dl>
+<dl>${grant.duration === 'denied' && grant.purpose ? detail('Purpose', grant.purpose) : ''}${detail('Permission ID', grant.id)}</dl>
 ${revoke(grant.id, grant.duration === 'denied' ? 'Remove denial' : 'Revoke permission')}</section>`).join('')}</article>`).join('')
       : '<p>No agents are connected.</p>');
   }
 
-  private async receipts(res: ServerResponse, session: Session, id?: string) {
+  private async rules(res: ServerResponse, session: Session) {
+    const rules = await this.wallet.rules(() => session.valid);
+    return page(res, 'Sharing rules', `<form class="card" method="post">${field(session)}
+<label for="rule">Write a rule in your own words</label>
+<input id="rule" name="rule" placeholder="Never share health with hosted models" maxlength="240" required>
+<button name="action" value="preview-rule">Review Rule</button></form>
+${rules.length ? `<ul class="group">${rules.map(rule => `<li class="cell">
+<p><strong>${escape(rule.text)}</strong></p><p class="secondary">${escape(describeRule(rule.policy))}</p>
+<form method="post">${field(session)}<input type="hidden" name="id" value="${rule.id}">
+<button name="action" value="remove-rule" aria-label="Remove rule: ${escape(rule.text)}">Remove</button></form></li>`).join('')}</ul>` : ''}`);
+  }
+
+  private async receipts(res: ServerResponse, session: Session, query: URLSearchParams, id?: string) {
     const receipts = await this.wallet.receipts(id, () => session.valid);
     if (!id) {
-      return page(res, 'What your AI saw', receipts.length ? `<ul>${receipts.map(receipt =>
-        `<li><a href="/receipts/${receipt.receipt_id}">${escape(receipt.agent)} · ${escape(receipt.purpose)}</a>
-<time datetime="${receipt.time}">${receipt.time}</time></li>`).join('')}</ul>` : '<p>No notes have been shared.</p>');
+      const report = await this.wallet.summary(() => session.valid);
+      const agent = query.get('agent') ?? '';
+      const kind = kindSchema.safeParse(query.get('kind')).data;
+      const agents = new Map(receipts.map(receipt => [receipt.agent_id, receipt.agent]));
+      const visible = receipts.filter(receipt =>
+        (!agent || receipt.agent_id === agent) && (!kind || receipt.kinds.includes(kind)));
+      return page(res, 'What your AI saw', `<section class="widget" aria-labelledby="week">
+<h2 id="week">This week</h2><div class="widget-count">${report.facts} <span>${report.facts === 1 ? 'fact shared' : 'facts shared'}</span></div>
+<p>${escape(report.summary)} ${escape(report.health)}</p></section>
+<form class="filters" method="get">
+<label for="filter-agent">Agent</label><select id="filter-agent" name="agent"><option value="">All agents</option>
+${[...agents].map(([id, name]) => `<option value="${escape(id)}" ${agent === id ? 'selected' : ''}>${escape(name)}</option>`).join('')}</select>
+<label for="filter-kind">Kind</label><select id="filter-kind" name="kind"><option value="">All kinds</option>
+${kinds.map(item => `<option value="${item}" ${item === kind ? 'selected' : ''}>${escape(labels[item])}</option>`).join('')}</select>
+<button>Filter</button></form>
+<h2>Timeline</h2>
+${visible.length ? `<ul class="group">${visible.map(receipt =>
+  `<li><a class="row receipt-row" href="/receipts/${receipt.receipt_id}"><strong>${escape(receipt.agent)}</strong>
+<span>${escape(receipt.purpose)}</span><span class="secondary">${escape(receipt.kinds.map(item => labels[item]).join(', '))} · ${receipt.destination_basis}</span>
+<time datetime="${receipt.time}">${escape(new Date(receipt.time).toLocaleString('en', { dateStyle: 'medium', timeStyle: 'short' }))}</time>
+</a></li>`).join('')}</ul>` : '<p>No matching receipts.</p>'}`);
     }
     const receipt = receipts[0] as Receipt;
-    return page(res, 'Sharing receipt', `<dl>${detail('Agent', receipt.agent)}
-${destinationDetails({ ...receipt, value: receipt.destination })}${detail('Purpose', receipt.purpose)}
+    return page(res, 'Sharing receipt', `<section class="card"><dl>${detail('Agent', receipt.agent)}
+${destinationDetails({ ...receipt, value: receipt.destination }, receipt.destination_basis, receipt.destination_host)}${detail('Purpose', receipt.purpose)}
 ${detail('Information', receipt.kinds.map(kind => labels[kind]).join(', '))}
 ${detail('Time (UTC)', receipt.time)}${detail('Receipt ID', receipt.receipt_id)}
-${detail('Content fingerprint (SHA-256)', receipt.content_digest)}</dl>
-<h2>Exactly what was shared</h2><pre>${escape(receipt.content)}</pre>`);
+${detail('Content fingerprint (SHA-256)', receipt.content_digest)}
+${receipt.outbound_digest ? detail('Model request fingerprint (SHA-256)', receipt.outbound_digest) : ''}</dl>
+<h2>Exactly what was shared</h2><pre>${escape(receipt.content)}</pre></section>`);
   }
 
   private async proposals(res: ServerResponse, session: Session) {

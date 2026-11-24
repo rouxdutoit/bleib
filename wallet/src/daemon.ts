@@ -7,6 +7,7 @@ import { credentialPattern, sha256, UserError } from './domain.js';
 import { json, jsonBody, text } from './http.js';
 import { handleBridge, McpHttp } from './mcp.js';
 import { verifyHome } from './store.js';
+import { handleProxy, isProxyPath, type ProxyRoutes } from './proxy.js';
 import { Browser } from './ui.js';
 import { Wallet } from './wallet.js';
 
@@ -22,9 +23,10 @@ const command = z.discriminatedUnion('action', [
   z.object({ action: z.literal('lock') }),
   z.object({ action: z.literal('recover'), identity: z.string().max(100), passphrase: z.string().max(1024) }),
   z.object({ action: z.literal('import'), path: z.string().max(4096), dialect: z.enum(['openclaw', 'hermes']) }),
-  z.object({ action: z.literal('pair'), name: z.string().max(100), destination: z.string().max(115), model: z.string().max(100).optional() }),
+  z.object({ action: z.literal('pair'), name: z.string().max(100), destination: z.string().max(115), model: z.string().max(100).optional(), proxy: z.enum(['openai', 'anthropic']).optional() }),
   z.object({ action: z.literal('revoke'), target: z.string().max(100) }),
   z.object({ action: z.literal('ui') }),
+  z.object({ action: z.literal('summary') }),
   z.object({ action: z.literal('receipts'), id: z.string().max(100).optional() }),
 ]);
 
@@ -42,9 +44,10 @@ async function runOwner(wallet: Wallet, browser: Browser, req: IncomingMessage, 
     case 'lock': value = await wallet.lock(); break;
     case 'recover': value = await wallet.recover(cmd.identity, cmd.passphrase); break;
     case 'import': value = await wallet.importWorkspace(cmd.path, cmd.dialect); break;
-    case 'pair': value = await wallet.pair(cmd.name, cmd.destination, cmd.model); break;
+    case 'pair': value = await wallet.pair(cmd.name, cmd.destination, cmd.model, cmd.proxy); break;
     case 'revoke': value = await wallet.revoke(cmd.target); break;
     case 'ui': value = await browser.openFromCli(); break;
+    case 'summary': value = await wallet.summary(); break;
     case 'receipts': value = await wallet.receipts(cmd.id); break;
   }
   json(res, 200, { value: value ?? null });
@@ -78,7 +81,7 @@ function close(server: Server) {
   });
 }
 
-export async function startDaemon(directory: string, options: Omit<ConstructorParameters<typeof Wallet>[2], 'onLock'>) {
+export async function startDaemon(directory: string, options: Omit<ConstructorParameters<typeof Wallet>[2], 'onLock' | 'routes'> & { routes?: ProxyRoutes }) {
   await verifyHome(directory);
   const home = await realpath(directory);
   const origin = walletOrigin(home);
@@ -95,6 +98,7 @@ export async function startDaemon(directory: string, options: Omit<ConstructorPa
     if (!req.url?.startsWith('/') || req.url.startsWith('//')) return text(res, 400, 'Invalid address.');
     const { pathname, origin: requestOrigin } = new URL(req.url, origin);
     if (requestOrigin !== origin) return text(res, 400, 'Invalid address.');
+    if (isProxyPath(pathname)) return handleProxy(wallet, options.routes ?? {}, req, res, pathname);
     if (pathname === '/stdio' && req.method === 'POST') return handleBridge(wallet, req, res);
     if (pathname === '/mcp') return mcp.handle(req, res);
     if (pathname === '/pair' && req.method === 'POST') {
@@ -178,9 +182,9 @@ export async function redeemCode(home: string, code: string) {
     method: 'POST', redirect: 'error',
     headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code }),
   }).catch(() => { throw new UserError('Start bleib serve in another terminal, then try again.'); });
-  const result = await res.json() as { credential?: string; error?: string };
+  const result = await res.json() as { credential?: string; error?: string; proxy?: 'openai' | 'anthropic' };
   if (!res.ok || !result.credential || !credentialPattern.test(result.credential)) {
     throw new UserError(result.error ?? 'The pairing code could not be used.');
   }
-  return { origin, credential: result.credential };
+  return { origin, credential: result.credential, proxy: result.proxy };
 }

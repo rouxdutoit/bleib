@@ -7,7 +7,8 @@ import { createInterface } from 'node:readline/promises';
 import { Writable } from 'node:stream';
 import { parseArgs } from 'node:util';
 import { callOwner, redeemCode, startDaemon, walletOrigin } from './daemon.js';
-import { UserError, type Receipt } from './domain.js';
+import { UserError, type ProxyProtocol, type Receipt } from './domain.js';
+import { proxyRoutes } from './proxy.js';
 import { serveStdio } from './mcp.js';
 import { prepareKit } from './store.js';
 
@@ -21,11 +22,12 @@ Usage: bleib [--home <directory>] <command>
   lock                                  Lock now
   recover <kit-file>                    Set a new passphrase from your recovery kit
   import openclaw|hermes <workspace>      Import workspace notes
-  pair <agent> --destination <place> [--model <name>]
+  pair <agent> --destination <place> [--model <name>] [--via-proxy openai|anthropic]
                                         Create a one-time pairing code
   connect                               Redeem a pairing code for an agent credential
   ui                                    Open the local wallet page
   revoke <agent-or-permission-id>        Revoke access
+  summary                               See what your AI saw this week
   receipts [receipt-id]                 List receipts or open one
   mcp                                   Start the paired stdio connection
 
@@ -56,9 +58,10 @@ async function newPassphrase(ask: (label: string) => Promise<string>) {
   return passphrase;
 }
 
-function settings(home: string, origin: string, credential: string) {
+function settings(home: string, origin: string, credential: string, proxy?: ProxyProtocol) {
   return {
     stdio: { type: 'stdio', command: 'bleib', args: ['mcp'], env: { BLEIB_HOME: home, BLEIB_AGENT_TOKEN: credential } },
+    ...(proxy ? { modelProxy: { protocol: proxy, baseUrl: `${origin}/v1`, apiKey: credential } } : {}),
     http: { type: 'http', url: `${origin}/mcp`, headers: { Authorization: `Bearer ${credential}` } },
   };
 }
@@ -74,7 +77,7 @@ async function main(argv: string[]) {
   const { values, positionals } = parseArgs({
     args: argv, allowPositionals: true, options: {
       home: { type: 'string' }, 'recovery-kit': { type: 'string' }, 'idle-minutes': { type: 'string' },
-      destination: { type: 'string' }, model: { type: 'string' }, help: { type: 'boolean', short: 'h' },
+      destination: { type: 'string' }, 'via-proxy': { type: 'string' }, model: { type: 'string' }, help: { type: 'boolean', short: 'h' },
     },
   });
   const [command, first, second] = positionals;
@@ -96,7 +99,7 @@ async function main(argv: string[]) {
     case 'serve': {
       const idle = Number(values['idle-minutes'] ?? '15');
       if (!Number.isFinite(idle) || idle <= 0 || idle > 1440) throw new UserError('Set an idle time above zero and at most 1,440 minutes.');
-      const daemon = await startDaemon(home, { idleMs: Math.max(1, Math.round(idle * 60_000)) });
+      const daemon = await startDaemon(home, { idleMs: Math.max(1, Math.round(idle * 60_000)), routes: proxyRoutes(process.env) });
       console.log(`Wallet available at ${daemon.origin} · locked`);
       const stop = () => { void daemon.close().then(() => { process.exitCode = 0; }); };
       process.once('SIGINT', stop);
@@ -127,17 +130,19 @@ async function main(argv: string[]) {
       break;
     }
     case 'pair': {
-      if (!first || !values.destination) throw new UserError('Usage: bleib pair <agent> --destination <place> [--model <name>]');
+      if (!first || !values.destination) throw new UserError('Usage: bleib pair <agent> --destination <place> [--model <name>] [--via-proxy openai|anthropic]');
+      const proxy = values['via-proxy'];
+      if (proxy !== undefined && proxy !== 'openai' && proxy !== 'anthropic') throw new UserError('Choose openai or anthropic for the proxy.');
       const result = await callOwner(home, {
-        action: 'pair', name: first, destination: values.destination, model: values.model,
+        action: 'pair', name: first, destination: values.destination, model: values.model, proxy,
       }) as { code: string; expiresInMinutes: number };
       console.log(`Pairing code (one use, ${result.expiresInMinutes} minutes): ${result.code}\nRun bleib connect with the same wallet home to redeem it.`);
-      console.log(JSON.stringify(settings(home, walletOrigin(home), '<credential from bleib connect>'), null, 2));
+      console.log(JSON.stringify(settings(home, walletOrigin(home), '<credential from bleib connect>', proxy), null, 2));
       break;
     }
     case 'connect': {
       const result = await prompt(async ask => redeemCode(home, (await ask('Pairing code: ')).trim()));
-      console.log(JSON.stringify(settings(home, result.origin, result.credential), null, 2));
+      console.log(JSON.stringify(settings(home, result.origin, result.credential, result.proxy), null, 2));
       break;
     }
     case 'ui': {
@@ -155,6 +160,11 @@ async function main(argv: string[]) {
       await callOwner(home, { action: 'revoke', target: first });
       console.log('Access revoked.');
       break;
+    case 'summary': {
+      const result = await callOwner(home, { action: 'summary' }) as { summary: string; health: string };
+      console.log(`${result.summary} ${result.health}`);
+      break;
+    }
     case 'receipts': {
       const receipts = await callOwner(home, { action: 'receipts', id: first }) as Receipt[];
       if (first) console.log(JSON.stringify(receipts[0], null, 2));

@@ -30,7 +30,15 @@ export const proposeSchema = z.object({
 export type Ask = z.infer<typeof askSchema>;
 export type Proposed = z.infer<typeof proposeSchema>;
 
-export type Destination = { value: string; provider: string | null; model: string | null };
+export type ProxyProtocol = 'openai' | 'anthropic';
+export type Destination = {
+  value: string; provider: string | null; model: string | null;
+  proxy?: { protocol: ProxyProtocol; origin: string };
+};
+export interface ObservedDestination {
+  protocol: ProxyProtocol; origin: string; provider: string; model: string; hosted: boolean;
+}
+
 export function destination(value: string, model?: string): Destination {
   if (model !== undefined && (!model.trim() || model.length > 100 || /[\p{Cc}\p{Cf}]/u.test(model))) {
     throw new UserError('Enter a model name of 1 to 100 characters.');
@@ -67,12 +75,13 @@ export interface Agent {
   credentialHash: string;
   revoked: boolean;
 }
-export interface Scope { agentId: string; kind: Kind; destination: string; purpose: string }
+export interface Scope { agentId: string; kind: Kind; destination: string; purpose?: string }
 export interface Grant extends Scope {
   id: string;
   duration: 'once' | 'always' | 'denied';
   sensitive: boolean;
   lastUsed: number;
+  decidedAt?: string;
   revoked: boolean;
   consumePreview?: { request: string; fingerprint: string; expires: number };
 }
@@ -101,7 +110,10 @@ export interface Receipt {
   agent: string;
   agent_id: string;
   destination: string;
-  destination_basis: 'declared';
+  destination_basis: 'declared' | 'observed';
+  destination_host?: string;
+  outbound_digest?: string;
+  decisions?: { kind: Kind; grant_id: string; mode: 'once' | 'always'; decided_at?: string }[];
   provider: string | null;
   model: string | null;
   purpose: string;
@@ -118,7 +130,8 @@ export type ToolReply =
   | { state: 'locked' | 'denied' | 'unavailable' | 'no_match' }
   | { state: 'ready'; agent: string; destination: string; kinds: readonly Kind[] }
   | { state: 'approval_required'; grant_request_id: string; approve_url: string; fresh?: boolean }
-  | { state: 'released'; receipt_id: string; content: string }
+  | { state: 'released'; receipt_id: string; content: string; constraints?: string[] }
+  | { state: 'proxy_ready'; reference: string; constraints?: string[] }
   | { state: 'proposal_pending'; proposal_id: string };
 
 export class UserError extends Error {}

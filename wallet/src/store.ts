@@ -3,6 +3,7 @@ import { link, mkdir, open, readFile, readdir, realpath, rename, rm, stat } from
 import { basename, dirname, join, relative, isAbsolute, resolve } from 'node:path';
 import { generateIdentity, identityToRecipient, journalKey, parseEnvelope, seal, unseal, unwrapIdentity, wrapIdentity } from './crypto.js';
 import { canonical, equal, secret, sha256, UserError } from './domain.js';
+import type { Rule } from './policy.js';
 import type { Agent, Approval, Entry, Grant, Pairing, Proposal, Receipt } from './domain.js';
 
 export const missing = (error: unknown) => (error as NodeJS.ErrnoException).code === 'ENOENT';
@@ -110,6 +111,10 @@ export async function recover(home: string, identity: string, passphrase: string
 }
 
 interface Change {
+  rules?: Rule[];
+  removedRules?: string[];
+  destinationBlocks?: { agentId: string; time: string }[];
+  clearedDestinationBlocks?: string[];
   agents?: Agent[];
   pairings?: Pairing[];
   entries?: Entry[];
@@ -122,6 +127,8 @@ interface Transaction { sequence: number; previous: string | null; change: Chang
 type BeforeCommit = (change: Readonly<Change>) => void;
 
 export class Store {
+  readonly rules = new Map<string, Rule>();
+  readonly destinationBlocks = new Map<string, string>();
   readonly agents = new Map<string, Agent>();
   readonly pairings = new Map<string, Pairing>();
   readonly entries = new Map<string, Entry>();
@@ -184,6 +191,10 @@ export class Store {
 
   private apply(transaction: Transaction, mac: string) {
     const { change } = transaction;
+    for (const rule of change.rules ?? []) this.rules.set(rule.id, rule);
+    for (const id of change.removedRules ?? []) this.rules.delete(id);
+    for (const item of change.destinationBlocks ?? []) this.destinationBlocks.set(item.agentId, item.time);
+    for (const id of change.clearedDestinationBlocks ?? []) this.destinationBlocks.delete(id);
     for (const agent of change.agents ?? []) this.agents.set(agent.id, agent);
     for (const pairing of change.pairings ?? []) this.pairings.set(pairing.id, pairing);
     for (const entry of change.entries ?? []) this.entries.set(entry.id, entry);

@@ -25,6 +25,10 @@ export function operations(wallet: Wallet, credential: string): AgentOperations 
 }
 
 function format(result: ToolReply): CallToolResult {
+  if (result.state === 'proxy_ready') {
+    const { reference, ...status } = result;
+    return { content: [{ type: 'text', text: reference }], structuredContent: status };
+  }
   if (result.state === 'released') {
     const { content, ...status } = result;
     return { content: [{ type: 'text', text: content }], structuredContent: status };
@@ -50,7 +54,7 @@ export function createMcp(ops: AgentOperations) {
     description: 'Call first to check wallet availability and your connection.',
   }, async () => format(await safe(ops.status)));
   server.registerTool('bleib_context_request', {
-    description: 'Ask for brief matching excerpts. Use a consistent, specific purpose for a repeated task.',
+    description: 'Ask for brief matching excerpts. State the specific purpose. If a proxy reference is returned, preserve it as tool-result text.',
     inputSchema: askSchema,
   }, async (input, extra) => {
     const result = await safe(() => ops.ask(input));
