@@ -106,15 +106,51 @@ Sources: `docs/BRIEF.md`, `docs/research/` (greenfield, Codex, teardowns 1–3; 
 
 ## Traceability
 
-Filled in by the roadmap.
-
 | Requirement | Phase | Status |
 |-------------|-------|--------|
+| SITE-01 | Phase 1 | Pending |
+| SITE-02 | Phase 1 | Pending |
+| SITE-03 | Phase 1 | Pending |
+| SITE-04 | Phase 1 | Pending |
+| SITE-05 | Phase 1 | Pending |
+| SITE-06 | Phase 1 | Pending |
+| SITE-07 | Phase 1 | Pending |
+| SITE-08 | Phase 1 | Pending |
+| SITE-09 | Phase 1 | Pending |
+| SITE-10 | Phase 1 | Pending |
+| SITE-11 | Phase 1 | Pending |
+| SITE-12 | Phase 1 | Pending |
+| WALT-01 | Phase 2 | Pending |
+| WALT-02 | Phase 2 | Pending |
+| WALT-03 | Phase 2 | Pending |
+| WALT-04 | Phase 2 | Pending |
+| IMPT-01 | Phase 2 | Pending |
+| IMPT-02 | Phase 3 | Pending |
+| DOOR-01 | Phase 2 | Pending |
+| DOOR-02 | Phase 2 | Pending |
+| DOOR-03 | Phase 3 | Pending |
+| DOOR-04 | Phase 2 | Pending |
+| CONS-01 | Phase 2 | Pending |
+| CONS-02 | Phase 2 | Pending |
+| CONS-03 | Phase 2 | Pending |
+| CONS-04 | Phase 3 | Pending |
+| CONS-05 | Phase 2 | Pending |
+| CONS-06 | Phase 2 | Pending |
+| DEST-01 | Phase 2 | Pending |
+| DEST-02 | Phase 3 | Pending |
+| RCPT-01 | Phase 2 | Pending |
+| RCPT-02 | Phase 3 | Pending |
+| RCPT-03 | Phase 3 | Pending |
+| PROP-01 | Phase 3 | Pending |
+| PROP-02 | Phase 3 | Pending |
 
 **Coverage:**
-- v1 requirements: 37 total
-- Mapped to phases: 0 (pending roadmap)
+- v1 requirements: 35 total
+- Mapped to phases: 35
+- Unmapped: 0
+
+By phase: Phase 1 = 12, Phase 2 = 15, Phase 3 = 8.
 
 ---
 *Requirements defined: 24 November 2026*
-*Last updated: 24 November 2026 after initial definition*
+*Last updated: 24 November 2026 after roadmap creation (traceability filled)*
