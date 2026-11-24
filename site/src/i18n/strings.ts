@@ -99,8 +99,8 @@ const en = {
         more: { to: 'how', hash: '#proposals' },
       },
       {
-        h: ['We never see', 'your memory.'],
-        p: 'It’s encrypted on your device. Without your key, it’s noise. No account, no tracking, nothing to sell.',
+        h: ['Only you', 'can read it.'],
+        p: 'Your memory is encrypted on your device, with a key only you hold. No account, no tracking, nothing to sell.',
         more: { to: 'security', hash: '' },
         dark: true,
       },
@@ -289,8 +289,8 @@ const de: Strings = {
         more: { to: 'how', hash: '#proposals' },
       },
       {
-        h: ['Wir sehen dein', 'Gedächtnis nie.'],
-        p: 'Es ist auf deinem Gerät verschlüsselt. Ohne deinen Schlüssel ist es Rauschen. Kein Konto, kein Tracking, nichts zu verkaufen.',
+        h: ['Nur du', 'kannst es lesen.'],
+        p: 'Dein Gedächtnis ist auf deinem Gerät verschlüsselt, mit einem Schlüssel, den nur du hast. Kein Konto, kein Tracking, nichts zu verkaufen.',
         more: { to: 'security', hash: '' },
         dark: true,
       },

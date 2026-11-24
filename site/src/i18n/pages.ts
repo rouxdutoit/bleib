@@ -196,7 +196,7 @@ const en: Docs = {
   security: {
     title: 'Security and privacy',
     description: 'How bleib protects your memory and what it trusts on your device.',
-    intro: ['We never see your memory. It’s encrypted on your device, with no account and no tracking. Every share leaves a receipt, and the code is open.'],
+    intro: ['Only you can read your memory. It’s encrypted on your device, with no account and no tracking. Every share leaves a receipt, and the code is open.'],
     cta: { label: 'Report a vulnerability', href: SECURITY_MAIL },
     sections: [
       {
@@ -348,7 +348,7 @@ const en: Docs = {
   appPrivacy: {
     title: 'App privacy',
     description: 'How bleib and its browser extension handle your memory.',
-    intro: ['We never see your memory. bleib is in development. The app and extension have no bleib account, telemetry, analytics or automatic crash reporting.'],
+    intro: ['Only you can read your memory. bleib is in development. The app and extension have no bleib account, telemetry, analytics or automatic crash reporting.'],
     sections: [
       {
         h: 'What the extension reads',
@@ -552,7 +552,7 @@ const de: Docs = {
   security: {
     title: 'Sicherheit und Datenschutz',
     description: 'Wie bleib dein Gedächtnis schützt und worauf es sich auf deinem Gerät verlässt.',
-    intro: ['Wir sehen dein Gedächtnis nie. Es ist auf deinem Gerät verschlüsselt, ohne Konto und ohne Tracking. Jede Freigabe hinterlässt einen Beleg, und der Quellcode ist offen.'],
+    intro: ['Nur du kannst dein Gedächtnis lesen. Es ist auf deinem Gerät verschlüsselt, ohne Konto und ohne Tracking. Jede Freigabe hinterlässt einen Beleg, und der Quellcode ist offen.'],
     cta: { label: 'Sicherheitslücke melden', href: SECURITY_MAIL },
     sections: [
       {
@@ -704,7 +704,7 @@ const de: Docs = {
   appPrivacy: {
     title: 'Datenschutz in der App',
     description: 'Wie bleib und die Browser-Erweiterung mit deinem Gedächtnis umgehen.',
-    intro: ['Wir sehen dein Gedächtnis nie. bleib ist in Entwicklung. App und Erweiterung kommen ohne bleib-Konto, Telemetrie, Nutzungsanalyse und automatische Absturzberichte aus.'],
+    intro: ['Nur du kannst dein Gedächtnis lesen. bleib ist in Entwicklung. App und Erweiterung kommen ohne bleib-Konto, Telemetrie, Nutzungsanalyse und automatische Absturzberichte aus.'],
     sections: [
       {
         h: 'Was die Erweiterung liest',
