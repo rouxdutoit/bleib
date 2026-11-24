@@ -2,7 +2,8 @@
  * Plays each scene's card morph once, when the scene comes into view: data-step="n" plus
  * cumulative classes s1..sn (see StoryVisual.astro, Hero.astro and Finale.astro).
  * A [data-type] element inside a scene is typed out at step 1, and later steps wait for it.
- * data-gaps="a,b,…" sets the pause after each step (ms), so a reader can finish before the next change.
+ * data-start sets the pause before step 1 and data-gaps="a,b,…" the pause after each step (ms): long enough
+ * to read what is on screen (about 0.25 s a word), while each transition itself stays quick.
  * [data-scramble-at="n"] text scrambles at step n, like fazit.dev's wordmark in reverse: each character
  * cycles through glyphs, then settles on its character of data-cipher (the same text, encrypted).
  * data-sv="scroll" waits for the person's first scroll before playing (the hero, which is in view on arrival).
@@ -89,7 +90,7 @@ export function play(sv: HTMLElement): void {
   const interval = Number(sv.dataset.interval ?? STEP);
   const gaps = (sv.dataset.gaps ?? '').split(',').map(Number);
   const typer = sv.querySelector<HTMLElement>('[data-type]');
-  let at = START;
+  let at = Number(sv.dataset.start ?? START);
   for (let k = 1; k <= steps; k++) {
     later(sv, () => setStep(sv, k), at);
     at = k === 1 && typer ? type(sv, typer, at) + 300 : at + (gaps[k - 1] || interval);

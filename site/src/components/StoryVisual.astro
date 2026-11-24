@@ -15,6 +15,9 @@ const { lang, scene } = Astro.props;
 const c = t(lang).cards;
 const STEPS = [4, 3, 4, 6, 3, 2];
 const INTERVAL = [900, 900, 900, 620, 900, 1000];
+/** Reading time: before step 1, the card as it first appears; GAPS, what a step reveals (see scripts/story.ts). */
+const START = [1600, 2600, 1800, 1500, 2200, 1800];
+const GAPS = ['', '900,1600', '900,900,1500', '', '900,1300', ''];
 /** Scene 6: a fixed stand-in for each value's ciphertext, one character per character of the value. */
 const cipher = (text: string) => btoa(encodeURIComponent(text + text)).replace(/[^A-Za-z0-9]/g, '').slice(0, [...text].length);
 
@@ -22,7 +25,7 @@ import { icon, type IconName } from './icons';
 const svg = (name: string, cls = 'g') => icon(name as IconName, cls);
 const cx = (n: number) => `cx at-${n}`;
 ---
-<div class="sv" data-sv data-steps={STEPS[scene]} data-interval={INTERVAL[scene]} data-step="0">
+<div class="sv" data-sv data-steps={STEPS[scene]} data-interval={INTERVAL[scene]} data-start={START[scene]} data-gaps={GAPS[scene] || undefined} data-step="0">
   <div class="tray">
     <div class="stack" aria-hidden="true">
       {scene === 0 && (

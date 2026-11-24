@@ -37,6 +37,11 @@ const all = s.scenes.map((x, i) => ({ i, dark: 'dark' in x }));
       linear-gradient(to bottom, var(--v-ink) 5px, var(--joint) 5px) center / 1px 9px no-repeat;
   }
   .story-dark ~ :global(section .rails::after) { background-position: left center, center center; }
+  /* In dark mode the page is black too, so the line closing the section is yellow, like the one opening it. */
+  :global(:root[data-theme='dark']) .story-dark ~ :global(section > .rails) { border-top-color: color-mix(in srgb, var(--v-ink) 32%, transparent); }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .story-dark ~ :global(section > .rails) { border-top-color: color-mix(in srgb, var(--v-ink) 32%, transparent); }
+  }
 </style>
 
 <script>
