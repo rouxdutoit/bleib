@@ -85,3 +85,16 @@ Items acknowledged and deferred at milestone close, most recent first:
 Last session: 2026-11-24
 Stopped at: Roadmap created; Phase 1 ready to plan
 Resume file: None
+
+## Phase 2 — Parallel wallet worktree
+
+- Branch `wallet` completed plans 02-01 and 02-02 on 24 November 2026. Claude review is pending.
+- The SDK tracer completed wallet setup, import, pairing, browser approval and a durable exact-text receipt. Both transports, lint, typecheck, packaging and browser verification passed.
+- Vitest passed 20 of 20 tests on Node 20.0.0 and Node 24.22.2. See [Phase 2 verification](phases/02-wallet-core-loop/02-VERIFICATION.md).
+- Founder review should confirm purpose-scoped re-asking, the authenticated browser handoff for elicitation, and how strongly to require a declared model in the pairing prompt.
+
+## Phase 3 — Parallel wallet worktree
+
+- Branch `wallet` implemented plans 03-01 through 03-03 on 24 November 2026. Remembered permissions follow agent, kind and destination. A stated purpose is recorded on every receipt. Hosted model names remain optional at pairing, and proxy receipts record the observed name.
+- Vitest passed 33 tests on Node 20.0.0 and 24.22.2. Chromium passed 36 axe scans at 360 and 1280 px in light and dark. All five snippets passed SDK disclosure tests. Claude Code, OpenClaw and Hermes also connected in their native CLI checks. See [Phase 3 verification](phases/03-full-control-and-proof/03-VERIFICATION.md).
+- The independent Phase 2 review remained pending at the verification cut. Native Claude Desktop and Cursor acceptance and founder publication remain open. The standalone OpenClaw final-request adapter is deferred.

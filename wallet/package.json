@@ -1,0 +1,41 @@
+{
+  "name": "bleib",
+  "version": "0.2.0",
+  "description": "A local encrypted wallet for the information you share with your AI",
+  "type": "module",
+  "bin": {
+    "bleib": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "docs",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint src test",
+    "typecheck": "tsc --noEmit",
+    "pretest": "npm run build",
+    "test": "vitest run",
+    "prepack": "npm run build",
+    "test:browser": "npm run build && node test/browser/phase3.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "age-encryption": "0.2.4",
+    "yaml": "2.9.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@types/node": "20.19.43",
+    "eslint": "9.39.5",
+    "playwright": "1.65.1",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.74.0",
+    "vitest": "3.2.7"
+  }
+}
