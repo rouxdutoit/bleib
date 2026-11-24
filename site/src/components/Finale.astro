@@ -1,9 +1,8 @@
 ---
-/** The closer: the password-manager moment the hero promises, one action, and a quiet line of trust. */
+/** The closer: the password-manager moment the hero promises, and one action. */
 import Mark from './Mark.astro';
 import Rails from './Rails.astro';
 import EarlyAccessForm from './EarlyAccessForm.astro';
-import { icon, type IconName } from './icons';
 import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -12,19 +11,20 @@ const s = t(lang).finale;
 <section class="finale has-rails" id="early-access" aria-labelledby="finale-title">
   <Rails />
   <div class="wrap inner">
-    <figure class="prompt" aria-hidden="true">
-      <span class="app"><Mark size={22} /></span>
-      <p class="t-headline p-title">{s.prompt.title}</p>
-      <p class="t-body fact"><span class="yes" set:html={icon('check')} />{s.prompt.fact}</p>
-      <p class="t-foot p-from">{s.prompt.from}</p>
-      <span class="actions"><span class="b b-2">{s.prompt.notNow}</span><span class="b b-1">{s.prompt.save}</span></span>
+    <figure class="scene" aria-hidden="true">
+      <div class="win">
+        <div class="bar"><span class="lights"><i></i><i></i><i></i></span><span class="t-foot site">{s.prompt.site}</span><span class="lights ghost"><i></i><i></i><i></i></span></div>
+        <div class="chat"><p class="t-body bubble">{s.prompt.said}</p></div>
+        <div class="save">
+          <span class="app"><Mark size={14} /></span>
+          <span class="save-text"><span class="t-foot save-title">{s.prompt.title}</span><span class="t-sub fact">{s.prompt.fact}</span></span>
+          <span class="b b-2">{s.prompt.notNow}</span><span class="b b-1">{s.prompt.save}</span>
+        </div>
+      </div>
     </figure>
     <h2 id="finale-title" class="title">{s.h}</h2>
     <p class="sub">{s.p}</p>
     <div class="form"><EarlyAccessForm lang={lang} /></div>
-    <ul class="trust t-foot">
-      {s.trust.map((x) => <li><span set:html={icon(x.icon as IconName)} />{x.t}</li>)}
-    </ul>
   </div>
 </section>
 
@@ -32,27 +32,28 @@ const s = t(lang).finale;
   .finale { padding: clamp(96px, 12vw, 160px) 0 clamp(72px, 9vw, 120px); }
   .inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
 
-  /* A macOS save prompt, as a password manager shows it. Decorative; the headline carries the meaning. */
-  .prompt { margin: 0 0 clamp(40px, 6vw, 64px); width: min(300px, 100%); padding: 20px 20px 16px; border-radius: 22px; background: var(--cell); color: var(--label); box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; }
-  .prompt p { margin: 0; }
-  .app { width: 44px; height: 44px; border-radius: 11px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; margin-bottom: 10px; }
-  .fact { margin-top: 10px !important; width: 100%; display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: var(--fill); text-align: left; }
-  .yes { flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: #f6e79a; color: #0a0a0a; }
-  .yes :global(svg) { width: 15px; height: 15px; display: block; }
-  .p-from { margin-top: 8px !important; color: var(--label-2); }
-  .actions { margin-top: 16px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .b { display: grid; place-items: center; min-height: 36px; border-radius: 999px; font-size: 15px; font-weight: 600; }
-  .b-2 { background: var(--fill); color: var(--label); }
-  .b-1 { background: #0a0a0a; color: #ffffff; }
-  :global(:root[data-theme='dark']) .b-1 { background: #f6e79a; color: #0a0a0a; }
-  @media (prefers-color-scheme: dark) {
-    :global(:root:not([data-theme='light'])) .b-1 { background: #f6e79a; color: #0a0a0a; }
-  }
+  /* A picture, not a control: a chat with bleib's save bar, as a password manager shows it. */
+  .scene { margin: 0 0 clamp(40px, 6vw, 64px); width: min(440px, 100%); }
+  .win { border-radius: 18px; background: var(--cell); color: var(--label); box-shadow: var(--shadow); overflow: hidden; text-align: left; }
+  .bar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 34px; padding: 0 12px; border-bottom: 1px solid var(--hairline); }
+  .lights { display: inline-flex; gap: 6px; }
+  .lights i { width: 9px; height: 9px; border-radius: 50%; background: #ff5f57; }
+  .lights i:nth-child(2) { background: #febc2e; }
+  .lights i:nth-child(3) { background: #28c840; }
+  .lights.ghost { visibility: hidden; justify-self: end; }
+  .site { color: var(--label-2); }
+  .chat { display: flex; justify-content: flex-end; padding: 18px 16px 14px; }
+  .bubble { margin: 0; max-width: 80%; padding: 8px 14px; border-radius: 18px; background: var(--fill); }
+  .save { display: flex; align-items: center; gap: 10px; margin: 0 10px 10px; padding: 8px 8px 8px 10px; border-radius: 14px; background: var(--fill); }
+  .app { flex: none; width: 28px; height: 28px; border-radius: 7px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
+  .save-text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .save-title { color: var(--label-2); }
+  .fact { color: var(--label); }
+  .b { flex: none; padding: 5px 11px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+  .b-2 { color: var(--label-2); }
+  .b-1 { background: #f6e79a; color: #0a0a0a; }
 
   .title { font-size: clamp(44px, 7vw, 88px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 700; }
   .sub { margin: 18px 0 0; font-size: clamp(17px, 1.7vw, 21px); line-height: 1.45; color: var(--muted); text-wrap: balance; }
   .form { margin-top: 32px; width: 100%; display: flex; justify-content: center; }
-  .trust { list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; color: var(--muted); }
-  .trust li { display: inline-flex; align-items: center; gap: 6px; }
-  .trust :global(svg) { width: 15px; height: 15px; display: block; }
 </style>

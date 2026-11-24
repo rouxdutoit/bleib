@@ -46,13 +46,17 @@ const en = {
     themeToLight: 'Switch to light mode',
   },
   hero: {
-    eyebrow: 'Free and open source',
+    eyebrow: 'In development',
     h1a: 'Your AI memory.',
     h1b: 'In your hands.',
     sub: ['Stop repeating yourself to every AI.', 'Like a password manager, it remembers for you.', 'Each AI sees only what it needs.'],
     primary: 'Get early access',
     secondary: 'View on GitHub',
-    note: 'In development.',
+    trust: [
+      { icon: 'lock', t: 'Encrypted on your device' },
+      { icon: 'code', t: 'Open source' },
+      { icon: 'savings', t: 'Free, for good' },
+    ],
   },
   preview: {
     file: 'bleib · Your wallet',
@@ -167,14 +171,9 @@ const en = {
     },
   },
   finale: {
-    prompt: { title: 'Save to bleib?', fact: 'Prefers aisle seats', from: 'From your chat with Claude', notNow: 'Not Now', save: 'Save' },
+    prompt: { site: 'claude.ai', said: 'I always book an aisle seat.', title: 'Save to bleib?', fact: 'Prefers aisle seats', notNow: 'Not Now', save: 'Save' },
     h: 'Tell it once.',
     p: 'Every AI gets what it needs. Nothing more.',
-    trust: [
-      { icon: 'lock', t: 'Encrypted on your device' },
-      { icon: 'code', t: 'Open source' },
-      { icon: 'savings', t: 'Free, for good' },
-    ],
   },
   form: {
     label: 'Email address',
@@ -234,13 +233,17 @@ const de: Strings = {
     themeToLight: 'Helles Design einschalten',
   },
   hero: {
-    eyebrow: 'Kostenlos und Open Source',
+    eyebrow: 'In Entwicklung',
     h1a: 'Dein KI-Gedächtnis.',
     h1b: 'In deiner Hand.',
     sub: ['Schluss damit, jeder KI alles neu zu erzählen.', 'Wie ein Passwort-Manager merkt es sich alles für dich.', 'Jede KI sieht nur, was sie braucht.'],
     primary: 'Frühen Zugang sichern',
     secondary: 'Auf GitHub ansehen',
-    note: 'In Entwicklung.',
+    trust: [
+      { icon: 'lock', t: 'Verschlüsselt auf deinem Gerät' },
+      { icon: 'code', t: 'Open Source' },
+      { icon: 'savings', t: 'Dauerhaft kostenlos' },
+    ],
   },
   preview: {
     file: 'bleib · Deine Wallet',
@@ -355,14 +358,9 @@ const de: Strings = {
     },
   },
   finale: {
-    prompt: { title: 'In bleib sichern?', fact: 'Bevorzugt Gangplätze', from: 'Aus deinem Chat mit Claude', notNow: 'Nicht jetzt', save: 'Sichern' },
+    prompt: { site: 'claude.ai', said: 'Ich buche immer einen Gangplatz.', title: 'In bleib sichern?', fact: 'Bevorzugt Gangplätze', notNow: 'Nicht jetzt', save: 'Sichern' },
     h: 'Einmal sagen.',
     p: 'Jede KI bekommt, was sie braucht. Mehr nicht.',
-    trust: [
-      { icon: 'lock', t: 'Verschlüsselt auf deinem Gerät' },
-      { icon: 'code', t: 'Open Source' },
-      { icon: 'savings', t: 'Dauerhaft kostenlos' },
-    ],
   },
   form: {
     label: 'E-Mail-Adresse',
