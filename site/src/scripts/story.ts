@@ -5,7 +5,7 @@
  * data-start sets the pause before step 1 and data-gaps="a,b,…" the pause after each step (ms): long enough
  * to read what is on screen (about 0.25 s a word), while each transition itself stays quick.
  * [data-scramble-at="n"] text scrambles at step n, like fazit.dev's wordmark in reverse: each character
- * cycles through glyphs, then settles on its character of data-cipher (the same text, encrypted).
+ * cycles through glyphs, then settles on its character of data-cipher (how it reads without the key).
  * data-sv="scroll" waits for the person's first scroll before playing (the hero, which is in view on arrival).
  * With reduced motion the final state shows at once.
  */
@@ -15,7 +15,7 @@ const STEP = 900;
 const GLYPHS = '-_/\\|<>~^*+=:;!?#%&@0123456789';
 const glyph = () => GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
 
-/** Cycles each character of el through glyphs, left to right, until it settles on its ciphertext character. */
+/** Cycles each character of el through glyphs, left to right, until it settles on its data-cipher character. */
 const scramble = (el: HTMLElement) => {
   const text = (el.dataset.text ??= el.textContent ?? '');
   const cipher = [...(el.dataset.cipher ?? '')];

@@ -18,8 +18,8 @@ const INTERVAL = [900, 900, 900, 620, 900, 1000];
 /** Reading time: before step 1, the card as it first appears; GAPS, what a step reveals (see scripts/story.ts). */
 const START = [1600, 2600, 1800, 1500, 2200, 1800];
 const GAPS = ['', '900,1600', '900,900,1500', '', '900,1300', ''];
-/** Scene 6: a fixed stand-in for each value's ciphertext, one character per character of the value. */
-const cipher = (text: string) => btoa(encodeURIComponent(text + text)).replace(/[^A-Za-z0-9]/g, '').slice(0, [...text].length);
+/** Scene 6: without the key, each character reads as a password dot. */
+const dots = (text: string) => '•'.repeat([...text].length);
 
 import { icon, type IconName } from './icons';
 const svg = (name: string, cls = 'g') => icon(name as IconName, cls);
@@ -205,8 +205,8 @@ const cx = (n: number) => `cx at-${n}`;
             {c.wallet.rows.slice(0, 3).map((r) => (
               <li class="cell">
                 <span class="ico" set:html={svg(r.icon)} />
-                <span class="t-body cell-k"><span class="seal" data-scramble-at="2" data-cipher={cipher(r.k)}>{r.k}</span></span>
-                <span class="t-body c-2 cell-v"><span class="seal" data-scramble-at="2" data-cipher={cipher(r.v)}>{r.v}</span></span>
+                <span class="t-body cell-k"><span class="seal" data-scramble-at="2" data-cipher={dots(r.k)}>{r.k}</span></span>
+                <span class="t-body c-2 cell-v"><span class="seal" data-scramble-at="2" data-cipher={dots(r.v)}>{r.v}</span></span>
               </li>
             ))}
           </ul>
@@ -254,10 +254,10 @@ const cx = (n: number) => `cx at-${n}`;
   .ico :global(.g) { width: 17px; height: 17px; }
   .cell-k { flex: 1; min-width: 0; }
   .blk { display: block; }
-  /* Scene 6: every character scrambles, then settles as ciphertext (scripts/story.ts). */
+  /* Scene 6: every character scrambles, then settles as a password dot (scripts/story.ts). */
   .seal :global(.ch) { position: relative; }
   .seal :global(.ch.sg) { visibility: hidden; }
-  .seal :global(.ct) { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.88em; }
+  .seal :global(.ct) { letter-spacing: 0.08em; }
   .seal :global(.ch.sg::after) { content: attr(data-g); position: absolute; top: 0; left: 50%; transform: translateX(-50%); visibility: visible; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-weight: 400; color: var(--label-3); }
   .cell-v { text-align: right; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
   .inline-g { display: inline-flex; }
