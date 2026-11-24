@@ -49,7 +49,12 @@ const playIcon = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v
 </section>
 
 <style>
+  /* Text and card read as one centred pair with a fixed gap. */
   .story {
+    --card-w: min(500px, 42vw);
+    --text-w: min(420px, 34vw);
+    --pair-gap: clamp(48px, 6vw, 104px);
+    --pair-w: min(calc(var(--text-w) + var(--pair-gap) + var(--card-w)), var(--colw));
     position: relative;
     display: grid;
   }
@@ -69,7 +74,6 @@ const playIcon = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v
     pointer-events: none;
   }
   .stage-card {
-    --card-w: min(440px, 38vw);
     position: absolute;
     top: 50%;
     height: 0;
@@ -78,10 +82,10 @@ const playIcon = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v
   }
   /* The card sits at the inner edges of the shared content column (see --colw). */
   .stage-card[data-side='right'] {
-    left: calc((100% + var(--colw)) / 2 - var(--card-w));
+    left: calc(50% + var(--pair-w) / 2 - var(--card-w));
   }
   .stage-card[data-side='left'] {
-    left: calc((100% - var(--colw)) / 2);
+    left: calc(50% - var(--pair-w) / 2);
   }
   .slot {
     position: absolute;
@@ -103,14 +107,14 @@ const playIcon = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v
     min-height: 100svh;
     display: flex;
     align-items: center;
-    width: var(--colw);
+    width: var(--pair-w);
     margin: 0 auto;
   }
   .frame[data-side='right'] {
     justify-content: flex-end;
   }
   .frame-text {
-    width: min(460px, 44%);
+    width: var(--text-w);
   }
   .frame[data-side='right'] .frame-text {
     margin-right: 0;
@@ -175,6 +179,7 @@ const playIcon = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v
       display: none;
     }
     .frame {
+      width: var(--colw);
       min-height: 0;
       flex-direction: column;
       align-items: stretch;

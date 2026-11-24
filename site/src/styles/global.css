@@ -423,10 +423,16 @@ h2 {
 .c-2 { color: var(--label-2); }
 .c-3 { color: var(--label-3); }
 
-/* Product mock-ups sit in a tray; cards are cells with concentric radii (tray 34 − padding 12 = 22). */
+/* Product mock-ups sit in a tray; cards are cells with concentric radii (tray 50 − padding 28 = 22). */
 .tray {
-  border-radius: 34px;
-  padding: 12px;
+  border-radius: 50px;
+  padding: 28px;
+}
+@media (max-width: 767px) {
+  .tray {
+    border-radius: 38px;
+    padding: 16px;
+  }
 }
 .card {
   border-radius: 22px;
