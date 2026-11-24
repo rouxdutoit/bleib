@@ -1,4 +1,4 @@
-import type { Lang, RouteKey } from './strings';
+import { GITHUB_URL, type Lang, type RouteKey } from './strings';
 import type { IconName } from '../components/icons';
 
 /**
@@ -412,7 +412,8 @@ const en: Docs = {
   developers: {
     title: 'Developers',
     description: 'bleib for developers: a local MCP door, open formats and receipts you can check.',
-    intro: ['bleib is in development and will be open source. This page describes what we are building, so you can tell us what you need.'],
+    intro: ['bleib is open source and in development. The wallet works today; this page shows how it fits together, so you can try it and tell us what you need.'],
+    cta: { label: 'View on GitHub', href: GITHUB_URL },
     sections: [
       {
         h: 'A local door over MCP',
@@ -435,11 +436,13 @@ const en: Docs = {
         ],
       },
       {
-        h: 'Planned commands',
+        h: 'Try it',
         blocks: [
-          { code: 'npx bleib init' },
-          { code: 'bleib import openclaw ~/.openclaw/workspace' },
-          { code: 'bleib pair claude --destination provider:anthropic' },
+          { p: 'Node 20 or newer, on Linux or macOS. Build and install from the repository, then follow the setup guide for your AI app.' },
+          { code: 'git clone https://github.com/rouxdutoit/bleib && cd bleib/wallet' },
+          { code: 'npm ci && npm pack && npm install --global ./bleib-*.tgz' },
+          { code: 'bleib init' },
+          { code: "bleib pair 'Claude Code' --destination provider:Anthropic" },
           { code: 'bleib serve' },
         ],
       },
@@ -457,7 +460,7 @@ const en: Docs = {
       },
       {
         h: 'Get involved',
-        blocks: [{ p: 'The repository will open on GitHub soon. Until then, write to hello@rouxdutoit.com, or join early access on the home page.' }],
+        blocks: [{ p: 'The code is on GitHub at github.com/rouxdutoit/bleib. Open an issue, send a pull request, or write to hello@rouxdutoit.com. Please report security issues by email, not in public.' }],
       },
     ],
   },
@@ -1004,7 +1007,8 @@ const de: Docs = {
   developers: {
     title: 'Entwickler',
     description: 'bleib für Entwickler: eine lokale MCP-Tür, offene Formate und überprüfbare Belege.',
-    intro: ['bleib ist in Entwicklung und wird Open Source. Hier steht, was wir bauen, damit du uns sagen kannst, was du brauchst.'],
+    intro: ['bleib ist Open Source und in Entwicklung. Die Wallet funktioniert schon; hier steht, wie sie aufgebaut ist, damit du sie ausprobieren und uns sagen kannst, was du brauchst.'],
+    cta: { label: 'Auf GitHub ansehen', href: GITHUB_URL },
     sections: [
       {
         h: 'Eine lokale Tür über MCP',
@@ -1027,11 +1031,13 @@ const de: Docs = {
         ],
       },
       {
-        h: 'Geplante Befehle',
+        h: 'Ausprobieren',
         blocks: [
-          { code: 'npx bleib init' },
-          { code: 'bleib import openclaw ~/.openclaw/workspace' },
-          { code: 'bleib pair claude --destination provider:anthropic' },
+          { p: 'Node 20 oder neuer, unter Linux oder macOS. Aus dem Repository bauen und installieren, dann der Anleitung für deine KI-App folgen.' },
+          { code: 'git clone https://github.com/rouxdutoit/bleib && cd bleib/wallet' },
+          { code: 'npm ci && npm pack && npm install --global ./bleib-*.tgz' },
+          { code: 'bleib init' },
+          { code: "bleib pair 'Claude Code' --destination provider:Anthropic" },
           { code: 'bleib serve' },
         ],
       },
@@ -1049,7 +1055,7 @@ const de: Docs = {
       },
       {
         h: 'Mitmachen',
-        blocks: [{ p: 'Das Repository wird bald auf GitHub veröffentlicht. Bis dahin schreib an hello@rouxdutoit.com oder sichere dir auf der Startseite frühen Zugang.' }],
+        blocks: [{ p: 'Der Code liegt auf GitHub unter github.com/rouxdutoit/bleib. Eröffne ein Issue, schick einen Pull Request oder schreib an hello@rouxdutoit.com. Sicherheitslücken bitte per E-Mail melden, nicht öffentlich.' }],
       },
     ],
   },
