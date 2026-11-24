@@ -7,6 +7,7 @@ import flight from '@material-symbols/svg-400/rounded/flight-fill.svg?raw';
 import work from '@material-symbols/svg-400/rounded/work-fill.svg?raw';
 import favorite from '@material-symbols/svg-400/rounded/favorite-fill.svg?raw';
 import lock from '@material-symbols/svg-400/rounded/lock-fill.svg?raw';
+import devices from '@material-symbols/svg-400/rounded/devices-fill.svg?raw';
 // The check uses weight 700 so it stays legible inside small filled circles.
 import check from '@material-symbols/svg-700/rounded/check.svg?raw';
 import verifiedUser from '@material-symbols/svg-400/rounded/verified_user-fill.svg?raw';
@@ -31,6 +32,7 @@ const raw = {
   work,
   favorite,
   lock,
+  devices,
   check,
   verified_user: verifiedUser,
   code,
