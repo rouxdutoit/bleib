@@ -47,7 +47,7 @@ const en = {
   hero: {
     eyebrow: 'In development',
     h1: 'Your AI memory wallet.',
-    sub: ['You control what each chat can know.'],
+    sub: ['Each task gets just what it needs.'],
     primary: 'Get early access',
     secondary: 'View on GitHub',
     trust: [
@@ -237,7 +237,7 @@ const de: Strings = {
   hero: {
     eyebrow: 'In Entwicklung',
     h1: 'Dein Wallet für dein KI-Gedächtnis.',
-    sub: ['Du bestimmst, was jeder Chat wissen darf.'],
+    sub: ['Jede Aufgabe bekommt nur, was sie braucht.'],
     primary: 'Frühen Zugang sichern',
     secondary: 'Auf GitHub ansehen',
     trust: [
