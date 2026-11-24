@@ -82,6 +82,8 @@ const cols: { h: string; items: Item[] }[] = [
   .ico-link { display: inline-flex; align-items: center; gap: 4px; min-height: 32px; }
   .ico-link :global(svg) { width: 16px; height: 16px; display: block; }
   @media (max-width: 760px) {
+    /* Room for Safari's floating address bar, so the last row (language, theme) can be tapped. */
+    .site-footer { padding-bottom: 104px; }
     .top { grid-template-columns: 1fr; }
     .cols { flex-wrap: wrap; gap: 28px 40px; }
   }
