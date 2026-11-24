@@ -94,6 +94,7 @@ const en = {
     ],
   },
   cards: {
+    replay: 'Replay',
     wallet: {
       title: 'Your Wallet',
       rows: [
@@ -101,6 +102,13 @@ const en = {
         { k: 'Travel', v: 'Aisle seat', icon: 'plane' },
         { k: 'Work', v: 'Friday review', icon: 'case' },
         { k: 'Health', v: 'Private', icon: 'heart', locked: true },
+      ],
+      sourcesLabel: 'Scattered across your AIs',
+      sources: [
+        { from: 'Notes', text: 'Marek lives in Berlin' },
+        { from: 'ChatGPT', text: 'Prefers an aisle seat' },
+        { from: 'Claude', text: 'Weekly review on Fridays' },
+        { from: 'Notes', text: 'Health notes' },
       ],
       footer: 'Encrypted on this device. Only you hold the key.',
     },
@@ -110,7 +118,9 @@ const en = {
       once: 'Allow Once',
       always: 'Always for Claude',
       no: 'Don’t Allow',
-      saved: 'Claude may now use Travel.',
+      rulesLabel: 'Remembered',
+      rule: { who: 'Claude', kind: 'Travel', scope: 'Always' },
+      later: { title: 'Claude used Travel', sub: 'Hotels in Porto · No question needed' },
     },
     receipt: {
       who: 'Claude',
@@ -128,15 +138,15 @@ const en = {
     },
     any: {
       title: 'Your Wallet',
-      sub: 'Preferences and rules stay here',
+      sub: 'Travel, Work, People · 2 rules',
+      usedBy: 'Now used by',
       sectionLabel: 'AI in use',
       providers: [
         { name: 'Claude', note: 'Anthropic', icon: '/providers/claude.svg' },
         { name: 'Codex', note: 'OpenAI', icon: '/providers/codex.svg' },
-        { name: 'Gemini', note: 'Google', icon: '/providers/gemini.svg' },
         { name: 'Ollama', note: 'On this device', icon: '/providers/ollama.svg' },
       ],
-      caption: 'Different AI. Same you.',
+      caption: 'Same preferences. Same rules.',
     },
     propose: {
       app: 'Claude',
@@ -147,6 +157,9 @@ const en = {
       save: 'Save',
       edit: 'Edit',
       later: 'Not Now',
+      walletLabel: 'Your Wallet',
+      newRow: { k: 'People', v: 'Marek is vegetarian' },
+      newTag: 'New',
       saved: 'Saved. No AI can read it until you allow it.',
     },
   },
@@ -282,6 +295,7 @@ const de: Strings = {
     ],
   },
   cards: {
+    replay: 'Nochmal abspielen',
     wallet: {
       title: 'Deine Wallet',
       rows: [
@@ -289,6 +303,13 @@ const de: Strings = {
         { k: 'Reisen', v: 'Gangplatz', icon: 'plane' },
         { k: 'Arbeit', v: 'Rückblick am Freitag', icon: 'case' },
         { k: 'Gesundheit', v: 'Privat', icon: 'heart', locked: true },
+      ],
+      sourcesLabel: 'Verstreut über deine KIs',
+      sources: [
+        { from: 'Notizen', text: 'Marek wohnt in Berlin' },
+        { from: 'ChatGPT', text: 'Bevorzugt einen Gangplatz' },
+        { from: 'Claude', text: 'Wochenrückblick am Freitag' },
+        { from: 'Notizen', text: 'Gesundheitsnotizen' },
       ],
       footer: 'Verschlüsselt auf diesem Gerät. Nur du hast den Schlüssel.',
     },
@@ -298,7 +319,9 @@ const de: Strings = {
       once: 'Einmal erlauben',
       always: 'Immer für Claude',
       no: 'Nicht erlauben',
-      saved: 'Claude darf jetzt Reisen nutzen.',
+      rulesLabel: 'Gemerkt',
+      rule: { who: 'Claude', kind: 'Reisen', scope: 'Immer' },
+      later: { title: 'Claude hat Reisen genutzt', sub: 'Hotels in Porto · Keine Nachfrage nötig' },
     },
     receipt: {
       who: 'Claude',
@@ -316,15 +339,15 @@ const de: Strings = {
     },
     any: {
       title: 'Deine Wallet',
-      sub: 'Vorlieben und Regeln bleiben hier',
+      sub: 'Reisen, Arbeit, Menschen · 2 Regeln',
+      usedBy: 'Gerade genutzt von',
       sectionLabel: 'Aktive KI',
       providers: [
         { name: 'Claude', note: 'Anthropic', icon: '/providers/claude.svg' },
         { name: 'Codex', note: 'OpenAI', icon: '/providers/codex.svg' },
-        { name: 'Gemini', note: 'Google', icon: '/providers/gemini.svg' },
         { name: 'Ollama', note: 'Auf diesem Gerät', icon: '/providers/ollama.svg' },
       ],
-      caption: 'Andere KI. Immer noch du.',
+      caption: 'Gleiche Vorlieben. Gleiche Regeln.',
     },
     propose: {
       app: 'Claude',
@@ -335,6 +358,9 @@ const de: Strings = {
       save: 'Speichern',
       edit: 'Bearbeiten',
       later: 'Nicht jetzt',
+      walletLabel: 'Deine Wallet',
+      newRow: { k: 'Menschen', v: 'Marek ist Vegetarier' },
+      newTag: 'Neu',
       saved: 'Gespeichert. Keine KI kann es lesen, bis du es erlaubst.',
     },
   },

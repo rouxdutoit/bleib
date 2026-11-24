@@ -1,14 +1,18 @@
 ---
 /**
- * Product mock-ups for the story, built on Apple HIG patterns (Rule No. 1):
- * 0 inset grouped list (Settings), 1 permission alert, 2 notification + widget,
- * 3 selection list, 4 actionable notification.
+ * One tray per scene. The tray never moves; the card inside morphs step by step to act out
+ * the scene's headline (Rule No. 1: Apple HIG patterns throughout).
+ * Steps are driven by scripts/story.ts: it sets data-step="n" and cumulative classes s1..sn.
+ *   .at-N     collapsed until step N, then open
+ *   .until-N  open until step N, then collapsed
+ *   .pick-at-N  capsule turns prominent at step N
  */
 import Mark from './Mark.astro';
 import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang; scene: number }
 const { lang, scene } = Astro.props;
 const c = t(lang).cards;
+const STEPS = [5, 3, 4, 2, 3];
 
 const glyph: Record<string, string> = {
   person: '<path d="M10 10a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm0 1.5c-3.3 0-6 1.7-6 4v.5c0 .6.4 1 1 1h10c.6 0 1-.4 1-1v-.5c0-2.3-2.7-4-6-4Z"/>',
@@ -18,146 +22,239 @@ const glyph: Record<string, string> = {
   lock: '<path d="M6.5 8.5V6.5a3.5 3.5 0 1 1 7 0v2h.3c.9 0 1.7.8 1.7 1.7v5.6c0 .9-.8 1.7-1.7 1.7H6.2c-.9 0-1.7-.8-1.7-1.7v-5.6c0-.9.8-1.7 1.7-1.7h.3Zm1.6 0h3.8v-2a1.9 1.9 0 0 0-3.8 0v2Z"/>',
   check: '<path d="M8.2 14.2a1 1 0 0 1-.7-.3L4.3 10.7a1 1 0 1 1 1.4-1.4l2.5 2.5 6.1-6.1a1 1 0 1 1 1.4 1.4l-6.8 6.8a1 1 0 0 1-.7.3Z"/>',
   shield: '<path d="M10 2.2 4 4.6v4.6c0 3.9 2.6 7.2 6 8.6 3.4-1.4 6-4.7 6-8.6V4.6l-6-2.4Zm-1 10.9-2.6-2.6 1.1-1.1L9 10.9l3.5-3.5 1.1 1.1L9 13.1Z"/>',
-  chev: '<path d="M7.3 4.3a1 1 0 0 1 1.4 0l5 5a1 1 0 0 1 0 1.4l-5 5a1 1 0 1 1-1.4-1.4L11.6 10 7.3 5.7a1 1 0 0 1 0-1.4Z"/>',
+  replay: '<path d="M10 3.5a6.5 6.5 0 1 1-6.3 8.1 1 1 0 0 1 1.9-.5A4.5 4.5 0 1 0 6.8 6.8l1 .9a.6.6 0 0 1-.4 1H4.1a.6.6 0 0 1-.6-.6V4.9a.6.6 0 0 1 1-.4l.8.8A6.5 6.5 0 0 1 10 3.5Z"/>',
 };
 const svg = (name: string, cls = 'g') => `<svg class="${cls}" viewBox="0 0 20 20" aria-hidden="true"><g fill="currentColor">${glyph[name]}</g></svg>`;
+const cx = (n: number, mode: 'at' | 'until') => `cx ${mode}-${n}`;
 ---
-<div class={`tray sv sv-${scene}`}>
-  {scene === 0 && (
-    <div class="card list-card">
-      <p class="t-foot c-2 sec-h">{c.wallet.title}</p>
-      <ul class="group">
-        {c.wallet.rows.map((r) => (
-          <li class="cell">
-            <span class="ico" set:html={svg(r.icon)} />
-            <span class="t-body cell-k">{r.k}</span>
-            <span class="t-body c-2 cell-v">{r.locked && <span class="inline-g" set:html={svg('lock')} />}{r.v}</span>
-          </li>
-        ))}
-      </ul>
-      <p class="t-foot c-2 sec-f">{c.wallet.footer}</p>
-    </div>
-  )}
-
-  {scene === 1 && (
-    <div class="alert-wrap">
-      <div class="card alert" role="presentation">
-        <p class="t-headline alert-title">{c.ask.title}</p>
-        <p class="t-foot alert-msg">{c.ask.message}</p>
-        <div class="alert-actions">
-          <span class="pill t-body">{c.ask.once}</span>
-          <span class="pill t-body pick">{c.ask.always}</span>
-          <span class="pill t-body">{c.ask.no}</span>
-        </div>
-      </div>
-      <p class="card banner t-sub saved"><span class="ok" set:html={svg('check')} />{c.ask.saved}</p>
-    </div>
-  )}
-
-  {scene === 2 && (
-    <div class="stack">
-      <div class="card note">
-        <div class="note-head">
-          <img class="app" src="/providers/claude.svg" alt="" width="38" height="38" />
-          <div class="note-id">
-            <p class="t-headline">{c.receipt.who}</p>
-            <p class="t-sub c-2">{c.receipt.where}</p>
+<div class="sv" data-sv data-steps={STEPS[scene]} data-step="0">
+  <div class="tray">
+    <div class="stack" aria-hidden="true">
+      {scene === 0 && (
+        <>
+          <div class="card list-card">
+            <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2 cnt">{[0, 1, 2, 3, 4].map((n) => <span class={`c${n}`}>{n}</span>)}</span></p>
+            <ul class="group">
+              {c.wallet.rows.map((r, i) => (
+                <li class={cx(i + 1, 'at')}>
+                  <div class="cx-in"><div class="cell">
+                    <span class="ico" set:html={svg(r.icon)} />
+                    <span class="t-body cell-k">{r.k}</span>
+                    <span class="t-body c-2 cell-v">{r.locked && <span class="inline-g" set:html={svg('lock')} />}{r.v}</span>
+                  </div></div>
+                </li>
+              ))}
+            </ul>
+            <div class={cx(5, 'at')}><div class="cx-in"><p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.wallet.footer}</p></div></div>
           </div>
-          <p class="t-foot c-2">{c.receipt.time}</p>
-        </div>
-        <p class="t-sub c-2 purpose">{c.receipt.purposeLabel} {c.receipt.purpose}</p>
-        <p class="t-foot c-2 sec-h inner">{c.receipt.sharedLabel}</p>
-        <ul class="group filled">
-          {c.receipt.shared.map((x) => (
-            <li class="cell"><span class="yes" set:html={svg('check')} /><span class="t-body">{x}</span></li>
-          ))}
-        </ul>
-        <p class="t-foot c-2 not"><span class="inline-g" set:html={svg('lock')} />{c.receipt.notShared}</p>
-      </div>
-      <div class="card widget">
-        <p class="t-foot c-2 w-label"><span class="w-mark" aria-hidden="true"><Mark size={11} /></span>{c.receipt.weeklyLabel}</p>
-        <p class="w-num"><span class="t-large">{c.receipt.weeklyN}</span><span class="t-sub">{c.receipt.weeklyText}</span></p>
-        <p class="t-foot c-2 w-note"><span class="inline-g ok-g" set:html={svg('shield')} />{c.receipt.weeklyNote}</p>
-      </div>
-    </div>
-  )}
-
-  {scene === 3 && (
-    <div class="card list-card">
-      <div class="head-cell">
-        <span class="w-tile" aria-hidden="true"><Mark size={18} /></span>
-        <div>
-          <p class="t-headline">{c.any.title}</p>
-          <p class="t-sub c-2">{c.any.sub}</p>
-        </div>
-      </div>
-      <p class="t-foot c-2 sec-h">{c.any.sectionLabel}</p>
-      <ul class="group">
-        {c.any.providers.map((p, i) => (
-          <li class:list={['cell prov', { on: i === 0 }]} data-prov={i}>
-            <img class="app-sm" src={p.icon} alt="" width="29" height="29" />
-            <span class="t-body cell-k">{p.name}</span>
-            <span class="t-sub c-2 cell-v">{p.note}</span>
-            <span class="tick" set:html={svg('check')} />
-          </li>
-        ))}
-      </ul>
-      <p class="t-foot c-2 sec-f">{c.any.caption}</p>
-    </div>
-  )}
-
-  {scene === 4 && (
-    <div class="stack">
-      <div class="card note">
-        <div class="note-head">
-          <img class="app" src="/providers/claude.svg" alt="" width="38" height="38" />
-          <div class="note-id">
-            <p class="t-headline">{c.propose.title}</p>
-            <p class="t-sub c-2">{c.propose.app}</p>
+          <div class={cx(5, 'until')}>
+            <div class="cx-in">
+              <div class="sources">
+                <p class="t-foot c-2 src-h">{c.wallet.sourcesLabel}</p>
+                <div class="src-grid">
+                  {c.wallet.sources.map((m, i) => (
+                    <div class={`card mini gone-${i + 1}`}><p class="t-foot c-2">{m.from}</p><p class="t-sub">{m.text}</p></div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
-          <p class="t-foot c-2">{c.propose.time}</p>
-        </div>
-        <p class="t-body fact">{c.propose.fact}</p>
-        <p class="t-foot c-2">{c.propose.why}</p>
-        <div class="row-actions">
-          <span class="pill t-body pick">{c.propose.save}</span>
-          <span class="pill t-body">{c.propose.edit}</span>
-          <span class="pill t-body">{c.propose.later}</span>
-        </div>
-      </div>
-      <p class="card banner t-sub saved"><span class="ok" set:html={svg('check')} />{c.propose.saved}</p>
+        </>
+      )}
+
+      {scene === 1 && (
+        <>
+          <div class={cx(2, 'until')}>
+            <div class="cx-in">
+              <div class="card alert">
+                <p class="t-headline">{c.ask.title}</p>
+                <p class="t-foot msg">{c.ask.message}</p>
+                <div class="pills">
+                  <span class="pill t-body">{c.ask.once}</span>
+                  <span class="pill t-body pick-at-1">{c.ask.always}</span>
+                  <span class="pill t-body">{c.ask.no}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class={cx(2, 'at')}>
+            <div class="cx-in">
+              <div class="card list-card">
+                <p class="t-foot c-2 sec-h">{c.ask.rulesLabel}</p>
+                <div class="cell">
+                  <img class="app-sm" src="/providers/claude.svg" alt="" width="29" height="29" />
+                  <span class="cell-k"><span class="t-body">{c.ask.rule.who}</span><span class="t-sub c-2 blk">{c.ask.rule.kind}</span></span>
+                  <span class="t-body c-2">{c.ask.rule.scope}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class={cx(3, 'at')}>
+            <div class="cx-in">
+              <div class="card note">
+                <div class="note-head">
+                  <span class="ok" set:html={svg('check')} />
+                  <div class="note-id"><p class="t-headline">{c.ask.later.title}</p><p class="t-sub c-2">{c.ask.later.sub}</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {scene === 2 && (
+        <>
+          <div class="card note">
+            <div class="note-head">
+              <img class="app" src="/providers/claude.svg" alt="" width="38" height="38" />
+              <div class="note-id"><p class="t-headline">{c.receipt.who}</p><p class="t-sub c-2">{c.receipt.where}</p></div>
+              <p class="t-foot c-2">{c.receipt.time}</p>
+            </div>
+            <p class="t-sub c-2 purpose">{c.receipt.purposeLabel} {c.receipt.purpose}</p>
+            <p class="t-foot c-2 sec-h inner">{c.receipt.sharedLabel}</p>
+            <ul class="group filled">
+              {c.receipt.shared.map((x, i) => (
+                <li class={cx(i + 1, 'at')}><div class="cx-in"><div class="cell"><span class="yes" set:html={svg('check')} /><span class="t-body">{x}</span></div></div></li>
+              ))}
+            </ul>
+            <div class={cx(3, 'at')}><div class="cx-in"><p class="t-foot c-2 not"><span class="inline-g" set:html={svg('lock')} />{c.receipt.notShared}</p></div></div>
+          </div>
+          <div class={cx(4, 'at')}>
+            <div class="cx-in">
+              <div class="card widget">
+                <p class="t-foot c-2 w-label"><span class="w-mark" aria-hidden="true"><Mark size={11} /></span>{c.receipt.weeklyLabel}</p>
+                <p class="w-num"><span class="t-large">{c.receipt.weeklyN}</span><span class="t-sub">{c.receipt.weeklyText}</span></p>
+                <p class="t-foot c-2 w-note"><span class="inline-g ok-g" set:html={svg('shield')} />{c.receipt.weeklyNote}</p>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {scene === 3 && (
+        <>
+          <div class="card list-card">
+            <div class="head-cell">
+              <span class="w-tile" aria-hidden="true"><Mark size={18} /></span>
+              <div>
+                <p class="t-headline">{c.any.title}</p>
+                <p class="t-sub c-2">{c.any.sub}</p>
+              </div>
+            </div>
+            <p class="t-foot c-2 used">{c.any.usedBy} <span class="swap">{c.any.providers.map((p, i) => <span class={`u${i}`}>{p.name}</span>)}</span></p>
+          </div>
+          <div class="card list-card">
+            <p class="t-foot c-2 sec-h">{c.any.sectionLabel}</p>
+            <ul class="group">
+              {c.any.providers.map((p, i) => (
+                <li class={`cell prov p${i}`}>
+                  <img class="app-sm" src={p.icon} alt="" width="29" height="29" />
+                  <span class="t-body cell-k">{p.name}</span>
+                  <span class="t-sub c-2 cell-v">{p.note}</span>
+                  <span class="tick" set:html={svg('check')} />
+                </li>
+              ))}
+            </ul>
+            <p class="t-foot c-2 sec-f">{c.any.caption}</p>
+          </div>
+        </>
+      )}
+
+      {scene === 4 && (
+        <>
+          <div class={cx(2, 'until')}>
+            <div class="cx-in">
+              <div class="card note">
+                <div class="note-head">
+                  <img class="app" src="/providers/claude.svg" alt="" width="38" height="38" />
+                  <div class="note-id"><p class="t-headline">{c.propose.title}</p><p class="t-sub c-2">{c.propose.app}</p></div>
+                  <p class="t-foot c-2">{c.propose.time}</p>
+                </div>
+                <p class="t-body fact">{c.propose.fact}</p>
+                <p class="t-foot c-2">{c.propose.why}</p>
+                <div class="row-actions">
+                  <span class="pill t-body pick-at-1">{c.propose.save}</span>
+                  <span class="pill t-body">{c.propose.edit}</span>
+                  <span class="pill t-body">{c.propose.later}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card list-card">
+            <p class="t-foot c-2 sec-h">{c.propose.walletLabel}</p>
+            <ul class="group">
+              {c.wallet.rows.slice(0, 2).map((r) => (
+                <li class="cell"><span class="ico" set:html={svg(r.icon)} /><span class="t-body cell-k">{r.k}</span><span class="t-body c-2 cell-v">{r.v}</span></li>
+              ))}
+              <li class={cx(2, 'at')}>
+                <div class="cx-in"><div class="cell">
+                  <span class="ico" set:html={svg('person')} />
+                  <span class="cell-k"><span class="t-body">{c.propose.newRow.v}</span></span>
+                  <span class="tag t-foot">{c.propose.newTag}</span>
+                </div></div>
+              </li>
+            </ul>
+            <div class={cx(3, 'at')}><div class="cx-in"><p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.propose.saved}</p></div></div>
+          </div>
+        </>
+      )}
     </div>
-  )}
+    <button class="replay" type="button" data-replay aria-label={c.replay} title={c.replay}><span set:html={svg('replay')} /></button>
+  </div>
 </div>
 
 <style>
   .sv { width: 100%; }
   .sv p { margin: 0; }
-  .stack { display: grid; gap: 12px; }
+  .tray { position: relative; }
+  .stack { display: flex; flex-direction: column; gap: 12px; }
 
-  /* Inset grouped list (Settings) */
-  .list-card { padding: 16px 0 14px; }
+  /* Collapsible pieces: height and opacity morph in place, nothing jumps. */
+  .cx { display: grid; grid-template-rows: 0fr; opacity: 0; margin-top: -12px; transition: grid-template-rows 0.55s var(--ease), opacity 0.4s var(--ease), margin-top 0.55s var(--ease); }
+  .cx.until-1, .cx.until-2, .cx.until-3, .cx.until-4, .cx.until-5 { grid-template-rows: 1fr; opacity: 1; margin-top: 0; }
+  li.cx, .card .cx { margin-top: 0; }
+  .cx-in { overflow: hidden; min-height: 0; }
+  .s1 .at-1, .s2 .at-2, .s3 .at-3, .s4 .at-4, .s5 .at-5 { grid-template-rows: 1fr; opacity: 1; margin-top: 0; }
+  .s1 .until-1, .s2 .until-2, .s3 .until-3, .s4 .until-4, .s5 .until-5 { grid-template-rows: 0fr; opacity: 0; margin-top: -12px; }
+
+  /* Lists (Settings) */
+  .list-card { padding: 14px 0 12px; }
+  .head { display: flex; align-items: baseline; gap: 8px; padding: 0 16px 6px; }
+  .cnt span { display: none; }
+  [data-step='0'] .cnt .c0, [data-step='1'] .cnt .c1, [data-step='2'] .cnt .c2, [data-step='3'] .cnt .c3, [data-step='4'] .cnt .c4, [data-step='5'] .cnt .c4 { display: inline; }
   .sec-h { padding: 0 16px 6px; text-transform: uppercase; letter-spacing: 0.02em; }
-  .sec-h.inner { padding: 16px 0 6px; }
-  .sec-f { padding: 8px 16px 0; }
+  .sec-h.inner { padding: 14px 0 6px; }
+  .sec-f { padding: 8px 16px 0; display: flex; align-items: center; gap: 5px; }
   .group { list-style: none; margin: 0; padding: 0; }
   .cell { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 16px; position: relative; }
-  .cell + .cell::before { content: ''; position: absolute; top: 0; right: 0; left: 57px; height: 0.5px; background: var(--separator); }
+  .group > li + li .cell::before, .group > li.cell + li.cell::before, .group > li.cell + li .cell::before { content: ''; position: absolute; top: 0; right: 0; left: 57px; height: 0.5px; background: var(--separator); }
   .ico { flex: none; width: 29px; height: 29px; border-radius: 7px; display: grid; place-items: center; background: var(--fill); color: var(--label); }
   .ico :global(.g) { width: 17px; height: 17px; }
   .cell-k { flex: 1; min-width: 0; }
+  .blk { display: block; }
   .cell-v { text-align: right; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
   .inline-g { display: inline-flex; }
   .inline-g :global(.g) { width: 13px; height: 13px; }
-  .head-cell { display: flex; align-items: center; gap: 12px; padding: 0 16px 16px; }
+  .head-cell { display: flex; align-items: center; gap: 12px; padding: 2px 16px 4px; }
   .w-tile { width: 44px; height: 44px; border-radius: 11px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; flex: none; }
+  .used { padding: 8px 16px 0; }
+  .swap span { display: none; color: var(--label); font-weight: 600; }
+  [data-step='0'] .swap .u0, [data-step='1'] .swap .u1, [data-step='2'] .swap .u2 { display: inline; }
+  .tag { padding: 2px 8px; border-radius: 999px; background: #f6e79a; color: #0a0a0a; font-weight: 600; }
 
-  /* Alert (permission prompt) with capsule buttons */
-  .alert-wrap { display: grid; gap: 12px; justify-items: center; }
-  .alert { width: min(100%, 320px); padding: 22px 16px 16px; text-align: center; border-radius: 22px; }
-  .alert-msg { margin-top: 4px !important; color: var(--label); }
-  .alert-actions { display: grid; gap: 8px; margin-top: 18px; }
-  .pill { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 16px; border-radius: 999px; background: var(--fill); color: var(--label); font-weight: 500; transition: background-color 0.35s var(--ease), color 0.35s var(--ease); }
+  /* Sources tray (like a stack of notifications) */
+  .sources { border-radius: 22px; background: var(--fill); padding: 12px; }
+  .src-h { padding: 0 4px 8px; }
+  .src-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .mini { padding: 10px 12px; border-radius: 14px; transition: opacity 0.45s var(--ease), transform 0.45s var(--ease); }
+  .s1 .gone-1, .s2 .gone-2, .s3 .gone-3, .s4 .gone-4 { opacity: 0; transform: translateY(-10px) scale(0.96); }
+
+  /* Alert */
+  .alert { padding: 22px 16px 16px; text-align: center; }
+  .msg { margin-top: 4px !important; }
+  .pills { display: grid; gap: 8px; margin-top: 18px; }
+  .pill { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 12px; border-radius: 999px; background: var(--fill); color: var(--label); font-weight: 500; transition: background-color 0.35s var(--ease), color 0.35s var(--ease); }
+  .s1 .pick-at-1 { background: var(--label); color: var(--cell); }
 
   /* Notification */
   .note { padding: 14px 16px 16px; }
@@ -168,13 +265,13 @@ const svg = (name: string, cls = 'g') => `<svg class="${cls}" viewBox="0 0 20 20
   .purpose { margin-top: 12px !important; }
   .group.filled { background: var(--fill); border-radius: 12px; }
   .group.filled .cell { padding: 0 12px; }
-  .group.filled .cell + .cell::before { left: 44px; }
+  .group.filled > li + li .cell::before { left: 44px; }
   .yes { flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: #f6e79a; color: #0a0a0a; }
-  .yes :global(.g) { width: 13px; height: 13px; }
-  .not { margin-top: 10px !important; display: flex; align-items: center; gap: 5px; }
+  .yes :global(.g), .ok :global(.g) { width: 13px; height: 13px; }
+  .ok { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--ok); color: #fff; }
+  .not { padding-top: 10px; display: flex; align-items: center; gap: 5px; }
   .fact { margin-top: 12px !important; font-weight: 500; }
   .row-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
-  .row-actions .pill { padding: 0 8px; }
 
   /* Widget */
   .widget { padding: 14px 16px 16px; }
@@ -184,26 +281,22 @@ const svg = (name: string, cls = 'g') => `<svg class="${cls}" viewBox="0 0 20 20
   .w-note { margin-top: 6px !important; display: flex; align-items: center; gap: 5px; }
   .ok-g { color: var(--ok); }
 
-  /* Selection list */
-  .tick { margin-left: 4px; color: var(--label); opacity: 0; transition: opacity 0.3s var(--ease); }
+  /* Selection list: the check mark moves with the step */
+  .tick { margin-left: 4px; color: var(--label); opacity: 0; transition: opacity 0.35s var(--ease); }
   .tick :global(.g) { width: 17px; height: 17px; }
-  .prov.on .tick { opacity: 1; }
-  .prov .cell-k { transition: font-weight 0.3s; }
-  .prov.on .cell-k { font-weight: 600; }
+  [data-step='0'] .p0 .tick, [data-step='1'] .p1 .tick, [data-step='2'] .p2 .tick { opacity: 1; }
 
-  /* Banner confirmation */
-  .banner { display: flex; align-items: center; gap: 8px; padding: 12px 16px; width: 100%; opacity: 0; transform: translateY(6px); transition: opacity 0.4s var(--ease), transform 0.4s var(--ease); }
-  .alert-wrap .banner { width: min(100%, 320px); }
-  .ok { flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: var(--ok); color: #fff; }
-  .ok :global(.g) { width: 13px; height: 13px; }
-
-  /* Played / final state */
-  :global(.is-final) .pick,
-  :global(.is-playing) .pick { background: var(--label); color: var(--cell); }
-  :global(.is-final) .saved,
-  :global(.is-playing) .saved { opacity: 1; transform: none; }
-  :global(.is-playing) .pick { transition-delay: 0.9s; }
-  :global(.is-playing) .saved { transition-delay: 1.6s; }
+  /* Replay, shown once the morph has finished */
+  .replay {
+    position: absolute; right: 14px; bottom: 14px;
+    width: 36px; height: 36px; border-radius: 50%; border: 0; cursor: pointer;
+    display: grid; place-items: center;
+    background: var(--cell); color: var(--label); box-shadow: 0 2px 8px rgb(0 0 0 / 0.12);
+    opacity: 0; visibility: hidden; transition: opacity 0.3s var(--ease), visibility 0.3s;
+  }
+  .replay::after { content: ''; position: absolute; inset: -4px; }
+  .replay :global(.g) { width: 16px; height: 16px; }
+  .done .replay { opacity: 1; visibility: visible; }
 </style>
 <style is:global>
   :root[data-theme='dark'] .sv .app,
