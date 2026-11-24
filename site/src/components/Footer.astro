@@ -15,7 +15,7 @@ const r = (key: RouteKey, label: string): Item => ({ key, label, href: routes[ke
 const cols: { h: string; items: Item[] }[] = [
   { h: s.footer.cols.product, items: [r('how', L.how), r('works', L.works), r('permissions', L.permissions), r('receipts', L.receipts), r('standards', L.standards), r('security', L.security)] },
   { h: s.footer.cols.project, items: [r('developers', L.developers), r('pricing', L.pricing), { label: L.github, href: GITHUB_URL || routes.developers[lang] }] },
-  { h: s.footer.cols.legal, items: [r('impressum', L.impressum), r('privacy', L.privacy)] },
+  { h: s.footer.cols.legal, items: [r('privacy', L.privacy), r('appPrivacy', L.appPrivacy), r('impressum', L.impressum)] },
 ];
 ---
 <footer class="site-footer has-rails">

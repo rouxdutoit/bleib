@@ -497,21 +497,45 @@ const en: Docs = {
     ],
   },
   privacy: {
-    title: 'Privacy',
+    title: 'Website privacy',
     description: 'How the bleib website handles your data.',
-    intro: ['This notice covers this website. bleib itself runs on your device and sends us nothing.'],
+    intro: [
+      'This notice covers the bleib website. The bleib app runs on your device and sends us nothing; see App privacy.',
+    ],
     sections: [
-      { h: 'Cookies', blocks: [{ p: 'None. If you switch between light and dark mode, your browser remembers the choice in its local storage. Nothing about it is sent to us.' }] },
-      { h: 'Analytics and tracking', blocks: [{ p: 'None.' }] },
-      { h: 'Third-party requests', blocks: [{ p: 'None. Fonts, icons and files are served with this site.' }] },
-      { h: 'Data processed', blocks: [{ p: 'Your IP address and technical request data when the site is delivered.' }] },
+      {
+        h: 'In short',
+        blocks: [
+          {
+            never: [
+              'No cookies, no analytics, no tracking.',
+              'No third-party requests. Fonts, icons and files are served with this site.',
+              'If you join early access, we keep your email address to tell you when bleib is ready. Nothing else.',
+            ],
+          },
+        ],
+      },
+      { h: 'Data processed', blocks: [{ p: 'When you open a page, our host receives your IP address and technical request details, such as the requested address and browser information, to deliver the page and protect the site from attacks.' }] },
       {
         h: 'Early access',
-        blocks: [{ p: 'If you join early access, we store your email address, your language and the time you signed up, to tell you when bleib is available. The legal basis is your consent, Article 6(1)(a) GDPR. You can withdraw it at any time by writing to hello@rouxdutoit.com, and we delete your entry.' }],
+        blocks: [
+          {
+            rows: [
+              { k: 'What we store', v: 'Your email address, your language and the time you signed up' },
+              { k: 'Why', v: 'To tell you when bleib is available' },
+              { k: 'Legal basis', v: 'Your consent, Article 6(1)(a) GDPR' },
+              { k: 'How long', v: 'Until bleib launches and we have written to you, or until you ask us to delete it' },
+              { k: 'Where', v: 'Cloudflare Workers KV (see Hosting)' },
+            ],
+          },
+          { p: 'To stop automated sign-ups, we count attempts per IP address for two minutes. We don’t store the address itself, only a shortened one-way hash of it, which expires after two minutes. The legal basis is Article 6(1)(f) GDPR, our legitimate interest in protecting the form.' },
+          { p: 'You can withdraw your consent at any time by writing to hello@rouxdutoit.com. We delete your entry and confirm by email.' },
+        ],
       },
+      { h: 'Local storage', blocks: [{ p: 'If you switch between light and dark mode, your browser remembers the choice in its local storage. It stays in your browser and is never sent to us. You can clear it in your browser settings.' }] },
       {
         h: 'Hosting',
-        blocks: [{ p: 'This site and the early-access list are hosted by Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA. When you open a page, Cloudflare receives your IP address and technical request details to deliver the page and protect the site from attacks. We have a data processing agreement with Cloudflare under Article 28 GDPR. Transfers to the USA are covered by the EU-US Data Privacy Framework, under which Cloudflare is certified, and by Standard Contractual Clauses. The legal basis is Article 6(1)(f) GDPR, our legitimate interest in operating a secure and functional site.' }],
+        blocks: [{ p: 'This site and the early-access list are hosted by Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA. Cloudflare processes your IP address and request details to deliver pages and protect the site. We have a data processing agreement with Cloudflare under Article 28 GDPR. Transfers to the USA are covered by the EU-US Data Privacy Framework, under which Cloudflare is certified, and by Standard Contractual Clauses. The legal basis is Article 6(1)(f) GDPR, our legitimate interest in operating a secure and functional site.' }],
       },
       {
         h: 'Contact',
@@ -521,8 +545,78 @@ const en: Docs = {
       { h: 'Links to other sites', blocks: [{ p: 'If you follow a link to another site, its privacy policy applies there.' }] },
       {
         h: 'Your rights',
-        blocks: [{ p: 'Under the GDPR you can request access (Article 15), rectification (Article 16), erasure (Article 17), restriction of processing (Article 18) and data portability (Article 20). You can object to processing (Article 21) and lodge a complaint with a supervisory authority (Article 77), for example the Bayerisches Landesamt für Datenschutzaufsicht, Promenade 18, 91522 Ansbach, Germany.' }],
+        blocks: [{ p: 'Under the GDPR you can request access (Article 15), rectification (Article 16), erasure (Article 17), restriction of processing (Article 18) and data portability (Article 20). You can object to processing based on legitimate interest (Article 21) and withdraw consent at any time (Article 7(3)). You can lodge a complaint with a supervisory authority (Article 77), for example the Bayerisches Landesamt für Datenschutzaufsicht, Promenade 18, 91522 Ansbach, Germany.' }],
       },
+      { h: 'Changes', blocks: [{ p: 'We update this notice when what we do changes. Last updated: 24 November 2026.' }] },
+    ],
+  },
+  appPrivacy: {
+    title: 'App privacy',
+    description: 'What the bleib app does with your data. In short: it stays on your device.',
+    intro: [
+      'bleib keeps what your AIs know about you on your device, encrypted with a key only you hold. We never receive it.',
+      'bleib is in development. This notice describes the app as it is built, and we will update it before launch.',
+    ],
+    sections: [
+      {
+        h: 'In short',
+        blocks: [
+          {
+            never: [
+              'Your memory, permissions and receipts stay on your device, encrypted.',
+              'bleib sends nothing to us: no telemetry, no analytics, no crash reports, no accounts.',
+              'An AI gets something from your wallet only when you allow it, and only after a receipt is written.',
+              'We hold no key that can read your data, so we can’t see it, sell it or hand it over.',
+            ],
+          },
+        ],
+      },
+      {
+        h: 'What the app keeps on your device',
+        blocks: [
+          {
+            rows: [
+              { k: 'Your memory', v: 'People, preferences, projects and rules, as Markdown files' },
+              { k: 'Permissions and rules', v: 'Which AI may see which kind of information, and where it may go' },
+              { k: 'Receipts', v: 'What each AI received, including the exact words' },
+              { k: 'Paired AIs', v: 'Each AI’s name, declared destination and a hashed credential' },
+              { k: 'Suggestions', v: 'Memories AIs propose, until you save or dismiss them' },
+            ],
+          },
+          { p: 'All of it is encrypted with age, using a key derived from your passphrase. Plain text never touches the disk. While the wallet is unlocked, the key is held in memory until you lock it, restart, or it locks itself after a period of inactivity.' },
+        ],
+      },
+      {
+        h: 'What reaches AI providers',
+        blocks: [
+          { p: 'When you allow an AI to use something, bleib gives that AI the smallest useful answer, and the AI app may send it to the model it uses: on your device, or to a provider such as Anthropic, OpenAI or Google. From then on, that provider’s privacy policy applies to what it received.' },
+          { p: 'bleib shows you the destination before you allow it, and records it on the receipt. What an AI has seen, it has seen: bleib can’t recall data from a provider.' },
+        ],
+      },
+      {
+        h: 'The local model proxy',
+        blocks: [{ p: 'If you route an AI app’s model requests through bleib’s local proxy, bleib forwards them to the provider you configured, to see where data really goes. It reads the destination and model from each request. It passes your API key through to the provider and never stores or logs it.' }],
+      },
+      {
+        h: 'Imports',
+        blocks: [{ p: 'When you import an OpenClaw or Hermes workspace, or paste memory from ChatGPT or Claude, bleib reads it on your device, splits it into entries for you to review, and encrypts what you keep. Nothing is uploaded.' }],
+      },
+      {
+        h: 'Deleting your data',
+        blocks: [{ p: 'Delete any entry, receipt or permission in the app, or delete the whole wallet folder. Because we never have a copy, deleting it on your devices deletes it everywhere we could reach. Copies that AI providers already received are governed by their own policies.' }],
+      },
+      {
+        h: 'Who is responsible',
+        blocks: [
+          { p: 'You are. bleib is software you run yourself; the data it processes stays with you, and we don’t process it. If you use bleib for work, your organisation may have its own duties for the data you put in it.' },
+          { p: 'For questions about the app, write to hello@rouxdutoit.com.' },
+        ],
+      },
+      {
+        h: 'Later: hosted sync',
+        blocks: [{ p: 'We plan an optional, paid sync and backup service. Your wallet would be encrypted on your device before upload, so we would store only data we cannot read. It will come with its own privacy notice and data processing terms before it launches.' }],
+      },
+      { h: 'Changes', blocks: [{ p: 'We update this notice when the app changes. Last updated: 24 November 2026.' }] },
     ],
   },
   impressum: {
@@ -995,21 +1089,45 @@ const de: Docs = {
     ],
   },
   privacy: {
-    title: 'Datenschutz',
+    title: 'Datenschutz der Website',
     description: 'Wie die Website von bleib mit deinen Daten umgeht.',
-    intro: ['Dieser Hinweis gilt für diese Website. bleib selbst läuft auf deinem Gerät und schickt uns nichts.'],
+    intro: [
+      'Dieser Hinweis gilt für die Website von bleib. Die App bleib läuft auf deinem Gerät und schickt uns nichts; siehe Datenschutz in der App.',
+    ],
     sections: [
-      { h: 'Cookies', blocks: [{ p: 'Keine. Wenn du zwischen hellem und dunklem Design wechselst, merkt sich dein Browser die Wahl im lokalen Speicher. Davon wird nichts an uns gesendet.' }] },
-      { h: 'Analyse und Tracking', blocks: [{ p: 'Keine.' }] },
-      { h: 'Anfragen an Dritte', blocks: [{ p: 'Keine. Schriften, Symbole und Dateien werden mit dieser Website ausgeliefert.' }] },
-      { h: 'Verarbeitete Daten', blocks: [{ p: 'Deine IP-Adresse und technische Anfragedaten, wenn die Website ausgeliefert wird.' }] },
+      {
+        h: 'Kurz gesagt',
+        blocks: [
+          {
+            never: [
+              'Keine Cookies, keine Analyse, kein Tracking.',
+              'Keine Anfragen an Dritte. Schriften, Symbole und Dateien werden mit dieser Website ausgeliefert.',
+              'Wenn du dich für frühen Zugang einträgst, speichern wir deine E-Mail-Adresse, um dir Bescheid zu geben, sobald bleib bereit ist. Sonst nichts.',
+            ],
+          },
+        ],
+      },
+      { h: 'Verarbeitete Daten', blocks: [{ p: 'Wenn du eine Seite öffnest, erhält unser Hoster deine IP-Adresse und technische Anfragedaten, etwa die aufgerufene Adresse und Browserinformationen, um die Seite auszuliefern und die Website vor Angriffen zu schützen.' }] },
       {
         h: 'Früher Zugang',
-        blocks: [{ p: 'Wenn du dich für frühen Zugang einträgst, speichern wir deine E-Mail-Adresse, deine Sprache und den Zeitpunkt der Anmeldung, um dir Bescheid zu geben, sobald bleib verfügbar ist. Rechtsgrundlage ist deine Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO. Du kannst sie jederzeit per E-Mail an hello@rouxdutoit.com widerrufen; dann löschen wir deinen Eintrag.' }],
+        blocks: [
+          {
+            rows: [
+              { k: 'Was wir speichern', v: 'Deine E-Mail-Adresse, deine Sprache und den Zeitpunkt der Anmeldung' },
+              { k: 'Wozu', v: 'Um dir Bescheid zu geben, sobald bleib verfügbar ist' },
+              { k: 'Rechtsgrundlage', v: 'Deine Einwilligung, Art. 6 Abs. 1 lit. a DSGVO' },
+              { k: 'Wie lange', v: 'Bis bleib startet und wir dir geschrieben haben, oder bis du die Löschung verlangst' },
+              { k: 'Wo', v: 'Cloudflare Workers KV (siehe Hosting)' },
+            ],
+          },
+          { p: 'Um automatisierte Anmeldungen zu verhindern, zählen wir Versuche pro IP-Adresse für zwei Minuten. Dabei speichern wir nicht die Adresse selbst, sondern nur einen gekürzten Einweg-Hash davon, der nach zwei Minuten verfällt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, unser berechtigtes Interesse am Schutz des Formulars.' },
+          { p: 'Du kannst deine Einwilligung jederzeit per E-Mail an hello@rouxdutoit.com widerrufen. Wir löschen deinen Eintrag und bestätigen es per E-Mail.' },
+        ],
       },
+      { h: 'Lokaler Speicher', blocks: [{ p: 'Wenn du zwischen hellem und dunklem Design wechselst, merkt sich dein Browser die Wahl im lokalen Speicher. Sie bleibt in deinem Browser und wird nie an uns gesendet. Du kannst sie in den Browsereinstellungen löschen.' }] },
       {
         h: 'Hosting',
-        blocks: [{ p: 'Diese Website und die Liste für frühen Zugang werden von Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA, gehostet. Wenn du eine Seite öffnest, erhält Cloudflare deine IP-Adresse und technische Anfragedaten, um die Seite auszuliefern und die Website vor Angriffen zu schützen. Mit Cloudflare besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Übermittlungen in die USA sind durch das EU-US Data Privacy Framework, unter dem Cloudflare zertifiziert ist, und durch Standardvertragsklauseln abgesichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, unser berechtigtes Interesse am sicheren und funktionsfähigen Betrieb der Website.' }],
+        blocks: [{ p: 'Diese Website und die Liste für frühen Zugang werden von Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA, gehostet. Cloudflare verarbeitet deine IP-Adresse und Anfragedaten, um Seiten auszuliefern und die Website zu schützen. Mit Cloudflare besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Übermittlungen in die USA sind durch das EU-US Data Privacy Framework, unter dem Cloudflare zertifiziert ist, und durch Standardvertragsklauseln abgesichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, unser berechtigtes Interesse am sicheren und funktionsfähigen Betrieb der Website.' }],
       },
       {
         h: 'Kontakt',
@@ -1019,8 +1137,78 @@ const de: Docs = {
       { h: 'Links zu anderen Websites', blocks: [{ p: 'Wenn du einem Link zu einer anderen Website folgst, gilt dort deren Datenschutzerklärung.' }] },
       {
         h: 'Deine Rechte',
-        blocks: [{ p: 'Nach der DSGVO hast du das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18) und Datenübertragbarkeit (Art. 20). Du kannst der Verarbeitung widersprechen (Art. 21) und dich bei einer Aufsichtsbehörde beschweren (Art. 77), zum Beispiel beim Bayerischen Landesamt für Datenschutzaufsicht, Promenade 18, 91522 Ansbach.' }],
+        blocks: [{ p: 'Nach der DSGVO hast du das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18) und Datenübertragbarkeit (Art. 20). Du kannst einer Verarbeitung auf Grundlage berechtigter Interessen widersprechen (Art. 21) und eine Einwilligung jederzeit widerrufen (Art. 7 Abs. 3). Du kannst dich bei einer Aufsichtsbehörde beschweren (Art. 77), zum Beispiel beim Bayerischen Landesamt für Datenschutzaufsicht, Promenade 18, 91522 Ansbach.' }],
       },
+      { h: 'Änderungen', blocks: [{ p: 'Wir passen diesen Hinweis an, wenn sich etwas ändert. Stand: 24. November 2026.' }] },
+    ],
+  },
+  appPrivacy: {
+    title: 'Datenschutz in der App',
+    description: 'Was die App bleib mit deinen Daten macht. Kurz: Sie bleiben auf deinem Gerät.',
+    intro: [
+      'bleib bewahrt, was deine KIs über dich wissen, auf deinem Gerät auf, verschlüsselt mit einem Schlüssel, den nur du hast. Wir bekommen nichts davon.',
+      'bleib ist in Entwicklung. Dieser Hinweis beschreibt die App, wie sie gebaut wird; vor dem Start aktualisieren wir ihn.',
+    ],
+    sections: [
+      {
+        h: 'Kurz gesagt',
+        blocks: [
+          {
+            never: [
+              'Dein Gedächtnis, deine Berechtigungen und Belege bleiben verschlüsselt auf deinem Gerät.',
+              'bleib schickt uns nichts: keine Telemetrie, keine Analyse, keine Absturzberichte, keine Konten.',
+              'Eine KI bekommt nur etwas aus deiner Wallet, wenn du es erlaubst, und erst nachdem ein Beleg geschrieben ist.',
+              'Wir haben keinen Schlüssel, mit dem wir deine Daten lesen könnten. Wir können sie also weder sehen noch verkaufen noch herausgeben.',
+            ],
+          },
+        ],
+      },
+      {
+        h: 'Was die App auf deinem Gerät speichert',
+        blocks: [
+          {
+            rows: [
+              { k: 'Dein Gedächtnis', v: 'Menschen, Vorlieben, Projekte und Regeln als Markdown-Dateien' },
+              { k: 'Berechtigungen und Regeln', v: 'Welche KI welche Art von Information sehen darf und wohin sie gehen darf' },
+              { k: 'Belege', v: 'Was jede KI bekommen hat, mit genauem Wortlaut' },
+              { k: 'Gekoppelte KIs', v: 'Name, angegebenes Ziel und gehashte Zugangsdaten jeder KI' },
+              { k: 'Vorschläge', v: 'Erinnerungen, die KIs vorschlagen, bis du sie speicherst oder verwirfst' },
+            ],
+          },
+          { p: 'Alles ist mit age verschlüsselt, mit einem Schlüssel, der aus deiner Passphrase entsteht. Klartext landet nie auf der Festplatte. Solange die Wallet entsperrt ist, liegt der Schlüssel im Arbeitsspeicher, bis du sie sperrst, neu startest oder sie sich nach einer Weile ohne Nutzung selbst sperrt.' },
+        ],
+      },
+      {
+        h: 'Was bei KI-Anbietern ankommt',
+        blocks: [
+          { p: 'Wenn du einer KI etwas erlaubst, gibt bleib ihr die kleinste brauchbare Antwort, und die KI-App kann sie an das Modell senden, das sie nutzt: auf deinem Gerät oder an einen Anbieter wie Anthropic, OpenAI oder Google. Ab dann gilt für das, was dort angekommen ist, die Datenschutzerklärung dieses Anbieters.' },
+          { p: 'bleib zeigt dir das Ziel, bevor du zustimmst, und hält es im Beleg fest. Was eine KI gesehen hat, hat sie gesehen: bleib kann nichts von einem Anbieter zurückholen.' },
+        ],
+      },
+      {
+        h: 'Der lokale Modell-Proxy',
+        blocks: [{ p: 'Wenn du die Modellanfragen einer KI-App über den lokalen Proxy von bleib leitest, gibt bleib sie an den von dir eingestellten Anbieter weiter, um zu sehen, wohin Daten wirklich gehen. Es liest Ziel und Modell aus jeder Anfrage. Deinen API-Schlüssel reicht es an den Anbieter durch und speichert oder protokolliert ihn nie.' }],
+      },
+      {
+        h: 'Importe',
+        blocks: [{ p: 'Wenn du einen OpenClaw- oder Hermes-Workspace importierst oder dein Gedächtnis aus ChatGPT oder Claude einfügst, liest bleib es auf deinem Gerät, teilt es in Einträge zur Prüfung auf und verschlüsselt, was du behältst. Nichts wird hochgeladen.' }],
+      },
+      {
+        h: 'Deine Daten löschen',
+        blocks: [{ p: 'Lösche einzelne Einträge, Belege oder Berechtigungen in der App oder den ganzen Wallet-Ordner. Da wir nie eine Kopie haben, ist es damit überall gelöscht, wo wir es erreichen könnten. Für Kopien, die KI-Anbieter bereits erhalten haben, gelten deren Regeln.' }],
+      },
+      {
+        h: 'Wer verantwortlich ist',
+        blocks: [
+          { p: 'Du. bleib ist Software, die du selbst betreibst; die verarbeiteten Daten bleiben bei dir, und wir verarbeiten sie nicht. Nutzt du bleib beruflich, kann deine Organisation eigene Pflichten für die Daten haben, die du dort ablegst.' },
+          { p: 'Fragen zur App beantworten wir unter hello@rouxdutoit.com.' },
+        ],
+      },
+      {
+        h: 'Später: gehostete Synchronisierung',
+        blocks: [{ p: 'Wir planen einen optionalen, kostenpflichtigen Dienst für Synchronisierung und Sicherung. Deine Wallet würde vor dem Hochladen auf deinem Gerät verschlüsselt, wir würden also nur Daten speichern, die wir nicht lesen können. Vor dem Start bekommt er eine eigene Datenschutzerklärung und eigene Bedingungen zur Auftragsverarbeitung.' }],
+      },
+      { h: 'Änderungen', blocks: [{ p: 'Wir passen diesen Hinweis an, wenn sich die App ändert. Stand: 24. November 2026.' }] },
     ],
   },
   impressum: {

@@ -1,7 +1,8 @@
 /**
  * Early-access signup (Cloudflare Pages Function).
  * Stores { email, lang, createdAt } in the EARLY_ACCESS KV namespace, one key per email.
- * Abuse protection: honeypot field and a small per-IP rate limit.
+ * Abuse protection: honeypot field and a small per-IP rate limit. The IP address itself is never
+ * stored: the counter key is a truncated SHA-256 hash of it, and expires after two minutes.
  */
 interface Env {
   EARLY_ACCESS: KVNamespace;
@@ -9,6 +10,11 @@ interface Env {
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const LIMIT_PER_MINUTE = 5;
+
+async function ipTag(ip: string): Promise<string> {
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`bleib-rl:${ip}`));
+  return [...new Uint8Array(digest).slice(0, 8)].map((b) => b.toString(16).padStart(2, '0')).join('');
+}
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), {
@@ -43,7 +49,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
   const ip = request.headers.get('cf-connecting-ip') ?? 'unknown';
   const minute = Math.floor(Date.now() / 60000);
-  const rlKey = `rl:${ip}:${minute}`;
+  const rlKey = `rl:${await ipTag(ip)}:${minute}`;
   const count = Number((await env.EARLY_ACCESS.get(rlKey)) ?? '0');
   if (count >= LIMIT_PER_MINUTE) return json({ ok: false, error: 'rate_limited' }, 429);
   await env.EARLY_ACCESS.put(rlKey, String(count + 1), { expirationTtl: 120 });
