@@ -153,6 +153,7 @@ const en = {
         { name: 'GLM', icon: '/providers/zhipu.svg', color: '/providers/zhipu-color.svg' },
         { name: 'Ollama', icon: '/providers/ollama.svg', color: '' },
       ],
+      more: 'More',
       caption: 'Different AI. Same preferences and rules.',
     },
     propose: {
@@ -349,6 +350,7 @@ const de: Strings = {
         { name: 'GLM', icon: '/providers/zhipu.svg', color: '/providers/zhipu-color.svg' },
         { name: 'Ollama', icon: '/providers/ollama.svg', color: '' },
       ],
+      more: 'Mehr',
       caption: 'Andere KI. Gleiche Vorlieben und Regeln.',
     },
     propose: {

@@ -151,6 +151,10 @@ const cx = (n: number) => `cx at-${n}`;
                     <span class="t-foot pname">{p.name}</span>
                   </span>
                 ))}
+                <span class="pi">
+                  <span class="picon pmore"><i></i><i></i><i></i></span>
+                  <span class="t-foot pname">{c.any.more}</span>
+                </span>
               </div>
             </div>
             <p class="t-foot c-2 strip-cap">{c.any.caption}</p>
@@ -253,6 +257,9 @@ const cx = (n: number) => `cx at-${n}`;
   .picon { position: relative; width: 28px; height: 28px; }
   .picon img { position: absolute; inset: 0; width: 28px; height: 28px; object-fit: contain; transition: opacity 0.4s var(--ease); }
   .pm { opacity: 0.25; }
+  /* The strip doesn't end on the last model: a greyed "More" follows, and never becomes active. */
+  .pmore { display: flex; align-items: center; justify-content: center; gap: 3px; opacity: 0.25; }
+  .pmore i { width: 5px; height: 5px; border-radius: 50%; background: var(--label); }
   .pc { opacity: 0; }
   .pname { color: var(--label-3); transition: color 0.4s var(--ease); }
   [data-step='0'] .pi-0 .pc, [data-step='1'] .pi-1 .pc, [data-step='2'] .pi-2 .pc, [data-step='3'] .pi-3 .pc,
