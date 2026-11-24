@@ -33,11 +33,11 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
         )}
       </div>
     </header>
-    <div class="doc-body">
+    <div class="doc-body has-rails">
+      <Rails />
+      <div class="wrap">
         {d.sections.map((sec) => (
-          <section class="band has-rails" id={sec.id}>
-            <Rails />
-            <div class="wrap sec">
+          <section class="sec" id={sec.id}>
             <h2 class="sec-h">{sec.h}</h2>
             <div class="sec-c">
               {sec.blocks.map((b) =>
@@ -67,9 +67,9 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
                 ),
               )}
             </div>
-            </div>
           </section>
         ))}
+      </div>
     </div>
   </article>
 </Base>
@@ -90,10 +90,10 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
   .hub-d { color: var(--on-card-muted); font-size: 15px; line-height: 1.4; }
   @media (max-width: 860px) { .hub { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
-  /* Each section is its own band: a rail-to-rail divider with joiners on top, like the hero line. */
-  .band { scroll-margin-top: 72px; }
+  /* Sections are separated by space alone: no dividers. */
+  .doc-body { padding: clamp(24px, 4vw, 48px) 0 clamp(80px, 10vw, 128px); }
   .doc-body .wrap { position: relative; z-index: 1; }
-  .sec { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: clamp(24px, 5vw, 72px); padding: clamp(48px, 6vw, 80px) 0; }
+  .sec { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: clamp(24px, 5vw, 72px); padding: clamp(36px, 4.5vw, 56px) 0; scroll-margin-top: 96px; }
   .sec-h { font-size: 22px; line-height: 28px; font-weight: 600; letter-spacing: -0.02em; }
   .sec-c { min-width: 0; max-width: 680px; }
   .sec-c > * + * { margin-top: 16px; }
