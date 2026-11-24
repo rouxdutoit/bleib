@@ -2,6 +2,8 @@
 /**
  * A chat message box, as in the hero and the closer. `typed` is typed out at step 1 (scripts/story.ts),
  * with a macOS caret that blinks once focused. Anything that sits in the box above the text goes in the slot.
+ * Like a chat app, the send button lights up while there is text; with `sentAt` it is pressed at that step and dims
+ * again once the box is empty.
  */
 import { icon } from './icons';
 interface Props { typed: string; sentAt?: 2 }
@@ -9,7 +11,7 @@ const { typed, sentAt } = Astro.props;
 ---
 <div class="composer" data-sent-at={sentAt}>
   <slot />
-  <p class="t-body input"><span class="field"><span class="typed" data-type={typed}></span><span class="caret"></span></span><span class="send" set:html={icon('arrow_outward')} /></p>
+  <p class="t-body input"><span class="field"><span class="typed" data-type={typed}></span><span class="caret"></span></span><span class:list={['send', sentAt && ['press', `at-${sentAt}`]]} set:html={icon('arrow_outward')} /></p>
 </div>
 
 <style>
@@ -21,6 +23,8 @@ const { typed, sentAt } = Astro.props;
   :global(.s1:not(.s2)) .caret { opacity: 1; animation: caret 1.06s steps(1, end) infinite; }
   @keyframes caret { 50% { opacity: 0; } }
   :global(.s2) [data-sent-at='2'] .field { display: none; }
-  .send { flex: none; width: 28px; height: 28px; margin-inline-start: auto; border-radius: 50%; display: grid; place-items: center; background: var(--fill); color: var(--label-2); }
+  .send { flex: none; width: 28px; height: 28px; margin-inline-start: auto; border-radius: 50%; display: grid; place-items: center; background: var(--fill); color: var(--label-2); transition: background-color var(--t-fade) var(--ease), color var(--t-fade) var(--ease); }
+  .composer:has(.typed:not(:empty)) .send { background: var(--label); color: var(--cell); }
+  :global(.s2) .composer[data-sent-at='2']:has(.typed) .send { background: var(--fill); color: var(--label-2); }
   .send :global(svg) { width: 16px; height: 16px; display: block; transform: rotate(-45deg); }
 </style>
