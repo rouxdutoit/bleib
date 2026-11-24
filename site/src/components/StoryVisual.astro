@@ -139,6 +139,7 @@ const cx = (n: number) => `reveal at-${n}`;
           <div class={cx(1)}>
             <div class="reveal-in">
               <div class="card alert">
+                <span class="alert-sym" set:html={svg('favorite')} />
                 <p class="t-headline">{c.ask.title}</p>
                 <p class="t-foot msg">{c.ask.message}</p>
                 <div class="pills">
@@ -269,6 +270,11 @@ const cx = (n: number) => `reveal at-${n}`;
 
   /* Alert */
   .alert { padding: 22px 16px 16px; text-align: center; }
+  /* Like an Apple alert: the symbol of what it is about above the question; Health is the pink heart. */
+  .alert-sym { display: block; width: 30px; height: 30px; margin: 0 auto 10px; color: #ff2d55; }
+  .alert-sym :global(svg) { width: 100%; height: 100%; display: block; }
+  :root[data-theme='dark'] .alert-sym { color: #ff375f; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .alert-sym { color: #ff375f; } }
   .msg { margin-top: 4px !important; }
   .pills { display: grid; gap: 8px; margin-top: 18px; }
   .pill { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 12px; border-radius: 999px; background: var(--fill); color: var(--label); font-weight: 500; transition: background-color var(--t-fade) var(--ease), color var(--t-fade) var(--ease); }
