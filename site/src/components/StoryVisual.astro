@@ -34,35 +34,22 @@ const chat = scene === 1;
   <div class={scene === 5 ? undefined : 'tray'}>
     <div class="stack" aria-hidden="true">
       {scene === 0 && (
-        <>
-          <div>
-            <div>
-              <div class="sources">
-                <p class="t-foot c-2 src-h">{c.wallet.sourcesLabel}</p>
-                <ul class="src-list">
-                  {c.wallet.sources.map((m, i) => (
-                    <li class={`dim-${i + 1}`}><div class="src-item"><div class="card mini"><span class="t-foot c-2 from">{m.from}</span><span class="t-sub">{m.text}</span></div></div></li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="card list-card">
-            <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2 cnt">{[0, 1, 2, 3, 4].map((n) => <span class={`c${n}`}>{n}</span>)}</span></p>
-            <ul class="group">
-              {c.wallet.rows.map((r, i) => (
-                <li class={cx(i + 1)}>
-                  <div class="reveal-in"><div class="cell">
-                    <span class="ico" set:html={svg(r.icon)} />
-                    <span class="t-body cell-k">{r.k}</span>
-                    <span class="t-body c-2 cell-v">{r.locked && <span class="inline-g" set:html={svg('lock')} />}{r.v}</span>
-                  </div></div>
-                </li>
-              ))}
-            </ul>
-            <p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.wallet.footer}</p>
-          </div>
-        </>
+        /* One list fills up: each detail arrives from the AI that had it, so "scattered" shows in the rows themselves. */
+        <div class="card list-card import-card">
+          <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2 cnt">{[0, 1, 2, 3, 4].map((n) => <span class={`c${n}`}>{n}</span>)}</span></p>
+          <ul class="group">
+            {c.wallet.rows.map((r, i) => (
+              <li class={cx(i + 1)}>
+                <div class="reveal-in"><div class="cell">
+                  <span class="ico" set:html={svg(r.icon)} />
+                  <span class="cell-k"><span class="t-body">{r.k}</span><span class="t-sub c-2 blk">{c.wallet.fromLabel} {r.from}</span></span>
+                  <span class="t-body c-2 cell-v">{r.locked && <span class="inline-g" set:html={svg('lock')} />}{r.v}</span>
+                </div></div>
+              </li>
+            ))}
+          </ul>
+          <p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.wallet.footer}</p>
+        </div>
       )}
 
       {scene === 1 && (
@@ -240,14 +227,8 @@ const chat = scene === 1;
   .strip-cap { padding: 6px 16px 0; text-align: center; }
   .tag { padding: 2px 8px; border-radius: 999px; background: #f6e79a; color: #0a0a0a; font-weight: 600; }
 
-  /* Sources tray (like a stack of notifications) */
-  /* Sources: a stack that shrinks as each item moves up into the wallet. */
-  .sources { border-radius: 22px; background: var(--fill); padding: 12px; }
-  .src-h { padding: 0 4px 8px; }
-  /* Two by two: four scattered facts read at a glance, at half the height of a list. */
-  .src-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-  .src-item, .mini { height: 100%; }
-  .mini { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 14px; }
+  /* Scene 1: each row says which AI the detail came from, under its kind. */
+  .import-card .cell { min-height: 56px; }
 
   /* Alert */
   .alert { padding: 22px 16px 16px; text-align: center; }

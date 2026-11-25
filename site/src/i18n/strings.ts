@@ -117,19 +117,13 @@ const en = {
     wallet: {
       title: 'Your bleib',
       rows: [
-        { k: 'People', v: 'Marek, Berlin', icon: 'person' },
-        { k: 'Travel', v: 'Aisle seat', icon: 'flight' },
-        { k: 'Work', v: 'Friday review', icon: 'work' },
-        { k: 'Health', v: 'Private', icon: 'favorite', locked: true },
+        { k: 'People', v: 'Marek, Berlin', icon: 'person', from: 'ChatGPT' },
+        { k: 'Travel', v: 'Aisle seat', icon: 'flight', from: 'Gemini' },
+        { k: 'Work', v: 'Friday review', icon: 'work', from: 'Claude' },
+        { k: 'Health', v: 'Private', icon: 'favorite', locked: true, from: 'ChatGPT' },
       ],
-      sourcesLabel: 'Scattered across your AIs',
-      sources: [
-        { from: 'ChatGPT', text: 'Marek, Berlin' },
-        { from: 'Gemini', text: 'Aisle seat' },
-        { from: 'Claude', text: 'Friday review' },
-        { from: 'ChatGPT', text: 'Health notes' },
-      ],
-      footer: 'Encrypted on this device. Only you have access.',
+      fromLabel: 'From',
+      footer: 'Encrypted on this device.',
     },
     ask: {
       title: 'Share your health notes with Claude?',
@@ -303,19 +297,13 @@ const de: Strings = {
     wallet: {
       title: 'Dein bleib',
       rows: [
-        { k: 'Menschen', v: 'Marek, Berlin', icon: 'person' },
-        { k: 'Reisen', v: 'Gangplatz', icon: 'flight' },
-        { k: 'Arbeit', v: 'Rückblick am Freitag', icon: 'work' },
-        { k: 'Gesundheit', v: 'Privat', icon: 'favorite', locked: true },
+        { k: 'Menschen', v: 'Marek, Berlin', icon: 'person', from: 'ChatGPT' },
+        { k: 'Reisen', v: 'Gangplatz', icon: 'flight', from: 'Gemini' },
+        { k: 'Arbeit', v: 'Rückblick am Freitag', icon: 'work', from: 'Claude' },
+        { k: 'Gesundheit', v: 'Privat', icon: 'favorite', locked: true, from: 'ChatGPT' },
       ],
-      sourcesLabel: 'Verstreut über deine KIs',
-      sources: [
-        { from: 'ChatGPT', text: 'Marek, Berlin' },
-        { from: 'Gemini', text: 'Gangplatz' },
-        { from: 'Claude', text: 'Rückblick am Freitag' },
-        { from: 'ChatGPT', text: 'Gesundheit' },
-      ],
-      footer: 'Verschlüsselt auf diesem Gerät. Nur du hast Zugriff.',
+      fromLabel: 'Von',
+      footer: 'Verschlüsselt auf diesem Gerät.',
     },
     ask: {
       title: 'Gesundheitsnotizen mit Claude teilen?',
