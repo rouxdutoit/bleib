@@ -54,9 +54,8 @@ const en = {
   },
   preview: {
     examples: 'Examples',
-    title: 'Share only what {ai} needs',
-    add: 'Add',
-    added: 'Added',
+    title: 'Added just what {ai} needs',
+    undo: 'Undo',
     attachment: 'About me',
     tabs: [
       {
@@ -237,9 +236,8 @@ const de: Strings = {
   },
   preview: {
     examples: 'Beispiele',
-    title: 'Nur teilen, was {ai} braucht',
-    add: 'Hinzufügen',
-    added: 'Hinzugefügt',
+    title: 'Hinzugefügt, was {ai} braucht',
+    undo: 'Rückgängig',
     attachment: 'Über mich',
     tabs: [
       {
