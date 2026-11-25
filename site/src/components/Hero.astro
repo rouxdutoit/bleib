@@ -34,13 +34,13 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
           const facts = x.facts.map((f) => f.t).join(' · ');
           const gaps = [readFor(x.typed), readFor([title, facts, pv.undo].join(' '))];
           return (
-            <div class="body" role="tabpanel" id={`ex-${i}`} aria-labelledby={`ex-tab-${i}`} hidden={i !== 0} data-steps="2" data-start="300" data-gaps={gaps.join(',')} data-step="0" {...(i === 0 ? { 'data-sv': 'scroll' } : {})}>
+            <div class="body" role="tabpanel" id={`ex-${i}`} aria-labelledby={`ex-tab-${i}`} hidden={i !== 0} data-steps="3" data-start="300" data-gaps={gaps.join(',')} data-step="0" {...(i === 0 ? { 'data-sv': 'scroll' } : {})}>
               <p class="sr-only">{x.typed} {title}: {x.facts.map((f) => f.t).join(', ')}. {x.private}</p>
               <div aria-hidden="true">
                 <BleibCard title={title} facts={x.facts} action={pv.undo} quiet />
                 <Composer typed={x.typed}>
-                  <div class="attach reveal at-2"><div class="reveal-in">
-                    <div class="chip land at-2">
+                  <div class="attach reveal at-3"><div class="reveal-in">
+                    <div class="chip land at-3">
                       <span class="chip-app"><Mark size={14} /></span>
                       <span class="chip-text"><span class="t-foot chip-title">{pv.attachment}</span><span class="t-foot chip-facts">{facts}</span></span>
                       <span class="chip-x" set:html={icon('close')} />
@@ -77,8 +77,7 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
   .body { --bleib-card-margin: 0 0 8px; padding: 16px; display: flex; flex-direction: column; justify-content: flex-end; }
   .body p { margin: 0; }
 
-  /* The chip lands in the message box a moment after bleib's card appears. */
-  .attach { --delay: 0.2s; }
+  /* Once bleib's card has been read, the chip lands in the message box. */
   .chip { position: relative; display: flex; align-items: center; gap: 10px; width: fit-content; max-width: calc(100% - 16px); margin: 8px 8px 0; padding: 8px 30px 8px 8px; border-radius: 14px; background: var(--fill); }
   .chip-app { flex: none; width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
   .chip-text { min-width: 0; display: flex; flex-direction: column; }
