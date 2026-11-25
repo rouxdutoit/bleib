@@ -60,7 +60,6 @@ const en = {
   preview: {
     examples: 'Examples',
     title: 'Added just what {ai} needs',
-    undo: 'Undo',
     attachment: 'About me',
     tabs: [
       {
@@ -240,7 +239,6 @@ const de: Strings = {
   preview: {
     examples: 'Beispiele',
     title: 'Was {ai} braucht',
-    undo: 'Widerrufen',
     attachment: 'Über mich',
     tabs: [
       {

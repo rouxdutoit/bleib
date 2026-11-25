@@ -1,28 +1,27 @@
 ---
 /**
- * bleib's card inside a chat, as in the hero and the closer: what bleib offers, with one action that turns
- * bleib yellow when done. It reveals at step `at` (2 or 3) and its action completes one step later (motion kit in global.css).
- * `quiet` is for something already saved: the action (Undo) sits there as a secondary button and is never pressed.
- * Spacing around it comes from --bleib-card-margin on the parent.
+ * bleib's card inside a chat, as in the hero and scene 2: what bleib did, each detail as a pill with its own symbol.
+ * With `action` (scene 2's Undo for a quiet save) a text button sits top right. With `removable` (the hero) each pill
+ * carries a small ×, so you leave out one detail by tapping it; the chip in the message box removes them all.
+ * It reveals at step `at` (motion kit in global.css). Spacing around it comes from --bleib-card-margin on the parent.
  */
 import Mark from './Mark.astro';
-import DrawTick from './DrawTick.astro';
 import { icon, type IconName } from './icons';
-interface Props { title: string; facts: { t: string; icon: string }[]; action: string; done?: string; at?: 2 | 3; quiet?: boolean }
-const { title, facts, action, done, at = 2, quiet = false } = Astro.props;
+interface Props { title: string; facts: { t: string; icon: string }[]; action?: string; removable?: boolean; at?: 2 | 3 }
+const { title, facts, action, removable = false, at = 2 } = Astro.props;
 ---
 <div class={`reveal at-${at}`}><div class="reveal-in">
   <div class="fill">
-    <p class="fill-head"><span class="app"><Mark size={12} /></span><span class="t-foot fill-title">{title}</span></p>
-    {quiet
-      ? <span class="b quiet">{action}</span>
-      : <span class={`b crossfade press at-${at + 1}`}><span>{action}</span><span class="to-done"><span class="tick"><DrawTick /></span>{done}</span></span>}
-    <ul class="facts">{facts.map((f) => <li class="t-foot"><span class="sym" set:html={icon(f.icon as IconName)} />{f.t}</li>)}</ul>
+    <p class:list={['fill-head', { wide: !action }]}><span class="app"><Mark size={12} /></span><span class="t-foot fill-title">{title}</span></p>
+    {action && <span class="b">{action}</span>}
+    <ul class="facts">{facts.map((f) => (
+      <li class="t-foot"><span class="sym" set:html={icon(f.icon as IconName)} />{f.t}{removable && <span class="x" set:html={icon('close')} />}</li>
+    ))}</ul>
   </div>
 </div></div>
 
 <style>
-  /* Two rows on every screen: the title with the action at its end (top right), then each detail as a pill with its own symbol. */
+  /* Two rows on every screen: the title (with Undo top right when there is one), then each detail as a pill with its own symbol. */
   .fill { margin: var(--bleib-card-margin, 0); padding: 10px 10px 10px 12px; border-radius: 14px; background: var(--fill); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; align-items: center; }
   .fill-head { margin: 0; min-width: 0; display: flex; align-items: center; gap: 8px; }
   .app { flex: none; width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
@@ -31,11 +30,11 @@ const { title, facts, action, done, at = 2, quiet = false } = Astro.props;
   .facts li { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px 4px 8px; border-radius: 999px; background: var(--cell); color: var(--label); font-weight: 500; white-space: nowrap; }
   .sym { display: grid; color: var(--label-2); }
   .sym :global(svg) { width: 14px; height: 14px; display: block; }
-  /* Like the story cards: the action in the label colour, bleib yellow once done; labels crossfade in place. */
-  .b { place-items: center; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 13px; line-height: 1; font-weight: 600; background: var(--label); color: var(--cell); transition: background-color var(--t-fade) var(--ease), color var(--t-fade) var(--ease); }
+  .fill-head.wide { grid-column: 1 / -1; }
   /* Undo is a text button, as in Apple's own Undo toasts: no capsule, so it never looks like one of the detail pills. */
-  .b.quiet { display: grid; height: auto; padding: 4px 2px; background: none; color: var(--label); font-size: 15px; }
-  .to-done { display: inline-flex; align-items: center; gap: 4px; }
-  :global(.s3) .b.at-3, :global(.s4) .b.at-4 { background: #f6e79a; color: #0a0a0a; }
-  .tick { display: grid; }
+  .b { display: grid; place-items: center; padding: 4px 2px; font-size: 15px; line-height: 1; font-weight: 600; color: var(--label); }
+  /* A removable pill ends in a small ×, like a token in Mail's To field: tap it to leave that detail out. */
+  .facts li:has(.x) { padding-right: 6px; }
+  .x { display: grid; place-items: center; width: 16px; height: 16px; margin-left: 1px; border-radius: 50%; background: var(--fill); color: var(--label-2); }
+  .x :global(svg) { width: 11px; height: 11px; display: block; }
 </style>

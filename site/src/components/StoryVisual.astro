@@ -58,7 +58,7 @@ const chat = scene === 1;
           {/* Like the hero: you type, you send, and bleib's card says it's saved, with Undo (scripts/story.ts). */}
           <div class="chat" {...play}>
             <p class="t-body bubble appear at-2">{c.propose.said}</p>
-            <BleibCard title={c.propose.title} facts={[{ t: c.propose.fact, icon: 'translate' }]} action={c.propose.undo} at={3} quiet />
+            <BleibCard title={c.propose.title} facts={[{ t: c.propose.fact, icon: 'translate' }]} action={c.propose.undo} at={3} />
             <Composer typed={c.propose.said} sentAt={2} />
           </div>
         </Window>

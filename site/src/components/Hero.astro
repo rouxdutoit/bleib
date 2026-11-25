@@ -32,12 +32,12 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
         {pv.tabs.map((x, i) => {
           const title = pv.title.replace('{ai}', x.ai);
           const facts = x.facts.map((f) => f.t).join(' · ');
-          const gaps = [readFor(x.typed), readFor([title, facts, pv.undo].join(' '))];
+          const gaps = [readFor(x.typed), readFor([title, facts].join(' '))];
           return (
             <div class="body" role="tabpanel" id={`ex-${i}`} aria-labelledby={`ex-tab-${i}`} hidden={i !== 0} data-steps="3" data-start="300" data-gaps={gaps.join(',')} data-step="0" {...(i === 0 ? { 'data-sv': 'scroll' } : {})}>
               <p class="sr-only">{x.typed} {title}: {x.facts.map((f) => f.t).join(', ')}. {x.private}</p>
               <div aria-hidden="true">
-                <BleibCard title={title} facts={x.facts} action={pv.undo} quiet />
+                <BleibCard title={title} facts={x.facts} removable />
                 <Composer typed={x.typed}>
                   <div class="attach reveal at-3"><div class="reveal-in">
                     <div class="chip land at-3">
@@ -72,7 +72,7 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
   /* A wrapped line breaks only at its comma, never mid-phrase. */
   .phrase { display: inline-block; }
 
-  /* The fill moment: as you type to a new AI, bleib adds just what it needs by itself, with Undo right there.
+  /* The fill moment: as you type to a new AI, bleib adds just what it needs by itself; tap a pill to leave one out.
      Plays on the first scroll (scripts/story.ts); each tab is another everyday example and replays when chosen. */
   .preview { margin: clamp(80px, 10vw, 120px) 0 0; width: 100%; max-width: 520px; text-align: left; }
   /* The window keeps its finished height from the start (scripts/story.ts); like a chat, the message box sits at the bottom. */
