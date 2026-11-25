@@ -51,6 +51,10 @@ function renderBlock(block: Block, site: URL) {
   if ('refs' in block) return bullets(block.refs.map(({ name, href, v }) =>
     `${link(name, href, site)}: ${v}`,
   ));
+  if ('compare' in block) {
+    const [us, them] = block.compare.head;
+    return bullets(block.compare.rows.map(([k, a, b]) => `${k}: ${us}: ${a}. ${them}: ${b}.`));
+  }
   return block.p;
 }
 

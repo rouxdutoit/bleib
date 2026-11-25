@@ -4,6 +4,8 @@ import Lines from '../components/Lines.astro';
 import Base from './Base.astro';
 import Rails from '../components/Rails.astro';
 import ProviderLogo from '../components/ProviderLogo.astro';
+import StoryVisual from '../components/StoryVisual.astro';
+import reserveScenes from '../scripts/reserve.js?raw';
 import { icon } from '../components/icons';
 import { docs, type Block } from '../i18n/pages';
 import { routes, type Lang, type RouteKey } from '../i18n/strings';
@@ -20,6 +22,14 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
         <h1 class="doc-h1">{d.title}</h1>
         {d.intro.map((p) => <p class="doc-intro"><Lines text={p} /></p>)}
         {d.cta && <a class="btn btn-secondary doc-cta" href={d.cta.href}>{d.cta.label}</a>}
+        {d.visual !== undefined && (
+          <>
+            {/* The page's homepage card: it holds its finished height (scripts/reserve.js) and plays when seen. */}
+            <script is:inline set:html={reserveScenes} />
+            <figure class="doc-visual"><StoryVisual lang={lang} scene={d.visual} /></figure>
+            <script is:inline>bleibReserve(document.currentScript.previousElementSibling)</script>
+          </>
+        )}
         {d.hub && (
           <ul class="hub">
             {d.hub.map((h) => (
@@ -49,6 +59,11 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
                   <dl class="kv refs">{b.refs.map((r) => <div><dt><a href={r.href} rel="noopener">{r.name}</a></dt><dd>{r.v}</dd></div>)}</dl>
                 ) : is(b, 'rows') ? (
                   <dl class="kv">{b.rows.map((r) => <div><dt>{r.k}</dt><dd>{r.v}</dd></div>)}</dl>
+                ) : is(b, 'compare') ? (
+                  <table class="cmp">
+                    <thead><tr><td></td><th scope="col" class="us">{b.compare.head[0]}</th><th scope="col">{b.compare.head[1]}</th></tr></thead>
+                    <tbody>{b.compare.rows.map((r) => <tr><th scope="row">{r[0]}</th><td class="us">{r[1]}</td><td>{r[2]}</td></tr>)}</tbody>
+                  </table>
                 ) : is(b, 'tiles') ? (
                   <ul class="tiles">
                     {b.tiles.map((tl) => (
@@ -120,6 +135,27 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
   .refs dt a:hover { text-decoration-color: currentColor; }
   .refs dd { color: var(--muted); }
 
+  /* Comparison: an inset grouped table. bleib's column is in the label colour, the other in the secondary one;
+     every cell is written out, so nothing depends on colour or ticks. On phones each row's question sits above its
+     two answers. */
+  .cmp { width: 100%; border-collapse: collapse; border-radius: 20px; overflow: hidden; background: var(--card); color: var(--on-card); border: var(--card-border); font-size: 15px; line-height: 20px; }
+  .cmp th, .cmp td { padding: 12px 16px; text-align: left; vertical-align: top; }
+  .cmp thead th { font-size: 13px; line-height: 18px; font-weight: 600; color: var(--on-card-muted); padding-bottom: 6px; }
+  .cmp thead .us { color: var(--on-card); }
+  .cmp tbody tr { border-top: 1px solid var(--hairline); }
+  .cmp tbody th { font-weight: 600; width: 34%; }
+  .cmp td { color: var(--on-card-muted); }
+  .cmp td.us { color: var(--on-card); font-weight: 500; }
+  @media (max-width: 560px) {
+    .cmp, .cmp thead, .cmp tbody { display: block; }
+    .cmp tr { display: grid; grid-template-columns: 1fr 1fr; }
+    .cmp thead td { display: none; }
+    .cmp tbody th { grid-column: 1 / -1; width: auto; padding-bottom: 2px; }
+    .cmp tbody td { padding-top: 2px; }
+  }
+
+  .doc-visual { margin: clamp(40px, 5vw, 56px) 0 0; width: 100%; max-width: 440px; }
+
   .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   /* Tags sit in the corner so titles line up across a row, with or without a tag. */
   .tile { position: relative; padding: 18px 20px; border-radius: 20px; background: var(--card); color: var(--on-card); border: var(--card-border); }
@@ -147,3 +183,8 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
     .kv div { grid-template-columns: 1fr; gap: 2px; }
   }
 </style>
+
+<script>
+  import { initStory } from '../scripts/story';
+  initStory();
+</script>

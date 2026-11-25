@@ -7,6 +7,7 @@ import type { IconName } from '../components/icons';
  *   p       paragraph            list   bullet list         code   command line
  *   never   icon list with hairlines (commitments)          rows   key / value list
  *   tiles   two-up tiles with an optional tag               address  postal lines
+ *   compare a three-column comparison (what, bleib, the other way), written out in words
  */
 /** `ai` shows that AI's own logo beside the title and detail (ProviderLogo). */
 export type Tile = { t: string; d: string; icon?: IconName; tag?: string; ai?: string };
@@ -18,7 +19,8 @@ export type Block =
   | { never: string[] }
   | { rows: { k: string; v: string }[] }
   | { tiles: Tile[] }
-  | { refs: { name: string; href: string; v: string }[] };
+  | { refs: { name: string; href: string; v: string }[] }
+  | { compare: { head: [string, string]; rows: [string, string, string][] } };
 
 export interface Section {
   id?: string;
@@ -33,6 +35,8 @@ export interface DocPage {
   /** Hub links shown under the intro (How it works). */
   hub?: { to: RouteKey; t: string; d: string; icon: IconName }[];
   cta?: { label: string; href: string };
+  /** A homepage card shown under the intro (StoryVisual scene index), so each page shows the product too. */
+  visual?: number;
   sections: Section[];
 }
 
@@ -45,6 +49,7 @@ const SECURITY_MAIL = 'mailto:security@bleib.dev?subject=bleib%20security';
 const en: Docs = {
   how: {
     title: 'How it works',
+    visual: 0,
     description: 'Keep your memory on your device and share only what each request needs.',
     intro: [
       'bleib keeps your memory on your device. Each AI gets only what it needs for the request.',
@@ -92,6 +97,23 @@ const en: Docs = {
         blocks: [{ p: 'The site can read the line as soon as bleib adds it. You can remove it from your draft, but the site may already have seen it.' }],
       },
       {
+        id: 'compare',
+        h: 'bleib and the memory in each AI',
+        blocks: [{
+          compare: {
+            head: ['bleib', 'Memory in each AI'],
+            rows: [
+              ['Works with ChatGPT, Claude and Gemini', 'One memory for all three', 'Each AI keeps its own'],
+              ['Where it’s kept', 'Encrypted on your device', 'On the provider’s servers'],
+              ['What each chat gets', 'Only the details it needs', 'Whatever the AI decides to use'],
+              ['What was shared', 'A receipt for every share', 'No record per chat'],
+              ['When you switch AI', 'Your memory comes with you', 'It stays behind'],
+              ['Price and code', 'Free and open source', 'Part of each service'],
+            ],
+          },
+        }],
+      },
+      {
         id: 'recovery',
         h: 'Get your memory back',
         blocks: [{ p: 'Keep your recovery kit somewhere safe, away from your device. If you forget your passphrase, it lets you unlock your memory again.' }],
@@ -124,6 +146,7 @@ const en: Docs = {
   },
   permissions: {
     title: 'Permissions',
+    visual: 3,
     description: 'Choose what each AI can get from your memory.',
     intro: ['bleib checks what a request needs on your device. It picks only the relevant minimum and asks once before the first share with each AI.'],
     sections: [
@@ -152,6 +175,7 @@ const en: Docs = {
   },
   receipts: {
     title: 'Receipts',
+    visual: 4,
     description: 'See what bleib shared from your memory.',
     intro: ['Before every share, bleib saves a receipt on your device. Sharing only happens once the receipt is saved.'],
     sections: [
@@ -198,6 +222,7 @@ const en: Docs = {
   },
   security: {
     title: 'Security and privacy',
+    visual: 5,
     description: 'How bleib protects your memory and what it trusts on your device.',
     intro: ['Only you can read your memory. It’s encrypted on your device, with no account and no tracking. Every share leaves a receipt, and the code is open.'],
     cta: { label: 'Report a vulnerability', href: SECURITY_MAIL },
@@ -392,6 +417,7 @@ const en: Docs = {
 const de: Docs = {
   how: {
     title: 'So funktioniert’s',
+    visual: 0,
     description: 'Dein Gedächtnis bleibt auf deinem Gerät. Du teilst nur, was die KI für die Anfrage braucht.',
     intro: [
       'bleib bewahrt dein Gedächtnis auf deinem Gerät auf. Jede KI bekommt nur das, was sie für die jeweilige Anfrage braucht.',
@@ -439,6 +465,23 @@ const de: Docs = {
         blocks: [{ p: 'Die Website kann den Text lesen, sobald bleib ihn einfügt. Du kannst ihn aus deinem Entwurf entfernen. Die Website kann ihn dann schon gesehen haben.' }],
       },
       {
+        id: 'compare',
+        h: 'bleib und das Gedächtnis jeder KI',
+        blocks: [{
+          compare: {
+            head: ['bleib', 'Gedächtnis in jeder KI'],
+            rows: [
+              ['Mit ChatGPT, Claude und Gemini', 'Ein Gedächtnis für alle drei', 'Jede KI hat ihr eigenes'],
+              ['Wo es liegt', 'Verschlüsselt auf deinem Gerät', 'Auf den Servern des Anbieters'],
+              ['Was jeder Chat bekommt', 'Nur die nötigen Angaben', 'Was die KI selbst auswählt'],
+              ['Was geteilt wurde', 'Ein Beleg für jede Weitergabe', 'Kein Nachweis pro Chat'],
+              ['Beim KI-Wechsel', 'Dein Gedächtnis kommt mit', 'Es bleibt zurück'],
+              ['Preis und Code', 'Kostenlos und quelloffen', 'Teil des jeweiligen Dienstes'],
+            ],
+          },
+        }],
+      },
+      {
         id: 'recovery',
         h: 'Dein Gedächtnis zurückholen',
         blocks: [{ p: 'Bewahre dein Wiederherstellungs-Kit an einem sicheren Ort außerhalb deines Geräts auf. Wenn du dein Passwort vergisst, entsperrst du damit dein Gedächtnis wieder.' }],
@@ -471,6 +514,7 @@ const de: Docs = {
   },
   permissions: {
     title: 'Berechtigungen',
+    visual: 3,
     description: 'Entscheide, was jede KI aus deinem Gedächtnis sehen darf.',
     intro: ['bleib wählt auf deinem Gerät nur aus, was zur Anfrage passt. Bevor eine KI zum ersten Mal etwas bekommt, fragt bleib dich einmal.'],
     sections: [
@@ -499,6 +543,7 @@ const de: Docs = {
   },
   receipts: {
     title: 'Belege',
+    visual: 4,
     description: 'Sieh nach, was bleib aus deinem Gedächtnis geteilt hat.',
     intro: ['Vor jeder Freigabe speichert bleib einen Beleg auf deinem Gerät. Geteilt wird erst, wenn der Beleg gespeichert ist.'],
     sections: [
@@ -545,6 +590,7 @@ const de: Docs = {
   },
   security: {
     title: 'Sicherheit und Datenschutz',
+    visual: 5,
     description: 'Wie bleib dein Gedächtnis schützt und worauf es sich auf deinem Gerät verlässt.',
     intro: ['Nur du kannst dein Gedächtnis lesen. Es ist auf deinem Gerät verschlüsselt, ohne Konto und ohne Tracking. Jede Freigabe hinterlässt einen Beleg, und der Quellcode ist offen.'],
     cta: { label: 'Sicherheitslücke melden', href: SECURITY_MAIL },
