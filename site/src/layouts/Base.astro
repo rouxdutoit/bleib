@@ -9,6 +9,10 @@ const s = t(lang);
 const site = Astro.site ?? new URL('https://bleib.dev');
 const pageTitle = title ? `${title} · bleib` : s.meta.title;
 const desc = description ?? s.meta.description;
+// A shared homepage link shows the hero's promise; subpages share their own title and description.
+const shareTitle = title ? pageTitle : s.meta.share.title;
+const shareDesc = description ?? s.meta.share.description;
+const shareImage = new URL(lang === 'de' ? '/og-de.png' : '/og.png', site).href;
 const canonical = new URL(routes[page][lang], site).href;
 const enHref = new URL(routes[page].en, site).href;
 const deHref = new URL(routes[page].de, site).href;
@@ -35,20 +39,20 @@ const deHref = new URL(routes[page].de, site).href;
         <link rel="describedby" href="/llms.txt" type="text/plain" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="bleib" />
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={desc} />
+        <meta property="og:title" content={shareTitle} />
+        <meta property="og:description" content={shareDesc} />
         <meta property="og:url" content={canonical} />
         <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_GB'} />
         <meta property="og:locale:alternate" content={lang === 'de' ? 'en_GB' : 'de_DE'} />
-        <meta property="og:image" content={new URL('/og.png', site).href} />
+        <meta property="og:image" content={shareImage} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content={lang === 'de' ? 'bleib-Logo' : 'bleib logo'} />
+        <meta property="og:image:alt" content={s.meta.share.alt} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={pageTitle} />
-        <meta name="twitter:description" content={desc} />
-        <meta name="twitter:image" content={new URL('/og.png', site).href} />
-        <meta name="twitter:image:alt" content={lang === 'de' ? 'bleib-Logo' : 'bleib logo'} />
+        <meta name="twitter:title" content={shareTitle} />
+        <meta name="twitter:description" content={shareDesc} />
+        <meta name="twitter:image" content={shareImage} />
+        <meta name="twitter:image:alt" content={s.meta.share.alt} />
         <script is:inline type="application/ld+json" set:html={JSON.stringify({
           '@context': 'https://schema.org',
           ...(page === 'home' ? {

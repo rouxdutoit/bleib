@@ -26,6 +26,12 @@ export type RouteKey = keyof typeof routes;
 const en = {
   meta: {
     title: 'bleib: your AI memory wallet',
+    /** What a shared link shows (the homepage): the hero's promise, not the category. */
+    share: {
+      title: 'bleib: Own your AI memory.',
+      description: 'Kept on your device. Shared on your terms. A free browser extension for Chrome and Firefox.',
+      alt: 'bleib: Own your AI memory. Kept on your device. Shared on your terms.',
+    },
     description:
       'bleib is your AI memory wallet: a browser extension that keeps your memory encrypted on your device. You decide what each AI can know, and you can always check what it saw. Free and open source.',
   },
@@ -208,6 +214,11 @@ export type Strings = typeof en;
 const de: Strings = {
   meta: {
     title: 'bleib: dein Wallet für dein KI-Gedächtnis',
+    share: {
+      title: 'bleib: Dein KI-Gedächtnis gehört dir.',
+      description: 'Auf deinem Gerät. Geteilt, wie du willst. Eine kostenlose Browser-Erweiterung für Chrome und Firefox.',
+      alt: 'bleib: Dein KI-Gedächtnis gehört dir. Auf deinem Gerät. Geteilt, wie du willst.',
+    },
     description:
       'bleib ist dein Wallet für dein KI-Gedächtnis: eine Browser-Erweiterung, die dein Gedächtnis verschlüsselt auf deinem Gerät bewahrt. Du entscheidest, was jede KI wissen darf, und kannst jederzeit nachsehen, was sie gesehen hat. Kostenlos und Open Source.',
   },
