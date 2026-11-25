@@ -17,11 +17,11 @@ import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang; scene: number; tray?: boolean }
 const { lang, scene, tray = false } = Astro.props;
 const c = t(lang).cards;
-const STEPS = [4, 3, c.any.providers.length - 1, 2, 2, 1];
+const STEPS = [4, 3, c.any.providers.length - 1, 2, 0, 1];
 const INTERVAL = [900, 900, 1250, 900, 900, 1000];
 /** Reading time: before step 1, the card as it first appears; GAPS, what a step reveals (see scripts/story.ts). */
 const START = [900, 1000, 2200, 1500, 1000, 1600];
-const GAPS = ['', ',900', '', '2200', '900', ''];
+const GAPS = ['', ',900', '', '2200', '', ''];
 
 import { icon, type IconName } from './icons';
 const svg = (name: string, cls = 'g') => icon(name as IconName, cls);
@@ -119,16 +119,16 @@ const chat = scene === 1;
       )}
 
       {scene === 4 && (
-        /* One receipt, like a notification: who and what for, the details shared as pills (they land one by one), and
-           what stayed private. */
+        /* One receipt, like a notification: who and what for, the details shared as pills, and what stayed private.
+           A record of something already done, so it doesn't move. */
         <div class="card note">
           <div class="note-head">
             <img class="app" src="/providers/claude-color.svg" alt="" width="42" height="42" />
             <div class="note-id"><p class="t-headline">{c.receipt.title}</p><p class="t-sub c-2">{c.receipt.purpose}</p></div>
             <p class="t-foot c-2 time">{c.receipt.time}</p>
           </div>
-          <p class="receipt-facts">{c.receipt.shared.map((x, i) => (
-            <span class={`pill-fact t-foot appear land at-${i + 1}`}><span class="pill-sym" set:html={svg(x.icon)} />{x.t}</span>
+          <p class="receipt-facts">{c.receipt.shared.map((x) => (
+            <span class="pill-fact t-foot"><span class="pill-sym" set:html={svg(x.icon)} />{x.t}</span>
           ))}</p>
           <p class="t-foot c-2 not"><span class="inline-g" set:html={svg('lock')} />{c.receipt.notShared}</p>
         </div>
