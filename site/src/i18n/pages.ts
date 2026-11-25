@@ -105,7 +105,7 @@ const en: Docs = {
             yes: 'Yes',
             no: 'No',
             rows: [
-              ['One memory for ChatGPT, Claude and Gemini', true, false],
+              ['One memory for every AI', true, false],
               ['Kept encrypted on your device', true, false],
               ['Each chat gets only what it needs', true, false],
               ['A receipt for every share', true, false],
@@ -475,7 +475,7 @@ const de: Docs = {
             yes: 'Ja',
             no: 'Nein',
             rows: [
-              ['Ein Gedächtnis für ChatGPT, Claude und Gemini', true, false],
+              ['Ein Gedächtnis für jede KI', true, false],
               ['Verschlüsselt auf deinem Gerät', true, false],
               ['Jeder Chat bekommt nur das Nötige', true, false],
               ['Ein Beleg für jede Weitergabe', true, false],

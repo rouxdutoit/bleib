@@ -66,7 +66,7 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
                     <thead><tr>
                       <td></td>
                       <th scope="col" class="us"><span class="cmp-logos"><span class="cmp-mark"><Mark size={14} /></span></span>{b.compare.head[0]}</th>
-                      <th scope="col"><span class="cmp-logos">{['ChatGPT', 'Claude', 'Gemini'].map((n) => <ProviderLogo name={n} lang={lang} size={14} />)}</span>{b.compare.head[1]}</th>
+                      <th scope="col"><span class="cmp-logos stack">{['ChatGPT', 'Claude', 'Gemini'].map((n) => <span class="cmp-ai"><ProviderLogo name={n} lang={lang} size={13} /></span>)}</span>{b.compare.head[1]}</th>
                     </tr></thead>
                     <tbody>{b.compare.rows.map((r) => (
                       <tr>
@@ -161,6 +161,10 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
   .cmp thead th { width: 76px; padding: 16px 8px 10px; text-align: center; font-size: 13px; line-height: 18px; font-weight: 600; color: var(--on-card-muted); }
   .cmp thead .us { color: var(--on-card); }
   .cmp-logos { display: flex; justify-content: center; align-items: center; gap: 3px; height: 24px; margin-bottom: 4px; }
+  /* The three AIs as overlapping circles, like a group in Messages, so they sit as neatly as bleib's one mark. */
+  .stack { gap: 0; }
+  .cmp-ai { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--fill); box-shadow: 0 0 0 2px var(--card); }
+  .cmp-ai + .cmp-ai { margin-left: -6px; }
   .cmp-mark { width: 24px; height: 24px; border-radius: 6px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
   :global(:root[data-theme='dark']) .cmp-mark { background: #f6e79a; color: #0a0a0a; }
   @media (prefers-color-scheme: dark) { :global(:root:not([data-theme='light'])) .cmp-mark { background: #f6e79a; color: #0a0a0a; } }
@@ -174,7 +178,7 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
   .no .cmp-sym { color: var(--on-card-muted); }
   @media (max-width: 560px) {
     .cmp tbody th { padding-right: 4px; font-size: 16px; line-height: 21px; }
-    .cmp thead th, .cmp tbody td { width: 64px; }
+    .cmp thead th, .cmp tbody td { width: 72px; }
     .cmp thead th { padding-left: 2px; padding-right: 2px; white-space: nowrap; }
     .cmp tbody th { padding-left: 16px; }
   }
