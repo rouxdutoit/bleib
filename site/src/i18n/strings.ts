@@ -68,7 +68,7 @@ const en = {
       },
       {
         ai: 'ChatGPT', icon: 'openai', typed: 'What should I cook tonight?',
-        facts: [{ t: 'No coriander', icon: 'restaurant' }, { t: 'Cooks for two', icon: 'group' }], private: 'Private details stay in your bleib.',
+        facts: [{ t: 'Loves spicy food', icon: 'restaurant' }, { t: 'Cooks for two', icon: 'group' }], private: 'Private details stay in your bleib.',
       },
     ],
   },
@@ -82,7 +82,7 @@ const en = {
       },
       {
         h: ['You chat.', 'bleib takes notes.'],
-        p: 'Mention you like short answers. It’s in your bleib, with Undo.',
+        p: 'Mention you’re learning Spanish. It’s in your bleib, with Undo.',
         more: { to: 'how', hash: '#proposals', label: 'Saves as you go' },
       },
       {
@@ -159,9 +159,9 @@ const en = {
     off: { setting: 'Memory', note: 'Switched off in each AI’s own settings.' },
     propose: {
       app: 'Claude',
-      said: 'I like short answers.',
+      said: 'I’m learning Spanish.',
       title: 'Saved to bleib',
-      fact: 'Short answers',
+      fact: 'Learning Spanish',
       undo: 'Undo',
     },
   },
@@ -250,7 +250,7 @@ const de: Strings = {
       },
       {
         ai: 'ChatGPT', icon: 'openai', typed: 'Was soll ich heute Abend kochen?',
-        facts: [{ t: 'Kein Koriander', icon: 'restaurant' }, { t: 'Kocht für zwei', icon: 'group' }], private: 'Private Angaben bleiben in deinem bleib.',
+        facts: [{ t: 'Mag es scharf', icon: 'restaurant' }, { t: 'Kocht für zwei', icon: 'group' }], private: 'Private Angaben bleiben in deinem bleib.',
       },
     ],
   },
@@ -264,7 +264,7 @@ const de: Strings = {
       },
       {
         h: ['Du chattest.', 'bleib merkt es sich.'],
-        p: 'Erwähn, dass du kurze Antworten magst. Es landet in deinem bleib, mit Rückgängig.',
+        p: 'Erwähn, dass du Spanisch lernst. Es landet in deinem bleib, mit Rückgängig.',
         more: { to: 'how', hash: '#proposals', label: 'Speichert nebenbei' },
       },
       {
@@ -341,9 +341,9 @@ const de: Strings = {
     off: { setting: 'Gedächtnis', note: 'In den Einstellungen jeder KI ausgeschaltet.' },
     propose: {
       app: 'Claude',
-      said: 'Ich mag kurze Antworten.',
+      said: 'Ich lerne Spanisch.',
       title: 'In bleib gespeichert',
-      fact: 'Kurze Antworten',
+      fact: 'Lernt Spanisch',
       undo: 'Rückgängig',
     },
   },

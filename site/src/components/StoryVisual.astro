@@ -70,7 +70,7 @@ const chat = scene === 1;
           {/* Like the hero: you type, you send, and bleib's card says it's saved, with Undo (scripts/story.ts). */}
           <div class="chat" {...play}>
             <p class="t-body bubble appear at-2">{c.propose.said}</p>
-            <BleibCard title={c.propose.title} facts={[{ t: c.propose.fact, icon: 'short_text' }]} action={c.propose.undo} at={3} quiet />
+            <BleibCard title={c.propose.title} facts={[{ t: c.propose.fact, icon: 'translate' }]} action={c.propose.undo} at={3} quiet />
             <Composer typed={c.propose.said} sentAt={2} />
           </div>
         </Window>
@@ -290,7 +290,8 @@ const chat = scene === 1;
   .chat { --bleib-card-margin: 0 0 8px; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
   /* Nothing in the window ever shrinks to make room, so the message, bleib's card and the box can never overlap. */
   .chat > :global(*) { flex: none; }
-  .bubble { --delay: 0.15s; align-self: flex-end; max-width: 80%; margin: 0 0 12px; padding: 8px 14px; border-radius: 18px; background: var(--fill); }
+  /* .sv p resets margins, so the bubble names .sv too, or it would sit right on bleib's card. */
+  .sv .bubble { --delay: 0.15s; align-self: flex-end; max-width: 80%; margin: 0 0 12px; padding: 8px 14px; border-radius: 18px; background: var(--fill); }
   /* Like the hero card: a saved detail is a pill with its own symbol. */
 
   /* Widget */
