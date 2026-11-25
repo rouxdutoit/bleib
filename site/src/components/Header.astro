@@ -67,6 +67,17 @@ const arrow = icon('arrow_outward');
       }
     });
     matchMedia('(min-width: 861px)').addEventListener('change', () => setOpen(false));
+
+    // On phones, like Safari's bars: the header slides away as you scroll down and returns as you scroll up.
+    // It stays while the menu is open, near the top, and whenever something in it has keyboard focus.
+    let last = scrollY;
+    addEventListener('scroll', () => {
+      const y = scrollY, delta = y - last;
+      if (Math.abs(delta) < 6) return;
+      header.toggleAttribute('data-hidden', delta > 0 && y > 76 && !header.hasAttribute('data-open') && !header.querySelector(':focus-visible'));
+      last = y;
+    }, { passive: true });
+    header.addEventListener('focusin', () => { if (header.querySelector(':focus-visible')) header.removeAttribute('data-hidden'); });
   }
 </script>
 <style>
@@ -118,6 +129,8 @@ const arrow = icon('arrow_outward');
   .menu-btn { display: none; }
 
   @media (max-width: 860px) {
+    .site-header { transition: transform 0.3s var(--ease); }
+    .site-header[data-hidden] { transform: translateY(-100%); }
     .frame { height: 64px; padding: 0 12px 0 var(--inset); }
     .menu-btn:not([hidden]) {
       display: inline-grid;
@@ -190,5 +203,8 @@ const arrow = icon('arrow_outward');
     .js[data-open] .nav::after { display: block; }
     .nav::before { left: -5px; background-size: 5px 1px, 1px 9px; background-position: right center, center center; }
     .nav::after { right: -5px; background-size: 5px 1px, 1px 9px; background-position: left center, center center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .site-header { transition: none; }
   }
 </style>
