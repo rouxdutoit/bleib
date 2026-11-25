@@ -41,6 +41,8 @@ const { tabs, tablist, id = 'tab' } = Astro.props;
   .tabs[role='tablist']::before { content: ''; position: absolute; top: 0; left: 0; width: var(--tab-w); height: 28px; border-radius: 8px; background: var(--cell); box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 2px rgb(0 0 0 / 0.08); transform: translateX(calc(var(--sel, 0) * 100%)); transition: transform var(--t-open) var(--ease); }
   .tab { position: relative; flex: 0 0 var(--tab-w); min-width: 0; display: flex; align-items: center; justify-content: center; gap: 6px; height: 28px; padding: 0 8px; border: 0; border-radius: 8px; background: none; color: var(--label-2); font-family: inherit; cursor: pointer; }
   .tab + .tab::before { content: ''; position: absolute; left: 0; top: 7px; bottom: 7px; width: 1px; background: var(--hairline); transition: opacity var(--t-fade) var(--ease); }
+  /* A window with one open tab sizes it to its name, so it never cuts "Claude" short on a narrow phone. */
+  .tab.on:only-child { flex: 0 0 auto; padding: 0 12px; }
   .tab.on { background: var(--cell); box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 2px rgb(0 0 0 / 0.08); }
   .tab.on, .tab[aria-selected='true'] { color: var(--label); cursor: default; }
   .tab[aria-selected='true']::before, .tab[aria-selected='true'] + .tab::before { opacity: 0; }

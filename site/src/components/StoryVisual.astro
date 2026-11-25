@@ -288,6 +288,8 @@ const chat = scene === 1;
   /* Quiet saving */
   /* Scene 2: a chat window, as in the hero. The message lands just after send is pressed. */
   .chat { --bleib-card-margin: 0 0 8px; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
+  /* Nothing in the window ever shrinks to make room, so the message, bleib's card and the box can never overlap. */
+  .chat > :global(*) { flex: none; }
   .bubble { --delay: 0.15s; align-self: flex-end; max-width: 80%; margin: 0 0 12px; padding: 8px 14px; border-radius: 18px; background: var(--fill); }
   /* Like the hero card: a saved detail is a pill with its own symbol. */
 
