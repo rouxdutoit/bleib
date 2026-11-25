@@ -9,15 +9,18 @@
  */
 import Mark from './Mark.astro';
 import DrawTick from './DrawTick.astro';
+import Window from './Window.astro';
+import BleibCard from './BleibCard.astro';
+import Composer from './Composer.astro';
 import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang; scene: number }
 const { lang, scene } = Astro.props;
 const c = t(lang).cards;
-const STEPS = [4, 2, c.any.providers.length - 1, 2, 3, 1];
+const STEPS = [4, 3, c.any.providers.length - 1, 2, 3, 1];
 const INTERVAL = [900, 900, 1250, 900, 900, 1000];
 /** Reading time: before step 1, the card as it first appears; GAPS, what a step reveals (see scripts/story.ts). */
 const START = [900, 1000, 2200, 1500, 1000, 1600];
-const GAPS = ['', '2500', '', '2200', '900,1500', ''];
+const GAPS = ['', ',900', '', '2200', '900,1500', ''];
 
 import { icon, type IconName } from './icons';
 const svg = (name: string, cls = 'g') => icon(name as IconName, cls);
@@ -59,42 +62,14 @@ const cx = (n: number) => `reveal at-${n}`;
       )}
 
       {scene === 1 && (
-        <>
-          <div class="card note">
-            <div class="note-head">
-              <img class="app-sm" src="/providers/claude.svg" alt="" width="29" height="29" />
-              <p class="t-headline">{c.propose.app}</p>
-            </div>
-            <p class="t-body chat-line">{c.propose.said}</p>
+        <Window tabs={[{ ai: c.propose.app, icon: 'claude-color' }]}>
+          {/* Like the hero: you type, you send, and bleib's card says it's saved, with Undo (scripts/story.ts). */}
+          <div class="chat">
+            <p class="t-body bubble appear at-2">{c.propose.said}</p>
+            <BleibCard title={c.propose.title} facts={[{ t: c.propose.fact, icon: 'eco' }]} action={c.propose.undo} at={3} quiet />
+            <Composer typed={c.propose.said} sentAt={2} />
           </div>
-          <div class={cx(1)}>
-            <div class="reveal-in">
-              <div class="card note">
-                <p class="w-label t-foot c-2"><span class="w-mark"><Mark size={11} /></span>{c.propose.title}</p>
-                <div class="save-detail">
-                  <span class="fact t-foot"><span class="fact-sym" set:html={svg('eco')} />{c.propose.fact}</span>
-                  <span class="pill t-foot undo">{c.propose.undo}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card list-card">
-            <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2 crossfade at-2"><span>2</span><span>3</span></span></p>
-            <ul class="group">
-              {c.wallet.rows.slice(0, 2).map((r) => (
-                <li class="cell"><span class="ico" set:html={svg(r.icon)} /><span class="t-body cell-k">{r.k}</span><span class="t-body c-2 cell-v">{r.v}</span></li>
-              ))}
-              <li class={cx(2)}>
-                <div class="reveal-in"><div class="cell">
-                  <span class="ico" set:html={svg('eco')} />
-                  <span class="t-body cell-k">{c.propose.fact}</span>
-                  <span class="tag t-foot">{c.propose.newTag}</span>
-                </div></div>
-              </li>
-            </ul>
-            <p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.propose.footer}</p>
-          </div>
-        </>
+        </Window>
       )}
 
       {scene === 2 && (
@@ -307,13 +282,10 @@ const cx = (n: number) => `reveal at-${n}`;
   .not { padding-top: 10px; display: flex; align-items: center; gap: 5px; }
 
   /* Quiet saving */
-  .sv .chat-line { width: fit-content; margin: 8px 0 0 auto; padding: 8px 14px; border-radius: 18px; background: var(--fill); }
-  .save-detail { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; }
+  /* Scene 2: a chat window, as in the hero. The message lands just after send is pressed. */
+  .chat { --bleib-card-margin: 0 0 8px; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
+  .bubble { --delay: 0.15s; align-self: flex-end; max-width: 80%; margin: 0 0 12px; padding: 8px 14px; border-radius: 18px; background: var(--fill); }
   /* Like the hero card: a saved detail is a pill with its own symbol. */
-  .fact { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px 4px 8px; border-radius: 999px; background: var(--fill); color: var(--label); font-weight: 500; }
-  .fact-sym { display: grid; color: var(--label-2); }
-  .fact-sym :global(.g) { width: 14px; height: 14px; }
-  .undo { flex: none; min-height: 28px; }
 
   /* Widget */
   .widget { padding: 14px 16px 16px; }

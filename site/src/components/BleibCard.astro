@@ -2,18 +2,21 @@
 /**
  * bleib's card inside a chat, as in the hero and the closer: what bleib offers, with one action that turns
  * bleib yellow when done. It reveals at step `at` (2 or 3) and its action completes one step later (motion kit in global.css).
+ * `quiet` is for something already saved: the action (Undo) sits there as a secondary button and is never pressed.
  * Spacing around it comes from --bleib-card-margin on the parent.
  */
 import Mark from './Mark.astro';
 import DrawTick from './DrawTick.astro';
 import { icon, type IconName } from './icons';
-interface Props { title: string; facts: { t: string; icon: string }[]; action: string; done: string; at?: 2 | 3 }
-const { title, facts, action, done, at = 2 } = Astro.props;
+interface Props { title: string; facts: { t: string; icon: string }[]; action: string; done?: string; at?: 2 | 3; quiet?: boolean }
+const { title, facts, action, done, at = 2, quiet = false } = Astro.props;
 ---
 <div class={`reveal at-${at}`}><div class="reveal-in">
   <div class="fill">
     <p class="fill-head"><span class="app"><Mark size={12} /></span><span class="t-foot fill-title">{title}</span></p>
-    <span class={`b crossfade press at-${at + 1}`}><span>{action}</span><span class="to-done"><span class="tick"><DrawTick /></span>{done}</span></span>
+    {quiet
+      ? <span class="b quiet">{action}</span>
+      : <span class={`b crossfade press at-${at + 1}`}><span>{action}</span><span class="to-done"><span class="tick"><DrawTick /></span>{done}</span></span>}
     <ul class="facts">{facts.map((f) => <li class="t-foot"><span class="sym" set:html={icon(f.icon as IconName)} />{f.t}</li>)}</ul>
   </div>
 </div></div>
@@ -30,6 +33,7 @@ const { title, facts, action, done, at = 2 } = Astro.props;
   .sym :global(svg) { width: 14px; height: 14px; display: block; }
   /* Like the story cards: the action in the label colour, bleib yellow once done; labels crossfade in place. */
   .b { place-items: center; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 13px; line-height: 1; font-weight: 600; background: var(--label); color: var(--cell); transition: background-color var(--t-fade) var(--ease), color var(--t-fade) var(--ease); }
+  .b.quiet { display: grid; background: var(--cell); color: var(--label); }
   .to-done { display: inline-flex; align-items: center; gap: 4px; }
   :global(.s3) .b.at-3, :global(.s4) .b.at-4 { background: #f6e79a; color: #0a0a0a; }
   .tick { display: grid; }

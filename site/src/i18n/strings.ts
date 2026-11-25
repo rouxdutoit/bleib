@@ -163,8 +163,6 @@ const en = {
       title: 'Saved to bleib',
       fact: 'Vegetarian',
       undo: 'Undo',
-      newTag: 'New',
-      footer: 'Encrypted on this device.',
     },
   },
   finale: {
@@ -347,8 +345,6 @@ const de: Strings = {
       title: 'In bleib gespeichert',
       fact: 'Vegetarisch',
       undo: 'Rückgängig',
-      newTag: 'Neu',
-      footer: 'Auf diesem Gerät verschlüsselt.',
     },
   },
   finale: {
