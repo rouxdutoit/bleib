@@ -7,7 +7,6 @@
  * Moves come from the motion kit in global.css (Reveal, Crossfade, Settle via .at-N and .dim-N);
  *   .pick-at-N  a choice is pressed at step N and turns bleib yellow, done
  */
-import Mark from './Mark.astro';
 import DrawTick from './DrawTick.astro';
 import Window from './Window.astro';
 import BleibCard from './BleibCard.astro';
@@ -18,11 +17,11 @@ import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang; scene: number; tray?: boolean }
 const { lang, scene, tray = false } = Astro.props;
 const c = t(lang).cards;
-const STEPS = [4, 3, c.any.providers.length - 1, 2, 3, 1];
+const STEPS = [4, 3, c.any.providers.length - 1, 2, 2, 1];
 const INTERVAL = [900, 900, 1250, 900, 900, 1000];
 /** Reading time: before step 1, the card as it first appears; GAPS, what a step reveals (see scripts/story.ts). */
 const START = [900, 1000, 2200, 1500, 1000, 1600];
-const GAPS = ['', ',900', '', '2200', '900,1500', ''];
+const GAPS = ['', ',900', '', '2200', '900', ''];
 
 import { icon, type IconName } from './icons';
 const svg = (name: string, cls = 'g') => icon(name as IconName, cls);
@@ -120,32 +119,19 @@ const chat = scene === 1;
       )}
 
       {scene === 4 && (
-        <>
-          <div class="card note">
-            <div class="note-head">
-              <img class="app" src="/providers/claude-color.svg" alt="" width="42" height="42" />
-              <div class="note-id"><p class="t-headline">{c.receipt.who}</p><p class="t-sub c-2">{c.receipt.where}</p></div>
-              <p class="t-foot c-2">{c.receipt.time}</p>
-            </div>
-            <p class="t-sub c-2 purpose">{c.receipt.purposeLabel} {c.receipt.purpose}</p>
-            <p class="t-foot c-2 sec-h inner">{c.receipt.sharedLabel}</p>
-            <ul class="group filled">
-              {c.receipt.shared.map((x, i) => (
-                <li class={cx(i + 1)}><div class="reveal-in"><div class="cell"><span class="row-sym" set:html={svg(x.icon)} /><span class="t-body">{x.t}</span></div></div></li>
-              ))}
-            </ul>
-            <p class="t-foot c-2 not"><span class="inline-g" set:html={svg('lock')} />{c.receipt.notShared}</p>
+        /* One receipt, like a notification: who and what for, the details shared as pills (they land one by one), and
+           what stayed private. */
+        <div class="card note">
+          <div class="note-head">
+            <img class="app" src="/providers/claude-color.svg" alt="" width="42" height="42" />
+            <div class="note-id"><p class="t-headline">{c.receipt.title}</p><p class="t-sub c-2">{c.receipt.purpose}</p></div>
+            <p class="t-foot c-2 time">{c.receipt.time}</p>
           </div>
-          <div class={cx(3)}>
-            <div class="reveal-in">
-              <div class="card widget">
-                <p class="t-foot c-2 w-label"><span class="w-mark" aria-hidden="true"><Mark size={11} /></span>{c.receipt.weeklyLabel}</p>
-                <p class="w-num"><span class="t-large">{c.receipt.weeklyN}</span><span class="t-sub">{c.receipt.weeklyText}</span></p>
-                <p class="t-foot c-2 w-note"><span class="inline-g ok-g" set:html={svg('verified_user')} />{c.receipt.weeklyNote}</p>
-              </div>
-            </div>
-          </div>
-        </>
+          <p class="receipt-facts">{c.receipt.shared.map((x, i) => (
+            <span class={`pill-fact t-foot appear land at-${i + 1}`}><span class="pill-sym" set:html={svg(x.icon)} />{x.t}</span>
+          ))}</p>
+          <p class="t-foot c-2 not"><span class="inline-g" set:html={svg('lock')} />{c.receipt.notShared}</p>
+        </div>
       )}
 
       {scene === 5 && (
@@ -271,14 +257,10 @@ const chat = scene === 1;
   .pill-fact { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px 3px 8px; border-radius: 999px; background: var(--fill); color: var(--label); font-weight: 500; }
   .pill-sym { display: grid; color: var(--label-2); }
   .pill-sym :global(.g) { width: 14px; height: 14px; }
-  .purpose { margin-top: 12px !important; }
-  .group.filled { background: var(--fill); border-radius: 12px; }
-  .group.filled .cell { padding: 0 12px; }
-  .group.filled > li + li .cell::before { left: 44px; }
-  /* Each shared detail keeps the symbol it had as a pill, as a leading symbol in the row (like Settings). */
-  .row-sym { flex: none; width: 20px; display: grid; place-items: center; color: var(--label-2); }
-  .row-sym :global(.g) { width: 20px; height: 20px; }
-  .not { padding-top: 10px; display: flex; align-items: center; gap: 5px; }
+  /* Receipt: the shared details line up with the title, the private note sits under them. */
+  .time { align-self: flex-start; }
+  .receipt-facts { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 0 52px !important; }
+  .not { padding: 10px 0 0 52px; display: flex; align-items: center; gap: 5px; }
 
   /* Quiet saving */
   /* Scene 2: a chat window, as in the hero. The message lands just after send is pressed. */
@@ -289,13 +271,6 @@ const chat = scene === 1;
   .sv .bubble { --delay: 0.15s; align-self: flex-end; max-width: 80%; margin: 0 0 12px; padding: 8px 14px; border-radius: 18px; background: var(--fill); }
   /* Like the hero card: a saved detail is a pill with its own symbol. */
 
-  /* Widget */
-  .widget { padding: 14px 16px 16px; }
-  .w-label { display: flex; align-items: center; gap: 6px; font-weight: 600; }
-  .w-mark { width: 18px; height: 18px; border-radius: 5px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
-  .w-num { display: flex; align-items: baseline; gap: 8px; margin-top: 6px !important; }
-  .w-note { margin-top: 6px !important; display: flex; align-items: center; gap: 5px; }
-  .ok-g { color: var(--ok); }
 
 
 </style>
