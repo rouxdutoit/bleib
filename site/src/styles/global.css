@@ -236,7 +236,7 @@ h3 {
    Draw       .draw (SVG path)            draws itself on as its crossfade (.crossfade.at-N) turns on
    Press      .press.at-N                 dips as if tapped when its step comes
    Land       .land.at-N                  drops into place with a small spring, as it is revealed
-   Toggle     .toggle.at-N                an iOS switch, on in bleib yellow, that turns off at step N
+   Toggle     .toggle.at-N                an iOS switch, on in system green, that turns off at step N
    Symbol     .fx-pop, -spin, -wave (+ fx-knob, fx-unroll, fx-write, fx-shackle, fx-click)   a headline symbol acts out what it means
    Scenes differ only in when things happen; --delay staggers a single move. */
 :root {
@@ -311,7 +311,7 @@ h3 {
   height: 31px;
   margin-inline-start: auto;
   border-radius: 999px;
-  background: #f6e79a;
+  background: var(--ok);
   transition: background-color 0.7s var(--ease) var(--delay, 0s);
 }
 .toggle::after {
