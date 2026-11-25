@@ -92,7 +92,7 @@ const en = {
       },
       {
         h: ['It only asks', 'when it matters.'],
-        p: 'Travel details are added automatically. Health notes wait for your yes.',
+        p: 'bleib suggests. You tap Add. In time, it adds travel details for you. Health notes always wait for your yes.',
         more: { to: 'permissions', hash: '', label: 'You decide what’s shared' },
       },
       {
@@ -277,7 +277,7 @@ const de: Strings = {
       },
       {
         h: ['bleib fragt,', 'wenn es zählt.'],
-        p: 'Reisedetails kommen automatisch dazu. Gesundheitsnotizen warten auf dein Ja.',
+        p: 'bleib schlägt vor. Du tippst auf Hinzufügen. Später fügt bleib Reisedetails selbst hinzu. Gesundheitsnotizen warten auf dein Ja.',
         more: { to: 'permissions', hash: '', label: 'Du entscheidest, was geteilt wird' },
       },
       {
