@@ -39,7 +39,7 @@ type Docs = Record<Exclude<RouteKey, 'home'>, DocPage>;
 
 const OPERATOR = ['Ruan “Roux” du Toit', 'Emeranstraße 23', '85622 Feldkirchen', 'Germany'];
 const OPERATOR_DE = ['Ruan „Roux“ du Toit', 'Emeranstraße 23', '85622 Feldkirchen', 'Deutschland'];
-const SECURITY_MAIL = 'mailto:hello@rouxdutoit.com?subject=bleib%20security';
+const SECURITY_MAIL = 'mailto:security@bleib.dev?subject=bleib%20security';
 
 const en: Docs = {
   how: {
@@ -218,7 +218,7 @@ const en: Docs = {
       },
       {
         h: 'Report a vulnerability',
-        blocks: [{ p: 'Email hello@rouxdutoit.com.' }],
+        blocks: [{ p: 'Email security@bleib.dev.' }],
       },
     ],
   },
@@ -269,7 +269,7 @@ const en: Docs = {
       },
       {
         h: 'Get involved',
-        blocks: [{ p: 'The code is on GitHub at github.com/rouxdutoit/bleib. Open an issue, send a pull request, or write to hello@rouxdutoit.com. Please report security issues by email, not in public.' }],
+        blocks: [{ p: 'The code is on GitHub at github.com/rouxdutoit/bleib. Open an issue, send a pull request, or write to hello@bleib.dev. Please report security issues to security@bleib.dev, not in public.' }],
       },
 
     ],
@@ -316,7 +316,7 @@ const en: Docs = {
             ],
           },
           { p: 'To stop automated sign-ups, we count attempts per IP address for up to two minutes. The counter is kept only in the server’s memory, under a shortened one-way hash of the address, never the address itself, and is never written to disk. The legal basis is Article 6(1)(f) GDPR, our legitimate interest in protecting the form.' },
-          { p: 'You can withdraw your consent at any time by writing to hello@rouxdutoit.com. We delete your entry and confirm by email.' },
+          { p: 'You can withdraw your consent at any time by writing to privacy@bleib.dev. We delete your entry and confirm by email.' },
         ],
       },
       { h: 'Local storage', blocks: [{ p: 'If you switch between light and dark mode, your browser remembers the choice in its local storage. It stays in your browser and is never sent to us. You can clear it in your browser settings.' }] },
@@ -328,13 +328,13 @@ const en: Docs = {
         h: 'Contact',
         blocks: [{ p: 'If you email or call, we use your message and contact details to respond. The legal basis is Article 6(1)(b) GDPR for contract-related enquiries and Article 6(1)(f) GDPR for our legitimate interest in answering other enquiries. We delete the data when it is no longer needed, unless the law requires us to keep it longer.' }],
       },
-      { h: 'Controller', blocks: [{ address: [...OPERATOR, 'Email hello@rouxdutoit.com', 'Telephone +49 162 7850608'] }] },
+      { h: 'Controller', blocks: [{ address: [...OPERATOR, 'Email privacy@bleib.dev', 'Telephone +49 162 7850608'] }] },
       { h: 'Links to other sites', blocks: [{ p: 'If you follow a link to another site, its privacy policy applies there.' }] },
       {
         h: 'Your rights',
         blocks: [{ p: 'Under the GDPR you can request access (Article 15), rectification (Article 16), erasure (Article 17), restriction of processing (Article 18) and data portability (Article 20). You can object to processing based on legitimate interest (Article 21) and withdraw consent at any time (Article 7(3)). You can lodge a complaint with a supervisory authority (Article 77), for example the Bayerisches Landesamt für Datenschutzaufsicht, Promenade 18, 91522 Ansbach, Germany.' }],
       },
-      { h: 'Changes', blocks: [{ p: 'We update this notice when what we do changes. Last updated: 24 November 2026.' }] },
+      { h: 'Changes', blocks: [{ p: 'We update this notice when what we do changes. Last updated: 25 November 2026.' }] },
     ],
   },
   appPrivacy: {
@@ -371,7 +371,7 @@ const en: Docs = {
       },
       {
         h: 'Contact',
-        blocks: [{ p: 'For questions about bleib, write to hello@rouxdutoit.com. Last updated 25 November 2026.' }],
+        blocks: [{ p: 'For questions about bleib and your data, write to privacy@bleib.dev. Last updated 25 November 2026.' }],
       },
     ],
   },
@@ -381,7 +381,7 @@ const en: Docs = {
     intro: ['Information under § 5 DDG.'],
     sections: [
       { h: 'Operator', blocks: [{ address: OPERATOR }] },
-      { h: 'Contact', blocks: [{ address: ['Email hello@rouxdutoit.com', 'Telephone +49 162 7850608'] }] },
+      { h: 'Contact', blocks: [{ address: ['Email hello@bleib.dev', 'Telephone +49 162 7850608'] }] },
       { h: 'Responsible for content', blocks: [{ p: 'Under § 18(2) MStV.' }, { address: OPERATOR }] },
       { h: 'About bleib', blocks: [{ p: 'bleib is free, open source and in development. bleib is licensed under AGPL-3.0-or-later. The file format, specification and SDK are under Apache-2.0.' }] },
     ],
@@ -565,7 +565,7 @@ const de: Docs = {
       },
       {
         h: 'Sicherheitslücke melden',
-        blocks: [{ p: 'Schreib an hello@rouxdutoit.com.' }],
+        blocks: [{ p: 'Schreib an security@bleib.dev.' }],
       },
     ],
   },
@@ -616,7 +616,7 @@ const de: Docs = {
       },
       {
         h: 'Mitmachen',
-        blocks: [{ p: 'Der Code liegt auf GitHub unter github.com/rouxdutoit/bleib. Eröffne ein Issue, schick einen Pull Request oder schreib an hello@rouxdutoit.com. Sicherheitslücken bitte per E-Mail melden, nicht öffentlich.' }],
+        blocks: [{ p: 'Der Code liegt auf GitHub unter github.com/rouxdutoit/bleib. Eröffne ein Issue, schick einen Pull Request oder schreib an hello@bleib.dev. Sicherheitslücken bitte an security@bleib.dev melden, nicht öffentlich.' }],
       },
 
     ],
@@ -663,7 +663,7 @@ const de: Docs = {
             ],
           },
           { p: 'Um automatisierte Anmeldungen zu verhindern, zählen wir Versuche pro IP-Adresse für höchstens zwei Minuten. Der Zähler liegt nur im Arbeitsspeicher des Servers, unter einem gekürzten Einweg-Hash der Adresse, nie unter der Adresse selbst, und wird nie auf einen Datenträger geschrieben. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, unser berechtigtes Interesse am Schutz des Formulars.' },
-          { p: 'Du kannst deine Einwilligung jederzeit per E-Mail an hello@rouxdutoit.com widerrufen. Wir löschen deinen Eintrag und bestätigen es per E-Mail.' },
+          { p: 'Du kannst deine Einwilligung jederzeit per E-Mail an privacy@bleib.dev widerrufen. Wir löschen deinen Eintrag und bestätigen es per E-Mail.' },
         ],
       },
       { h: 'Lokaler Speicher', blocks: [{ p: 'Wenn du zwischen hellem und dunklem Design wechselst, merkt sich dein Browser die Wahl im lokalen Speicher. Sie bleibt in deinem Browser und wird nie an uns gesendet. Du kannst sie in den Browsereinstellungen löschen.' }] },
@@ -675,13 +675,13 @@ const de: Docs = {
         h: 'Kontakt',
         blocks: [{ p: 'Wenn du uns schreibst oder anrufst, nutzen wir deine Nachricht und Kontaktdaten, um dir zu antworten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO bei vertragsbezogenen Anfragen und Art. 6 Abs. 1 lit. f DSGVO für unser berechtigtes Interesse an der Beantwortung sonstiger Anfragen. Wir löschen die Daten, sobald sie nicht mehr benötigt werden, sofern keine gesetzlichen Aufbewahrungspflichten bestehen.' }],
       },
-      { h: 'Verantwortlicher', blocks: [{ address: [...OPERATOR_DE, 'E-Mail hello@rouxdutoit.com', 'Telefon +49 162 7850608'] }] },
+      { h: 'Verantwortlicher', blocks: [{ address: [...OPERATOR_DE, 'E-Mail privacy@bleib.dev', 'Telefon +49 162 7850608'] }] },
       { h: 'Links zu anderen Websites', blocks: [{ p: 'Wenn du einem Link zu einer anderen Website folgst, gilt dort deren Datenschutzerklärung.' }] },
       {
         h: 'Deine Rechte',
         blocks: [{ p: 'Nach der DSGVO hast du das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18) und Datenübertragbarkeit (Art. 20). Du kannst einer Verarbeitung auf Grundlage berechtigter Interessen widersprechen (Art. 21) und eine Einwilligung jederzeit widerrufen (Art. 7 Abs. 3). Du kannst dich bei einer Aufsichtsbehörde beschweren (Art. 77), zum Beispiel beim Bayerischen Landesamt für Datenschutzaufsicht, Promenade 18, 91522 Ansbach.' }],
       },
-      { h: 'Änderungen', blocks: [{ p: 'Wir passen diesen Hinweis an, wenn sich etwas ändert. Stand: 24. November 2026.' }] },
+      { h: 'Änderungen', blocks: [{ p: 'Wir passen diesen Hinweis an, wenn sich etwas ändert. Stand: 25. November 2026.' }] },
     ],
   },
   appPrivacy: {
@@ -718,7 +718,7 @@ const de: Docs = {
       },
       {
         h: 'Kontakt',
-        blocks: [{ p: 'Schreib bei Fragen zu bleib an hello@rouxdutoit.com. Stand 25. November 2026.' }],
+        blocks: [{ p: 'Schreib bei Fragen zu bleib und deinen Daten an privacy@bleib.dev. Stand 25. November 2026.' }],
       },
     ],
   },
@@ -728,7 +728,7 @@ const de: Docs = {
     intro: ['Angaben gemäß § 5 DDG.'],
     sections: [
       { h: 'Anbieter', blocks: [{ address: OPERATOR_DE }] },
-      { h: 'Kontakt', blocks: [{ address: ['E-Mail hello@rouxdutoit.com', 'Telefon +49 162 7850608'] }] },
+      { h: 'Kontakt', blocks: [{ address: ['E-Mail hello@bleib.dev', 'Telefon +49 162 7850608'] }] },
       { h: 'Verantwortlich für den Inhalt', blocks: [{ p: 'Nach § 18 Abs. 2 MStV.' }, { address: OPERATOR_DE }] },
       { h: 'Über bleib', blocks: [{ p: 'bleib ist kostenlos, quelloffen und in Entwicklung. bleib steht unter AGPL-3.0-or-later. Dateiformat, Spezifikation und SDK stehen unter Apache-2.0.' }] },
     ],
