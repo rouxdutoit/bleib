@@ -99,9 +99,8 @@ const chat = scene === 1;
           {/* Everyday things just work, then something sensitive asks first. */}
           <div class="card note">
             <div class="note-head">
-              {(() => { const p = c.any.providers.find((x) => x.name === c.ask.later.ai); return p && <img class="app" src={p.color || p.icon} alt="" width="38" height="38" />; })()}
-              <div class="note-id"><p class="t-headline">{c.ask.later.title}</p><p class="t-sub c-2">{c.ask.later.sub}</p></div>
-              <span class="t-foot auto">{c.ask.later.tag}</span>
+              {(() => { const p = c.any.providers.find((x) => x.name === c.ask.later.ai); return p && <img class="app app-tall" src={p.color || p.icon} alt="" width="50" height="50" />; })()}
+              <div class="note-id"><p class="t-headline">{c.ask.later.title}</p><p class="later-fact"><span class="pill-fact t-foot"><span class="pill-sym" set:html={svg(c.ask.later.icon)} />{c.ask.later.sub}</span><span class="t-foot auto">{c.ask.later.tag}</span></p></div>
             </div>
           </div>
           <div class={cx(1)}>
@@ -123,7 +122,7 @@ const chat = scene === 1;
         <>
           <div class="card note">
             <div class="note-head">
-              <img class="app" src="/providers/claude-color.svg" alt="" width="38" height="38" />
+              <img class="app" src="/providers/claude-color.svg" alt="" width="42" height="42" />
               <div class="note-id"><p class="t-headline">{c.receipt.who}</p><p class="t-sub c-2">{c.receipt.where}</p></div>
               <p class="t-foot c-2">{c.receipt.time}</p>
             </div>
@@ -255,7 +254,14 @@ const chat = scene === 1;
   .note-id { flex: 1; min-width: 0; }
   /* A quiet status capsule, as iOS marks a state. */
   .auto { flex: none; padding: 3px 10px; border-radius: 999px; background: var(--fill); color: var(--label-2); font-weight: 600; }
-  .app { width: 38px; height: 38px; border-radius: 9px; padding: 6px; background: var(--fill); flex: none; }
+  /* An AI's icon tile is as tall as the two lines of text beside it (title and detail). */
+  .app { width: 42px; height: 42px; border-radius: 10px; padding: 7px; background: var(--fill); flex: none; }
+  .app-tall { width: 50px; height: 50px; border-radius: 12px; padding: 9px; }
+  /* The detail as a pill, with Automatic at the end of the same line, so the title keeps the full width. */
+  .later-fact { margin-top: 4px !important; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .pill-fact { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px 3px 8px; border-radius: 999px; background: var(--fill); color: var(--label); font-weight: 500; }
+  .pill-sym { display: grid; color: var(--label-2); }
+  .pill-sym :global(.g) { width: 14px; height: 14px; }
   .app-sm { width: 29px; height: 29px; border-radius: 7px; padding: 4px; background: var(--fill); flex: none; }
   .purpose { margin-top: 12px !important; }
   .group.filled { background: var(--fill); border-radius: 12px; }
