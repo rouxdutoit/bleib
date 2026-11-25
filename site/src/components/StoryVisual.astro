@@ -72,7 +72,7 @@ const cx = (n: number) => `reveal at-${n}`;
               <div class="card note">
                 <p class="w-label t-foot c-2"><span class="w-mark"><Mark size={11} /></span>{c.propose.title}</p>
                 <div class="save-detail">
-                  <p class="t-sub"><span class="yes" set:html={svg('check')} />{c.propose.fact}</p>
+                  <span class="fact t-foot"><span class="fact-sym" set:html={svg('eco')} />{c.propose.fact}</span>
                   <span class="pill t-foot undo">{c.propose.undo}</span>
                 </div>
               </div>
@@ -308,7 +308,10 @@ const cx = (n: number) => `reveal at-${n}`;
   /* Quiet saving */
   .sv .chat-line { width: fit-content; margin: 8px 0 0 auto; padding: 8px 14px; border-radius: 18px; background: var(--fill); }
   .save-detail { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; }
-  .save-detail p { display: flex; align-items: center; gap: 6px; }
+  /* Like the hero card: a saved detail is a pill with its own symbol. */
+  .fact { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px 4px 8px; border-radius: 999px; background: var(--fill); color: var(--label); font-weight: 500; }
+  .fact-sym { display: grid; color: var(--label-2); }
+  .fact-sym :global(.g) { width: 14px; height: 14px; }
   .undo { flex: none; min-height: 28px; }
 
   /* Widget */
