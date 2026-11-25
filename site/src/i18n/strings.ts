@@ -116,7 +116,7 @@ const en = {
     wallet: {
       title: 'Your bleib',
       rows: [
-        { k: 'People', v: 'Marek, Berlin', icon: 'person', from: 'ChatGPT' },
+        { k: 'People', v: 'James, Berlin', icon: 'person', from: 'ChatGPT' },
         { k: 'Travel', v: 'Aisle seat', icon: 'flight', from: 'Gemini' },
         { k: 'Work', v: 'Friday review', icon: 'work', from: 'Claude' },
         { k: 'Health', v: 'Private', icon: 'favorite', locked: true, from: 'ChatGPT' },
@@ -287,7 +287,7 @@ const de: Strings = {
     wallet: {
       title: 'Dein bleib',
       rows: [
-        { k: 'Menschen', v: 'Marek, Berlin', icon: 'person', from: 'ChatGPT' },
+        { k: 'Menschen', v: 'Rieke, Berlin', icon: 'person', from: 'ChatGPT' },
         { k: 'Reisen', v: 'Gangplatz', icon: 'flight', from: 'Gemini' },
         { k: 'Arbeit', v: 'Freitagsrunde', icon: 'work', from: 'Claude' },
         { k: 'Gesundheit', v: 'Privat', icon: 'favorite', locked: true, from: 'ChatGPT' },
