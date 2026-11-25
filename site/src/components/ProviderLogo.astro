@@ -1,0 +1,18 @@
+---
+/**
+ * An AI's own logo at text size, as on the hero's tabs: Claude and Gemini in colour, ChatGPT's in the label colour
+ * so it shows in dark mode too. Decorative: the AI's name always sits next to it.
+ */
+import { t, type Lang } from '../i18n/strings';
+interface Props { name: string; lang: Lang; size?: number }
+const { name, lang, size = 14 } = Astro.props;
+const p = t(lang).cards.any.providers.find((x) => x.name === name);
+---
+{p && (p.color
+  ? <img class="logo" src={p.color} alt="" width={size} height={size} style={`--s: ${size}px`} />
+  : <span class="logo mono" aria-hidden="true" style={`--s: ${size}px; --logo: url(${p.icon})`} />)}
+
+<style>
+  .logo { flex: none; display: inline-block; width: var(--s); height: var(--s); vertical-align: -0.12em; }
+  .mono { background: var(--label); mask: var(--logo) center / contain no-repeat; }
+</style>

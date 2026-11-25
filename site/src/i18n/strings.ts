@@ -130,7 +130,7 @@ const en = {
       message: 'For your running plan. Health is sensitive, so bleib asks first.',
       action: 'Allow Once',
       allowed: 'Allowed',
-      later: { title: 'Claude used Travel', sub: 'Aisle seat', tag: 'Automatic' },
+      later: { ai: 'Claude', title: 'Claude used Travel', sub: 'Aisle seat', tag: 'Automatic' },
     },
     receipt: {
       who: 'Claude',
@@ -310,7 +310,7 @@ const de: Strings = {
       message: 'Für deinen Laufplan. Gesundheit ist sensibel, darum fragt bleib vorher.',
       action: 'Einmal erlauben',
       allowed: 'Erlaubt',
-      later: { title: 'Claude nutzte Reisen', sub: 'Gangplatz', tag: 'Automatisch' },
+      later: { ai: 'Claude', title: 'Claude nutzte Reisen', sub: 'Gangplatz', tag: 'Automatisch' },
     },
     receipt: {
       who: 'Claude',

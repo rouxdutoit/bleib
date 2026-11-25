@@ -12,6 +12,7 @@ import DrawTick from './DrawTick.astro';
 import Window from './Window.astro';
 import BleibCard from './BleibCard.astro';
 import Composer from './Composer.astro';
+import ProviderLogo from './ProviderLogo.astro';
 import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang; scene: number }
 const { lang, scene } = Astro.props;
@@ -29,8 +30,6 @@ const cx = (n: number) => `reveal at-${n}`;
  *  so, as in the hero, the window's body plays and holds it, and the message box never moves. */
 const play = { 'data-sv': '', 'data-steps': STEPS[scene], 'data-interval': INTERVAL[scene], 'data-start': START[scene], 'data-gaps': GAPS[scene] || undefined, 'data-step': '0' };
 const chat = scene === 1;
-/** An AI's own logo, as on the hero's tabs: Claude and Gemini in colour, ChatGPT's in the label colour. */
-const provider = (name: string) => c.any.providers.find((x) => x.name === name);
 ---
 <div class="sv" {...(chat ? {} : play)}>
   <div class={scene === 5 ? undefined : 'tray'}>
@@ -44,9 +43,7 @@ const provider = (name: string) => c.any.providers.find((x) => x.name === name);
               <li class={cx(i + 1)}>
                 <div class="reveal-in"><div class="cell">
                   <span class="ico" set:html={svg(r.icon)} />
-                  <span class="cell-k"><span class="t-body">{r.k}</span><span class="t-sub c-2 from">{c.wallet.fromLabel} {(() => { const p = provider(r.from); return p?.color
-                    ? <img class="src-logo" src={p.color} alt="" width="14" height="14" />
-                    : p && <span class="src-logo mono" style={`--logo: url(${p.icon})`} />; })()}{r.from}</span></span>
+                  <span class="cell-k"><span class="t-body">{r.k}</span><span class="t-sub c-2 from">{c.wallet.fromLabel} <ProviderLogo name={r.from} lang={lang} />{r.from}</span></span>
                   <span class="t-body c-2 cell-v">{r.locked && <span class="inline-g" set:html={svg('lock')} />}{r.v}</span>
                 </div></div>
               </li>
@@ -76,7 +73,7 @@ const provider = (name: string) => c.any.providers.find((x) => x.name === name);
                 <li class="cell"><span class="ico" set:html={svg(r.icon)} /><span class="t-body cell-k">{r.k}</span><span class="t-body c-2 cell-v">{r.v}</span></li>
               ))}
             </ul>
-            <p class="t-foot c-2 used">{c.any.usedBy} <span class="swap">{c.any.providers.map((p, i) => <span class={`u${i}`}>{p.name}</span>)}</span></p>
+            <p class="t-foot c-2 used">{c.any.usedBy} <span class="swap">{c.any.providers.map((p, i) => <span class={`u${i}`}><ProviderLogo name={p.name} lang={lang} size={12} /> {p.name}</span>)}</span></p>
           </div>
           <div class="card strip">
             <div class="pwin">
@@ -102,7 +99,7 @@ const provider = (name: string) => c.any.providers.find((x) => x.name === name);
           {/* Everyday things just work, then something sensitive asks first. */}
           <div class="card note">
             <div class="note-head">
-              <span class="ok" set:html={svg('check')} />
+              <img class="app-sm" src={c.any.providers.find((p) => p.name === c.ask.later.ai)?.icon} alt="" width="29" height="29" />
               <div class="note-id"><p class="t-headline">{c.ask.later.title}</p><p class="t-sub c-2">{c.ask.later.sub}</p></div>
               <span class="t-foot auto">{c.ask.later.tag}</span>
             </div>
@@ -234,8 +231,6 @@ const provider = (name: string) => c.any.providers.find((x) => x.name === name);
   /* Scene 1: each row says which AI the detail came from, under its kind. */
   .import-card .cell { min-height: 56px; }
   .from { display: flex; align-items: center; gap: 4px; }
-  .src-logo { flex: none; display: block; width: 14px; height: 14px; }
-  .src-logo.mono { background: var(--label); mask: var(--logo) center / contain no-repeat; }
 
   /* Alert */
   .alert { padding: 22px 16px 16px; text-align: center; }
@@ -269,8 +264,6 @@ const provider = (name: string) => c.any.providers.find((x) => x.name === name);
   /* Each shared detail keeps the symbol it had as a pill, as a leading symbol in the row (like Settings). */
   .row-sym { flex: none; width: 20px; display: grid; place-items: center; color: var(--label-2); }
   .row-sym :global(.g) { width: 20px; height: 20px; }
-  .ok :global(.g) { width: 18px; height: 18px; }
-  .ok { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--ok); color: #fff; }
   .not { padding-top: 10px; display: flex; align-items: center; gap: 5px; }
 
   /* Quiet saving */
