@@ -187,7 +187,7 @@ const en: Docs = {
       },
       {
         h: 'Storing your memory',
-        blocks: [{ p: 'bleib stores your notes as Markdown, a plain text format, and encrypts them with age. It reads the data exports from ChatGPT, Claude and Gemini on your device.' }],
+        blocks: [{ p: 'bleib stores your memories as Markdown, a plain text format, and encrypts them with age. It reads the data exports from ChatGPT, Claude and Gemini on your device.' }],
       },
       {
         h: 'Exporting receipts',
@@ -203,7 +203,7 @@ const en: Docs = {
     sections: [
       {
         h: 'On your device',
-        blocks: [{ p: 'bleib encrypts your notes, permissions and receipts. It picks what a request needs on your device and asks every time about sensitive information.' }],
+        blocks: [{ p: 'bleib encrypts your memories, permissions and receipts. It picks what a request needs on your device and asks every time about sensitive information.' }],
       },
       {
         h: 'What bleib trusts',
@@ -345,7 +345,7 @@ const en: Docs = {
       {
         h: 'What the extension reads',
         blocks: [
-          { p: 'On recognised pages on chatgpt.com, claude.ai and gemini.google.com, bleib checks what you type in the draft to find relevant notes or recognise preferences to save.' },
+          { p: 'On recognised pages on chatgpt.com, claude.ai and gemini.google.com, bleib checks what you type in the draft to find relevant memories or recognise preferences to save.' },
           { p: 'When you bring in your memories, bleib reads the data export file you choose, on your device. It puts what it finds in review, with its source. The file isn’t uploaded anywhere.' },
         ],
       },
@@ -353,7 +353,7 @@ const en: Docs = {
         h: 'What bleib keeps in your browser',
         blocks: [
           { list: [
-            'Your notes and entries waiting for review, including their source.',
+            'Your memories and entries waiting for review, including their source.',
             'Permissions, details of the AIs you use, and receipts for shares.',
           ] },
           { p: 'bleib encrypts these records and keeps them in your browser profile on your device. Imported files and pasted text are processed on your device too. Nothing is sent to us.' },
@@ -367,7 +367,7 @@ const en: Docs = {
       },
       {
         h: 'Manage your data',
-        blocks: [{ p: 'You can review and change your memory and disconnect an AI in bleib. Removing the extension deletes its data from your browser. For copies already held by an AI provider, use that provider’s controls.' }],
+        blocks: [{ p: 'You can review and change your memory and disconnect an AI in bleib. Removing the extension deletes its data from your browser. Make a backup first. For copies already held by an AI provider, use that provider’s controls.' }],
       },
       {
         h: 'Contact',
@@ -534,7 +534,7 @@ const de: Docs = {
       },
       {
         h: 'Dein Gedächtnis speichern',
-        blocks: [{ p: 'bleib speichert deine Notizen als Markdown, ein einfaches Textformat, und verschlüsselt sie mit age. Die Datenexporte von ChatGPT, Claude und Gemini liest es auf deinem Gerät.' }],
+        blocks: [{ p: 'bleib speichert deine Erinnerungen als Markdown, ein einfaches Textformat, und verschlüsselt sie mit age. Die Datenexporte von ChatGPT, Claude und Gemini liest es auf deinem Gerät.' }],
       },
       {
         h: 'Belege exportieren',
@@ -550,7 +550,7 @@ const de: Docs = {
     sections: [
       {
         h: 'Auf deinem Gerät',
-        blocks: [{ p: 'bleib verschlüsselt deine Notizen, Berechtigungen und Belege. Es wählt auf deinem Gerät aus, was die KI für ihre Anfrage braucht. Bei sensiblen Angaben fragt es jedes Mal.' }],
+        blocks: [{ p: 'bleib verschlüsselt deine Erinnerungen, Berechtigungen und Belege. Es wählt auf deinem Gerät aus, was die KI für ihre Anfrage braucht. Bei sensiblen Angaben fragt es jedes Mal.' }],
       },
       {
         h: 'Worauf bleib sich verlässt',
@@ -692,7 +692,7 @@ const de: Docs = {
       {
         h: 'Was die Erweiterung liest',
         blocks: [
-          { p: 'Auf erkannten Seiten von chatgpt.com, claude.ai und gemini.google.com prüft bleib, was du in den Entwurf schreibst. So findet es passende Notizen und erkennt Vorlieben, die es speichern kann.' },
+          { p: 'Auf erkannten Seiten von chatgpt.com, claude.ai und gemini.google.com prüft bleib, was du in den Entwurf schreibst. So findet es passende Erinnerungen und erkennt Vorlieben, die es speichern kann.' },
           { p: 'Wenn du deine Erinnerungen mitnimmst, liest bleib die Exportdatei, die du auswählst, auf deinem Gerät. Was es findet, legt es dir mit seiner Herkunft zur Prüfung vor. Die Datei wird nirgendwohin hochgeladen.' },
         ],
       },
@@ -700,7 +700,7 @@ const de: Docs = {
         h: 'Was bleib in deinem Browser speichert',
         blocks: [
           { list: [
-            'Deine Notizen und Einträge zur Prüfung, jeweils mit ihrer Herkunft.',
+            'Deine Erinnerungen und Einträge zur Prüfung, jeweils mit ihrer Herkunft.',
             'Berechtigungen, Angaben zu den KIs, die du nutzt, und Belege für Freigaben.',
           ] },
           { p: 'bleib verschlüsselt diese Daten und speichert sie in deinem Browserprofil auf deinem Gerät. Auch importierte Dateien und eingefügten Text verarbeitet bleib auf deinem Gerät. Nichts davon wird an uns gesendet.' },
@@ -714,7 +714,7 @@ const de: Docs = {
       },
       {
         h: 'Deine Daten verwalten',
-        blocks: [{ p: 'Du kannst dein Gedächtnis prüfen und ändern und KI-Verbindungen in bleib trennen. Wenn du die Erweiterung entfernst, löscht der Browser ihre Daten. Für Kopien, die ein KI-Anbieter bereits hat, nutze die Einstellungen dieses Anbieters.' }],
+        blocks: [{ p: 'Du kannst dein Gedächtnis prüfen und ändern und KI-Verbindungen in bleib trennen. Wenn du die Erweiterung entfernst, löscht der Browser ihre Daten. Mach vorher ein Backup. Für Kopien, die ein KI-Anbieter bereits hat, nutze die Einstellungen dieses Anbieters.' }],
       },
       {
         h: 'Kontakt',
