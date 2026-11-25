@@ -1,9 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 name: Deploy website
 
+# The live site deploys only from the `live` branch, so `main` can be pushed after every commit (backup and the
+# GitHub contribution graph) without going live. To go live: git push origin main:live (or run this workflow by hand).
 "on":
   push:
-    branches: [main]
+    branches: [live]
     paths:
       - 'site/**'
       - '.github/workflows/deploy-site.yml'
