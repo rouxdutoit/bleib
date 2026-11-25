@@ -1,0 +1,16 @@
+{
+  "name": "bleib-local-model-x",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test.mjs"
+  },
+  "dependencies": {
+    "@huggingface/tokenizers": "0.2.0",
+    "@mlc-ai/web-llm": "0.2.89",
+    "esbuild": "0.28.2",
+    "onnxruntime-node": "1.31.1",
+    "onnxruntime-web": "1.31.1",
+    "playwright": "1.65.1"
+  }
+}

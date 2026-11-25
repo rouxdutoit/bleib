@@ -1,0 +1,25 @@
+{
+  "name": "bleib-local-model-v",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test.mjs"
+  },
+  "dependencies": {
+    "@huggingface/tokenizers": "0.2.0",
+    "@huggingface/transformers": "4.3.2",
+    "@mlc-ai/web-llm": "0.2.89",
+    "@wllama/wllama": "4.0.0",
+    "esbuild": "0.28.2",
+    "onnxruntime-node": "1.31.1",
+    "onnxruntime-web": "1.31.1",
+    "playwright": "1.63.0"
+  },
+  "overrides": {
+    "@huggingface/transformers": {
+      "onnxruntime-web": "$onnxruntime-web",
+      "onnxruntime-node": "$onnxruntime-node"
+    }
+  }
+}

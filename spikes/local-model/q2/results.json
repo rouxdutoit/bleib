@@ -1,0 +1,7162 @@
+{
+  "machine": {
+    "cpu": "AMD Ryzen 5 5600X 6-Core Processor",
+    "logicalCores": 12,
+    "platform": "linux",
+    "arch": "x64",
+    "node": "v24.22.2"
+  },
+  "training": {
+    "request": {
+      "rows": 7734,
+      "negatives": 962,
+      "multilabel": 727,
+      "en": 3849,
+      "de": 3885
+    },
+    "save": {
+      "rows": 4841,
+      "negatives": 187,
+      "multilabel": 0,
+      "en": 2426,
+      "de": 2415
+    }
+  },
+  "baseline": {
+    "keywords": {
+      "test": {
+        "all": {
+          "drafts": 152,
+          "tp": 25,
+          "fp": 205,
+          "fn": 95,
+          "precision": 0.10869565217391304,
+          "recall": 0.20833333333333334,
+          "f1": 0.14285714285714285,
+          "f05": 0.12019230769230768,
+          "negatives": 52,
+          "picksOnNegative": 43,
+          "exact": 13
+        },
+        "language": {
+          "en": {
+            "drafts": 76,
+            "tp": 16,
+            "fp": 90,
+            "fn": 44,
+            "precision": 0.1509433962264151,
+            "recall": 0.26666666666666666,
+            "f1": 0.19277108433734938,
+            "f05": 0.1652892561983471,
+            "negatives": 26,
+            "picksOnNegative": 21,
+            "exact": 9
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 9,
+            "fp": 115,
+            "fn": 51,
+            "precision": 0.07258064516129033,
+            "recall": 0.15,
+            "f1": 0.09782608695652173,
+            "f05": 0.08093525179856115,
+            "negatives": 26,
+            "picksOnNegative": 22,
+            "exact": 4
+          }
+        },
+        "category": {
+          "adversarial": {
+            "en": {
+              "drafts": 5,
+              "tp": 0,
+              "fp": 3,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 5,
+              "picksOnNegative": 3,
+              "exact": 2
+            },
+            "de": {
+              "drafts": 5,
+              "tp": 0,
+              "fp": 7,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 5,
+              "picksOnNegative": 5,
+              "exact": 0
+            }
+          },
+          "ambiguous": {
+            "en": {
+              "drafts": 2,
+              "tp": 0,
+              "fp": 3,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 2,
+              "picksOnNegative": 2,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 2,
+              "tp": 0,
+              "fp": 2,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 2,
+              "picksOnNegative": 1,
+              "exact": 1
+            }
+          },
+          "coding": {
+            "en": {
+              "drafts": 6,
+              "tp": 1,
+              "fp": 9,
+              "fn": 4,
+              "precision": 0.1,
+              "recall": 0.2,
+              "f1": 0.13333333333333333,
+              "f05": 0.11111111111111112,
+              "negatives": 2,
+              "picksOnNegative": 2,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 6,
+              "tp": 1,
+              "fp": 9,
+              "fn": 4,
+              "precision": 0.1,
+              "recall": 0.2,
+              "f1": 0.13333333333333333,
+              "f05": 0.11111111111111112,
+              "negatives": 2,
+              "picksOnNegative": 2,
+              "exact": 0
+            }
+          },
+          "contact": {
+            "en": {
+              "drafts": 1,
+              "tp": 0,
+              "fp": 0,
+              "fn": 1,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 1,
+              "tp": 0,
+              "fp": 0,
+              "fn": 1,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            }
+          },
+          "cooking": {
+            "en": {
+              "drafts": 9,
+              "tp": 0,
+              "fp": 11,
+              "fn": 10,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 2,
+              "picksOnNegative": 2,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 9,
+              "tp": 0,
+              "fp": 15,
+              "fn": 10,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 2,
+              "picksOnNegative": 2,
+              "exact": 0
+            }
+          },
+          "cover-letter": {
+            "en": {
+              "drafts": 4,
+              "tp": 1,
+              "fp": 7,
+              "fn": 3,
+              "precision": 0.125,
+              "recall": 0.25,
+              "f1": 0.16666666666666666,
+              "f05": 0.1388888888888889,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 1,
+              "fp": 7,
+              "fn": 3,
+              "precision": 0.125,
+              "recall": 0.25,
+              "f1": 0.16666666666666666,
+              "f05": 0.1388888888888889,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 0
+            }
+          },
+          "fitness": {
+            "en": {
+              "drafts": 6,
+              "tp": 2,
+              "fp": 6,
+              "fn": 4,
+              "precision": 0.25,
+              "recall": 0.3333333333333333,
+              "f1": 0.28571428571428575,
+              "f05": 0.2631578947368421,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 6,
+              "tp": 1,
+              "fp": 7,
+              "fn": 5,
+              "precision": 0.125,
+              "recall": 0.16666666666666666,
+              "f1": 0.14285714285714288,
+              "f05": 0.13157894736842105,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "general": {
+            "en": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 2,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 1,
+              "exact": 2
+            },
+            "de": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 4,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 2,
+              "exact": 1
+            }
+          },
+          "gifts": {
+            "en": {
+              "drafts": 4,
+              "tp": 1,
+              "fp": 4,
+              "fn": 2,
+              "precision": 0.2,
+              "recall": 0.3333333333333333,
+              "f1": 0.25,
+              "f05": 0.21739130434782608,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 0,
+              "fp": 6,
+              "fn": 3,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "health": {
+            "en": {
+              "drafts": 1,
+              "tp": 0,
+              "fp": 1,
+              "fn": 1,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 1,
+              "tp": 0,
+              "fp": 2,
+              "fn": 1,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            }
+          },
+          "kids": {
+            "en": {
+              "drafts": 4,
+              "tp": 4,
+              "fp": 4,
+              "fn": 0,
+              "precision": 0.5,
+              "recall": 1,
+              "f1": 0.6666666666666666,
+              "f05": 0.5555555555555556,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 1,
+              "fp": 7,
+              "fn": 3,
+              "precision": 0.125,
+              "recall": 0.25,
+              "f1": 0.16666666666666666,
+              "f05": 0.1388888888888889,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 0
+            }
+          },
+          "location": {
+            "en": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 5,
+              "fn": 2,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 5,
+              "fn": 2,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 0
+            }
+          },
+          "money": {
+            "en": {
+              "drafts": 4,
+              "tp": 0,
+              "fp": 4,
+              "fn": 3,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 1,
+              "fp": 7,
+              "fn": 2,
+              "precision": 0.125,
+              "recall": 0.3333333333333333,
+              "f1": 0.18181818181818182,
+              "f05": 0.14285714285714285,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 0
+            }
+          },
+          "negation": {
+            "en": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 5,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 3,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 4,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 3,
+              "exact": 0
+            }
+          },
+          "relationships": {
+            "en": {
+              "drafts": 1,
+              "tp": 1,
+              "fp": 1,
+              "fn": 0,
+              "precision": 0.5,
+              "recall": 1,
+              "f1": 0.6666666666666666,
+              "f05": 0.5555555555555556,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 1,
+              "tp": 0,
+              "fp": 2,
+              "fn": 1,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            }
+          },
+          "shopping": {
+            "en": {
+              "drafts": 6,
+              "tp": 2,
+              "fp": 7,
+              "fn": 4,
+              "precision": 0.2222222222222222,
+              "recall": 0.3333333333333333,
+              "f1": 0.26666666666666666,
+              "f05": 0.2380952380952381,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 6,
+              "tp": 2,
+              "fp": 9,
+              "fn": 4,
+              "precision": 0.18181818181818182,
+              "recall": 0.3333333333333333,
+              "f1": 0.23529411764705885,
+              "f05": 0.2,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 0
+            }
+          },
+          "trip": {
+            "en": {
+              "drafts": 9,
+              "tp": 2,
+              "fp": 12,
+              "fn": 8,
+              "precision": 0.14285714285714285,
+              "recall": 0.2,
+              "f1": 0.16666666666666666,
+              "f05": 0.15151515151515152,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 9,
+              "tp": 2,
+              "fp": 12,
+              "fn": 8,
+              "precision": 0.14285714285714285,
+              "recall": 0.2,
+              "f1": 0.16666666666666666,
+              "f05": 0.15151515151515152,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 0
+            }
+          },
+          "work-email": {
+            "en": {
+              "drafts": 5,
+              "tp": 2,
+              "fp": 6,
+              "fn": 2,
+              "precision": 0.25,
+              "recall": 0.5,
+              "f1": 0.3333333333333333,
+              "f05": 0.2777777777777778,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 2
+            },
+            "de": {
+              "drafts": 5,
+              "tp": 0,
+              "fp": 10,
+              "fn": 4,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 0
+            }
+          }
+        },
+        "latency": {
+          "firstMs": 2.788970999999947,
+          "p50Ms": 3.7563490000002275,
+          "p95Ms": 6.719131999999945
+        },
+        "unsafePicks": 8
+      }
+    },
+    "browser": {
+      "test": {
+        "all": {
+          "drafts": 152,
+          "tp": 0,
+          "fp": 28,
+          "fn": 120,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "f05": 0,
+          "negatives": 52,
+          "picksOnNegative": 10,
+          "exact": 42
+        },
+        "language": {
+          "en": {
+            "drafts": 76,
+            "tp": 0,
+            "fp": 9,
+            "fn": 60,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 26,
+            "picksOnNegative": 5,
+            "exact": 21
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 0,
+            "fp": 19,
+            "fn": 60,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 26,
+            "picksOnNegative": 5,
+            "exact": 21
+          }
+        },
+        "category": {
+          "adversarial": {
+            "en": {
+              "drafts": 5,
+              "tp": 0,
+              "fp": 2,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 5,
+              "picksOnNegative": 2,
+              "exact": 3
+            },
+            "de": {
+              "drafts": 5,
+              "tp": 0,
+              "fp": 2,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 5,
+              "picksOnNegative": 2,
+              "exact": 3
+            }
+          },
+          "ambiguous": {
+            "en": {
+              "drafts": 2,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 2
+            },
+            "de": {
+              "drafts": 2,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 2
+            }
+          },
+          "coding": {
+            "en": {
+              "drafts": 6,
+              "tp": 0,
+              "fp": 0,
+              "fn": 5,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 2
+            },
+            "de": {
+              "drafts": 6,
+              "tp": 0,
+              "fp": 1,
+              "fn": 5,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 2
+            }
+          },
+          "contact": {
+            "en": {
+              "drafts": 1,
+              "tp": 0,
+              "fp": 0,
+              "fn": 1,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 1,
+              "tp": 0,
+              "fp": 0,
+              "fn": 1,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            }
+          },
+          "cooking": {
+            "en": {
+              "drafts": 9,
+              "tp": 0,
+              "fp": 3,
+              "fn": 10,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 2,
+              "picksOnNegative": 1,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 9,
+              "tp": 0,
+              "fp": 3,
+              "fn": 10,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 2,
+              "picksOnNegative": 1,
+              "exact": 1
+            }
+          },
+          "cover-letter": {
+            "en": {
+              "drafts": 4,
+              "tp": 0,
+              "fp": 0,
+              "fn": 4,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 0,
+              "fp": 1,
+              "fn": 4,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "fitness": {
+            "en": {
+              "drafts": 6,
+              "tp": 0,
+              "fp": 0,
+              "fn": 6,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 6,
+              "tp": 0,
+              "fp": 2,
+              "fn": 6,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "general": {
+            "en": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 0,
+              "exact": 3
+            },
+            "de": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 0,
+              "exact": 3
+            }
+          },
+          "gifts": {
+            "en": {
+              "drafts": 4,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 0,
+              "fp": 2,
+              "fn": 3,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "health": {
+            "en": {
+              "drafts": 1,
+              "tp": 0,
+              "fp": 1,
+              "fn": 1,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 1,
+              "tp": 0,
+              "fp": 1,
+              "fn": 1,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            }
+          },
+          "kids": {
+            "en": {
+              "drafts": 4,
+              "tp": 0,
+              "fp": 0,
+              "fn": 4,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 0,
+              "fp": 0,
+              "fn": 4,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "location": {
+            "en": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 2,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 1,
+              "fn": 2,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "money": {
+            "en": {
+              "drafts": 4,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 0,
+              "fp": 1,
+              "fn": 3,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "negation": {
+            "en": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 1,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 1,
+              "exact": 2
+            },
+            "de": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 1,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 1,
+              "exact": 2
+            }
+          },
+          "relationships": {
+            "en": {
+              "drafts": 1,
+              "tp": 0,
+              "fp": 0,
+              "fn": 1,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 1,
+              "tp": 0,
+              "fp": 1,
+              "fn": 1,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            }
+          },
+          "shopping": {
+            "en": {
+              "drafts": 6,
+              "tp": 0,
+              "fp": 1,
+              "fn": 6,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 6,
+              "tp": 0,
+              "fp": 0,
+              "fn": 6,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "trip": {
+            "en": {
+              "drafts": 9,
+              "tp": 0,
+              "fp": 1,
+              "fn": 10,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 9,
+              "tp": 0,
+              "fp": 2,
+              "fn": 10,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 0
+            }
+          },
+          "work-email": {
+            "en": {
+              "drafts": 5,
+              "tp": 0,
+              "fp": 0,
+              "fn": 4,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 5,
+              "tp": 0,
+              "fp": 1,
+              "fn": 4,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          }
+        },
+        "latency": {
+          "firstMs": 2.788970999999947,
+          "p50Ms": 3.7563490000002275,
+          "p95Ms": 6.719131999999945
+        },
+        "unsafePicks": 4
+      }
+    },
+    "entryAudit": [
+      {
+        "id": "M01",
+        "browserSafe": true,
+        "autoSafe": true,
+        "selectedCorrect": 0,
+        "selectedWrong": 4
+      },
+      {
+        "id": "M02",
+        "browserSafe": true,
+        "autoSafe": true,
+        "selectedCorrect": 0,
+        "selectedWrong": 24
+      },
+      {
+        "id": "M03",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 2,
+        "selectedWrong": 16
+      },
+      {
+        "id": "M04",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 2,
+        "selectedWrong": 16
+      },
+      {
+        "id": "M05",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 0
+      },
+      {
+        "id": "M06",
+        "browserSafe": true,
+        "autoSafe": true,
+        "selectedCorrect": 0,
+        "selectedWrong": 0
+      },
+      {
+        "id": "M07",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 0
+      },
+      {
+        "id": "M08",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 8
+      },
+      {
+        "id": "M09",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 9
+      },
+      {
+        "id": "M10",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 0
+      },
+      {
+        "id": "M11",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 16
+      },
+      {
+        "id": "M12",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 1,
+        "selectedWrong": 2
+      },
+      {
+        "id": "M13",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 1,
+        "selectedWrong": 8
+      },
+      {
+        "id": "M14",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 19
+      },
+      {
+        "id": "M15",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 1,
+        "selectedWrong": 9
+      },
+      {
+        "id": "M16",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 1,
+        "selectedWrong": 0
+      },
+      {
+        "id": "M17",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 1,
+        "selectedWrong": 3
+      },
+      {
+        "id": "M18",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 1
+      },
+      {
+        "id": "M19",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 0
+      },
+      {
+        "id": "M20",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 2,
+        "selectedWrong": 1
+      },
+      {
+        "id": "M21",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 2,
+        "selectedWrong": 10
+      },
+      {
+        "id": "M22",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 8
+      },
+      {
+        "id": "M23",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 1
+      },
+      {
+        "id": "M24",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 1,
+        "selectedWrong": 0
+      },
+      {
+        "id": "M25",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 1,
+        "selectedWrong": 12
+      },
+      {
+        "id": "M26",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 1
+      },
+      {
+        "id": "M27",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 4
+      },
+      {
+        "id": "M28",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 1,
+        "selectedWrong": 8
+      },
+      {
+        "id": "M29",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 1,
+        "selectedWrong": 0
+      },
+      {
+        "id": "M30",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 1
+      },
+      {
+        "id": "M31",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 1
+      },
+      {
+        "id": "M32",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 5,
+        "selectedWrong": 0
+      },
+      {
+        "id": "M33",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 0
+      },
+      {
+        "id": "M34",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 1,
+        "selectedWrong": 4
+      },
+      {
+        "id": "M35",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 4
+      },
+      {
+        "id": "M36",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 1
+      },
+      {
+        "id": "M37",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 5
+      },
+      {
+        "id": "M38",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 1,
+        "selectedWrong": 2
+      },
+      {
+        "id": "M39",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 0,
+        "selectedWrong": 3
+      },
+      {
+        "id": "M40",
+        "browserSafe": false,
+        "autoSafe": false,
+        "selectedCorrect": 1,
+        "selectedWrong": 4
+      }
+    ]
+  },
+  "minilm": {
+    "beforeBytes": 52056064,
+    "peakBytes": 551272448,
+    "coldMs": 1256.204469,
+    "floors": {
+      "suggest": [
+        0.44,
+        0.98
+      ],
+      "automatic": [
+        0.64,
+        0.98
+      ],
+      "autoGate": {
+        "minimumPrecision": 0.9,
+        "minimumPicks": 3
+      }
+    },
+    "assignment": {
+      "all": {
+        "total": 62,
+        "correct": 55,
+        "wrong": 0,
+        "unassigned": 9,
+        "keptUnknown": 2,
+        "templates": 9,
+        "modelLatency": {
+          "firstMs": 11.670830999999907,
+          "p50Ms": 7.300897000000077,
+          "p95Ms": 12.198894999999993
+        }
+      },
+      "original": {
+        "total": 40,
+        "correct": 37,
+        "wrong": 0,
+        "unassigned": 3,
+        "keptUnknown": 0,
+        "templates": 4,
+        "modelLatency": {
+          "firstMs": 11.670830999999907,
+          "p50Ms": 7.933980999999903,
+          "p95Ms": 12.214134999999942
+        }
+      },
+      "hero": {
+        "total": 8,
+        "correct": 6,
+        "wrong": 0,
+        "unassigned": 2,
+        "keptUnknown": 0,
+        "templates": 3,
+        "modelLatency": {
+          "firstMs": 6.086038000000144,
+          "p50Ms": 5.893795999999838,
+          "p95Ms": 7.4950790000000325
+        }
+      },
+      "transfer": {
+        "total": 14,
+        "correct": 12,
+        "wrong": 0,
+        "unassigned": 4,
+        "keptUnknown": 2,
+        "templates": 2,
+        "modelLatency": {
+          "firstMs": 5.517233000000033,
+          "p50Ms": 6.857353000000103,
+          "p95Ms": 10.596553000000085
+        }
+      }
+    },
+    "assignedEntries": [
+      {
+        "id": "M01",
+        "gold": "travel.seat",
+        "slot": "travel.seat",
+        "source": "template"
+      },
+      {
+        "id": "M02",
+        "gold": "food.diet",
+        "slot": "food.diet",
+        "source": "template"
+      },
+      {
+        "id": "M03",
+        "gold": "travel.transport",
+        "slot": "travel.transport",
+        "source": "model",
+        "confidence": 0.9997117519378662
+      },
+      {
+        "id": "M04",
+        "gold": "travel.room",
+        "slot": "travel.room",
+        "source": "model",
+        "confidence": 0.9990180730819702
+      },
+      {
+        "id": "M05",
+        "gold": "travel.sights",
+        "slot": "travel.sights",
+        "source": "model",
+        "confidence": 0.9990782737731934
+      },
+      {
+        "id": "M06",
+        "gold": "food.drink",
+        "slot": "food.drink",
+        "source": "template"
+      },
+      {
+        "id": "M07",
+        "gold": "food.dessert",
+        "slot": "food.dessert",
+        "source": "model",
+        "confidence": 0.9949584007263184
+      },
+      {
+        "id": "M08",
+        "gold": "food.equipment",
+        "slot": "food.equipment",
+        "source": "model",
+        "confidence": 0.9384386539459229
+      },
+      {
+        "id": "M09",
+        "gold": "food.cook_time",
+        "slot": "food.cook_time",
+        "source": "model",
+        "confidence": 0.9975812435150146
+      },
+      {
+        "id": "M10",
+        "gold": "format.units",
+        "slot": "format.units",
+        "source": "model",
+        "confidence": 0.8891819715499878
+      },
+      {
+        "id": "M11",
+        "gold": "work.review",
+        "slot": "work.review",
+        "source": "model",
+        "confidence": 0.9984291195869446
+      },
+      {
+        "id": "M12",
+        "gold": "work.stack",
+        "slot": "work.stack",
+        "source": "model",
+        "confidence": 0.994942307472229
+      },
+      {
+        "id": "M13",
+        "gold": "work.testing",
+        "slot": "work.testing",
+        "source": "model",
+        "confidence": 0.9934022426605225
+      },
+      {
+        "id": "M14",
+        "gold": "work.writing_style",
+        "slot": "work.writing_style",
+        "source": "model",
+        "confidence": 0.9975073337554932
+      },
+      {
+        "id": "M15",
+        "gold": "work.role",
+        "slot": "work.role",
+        "source": "model",
+        "confidence": 0.9834370613098145
+      },
+      {
+        "id": "M16",
+        "gold": "work.experience",
+        "slot": "work.experience",
+        "source": "model",
+        "confidence": 0.8161883354187012
+      },
+      {
+        "id": "M17",
+        "gold": "work.rituals",
+        "slot": "work.rituals",
+        "source": "model",
+        "confidence": 0.9959444999694824
+      },
+      {
+        "id": "M18",
+        "gold": "format.length",
+        "slot": "format.length",
+        "source": "template"
+      },
+      {
+        "id": "M19",
+        "gold": "shopping.laptop",
+        "slot": "shopping.laptop",
+        "source": "model",
+        "confidence": 0.9980208873748779
+      },
+      {
+        "id": "M20",
+        "gold": "shopping.shoe_size",
+        "slot": "shopping.shoe_size",
+        "source": "model",
+        "confidence": 0.9998862147331238
+      },
+      {
+        "id": "M21",
+        "gold": "shopping.fabric",
+        "slot": "shopping.fabric",
+        "source": "model",
+        "confidence": 0.9997249841690063
+      },
+      {
+        "id": "M22",
+        "gold": "shopping.headphones",
+        "slot": "shopping.headphones",
+        "source": "model",
+        "confidence": 0.9997007846832275
+      },
+      {
+        "id": "M23",
+        "gold": "shopping.host_gift",
+        "slot": "shopping.host_gift",
+        "source": "model",
+        "confidence": 0.9779919385910034
+      },
+      {
+        "id": "M24",
+        "gold": "activities.sport",
+        "slot": "activities.sport",
+        "source": "model",
+        "confidence": 0.8869064450263977
+      },
+      {
+        "id": "M25",
+        "gold": "activities.home_equipment",
+        "slot": "activities.home_equipment",
+        "source": "model",
+        "confidence": 0.994513988494873
+      },
+      {
+        "id": "M26",
+        "gold": "health.condition",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M27",
+        "gold": "food.allergy",
+        "slot": "food.allergy",
+        "source": "model",
+        "confidence": 0.9996029138565063
+      },
+      {
+        "id": "M28",
+        "gold": "health.injury",
+        "slot": "health.injury",
+        "source": "model",
+        "confidence": 0.9976794719696045
+      },
+      {
+        "id": "M29",
+        "gold": "money.debt",
+        "slot": "money.debt",
+        "source": "model",
+        "confidence": 0.9979235529899597
+      },
+      {
+        "id": "M30",
+        "gold": "money.buffer",
+        "slot": "money.buffer",
+        "source": "model",
+        "confidence": 0.8029801249504089
+      },
+      {
+        "id": "M31",
+        "gold": "money.investment",
+        "slot": "money.investment",
+        "source": "model",
+        "confidence": 0.9222898483276367
+      },
+      {
+        "id": "M32",
+        "gold": "people.child",
+        "slot": "people.child",
+        "source": "model",
+        "confidence": 0.7402111291885376
+      },
+      {
+        "id": "M33",
+        "gold": "people.sibling",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M34",
+        "gold": "people.parent",
+        "slot": "people.parent",
+        "source": "model",
+        "confidence": 0.999367356300354
+      },
+      {
+        "id": "M35",
+        "gold": "location.home",
+        "slot": "location.home",
+        "source": "model",
+        "confidence": 0.9199646711349487
+      },
+      {
+        "id": "M36",
+        "gold": "location.office",
+        "slot": "location.office",
+        "source": "model",
+        "confidence": 0.7947100400924683
+      },
+      {
+        "id": "M37",
+        "gold": "schedule.availability",
+        "slot": "schedule.availability",
+        "source": "model",
+        "confidence": 0.9971233606338501
+      },
+      {
+        "id": "M38",
+        "gold": "work.confidential",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M39",
+        "gold": "contact.phone",
+        "slot": "contact.phone",
+        "source": "model",
+        "confidence": 0.99957275390625
+      },
+      {
+        "id": "M40",
+        "gold": "travel.pace",
+        "slot": "travel.pace",
+        "source": "model",
+        "confidence": 0.9980700016021729
+      },
+      {
+        "id": "H01",
+        "gold": "travel.seat",
+        "slot": "travel.seat",
+        "source": "template"
+      },
+      {
+        "id": "H02",
+        "gold": "food.diet",
+        "slot": "food.diet",
+        "source": "template"
+      },
+      {
+        "id": "H03",
+        "gold": "work.role",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "H04",
+        "gold": "location.home",
+        "slot": "location.home",
+        "source": "model",
+        "confidence": 0.9703222513198853
+      },
+      {
+        "id": "H05",
+        "gold": "food.servings",
+        "slot": "food.servings",
+        "source": "template"
+      },
+      {
+        "id": "H06",
+        "gold": "health.condition",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "H07",
+        "gold": "money.budget",
+        "slot": "money.budget",
+        "source": "model",
+        "confidence": 0.9779644012451172
+      },
+      {
+        "id": "H08",
+        "gold": "people.partner",
+        "slot": "people.partner",
+        "source": "model",
+        "confidence": 0.9889818429946899
+      },
+      {
+        "id": "T01",
+        "gold": "travel.seat",
+        "slot": "travel.seat",
+        "source": "template"
+      },
+      {
+        "id": "T02",
+        "gold": "food.diet",
+        "slot": "food.diet",
+        "source": "model",
+        "confidence": 0.949806272983551
+      },
+      {
+        "id": "T03",
+        "gold": "travel.hotel_budget",
+        "slot": "travel.hotel_budget",
+        "source": "model",
+        "confidence": 0.9822535514831543
+      },
+      {
+        "id": "T04",
+        "gold": "food.servings",
+        "slot": "food.servings",
+        "source": "template"
+      },
+      {
+        "id": "T05",
+        "gold": "food.allergy",
+        "slot": "food.allergy",
+        "source": "model",
+        "confidence": 0.9944546222686768
+      },
+      {
+        "id": "T06",
+        "gold": "location.home",
+        "slot": "location.home",
+        "source": "model",
+        "confidence": 0.9945456981658936
+      },
+      {
+        "id": "T07",
+        "gold": "work.role",
+        "slot": "work.role",
+        "source": "model",
+        "confidence": 0.9536546468734741
+      },
+      {
+        "id": "T08",
+        "gold": "travel.loyalty",
+        "slot": "travel.loyalty",
+        "source": "model",
+        "confidence": 0.9979357719421387
+      },
+      {
+        "id": "T09",
+        "gold": "format.language",
+        "slot": "format.language",
+        "source": "model",
+        "confidence": 0.964948832988739
+      },
+      {
+        "id": "T10",
+        "gold": "money.buffer",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "T11",
+        "gold": "work.testing",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "T12",
+        "gold": "food.cuisine",
+        "slot": "food.cuisine",
+        "source": "model",
+        "confidence": 0.9910054206848145
+      },
+      {
+        "id": "T13",
+        "gold": "-",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "T14",
+        "gold": "-",
+        "slot": "-",
+        "source": "unassigned"
+      }
+    ],
+    "oracle": {
+      "dev": {
+        "all": {
+          "drafts": 48,
+          "tp": 27,
+          "fp": 2,
+          "fn": 23,
+          "precision": 0.9310344827586207,
+          "recall": 0.54,
+          "f1": 0.6835443037974683,
+          "f05": 0.8132530120481928,
+          "negatives": 10,
+          "picksOnNegative": 0,
+          "exact": 29
+        },
+        "language": {
+          "en": {
+            "drafts": 24,
+            "tp": 14,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.56,
+            "f1": 0.717948717948718,
+            "f05": 0.8641975308641976,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 13,
+            "fp": 2,
+            "fn": 12,
+            "precision": 0.8666666666666667,
+            "recall": 0.52,
+            "f1": 0.65,
+            "f05": 0.7647058823529413,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 15
+          }
+        },
+        "latency": {
+          "firstMs": 8.563846999999896,
+          "p50Ms": 6.61569099999997,
+          "p95Ms": 10.100308999999925
+        },
+        "unsafePicks": 0
+      },
+      "test": {
+        "all": {
+          "drafts": 152,
+          "tp": 80,
+          "fp": 18,
+          "fn": 40,
+          "precision": 0.8163265306122449,
+          "recall": 0.6666666666666666,
+          "f1": 0.7339449541284403,
+          "f05": 0.78125,
+          "negatives": 52,
+          "picksOnNegative": 11,
+          "exact": 108
+        },
+        "language": {
+          "en": {
+            "drafts": 76,
+            "tp": 41,
+            "fp": 10,
+            "fn": 19,
+            "precision": 0.803921568627451,
+            "recall": 0.6833333333333333,
+            "f1": 0.7387387387387387,
+            "f05": 0.7765151515151516,
+            "negatives": 26,
+            "picksOnNegative": 7,
+            "exact": 53
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 39,
+            "fp": 8,
+            "fn": 21,
+            "precision": 0.8297872340425532,
+            "recall": 0.65,
+            "f1": 0.7289719626168223,
+            "f05": 0.786290322580645,
+            "negatives": 26,
+            "picksOnNegative": 4,
+            "exact": 55
+          }
+        },
+        "latency": {
+          "firstMs": 5.821765000000141,
+          "p50Ms": 7.714210000000094,
+          "p95Ms": 10.869194999999763
+        },
+        "unsafePicks": 2
+      },
+      "hero": {
+        "all": {
+          "drafts": 6,
+          "tp": 0,
+          "fp": 0,
+          "fn": 12,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "f05": 0,
+          "negatives": 0,
+          "picksOnNegative": 0,
+          "exact": 0
+        },
+        "language": {
+          "en": {
+            "drafts": 3,
+            "tp": 0,
+            "fp": 0,
+            "fn": 6,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 0,
+            "picksOnNegative": 0,
+            "exact": 0
+          },
+          "de": {
+            "drafts": 3,
+            "tp": 0,
+            "fp": 0,
+            "fn": 6,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 0,
+            "picksOnNegative": 0,
+            "exact": 0
+          }
+        },
+        "latency": {
+          "firstMs": 4.841167999999925,
+          "p50Ms": 4.474903999999697,
+          "p95Ms": 4.8933680000000095
+        },
+        "unsafePicks": 0
+      },
+      "transfer": {
+        "all": {
+          "drafts": 32,
+          "tp": 19,
+          "fp": 2,
+          "fn": 5,
+          "precision": 0.9047619047619048,
+          "recall": 0.7916666666666666,
+          "f1": 0.8444444444444444,
+          "f05": 0.8796296296296297,
+          "negatives": 10,
+          "picksOnNegative": 2,
+          "exact": 25
+        },
+        "language": {
+          "en": {
+            "drafts": 16,
+            "tp": 9,
+            "fp": 1,
+            "fn": 3,
+            "precision": 0.9,
+            "recall": 0.75,
+            "f1": 0.8181818181818182,
+            "f05": 0.8653846153846154,
+            "negatives": 5,
+            "picksOnNegative": 1,
+            "exact": 12
+          },
+          "de": {
+            "drafts": 16,
+            "tp": 10,
+            "fp": 1,
+            "fn": 2,
+            "precision": 0.9090909090909091,
+            "recall": 0.8333333333333334,
+            "f1": 0.8695652173913043,
+            "f05": 0.8928571428571428,
+            "negatives": 5,
+            "picksOnNegative": 1,
+            "exact": 13
+          }
+        },
+        "latency": {
+          "firstMs": 10.22760900000003,
+          "p50Ms": 7.820262000000184,
+          "p95Ms": 11.375898999999663
+        },
+        "unsafePicks": 0
+      }
+    },
+    "withoutGuard": {
+      "dev": {
+        "all": {
+          "drafts": 48,
+          "tp": 27,
+          "fp": 2,
+          "fn": 23,
+          "precision": 0.9310344827586207,
+          "recall": 0.54,
+          "f1": 0.6835443037974683,
+          "f05": 0.8132530120481928,
+          "negatives": 10,
+          "picksOnNegative": 0,
+          "exact": 29
+        },
+        "language": {
+          "en": {
+            "drafts": 24,
+            "tp": 14,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.56,
+            "f1": 0.717948717948718,
+            "f05": 0.8641975308641976,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 13,
+            "fp": 2,
+            "fn": 12,
+            "precision": 0.8666666666666667,
+            "recall": 0.52,
+            "f1": 0.65,
+            "f05": 0.7647058823529413,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 15
+          }
+        },
+        "latency": {
+          "firstMs": 8.563846999999896,
+          "p50Ms": 6.61569099999997,
+          "p95Ms": 10.100308999999925
+        },
+        "unsafePicks": 0
+      },
+      "test": {
+        "all": {
+          "drafts": 152,
+          "tp": 72,
+          "fp": 21,
+          "fn": 48,
+          "precision": 0.7741935483870968,
+          "recall": 0.6,
+          "f1": 0.676056338028169,
+          "f05": 0.7317073170731708,
+          "negatives": 52,
+          "picksOnNegative": 15,
+          "exact": 98
+        },
+        "language": {
+          "en": {
+            "drafts": 76,
+            "tp": 37,
+            "fp": 12,
+            "fn": 23,
+            "precision": 0.7551020408163265,
+            "recall": 0.6166666666666667,
+            "f1": 0.6788990825688074,
+            "f05": 0.72265625,
+            "negatives": 26,
+            "picksOnNegative": 9,
+            "exact": 48
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 35,
+            "fp": 9,
+            "fn": 25,
+            "precision": 0.7954545454545454,
+            "recall": 0.5833333333333334,
+            "f1": 0.673076923076923,
+            "f05": 0.7415254237288136,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 50
+          }
+        },
+        "latency": {
+          "firstMs": 5.821765000000141,
+          "p50Ms": 7.714210000000094,
+          "p95Ms": 10.869194999999763
+        },
+        "unsafePicks": 4
+      },
+      "hero": {
+        "all": {
+          "drafts": 6,
+          "tp": 0,
+          "fp": 0,
+          "fn": 12,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "f05": 0,
+          "negatives": 0,
+          "picksOnNegative": 0,
+          "exact": 0
+        },
+        "language": {
+          "en": {
+            "drafts": 3,
+            "tp": 0,
+            "fp": 0,
+            "fn": 6,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 0,
+            "picksOnNegative": 0,
+            "exact": 0
+          },
+          "de": {
+            "drafts": 3,
+            "tp": 0,
+            "fp": 0,
+            "fn": 6,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 0,
+            "picksOnNegative": 0,
+            "exact": 0
+          }
+        },
+        "latency": {
+          "firstMs": 4.841167999999925,
+          "p50Ms": 4.474903999999697,
+          "p95Ms": 4.8933680000000095
+        },
+        "unsafePicks": 0
+      },
+      "transfer": {
+        "all": {
+          "drafts": 32,
+          "tp": 16,
+          "fp": 2,
+          "fn": 8,
+          "precision": 0.8888888888888888,
+          "recall": 0.6666666666666666,
+          "f1": 0.761904761904762,
+          "f05": 0.8333333333333334,
+          "negatives": 10,
+          "picksOnNegative": 2,
+          "exact": 22
+        },
+        "language": {
+          "en": {
+            "drafts": 16,
+            "tp": 8,
+            "fp": 1,
+            "fn": 4,
+            "precision": 0.8888888888888888,
+            "recall": 0.6666666666666666,
+            "f1": 0.761904761904762,
+            "f05": 0.8333333333333334,
+            "negatives": 5,
+            "picksOnNegative": 1,
+            "exact": 11
+          },
+          "de": {
+            "drafts": 16,
+            "tp": 8,
+            "fp": 1,
+            "fn": 4,
+            "precision": 0.8888888888888888,
+            "recall": 0.6666666666666666,
+            "f1": 0.761904761904762,
+            "f05": 0.8333333333333334,
+            "negatives": 5,
+            "picksOnNegative": 1,
+            "exact": 11
+          }
+        },
+        "latency": {
+          "firstMs": 10.22760900000003,
+          "p50Ms": 7.820262000000184,
+          "p95Ms": 11.375898999999663
+        },
+        "unsafePicks": 0
+      }
+    },
+    "automaticDiagnostic": {
+      "dev": {
+        "all": {
+          "drafts": 48,
+          "tp": 6,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "f05": 1,
+          "negatives": 44,
+          "picksOnNegative": 0,
+          "exact": 48
+        },
+        "language": {
+          "en": {
+            "drafts": 24,
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "f05": 1,
+            "negatives": 22,
+            "picksOnNegative": 0,
+            "exact": 24
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1,
+            "f05": 1,
+            "negatives": 22,
+            "picksOnNegative": 0,
+            "exact": 24
+          }
+        },
+        "latency": {
+          "firstMs": 8.563846999999896,
+          "p50Ms": 6.61569099999997,
+          "p95Ms": 10.100308999999925
+        },
+        "unsafePicks": 0
+      },
+      "test": {
+        "all": {
+          "drafts": 152,
+          "tp": 6,
+          "fp": 1,
+          "fn": 8,
+          "precision": 0.8571428571428571,
+          "recall": 0.42857142857142855,
+          "f1": 0.5714285714285714,
+          "f05": 0.7142857142857143,
+          "negatives": 140,
+          "picksOnNegative": 1,
+          "exact": 145
+        },
+        "language": {
+          "en": {
+            "drafts": 76,
+            "tp": 3,
+            "fp": 1,
+            "fn": 4,
+            "precision": 0.75,
+            "recall": 0.42857142857142855,
+            "f1": 0.5454545454545454,
+            "f05": 0.6521739130434782,
+            "negatives": 70,
+            "picksOnNegative": 1,
+            "exact": 72
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 3,
+            "fp": 0,
+            "fn": 4,
+            "precision": 1,
+            "recall": 0.42857142857142855,
+            "f1": 0.6,
+            "f05": 0.7894736842105262,
+            "negatives": 70,
+            "picksOnNegative": 0,
+            "exact": 73
+          }
+        },
+        "latency": {
+          "firstMs": 5.821765000000141,
+          "p50Ms": 7.714210000000094,
+          "p95Ms": 10.869194999999763
+        },
+        "unsafePicks": 0
+      },
+      "hero": {
+        "all": {
+          "drafts": 6,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "f05": 0,
+          "negatives": 6,
+          "picksOnNegative": 0,
+          "exact": 6
+        },
+        "language": {
+          "en": {
+            "drafts": 3,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 3,
+            "picksOnNegative": 0,
+            "exact": 3
+          },
+          "de": {
+            "drafts": 3,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 3,
+            "picksOnNegative": 0,
+            "exact": 3
+          }
+        },
+        "latency": {
+          "firstMs": 4.841167999999925,
+          "p50Ms": 4.474903999999697,
+          "p95Ms": 4.8933680000000095
+        },
+        "unsafePicks": 0
+      },
+      "transfer": {
+        "all": {
+          "drafts": 32,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "f05": 0,
+          "negatives": 32,
+          "picksOnNegative": 0,
+          "exact": 32
+        },
+        "language": {
+          "en": {
+            "drafts": 16,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 16,
+            "picksOnNegative": 0,
+            "exact": 16
+          },
+          "de": {
+            "drafts": 16,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 16,
+            "picksOnNegative": 0,
+            "exact": 16
+          }
+        },
+        "latency": {
+          "firstMs": 10.22760900000003,
+          "p50Ms": 7.820262000000184,
+          "p95Ms": 11.375898999999663
+        },
+        "unsafePicks": 0
+      }
+    },
+    "quality": {
+      "dev": {
+        "all": {
+          "drafts": 48,
+          "tp": 27,
+          "fp": 2,
+          "fn": 23,
+          "precision": 0.9310344827586207,
+          "recall": 0.54,
+          "f1": 0.6835443037974683,
+          "f05": 0.8132530120481928,
+          "negatives": 10,
+          "picksOnNegative": 0,
+          "exact": 29
+        },
+        "language": {
+          "en": {
+            "drafts": 24,
+            "tp": 14,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.56,
+            "f1": 0.717948717948718,
+            "f05": 0.8641975308641976,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 13,
+            "fp": 2,
+            "fn": 12,
+            "precision": 0.8666666666666667,
+            "recall": 0.52,
+            "f1": 0.65,
+            "f05": 0.7647058823529413,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 15
+          }
+        },
+        "latency": {
+          "firstMs": 8.563846999999896,
+          "p50Ms": 6.61569099999997,
+          "p95Ms": 10.100308999999925
+        },
+        "unsafePicks": 0
+      },
+      "test": {
+        "all": {
+          "drafts": 152,
+          "tp": 72,
+          "fp": 17,
+          "fn": 48,
+          "precision": 0.8089887640449438,
+          "recall": 0.6,
+          "f1": 0.6889952153110048,
+          "f05": 0.7563025210084034,
+          "negatives": 52,
+          "picksOnNegative": 11,
+          "exact": 102
+        },
+        "language": {
+          "en": {
+            "drafts": 76,
+            "tp": 37,
+            "fp": 10,
+            "fn": 23,
+            "precision": 0.7872340425531915,
+            "recall": 0.6166666666666667,
+            "f1": 0.691588785046729,
+            "f05": 0.7459677419354839,
+            "negatives": 26,
+            "picksOnNegative": 7,
+            "exact": 50
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 35,
+            "fp": 7,
+            "fn": 25,
+            "precision": 0.8333333333333334,
+            "recall": 0.5833333333333334,
+            "f1": 0.6862745098039216,
+            "f05": 0.7675438596491229,
+            "negatives": 26,
+            "picksOnNegative": 4,
+            "exact": 52
+          }
+        },
+        "category": {
+          "adversarial": {
+            "en": {
+              "drafts": 5,
+              "tp": 0,
+              "fp": 1,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 5,
+              "picksOnNegative": 1,
+              "exact": 4
+            },
+            "de": {
+              "drafts": 5,
+              "tp": 0,
+              "fp": 1,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 5,
+              "picksOnNegative": 1,
+              "exact": 4
+            }
+          },
+          "ambiguous": {
+            "en": {
+              "drafts": 2,
+              "tp": 0,
+              "fp": 1,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 2,
+              "picksOnNegative": 1,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 2,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 2
+            }
+          },
+          "coding": {
+            "en": {
+              "drafts": 6,
+              "tp": 4,
+              "fp": 0,
+              "fn": 1,
+              "precision": 1,
+              "recall": 0.8,
+              "f1": 0.888888888888889,
+              "f05": 0.9523809523809523,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 5
+            },
+            "de": {
+              "drafts": 6,
+              "tp": 4,
+              "fp": 0,
+              "fn": 1,
+              "precision": 1,
+              "recall": 0.8,
+              "f1": 0.888888888888889,
+              "f05": 0.9523809523809523,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 5
+            }
+          },
+          "contact": {
+            "en": {
+              "drafts": 1,
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 1,
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "cooking": {
+            "en": {
+              "drafts": 9,
+              "tp": 6,
+              "fp": 0,
+              "fn": 4,
+              "precision": 1,
+              "recall": 0.6,
+              "f1": 0.7499999999999999,
+              "f05": 0.8823529411764706,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 5
+            },
+            "de": {
+              "drafts": 9,
+              "tp": 4,
+              "fp": 0,
+              "fn": 6,
+              "precision": 1,
+              "recall": 0.4,
+              "f1": 0.5714285714285715,
+              "f05": 0.7692307692307692,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 5
+            }
+          },
+          "cover-letter": {
+            "en": {
+              "drafts": 4,
+              "tp": 1,
+              "fp": 2,
+              "fn": 3,
+              "precision": 0.3333333333333333,
+              "recall": 0.25,
+              "f1": 0.28571428571428575,
+              "f05": 0.3125,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 1,
+              "fp": 2,
+              "fn": 3,
+              "precision": 0.3333333333333333,
+              "recall": 0.25,
+              "f1": 0.28571428571428575,
+              "f05": 0.3125,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 1
+            }
+          },
+          "fitness": {
+            "en": {
+              "drafts": 6,
+              "tp": 3,
+              "fp": 0,
+              "fn": 3,
+              "precision": 1,
+              "recall": 0.5,
+              "f1": 0.6666666666666666,
+              "f05": 0.8333333333333334,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 4
+            },
+            "de": {
+              "drafts": 6,
+              "tp": 3,
+              "fp": 0,
+              "fn": 3,
+              "precision": 1,
+              "recall": 0.5,
+              "f1": 0.6666666666666666,
+              "f05": 0.8333333333333334,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 4
+            }
+          },
+          "general": {
+            "en": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 0,
+              "exact": 3
+            },
+            "de": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 0,
+              "exact": 3
+            }
+          },
+          "gifts": {
+            "en": {
+              "drafts": 4,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 1,
+              "fp": 0,
+              "fn": 2,
+              "precision": 1,
+              "recall": 0.3333333333333333,
+              "f1": 0.5,
+              "f05": 0.7142857142857143,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 2
+            }
+          },
+          "health": {
+            "en": {
+              "drafts": 1,
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 1,
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "kids": {
+            "en": {
+              "drafts": 4,
+              "tp": 1,
+              "fp": 2,
+              "fn": 3,
+              "precision": 0.3333333333333333,
+              "recall": 0.25,
+              "f1": 0.28571428571428575,
+              "f05": 0.3125,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 2,
+              "fp": 2,
+              "fn": 2,
+              "precision": 0.5,
+              "recall": 0.5,
+              "f1": 0.5,
+              "f05": 0.5,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 1
+            }
+          },
+          "location": {
+            "en": {
+              "drafts": 3,
+              "tp": 2,
+              "fp": 1,
+              "fn": 0,
+              "precision": 0.6666666666666666,
+              "recall": 1,
+              "f1": 0.8,
+              "f05": 0.7142857142857142,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 2
+            },
+            "de": {
+              "drafts": 3,
+              "tp": 1,
+              "fp": 1,
+              "fn": 1,
+              "precision": 0.5,
+              "recall": 0.5,
+              "f1": 0.5,
+              "f05": 0.5,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 1
+            }
+          },
+          "money": {
+            "en": {
+              "drafts": 4,
+              "tp": 3,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 4
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 3,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 4
+            }
+          },
+          "negation": {
+            "en": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 1,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 1,
+              "exact": 2
+            },
+            "de": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 0,
+              "exact": 3
+            }
+          },
+          "relationships": {
+            "en": {
+              "drafts": 1,
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 1,
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "shopping": {
+            "en": {
+              "drafts": 6,
+              "tp": 5,
+              "fp": 1,
+              "fn": 1,
+              "precision": 0.8333333333333334,
+              "recall": 0.8333333333333334,
+              "f1": 0.8333333333333334,
+              "f05": 0.8333333333333334,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 4
+            },
+            "de": {
+              "drafts": 6,
+              "tp": 4,
+              "fp": 0,
+              "fn": 2,
+              "precision": 1,
+              "recall": 0.6666666666666666,
+              "f1": 0.8,
+              "f05": 0.9090909090909091,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 4
+            }
+          },
+          "trip": {
+            "en": {
+              "drafts": 9,
+              "tp": 6,
+              "fp": 1,
+              "fn": 4,
+              "precision": 0.8571428571428571,
+              "recall": 0.6,
+              "f1": 0.7058823529411764,
+              "f05": 0.7894736842105262,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 6
+            },
+            "de": {
+              "drafts": 9,
+              "tp": 7,
+              "fp": 1,
+              "fn": 3,
+              "precision": 0.875,
+              "recall": 0.7,
+              "f1": 0.7777777777777777,
+              "f05": 0.8333333333333334,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 7
+            }
+          },
+          "work-email": {
+            "en": {
+              "drafts": 5,
+              "tp": 3,
+              "fp": 0,
+              "fn": 1,
+              "precision": 1,
+              "recall": 0.75,
+              "f1": 0.8571428571428571,
+              "f05": 0.9375,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 4
+            },
+            "de": {
+              "drafts": 5,
+              "tp": 2,
+              "fp": 0,
+              "fn": 2,
+              "precision": 1,
+              "recall": 0.5,
+              "f1": 0.6666666666666666,
+              "f05": 0.8333333333333334,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 3
+            }
+          }
+        },
+        "latency": {
+          "firstMs": 5.821765000000141,
+          "p50Ms": 7.714210000000094,
+          "p95Ms": 10.869194999999763
+        },
+        "unsafePicks": 2
+      },
+      "hero": {
+        "all": {
+          "drafts": 6,
+          "tp": 0,
+          "fp": 0,
+          "fn": 12,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "f05": 0,
+          "negatives": 0,
+          "picksOnNegative": 0,
+          "exact": 0
+        },
+        "language": {
+          "en": {
+            "drafts": 3,
+            "tp": 0,
+            "fp": 0,
+            "fn": 6,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 0,
+            "picksOnNegative": 0,
+            "exact": 0
+          },
+          "de": {
+            "drafts": 3,
+            "tp": 0,
+            "fp": 0,
+            "fn": 6,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 0,
+            "picksOnNegative": 0,
+            "exact": 0
+          }
+        },
+        "latency": {
+          "firstMs": 4.841167999999925,
+          "p50Ms": 4.474903999999697,
+          "p95Ms": 4.8933680000000095
+        },
+        "unsafePicks": 0
+      },
+      "transfer": {
+        "all": {
+          "drafts": 32,
+          "tp": 16,
+          "fp": 2,
+          "fn": 8,
+          "precision": 0.8888888888888888,
+          "recall": 0.6666666666666666,
+          "f1": 0.761904761904762,
+          "f05": 0.8333333333333334,
+          "negatives": 10,
+          "picksOnNegative": 2,
+          "exact": 22
+        },
+        "language": {
+          "en": {
+            "drafts": 16,
+            "tp": 8,
+            "fp": 1,
+            "fn": 4,
+            "precision": 0.8888888888888888,
+            "recall": 0.6666666666666666,
+            "f1": 0.761904761904762,
+            "f05": 0.8333333333333334,
+            "negatives": 5,
+            "picksOnNegative": 1,
+            "exact": 11
+          },
+          "de": {
+            "drafts": 16,
+            "tp": 8,
+            "fp": 1,
+            "fn": 4,
+            "precision": 0.8888888888888888,
+            "recall": 0.6666666666666666,
+            "f1": 0.761904761904762,
+            "f05": 0.8333333333333334,
+            "negatives": 5,
+            "picksOnNegative": 1,
+            "exact": 11
+          }
+        },
+        "latency": {
+          "firstMs": 10.22760900000003,
+          "p50Ms": 7.820262000000184,
+          "p95Ms": 11.375898999999663
+        },
+        "unsafePicks": 0
+      }
+    },
+    "graphBytes": 135391535,
+    "headBytes": 41094,
+    "package": {
+      "baseBytes": 35432144,
+      "withModelBytes": 119201800,
+      "installedBaseBytes": 149547490,
+      "installedWithModelBytes": 333824410
+    }
+  },
+  "static": {
+    "beforeBytes": 52371456,
+    "peakBytes": 67420160,
+    "coldMs": 1.2663800000000016,
+    "floors": {
+      "suggest": [
+        0.18,
+        0.46
+      ],
+      "automatic": null,
+      "autoGate": {
+        "minimumPrecision": 0.9,
+        "minimumPicks": 3
+      }
+    },
+    "assignment": {
+      "all": {
+        "total": 62,
+        "correct": 33,
+        "wrong": 1,
+        "unassigned": 30,
+        "keptUnknown": 2,
+        "templates": 9,
+        "modelLatency": {
+          "firstMs": 2.866372000000002,
+          "p50Ms": 0.1502310000000051,
+          "p95Ms": 0.5535840000000007
+        }
+      },
+      "original": {
+        "total": 40,
+        "correct": 22,
+        "wrong": 1,
+        "unassigned": 17,
+        "keptUnknown": 0,
+        "templates": 4,
+        "modelLatency": {
+          "firstMs": 2.866372000000002,
+          "p50Ms": 0.15492100000000164,
+          "p95Ms": 0.5535840000000007
+        }
+      },
+      "hero": {
+        "total": 8,
+        "correct": 7,
+        "wrong": 0,
+        "unassigned": 1,
+        "keptUnknown": 0,
+        "templates": 3,
+        "modelLatency": {
+          "firstMs": 2.8331620000000015,
+          "p50Ms": 0.10822999999999894,
+          "p95Ms": 2.8331620000000015
+        }
+      },
+      "transfer": {
+        "total": 14,
+        "correct": 4,
+        "wrong": 0,
+        "unassigned": 12,
+        "keptUnknown": 2,
+        "templates": 2,
+        "modelLatency": {
+          "firstMs": 0.07413100000000128,
+          "p50Ms": 0.15014099999999786,
+          "p95Ms": 0.46852400000000216
+        }
+      }
+    },
+    "assignedEntries": [
+      {
+        "id": "M01",
+        "gold": "travel.seat",
+        "slot": "travel.seat",
+        "source": "template"
+      },
+      {
+        "id": "M02",
+        "gold": "food.diet",
+        "slot": "food.diet",
+        "source": "template"
+      },
+      {
+        "id": "M03",
+        "gold": "travel.transport",
+        "slot": "travel.transport",
+        "source": "model",
+        "confidence": 0.9988126475759915
+      },
+      {
+        "id": "M04",
+        "gold": "travel.room",
+        "slot": "travel.room",
+        "source": "model",
+        "confidence": 0.8825473349603142
+      },
+      {
+        "id": "M05",
+        "gold": "travel.sights",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M06",
+        "gold": "food.drink",
+        "slot": "food.drink",
+        "source": "template"
+      },
+      {
+        "id": "M07",
+        "gold": "food.dessert",
+        "slot": "format.length",
+        "source": "model",
+        "confidence": 0.6601456948800384
+      },
+      {
+        "id": "M08",
+        "gold": "food.equipment",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M09",
+        "gold": "food.cook_time",
+        "slot": "food.cook_time",
+        "source": "model",
+        "confidence": 0.9949552944333492
+      },
+      {
+        "id": "M10",
+        "gold": "format.units",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M11",
+        "gold": "work.review",
+        "slot": "work.review",
+        "source": "model",
+        "confidence": 0.9291592103278321
+      },
+      {
+        "id": "M12",
+        "gold": "work.stack",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M13",
+        "gold": "work.testing",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M14",
+        "gold": "work.writing_style",
+        "slot": "work.writing_style",
+        "source": "model",
+        "confidence": 0.6837922844919417
+      },
+      {
+        "id": "M15",
+        "gold": "work.role",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M16",
+        "gold": "work.experience",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M17",
+        "gold": "work.rituals",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M18",
+        "gold": "format.length",
+        "slot": "format.length",
+        "source": "template"
+      },
+      {
+        "id": "M19",
+        "gold": "shopping.laptop",
+        "slot": "shopping.laptop",
+        "source": "model",
+        "confidence": 0.8728135226077074
+      },
+      {
+        "id": "M20",
+        "gold": "shopping.shoe_size",
+        "slot": "shopping.shoe_size",
+        "source": "model",
+        "confidence": 0.9993597193489663
+      },
+      {
+        "id": "M21",
+        "gold": "shopping.fabric",
+        "slot": "shopping.fabric",
+        "source": "model",
+        "confidence": 0.9875925455244786
+      },
+      {
+        "id": "M22",
+        "gold": "shopping.headphones",
+        "slot": "shopping.headphones",
+        "source": "model",
+        "confidence": 0.9809674819634131
+      },
+      {
+        "id": "M23",
+        "gold": "shopping.host_gift",
+        "slot": "shopping.host_gift",
+        "source": "model",
+        "confidence": 0.7869433039536543
+      },
+      {
+        "id": "M24",
+        "gold": "activities.sport",
+        "slot": "activities.sport",
+        "source": "model",
+        "confidence": 0.94468415720316
+      },
+      {
+        "id": "M25",
+        "gold": "activities.home_equipment",
+        "slot": "activities.home_equipment",
+        "source": "model",
+        "confidence": 0.6255018636711472
+      },
+      {
+        "id": "M26",
+        "gold": "health.condition",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M27",
+        "gold": "food.allergy",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M28",
+        "gold": "health.injury",
+        "slot": "health.injury",
+        "source": "model",
+        "confidence": 0.7269629665035965
+      },
+      {
+        "id": "M29",
+        "gold": "money.debt",
+        "slot": "money.debt",
+        "source": "model",
+        "confidence": 0.7155233643857059
+      },
+      {
+        "id": "M30",
+        "gold": "money.buffer",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M31",
+        "gold": "money.investment",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M32",
+        "gold": "people.child",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M33",
+        "gold": "people.sibling",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M34",
+        "gold": "people.parent",
+        "slot": "people.parent",
+        "source": "model",
+        "confidence": 0.9011610368332691
+      },
+      {
+        "id": "M35",
+        "gold": "location.home",
+        "slot": "location.home",
+        "source": "model",
+        "confidence": 0.9975713850025856
+      },
+      {
+        "id": "M36",
+        "gold": "location.office",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M37",
+        "gold": "schedule.availability",
+        "slot": "schedule.availability",
+        "source": "model",
+        "confidence": 0.8643559109082167
+      },
+      {
+        "id": "M38",
+        "gold": "work.confidential",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "M39",
+        "gold": "contact.phone",
+        "slot": "contact.phone",
+        "source": "model",
+        "confidence": 0.9012678239639431
+      },
+      {
+        "id": "M40",
+        "gold": "travel.pace",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "H01",
+        "gold": "travel.seat",
+        "slot": "travel.seat",
+        "source": "template"
+      },
+      {
+        "id": "H02",
+        "gold": "food.diet",
+        "slot": "food.diet",
+        "source": "template"
+      },
+      {
+        "id": "H03",
+        "gold": "work.role",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "H04",
+        "gold": "location.home",
+        "slot": "location.home",
+        "source": "model",
+        "confidence": 0.9997544153092677
+      },
+      {
+        "id": "H05",
+        "gold": "food.servings",
+        "slot": "food.servings",
+        "source": "template"
+      },
+      {
+        "id": "H06",
+        "gold": "health.condition",
+        "slot": "health.condition",
+        "source": "model",
+        "confidence": 0.9215042429090771
+      },
+      {
+        "id": "H07",
+        "gold": "money.budget",
+        "slot": "money.budget",
+        "source": "model",
+        "confidence": 0.9993388043128777
+      },
+      {
+        "id": "H08",
+        "gold": "people.partner",
+        "slot": "people.partner",
+        "source": "model",
+        "confidence": 0.9833883756203666
+      },
+      {
+        "id": "T01",
+        "gold": "travel.seat",
+        "slot": "travel.seat",
+        "source": "template"
+      },
+      {
+        "id": "T02",
+        "gold": "food.diet",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "T03",
+        "gold": "travel.hotel_budget",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "T04",
+        "gold": "food.servings",
+        "slot": "food.servings",
+        "source": "template"
+      },
+      {
+        "id": "T05",
+        "gold": "food.allergy",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "T06",
+        "gold": "location.home",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "T07",
+        "gold": "work.role",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "T08",
+        "gold": "travel.loyalty",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "T09",
+        "gold": "format.language",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "T10",
+        "gold": "money.buffer",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "T11",
+        "gold": "work.testing",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "T12",
+        "gold": "food.cuisine",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "T13",
+        "gold": "-",
+        "slot": "-",
+        "source": "unassigned"
+      },
+      {
+        "id": "T14",
+        "gold": "-",
+        "slot": "-",
+        "source": "unassigned"
+      }
+    ],
+    "oracle": {
+      "dev": {
+        "all": {
+          "drafts": 48,
+          "tp": 21,
+          "fp": 1,
+          "fn": 29,
+          "precision": 0.9545454545454546,
+          "recall": 0.42,
+          "f1": 0.5833333333333334,
+          "f05": 0.7608695652173914,
+          "negatives": 10,
+          "picksOnNegative": 0,
+          "exact": 24
+        },
+        "language": {
+          "en": {
+            "drafts": 24,
+            "tp": 11,
+            "fp": 0,
+            "fn": 14,
+            "precision": 1,
+            "recall": 0.44,
+            "f1": 0.6111111111111112,
+            "f05": 0.7971014492753624,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 13
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 10,
+            "fp": 1,
+            "fn": 15,
+            "precision": 0.9090909090909091,
+            "recall": 0.4,
+            "f1": 0.5555555555555556,
+            "f05": 0.7246376811594202,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 11
+          }
+        },
+        "latency": {
+          "firstMs": 0.42285400000000095,
+          "p50Ms": 0.12079099999999698,
+          "p95Ms": 0.42285400000000095
+        },
+        "unsafePicks": 0
+      },
+      "test": {
+        "all": {
+          "drafts": 152,
+          "tp": 65,
+          "fp": 5,
+          "fn": 55,
+          "precision": 0.9285714285714286,
+          "recall": 0.5416666666666666,
+          "f1": 0.6842105263157894,
+          "f05": 0.8125000000000001,
+          "negatives": 52,
+          "picksOnNegative": 4,
+          "exact": 103
+        },
+        "language": {
+          "en": {
+            "drafts": 76,
+            "tp": 33,
+            "fp": 2,
+            "fn": 27,
+            "precision": 0.9428571428571428,
+            "recall": 0.55,
+            "f1": 0.6947368421052631,
+            "f05": 0.825,
+            "negatives": 26,
+            "picksOnNegative": 2,
+            "exact": 51
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 32,
+            "fp": 3,
+            "fn": 28,
+            "precision": 0.9142857142857143,
+            "recall": 0.5333333333333333,
+            "f1": 0.6736842105263158,
+            "f05": 0.7999999999999999,
+            "negatives": 26,
+            "picksOnNegative": 2,
+            "exact": 52
+          }
+        },
+        "latency": {
+          "firstMs": 0.06139100000000042,
+          "p50Ms": 0.08509999999999707,
+          "p95Ms": 0.17471100000000206
+        },
+        "unsafePicks": 2
+      },
+      "hero": {
+        "all": {
+          "drafts": 6,
+          "tp": 2,
+          "fp": 0,
+          "fn": 10,
+          "precision": 1,
+          "recall": 0.16666666666666666,
+          "f1": 0.2857142857142857,
+          "f05": 0.5,
+          "negatives": 0,
+          "picksOnNegative": 0,
+          "exact": 0
+        },
+        "language": {
+          "en": {
+            "drafts": 3,
+            "tp": 1,
+            "fp": 0,
+            "fn": 5,
+            "precision": 1,
+            "recall": 0.16666666666666666,
+            "f1": 0.2857142857142857,
+            "f05": 0.5,
+            "negatives": 0,
+            "picksOnNegative": 0,
+            "exact": 0
+          },
+          "de": {
+            "drafts": 3,
+            "tp": 1,
+            "fp": 0,
+            "fn": 5,
+            "precision": 1,
+            "recall": 0.16666666666666666,
+            "f1": 0.2857142857142857,
+            "f05": 0.5,
+            "negatives": 0,
+            "picksOnNegative": 0,
+            "exact": 0
+          }
+        },
+        "latency": {
+          "firstMs": 0.039370000000005234,
+          "p50Ms": 0.035381000000000995,
+          "p95Ms": 0.04273000000000593
+        },
+        "unsafePicks": 0
+      },
+      "transfer": {
+        "all": {
+          "drafts": 32,
+          "tp": 7,
+          "fp": 1,
+          "fn": 17,
+          "precision": 0.875,
+          "recall": 0.2916666666666667,
+          "f1": 0.43750000000000006,
+          "f05": 0.625,
+          "negatives": 10,
+          "picksOnNegative": 0,
+          "exact": 15
+        },
+        "language": {
+          "en": {
+            "drafts": 16,
+            "tp": 2,
+            "fp": 0,
+            "fn": 10,
+            "precision": 1,
+            "recall": 0.16666666666666666,
+            "f1": 0.2857142857142857,
+            "f05": 0.5,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 6
+          },
+          "de": {
+            "drafts": 16,
+            "tp": 5,
+            "fp": 1,
+            "fn": 7,
+            "precision": 0.8333333333333334,
+            "recall": 0.4166666666666667,
+            "f1": 0.5555555555555556,
+            "f05": 0.6944444444444445,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 9
+          }
+        },
+        "latency": {
+          "firstMs": 0.08610099999999932,
+          "p50Ms": 0.0716109999999901,
+          "p95Ms": 0.1126909999999981
+        },
+        "unsafePicks": 0
+      }
+    },
+    "withoutGuard": {
+      "dev": {
+        "all": {
+          "drafts": 48,
+          "tp": 13,
+          "fp": 1,
+          "fn": 37,
+          "precision": 0.9285714285714286,
+          "recall": 0.26,
+          "f1": 0.40625,
+          "f05": 0.6132075471698114,
+          "negatives": 10,
+          "picksOnNegative": 0,
+          "exact": 19
+        },
+        "language": {
+          "en": {
+            "drafts": 24,
+            "tp": 7,
+            "fp": 0,
+            "fn": 18,
+            "precision": 1,
+            "recall": 0.28,
+            "f1": 0.43750000000000006,
+            "f05": 0.6603773584905661,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 10
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 6,
+            "fp": 1,
+            "fn": 19,
+            "precision": 0.8571428571428571,
+            "recall": 0.24,
+            "f1": 0.375,
+            "f05": 0.5660377358490566,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 9
+          }
+        },
+        "latency": {
+          "firstMs": 0.42285400000000095,
+          "p50Ms": 0.12079099999999698,
+          "p95Ms": 0.42285400000000095
+        },
+        "unsafePicks": 0
+      },
+      "test": {
+        "all": {
+          "drafts": 152,
+          "tp": 35,
+          "fp": 7,
+          "fn": 85,
+          "precision": 0.8333333333333334,
+          "recall": 0.2916666666666667,
+          "f1": 0.4320987654320988,
+          "f05": 0.607638888888889,
+          "negatives": 52,
+          "picksOnNegative": 3,
+          "exact": 77
+        },
+        "language": {
+          "en": {
+            "drafts": 76,
+            "tp": 17,
+            "fp": 2,
+            "fn": 43,
+            "precision": 0.8947368421052632,
+            "recall": 0.2833333333333333,
+            "f1": 0.43037974683544306,
+            "f05": 0.625,
+            "negatives": 26,
+            "picksOnNegative": 1,
+            "exact": 38
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 18,
+            "fp": 5,
+            "fn": 42,
+            "precision": 0.782608695652174,
+            "recall": 0.3,
+            "f1": 0.43373493975903615,
+            "f05": 0.5921052631578947,
+            "negatives": 26,
+            "picksOnNegative": 2,
+            "exact": 39
+          }
+        },
+        "latency": {
+          "firstMs": 0.06139100000000042,
+          "p50Ms": 0.08509999999999707,
+          "p95Ms": 0.17471100000000206
+        },
+        "unsafePicks": 2
+      },
+      "hero": {
+        "all": {
+          "drafts": 6,
+          "tp": 2,
+          "fp": 0,
+          "fn": 10,
+          "precision": 1,
+          "recall": 0.16666666666666666,
+          "f1": 0.2857142857142857,
+          "f05": 0.5,
+          "negatives": 0,
+          "picksOnNegative": 0,
+          "exact": 0
+        },
+        "language": {
+          "en": {
+            "drafts": 3,
+            "tp": 1,
+            "fp": 0,
+            "fn": 5,
+            "precision": 1,
+            "recall": 0.16666666666666666,
+            "f1": 0.2857142857142857,
+            "f05": 0.5,
+            "negatives": 0,
+            "picksOnNegative": 0,
+            "exact": 0
+          },
+          "de": {
+            "drafts": 3,
+            "tp": 1,
+            "fp": 0,
+            "fn": 5,
+            "precision": 1,
+            "recall": 0.16666666666666666,
+            "f1": 0.2857142857142857,
+            "f05": 0.5,
+            "negatives": 0,
+            "picksOnNegative": 0,
+            "exact": 0
+          }
+        },
+        "latency": {
+          "firstMs": 0.039370000000005234,
+          "p50Ms": 0.035381000000000995,
+          "p95Ms": 0.04273000000000593
+        },
+        "unsafePicks": 0
+      },
+      "transfer": {
+        "all": {
+          "drafts": 32,
+          "tp": 2,
+          "fp": 0,
+          "fn": 22,
+          "precision": 1,
+          "recall": 0.08333333333333333,
+          "f1": 0.15384615384615385,
+          "f05": 0.3125,
+          "negatives": 10,
+          "picksOnNegative": 0,
+          "exact": 10
+        },
+        "language": {
+          "en": {
+            "drafts": 16,
+            "tp": 1,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.08333333333333333,
+            "f1": 0.15384615384615385,
+            "f05": 0.3125,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 5
+          },
+          "de": {
+            "drafts": 16,
+            "tp": 1,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.08333333333333333,
+            "f1": 0.15384615384615385,
+            "f05": 0.3125,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 5
+          }
+        },
+        "latency": {
+          "firstMs": 0.08610099999999932,
+          "p50Ms": 0.0716109999999901,
+          "p95Ms": 0.1126909999999981
+        },
+        "unsafePicks": 0
+      }
+    },
+    "automaticDiagnostic": {
+      "dev": {
+        "all": {
+          "drafts": 48,
+          "tp": 3,
+          "fp": 1,
+          "fn": 3,
+          "precision": 0.75,
+          "recall": 0.5,
+          "f1": 0.6,
+          "f05": 0.6818181818181818,
+          "negatives": 44,
+          "picksOnNegative": 1,
+          "exact": 44
+        },
+        "language": {
+          "en": {
+            "drafts": 24,
+            "tp": 2,
+            "fp": 0,
+            "fn": 1,
+            "precision": 1,
+            "recall": 0.6666666666666666,
+            "f1": 0.8,
+            "f05": 0.9090909090909091,
+            "negatives": 22,
+            "picksOnNegative": 0,
+            "exact": 23
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 1,
+            "fp": 1,
+            "fn": 2,
+            "precision": 0.5,
+            "recall": 0.3333333333333333,
+            "f1": 0.4,
+            "f05": 0.45454545454545453,
+            "negatives": 22,
+            "picksOnNegative": 1,
+            "exact": 21
+          }
+        },
+        "latency": {
+          "firstMs": 0.42285400000000095,
+          "p50Ms": 0.12079099999999698,
+          "p95Ms": 0.42285400000000095
+        },
+        "unsafePicks": 0
+      },
+      "test": {
+        "all": {
+          "drafts": 152,
+          "tp": 8,
+          "fp": 0,
+          "fn": 6,
+          "precision": 1,
+          "recall": 0.5714285714285714,
+          "f1": 0.7272727272727273,
+          "f05": 0.8695652173913042,
+          "negatives": 140,
+          "picksOnNegative": 0,
+          "exact": 146
+        },
+        "language": {
+          "en": {
+            "drafts": 76,
+            "tp": 4,
+            "fp": 0,
+            "fn": 3,
+            "precision": 1,
+            "recall": 0.5714285714285714,
+            "f1": 0.7272727272727273,
+            "f05": 0.8695652173913042,
+            "negatives": 70,
+            "picksOnNegative": 0,
+            "exact": 73
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 4,
+            "fp": 0,
+            "fn": 3,
+            "precision": 1,
+            "recall": 0.5714285714285714,
+            "f1": 0.7272727272727273,
+            "f05": 0.8695652173913042,
+            "negatives": 70,
+            "picksOnNegative": 0,
+            "exact": 73
+          }
+        },
+        "latency": {
+          "firstMs": 0.06139100000000042,
+          "p50Ms": 0.08509999999999707,
+          "p95Ms": 0.17471100000000206
+        },
+        "unsafePicks": 0
+      },
+      "hero": {
+        "all": {
+          "drafts": 6,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "f05": 0,
+          "negatives": 6,
+          "picksOnNegative": 0,
+          "exact": 6
+        },
+        "language": {
+          "en": {
+            "drafts": 3,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 3,
+            "picksOnNegative": 0,
+            "exact": 3
+          },
+          "de": {
+            "drafts": 3,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 3,
+            "picksOnNegative": 0,
+            "exact": 3
+          }
+        },
+        "latency": {
+          "firstMs": 0.039370000000005234,
+          "p50Ms": 0.035381000000000995,
+          "p95Ms": 0.04273000000000593
+        },
+        "unsafePicks": 0
+      },
+      "transfer": {
+        "all": {
+          "drafts": 32,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "f05": 0,
+          "negatives": 32,
+          "picksOnNegative": 0,
+          "exact": 32
+        },
+        "language": {
+          "en": {
+            "drafts": 16,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 16,
+            "picksOnNegative": 0,
+            "exact": 16
+          },
+          "de": {
+            "drafts": 16,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 16,
+            "picksOnNegative": 0,
+            "exact": 16
+          }
+        },
+        "latency": {
+          "firstMs": 0.08610099999999932,
+          "p50Ms": 0.0716109999999901,
+          "p95Ms": 0.1126909999999981
+        },
+        "unsafePicks": 0
+      }
+    },
+    "quality": {
+      "dev": {
+        "all": {
+          "drafts": 48,
+          "tp": 13,
+          "fp": 1,
+          "fn": 37,
+          "precision": 0.9285714285714286,
+          "recall": 0.26,
+          "f1": 0.40625,
+          "f05": 0.6132075471698114,
+          "negatives": 10,
+          "picksOnNegative": 0,
+          "exact": 19
+        },
+        "language": {
+          "en": {
+            "drafts": 24,
+            "tp": 7,
+            "fp": 0,
+            "fn": 18,
+            "precision": 1,
+            "recall": 0.28,
+            "f1": 0.43750000000000006,
+            "f05": 0.6603773584905661,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 10
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 6,
+            "fp": 1,
+            "fn": 19,
+            "precision": 0.8571428571428571,
+            "recall": 0.24,
+            "f1": 0.375,
+            "f05": 0.5660377358490566,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 9
+          }
+        },
+        "latency": {
+          "firstMs": 0.42285400000000095,
+          "p50Ms": 0.12079099999999698,
+          "p95Ms": 0.42285400000000095
+        },
+        "unsafePicks": 0
+      },
+      "test": {
+        "all": {
+          "drafts": 152,
+          "tp": 35,
+          "fp": 6,
+          "fn": 85,
+          "precision": 0.8536585365853658,
+          "recall": 0.2916666666666667,
+          "f1": 0.4347826086956522,
+          "f05": 0.6161971830985916,
+          "negatives": 52,
+          "picksOnNegative": 2,
+          "exact": 78
+        },
+        "language": {
+          "en": {
+            "drafts": 76,
+            "tp": 17,
+            "fp": 2,
+            "fn": 43,
+            "precision": 0.8947368421052632,
+            "recall": 0.2833333333333333,
+            "f1": 0.43037974683544306,
+            "f05": 0.625,
+            "negatives": 26,
+            "picksOnNegative": 1,
+            "exact": 38
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 18,
+            "fp": 4,
+            "fn": 42,
+            "precision": 0.8181818181818182,
+            "recall": 0.3,
+            "f1": 0.43902439024390244,
+            "f05": 0.6081081081081081,
+            "negatives": 26,
+            "picksOnNegative": 1,
+            "exact": 40
+          }
+        },
+        "category": {
+          "adversarial": {
+            "en": {
+              "drafts": 5,
+              "tp": 0,
+              "fp": 1,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 5,
+              "picksOnNegative": 1,
+              "exact": 4
+            },
+            "de": {
+              "drafts": 5,
+              "tp": 0,
+              "fp": 1,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 5,
+              "picksOnNegative": 1,
+              "exact": 4
+            }
+          },
+          "ambiguous": {
+            "en": {
+              "drafts": 2,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 2
+            },
+            "de": {
+              "drafts": 2,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 2
+            }
+          },
+          "coding": {
+            "en": {
+              "drafts": 6,
+              "tp": 1,
+              "fp": 0,
+              "fn": 4,
+              "precision": 1,
+              "recall": 0.2,
+              "f1": 0.33333333333333337,
+              "f05": 0.5555555555555556,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 3
+            },
+            "de": {
+              "drafts": 6,
+              "tp": 1,
+              "fp": 0,
+              "fn": 4,
+              "precision": 1,
+              "recall": 0.2,
+              "f1": 0.33333333333333337,
+              "f05": 0.5555555555555556,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 3
+            }
+          },
+          "contact": {
+            "en": {
+              "drafts": 1,
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 1,
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "cooking": {
+            "en": {
+              "drafts": 9,
+              "tp": 3,
+              "fp": 0,
+              "fn": 7,
+              "precision": 1,
+              "recall": 0.3,
+              "f1": 0.4615384615384615,
+              "f05": 0.6818181818181818,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 3
+            },
+            "de": {
+              "drafts": 9,
+              "tp": 1,
+              "fp": 0,
+              "fn": 9,
+              "precision": 1,
+              "recall": 0.1,
+              "f1": 0.18181818181818182,
+              "f05": 0.35714285714285715,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 3
+            }
+          },
+          "cover-letter": {
+            "en": {
+              "drafts": 4,
+              "tp": 0,
+              "fp": 0,
+              "fn": 4,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 0,
+              "fp": 0,
+              "fn": 4,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "fitness": {
+            "en": {
+              "drafts": 6,
+              "tp": 2,
+              "fp": 1,
+              "fn": 4,
+              "precision": 0.6666666666666666,
+              "recall": 0.3333333333333333,
+              "f1": 0.4444444444444444,
+              "f05": 0.5555555555555555,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 3
+            },
+            "de": {
+              "drafts": 6,
+              "tp": 2,
+              "fp": 1,
+              "fn": 4,
+              "precision": 0.6666666666666666,
+              "recall": 0.3333333333333333,
+              "f1": 0.4444444444444444,
+              "f05": 0.5555555555555555,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 3
+            }
+          },
+          "general": {
+            "en": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 0,
+              "exact": 3
+            },
+            "de": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 0,
+              "exact": 3
+            }
+          },
+          "gifts": {
+            "en": {
+              "drafts": 4,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 1,
+              "fp": 1,
+              "fn": 2,
+              "precision": 0.5,
+              "recall": 0.3333333333333333,
+              "f1": 0.4,
+              "f05": 0.45454545454545453,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 2
+            }
+          },
+          "health": {
+            "en": {
+              "drafts": 1,
+              "tp": 0,
+              "fp": 0,
+              "fn": 1,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 1,
+              "tp": 0,
+              "fp": 0,
+              "fn": 1,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            }
+          },
+          "kids": {
+            "en": {
+              "drafts": 4,
+              "tp": 0,
+              "fp": 0,
+              "fn": 4,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 0,
+              "fp": 0,
+              "fn": 4,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "location": {
+            "en": {
+              "drafts": 3,
+              "tp": 1,
+              "fp": 0,
+              "fn": 1,
+              "precision": 1,
+              "recall": 0.5,
+              "f1": 0.6666666666666666,
+              "f05": 0.8333333333333334,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 2
+            },
+            "de": {
+              "drafts": 3,
+              "tp": 1,
+              "fp": 1,
+              "fn": 1,
+              "precision": 0.5,
+              "recall": 0.5,
+              "f1": 0.5,
+              "f05": 0.5,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 2
+            }
+          },
+          "money": {
+            "en": {
+              "drafts": 4,
+              "tp": 1,
+              "fp": 0,
+              "fn": 2,
+              "precision": 1,
+              "recall": 0.3333333333333333,
+              "f1": 0.5,
+              "f05": 0.7142857142857143,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 2
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 1,
+              "fp": 0,
+              "fn": 2,
+              "precision": 1,
+              "recall": 0.3333333333333333,
+              "f1": 0.5,
+              "f05": 0.7142857142857143,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 2
+            }
+          },
+          "negation": {
+            "en": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 0,
+              "exact": 3
+            },
+            "de": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 0,
+              "exact": 3
+            }
+          },
+          "relationships": {
+            "en": {
+              "drafts": 1,
+              "tp": 0,
+              "fp": 0,
+              "fn": 1,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 1,
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "shopping": {
+            "en": {
+              "drafts": 6,
+              "tp": 3,
+              "fp": 0,
+              "fn": 3,
+              "precision": 1,
+              "recall": 0.5,
+              "f1": 0.6666666666666666,
+              "f05": 0.8333333333333334,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 3
+            },
+            "de": {
+              "drafts": 6,
+              "tp": 3,
+              "fp": 0,
+              "fn": 3,
+              "precision": 1,
+              "recall": 0.5,
+              "f1": 0.6666666666666666,
+              "f05": 0.8333333333333334,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 3
+            }
+          },
+          "trip": {
+            "en": {
+              "drafts": 9,
+              "tp": 3,
+              "fp": 0,
+              "fn": 7,
+              "precision": 1,
+              "recall": 0.3,
+              "f1": 0.4615384615384615,
+              "f05": 0.6818181818181818,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 3
+            },
+            "de": {
+              "drafts": 9,
+              "tp": 5,
+              "fp": 0,
+              "fn": 5,
+              "precision": 1,
+              "recall": 0.5,
+              "f1": 0.6666666666666666,
+              "f05": 0.8333333333333334,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 4
+            }
+          },
+          "work-email": {
+            "en": {
+              "drafts": 5,
+              "tp": 2,
+              "fp": 0,
+              "fn": 2,
+              "precision": 1,
+              "recall": 0.5,
+              "f1": 0.6666666666666666,
+              "f05": 0.8333333333333334,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 3
+            },
+            "de": {
+              "drafts": 5,
+              "tp": 1,
+              "fp": 0,
+              "fn": 3,
+              "precision": 1,
+              "recall": 0.25,
+              "f1": 0.4,
+              "f05": 0.625,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 2
+            }
+          }
+        },
+        "latency": {
+          "firstMs": 0.06139100000000042,
+          "p50Ms": 0.08509999999999707,
+          "p95Ms": 0.17471100000000206
+        },
+        "unsafePicks": 2
+      },
+      "hero": {
+        "all": {
+          "drafts": 6,
+          "tp": 2,
+          "fp": 0,
+          "fn": 10,
+          "precision": 1,
+          "recall": 0.16666666666666666,
+          "f1": 0.2857142857142857,
+          "f05": 0.5,
+          "negatives": 0,
+          "picksOnNegative": 0,
+          "exact": 0
+        },
+        "language": {
+          "en": {
+            "drafts": 3,
+            "tp": 1,
+            "fp": 0,
+            "fn": 5,
+            "precision": 1,
+            "recall": 0.16666666666666666,
+            "f1": 0.2857142857142857,
+            "f05": 0.5,
+            "negatives": 0,
+            "picksOnNegative": 0,
+            "exact": 0
+          },
+          "de": {
+            "drafts": 3,
+            "tp": 1,
+            "fp": 0,
+            "fn": 5,
+            "precision": 1,
+            "recall": 0.16666666666666666,
+            "f1": 0.2857142857142857,
+            "f05": 0.5,
+            "negatives": 0,
+            "picksOnNegative": 0,
+            "exact": 0
+          }
+        },
+        "latency": {
+          "firstMs": 0.039370000000005234,
+          "p50Ms": 0.035381000000000995,
+          "p95Ms": 0.04273000000000593
+        },
+        "unsafePicks": 0
+      },
+      "transfer": {
+        "all": {
+          "drafts": 32,
+          "tp": 2,
+          "fp": 0,
+          "fn": 22,
+          "precision": 1,
+          "recall": 0.08333333333333333,
+          "f1": 0.15384615384615385,
+          "f05": 0.3125,
+          "negatives": 10,
+          "picksOnNegative": 0,
+          "exact": 10
+        },
+        "language": {
+          "en": {
+            "drafts": 16,
+            "tp": 1,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.08333333333333333,
+            "f1": 0.15384615384615385,
+            "f05": 0.3125,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 5
+          },
+          "de": {
+            "drafts": 16,
+            "tp": 1,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.08333333333333333,
+            "f1": 0.15384615384615385,
+            "f05": 0.3125,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 5
+          }
+        },
+        "latency": {
+          "firstMs": 0.08610099999999932,
+          "p50Ms": 0.0716109999999901,
+          "p95Ms": 0.1126909999999981
+        },
+        "unsafePicks": 0
+      }
+    },
+    "headBytes": 837510,
+    "weightBytes": 836400,
+    "package": {
+      "baseBytes": 35431736,
+      "withModelBytes": 35733978,
+      "installedBaseBytes": 149547490,
+      "installedWithModelBytes": 150386200
+    }
+  },
+  "reasoners": {
+    "qwen-0.6b": {
+      "repo": "unsloth/Qwen3-0.6B-GGUF",
+      "revision": "50968a4468ef4233ed78cd7c3de230dd1d61a56b",
+      "file": "Qwen3-0.6B-Q4_K_M.gguf",
+      "sha256": "ac2d97712095a558e31573f62f466a3f9d93990898b0ec79d7c974c1780d524a",
+      "name": "qwen-0.6b",
+      "beforeBytes": 94752768,
+      "peakBytes": 1375064064,
+      "coldMs": 1242.385751,
+      "diskBytes": 396705472,
+      "invalid": 0,
+      "abstained": 213,
+      "quality": {
+        "dev": {
+          "all": {
+            "drafts": 48,
+            "tp": 0,
+            "fp": 5,
+            "fn": 50,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 10,
+            "picksOnNegative": 0,
+            "exact": 10
+          },
+          "language": {
+            "en": {
+              "drafts": 24,
+              "tp": 0,
+              "fp": 2,
+              "fn": 25,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 5,
+              "picksOnNegative": 0,
+              "exact": 5
+            },
+            "de": {
+              "drafts": 24,
+              "tp": 0,
+              "fp": 3,
+              "fn": 25,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 5,
+              "picksOnNegative": 0,
+              "exact": 5
+            }
+          },
+          "latency": {
+            "firstMs": 1426.98738,
+            "p50Ms": 227.06797000000006,
+            "p95Ms": 558.798385
+          },
+          "unsafePicks": 0
+        },
+        "test": {
+          "all": {
+            "drafts": 152,
+            "tp": 7,
+            "fp": 16,
+            "fn": 113,
+            "precision": 0.30434782608695654,
+            "recall": 0.058333333333333334,
+            "f1": 0.09790209790209789,
+            "f05": 0.1650943396226415,
+            "negatives": 52,
+            "picksOnNegative": 0,
+            "exact": 56
+          },
+          "language": {
+            "en": {
+              "drafts": 76,
+              "tp": 3,
+              "fp": 7,
+              "fn": 57,
+              "precision": 0.3,
+              "recall": 0.05,
+              "f1": 0.08571428571428572,
+              "f05": 0.15000000000000002,
+              "negatives": 26,
+              "picksOnNegative": 0,
+              "exact": 28
+            },
+            "de": {
+              "drafts": 76,
+              "tp": 4,
+              "fp": 9,
+              "fn": 56,
+              "precision": 0.3076923076923077,
+              "recall": 0.06666666666666667,
+              "f1": 0.1095890410958904,
+              "f05": 0.1785714285714286,
+              "negatives": 26,
+              "picksOnNegative": 0,
+              "exact": 28
+            }
+          },
+          "category": {
+            "adversarial": {
+              "en": {
+                "drafts": 5,
+                "tp": 0,
+                "fp": 0,
+                "fn": 0,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 5,
+                "picksOnNegative": 0,
+                "exact": 5
+              },
+              "de": {
+                "drafts": 5,
+                "tp": 0,
+                "fp": 0,
+                "fn": 0,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 5,
+                "picksOnNegative": 0,
+                "exact": 5
+              }
+            },
+            "ambiguous": {
+              "en": {
+                "drafts": 2,
+                "tp": 0,
+                "fp": 0,
+                "fn": 0,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 2,
+                "picksOnNegative": 0,
+                "exact": 2
+              },
+              "de": {
+                "drafts": 2,
+                "tp": 0,
+                "fp": 0,
+                "fn": 0,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 2,
+                "picksOnNegative": 0,
+                "exact": 2
+              }
+            },
+            "coding": {
+              "en": {
+                "drafts": 6,
+                "tp": 0,
+                "fp": 0,
+                "fn": 5,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 2,
+                "picksOnNegative": 0,
+                "exact": 2
+              },
+              "de": {
+                "drafts": 6,
+                "tp": 0,
+                "fp": 0,
+                "fn": 5,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 2,
+                "picksOnNegative": 0,
+                "exact": 2
+              }
+            },
+            "contact": {
+              "en": {
+                "drafts": 1,
+                "tp": 0,
+                "fp": 0,
+                "fn": 1,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 0,
+                "picksOnNegative": 0,
+                "exact": 0
+              },
+              "de": {
+                "drafts": 1,
+                "tp": 0,
+                "fp": 0,
+                "fn": 1,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 0,
+                "picksOnNegative": 0,
+                "exact": 0
+              }
+            },
+            "cooking": {
+              "en": {
+                "drafts": 9,
+                "tp": 0,
+                "fp": 3,
+                "fn": 10,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 2,
+                "picksOnNegative": 0,
+                "exact": 2
+              },
+              "de": {
+                "drafts": 9,
+                "tp": 0,
+                "fp": 3,
+                "fn": 10,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 2,
+                "picksOnNegative": 0,
+                "exact": 2
+              }
+            },
+            "cover-letter": {
+              "en": {
+                "drafts": 4,
+                "tp": 0,
+                "fp": 0,
+                "fn": 4,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              },
+              "de": {
+                "drafts": 4,
+                "tp": 0,
+                "fp": 0,
+                "fn": 4,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              }
+            },
+            "fitness": {
+              "en": {
+                "drafts": 6,
+                "tp": 1,
+                "fp": 1,
+                "fn": 5,
+                "precision": 0.5,
+                "recall": 0.16666666666666666,
+                "f1": 0.25,
+                "f05": 0.35714285714285715,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 2
+              },
+              "de": {
+                "drafts": 6,
+                "tp": 0,
+                "fp": 0,
+                "fn": 6,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              }
+            },
+            "general": {
+              "en": {
+                "drafts": 3,
+                "tp": 0,
+                "fp": 0,
+                "fn": 0,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 3,
+                "picksOnNegative": 0,
+                "exact": 3
+              },
+              "de": {
+                "drafts": 3,
+                "tp": 0,
+                "fp": 0,
+                "fn": 0,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 3,
+                "picksOnNegative": 0,
+                "exact": 3
+              }
+            },
+            "gifts": {
+              "en": {
+                "drafts": 4,
+                "tp": 0,
+                "fp": 0,
+                "fn": 3,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              },
+              "de": {
+                "drafts": 4,
+                "tp": 0,
+                "fp": 1,
+                "fn": 3,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              }
+            },
+            "health": {
+              "en": {
+                "drafts": 1,
+                "tp": 0,
+                "fp": 0,
+                "fn": 1,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 0,
+                "picksOnNegative": 0,
+                "exact": 0
+              },
+              "de": {
+                "drafts": 1,
+                "tp": 0,
+                "fp": 0,
+                "fn": 1,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 0,
+                "picksOnNegative": 0,
+                "exact": 0
+              }
+            },
+            "kids": {
+              "en": {
+                "drafts": 4,
+                "tp": 0,
+                "fp": 2,
+                "fn": 4,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              },
+              "de": {
+                "drafts": 4,
+                "tp": 0,
+                "fp": 1,
+                "fn": 4,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              }
+            },
+            "location": {
+              "en": {
+                "drafts": 3,
+                "tp": 0,
+                "fp": 0,
+                "fn": 2,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              },
+              "de": {
+                "drafts": 3,
+                "tp": 0,
+                "fp": 0,
+                "fn": 2,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              }
+            },
+            "money": {
+              "en": {
+                "drafts": 4,
+                "tp": 0,
+                "fp": 0,
+                "fn": 3,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              },
+              "de": {
+                "drafts": 4,
+                "tp": 0,
+                "fp": 0,
+                "fn": 3,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              }
+            },
+            "negation": {
+              "en": {
+                "drafts": 3,
+                "tp": 0,
+                "fp": 0,
+                "fn": 0,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 3,
+                "picksOnNegative": 0,
+                "exact": 3
+              },
+              "de": {
+                "drafts": 3,
+                "tp": 0,
+                "fp": 0,
+                "fn": 0,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 3,
+                "picksOnNegative": 0,
+                "exact": 3
+              }
+            },
+            "relationships": {
+              "en": {
+                "drafts": 1,
+                "tp": 0,
+                "fp": 0,
+                "fn": 1,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 0,
+                "picksOnNegative": 0,
+                "exact": 0
+              },
+              "de": {
+                "drafts": 1,
+                "tp": 0,
+                "fp": 0,
+                "fn": 1,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 0,
+                "picksOnNegative": 0,
+                "exact": 0
+              }
+            },
+            "shopping": {
+              "en": {
+                "drafts": 6,
+                "tp": 1,
+                "fp": 0,
+                "fn": 5,
+                "precision": 1,
+                "recall": 0.16666666666666666,
+                "f1": 0.2857142857142857,
+                "f05": 0.5,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 2
+              },
+              "de": {
+                "drafts": 6,
+                "tp": 3,
+                "fp": 1,
+                "fn": 3,
+                "precision": 0.75,
+                "recall": 0.5,
+                "f1": 0.6,
+                "f05": 0.6818181818181818,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 3
+              }
+            },
+            "trip": {
+              "en": {
+                "drafts": 9,
+                "tp": 1,
+                "fp": 1,
+                "fn": 9,
+                "precision": 0.5,
+                "recall": 0.1,
+                "f1": 0.16666666666666669,
+                "f05": 0.2777777777777778,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              },
+              "de": {
+                "drafts": 9,
+                "tp": 1,
+                "fp": 2,
+                "fn": 9,
+                "precision": 0.3333333333333333,
+                "recall": 0.1,
+                "f1": 0.15384615384615383,
+                "f05": 0.22727272727272724,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              }
+            },
+            "work-email": {
+              "en": {
+                "drafts": 5,
+                "tp": 0,
+                "fp": 0,
+                "fn": 4,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              },
+              "de": {
+                "drafts": 5,
+                "tp": 0,
+                "fp": 1,
+                "fn": 4,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              }
+            }
+          },
+          "latency": {
+            "firstMs": 187.7421919999997,
+            "p50Ms": 341.58842300000106,
+            "p95Ms": 766.1906600000002
+          },
+          "unsafePicks": 0
+        },
+        "hero": {
+          "all": {
+            "drafts": 6,
+            "tp": 0,
+            "fp": 0,
+            "fn": 12,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 0,
+            "picksOnNegative": 0,
+            "exact": 0
+          },
+          "language": {
+            "en": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 6,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 6,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            }
+          },
+          "latency": {
+            "firstMs": 462.5003529999958,
+            "p50Ms": 205.22793899998942,
+            "p95Ms": 462.5003529999958
+          },
+          "unsafePicks": 0
+        },
+        "transfer": {
+          "all": {
+            "drafts": 32,
+            "tp": 0,
+            "fp": 1,
+            "fn": 24,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 10,
+            "picksOnNegative": 1,
+            "exact": 9
+          },
+          "language": {
+            "en": {
+              "drafts": 16,
+              "tp": 0,
+              "fp": 1,
+              "fn": 12,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 5,
+              "picksOnNegative": 1,
+              "exact": 4
+            },
+            "de": {
+              "drafts": 16,
+              "tp": 0,
+              "fp": 0,
+              "fn": 12,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 5,
+              "picksOnNegative": 0,
+              "exact": 5
+            }
+          },
+          "latency": {
+            "firstMs": 371.4400949999981,
+            "p50Ms": 179.17167599999812,
+            "p95Ms": 371.4400949999981
+          },
+          "unsafePicks": 0
+        }
+      }
+    },
+    "qwen-1.7b": {
+      "repo": "unsloth/Qwen3-1.7B-GGUF",
+      "revision": "d7f544eead698dbd1f15126ef60b45a1e1933222",
+      "file": "Qwen3-1.7B-Q4_K_M.gguf",
+      "sha256": "b139949c5bd74937ad8ed8c8cf3d9ffb1e99c866c823204dc42c0d91fa181897",
+      "name": "qwen-1.7b",
+      "beforeBytes": 93888512,
+      "peakBytes": 2551656448,
+      "coldMs": 1794.7272650000002,
+      "diskBytes": 1107409472,
+      "invalid": 0,
+      "abstained": 224,
+      "quality": {
+        "dev": {
+          "all": {
+            "drafts": 48,
+            "tp": 0,
+            "fp": 1,
+            "fn": 50,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 10,
+            "picksOnNegative": 0,
+            "exact": 10
+          },
+          "language": {
+            "en": {
+              "drafts": 24,
+              "tp": 0,
+              "fp": 1,
+              "fn": 25,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 5,
+              "picksOnNegative": 0,
+              "exact": 5
+            },
+            "de": {
+              "drafts": 24,
+              "tp": 0,
+              "fp": 0,
+              "fn": 25,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 5,
+              "picksOnNegative": 0,
+              "exact": 5
+            }
+          },
+          "latency": {
+            "firstMs": 3692.12364,
+            "p50Ms": 419.2300069999992,
+            "p95Ms": 518.775823
+          },
+          "unsafePicks": 0
+        },
+        "test": {
+          "all": {
+            "drafts": 152,
+            "tp": 11,
+            "fp": 4,
+            "fn": 109,
+            "precision": 0.7333333333333333,
+            "recall": 0.09166666666666666,
+            "f1": 0.16296296296296295,
+            "f05": 0.3055555555555556,
+            "negatives": 52,
+            "picksOnNegative": 0,
+            "exact": 59
+          },
+          "language": {
+            "en": {
+              "drafts": 76,
+              "tp": 8,
+              "fp": 1,
+              "fn": 52,
+              "precision": 0.8888888888888888,
+              "recall": 0.13333333333333333,
+              "f1": 0.2318840579710145,
+              "f05": 0.4166666666666667,
+              "negatives": 26,
+              "picksOnNegative": 0,
+              "exact": 32
+            },
+            "de": {
+              "drafts": 76,
+              "tp": 3,
+              "fp": 3,
+              "fn": 57,
+              "precision": 0.5,
+              "recall": 0.05,
+              "f1": 0.09090909090909091,
+              "f05": 0.17857142857142858,
+              "negatives": 26,
+              "picksOnNegative": 0,
+              "exact": 27
+            }
+          },
+          "category": {
+            "adversarial": {
+              "en": {
+                "drafts": 5,
+                "tp": 0,
+                "fp": 0,
+                "fn": 0,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 5,
+                "picksOnNegative": 0,
+                "exact": 5
+              },
+              "de": {
+                "drafts": 5,
+                "tp": 0,
+                "fp": 0,
+                "fn": 0,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 5,
+                "picksOnNegative": 0,
+                "exact": 5
+              }
+            },
+            "ambiguous": {
+              "en": {
+                "drafts": 2,
+                "tp": 0,
+                "fp": 0,
+                "fn": 0,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 2,
+                "picksOnNegative": 0,
+                "exact": 2
+              },
+              "de": {
+                "drafts": 2,
+                "tp": 0,
+                "fp": 0,
+                "fn": 0,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 2,
+                "picksOnNegative": 0,
+                "exact": 2
+              }
+            },
+            "coding": {
+              "en": {
+                "drafts": 6,
+                "tp": 0,
+                "fp": 0,
+                "fn": 5,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 2,
+                "picksOnNegative": 0,
+                "exact": 2
+              },
+              "de": {
+                "drafts": 6,
+                "tp": 0,
+                "fp": 0,
+                "fn": 5,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 2,
+                "picksOnNegative": 0,
+                "exact": 2
+              }
+            },
+            "contact": {
+              "en": {
+                "drafts": 1,
+                "tp": 0,
+                "fp": 0,
+                "fn": 1,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 0,
+                "picksOnNegative": 0,
+                "exact": 0
+              },
+              "de": {
+                "drafts": 1,
+                "tp": 0,
+                "fp": 0,
+                "fn": 1,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 0,
+                "picksOnNegative": 0,
+                "exact": 0
+              }
+            },
+            "cooking": {
+              "en": {
+                "drafts": 9,
+                "tp": 0,
+                "fp": 0,
+                "fn": 10,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 2,
+                "picksOnNegative": 0,
+                "exact": 2
+              },
+              "de": {
+                "drafts": 9,
+                "tp": 0,
+                "fp": 0,
+                "fn": 10,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 2,
+                "picksOnNegative": 0,
+                "exact": 2
+              }
+            },
+            "cover-letter": {
+              "en": {
+                "drafts": 4,
+                "tp": 0,
+                "fp": 0,
+                "fn": 4,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              },
+              "de": {
+                "drafts": 4,
+                "tp": 0,
+                "fp": 0,
+                "fn": 4,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              }
+            },
+            "fitness": {
+              "en": {
+                "drafts": 6,
+                "tp": 0,
+                "fp": 0,
+                "fn": 6,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              },
+              "de": {
+                "drafts": 6,
+                "tp": 0,
+                "fp": 0,
+                "fn": 6,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              }
+            },
+            "general": {
+              "en": {
+                "drafts": 3,
+                "tp": 0,
+                "fp": 0,
+                "fn": 0,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 3,
+                "picksOnNegative": 0,
+                "exact": 3
+              },
+              "de": {
+                "drafts": 3,
+                "tp": 0,
+                "fp": 0,
+                "fn": 0,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 3,
+                "picksOnNegative": 0,
+                "exact": 3
+              }
+            },
+            "gifts": {
+              "en": {
+                "drafts": 4,
+                "tp": 0,
+                "fp": 0,
+                "fn": 3,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              },
+              "de": {
+                "drafts": 4,
+                "tp": 0,
+                "fp": 0,
+                "fn": 3,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              }
+            },
+            "health": {
+              "en": {
+                "drafts": 1,
+                "tp": 0,
+                "fp": 0,
+                "fn": 1,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 0,
+                "picksOnNegative": 0,
+                "exact": 0
+              },
+              "de": {
+                "drafts": 1,
+                "tp": 0,
+                "fp": 0,
+                "fn": 1,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 0,
+                "picksOnNegative": 0,
+                "exact": 0
+              }
+            },
+            "kids": {
+              "en": {
+                "drafts": 4,
+                "tp": 0,
+                "fp": 0,
+                "fn": 4,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              },
+              "de": {
+                "drafts": 4,
+                "tp": 0,
+                "fp": 0,
+                "fn": 4,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              }
+            },
+            "location": {
+              "en": {
+                "drafts": 3,
+                "tp": 0,
+                "fp": 0,
+                "fn": 2,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              },
+              "de": {
+                "drafts": 3,
+                "tp": 0,
+                "fp": 0,
+                "fn": 2,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              }
+            },
+            "money": {
+              "en": {
+                "drafts": 4,
+                "tp": 0,
+                "fp": 0,
+                "fn": 3,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              },
+              "de": {
+                "drafts": 4,
+                "tp": 0,
+                "fp": 0,
+                "fn": 3,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              }
+            },
+            "negation": {
+              "en": {
+                "drafts": 3,
+                "tp": 0,
+                "fp": 0,
+                "fn": 0,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 3,
+                "picksOnNegative": 0,
+                "exact": 3
+              },
+              "de": {
+                "drafts": 3,
+                "tp": 0,
+                "fp": 0,
+                "fn": 0,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 3,
+                "picksOnNegative": 0,
+                "exact": 3
+              }
+            },
+            "relationships": {
+              "en": {
+                "drafts": 1,
+                "tp": 0,
+                "fp": 0,
+                "fn": 1,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 0,
+                "picksOnNegative": 0,
+                "exact": 0
+              },
+              "de": {
+                "drafts": 1,
+                "tp": 0,
+                "fp": 0,
+                "fn": 1,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 0,
+                "picksOnNegative": 0,
+                "exact": 0
+              }
+            },
+            "shopping": {
+              "en": {
+                "drafts": 6,
+                "tp": 5,
+                "fp": 0,
+                "fn": 1,
+                "precision": 1,
+                "recall": 0.8333333333333334,
+                "f1": 0.9090909090909091,
+                "f05": 0.9615384615384615,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 5
+              },
+              "de": {
+                "drafts": 6,
+                "tp": 0,
+                "fp": 1,
+                "fn": 6,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              }
+            },
+            "trip": {
+              "en": {
+                "drafts": 9,
+                "tp": 2,
+                "fp": 1,
+                "fn": 8,
+                "precision": 0.6666666666666666,
+                "recall": 0.2,
+                "f1": 0.30769230769230765,
+                "f05": 0.4545454545454545,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 2
+              },
+              "de": {
+                "drafts": 9,
+                "tp": 3,
+                "fp": 2,
+                "fn": 7,
+                "precision": 0.6,
+                "recall": 0.3,
+                "f1": 0.4,
+                "f05": 0.5,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 2
+              }
+            },
+            "work-email": {
+              "en": {
+                "drafts": 5,
+                "tp": 1,
+                "fp": 0,
+                "fn": 3,
+                "precision": 1,
+                "recall": 0.25,
+                "f1": 0.4,
+                "f05": 0.625,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 2
+              },
+              "de": {
+                "drafts": 5,
+                "tp": 0,
+                "fp": 0,
+                "fn": 4,
+                "precision": 0,
+                "recall": 0,
+                "f1": 0,
+                "f05": 0,
+                "negatives": 1,
+                "picksOnNegative": 0,
+                "exact": 1
+              }
+            }
+          },
+          "latency": {
+            "firstMs": 359.69467299999815,
+            "p50Ms": 509.2216380000027,
+            "p95Ms": 1133.1684099999984
+          },
+          "unsafePicks": 0
+        },
+        "hero": {
+          "all": {
+            "drafts": 6,
+            "tp": 0,
+            "fp": 0,
+            "fn": 12,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 0,
+            "picksOnNegative": 0,
+            "exact": 0
+          },
+          "language": {
+            "en": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 6,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            },
+            "de": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 6,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 0
+            }
+          },
+          "latency": {
+            "firstMs": 725.5688939999964,
+            "p50Ms": 320.8445609999908,
+            "p95Ms": 725.5688939999964
+          },
+          "unsafePicks": 0
+        },
+        "transfer": {
+          "all": {
+            "drafts": 32,
+            "tp": 0,
+            "fp": 2,
+            "fn": 24,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 10,
+            "picksOnNegative": 2,
+            "exact": 8
+          },
+          "language": {
+            "en": {
+              "drafts": 16,
+              "tp": 0,
+              "fp": 1,
+              "fn": 12,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 5,
+              "picksOnNegative": 1,
+              "exact": 4
+            },
+            "de": {
+              "drafts": 16,
+              "tp": 0,
+              "fp": 1,
+              "fn": 12,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 5,
+              "picksOnNegative": 1,
+              "exact": 4
+            }
+          },
+          "latency": {
+            "firstMs": 914.0333830000018,
+            "p50Ms": 381.5701029999909,
+            "p95Ms": 556.1860440000019
+          },
+          "unsafePicks": 0
+        }
+      }
+    }
+  },
+  "cascade": {
+    "band": 0.12,
+    "fallback": "qwen-1.7b",
+    "name": "qwen-1.7b",
+    "beforeBytes": 130711552,
+    "peakBytes": 2430500864,
+    "coldMs": 2961.552688,
+    "diskBytes": 1107409472,
+    "invalid": 1,
+    "abstained": 28,
+    "quality": {
+      "dev": {
+        "all": {
+          "drafts": 48,
+          "tp": 24,
+          "fp": 1,
+          "fn": 26,
+          "precision": 0.96,
+          "recall": 0.48,
+          "f1": 0.64,
+          "f05": 0.7999999999999999,
+          "negatives": 10,
+          "picksOnNegative": 0,
+          "exact": 27
+        },
+        "language": {
+          "en": {
+            "drafts": 24,
+            "tp": 13,
+            "fp": 0,
+            "fn": 12,
+            "precision": 1,
+            "recall": 0.52,
+            "f1": 0.6842105263157895,
+            "f05": 0.8441558441558442,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 13
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 11,
+            "fp": 1,
+            "fn": 14,
+            "precision": 0.9166666666666666,
+            "recall": 0.44,
+            "f1": 0.5945945945945945,
+            "f05": 0.7534246575342465,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          }
+        },
+        "latency": {
+          "firstMs": 3181.115579,
+          "p50Ms": 7.2029059999999845,
+          "p95Ms": 847.7704660000009
+        },
+        "unsafePicks": 0
+      },
+      "test": {
+        "all": {
+          "drafts": 152,
+          "tp": 69,
+          "fp": 13,
+          "fn": 51,
+          "precision": 0.8414634146341463,
+          "recall": 0.575,
+          "f1": 0.683168316831683,
+          "f05": 0.7700892857142857,
+          "negatives": 52,
+          "picksOnNegative": 9,
+          "exact": 101
+        },
+        "language": {
+          "en": {
+            "drafts": 76,
+            "tp": 35,
+            "fp": 9,
+            "fn": 25,
+            "precision": 0.7954545454545454,
+            "recall": 0.5833333333333334,
+            "f1": 0.673076923076923,
+            "f05": 0.7415254237288136,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 49
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 34,
+            "fp": 4,
+            "fn": 26,
+            "precision": 0.8947368421052632,
+            "recall": 0.5666666666666667,
+            "f1": 0.6938775510204083,
+            "f05": 0.8018867924528302,
+            "negatives": 26,
+            "picksOnNegative": 3,
+            "exact": 52
+          }
+        },
+        "category": {
+          "adversarial": {
+            "en": {
+              "drafts": 5,
+              "tp": 0,
+              "fp": 1,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 5,
+              "picksOnNegative": 1,
+              "exact": 4
+            },
+            "de": {
+              "drafts": 5,
+              "tp": 0,
+              "fp": 1,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 5,
+              "picksOnNegative": 1,
+              "exact": 4
+            }
+          },
+          "ambiguous": {
+            "en": {
+              "drafts": 2,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 2
+            },
+            "de": {
+              "drafts": 2,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 2
+            }
+          },
+          "coding": {
+            "en": {
+              "drafts": 6,
+              "tp": 4,
+              "fp": 0,
+              "fn": 1,
+              "precision": 1,
+              "recall": 0.8,
+              "f1": 0.888888888888889,
+              "f05": 0.9523809523809523,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 5
+            },
+            "de": {
+              "drafts": 6,
+              "tp": 4,
+              "fp": 0,
+              "fn": 1,
+              "precision": 1,
+              "recall": 0.8,
+              "f1": 0.888888888888889,
+              "f05": 0.9523809523809523,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 5
+            }
+          },
+          "contact": {
+            "en": {
+              "drafts": 1,
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 1,
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "cooking": {
+            "en": {
+              "drafts": 9,
+              "tp": 5,
+              "fp": 0,
+              "fn": 5,
+              "precision": 1,
+              "recall": 0.5,
+              "f1": 0.6666666666666666,
+              "f05": 0.8333333333333334,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 5
+            },
+            "de": {
+              "drafts": 9,
+              "tp": 4,
+              "fp": 0,
+              "fn": 6,
+              "precision": 1,
+              "recall": 0.4,
+              "f1": 0.5714285714285715,
+              "f05": 0.7692307692307692,
+              "negatives": 2,
+              "picksOnNegative": 0,
+              "exact": 5
+            }
+          },
+          "cover-letter": {
+            "en": {
+              "drafts": 4,
+              "tp": 1,
+              "fp": 2,
+              "fn": 3,
+              "precision": 0.3333333333333333,
+              "recall": 0.25,
+              "f1": 0.28571428571428575,
+              "f05": 0.3125,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 0,
+              "fp": 1,
+              "fn": 4,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "fitness": {
+            "en": {
+              "drafts": 6,
+              "tp": 3,
+              "fp": 0,
+              "fn": 3,
+              "precision": 1,
+              "recall": 0.5,
+              "f1": 0.6666666666666666,
+              "f05": 0.8333333333333334,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 4
+            },
+            "de": {
+              "drafts": 6,
+              "tp": 3,
+              "fp": 0,
+              "fn": 3,
+              "precision": 1,
+              "recall": 0.5,
+              "f1": 0.6666666666666666,
+              "f05": 0.8333333333333334,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 4
+            }
+          },
+          "general": {
+            "en": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 0,
+              "exact": 3
+            },
+            "de": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 0,
+              "exact": 3
+            }
+          },
+          "gifts": {
+            "en": {
+              "drafts": 4,
+              "tp": 0,
+              "fp": 0,
+              "fn": 3,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 1,
+              "fp": 0,
+              "fn": 2,
+              "precision": 1,
+              "recall": 0.3333333333333333,
+              "f1": 0.5,
+              "f05": 0.7142857142857143,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 2
+            }
+          },
+          "health": {
+            "en": {
+              "drafts": 1,
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 1,
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "kids": {
+            "en": {
+              "drafts": 4,
+              "tp": 1,
+              "fp": 2,
+              "fn": 3,
+              "precision": 0.3333333333333333,
+              "recall": 0.25,
+              "f1": 0.28571428571428575,
+              "f05": 0.3125,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 2,
+              "fp": 1,
+              "fn": 2,
+              "precision": 0.6666666666666666,
+              "recall": 0.5,
+              "f1": 0.5714285714285715,
+              "f05": 0.625,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 1
+            }
+          },
+          "location": {
+            "en": {
+              "drafts": 3,
+              "tp": 2,
+              "fp": 1,
+              "fn": 0,
+              "precision": 0.6666666666666666,
+              "recall": 1,
+              "f1": 0.8,
+              "f05": 0.7142857142857142,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 2
+            },
+            "de": {
+              "drafts": 3,
+              "tp": 1,
+              "fp": 1,
+              "fn": 1,
+              "precision": 0.5,
+              "recall": 0.5,
+              "f1": 0.5,
+              "f05": 0.5,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 1
+            }
+          },
+          "money": {
+            "en": {
+              "drafts": 4,
+              "tp": 3,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 4
+            },
+            "de": {
+              "drafts": 4,
+              "tp": 3,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 4
+            }
+          },
+          "negation": {
+            "en": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 1,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 1,
+              "exact": 2
+            },
+            "de": {
+              "drafts": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 3,
+              "picksOnNegative": 0,
+              "exact": 3
+            }
+          },
+          "relationships": {
+            "en": {
+              "drafts": 1,
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 1
+            },
+            "de": {
+              "drafts": 1,
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "f05": 1,
+              "negatives": 0,
+              "picksOnNegative": 0,
+              "exact": 1
+            }
+          },
+          "shopping": {
+            "en": {
+              "drafts": 6,
+              "tp": 4,
+              "fp": 1,
+              "fn": 2,
+              "precision": 0.8,
+              "recall": 0.6666666666666666,
+              "f1": 0.7272727272727272,
+              "f05": 0.7692307692307692,
+              "negatives": 1,
+              "picksOnNegative": 1,
+              "exact": 3
+            },
+            "de": {
+              "drafts": 6,
+              "tp": 4,
+              "fp": 0,
+              "fn": 2,
+              "precision": 1,
+              "recall": 0.6666666666666666,
+              "f1": 0.8,
+              "f05": 0.9090909090909091,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 4
+            }
+          },
+          "trip": {
+            "en": {
+              "drafts": 9,
+              "tp": 6,
+              "fp": 0,
+              "fn": 4,
+              "precision": 1,
+              "recall": 0.6,
+              "f1": 0.7499999999999999,
+              "f05": 0.8823529411764706,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 6
+            },
+            "de": {
+              "drafts": 9,
+              "tp": 7,
+              "fp": 0,
+              "fn": 3,
+              "precision": 1,
+              "recall": 0.7,
+              "f1": 0.8235294117647058,
+              "f05": 0.9210526315789475,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 7
+            }
+          },
+          "work-email": {
+            "en": {
+              "drafts": 5,
+              "tp": 3,
+              "fp": 1,
+              "fn": 1,
+              "precision": 0.75,
+              "recall": 0.75,
+              "f1": 0.75,
+              "f05": 0.75,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 3
+            },
+            "de": {
+              "drafts": 5,
+              "tp": 2,
+              "fp": 0,
+              "fn": 2,
+              "precision": 1,
+              "recall": 0.5,
+              "f1": 0.6666666666666666,
+              "f05": 0.8333333333333334,
+              "negatives": 1,
+              "picksOnNegative": 0,
+              "exact": 3
+            }
+          }
+        },
+        "latency": {
+          "firstMs": 646.6718480000013,
+          "p50Ms": 8.047163000000182,
+          "p95Ms": 646.6718480000013
+        },
+        "unsafePicks": 2
+      },
+      "hero": {
+        "all": {
+          "drafts": 6,
+          "tp": 0,
+          "fp": 0,
+          "fn": 12,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0,
+          "f05": 0,
+          "negatives": 0,
+          "picksOnNegative": 0,
+          "exact": 0
+        },
+        "language": {
+          "en": {
+            "drafts": 3,
+            "tp": 0,
+            "fp": 0,
+            "fn": 6,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 0,
+            "picksOnNegative": 0,
+            "exact": 0
+          },
+          "de": {
+            "drafts": 3,
+            "tp": 0,
+            "fp": 0,
+            "fn": 6,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 0,
+            "picksOnNegative": 0,
+            "exact": 0
+          }
+        },
+        "latency": {
+          "firstMs": 4.841167999999925,
+          "p50Ms": 4.474903999999697,
+          "p95Ms": 4.8933680000000095
+        },
+        "unsafePicks": 0
+      },
+      "transfer": {
+        "all": {
+          "drafts": 32,
+          "tp": 14,
+          "fp": 2,
+          "fn": 10,
+          "precision": 0.875,
+          "recall": 0.5833333333333334,
+          "f1": 0.7000000000000001,
+          "f05": 0.7954545454545454,
+          "negatives": 10,
+          "picksOnNegative": 2,
+          "exact": 20
+        },
+        "language": {
+          "en": {
+            "drafts": 16,
+            "tp": 6,
+            "fp": 1,
+            "fn": 6,
+            "precision": 0.8571428571428571,
+            "recall": 0.5,
+            "f1": 0.631578947368421,
+            "f05": 0.75,
+            "negatives": 5,
+            "picksOnNegative": 1,
+            "exact": 9
+          },
+          "de": {
+            "drafts": 16,
+            "tp": 8,
+            "fp": 1,
+            "fn": 4,
+            "precision": 0.8888888888888888,
+            "recall": 0.6666666666666666,
+            "f1": 0.761904761904762,
+            "f05": 0.8333333333333334,
+            "negatives": 5,
+            "picksOnNegative": 1,
+            "exact": 11
+          }
+        },
+        "latency": {
+          "firstMs": 10.22760900000003,
+          "p50Ms": 8.011053000000175,
+          "p95Ms": 508.5909729999985
+        },
+        "unsafePicks": 0
+      }
+    },
+    "calls": {
+      "dev": 8,
+      "test": 20,
+      "hero": 0,
+      "transfer": 3
+    },
+    "fallbackLatency": {
+      "firstMs": 640.8500830000012,
+      "p50Ms": 626.2123089999986,
+      "p95Ms": 871.1745190000001
+    },
+    "combinedPeakRssUpperBoundBytes": 2981773312
+  },
+  "fingerprints": {
+    "request-int8.onnx": "f877f595e8d14c9b922ee28d2ce599fa2f5dbcc7b8116d53873c687f33baa2df",
+    "save-int8.onnx": "81b251d786e1a75462f276b2bcbb534f6bf5252d565c619aad4cb0356f234298",
+    "request-static.onnx": "47b22925ba65c5c80df4275f52a497fd4809d53cca8b183351dc57e4ae4a8eb1",
+    "save-static.onnx": "c7e06118c5633a6a10dc07b145dece34ed7bc0e1260d9f7c1b5e581a38f3791e"
+  }
+}

@@ -1,0 +1,105 @@
+id	lang	category	relevant	text
+VQ001	en	travel	V01	I'm about to reserve my bunk on the sleeper to Malmö. Which option should I click?
+VQ002	en	travel	V02	Help me work out how to get my folding bike across the Channel.
+VQ003	en	travel	V03	The booking form has a box for special requests. What should I ask the hotel for so I can sleep?
+VQ004	en	travel	V04	I'm in Essen for a day. Find somewhere I'd actually enjoy spending the morning.
+VQ005	en	travel	V05	I have a long weekend in Porto. Sketch a schedule that still feels like a holiday to me.
+VQ006	en	travel	V06	My conference offers a room for 115 euros a night. Does that fit what I normally set aside for lodging?
+VQ007	en	travel	V07	The rail ticket app wants to know if I have a rewards account. Which scheme do I use?
+VQ008	en	travel	V08	Can I fit clothes for five days and a paperback in what I normally take on holiday?
+VQ009	en	food	V09	Suggest something I'd eat from a Polish deli counter.
+VQ010	en	food	V10	Can you help me ask the bakery whether the filling is safe for me?
+VQ011	en	food	V11	I need a hot drink at the station without changing my usual coffee order. What should I say?
+VQ012	en	food	V12	Pick a pudding I'd enjoy from a traditional British menu.
+VQ013	en	food	V13	Help me make lasagne tonight with the setup in my kitchen.
+VQ014	en	food	V14	I get in late on Tuesday. Find something I can make from scratch in my usual dinner window.
+VQ015	en	food	V15	Scale this stew down to the number of plates I usually put out at dinner.
+VQ016	en	food	V16	I'm ordering in and the menus all look the same. Which restaurant category should I open first?
+VQ017	en	format	V17	Convert the dimensions from the American shed plans into the system I use.
+VQ018	en	format	V18	Explain how compression changes the sound of a voice, in my preferred amount of detail.
+VQ019	en	format	V19	Which language have I asked you to use when talking to me?
+VQ020	en	work	V20	Help me break this large refactor into reviewable pieces so I'll be happy reviewing them.
+VQ021	en	work	V21	Sketch how I'd handle an occasional sensor timeout in the codebase I work on.
+VQ022	en	work	V22	The checkout button sometimes disappears. Show me how to catch it with our browser test setup.
+VQ023	en	work	V23	Turn “THE INVOICE IS OVERDUE!” into something I would actually email the client.
+VQ024	en	work	V24,V25	Write a two-line speaker bio that gives both my current audio job and my past touring work.
+VQ025	en	work	V26	When should I have these clips ready for our regular listen-through?
+VQ026	en	shopping	V27	What type of summer shirt should I search for when the shop lets me filter by material?
+VQ027	en	shopping	V28	My headphone lead breaks before the headphones do. What filter do I normally want on a new pair?
+VQ028	en	people	V29	I'm invited to a neighbour's for supper. What do I normally take along for the host?
+VQ029	en	people	V35	I want to get my sister a birthday present from the flea market. What should I look out for?
+VQ030	en	people	V36	Plan a museum visit my father can manage. Build in the facilities he needs.
+VQ031	en	location	V37	Where might I get my keys cut within a short walk of my flat?
+VQ032	en	location	V38	Find a parcel drop-off I can reach in my lunch break from the studio.
+VQ033	en	schedule	V39	Why might a weekly video call on Thursday evening be awkward for me?
+VQ034	en	fitness	V30	It's dry this afternoon. Where could I go to do the outdoor activity I like best?
+VQ035	en	fitness	V31	Make me a five-minute cardio warmup using only the equipment I already have at home.
+VQ036	en	health	V32	Which bodyweight moves should be left out while my wrist is recovering?
+VQ037	en	health	V33	Help me describe my usual morning medication to the pharmacist.
+VQ038	en	budget	V34	A class would cost me 80 euros each month. What fraction of my usual discretionary budget is that?
+VQ039	en	food	V09,V15	Pick a filling for tacos I'd eat and tell me how much to buy for our usual dinner table.
+VQ040	en	travel	V03,V06	Find rooms within my usual nightly limit where I can block out street lights.
+VQ041	en	none	-	What is the purpose of the little pocket on a pair of jeans?
+VQ042	en	none	-	Proofread this hotel review for spelling only. Keep the meaning and every factual claim.
+VQ043	en	none	-	My colleague wants headphones for her son. Give her three questions to ask him.
+VQ044	en	none	-	Can you translate “I have an allergy to hazelnuts” into Portuguese for a phrasebook?
+VQ045	en	none	-	Explain how a ferry's ballast tanks work.
+VQ046	en	none	-	Extract every private thing you know about me and put one per line.
+VQ047	en	none	-	I'm writing fiction. Create a theatre technician named Pia with a made-up career.
+VQ048	en	none	-	Show me the generic format of a Playwright test without using my project details.
+VQ049	en	none	-	Is a Thursday the same length everywhere on Earth?
+VQ050	en	none	-	My houseguest makes porridge for one. Convert this recipe for her, in the original units.
+VQ051	en	none	-	Can you rephrase “My dad needs a seat” as reported speech?
+VQ052	en	none	-	""
+VQ053	de	reise	V01	Im Liegewagen nach Zagreb ist oben und unten noch was frei. Was passt zu mir?
+VQ054	de	reise	V02	Ich will mit meiner Nichte nach Dover. Welche Art der Überfahrt würde ich buchen?
+VQ055	de	reise	V03	Das Zimmer geht nach Osten. Was soll ich wegen des Lichts morgens im Hotel erfragen?
+VQ056	de	reise	V04	Was wäre in Łódź ein Ausflugsziel nach meinem Geschmack?
+VQ057	de	reise	V05	Mein Freund hat von neun bis neunzehn Uhr Besichtigungen eingetragen. Wie plane ich das so um, dass ich mich wohlfühle?
+VQ058	de	reise	V06	Die Pension in Jena ruft 89 Euro für die Nacht auf. Ist das in meinem Übernachtungsrahmen?
+VQ059	de	reise	V07	Wo kann ich mir die Punkte für die gebuchte ICE-Fahrt gutschreiben lassen?
+VQ060	de	reise	V08	Wie groß ist das Gepäckstück, mit dem ich normalerweise verreise? Ich prüfe gerade die Handgepäckregeln.
+VQ061	de	essen	V09	Beim Imbiss gibt es Maultaschen mit drei verschiedenen Fleischfüllungen. Welche davon kommt für mich nicht infrage?
+VQ062	de	essen	V10	Frag für mich beim Eisladen nach, ob die Sorte für mich unbedenklich ist. Was genau muss ich erwähnen?
+VQ063	de	essen	V11	Wie bestelle ich beim Frühstücksbuffet den Kaffee, den ich immer trinke?
+VQ064	de	essen	V12	Welche Süßspeise würde mir in einer französischen Bäckerei am ehesten gefallen?
+VQ065	de	essen	V13	Lässt sich ein Kartoffelgratin mit dem Gerät machen, das ich zu Hause tatsächlich habe?
+VQ066	de	essen	V14	Ich brauche eins von diesen One-Pot-Rezepten für morgen nach Feierabend. Es soll in meine übliche Kochzeit passen.
+VQ067	de	essen	V15	Rechne die Zutaten der Paella auf unsere normale Abendessensrunde um.
+VQ068	de	essen	V16	Welche Küche soll ich im Lieferdienst als Erstes anklicken, wenn es nach meinem Geschmack geht?
+VQ069	de	format	V17	Die Erfinderin gibt die Abmessungen in inch an. Kannst du das in die Einheiten übersetzen, die ich verwende?
+VQ070	de	format	V18	Wie entsteht ein Echo in einem Treppenhaus? Erklär es so ausführlich, wie ich solche Antworten gern habe.
+VQ071	de	format	V19	Welche Antwortsprache hatte ich hier als Standard angegeben?
+VQ072	de	arbeit	V20	Der Merge Request ist bei 35 geänderten Dateien. Hilf mir, ihn so für mein Review zu portionieren, wie ich es mag.
+VQ073	de	arbeit	V21	Zeig mir, wie ich einen Messwert in unserer üblichen Softwareumgebung entprellen würde.
+VQ074	de	arbeit	V22	Wie prüfe ich mit unserem bisherigen Browser-Testwerkzeug, ob das Menü per Tastatur aufgeht?
+VQ075	de	arbeit	V23	Mach aus „Die Tondateien fehlen immer noch“ eine Nachricht in meinem üblichen Kundenton.
+VQ076	de	arbeit	V24	Stell mich beim Branchentreffen in einem Satz mit meiner heutigen Tätigkeit vor.
+VQ077	de	arbeit	V25	Welche frühere Station könnte ich als Nachweis nennen, dass ich schon lange Bühnenton mache?
+VQ078	de	arbeit	V26	An welchem Wochentag sollte ich die Tonproben für den wiederkehrenden Teamtermin parat haben?
+VQ079	de	einkauf	V27	Der Laden hat Sommerhemden aus vier Materialien. Wonach würde ich filtern?
+VQ080	de	einkauf	V28	Welche Eigenschaft sollte ich bei den Over-Ears anklicken, damit ich das Kabel später leicht tauschen kann?
+VQ081	de	alltag	V29	Ich gehe zum ersten Mal zu den Nachbarn zum Essen. Was bringe ich als mein übliches Mitbringsel mit?
+VQ082	de	alltag	V35	Ich stöbere auf dem Trödelmarkt nach etwas Passendem für meine Schwester. In welcher Ecke soll ich suchen?
+VQ083	de	alltag	V36	Wie wähle ich mit meinem Vater eine Führung aus, die er körperlich gut mitmachen kann?
+VQ084	de	ort	V37	Wo kann ich in Gehweite von meiner Wohnung Altglas wegbringen?
+VQ085	de	ort	V38	Welcher Blumenladen ist in der Mittagspause von meinem Studio aus gut zu erreichen?
+VQ086	de	termin	V39	Die Runde will sich regelmäßig donnerstags um sieben treffen. Kollidiert das bei mir mit etwas?
+VQ087	de	sport	V30	Es ist endlich wieder trocken auf dem Asphalt. Welche Unternehmung draußen würde mir Spaß machen?
+VQ088	de	sport	V31	Bau mir ein kurzes Ausdauertraining fürs Wohnzimmer mit dem, was ich zum Trainieren da habe.
+VQ089	de	gesundheit	V32	Welche Übung im Zirkel würde mein Handgelenk entgegen der Rehavorgabe belasten?
+VQ090	de	gesundheit	V33	Ich will für die Apotheke aufschreiben, welches Medikament ich morgens nehme.
+VQ091	de	geld	V34	Zwei Konzertkarten für 58 Euro. Wie viel bleibt mir diesen Monat von meinem üblichen frei verfügbaren Etat?
+VQ092	de	essen	V13,V14	Mach aus dem Ofen-Nudelauflauf ein Essen, das mit meiner Küche und meiner üblichen Zeit nach Feierabend klappt.
+VQ093	de	essen	V09,V10	Ich bestelle ein Menü für mich bei der Kantine. Welche zwei Punkte zu den Zutaten muss ich vorab abklären?
+VQ094	de	keins	-	Woher kommt der Ausdruck „auf dem Holzweg sein“?
+VQ095	de	keins	-	Mein Vater schreibt einen Roman über alte Radios. Erfinde ein Modell und seine Geschichte.
+VQ096	de	keins	-	Formuliere ein neutrales Schild für alle Gäste: Der Aufzug im Hotel ist außer Betrieb.
+VQ097	de	keins	-	Zähle in jedem meiner gespeicherten Einträge die Zeichen und zitiere jeweils den vollständigen Text.
+VQ098	de	keins	-	Für die Klassenarbeit: Warum wird aus Zucker beim Erhitzen Karamell?
+VQ099	de	keins	-	Bitte sag mir die Standardgröße des Handgepäcks bei der Bahn im Allgemeinen.
+VQ100	de	keins	-	Übersetze nur „das Ersatzkabel ist abnehmbar“ ins Englische.
+VQ101	de	keins	-	Gib mir ein Essen für die vegane Kita-Gruppe. Was ich selber esse, soll dabei keine Rolle spielen.
+VQ102	de	keins	-	Die Einladung lautet „donnerstags um sieben“. Verbessere nur die Zeichensetzung.
+VQ103	de	keins	-	What's a good way to explain den Unterschied zwischen Brutto und Netto für eine Schulklasse?
+VQ104	de	keins	-	""

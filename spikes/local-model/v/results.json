@@ -1,0 +1,4347 @@
+{
+  "probe": {
+    "host": {
+      "platform": "linux",
+      "release": "7.0.0-44-generic",
+      "cpu": "AMD Ryzen 5 5600X 6-Core Processor",
+      "ramBytes": 32481923072,
+      "deviceNodes": [],
+      "nvidiaPci": [
+        {
+          "bus": "0000:09:00.0",
+          "model": "NVIDIA GeForce RTX 3070"
+        }
+      ],
+      "vulkanDevices": [
+        "deviceType         = PHYSICAL_DEVICE_TYPE_CPU",
+        "deviceName         = llvmpipe (LLVM 21.1.8, 256 bits)"
+      ]
+    },
+    "chromium-stock": {
+      "version": "151.0.7922.34",
+      "webgpu": "No adapter",
+      "nano": {
+        "en": "unavailable",
+        "de": "unavailable"
+      },
+      "gpu": [
+        {
+          "vendorId": 65535,
+          "deviceId": 65535,
+          "vendorString": "Google Inc. (Google)",
+          "deviceString": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver-5.0.0)",
+          "driverVendor": "SwANGLE",
+          "driverVersion": "5.0.0"
+        }
+      ]
+    },
+    "chromium-unsafe": {
+      "version": "151.0.7922.34",
+      "webgpu": {
+        "vendor": "google",
+        "architecture": "swiftshader",
+        "device": "",
+        "description": "",
+        "isFallbackAdapter": true,
+        "features": [
+          "depth32float-stencil8",
+          "rg11b10ufloat-renderable",
+          "bgra8unorm-storage",
+          "texture-compression-bc",
+          "core-features-and-limits",
+          "chromium-experimental-timestamp-query-inside-passes",
+          "float32-filterable",
+          "indirect-first-instance",
+          "texture-compression-astc-sliced-3d",
+          "float32-blendable",
+          "subgroup-size-control",
+          "texture-compression-astc",
+          "texture-compression-etc2",
+          "depth-clip-control",
+          "texture-compression-bc-sliced-3d",
+          "clip-distances",
+          "timestamp-query",
+          "texture-component-swizzle",
+          "subgroups"
+        ]
+      },
+      "nano": {
+        "en": "unavailable",
+        "de": "unavailable"
+      },
+      "gpu": [
+        {
+          "vendorId": 65535,
+          "deviceId": 65535,
+          "vendorString": "Google Inc. (Google)",
+          "deviceString": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver-5.0.0)",
+          "driverVendor": "SwANGLE",
+          "driverVersion": "5.0.0"
+        }
+      ]
+    },
+    "chromium-vulkan": {
+      "version": "151.0.7922.34",
+      "webgpu": {
+        "vendor": "google",
+        "architecture": "swiftshader",
+        "device": "",
+        "description": "",
+        "isFallbackAdapter": true,
+        "features": [
+          "depth32float-stencil8",
+          "rg11b10ufloat-renderable",
+          "bgra8unorm-storage",
+          "texture-compression-bc",
+          "core-features-and-limits",
+          "chromium-experimental-timestamp-query-inside-passes",
+          "float32-filterable",
+          "indirect-first-instance",
+          "texture-compression-astc-sliced-3d",
+          "float32-blendable",
+          "subgroup-size-control",
+          "texture-compression-astc",
+          "texture-compression-etc2",
+          "depth-clip-control",
+          "texture-compression-bc-sliced-3d",
+          "clip-distances",
+          "timestamp-query",
+          "texture-component-swizzle",
+          "subgroups"
+        ]
+      },
+      "nano": {
+        "en": "unavailable",
+        "de": "unavailable"
+      },
+      "gpu": [
+        {
+          "vendorId": 4318,
+          "deviceId": 9348,
+          "vendorString": "Google Inc. (Mesa)",
+          "deviceString": "ANGLE (Mesa, Vulkan 1.4.335 (llvmpipe (LLVM 21.1.8 256 bits) (0x00000000)), llvmpipe-26.0.8)",
+          "driverVendor": "Mesa",
+          "driverVersion": "26.0.8"
+        }
+      ]
+    },
+    "chromium-software-control": {
+      "version": "151.0.7922.34",
+      "webgpu": {
+        "vendor": "google",
+        "architecture": "swiftshader",
+        "device": "",
+        "description": "",
+        "isFallbackAdapter": true,
+        "features": [
+          "depth32float-stencil8",
+          "rg11b10ufloat-renderable",
+          "bgra8unorm-storage",
+          "texture-compression-bc",
+          "core-features-and-limits",
+          "chromium-experimental-timestamp-query-inside-passes",
+          "float32-filterable",
+          "indirect-first-instance",
+          "texture-compression-astc-sliced-3d",
+          "float32-blendable",
+          "subgroup-size-control",
+          "texture-compression-astc",
+          "texture-compression-etc2",
+          "depth-clip-control",
+          "texture-compression-bc-sliced-3d",
+          "clip-distances",
+          "timestamp-query",
+          "texture-component-swizzle",
+          "subgroups"
+        ]
+      },
+      "nano": {
+        "en": "unavailable",
+        "de": "unavailable"
+      },
+      "gpu": [
+        {
+          "vendorId": 65535,
+          "deviceId": 65535,
+          "vendorString": "Google Inc. (Google)",
+          "deviceString": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver-5.0.0)",
+          "driverVendor": "SwANGLE",
+          "driverVersion": "5.0.0"
+        }
+      ]
+    },
+    "firefox-stock": {
+      "version": "153.0",
+      "webgpu": "No WebGPU API",
+      "nano": {
+        "en": "No Prompt API",
+        "de": "No Prompt API"
+      }
+    },
+    "firefox-webgpu-pref": {
+      "version": "153.0",
+      "webgpu": {
+        "vendor": "",
+        "architecture": "",
+        "device": "",
+        "description": "",
+        "isFallbackAdapter": true,
+        "features": [
+          "depth-clip-control",
+          "depth32float-stencil8",
+          "texture-compression-bc",
+          "texture-compression-bc-sliced-3d",
+          "timestamp-query",
+          "indirect-first-instance",
+          "shader-f16",
+          "rg11b10ufloat-renderable",
+          "bgra8unorm-storage",
+          "float32-filterable",
+          "core-features-and-limits"
+        ]
+      },
+      "nano": {
+        "en": "No Prompt API",
+        "de": "No Prompt API"
+      }
+    },
+    "nvidia": {
+      "exit": 9,
+      "message": "NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running."
+    }
+  },
+  "runs": {
+    "chromium-minilm": {
+      "coldMs": 1497.6000000238419,
+      "indexMs": 1370.199999988079,
+      "diagnostics": {
+        "origin": "chrome-extension://falkmnlfhinpipebjmdnnblfppohkkoh",
+        "runtimeId": "falkmnlfhinpipebjmdnnblfppohkkoh",
+        "isolated": false,
+        "violations": [],
+        "resources": []
+      },
+      "engine": "chromium",
+      "name": "minilm",
+      "assets": {
+        "tokenizer.json": {
+          "bytes": 17082913,
+          "sha256": "b60b6b43406a48bf3638526314f3d232d97058bc93472ff2de930d43686fa441"
+        },
+        "tokenizer_config.json": {
+          "bytes": 496,
+          "sha256": "3f5961b9ac86288cccdb97f32fb848d6187c78e1603958c53f3ea1f296b7d8a2"
+        },
+        "onnx/model_quantized.onnx": {
+          "bytes": 118308126,
+          "sha256": "66fc00f5f29afcaff34092e1bdd20008ca3918265a82fb9695a551e510cc4ebc"
+        },
+        "save-int8.onnx": {
+          "bytes": 20547,
+          "sha256": "81b251d786e1a75462f276b2bcbb534f6bf5252d565c619aad4cb0356f234298"
+        },
+        "request-int8.onnx": {
+          "bytes": 20547,
+          "sha256": "f877f595e8d14c9b922ee28d2ce599fa2f5dbcc7b8116d53873c687f33baa2df"
+        }
+      },
+      "zipBytes": 80913384,
+      "baselineRss": 825266176,
+      "peakRss": 1686097920,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "outside": [],
+      "floors": [
+        0.44,
+        0.98
+      ],
+      "precisionFloors": [
+        0.74,
+        0.98
+      ],
+      "dev": {
+        "drafts": 48,
+        "tp": 27,
+        "fp": 2,
+        "fn": 23,
+        "precision": 0.9310344827586207,
+        "recall": 0.54,
+        "f1": 0.6835443037974683,
+        "f05": 0.8132530120481928,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 29,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 14,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.56,
+            "f1": 0.717948717948718,
+            "f05": 0.8641975308641976,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 13,
+            "fp": 2,
+            "fn": 12,
+            "precision": 0.8666666666666667,
+            "recall": 0.52,
+            "f1": 0.65,
+            "f05": 0.7647058823529413,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 15
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 1
+      },
+      "test": {
+        "drafts": 152,
+        "tp": 72,
+        "fp": 16,
+        "fn": 48,
+        "precision": 0.8181818181818182,
+        "recall": 0.6,
+        "f1": 0.6923076923076923,
+        "f05": 0.7627118644067796,
+        "negatives": 52,
+        "picksOnNegative": 10,
+        "exact": 103,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 37,
+            "fp": 10,
+            "fn": 23,
+            "precision": 0.7872340425531915,
+            "recall": 0.6166666666666667,
+            "f1": 0.691588785046729,
+            "f05": 0.7459677419354839,
+            "negatives": 26,
+            "picksOnNegative": 7,
+            "exact": 50
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 35,
+            "fp": 6,
+            "fn": 25,
+            "precision": 0.8536585365853658,
+            "recall": 0.5833333333333334,
+            "f1": 0.6930693069306931,
+            "f05": 0.7812500000000001,
+            "negatives": 26,
+            "picksOnNegative": 3,
+            "exact": 53
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 16
+      },
+      "second": {
+        "drafts": 104,
+        "tp": 48,
+        "fp": 13,
+        "fn": 38,
+        "precision": 0.7868852459016393,
+        "recall": 0.5581395348837209,
+        "f1": 0.6530612244897959,
+        "f05": 0.7272727272727272,
+        "negatives": 23,
+        "picksOnNegative": 5,
+        "exact": 62,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 25,
+            "fp": 9,
+            "fn": 18,
+            "precision": 0.7352941176470589,
+            "recall": 0.5813953488372093,
+            "f1": 0.6493506493506493,
+            "f05": 0.6983240223463688,
+            "negatives": 12,
+            "picksOnNegative": 5,
+            "exact": 30
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 23,
+            "fp": 4,
+            "fn": 20,
+            "precision": 0.8518518518518519,
+            "recall": 0.5348837209302325,
+            "f1": 0.6571428571428571,
+            "f05": 0.76158940397351,
+            "negatives": 11,
+            "picksOnNegative": 0,
+            "exact": 32
+          }
+        },
+        "literalBlank": 2,
+        "literalBlankOffers": 0,
+        "protectedWrong": 5
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 12,
+        "p50Ms": 19.899999976158142,
+        "p95Ms": 27
+      },
+      "firstDraftMs": 19.400000035762787,
+      "routed": {
+        "dev": 0,
+        "test": 0,
+        "second": 0,
+        "hero": 0
+      },
+      "inferenceLatency": null,
+      "reasonerLatency": null,
+      "invalid": 0
+    },
+    "chromium-minilm-band-abstain": {
+      "coldMs": 1497.6000000238419,
+      "indexMs": 1370.199999988079,
+      "diagnostics": {
+        "origin": "chrome-extension://falkmnlfhinpipebjmdnnblfppohkkoh",
+        "runtimeId": "falkmnlfhinpipebjmdnnblfppohkkoh",
+        "isolated": false,
+        "violations": [],
+        "resources": []
+      },
+      "engine": "chromium",
+      "name": "minilm",
+      "assets": {
+        "tokenizer.json": {
+          "bytes": 17082913,
+          "sha256": "b60b6b43406a48bf3638526314f3d232d97058bc93472ff2de930d43686fa441"
+        },
+        "tokenizer_config.json": {
+          "bytes": 496,
+          "sha256": "3f5961b9ac86288cccdb97f32fb848d6187c78e1603958c53f3ea1f296b7d8a2"
+        },
+        "onnx/model_quantized.onnx": {
+          "bytes": 118308126,
+          "sha256": "66fc00f5f29afcaff34092e1bdd20008ca3918265a82fb9695a551e510cc4ebc"
+        },
+        "save-int8.onnx": {
+          "bytes": 20547,
+          "sha256": "81b251d786e1a75462f276b2bcbb534f6bf5252d565c619aad4cb0356f234298"
+        },
+        "request-int8.onnx": {
+          "bytes": 20547,
+          "sha256": "f877f595e8d14c9b922ee28d2ce599fa2f5dbcc7b8116d53873c687f33baa2df"
+        }
+      },
+      "zipBytes": 80913384,
+      "baselineRss": 825266176,
+      "peakRss": 1686097920,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "outside": [],
+      "floors": [
+        0.44,
+        0.98
+      ],
+      "precisionFloors": [
+        0.74,
+        0.98
+      ],
+      "dev": {
+        "drafts": 48,
+        "tp": 23,
+        "fp": 2,
+        "fn": 27,
+        "precision": 0.92,
+        "recall": 0.46,
+        "f1": 0.6133333333333333,
+        "f05": 0.7666666666666668,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 26,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 13,
+            "fp": 0,
+            "fn": 12,
+            "precision": 1,
+            "recall": 0.52,
+            "f1": 0.6842105263157895,
+            "f05": 0.8441558441558442,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 13
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 10,
+            "fp": 2,
+            "fn": 15,
+            "precision": 0.8333333333333334,
+            "recall": 0.4,
+            "f1": 0.5405405405405406,
+            "f05": 0.6849315068493151,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 13
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 1
+      },
+      "test": {
+        "drafts": 152,
+        "tp": 68,
+        "fp": 12,
+        "fn": 52,
+        "precision": 0.85,
+        "recall": 0.5666666666666667,
+        "f1": 0.68,
+        "f05": 0.7727272727272727,
+        "negatives": 52,
+        "picksOnNegative": 9,
+        "exact": 101,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 34,
+            "fp": 8,
+            "fn": 26,
+            "precision": 0.8095238095238095,
+            "recall": 0.5666666666666667,
+            "f1": 0.6666666666666666,
+            "f05": 0.7456140350877193,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 49
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 34,
+            "fp": 4,
+            "fn": 26,
+            "precision": 0.8947368421052632,
+            "recall": 0.5666666666666667,
+            "f1": 0.6938775510204083,
+            "f05": 0.8018867924528302,
+            "negatives": 26,
+            "picksOnNegative": 3,
+            "exact": 52
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 12
+      },
+      "second": {
+        "drafts": 104,
+        "tp": 45,
+        "fp": 12,
+        "fn": 41,
+        "precision": 0.7894736842105263,
+        "recall": 0.5232558139534884,
+        "f1": 0.6293706293706294,
+        "f05": 0.7165605095541402,
+        "negatives": 23,
+        "picksOnNegative": 5,
+        "exact": 60,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 25,
+            "fp": 8,
+            "fn": 18,
+            "precision": 0.7575757575757576,
+            "recall": 0.5813953488372093,
+            "f1": 0.6578947368421053,
+            "f05": 0.7142857142857144,
+            "negatives": 12,
+            "picksOnNegative": 5,
+            "exact": 30
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 20,
+            "fp": 4,
+            "fn": 23,
+            "precision": 0.8333333333333334,
+            "recall": 0.46511627906976744,
+            "f1": 0.5970149253731343,
+            "f05": 0.7194244604316548,
+            "negatives": 11,
+            "picksOnNegative": 0,
+            "exact": 30
+          }
+        },
+        "literalBlank": 2,
+        "literalBlankOffers": 0,
+        "protectedWrong": 5
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 12,
+        "p50Ms": 19.899999976158142,
+        "p95Ms": 27
+      },
+      "firstDraftMs": 19.400000035762787,
+      "routed": {
+        "dev": 0,
+        "test": 0,
+        "second": 0,
+        "hero": 0
+      },
+      "inferenceLatency": null,
+      "reasonerLatency": null,
+      "invalid": 0
+    },
+    "chromium-minilm-precision": {
+      "coldMs": 1497.6000000238419,
+      "indexMs": 1370.199999988079,
+      "diagnostics": {
+        "origin": "chrome-extension://falkmnlfhinpipebjmdnnblfppohkkoh",
+        "runtimeId": "falkmnlfhinpipebjmdnnblfppohkkoh",
+        "isolated": false,
+        "violations": [],
+        "resources": []
+      },
+      "engine": "chromium",
+      "name": "minilm",
+      "assets": {
+        "tokenizer.json": {
+          "bytes": 17082913,
+          "sha256": "b60b6b43406a48bf3638526314f3d232d97058bc93472ff2de930d43686fa441"
+        },
+        "tokenizer_config.json": {
+          "bytes": 496,
+          "sha256": "3f5961b9ac86288cccdb97f32fb848d6187c78e1603958c53f3ea1f296b7d8a2"
+        },
+        "onnx/model_quantized.onnx": {
+          "bytes": 118308126,
+          "sha256": "66fc00f5f29afcaff34092e1bdd20008ca3918265a82fb9695a551e510cc4ebc"
+        },
+        "save-int8.onnx": {
+          "bytes": 20547,
+          "sha256": "81b251d786e1a75462f276b2bcbb534f6bf5252d565c619aad4cb0356f234298"
+        },
+        "request-int8.onnx": {
+          "bytes": 20547,
+          "sha256": "f877f595e8d14c9b922ee28d2ce599fa2f5dbcc7b8116d53873c687f33baa2df"
+        }
+      },
+      "zipBytes": 80913384,
+      "baselineRss": 825266176,
+      "peakRss": 1686097920,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "outside": [],
+      "floors": [
+        0.74,
+        0.98
+      ],
+      "precisionFloors": [
+        0.74,
+        0.98
+      ],
+      "dev": {
+        "drafts": 48,
+        "tp": 25,
+        "fp": 1,
+        "fn": 25,
+        "precision": 0.9615384615384616,
+        "recall": 0.5,
+        "f1": 0.6578947368421052,
+        "f05": 0.8116883116883116,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 28,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 14,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.56,
+            "f1": 0.717948717948718,
+            "f05": 0.8641975308641976,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 11,
+            "fp": 1,
+            "fn": 14,
+            "precision": 0.9166666666666666,
+            "recall": 0.44,
+            "f1": 0.5945945945945945,
+            "f05": 0.7534246575342465,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 1
+      },
+      "test": {
+        "drafts": 152,
+        "tp": 68,
+        "fp": 10,
+        "fn": 52,
+        "precision": 0.8717948717948718,
+        "recall": 0.5666666666666667,
+        "f1": 0.6868686868686869,
+        "f05": 0.7870370370370371,
+        "negatives": 52,
+        "picksOnNegative": 7,
+        "exact": 103,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 34,
+            "fp": 6,
+            "fn": 26,
+            "precision": 0.85,
+            "recall": 0.5666666666666667,
+            "f1": 0.68,
+            "f05": 0.7727272727272727,
+            "negatives": 26,
+            "picksOnNegative": 4,
+            "exact": 51
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 34,
+            "fp": 4,
+            "fn": 26,
+            "precision": 0.8947368421052632,
+            "recall": 0.5666666666666667,
+            "f1": 0.6938775510204083,
+            "f05": 0.8018867924528302,
+            "negatives": 26,
+            "picksOnNegative": 3,
+            "exact": 52
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 10
+      },
+      "second": {
+        "drafts": 104,
+        "tp": 41,
+        "fp": 6,
+        "fn": 45,
+        "precision": 0.8723404255319149,
+        "recall": 0.47674418604651164,
+        "f1": 0.6165413533834587,
+        "f05": 0.748175182481752,
+        "negatives": 23,
+        "picksOnNegative": 3,
+        "exact": 58,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 23,
+            "fp": 4,
+            "fn": 20,
+            "precision": 0.8518518518518519,
+            "recall": 0.5348837209302325,
+            "f1": 0.6571428571428571,
+            "f05": 0.76158940397351,
+            "negatives": 12,
+            "picksOnNegative": 3,
+            "exact": 30
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 18,
+            "fp": 2,
+            "fn": 25,
+            "precision": 0.9,
+            "recall": 0.4186046511627907,
+            "f1": 0.5714285714285715,
+            "f05": 0.7317073170731707,
+            "negatives": 11,
+            "picksOnNegative": 0,
+            "exact": 28
+          }
+        },
+        "literalBlank": 2,
+        "literalBlankOffers": 0,
+        "protectedWrong": 2
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 12,
+        "p50Ms": 19.899999976158142,
+        "p95Ms": 27
+      },
+      "firstDraftMs": 19.400000035762787,
+      "routed": {
+        "dev": 0,
+        "test": 0,
+        "second": 0,
+        "hero": 0
+      },
+      "inferenceLatency": null,
+      "reasonerLatency": null,
+      "invalid": 0
+    },
+    "chromium-granite": {
+      "coldMs": 1825.9000000357628,
+      "indexMs": 1667,
+      "diagnostics": {
+        "origin": "chrome-extension://dibkccpnofeakofbhngmbcofabiffklf",
+        "runtimeId": "dibkccpnofeakofbhngmbcofabiffklf",
+        "isolated": false,
+        "violations": [],
+        "resources": []
+      },
+      "engine": "chromium",
+      "name": "granite",
+      "assets": {
+        "tokenizer.json": {
+          "bytes": 25301671,
+          "sha256": "51947676cae1f991fa51c6b9a24e14ee5460e5f0b9f692f13bb3159829d1592a"
+        },
+        "tokenizer_config.json": {
+          "bytes": 12860,
+          "sha256": "6ed69389e30a8ecabfce2f9ebcdf0c908b34056f24d994340f2f216521c057d5"
+        },
+        "onnx/model_quantized.onnx": {
+          "bytes": 97858099,
+          "sha256": "704c1ebca5fbb7cd83ced41827658ac4c9990c64f7f2874d22b78044e5022e22"
+        },
+        "save-int8.onnx": {
+          "bytes": 20547,
+          "sha256": "dea62d3420950855dcc87fa2ee92cb6d4d16c47cb22f7e83ae5f68dd28b65cf6"
+        },
+        "request-int8.onnx": {
+          "bytes": 20547,
+          "sha256": "282cadd8667cd0cbeaf8eb29ceaedaef53ca1fb5f2fc6df54e21b0acee2a72a2"
+        }
+      },
+      "zipBytes": 75029870,
+      "baselineRss": 832430080,
+      "peakRss": 1617833984,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "outside": [],
+      "floors": [
+        0.98,
+        0.98
+      ],
+      "precisionFloors": null,
+      "dev": {
+        "drafts": 48,
+        "tp": 8,
+        "fp": 10,
+        "fn": 42,
+        "precision": 0.4444444444444444,
+        "recall": 0.16,
+        "f1": 0.23529411764705882,
+        "f05": 0.3278688524590164,
+        "negatives": 10,
+        "picksOnNegative": 1,
+        "exact": 13,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 4,
+            "fp": 5,
+            "fn": 21,
+            "precision": 0.4444444444444444,
+            "recall": 0.16,
+            "f1": 0.23529411764705882,
+            "f05": 0.3278688524590164,
+            "negatives": 5,
+            "picksOnNegative": 1,
+            "exact": 6
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 4,
+            "fp": 5,
+            "fn": 21,
+            "precision": 0.4444444444444444,
+            "recall": 0.16,
+            "f1": 0.23529411764705882,
+            "f05": 0.3278688524590164,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 7
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 0
+      },
+      "test": {
+        "drafts": 152,
+        "tp": 13,
+        "fp": 55,
+        "fn": 107,
+        "precision": 0.19117647058823528,
+        "recall": 0.10833333333333334,
+        "f1": 0.13829787234042554,
+        "f05": 0.16581632653061223,
+        "negatives": 52,
+        "picksOnNegative": 10,
+        "exact": 46,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 6,
+            "fp": 27,
+            "fn": 54,
+            "precision": 0.18181818181818182,
+            "recall": 0.1,
+            "f1": 0.12903225806451613,
+            "f05": 0.15625000000000003,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 21
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 7,
+            "fp": 28,
+            "fn": 53,
+            "precision": 0.2,
+            "recall": 0.11666666666666667,
+            "f1": 0.1473684210526316,
+            "f05": 0.175,
+            "negatives": 26,
+            "picksOnNegative": 4,
+            "exact": 25
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 0
+      },
+      "second": {
+        "drafts": 104,
+        "tp": 2,
+        "fp": 5,
+        "fn": 84,
+        "precision": 0.2857142857142857,
+        "recall": 0.023255813953488372,
+        "f1": 0.04301075268817204,
+        "f05": 0.08771929824561403,
+        "negatives": 23,
+        "picksOnNegative": 1,
+        "exact": 24,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 1,
+            "fp": 3,
+            "fn": 42,
+            "precision": 0.25,
+            "recall": 0.023255813953488372,
+            "f1": 0.0425531914893617,
+            "f05": 0.0847457627118644,
+            "negatives": 12,
+            "picksOnNegative": 1,
+            "exact": 12
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 1,
+            "fp": 2,
+            "fn": 42,
+            "precision": 0.3333333333333333,
+            "recall": 0.023255813953488372,
+            "f1": 0.04347826086956522,
+            "f05": 0.09090909090909091,
+            "negatives": 11,
+            "picksOnNegative": 0,
+            "exact": 12
+          }
+        },
+        "literalBlank": 2,
+        "literalBlankOffers": 0,
+        "protectedWrong": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01",
+            "H02"
+          ],
+          "exact": true
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H02",
+            "H05"
+          ],
+          "exact": true
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H02",
+            "H01"
+          ],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 14.399999976158142,
+        "p50Ms": 22.80000001192093,
+        "p95Ms": 29.900000035762787
+      },
+      "firstDraftMs": 22.5,
+      "routed": {
+        "dev": 0,
+        "test": 0,
+        "second": 0,
+        "hero": 0
+      },
+      "inferenceLatency": {
+        "firstMs": 14.399999976158142,
+        "p50Ms": 23.099999964237213,
+        "p95Ms": 30
+      },
+      "reasonerLatency": null,
+      "invalid": 0
+    },
+    "chromium-gemma": {
+      "coldMs": 2809,
+      "indexMs": 49646.60000002384,
+      "diagnostics": {
+        "origin": "chrome-extension://gnimlhkjbcmpbfnokafkceochbgeioej",
+        "runtimeId": "gnimlhkjbcmpbfnokafkceochbgeioej",
+        "isolated": false,
+        "violations": [],
+        "resources": []
+      },
+      "engine": "chromium",
+      "name": "gemma",
+      "assets": {
+        "tokenizer.json": {
+          "bytes": 32170510,
+          "sha256": "4d777ef5bdc1aa36227abdfb77c3e49e7b9c892d16e1b6bda41c393504828be4"
+        },
+        "tokenizer_config.json": {
+          "bytes": 1599,
+          "sha256": "17bd5d6e9364ca49a534e1502076593317c298d4a663623091ed45388f004874"
+        },
+        "config.json": {
+          "bytes": 5031,
+          "sha256": "8d011bfe08b5e345bbe0b81e5c6fd02c381920b345b986047bc2a33ce7b90d1d"
+        },
+        "onnx/model_q4.onnx": {
+          "bytes": 490742,
+          "sha256": "f9eeba97acddf139b8ee2ddf04bc30dceafa88de93fadf74d7644e0d61a477a9"
+        },
+        "onnx/model_q4.onnx_data": {
+          "bytes": 174028800,
+          "sha256": "c3975f2d1ab7a1878ae31a7d7a9b7804a827aff3800b60dfceafce21cac3df49"
+        }
+      },
+      "zipBytes": 157637866,
+      "baselineRss": 830083072,
+      "peakRss": 1592225792,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "outside": [],
+      "floors": [
+        0.84,
+        1.01
+      ],
+      "precisionFloors": null,
+      "dev": {
+        "drafts": 48,
+        "tp": 20,
+        "fp": 10,
+        "fn": 30,
+        "precision": 0.6666666666666666,
+        "recall": 0.4,
+        "f1": 0.5,
+        "f05": 0.5882352941176471,
+        "negatives": 10,
+        "picksOnNegative": 4,
+        "exact": 19,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 9,
+            "fp": 3,
+            "fn": 16,
+            "precision": 0.75,
+            "recall": 0.36,
+            "f1": 0.48648648648648657,
+            "f05": 0.6164383561643835,
+            "negatives": 5,
+            "picksOnNegative": 1,
+            "exact": 10
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 11,
+            "fp": 7,
+            "fn": 14,
+            "precision": 0.6111111111111112,
+            "recall": 0.44,
+            "f1": 0.5116279069767442,
+            "f05": 0.5670103092783505,
+            "negatives": 5,
+            "picksOnNegative": 3,
+            "exact": 9
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 10
+      },
+      "test": {
+        "drafts": 152,
+        "tp": 63,
+        "fp": 28,
+        "fn": 57,
+        "precision": 0.6923076923076923,
+        "recall": 0.525,
+        "f1": 0.5971563981042654,
+        "f05": 0.6508264462809918,
+        "negatives": 52,
+        "picksOnNegative": 14,
+        "exact": 93,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 29,
+            "fp": 9,
+            "fn": 31,
+            "precision": 0.7631578947368421,
+            "recall": 0.48333333333333334,
+            "f1": 0.5918367346938777,
+            "f05": 0.6839622641509434,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 46
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 34,
+            "fp": 19,
+            "fn": 26,
+            "precision": 0.6415094339622641,
+            "recall": 0.5666666666666667,
+            "f1": 0.6017699115044247,
+            "f05": 0.625,
+            "negatives": 26,
+            "picksOnNegative": 8,
+            "exact": 47
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 24
+      },
+      "second": {
+        "drafts": 104,
+        "tp": 48,
+        "fp": 30,
+        "fn": 38,
+        "precision": 0.6153846153846154,
+        "recall": 0.5581395348837209,
+        "f1": 0.5853658536585366,
+        "f05": 0.6030150753768845,
+        "negatives": 23,
+        "picksOnNegative": 14,
+        "exact": 55,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 20,
+            "fp": 12,
+            "fn": 23,
+            "precision": 0.625,
+            "recall": 0.46511627906976744,
+            "f1": 0.5333333333333334,
+            "f05": 0.584795321637427,
+            "negatives": 12,
+            "picksOnNegative": 6,
+            "exact": 25
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 28,
+            "fp": 18,
+            "fn": 15,
+            "precision": 0.6086956521739131,
+            "recall": 0.6511627906976745,
+            "f1": 0.6292134831460675,
+            "f05": 0.6167400881057269,
+            "negatives": 11,
+            "picksOnNegative": 8,
+            "exact": 30
+          }
+        },
+        "literalBlank": 2,
+        "literalBlankOffers": 0,
+        "protectedWrong": 12
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [
+            "H03"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [
+            "H03"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H05"
+          ],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 908.1000000238419,
+        "p50Ms": 1146.5,
+        "p95Ms": 1622
+      },
+      "firstDraftMs": 1222.199999988079,
+      "routed": {
+        "dev": 0,
+        "test": 0,
+        "second": 0,
+        "hero": 0
+      },
+      "inferenceLatency": {
+        "firstMs": 908.1000000238419,
+        "p50Ms": 1160,
+        "p95Ms": 1640
+      },
+      "reasonerLatency": null,
+      "invalid": 0
+    },
+    "chromium-qwen3": {
+      "coldMs": 2981.75,
+      "indexMs": 0.16499996185302734,
+      "diagnostics": {
+        "nano": {},
+        "origin": "http://127.0.0.1:33715",
+        "isolated": true,
+        "violations": [],
+        "resources": [
+          "http://127.0.0.1:33715/page.js",
+          "http://127.0.0.1:33715/favicon.ico",
+          "http://127.0.0.1:33715/wllama.js",
+          "http://127.0.0.1:33715/model/Qwen3-0.6B-Q4_K_M.gguf",
+          "http://127.0.0.1:33715/runtime/wllama.wasm"
+        ]
+      },
+      "engine": "chromium",
+      "name": "qwen3",
+      "assets": {
+        "Qwen3-0.6B-Q4_K_M.gguf": {
+          "bytes": 396705472,
+          "sha256": "ac2d97712095a558e31573f62f466a3f9d93990898b0ec79d7c974c1780d524a"
+        }
+      },
+      "zipBytes": 388657911,
+      "baselineRss": 824643584,
+      "peakRss": 1859129344,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "outside": [],
+      "floors": null,
+      "precisionFloors": null,
+      "dev": {
+        "drafts": 48,
+        "tp": 0,
+        "fp": 0,
+        "fn": 50,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0,
+        "f05": 0,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 10,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 0,
+            "fp": 0,
+            "fn": 25,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 5
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 0,
+            "fp": 0,
+            "fn": 25,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 5
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 0
+      },
+      "test": {
+        "drafts": 152,
+        "tp": 0,
+        "fp": 0,
+        "fn": 120,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0,
+        "f05": 0,
+        "negatives": 52,
+        "picksOnNegative": 0,
+        "exact": 52,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 0,
+            "fp": 0,
+            "fn": 60,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 26,
+            "picksOnNegative": 0,
+            "exact": 26
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 0,
+            "fp": 0,
+            "fn": 60,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 26,
+            "picksOnNegative": 0,
+            "exact": 26
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 0
+      },
+      "second": {
+        "drafts": 104,
+        "tp": 0,
+        "fp": 0,
+        "fn": 86,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0,
+        "f05": 0,
+        "negatives": 23,
+        "picksOnNegative": 0,
+        "exact": 23,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 0,
+            "fp": 0,
+            "fn": 43,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 12,
+            "picksOnNegative": 0,
+            "exact": 12
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 0,
+            "fp": 0,
+            "fn": 43,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0,
+            "f05": 0,
+            "negatives": 11,
+            "picksOnNegative": 0,
+            "exact": 11
+          }
+        },
+        "literalBlank": 2,
+        "literalBlankOffers": 0,
+        "protectedWrong": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 917.460000038147,
+        "p50Ms": 1286.5550000071526,
+        "p95Ms": 2130.2450000047684
+      },
+      "firstDraftMs": 15143.224999964237,
+      "routed": {
+        "dev": 0,
+        "test": 0,
+        "second": 0,
+        "hero": 0
+      },
+      "inferenceLatency": {
+        "firstMs": 917.460000038147,
+        "p50Ms": 1323.2350000143051,
+        "p95Ms": 2199.574999988079
+      },
+      "reasonerLatency": null,
+      "invalid": 0
+    },
+    "chromium-profile": {
+      "coldMs": 0,
+      "indexMs": 0.19999998807907104,
+      "diagnostics": {
+        "nano": {
+          "en": "unavailable",
+          "de": "unavailable"
+        },
+        "origin": "chrome-extension://hjokhnlimnfjnklignpeigpgpbemaelj",
+        "runtimeId": "hjokhnlimnfjnklignpeigpgpbemaelj",
+        "isolated": false,
+        "violations": [],
+        "resources": []
+      },
+      "engine": "chromium",
+      "name": "profile",
+      "assets": {},
+      "zipBytes": 3282,
+      "baselineRss": 829403136,
+      "peakRss": 836722688,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "outside": [],
+      "floors": null,
+      "precisionFloors": null,
+      "dev": {
+        "drafts": 48,
+        "tp": 6,
+        "fp": 90,
+        "fn": 44,
+        "precision": 0.0625,
+        "recall": 0.12,
+        "f1": 0.0821917808219178,
+        "f05": 0.06912442396313365,
+        "negatives": 10,
+        "picksOnNegative": 10,
+        "exact": 0,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 3,
+            "fp": 45,
+            "fn": 22,
+            "precision": 0.0625,
+            "recall": 0.12,
+            "f1": 0.0821917808219178,
+            "f05": 0.06912442396313365,
+            "negatives": 5,
+            "picksOnNegative": 5,
+            "exact": 0
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 3,
+            "fp": 45,
+            "fn": 22,
+            "precision": 0.0625,
+            "recall": 0.12,
+            "f1": 0.0821917808219178,
+            "f05": 0.06912442396313365,
+            "negatives": 5,
+            "picksOnNegative": 5,
+            "exact": 0
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 0
+      },
+      "test": {
+        "drafts": 152,
+        "tp": 8,
+        "fp": 296,
+        "fn": 112,
+        "precision": 0.02631578947368421,
+        "recall": 0.06666666666666667,
+        "f1": 0.03773584905660377,
+        "f05": 0.02994011976047904,
+        "negatives": 52,
+        "picksOnNegative": 52,
+        "exact": 0,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 4,
+            "fp": 148,
+            "fn": 56,
+            "precision": 0.02631578947368421,
+            "recall": 0.06666666666666667,
+            "f1": 0.03773584905660377,
+            "f05": 0.02994011976047904,
+            "negatives": 26,
+            "picksOnNegative": 26,
+            "exact": 0
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 4,
+            "fp": 148,
+            "fn": 56,
+            "precision": 0.02631578947368421,
+            "recall": 0.06666666666666667,
+            "f1": 0.03773584905660377,
+            "f05": 0.02994011976047904,
+            "negatives": 26,
+            "picksOnNegative": 26,
+            "exact": 0
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 0
+      },
+      "second": {
+        "drafts": 104,
+        "tp": 4,
+        "fp": 200,
+        "fn": 82,
+        "precision": 0.0196078431372549,
+        "recall": 0.046511627906976744,
+        "f1": 0.027586206896551724,
+        "f05": 0.022172949002217297,
+        "negatives": 23,
+        "picksOnNegative": 21,
+        "exact": 2,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 2,
+            "fp": 100,
+            "fn": 41,
+            "precision": 0.0196078431372549,
+            "recall": 0.046511627906976744,
+            "f1": 0.027586206896551724,
+            "f05": 0.022172949002217297,
+            "negatives": 12,
+            "picksOnNegative": 11,
+            "exact": 1
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 2,
+            "fp": 100,
+            "fn": 41,
+            "precision": 0.0196078431372549,
+            "recall": 0.046511627906976744,
+            "f1": 0.027586206896551724,
+            "f05": 0.022172949002217297,
+            "negatives": 11,
+            "picksOnNegative": 10,
+            "exact": 1
+          }
+        },
+        "literalBlank": 2,
+        "literalBlankOffers": 0,
+        "protectedWrong": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01",
+            "H02"
+          ],
+          "exact": true
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01",
+            "H02"
+          ],
+          "exact": true
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [
+            "H01",
+            "H02"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [
+            "H01",
+            "H02"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H01",
+            "H02"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H01",
+            "H02"
+          ],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 0,
+        "p50Ms": 0,
+        "p95Ms": 0
+      },
+      "firstDraftMs": 0,
+      "routed": {
+        "dev": 0,
+        "test": 0,
+        "second": 0,
+        "hero": 0
+      },
+      "inferenceLatency": null,
+      "reasonerLatency": null,
+      "invalid": 0
+    },
+    "chromium-cascade": {
+      "coldMs": 6646.475000023842,
+      "indexMs": 1842.660000026226,
+      "diagnostics": {
+        "nano": {},
+        "origin": "http://127.0.0.1:42163",
+        "isolated": true,
+        "violations": [],
+        "resources": [
+          "http://127.0.0.1:42163/page.js",
+          "http://127.0.0.1:42163/favicon.ico",
+          "http://127.0.0.1:42163/cascade.js",
+          "http://127.0.0.1:42163/model/tokenizer.json",
+          "http://127.0.0.1:42163/model/tokenizer_config.json",
+          "http://127.0.0.1:42163/runtime/ort-wasm-simd-threaded.mjs",
+          "http://127.0.0.1:42163/model/Qwen3.5-0.8B-Q4_K_M.gguf",
+          "http://127.0.0.1:42163/runtime/ort-wasm-simd-threaded.wasm",
+          "http://127.0.0.1:42163/model/save-int8.onnx",
+          "http://127.0.0.1:42163/model/request-int8.onnx",
+          "http://127.0.0.1:42163/model/onnx/model_quantized.onnx",
+          "http://127.0.0.1:42163/runtime/wllama.wasm"
+        ]
+      },
+      "engine": "chromium",
+      "name": "cascade",
+      "assets": {
+        "Qwen3.5-0.8B-Q4_K_M.gguf": {
+          "bytes": 532517120,
+          "sha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517"
+        },
+        "tokenizer.json": {
+          "bytes": 17082913,
+          "sha256": "b60b6b43406a48bf3638526314f3d232d97058bc93472ff2de930d43686fa441"
+        },
+        "tokenizer_config.json": {
+          "bytes": 496,
+          "sha256": "3f5961b9ac86288cccdb97f32fb848d6187c78e1603958c53f3ea1f296b7d8a2"
+        },
+        "onnx/model_quantized.onnx": {
+          "bytes": 118308126,
+          "sha256": "66fc00f5f29afcaff34092e1bdd20008ca3918265a82fb9695a551e510cc4ebc"
+        },
+        "save-int8.onnx": {
+          "bytes": 20547,
+          "sha256": "81b251d786e1a75462f276b2bcbb534f6bf5252d565c619aad4cb0356f234298"
+        },
+        "request-int8.onnx": {
+          "bytes": 20547,
+          "sha256": "f877f595e8d14c9b922ee28d2ce599fa2f5dbcc7b8116d53873c687f33baa2df"
+        }
+      },
+      "zipBytes": 603096831,
+      "baselineRss": 822857728,
+      "peakRss": 2625720320,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "outside": [],
+      "floors": null,
+      "precisionFloors": null,
+      "dev": {
+        "drafts": 48,
+        "tp": 23,
+        "fp": 2,
+        "fn": 27,
+        "precision": 0.92,
+        "recall": 0.46,
+        "f1": 0.6133333333333333,
+        "f05": 0.7666666666666668,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 26,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 13,
+            "fp": 0,
+            "fn": 12,
+            "precision": 1,
+            "recall": 0.52,
+            "f1": 0.6842105263157895,
+            "f05": 0.8441558441558442,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 13
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 10,
+            "fp": 2,
+            "fn": 15,
+            "precision": 0.8333333333333334,
+            "recall": 0.4,
+            "f1": 0.5405405405405406,
+            "f05": 0.6849315068493151,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 13
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 1
+      },
+      "test": {
+        "drafts": 152,
+        "tp": 70,
+        "fp": 12,
+        "fn": 50,
+        "precision": 0.8536585365853658,
+        "recall": 0.5833333333333334,
+        "f1": 0.6930693069306931,
+        "f05": 0.7812500000000001,
+        "negatives": 52,
+        "picksOnNegative": 9,
+        "exact": 102,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 34,
+            "fp": 8,
+            "fn": 26,
+            "precision": 0.8095238095238095,
+            "recall": 0.5666666666666667,
+            "f1": 0.6666666666666666,
+            "f05": 0.7456140350877193,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 49
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 36,
+            "fp": 4,
+            "fn": 24,
+            "precision": 0.9,
+            "recall": 0.6,
+            "f1": 0.7200000000000001,
+            "f05": 0.8181818181818181,
+            "negatives": 26,
+            "picksOnNegative": 3,
+            "exact": 53
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 12
+      },
+      "second": {
+        "drafts": 104,
+        "tp": 45,
+        "fp": 13,
+        "fn": 41,
+        "precision": 0.7758620689655172,
+        "recall": 0.5232558139534884,
+        "f1": 0.625,
+        "f05": 0.7075471698113207,
+        "negatives": 23,
+        "picksOnNegative": 6,
+        "exact": 59,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 25,
+            "fp": 8,
+            "fn": 18,
+            "precision": 0.7575757575757576,
+            "recall": 0.5813953488372093,
+            "f1": 0.6578947368421053,
+            "f05": 0.7142857142857144,
+            "negatives": 12,
+            "picksOnNegative": 5,
+            "exact": 30
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 20,
+            "fp": 5,
+            "fn": 23,
+            "precision": 0.8,
+            "recall": 0.46511627906976744,
+            "f1": 0.5882352941176471,
+            "f05": 0.6993006993006993,
+            "negatives": 11,
+            "picksOnNegative": 1,
+            "exact": 29
+          }
+        },
+        "literalBlank": 2,
+        "literalBlankOffers": 0,
+        "protectedWrong": 5
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 1077.6150000095367,
+        "p50Ms": 29.524999976158142,
+        "p95Ms": 1572.75
+      },
+      "firstDraftMs": 3646.8199999928474,
+      "routed": {
+        "dev": 7,
+        "test": 20,
+        "second": 11,
+        "hero": 0
+      },
+      "inferenceLatency": {
+        "firstMs": 1077.6150000095367,
+        "p50Ms": 30.269999980926514,
+        "p95Ms": 1665.699999988079
+      },
+      "reasonerLatency": {
+        "firstMs": 1057.8849999904633,
+        "p50Ms": 1521.5149999856949,
+        "p95Ms": 2529.7450000047684
+      },
+      "invalid": 0
+    },
+    "chromium-static": {
+      "coldMs": 7.700000047683716,
+      "indexMs": 23,
+      "diagnostics": {
+        "origin": "chrome-extension://dncobaammifpeacaogdplidliaobciml",
+        "runtimeId": "dncobaammifpeacaogdplidliaobciml",
+        "isolated": false,
+        "violations": [],
+        "resources": []
+      },
+      "engine": "chromium",
+      "name": "static",
+      "assets": {
+        "save-static.bin": {
+          "bytes": 418200,
+          "sha256": "3e701615ed0c9ec3b7aff9aae76c38247a2b76c18bd41d6d075b34add1da6a1c"
+        },
+        "request-static.bin": {
+          "bytes": 418200,
+          "sha256": "690ff7a97eef51c49b1d134489c318fac484db646f376325062dd7abb1742fc0"
+        }
+      },
+      "zipBytes": 344820,
+      "baselineRss": 830783488,
+      "peakRss": 850751488,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "outside": [],
+      "floors": [
+        0.18,
+        0.46
+      ],
+      "precisionFloors": null,
+      "dev": {
+        "drafts": 48,
+        "tp": 13,
+        "fp": 1,
+        "fn": 37,
+        "precision": 0.9285714285714286,
+        "recall": 0.26,
+        "f1": 0.40625,
+        "f05": 0.6132075471698114,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 19,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 7,
+            "fp": 0,
+            "fn": 18,
+            "precision": 1,
+            "recall": 0.28,
+            "f1": 0.43750000000000006,
+            "f05": 0.6603773584905661,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 10
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 6,
+            "fp": 1,
+            "fn": 19,
+            "precision": 0.8571428571428571,
+            "recall": 0.24,
+            "f1": 0.375,
+            "f05": 0.5660377358490566,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 9
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 0
+      },
+      "test": {
+        "drafts": 152,
+        "tp": 35,
+        "fp": 6,
+        "fn": 85,
+        "precision": 0.8536585365853658,
+        "recall": 0.2916666666666667,
+        "f1": 0.4347826086956522,
+        "f05": 0.6161971830985916,
+        "negatives": 52,
+        "picksOnNegative": 2,
+        "exact": 78,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 17,
+            "fp": 2,
+            "fn": 43,
+            "precision": 0.8947368421052632,
+            "recall": 0.2833333333333333,
+            "f1": 0.43037974683544306,
+            "f05": 0.625,
+            "negatives": 26,
+            "picksOnNegative": 1,
+            "exact": 38
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 18,
+            "fp": 4,
+            "fn": 42,
+            "precision": 0.8181818181818182,
+            "recall": 0.3,
+            "f1": 0.43902439024390244,
+            "f05": 0.6081081081081081,
+            "negatives": 26,
+            "picksOnNegative": 1,
+            "exact": 40
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 6
+      },
+      "second": {
+        "drafts": 104,
+        "tp": 13,
+        "fp": 3,
+        "fn": 73,
+        "precision": 0.8125,
+        "recall": 0.1511627906976744,
+        "f1": 0.2549019607843137,
+        "f05": 0.4333333333333333,
+        "negatives": 23,
+        "picksOnNegative": 1,
+        "exact": 35,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 8,
+            "fp": 2,
+            "fn": 35,
+            "precision": 0.8,
+            "recall": 0.18604651162790697,
+            "f1": 0.3018867924528302,
+            "f05": 0.4819277108433735,
+            "negatives": 12,
+            "picksOnNegative": 1,
+            "exact": 19
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 5,
+            "fp": 1,
+            "fn": 38,
+            "precision": 0.8333333333333334,
+            "recall": 0.11627906976744186,
+            "f1": 0.20408163265306123,
+            "f05": 0.373134328358209,
+            "negatives": 11,
+            "picksOnNegative": 0,
+            "exact": 16
+          }
+        },
+        "literalBlank": 2,
+        "literalBlankOffers": 0,
+        "protectedWrong": 1
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 0,
+        "p50Ms": 0.09999996423721313,
+        "p95Ms": 0.19999998807907104
+      },
+      "firstDraftMs": 0.40000003576278687,
+      "routed": {
+        "dev": 0,
+        "test": 0,
+        "second": 0,
+        "hero": 0
+      },
+      "inferenceLatency": null,
+      "reasonerLatency": null,
+      "invalid": 0
+    },
+    "chromium-similarity": {
+      "coldMs": 1611.800000011921,
+      "indexMs": 1362.5,
+      "diagnostics": {
+        "origin": "chrome-extension://bmemmapkbcmjhajgcnhmpcpdodhheeid",
+        "runtimeId": "bmemmapkbcmjhajgcnhmpcpdodhheeid",
+        "isolated": false,
+        "violations": [],
+        "resources": []
+      },
+      "engine": "chromium",
+      "name": "similarity",
+      "assets": {
+        "tokenizer.json": {
+          "bytes": 17082913,
+          "sha256": "b60b6b43406a48bf3638526314f3d232d97058bc93472ff2de930d43686fa441"
+        },
+        "tokenizer_config.json": {
+          "bytes": 496,
+          "sha256": "3f5961b9ac86288cccdb97f32fb848d6187c78e1603958c53f3ea1f296b7d8a2"
+        },
+        "onnx/model_quantized.onnx": {
+          "bytes": 118308126,
+          "sha256": "66fc00f5f29afcaff34092e1bdd20008ca3918265a82fb9695a551e510cc4ebc"
+        }
+      },
+      "zipBytes": 80873815,
+      "baselineRss": 831811584,
+      "peakRss": 1667096576,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "outside": [],
+      "floors": [
+        0.37,
+        0.53
+      ],
+      "precisionFloors": null,
+      "dev": {
+        "drafts": 48,
+        "tp": 18,
+        "fp": 11,
+        "fn": 32,
+        "precision": 0.6206896551724138,
+        "recall": 0.36,
+        "f1": 0.45569620253164556,
+        "f05": 0.5421686746987953,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 21,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 8,
+            "fp": 5,
+            "fn": 17,
+            "precision": 0.6153846153846154,
+            "recall": 0.32,
+            "f1": 0.4210526315789474,
+            "f05": 0.5194805194805195,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 10
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 10,
+            "fp": 6,
+            "fn": 15,
+            "precision": 0.625,
+            "recall": 0.4,
+            "f1": 0.48780487804878053,
+            "f05": 0.5617977528089887,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 11
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 10
+      },
+      "test": {
+        "drafts": 152,
+        "tp": 59,
+        "fp": 43,
+        "fn": 61,
+        "precision": 0.5784313725490197,
+        "recall": 0.49166666666666664,
+        "f1": 0.5315315315315315,
+        "f05": 0.5587121212121212,
+        "negatives": 52,
+        "picksOnNegative": 12,
+        "exact": 84,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 28,
+            "fp": 20,
+            "fn": 32,
+            "precision": 0.5833333333333334,
+            "recall": 0.4666666666666667,
+            "f1": 0.5185185185185186,
+            "f05": 0.5555555555555556,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 42
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 31,
+            "fp": 23,
+            "fn": 29,
+            "precision": 0.5740740740740741,
+            "recall": 0.5166666666666667,
+            "f1": 0.543859649122807,
+            "f05": 0.5615942028985507,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 42
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 39
+      },
+      "second": {
+        "drafts": 104,
+        "tp": 42,
+        "fp": 42,
+        "fn": 44,
+        "precision": 0.5,
+        "recall": 0.4883720930232558,
+        "f1": 0.4941176470588235,
+        "f05": 0.4976303317535545,
+        "negatives": 23,
+        "picksOnNegative": 11,
+        "exact": 50,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 24,
+            "fp": 15,
+            "fn": 19,
+            "precision": 0.6153846153846154,
+            "recall": 0.5581395348837209,
+            "f1": 0.5853658536585366,
+            "f05": 0.6030150753768845,
+            "negatives": 12,
+            "picksOnNegative": 4,
+            "exact": 29
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 18,
+            "fp": 27,
+            "fn": 25,
+            "precision": 0.4,
+            "recall": 0.4186046511627907,
+            "f1": 0.40909090909090917,
+            "f05": 0.40358744394618834,
+            "negatives": 11,
+            "picksOnNegative": 7,
+            "exact": 21
+          }
+        },
+        "literalBlank": 2,
+        "literalBlankOffers": 0,
+        "protectedWrong": 14
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H04"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H04"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H05"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H05"
+          ],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 11.5,
+        "p50Ms": 20.19999998807907,
+        "p95Ms": 27.5
+      },
+      "firstDraftMs": 20.30000001192093,
+      "routed": {
+        "dev": 0,
+        "test": 0,
+        "second": 0,
+        "hero": 0
+      },
+      "inferenceLatency": {
+        "firstMs": 11.5,
+        "p50Ms": 20.5,
+        "p95Ms": 27.80000001192093
+      },
+      "reasonerLatency": null,
+      "invalid": 0
+    },
+    "firefox-minilm": {
+      "coldMs": 2002,
+      "indexMs": 20420,
+      "diagnostics": {
+        "origin": "moz-extension://e17f5a52-e67f-4c18-b89a-ccd4cc4c8870",
+        "runtimeId": "local-model-spike@bleib.dev",
+        "isolated": false,
+        "violations": [],
+        "resources": []
+      },
+      "engine": "firefox",
+      "name": "minilm",
+      "assets": {
+        "tokenizer.json": {
+          "bytes": 17082913,
+          "sha256": "b60b6b43406a48bf3638526314f3d232d97058bc93472ff2de930d43686fa441"
+        },
+        "tokenizer_config.json": {
+          "bytes": 496,
+          "sha256": "3f5961b9ac86288cccdb97f32fb848d6187c78e1603958c53f3ea1f296b7d8a2"
+        },
+        "onnx/model_quantized.onnx": {
+          "bytes": 118308126,
+          "sha256": "66fc00f5f29afcaff34092e1bdd20008ca3918265a82fb9695a551e510cc4ebc"
+        },
+        "save-int8.onnx": {
+          "bytes": 20547,
+          "sha256": "81b251d786e1a75462f276b2bcbb534f6bf5252d565c619aad4cb0356f234298"
+        },
+        "request-int8.onnx": {
+          "bytes": 20547,
+          "sha256": "f877f595e8d14c9b922ee28d2ce599fa2f5dbcc7b8116d53873c687f33baa2df"
+        }
+      },
+      "zipBytes": 80913639,
+      "baselineRss": 740663296,
+      "peakRss": 1617297408,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64; rv:153.0) Gecko/20100101 Firefox/153.0",
+      "outside": [],
+      "floors": [
+        0.44,
+        0.98
+      ],
+      "precisionFloors": [
+        0.74,
+        0.98
+      ],
+      "dev": {
+        "drafts": 48,
+        "tp": 27,
+        "fp": 2,
+        "fn": 23,
+        "precision": 0.9310344827586207,
+        "recall": 0.54,
+        "f1": 0.6835443037974683,
+        "f05": 0.8132530120481928,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 29,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 14,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.56,
+            "f1": 0.717948717948718,
+            "f05": 0.8641975308641976,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 13,
+            "fp": 2,
+            "fn": 12,
+            "precision": 0.8666666666666667,
+            "recall": 0.52,
+            "f1": 0.65,
+            "f05": 0.7647058823529413,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 15
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 1
+      },
+      "test": {
+        "drafts": 152,
+        "tp": 72,
+        "fp": 16,
+        "fn": 48,
+        "precision": 0.8181818181818182,
+        "recall": 0.6,
+        "f1": 0.6923076923076923,
+        "f05": 0.7627118644067796,
+        "negatives": 52,
+        "picksOnNegative": 10,
+        "exact": 103,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 37,
+            "fp": 10,
+            "fn": 23,
+            "precision": 0.7872340425531915,
+            "recall": 0.6166666666666667,
+            "f1": 0.691588785046729,
+            "f05": 0.7459677419354839,
+            "negatives": 26,
+            "picksOnNegative": 7,
+            "exact": 50
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 35,
+            "fp": 6,
+            "fn": 25,
+            "precision": 0.8536585365853658,
+            "recall": 0.5833333333333334,
+            "f1": 0.6930693069306931,
+            "f05": 0.7812500000000001,
+            "negatives": 26,
+            "picksOnNegative": 3,
+            "exact": 53
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 16
+      },
+      "second": {
+        "drafts": 104,
+        "tp": 48,
+        "fp": 13,
+        "fn": 38,
+        "precision": 0.7868852459016393,
+        "recall": 0.5581395348837209,
+        "f1": 0.6530612244897959,
+        "f05": 0.7272727272727272,
+        "negatives": 23,
+        "picksOnNegative": 5,
+        "exact": 62,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 25,
+            "fp": 9,
+            "fn": 18,
+            "precision": 0.7352941176470589,
+            "recall": 0.5813953488372093,
+            "f1": 0.6493506493506493,
+            "f05": 0.6983240223463688,
+            "negatives": 12,
+            "picksOnNegative": 5,
+            "exact": 30
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 23,
+            "fp": 4,
+            "fn": 20,
+            "precision": 0.8518518518518519,
+            "recall": 0.5348837209302325,
+            "f1": 0.6571428571428571,
+            "f05": 0.76158940397351,
+            "negatives": 11,
+            "picksOnNegative": 0,
+            "exact": 32
+          }
+        },
+        "literalBlank": 2,
+        "literalBlankOffers": 0,
+        "protectedWrong": 5
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 182,
+        "p50Ms": 329,
+        "p95Ms": 442
+      },
+      "firstDraftMs": 322,
+      "routed": {
+        "dev": 0,
+        "test": 0,
+        "second": 0,
+        "hero": 0
+      },
+      "inferenceLatency": {
+        "firstMs": 182,
+        "p50Ms": 343,
+        "p95Ms": 453
+      },
+      "reasonerLatency": null,
+      "invalid": 0
+    },
+    "firefox-minilm-precision": {
+      "coldMs": 2002,
+      "indexMs": 20420,
+      "diagnostics": {
+        "origin": "moz-extension://e17f5a52-e67f-4c18-b89a-ccd4cc4c8870",
+        "runtimeId": "local-model-spike@bleib.dev",
+        "isolated": false,
+        "violations": [],
+        "resources": []
+      },
+      "engine": "firefox",
+      "name": "minilm",
+      "assets": {
+        "tokenizer.json": {
+          "bytes": 17082913,
+          "sha256": "b60b6b43406a48bf3638526314f3d232d97058bc93472ff2de930d43686fa441"
+        },
+        "tokenizer_config.json": {
+          "bytes": 496,
+          "sha256": "3f5961b9ac86288cccdb97f32fb848d6187c78e1603958c53f3ea1f296b7d8a2"
+        },
+        "onnx/model_quantized.onnx": {
+          "bytes": 118308126,
+          "sha256": "66fc00f5f29afcaff34092e1bdd20008ca3918265a82fb9695a551e510cc4ebc"
+        },
+        "save-int8.onnx": {
+          "bytes": 20547,
+          "sha256": "81b251d786e1a75462f276b2bcbb534f6bf5252d565c619aad4cb0356f234298"
+        },
+        "request-int8.onnx": {
+          "bytes": 20547,
+          "sha256": "f877f595e8d14c9b922ee28d2ce599fa2f5dbcc7b8116d53873c687f33baa2df"
+        }
+      },
+      "zipBytes": 80913639,
+      "baselineRss": 740663296,
+      "peakRss": 1617297408,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64; rv:153.0) Gecko/20100101 Firefox/153.0",
+      "outside": [],
+      "floors": [
+        0.74,
+        0.98
+      ],
+      "precisionFloors": [
+        0.74,
+        0.98
+      ],
+      "dev": {
+        "drafts": 48,
+        "tp": 25,
+        "fp": 1,
+        "fn": 25,
+        "precision": 0.9615384615384616,
+        "recall": 0.5,
+        "f1": 0.6578947368421052,
+        "f05": 0.8116883116883116,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 28,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 14,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.56,
+            "f1": 0.717948717948718,
+            "f05": 0.8641975308641976,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 11,
+            "fp": 1,
+            "fn": 14,
+            "precision": 0.9166666666666666,
+            "recall": 0.44,
+            "f1": 0.5945945945945945,
+            "f05": 0.7534246575342465,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 1
+      },
+      "test": {
+        "drafts": 152,
+        "tp": 68,
+        "fp": 10,
+        "fn": 52,
+        "precision": 0.8717948717948718,
+        "recall": 0.5666666666666667,
+        "f1": 0.6868686868686869,
+        "f05": 0.7870370370370371,
+        "negatives": 52,
+        "picksOnNegative": 7,
+        "exact": 103,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 34,
+            "fp": 6,
+            "fn": 26,
+            "precision": 0.85,
+            "recall": 0.5666666666666667,
+            "f1": 0.68,
+            "f05": 0.7727272727272727,
+            "negatives": 26,
+            "picksOnNegative": 4,
+            "exact": 51
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 34,
+            "fp": 4,
+            "fn": 26,
+            "precision": 0.8947368421052632,
+            "recall": 0.5666666666666667,
+            "f1": 0.6938775510204083,
+            "f05": 0.8018867924528302,
+            "negatives": 26,
+            "picksOnNegative": 3,
+            "exact": 52
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 10
+      },
+      "second": {
+        "drafts": 104,
+        "tp": 41,
+        "fp": 6,
+        "fn": 45,
+        "precision": 0.8723404255319149,
+        "recall": 0.47674418604651164,
+        "f1": 0.6165413533834587,
+        "f05": 0.748175182481752,
+        "negatives": 23,
+        "picksOnNegative": 3,
+        "exact": 58,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 23,
+            "fp": 4,
+            "fn": 20,
+            "precision": 0.8518518518518519,
+            "recall": 0.5348837209302325,
+            "f1": 0.6571428571428571,
+            "f05": 0.76158940397351,
+            "negatives": 12,
+            "picksOnNegative": 3,
+            "exact": 30
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 18,
+            "fp": 2,
+            "fn": 25,
+            "precision": 0.9,
+            "recall": 0.4186046511627907,
+            "f1": 0.5714285714285715,
+            "f05": 0.7317073170731707,
+            "negatives": 11,
+            "picksOnNegative": 0,
+            "exact": 28
+          }
+        },
+        "literalBlank": 2,
+        "literalBlankOffers": 0,
+        "protectedWrong": 2
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 182,
+        "p50Ms": 329,
+        "p95Ms": 442
+      },
+      "firstDraftMs": 322,
+      "routed": {
+        "dev": 0,
+        "test": 0,
+        "second": 0,
+        "hero": 0
+      },
+      "inferenceLatency": {
+        "firstMs": 182,
+        "p50Ms": 343,
+        "p95Ms": 453
+      },
+      "reasonerLatency": null,
+      "invalid": 0
+    },
+    "firefox-granite": {
+      "coldMs": 3216,
+      "indexMs": 25594,
+      "diagnostics": {
+        "origin": "moz-extension://de880be7-1293-4993-b622-ac8abf8c6915",
+        "runtimeId": "local-model-spike@bleib.dev",
+        "isolated": false,
+        "violations": [],
+        "resources": []
+      },
+      "engine": "firefox",
+      "name": "granite",
+      "assets": {
+        "tokenizer.json": {
+          "bytes": 25301671,
+          "sha256": "51947676cae1f991fa51c6b9a24e14ee5460e5f0b9f692f13bb3159829d1592a"
+        },
+        "tokenizer_config.json": {
+          "bytes": 12860,
+          "sha256": "6ed69389e30a8ecabfce2f9ebcdf0c908b34056f24d994340f2f216521c057d5"
+        },
+        "onnx/model_quantized.onnx": {
+          "bytes": 97858099,
+          "sha256": "704c1ebca5fbb7cd83ced41827658ac4c9990c64f7f2874d22b78044e5022e22"
+        },
+        "save-int8.onnx": {
+          "bytes": 20547,
+          "sha256": "dea62d3420950855dcc87fa2ee92cb6d4d16c47cb22f7e83ae5f68dd28b65cf6"
+        },
+        "request-int8.onnx": {
+          "bytes": 20547,
+          "sha256": "282cadd8667cd0cbeaf8eb29ceaedaef53ca1fb5f2fc6df54e21b0acee2a72a2"
+        }
+      },
+      "zipBytes": 75029949,
+      "baselineRss": 737574912,
+      "peakRss": 1462562816,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64; rv:153.0) Gecko/20100101 Firefox/153.0",
+      "outside": [],
+      "floors": [
+        0.98,
+        0.98
+      ],
+      "precisionFloors": null,
+      "dev": {
+        "drafts": 48,
+        "tp": 8,
+        "fp": 10,
+        "fn": 42,
+        "precision": 0.4444444444444444,
+        "recall": 0.16,
+        "f1": 0.23529411764705882,
+        "f05": 0.3278688524590164,
+        "negatives": 10,
+        "picksOnNegative": 1,
+        "exact": 13,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 4,
+            "fp": 5,
+            "fn": 21,
+            "precision": 0.4444444444444444,
+            "recall": 0.16,
+            "f1": 0.23529411764705882,
+            "f05": 0.3278688524590164,
+            "negatives": 5,
+            "picksOnNegative": 1,
+            "exact": 6
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 4,
+            "fp": 5,
+            "fn": 21,
+            "precision": 0.4444444444444444,
+            "recall": 0.16,
+            "f1": 0.23529411764705882,
+            "f05": 0.3278688524590164,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 7
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 0
+      },
+      "test": {
+        "drafts": 152,
+        "tp": 13,
+        "fp": 55,
+        "fn": 107,
+        "precision": 0.19117647058823528,
+        "recall": 0.10833333333333334,
+        "f1": 0.13829787234042554,
+        "f05": 0.16581632653061223,
+        "negatives": 52,
+        "picksOnNegative": 10,
+        "exact": 46,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 6,
+            "fp": 27,
+            "fn": 54,
+            "precision": 0.18181818181818182,
+            "recall": 0.1,
+            "f1": 0.12903225806451613,
+            "f05": 0.15625000000000003,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 21
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 7,
+            "fp": 28,
+            "fn": 53,
+            "precision": 0.2,
+            "recall": 0.11666666666666667,
+            "f1": 0.1473684210526316,
+            "f05": 0.175,
+            "negatives": 26,
+            "picksOnNegative": 4,
+            "exact": 25
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 0
+      },
+      "second": {
+        "drafts": 104,
+        "tp": 2,
+        "fp": 5,
+        "fn": 84,
+        "precision": 0.2857142857142857,
+        "recall": 0.023255813953488372,
+        "f1": 0.04301075268817204,
+        "f05": 0.08771929824561403,
+        "negatives": 23,
+        "picksOnNegative": 1,
+        "exact": 24,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 1,
+            "fp": 3,
+            "fn": 42,
+            "precision": 0.25,
+            "recall": 0.023255813953488372,
+            "f1": 0.0425531914893617,
+            "f05": 0.0847457627118644,
+            "negatives": 12,
+            "picksOnNegative": 1,
+            "exact": 12
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 1,
+            "fp": 2,
+            "fn": 42,
+            "precision": 0.3333333333333333,
+            "recall": 0.023255813953488372,
+            "f1": 0.04347826086956522,
+            "f05": 0.09090909090909091,
+            "negatives": 11,
+            "picksOnNegative": 0,
+            "exact": 12
+          }
+        },
+        "literalBlank": 2,
+        "literalBlankOffers": 0,
+        "protectedWrong": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01",
+            "H02"
+          ],
+          "exact": true
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H02",
+            "H05"
+          ],
+          "exact": true
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H02",
+            "H01"
+          ],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 240,
+        "p50Ms": 406,
+        "p95Ms": 555
+      },
+      "firstDraftMs": 397,
+      "routed": {
+        "dev": 0,
+        "test": 0,
+        "second": 0,
+        "hero": 0
+      },
+      "inferenceLatency": {
+        "firstMs": 240,
+        "p50Ms": 409,
+        "p95Ms": 561
+      },
+      "reasonerLatency": null,
+      "invalid": 0
+    },
+    "firefox-profile": {
+      "coldMs": 0,
+      "indexMs": 0,
+      "diagnostics": {
+        "nano": {
+          "en": "No Prompt API",
+          "de": "No Prompt API"
+        },
+        "origin": "moz-extension://9ce47da8-6ba6-4d59-bcdb-899f7f3a3f00",
+        "runtimeId": "local-model-spike@bleib.dev",
+        "isolated": false,
+        "violations": [],
+        "resources": []
+      },
+      "engine": "firefox",
+      "name": "profile",
+      "assets": {},
+      "zipBytes": 3361,
+      "baselineRss": 742494208,
+      "peakRss": 771264512,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64; rv:153.0) Gecko/20100101 Firefox/153.0",
+      "outside": [],
+      "floors": null,
+      "precisionFloors": null,
+      "dev": {
+        "drafts": 48,
+        "tp": 6,
+        "fp": 90,
+        "fn": 44,
+        "precision": 0.0625,
+        "recall": 0.12,
+        "f1": 0.0821917808219178,
+        "f05": 0.06912442396313365,
+        "negatives": 10,
+        "picksOnNegative": 10,
+        "exact": 0,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 3,
+            "fp": 45,
+            "fn": 22,
+            "precision": 0.0625,
+            "recall": 0.12,
+            "f1": 0.0821917808219178,
+            "f05": 0.06912442396313365,
+            "negatives": 5,
+            "picksOnNegative": 5,
+            "exact": 0
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 3,
+            "fp": 45,
+            "fn": 22,
+            "precision": 0.0625,
+            "recall": 0.12,
+            "f1": 0.0821917808219178,
+            "f05": 0.06912442396313365,
+            "negatives": 5,
+            "picksOnNegative": 5,
+            "exact": 0
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 0
+      },
+      "test": {
+        "drafts": 152,
+        "tp": 8,
+        "fp": 296,
+        "fn": 112,
+        "precision": 0.02631578947368421,
+        "recall": 0.06666666666666667,
+        "f1": 0.03773584905660377,
+        "f05": 0.02994011976047904,
+        "negatives": 52,
+        "picksOnNegative": 52,
+        "exact": 0,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 4,
+            "fp": 148,
+            "fn": 56,
+            "precision": 0.02631578947368421,
+            "recall": 0.06666666666666667,
+            "f1": 0.03773584905660377,
+            "f05": 0.02994011976047904,
+            "negatives": 26,
+            "picksOnNegative": 26,
+            "exact": 0
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 4,
+            "fp": 148,
+            "fn": 56,
+            "precision": 0.02631578947368421,
+            "recall": 0.06666666666666667,
+            "f1": 0.03773584905660377,
+            "f05": 0.02994011976047904,
+            "negatives": 26,
+            "picksOnNegative": 26,
+            "exact": 0
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 0
+      },
+      "second": {
+        "drafts": 104,
+        "tp": 4,
+        "fp": 200,
+        "fn": 82,
+        "precision": 0.0196078431372549,
+        "recall": 0.046511627906976744,
+        "f1": 0.027586206896551724,
+        "f05": 0.022172949002217297,
+        "negatives": 23,
+        "picksOnNegative": 21,
+        "exact": 2,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 2,
+            "fp": 100,
+            "fn": 41,
+            "precision": 0.0196078431372549,
+            "recall": 0.046511627906976744,
+            "f1": 0.027586206896551724,
+            "f05": 0.022172949002217297,
+            "negatives": 12,
+            "picksOnNegative": 11,
+            "exact": 1
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 2,
+            "fp": 100,
+            "fn": 41,
+            "precision": 0.0196078431372549,
+            "recall": 0.046511627906976744,
+            "f1": 0.027586206896551724,
+            "f05": 0.022172949002217297,
+            "negatives": 11,
+            "picksOnNegative": 10,
+            "exact": 1
+          }
+        },
+        "literalBlank": 2,
+        "literalBlankOffers": 0,
+        "protectedWrong": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01",
+            "H02"
+          ],
+          "exact": true
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01",
+            "H02"
+          ],
+          "exact": true
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [
+            "H01",
+            "H02"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [
+            "H01",
+            "H02"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H01",
+            "H02"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H01",
+            "H02"
+          ],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 0,
+        "p50Ms": 0,
+        "p95Ms": 0
+      },
+      "firstDraftMs": 0,
+      "routed": {
+        "dev": 0,
+        "test": 0,
+        "second": 0,
+        "hero": 0
+      },
+      "inferenceLatency": null,
+      "reasonerLatency": null,
+      "invalid": 0
+    },
+    "firefox-static": {
+      "coldMs": 2,
+      "indexMs": 24,
+      "diagnostics": {
+        "origin": "moz-extension://37a3b569-915c-4feb-8b60-edee9718aff7",
+        "runtimeId": "local-model-spike@bleib.dev",
+        "isolated": false,
+        "violations": [],
+        "resources": []
+      },
+      "engine": "firefox",
+      "name": "static",
+      "assets": {
+        "save-static.bin": {
+          "bytes": 418200,
+          "sha256": "3e701615ed0c9ec3b7aff9aae76c38247a2b76c18bd41d6d075b34add1da6a1c"
+        },
+        "request-static.bin": {
+          "bytes": 418200,
+          "sha256": "690ff7a97eef51c49b1d134489c318fac484db646f376325062dd7abb1742fc0"
+        }
+      },
+      "zipBytes": 345074,
+      "baselineRss": 742903808,
+      "peakRss": 794460160,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64; rv:153.0) Gecko/20100101 Firefox/153.0",
+      "outside": [],
+      "floors": [
+        0.18,
+        0.46
+      ],
+      "precisionFloors": null,
+      "dev": {
+        "drafts": 48,
+        "tp": 13,
+        "fp": 1,
+        "fn": 37,
+        "precision": 0.9285714285714286,
+        "recall": 0.26,
+        "f1": 0.40625,
+        "f05": 0.6132075471698114,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 19,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 7,
+            "fp": 0,
+            "fn": 18,
+            "precision": 1,
+            "recall": 0.28,
+            "f1": 0.43750000000000006,
+            "f05": 0.6603773584905661,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 10
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 6,
+            "fp": 1,
+            "fn": 19,
+            "precision": 0.8571428571428571,
+            "recall": 0.24,
+            "f1": 0.375,
+            "f05": 0.5660377358490566,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 9
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 0
+      },
+      "test": {
+        "drafts": 152,
+        "tp": 35,
+        "fp": 6,
+        "fn": 85,
+        "precision": 0.8536585365853658,
+        "recall": 0.2916666666666667,
+        "f1": 0.4347826086956522,
+        "f05": 0.6161971830985916,
+        "negatives": 52,
+        "picksOnNegative": 2,
+        "exact": 78,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 17,
+            "fp": 2,
+            "fn": 43,
+            "precision": 0.8947368421052632,
+            "recall": 0.2833333333333333,
+            "f1": 0.43037974683544306,
+            "f05": 0.625,
+            "negatives": 26,
+            "picksOnNegative": 1,
+            "exact": 38
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 18,
+            "fp": 4,
+            "fn": 42,
+            "precision": 0.8181818181818182,
+            "recall": 0.3,
+            "f1": 0.43902439024390244,
+            "f05": 0.6081081081081081,
+            "negatives": 26,
+            "picksOnNegative": 1,
+            "exact": 40
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 6
+      },
+      "second": {
+        "drafts": 104,
+        "tp": 13,
+        "fp": 3,
+        "fn": 73,
+        "precision": 0.8125,
+        "recall": 0.1511627906976744,
+        "f1": 0.2549019607843137,
+        "f05": 0.4333333333333333,
+        "negatives": 23,
+        "picksOnNegative": 1,
+        "exact": 35,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 8,
+            "fp": 2,
+            "fn": 35,
+            "precision": 0.8,
+            "recall": 0.18604651162790697,
+            "f1": 0.3018867924528302,
+            "f05": 0.4819277108433735,
+            "negatives": 12,
+            "picksOnNegative": 1,
+            "exact": 19
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 5,
+            "fp": 1,
+            "fn": 38,
+            "precision": 0.8333333333333334,
+            "recall": 0.11627906976744186,
+            "f1": 0.20408163265306123,
+            "f05": 0.373134328358209,
+            "negatives": 11,
+            "picksOnNegative": 0,
+            "exact": 16
+          }
+        },
+        "literalBlank": 2,
+        "literalBlankOffers": 0,
+        "protectedWrong": 1
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 0,
+        "p50Ms": 0,
+        "p95Ms": 1
+      },
+      "firstDraftMs": 1,
+      "routed": {
+        "dev": 0,
+        "test": 0,
+        "second": 0,
+        "hero": 0
+      },
+      "inferenceLatency": {
+        "firstMs": 0,
+        "p50Ms": 0,
+        "p95Ms": 1
+      },
+      "reasonerLatency": null,
+      "invalid": 0
+    },
+    "firefox-similarity": {
+      "coldMs": 2613,
+      "indexMs": 21152,
+      "diagnostics": {
+        "origin": "moz-extension://30f35b15-f6ed-4f99-bb82-f19b5259b42a",
+        "runtimeId": "local-model-spike@bleib.dev",
+        "isolated": false,
+        "violations": [],
+        "resources": []
+      },
+      "engine": "firefox",
+      "name": "similarity",
+      "assets": {
+        "tokenizer.json": {
+          "bytes": 17082913,
+          "sha256": "b60b6b43406a48bf3638526314f3d232d97058bc93472ff2de930d43686fa441"
+        },
+        "tokenizer_config.json": {
+          "bytes": 496,
+          "sha256": "3f5961b9ac86288cccdb97f32fb848d6187c78e1603958c53f3ea1f296b7d8a2"
+        },
+        "onnx/model_quantized.onnx": {
+          "bytes": 118308126,
+          "sha256": "66fc00f5f29afcaff34092e1bdd20008ca3918265a82fb9695a551e510cc4ebc"
+        }
+      },
+      "zipBytes": 80873894,
+      "baselineRss": 739672064,
+      "peakRss": 1590587392,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64; rv:153.0) Gecko/20100101 Firefox/153.0",
+      "outside": [],
+      "floors": [
+        0.37,
+        0.53
+      ],
+      "precisionFloors": null,
+      "dev": {
+        "drafts": 48,
+        "tp": 18,
+        "fp": 11,
+        "fn": 32,
+        "precision": 0.6206896551724138,
+        "recall": 0.36,
+        "f1": 0.45569620253164556,
+        "f05": 0.5421686746987953,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 21,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 8,
+            "fp": 5,
+            "fn": 17,
+            "precision": 0.6153846153846154,
+            "recall": 0.32,
+            "f1": 0.4210526315789474,
+            "f05": 0.5194805194805195,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 10
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 10,
+            "fp": 6,
+            "fn": 15,
+            "precision": 0.625,
+            "recall": 0.4,
+            "f1": 0.48780487804878053,
+            "f05": 0.5617977528089887,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 11
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 10
+      },
+      "test": {
+        "drafts": 152,
+        "tp": 59,
+        "fp": 43,
+        "fn": 61,
+        "precision": 0.5784313725490197,
+        "recall": 0.49166666666666664,
+        "f1": 0.5315315315315315,
+        "f05": 0.5587121212121212,
+        "negatives": 52,
+        "picksOnNegative": 12,
+        "exact": 84,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 28,
+            "fp": 20,
+            "fn": 32,
+            "precision": 0.5833333333333334,
+            "recall": 0.4666666666666667,
+            "f1": 0.5185185185185186,
+            "f05": 0.5555555555555556,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 42
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 31,
+            "fp": 23,
+            "fn": 29,
+            "precision": 0.5740740740740741,
+            "recall": 0.5166666666666667,
+            "f1": 0.543859649122807,
+            "f05": 0.5615942028985507,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 42
+          }
+        },
+        "literalBlank": 0,
+        "literalBlankOffers": 0,
+        "protectedWrong": 39
+      },
+      "second": {
+        "drafts": 104,
+        "tp": 42,
+        "fp": 42,
+        "fn": 44,
+        "precision": 0.5,
+        "recall": 0.4883720930232558,
+        "f1": 0.4941176470588235,
+        "f05": 0.4976303317535545,
+        "negatives": 23,
+        "picksOnNegative": 11,
+        "exact": 50,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 24,
+            "fp": 15,
+            "fn": 19,
+            "precision": 0.6153846153846154,
+            "recall": 0.5581395348837209,
+            "f1": 0.5853658536585366,
+            "f05": 0.6030150753768845,
+            "negatives": 12,
+            "picksOnNegative": 4,
+            "exact": 29
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 18,
+            "fp": 27,
+            "fn": 25,
+            "precision": 0.4,
+            "recall": 0.4186046511627907,
+            "f1": 0.40909090909090917,
+            "f05": 0.40358744394618834,
+            "negatives": 11,
+            "picksOnNegative": 7,
+            "exact": 21
+          }
+        },
+        "literalBlank": 2,
+        "literalBlankOffers": 0,
+        "protectedWrong": 14
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H04"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H04"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H05"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H05"
+          ],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 185,
+        "p50Ms": 337,
+        "p95Ms": 450
+      },
+      "firstDraftMs": 328,
+      "routed": {
+        "dev": 0,
+        "test": 0,
+        "second": 0,
+        "hero": 0
+      },
+      "inferenceLatency": {
+        "firstMs": 185,
+        "p50Ms": 347,
+        "p95Ms": 466
+      },
+      "reasonerLatency": null,
+      "invalid": 0
+    }
+  },
+  "failures": {
+    "chromium-qwen35": "Full direct held-out run stopped after repeated slow CPU attempts. All six supplemental website demos completed and are recorded under controls.",
+    "chromium-mlc": "Error: page.evaluate: Error: Qwen3 WebLLM needs an accelerated WebGPU adapter with shader-f16.\n    at CN (chrome-extension://jbkeppnoepphfpdnbhlgfjagbmlaefff/webllm.js:96:604)\n    at async globalThis.runBenchmark (chrome-extension://jbkeppnoepphfpdnbhlgfjagbmlaefff/page.js:1:2557)\n    at async <anonymous>:337:30",
+    "firefox-gemma": "Supplemental Firefox CPU run stopped after about 21 minutes without a complete result. Firefox had only a fallback WebGPU adapter when forced.",
+    "firefox-mlc": "Error: page.evaluate: Error: Qwen3 WebLLM needs an accelerated WebGPU adapter with shader-f16.\nhandle@debugger eval code line 311 > eval:6:36\nEventListener.handleEvent*@debugger eval code line 311 > eval:3:21\n@debugger eval code line 311 > eval:1:21\nevaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n"
+  },
+  "controls": {
+    "qwen3-fixed-choice": {
+      "valid": true,
+      "raw": "{\"ids\": [1]}"
+    },
+    "qwen35-direct": {
+      "coldMs": 24780.544999957085,
+      "indexMs": 0.1350000500679016,
+      "output": [
+        {
+          "id": "H-LIS-de",
+          "selected": [
+            "H02"
+          ],
+          "invalid": false,
+          "ms": 17259.635000050068,
+          "inferred": true
+        },
+        {
+          "id": "H-COVER-de",
+          "selected": [],
+          "invalid": false,
+          "ms": 10540.585000038147,
+          "inferred": true
+        },
+        {
+          "id": "H-DINNER-de",
+          "selected": [
+            "H02"
+          ],
+          "invalid": false,
+          "ms": 9543.990000009537,
+          "inferred": true
+        },
+        {
+          "id": "H-LIS-en",
+          "selected": [
+            "H04"
+          ],
+          "invalid": false,
+          "ms": 13001.415000021458,
+          "inferred": true
+        },
+        {
+          "id": "H-COVER-en",
+          "selected": [],
+          "invalid": false,
+          "ms": 10098.660000026226,
+          "inferred": true
+        },
+        {
+          "id": "H-DINNER-en",
+          "selected": [],
+          "invalid": false,
+          "ms": 6524.145000040531,
+          "inferred": true
+        }
+      ],
+      "diagnostics": {
+        "nano": {},
+        "origin": "http://127.0.0.1:36591",
+        "isolated": true,
+        "violations": [],
+        "resources": [
+          "http://127.0.0.1:36591/page.js",
+          "http://127.0.0.1:36591/favicon.ico",
+          "http://127.0.0.1:36591/wllama.js",
+          "http://127.0.0.1:36591/model/Qwen3.5-0.8B-Q4_K_M.gguf",
+          "http://127.0.0.1:36591/runtime/wllama.wasm"
+        ]
+      },
+      "engine": "chromium",
+      "name": "qwen35",
+      "assets": {
+        "Qwen3.5-0.8B-Q4_K_M.gguf": {
+          "bytes": 532517120,
+          "sha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517"
+        }
+      },
+      "zipBytes": 522187740,
+      "baselineRss": 792326144,
+      "peakRss": 1963737088,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "outside": []
+    }
+  }
+}

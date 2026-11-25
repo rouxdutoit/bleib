@@ -1,0 +1,5661 @@
+{
+  "minilm-int8": {
+    "embeddingFidelity": {
+      "fp32VsMaker": {
+        "minCosine": 0.9999999251733354,
+        "cosines": [
+          1.0000000068922688,
+          1.0000000395701216,
+          0.9999999758931005,
+          0.9999999563428523,
+          1.0000000077545115,
+          0.9999999251733354,
+          0.9999999628956445,
+          0.9999999950019971,
+          1.0000000000609972,
+          1.0000000355548744
+        ],
+        "exactIds": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "quantizedVsFp32": {
+        "minCosine": 0.9927638648755366,
+        "cosines": [
+          0.9981809904547249,
+          0.9953823091546866,
+          0.998682806285035,
+          0.9947530737901596,
+          0.9927638648755366,
+          0.9978782898260709,
+          0.9971656690508766,
+          0.9982840012856473,
+          0.9959709006742602,
+          0.9971787628361801
+        ],
+        "exactIds": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    "assets": {
+      "onnx/model_quantized.onnx": {
+        "bytes": 118308126,
+        "sha256": "66fc00f5f29afcaff34092e1bdd20008ca3918265a82fb9695a551e510cc4ebc"
+      }
+    },
+    "fp32WithFrozenHeadsDev": {
+      "drafts": 48,
+      "tp": 25,
+      "fp": 0,
+      "fn": 25,
+      "precision": 1,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "f05": 0.8333333333333334,
+      "negatives": 10,
+      "picksOnNegative": 0,
+      "exact": 28,
+      "byLanguage": {
+        "en": {
+          "drafts": 24,
+          "tp": 14,
+          "fp": 0,
+          "fn": 11,
+          "precision": 1,
+          "recall": 0.56,
+          "f1": 0.717948717948718,
+          "f05": 0.8641975308641976,
+          "negatives": 5,
+          "picksOnNegative": 0,
+          "exact": 14
+        },
+        "de": {
+          "drafts": 24,
+          "tp": 11,
+          "fp": 0,
+          "fn": 14,
+          "precision": 1,
+          "recall": 0.44,
+          "f1": 0.6111111111111112,
+          "f05": 0.7971014492753624,
+          "negatives": 5,
+          "picksOnNegative": 0,
+          "exact": 14
+        }
+      },
+      "blank": 0,
+      "blankOffers": 0
+    },
+    "training": {
+      "request": {
+        "data": {
+          "bytes": 1144429,
+          "sha256": "7fa216064852909c20bc7e66c7d10944f9136eb80027ca6ab149e31983b43dba"
+        },
+        "head": {
+          "bytes": 20547,
+          "sha256": "f877f595e8d14c9b922ee28d2ce599fa2f5dbcc7b8116d53873c687f33baa2df"
+        }
+      },
+      "save": {
+        "data": {
+          "bytes": 666426,
+          "sha256": "cf7d18136b5ba9ceaca4748282170acf9972754ad2cee314f821707fa4920cd5"
+        },
+        "head": {
+          "bytes": 20547,
+          "sha256": "81b251d786e1a75462f276b2bcbb534f6bf5252d565c619aad4cb0356f234298"
+        }
+      }
+    },
+    "node": {
+      "operating": {
+        "floors": [
+          0.76,
+          0.98
+        ],
+        "passedDevPrecisionGate": true
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 25,
+        "fp": 1,
+        "fn": 25,
+        "precision": 0.9615384615384616,
+        "recall": 0.5,
+        "f1": 0.6578947368421052,
+        "f05": 0.8116883116883116,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 28,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 14,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.56,
+            "f1": 0.717948717948718,
+            "f05": 0.8641975308641976,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 11,
+            "fp": 1,
+            "fn": 14,
+            "precision": 0.9166666666666666,
+            "recall": 0.44,
+            "f1": 0.5945945945945945,
+            "f05": 0.7534246575342465,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "coldMs": 810.428681,
+      "firstMs": 6.959695000000011,
+      "indexMs": 378.81800899999996,
+      "beforeBytes": 62103552,
+      "original": {
+        "drafts": 152,
+        "tp": 68,
+        "fp": 9,
+        "fn": 52,
+        "precision": 0.8831168831168831,
+        "recall": 0.5666666666666667,
+        "f1": 0.6903553299492385,
+        "f05": 0.794392523364486,
+        "negatives": 52,
+        "picksOnNegative": 6,
+        "exact": 104,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 34,
+            "fp": 5,
+            "fn": 26,
+            "precision": 0.8717948717948718,
+            "recall": 0.5666666666666667,
+            "f1": 0.6868686868686869,
+            "f05": 0.7870370370370371,
+            "negatives": 26,
+            "picksOnNegative": 3,
+            "exact": 52
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 34,
+            "fp": 4,
+            "fn": 26,
+            "precision": 0.8947368421052632,
+            "recall": 0.5666666666666667,
+            "f1": 0.6938775510204083,
+            "f05": 0.8018867924528302,
+            "negatives": 26,
+            "picksOnNegative": 3,
+            "exact": 52
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 39,
+        "fp": 6,
+        "fn": 47,
+        "precision": 0.8666666666666667,
+        "recall": 0.45348837209302323,
+        "f1": 0.5954198473282443,
+        "f05": 0.7330827067669173,
+        "negatives": 23,
+        "picksOnNegative": 3,
+        "exact": 56,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 22,
+            "fp": 4,
+            "fn": 21,
+            "precision": 0.8461538461538461,
+            "recall": 0.5116279069767442,
+            "f1": 0.6376811594202898,
+            "f05": 0.7482993197278912,
+            "negatives": 12,
+            "picksOnNegative": 3,
+            "exact": 29
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 17,
+            "fp": 2,
+            "fn": 26,
+            "precision": 0.8947368421052632,
+            "recall": 0.3953488372093023,
+            "f1": 0.5483870967741935,
+            "f05": 0.7142857142857143,
+            "negatives": 11,
+            "picksOnNegative": 0,
+            "exact": 27
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 4.530706000000009,
+        "p50Ms": 5.849375000000009,
+        "p95Ms": 7.876981999999998
+      },
+      "inferenceLatency": {
+        "firstMs": 4.530706000000009,
+        "p50Ms": 5.895415999999841,
+        "p95Ms": 7.990142000000105
+      },
+      "idleBytes": 567074816,
+      "peakBytes": 567074816
+    },
+    "chromium": {
+      "operating": {
+        "floors": [
+          0.76,
+          0.98
+        ],
+        "passedDevPrecisionGate": true
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 24,
+        "fp": 1,
+        "fn": 26,
+        "precision": 0.96,
+        "recall": 0.48,
+        "f1": 0.64,
+        "f05": 0.7999999999999999,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 27,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 14,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.56,
+            "f1": 0.717948717948718,
+            "f05": 0.8641975308641976,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 10,
+            "fp": 1,
+            "fn": 15,
+            "precision": 0.9090909090909091,
+            "recall": 0.4,
+            "f1": 0.5555555555555556,
+            "f05": 0.7246376811594202,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 13
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "original": {
+        "drafts": 152,
+        "tp": 68,
+        "fp": 10,
+        "fn": 52,
+        "precision": 0.8717948717948718,
+        "recall": 0.5666666666666667,
+        "f1": 0.6868686868686869,
+        "f05": 0.7870370370370371,
+        "negatives": 52,
+        "picksOnNegative": 7,
+        "exact": 103,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 34,
+            "fp": 6,
+            "fn": 26,
+            "precision": 0.85,
+            "recall": 0.5666666666666667,
+            "f1": 0.68,
+            "f05": 0.7727272727272727,
+            "negatives": 26,
+            "picksOnNegative": 4,
+            "exact": 51
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 34,
+            "fp": 4,
+            "fn": 26,
+            "precision": 0.8947368421052632,
+            "recall": 0.5666666666666667,
+            "f1": 0.6938775510204083,
+            "f05": 0.8018867924528302,
+            "negatives": 26,
+            "picksOnNegative": 3,
+            "exact": 52
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 39,
+        "fp": 5,
+        "fn": 47,
+        "precision": 0.8863636363636364,
+        "recall": 0.45348837209302323,
+        "f1": 0.6,
+        "f05": 0.7442748091603053,
+        "negatives": 23,
+        "picksOnNegative": 3,
+        "exact": 56,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 22,
+            "fp": 4,
+            "fn": 21,
+            "precision": 0.8461538461538461,
+            "recall": 0.5116279069767442,
+            "f1": 0.6376811594202898,
+            "f05": 0.7482993197278912,
+            "negatives": 12,
+            "picksOnNegative": 3,
+            "exact": 29
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 17,
+            "fp": 1,
+            "fn": 26,
+            "precision": 0.9444444444444444,
+            "recall": 0.3953488372093023,
+            "f1": 0.5573770491803278,
+            "f05": 0.7391304347826086,
+            "negatives": 11,
+            "picksOnNegative": 0,
+            "exact": 27
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 47.30000001192093,
+        "p50Ms": 77.80000001192093,
+        "p95Ms": 101.60000002384186
+      },
+      "inferenceLatency": {
+        "firstMs": 47.30000001192093,
+        "p50Ms": 80.59999996423721,
+        "p95Ms": 106.39999997615814
+      },
+      "coldMs": 5271.800000011921,
+      "firstMs": 228,
+      "indexMs": 5055.900000035763,
+      "unpackedBytes": 150426509,
+      "zipBytes": 80912327,
+      "beforeBytes": 733593600,
+      "idleBytes": 1244352512,
+      "peakBytes": 1518825472,
+      "version": "Chrome/151.0.7922.34",
+      "diagnostics": {
+        "origin": "chrome-extension://fjfnobhcpahmlndjeelmnagkafcnbhcm",
+        "runtimeId": "fjfnobhcpahmlndjeelmnagkafcnbhcm",
+        "violations": [],
+        "resources": []
+      }
+    }
+  },
+  "minilm-q4": {
+    "embeddingFidelity": {
+      "fp32VsMaker": {
+        "minCosine": 0.9999999251733354,
+        "cosines": [
+          1.0000000068922688,
+          1.0000000395701216,
+          0.9999999758931005,
+          0.9999999563428523,
+          1.0000000077545115,
+          0.9999999251733354,
+          0.9999999628956445,
+          0.9999999950019971,
+          1.0000000000609972,
+          1.0000000355548744
+        ],
+        "exactIds": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "quantizedVsFp32": {
+        "minCosine": 0.9851426211899311,
+        "cosines": [
+          0.9933726778433206,
+          0.9897822714326433,
+          0.9927716422219011,
+          0.9851426211899311,
+          0.9870987271419656,
+          0.9900527152796158,
+          0.9928657206012923,
+          0.9912477546700597,
+          0.9896662310695084,
+          0.9912729523567416
+        ],
+        "exactIds": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    "assets": {
+      "onnx/model_q4.onnx": {
+        "bytes": 73992032,
+        "sha256": "e9cf61b3bb7478019c7122ab03ee75e7faa2ac4cb8a553f7f29f650cc0b09d4c"
+      }
+    },
+    "fp32WithFrozenHeadsDev": {
+      "drafts": 48,
+      "tp": 25,
+      "fp": 0,
+      "fn": 25,
+      "precision": 1,
+      "recall": 0.5,
+      "f1": 0.6666666666666666,
+      "f05": 0.8333333333333334,
+      "negatives": 10,
+      "picksOnNegative": 0,
+      "exact": 28,
+      "byLanguage": {
+        "en": {
+          "drafts": 24,
+          "tp": 14,
+          "fp": 0,
+          "fn": 11,
+          "precision": 1,
+          "recall": 0.56,
+          "f1": 0.717948717948718,
+          "f05": 0.8641975308641976,
+          "negatives": 5,
+          "picksOnNegative": 0,
+          "exact": 14
+        },
+        "de": {
+          "drafts": 24,
+          "tp": 11,
+          "fp": 0,
+          "fn": 14,
+          "precision": 1,
+          "recall": 0.44,
+          "f1": 0.6111111111111112,
+          "f05": 0.7971014492753624,
+          "negatives": 5,
+          "picksOnNegative": 0,
+          "exact": 14
+        }
+      },
+      "blank": 0,
+      "blankOffers": 0
+    },
+    "training": {
+      "request": {
+        "data": {
+          "bytes": 1144429,
+          "sha256": "7fa216064852909c20bc7e66c7d10944f9136eb80027ca6ab149e31983b43dba"
+        },
+        "head": {
+          "bytes": 20547,
+          "sha256": "842da472d408e2b8ffa123f1e640710aea2d5e01cc132abaeedea264c3dad4f2"
+        }
+      },
+      "save": {
+        "data": {
+          "bytes": 666426,
+          "sha256": "cf7d18136b5ba9ceaca4748282170acf9972754ad2cee314f821707fa4920cd5"
+        },
+        "head": {
+          "bytes": 20547,
+          "sha256": "180824b0f6e67680d5cea57a8ba1f22f5887323353b88b46da1e1ff5ec8e18d4"
+        }
+      }
+    },
+    "node": {
+      "operating": {
+        "floors": [
+          0.78,
+          0.98
+        ],
+        "passedDevPrecisionGate": true
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 24,
+        "fp": 0,
+        "fn": 26,
+        "precision": 1,
+        "recall": 0.48,
+        "f1": 0.6486486486486487,
+        "f05": 0.821917808219178,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 27,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 14,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.56,
+            "f1": 0.717948717948718,
+            "f05": 0.8641975308641976,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 10,
+            "fp": 0,
+            "fn": 15,
+            "precision": 1,
+            "recall": 0.4,
+            "f1": 0.5714285714285715,
+            "f05": 0.7692307692307692,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 13
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "coldMs": 699.935518,
+      "firstMs": 14.432492999999909,
+      "indexMs": 990.3730569999999,
+      "beforeBytes": 62464000,
+      "original": {
+        "drafts": 152,
+        "tp": 70,
+        "fp": 10,
+        "fn": 50,
+        "precision": 0.875,
+        "recall": 0.5833333333333334,
+        "f1": 0.7000000000000001,
+        "f05": 0.7954545454545454,
+        "negatives": 52,
+        "picksOnNegative": 6,
+        "exact": 106,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 36,
+            "fp": 5,
+            "fn": 24,
+            "precision": 0.8780487804878049,
+            "recall": 0.6,
+            "f1": 0.712871287128713,
+            "f05": 0.8035714285714286,
+            "negatives": 26,
+            "picksOnNegative": 3,
+            "exact": 53
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 34,
+            "fp": 5,
+            "fn": 26,
+            "precision": 0.8717948717948718,
+            "recall": 0.5666666666666667,
+            "f1": 0.6868686868686869,
+            "f05": 0.7870370370370371,
+            "negatives": 26,
+            "picksOnNegative": 3,
+            "exact": 53
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 36,
+        "fp": 6,
+        "fn": 50,
+        "precision": 0.8571428571428571,
+        "recall": 0.4186046511627907,
+        "f1": 0.5625000000000001,
+        "f05": 0.7086614173228346,
+        "negatives": 23,
+        "picksOnNegative": 3,
+        "exact": 55,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 19,
+            "fp": 4,
+            "fn": 24,
+            "precision": 0.8260869565217391,
+            "recall": 0.4418604651162791,
+            "f1": 0.5757575757575758,
+            "f05": 0.7037037037037036,
+            "negatives": 12,
+            "picksOnNegative": 3,
+            "exact": 28
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 17,
+            "fp": 2,
+            "fn": 26,
+            "precision": 0.8947368421052632,
+            "recall": 0.3953488372093023,
+            "f1": 0.5483870967741935,
+            "f05": 0.7142857142857143,
+            "negatives": 11,
+            "picksOnNegative": 0,
+            "exact": 27
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 10.489982000000055,
+        "p50Ms": 13.804208000000017,
+        "p95Ms": 17.159414000000652
+      },
+      "inferenceLatency": {
+        "firstMs": 10.489982000000055,
+        "p50Ms": 13.841858000000684,
+        "p95Ms": 17.32155499999999
+      },
+      "idleBytes": 519643136,
+      "peakBytes": 521777152
+    },
+    "chromium": {
+      "operating": {
+        "floors": [
+          0.78,
+          0.98
+        ],
+        "passedDevPrecisionGate": true
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 24,
+        "fp": 0,
+        "fn": 26,
+        "precision": 1,
+        "recall": 0.48,
+        "f1": 0.6486486486486487,
+        "f05": 0.821917808219178,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 27,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 14,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.56,
+            "f1": 0.717948717948718,
+            "f05": 0.8641975308641976,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 10,
+            "fp": 0,
+            "fn": 15,
+            "precision": 1,
+            "recall": 0.4,
+            "f1": 0.5714285714285715,
+            "f05": 0.7692307692307692,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 13
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "original": {
+        "drafts": 152,
+        "tp": 70,
+        "fp": 10,
+        "fn": 50,
+        "precision": 0.875,
+        "recall": 0.5833333333333334,
+        "f1": 0.7000000000000001,
+        "f05": 0.7954545454545454,
+        "negatives": 52,
+        "picksOnNegative": 6,
+        "exact": 106,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 36,
+            "fp": 5,
+            "fn": 24,
+            "precision": 0.8780487804878049,
+            "recall": 0.6,
+            "f1": 0.712871287128713,
+            "f05": 0.8035714285714286,
+            "negatives": 26,
+            "picksOnNegative": 3,
+            "exact": 53
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 34,
+            "fp": 5,
+            "fn": 26,
+            "precision": 0.8717948717948718,
+            "recall": 0.5666666666666667,
+            "f1": 0.6868686868686869,
+            "f05": 0.7870370370370371,
+            "negatives": 26,
+            "picksOnNegative": 3,
+            "exact": 53
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 36,
+        "fp": 6,
+        "fn": 50,
+        "precision": 0.8571428571428571,
+        "recall": 0.4186046511627907,
+        "f1": 0.5625000000000001,
+        "f05": 0.7086614173228346,
+        "negatives": 23,
+        "picksOnNegative": 3,
+        "exact": 55,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 19,
+            "fp": 4,
+            "fn": 24,
+            "precision": 0.8260869565217391,
+            "recall": 0.4418604651162791,
+            "f1": 0.5757575757575758,
+            "f05": 0.7037037037037036,
+            "negatives": 12,
+            "picksOnNegative": 3,
+            "exact": 28
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 17,
+            "fp": 2,
+            "fn": 26,
+            "precision": 0.8947368421052632,
+            "recall": 0.3953488372093023,
+            "f1": 0.5483870967741935,
+            "f05": 0.7142857142857143,
+            "negatives": 11,
+            "picksOnNegative": 0,
+            "exact": 27
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 239.89999997615814,
+        "p50Ms": 303.5,
+        "p95Ms": 357
+      },
+      "inferenceLatency": {
+        "firstMs": 239.89999997615814,
+        "p50Ms": 304.60000002384186,
+        "p95Ms": 357.39999997615814
+      },
+      "coldMs": 4589.199999988079,
+      "firstMs": 421.0999999642372,
+      "indexMs": 22361.69999998808,
+      "unpackedBytes": 106110381,
+      "zipBytes": 76722646,
+      "beforeBytes": 769531904,
+      "idleBytes": 1142251520,
+      "peakBytes": 1375846400,
+      "version": "Chrome/151.0.7922.34",
+      "diagnostics": {
+        "origin": "chrome-extension://almngphkjjfjoihjoobkhlgjijohjcec",
+        "runtimeId": "almngphkjjfjoihjoobkhlgjijohjcec",
+        "violations": [],
+        "resources": []
+      }
+    }
+  },
+  "harrier-int8": {
+    "embeddingFidelity": {
+      "fp32VsMaker": {
+        "minCosine": 0.9999999395135125,
+        "cosines": [
+          0.9999999657473022,
+          0.9999999596211371,
+          1.0000000046344577,
+          1.000000019798044,
+          0.9999999528069273,
+          0.9999999395135125,
+          1.000000010913243,
+          0.9999999777295037,
+          1.0000000359217212,
+          0.9999999946564975
+        ],
+        "exactIds": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "quantizedVsFp32": {
+        "minCosine": 0.9811361650471915,
+        "cosines": [
+          0.9860850855244471,
+          0.9811361650471915,
+          0.9817509476780693,
+          0.9819725999604704,
+          0.9852947169785525,
+          0.9863910724085102,
+          0.9857297523181109,
+          0.9856623353411634,
+          0.9851976363574221,
+          0.9847172936950063
+        ],
+        "exactIds": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    "assets": {
+      "onnx/model_quantized.onnx": {
+        "bytes": 953754,
+        "sha256": "ca1e822a6bfadbd598651de106b13f38c400672cee5b061504accd764c24b8b8"
+      },
+      "onnx/model_quantized.onnx.data": {
+        "bytes": 301820416,
+        "sha256": "7b694413046837724597639bc47f9d5ec6e4320f9f7167cea159095d3faff179"
+      }
+    },
+    "fp32WithFrozenHeadsDev": {
+      "drafts": 48,
+      "tp": 24,
+      "fp": 0,
+      "fn": 26,
+      "precision": 1,
+      "recall": 0.48,
+      "f1": 0.6486486486486487,
+      "f05": 0.821917808219178,
+      "negatives": 10,
+      "picksOnNegative": 0,
+      "exact": 25,
+      "byLanguage": {
+        "en": {
+          "drafts": 24,
+          "tp": 13,
+          "fp": 0,
+          "fn": 12,
+          "precision": 1,
+          "recall": 0.52,
+          "f1": 0.6842105263157895,
+          "f05": 0.8441558441558442,
+          "negatives": 5,
+          "picksOnNegative": 0,
+          "exact": 13
+        },
+        "de": {
+          "drafts": 24,
+          "tp": 11,
+          "fp": 0,
+          "fn": 14,
+          "precision": 1,
+          "recall": 0.44,
+          "f1": 0.6111111111111112,
+          "f05": 0.7971014492753624,
+          "negatives": 5,
+          "picksOnNegative": 0,
+          "exact": 12
+        }
+      },
+      "blank": 0,
+      "blankOffers": 0
+    },
+    "training": {
+      "request": {
+        "data": {
+          "bytes": 1144429,
+          "sha256": "7fa216064852909c20bc7e66c7d10944f9136eb80027ca6ab149e31983b43dba"
+        },
+        "head": {
+          "bytes": 33603,
+          "sha256": "f391ce6a80902fe4ae7e59ce8a54589afcc94a840772000d07735ae9e8c9b3c8"
+        }
+      },
+      "save": {
+        "data": {
+          "bytes": 666426,
+          "sha256": "cf7d18136b5ba9ceaca4748282170acf9972754ad2cee314f821707fa4920cd5"
+        },
+        "head": {
+          "bytes": 33603,
+          "sha256": "36cc90541886790835a68b88d585b760308089090d9ede5b69e189159d088c5f"
+        }
+      }
+    },
+    "node": {
+      "operating": {
+        "floors": [
+          0.88,
+          0.96
+        ],
+        "passedDevPrecisionGate": true
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 25,
+        "fp": 0,
+        "fn": 25,
+        "precision": 1,
+        "recall": 0.5,
+        "f1": 0.6666666666666666,
+        "f05": 0.8333333333333334,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 25,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 13,
+            "fp": 0,
+            "fn": 12,
+            "precision": 1,
+            "recall": 0.52,
+            "f1": 0.6842105263157895,
+            "f05": 0.8441558441558442,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 13
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 12,
+            "fp": 0,
+            "fn": 13,
+            "precision": 1,
+            "recall": 0.48,
+            "f1": 0.6486486486486487,
+            "f05": 0.821917808219178,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 12
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "coldMs": 1008.3113599999999,
+      "firstMs": 37.687875000000076,
+      "indexMs": 2557.821815,
+      "beforeBytes": 62644224,
+      "original": {
+        "drafts": 152,
+        "tp": 68,
+        "fp": 6,
+        "fn": 52,
+        "precision": 0.918918918918919,
+        "recall": 0.5666666666666667,
+        "f1": 0.7010309278350515,
+        "f05": 0.8173076923076924,
+        "negatives": 52,
+        "picksOnNegative": 5,
+        "exact": 104,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 38,
+            "fp": 3,
+            "fn": 22,
+            "precision": 0.926829268292683,
+            "recall": 0.6333333333333333,
+            "f1": 0.7524752475247526,
+            "f05": 0.8482142857142858,
+            "negatives": 26,
+            "picksOnNegative": 3,
+            "exact": 54
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 30,
+            "fp": 3,
+            "fn": 30,
+            "precision": 0.9090909090909091,
+            "recall": 0.5,
+            "f1": 0.6451612903225806,
+            "f05": 0.7812499999999999,
+            "negatives": 26,
+            "picksOnNegative": 2,
+            "exact": 50
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 30,
+        "fp": 2,
+        "fn": 56,
+        "precision": 0.9375,
+        "recall": 0.3488372093023256,
+        "f1": 0.5084745762711865,
+        "f05": 0.7009345794392524,
+        "negatives": 23,
+        "picksOnNegative": 1,
+        "exact": 50,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 16,
+            "fp": 1,
+            "fn": 27,
+            "precision": 0.9411764705882353,
+            "recall": 0.37209302325581395,
+            "f1": 0.5333333333333333,
+            "f05": 0.7207207207207207,
+            "negatives": 12,
+            "picksOnNegative": 1,
+            "exact": 27
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 14,
+            "fp": 1,
+            "fn": 29,
+            "precision": 0.9333333333333333,
+            "recall": 0.32558139534883723,
+            "f1": 0.4827586206896553,
+            "f05": 0.679611650485437,
+            "negatives": 11,
+            "picksOnNegative": 0,
+            "exact": 23
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01",
+            "H02"
+          ],
+          "exact": true
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 29.706441999999697,
+        "p50Ms": 39.397407999998904,
+        "p95Ms": 49.308624999999665
+      },
+      "inferenceLatency": {
+        "firstMs": 29.706441999999697,
+        "p50Ms": 39.792271000000255,
+        "p95Ms": 49.345525000000634
+      },
+      "idleBytes": 677281792,
+      "peakBytes": 682123264
+    },
+    "chromium": {
+      "operating": {
+        "floors": [
+          0.88,
+          0.96
+        ],
+        "passedDevPrecisionGate": true
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 25,
+        "fp": 0,
+        "fn": 25,
+        "precision": 1,
+        "recall": 0.5,
+        "f1": 0.6666666666666666,
+        "f05": 0.8333333333333334,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 26,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 14,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.56,
+            "f1": 0.717948717948718,
+            "f05": 0.8641975308641976,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 11,
+            "fp": 0,
+            "fn": 14,
+            "precision": 1,
+            "recall": 0.44,
+            "f1": 0.6111111111111112,
+            "f05": 0.7971014492753624,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 12
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "original": {
+        "drafts": 152,
+        "tp": 68,
+        "fp": 7,
+        "fn": 52,
+        "precision": 0.9066666666666666,
+        "recall": 0.5666666666666667,
+        "f1": 0.6974358974358975,
+        "f05": 0.8095238095238094,
+        "negatives": 52,
+        "picksOnNegative": 5,
+        "exact": 104,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 38,
+            "fp": 3,
+            "fn": 22,
+            "precision": 0.926829268292683,
+            "recall": 0.6333333333333333,
+            "f1": 0.7524752475247526,
+            "f05": 0.8482142857142858,
+            "negatives": 26,
+            "picksOnNegative": 3,
+            "exact": 54
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 30,
+            "fp": 4,
+            "fn": 30,
+            "precision": 0.8823529411764706,
+            "recall": 0.5,
+            "f1": 0.6382978723404256,
+            "f05": 0.7653061224489797,
+            "negatives": 26,
+            "picksOnNegative": 2,
+            "exact": 50
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 29,
+        "fp": 1,
+        "fn": 57,
+        "precision": 0.9666666666666667,
+        "recall": 0.3372093023255814,
+        "f1": 0.5,
+        "f05": 0.703883495145631,
+        "negatives": 23,
+        "picksOnNegative": 1,
+        "exact": 50,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 15,
+            "fp": 1,
+            "fn": 28,
+            "precision": 0.9375,
+            "recall": 0.3488372093023256,
+            "f1": 0.5084745762711865,
+            "f05": 0.7009345794392524,
+            "negatives": 12,
+            "picksOnNegative": 1,
+            "exact": 26
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 14,
+            "fp": 0,
+            "fn": 29,
+            "precision": 1,
+            "recall": 0.32558139534883723,
+            "f1": 0.49122807017543857,
+            "f05": 0.7070707070707072,
+            "negatives": 11,
+            "picksOnNegative": 0,
+            "exact": 24
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 491.89999997615814,
+        "p50Ms": 483.9000000357628,
+        "p95Ms": 586.8999999761581
+      },
+      "inferenceLatency": {
+        "firstMs": 491.89999997615814,
+        "p50Ms": 493.9000000357628,
+        "p95Ms": 588
+      },
+      "coldMs": 8376.699999988079,
+      "firstMs": 614.1000000238419,
+      "indexMs": 33407.40000003576,
+      "unpackedBytes": 338159430,
+      "zipBytes": 221148004,
+      "beforeBytes": 768610304,
+      "idleBytes": 1249771520,
+      "peakBytes": 1795543040,
+      "version": "Chrome/151.0.7922.34",
+      "diagnostics": {
+        "origin": "chrome-extension://bjljidbobkljaopnpjenhemklgakdolh",
+        "runtimeId": "bjljidbobkljaopnpjenhemklgakdolh",
+        "violations": [],
+        "resources": []
+      }
+    }
+  },
+  "harrier-q4": {
+    "embeddingFidelity": {
+      "fp32VsMaker": {
+        "minCosine": 0.9999999395135125,
+        "cosines": [
+          0.9999999657473022,
+          0.9999999596211371,
+          1.0000000046344577,
+          1.000000019798044,
+          0.9999999528069273,
+          0.9999999395135125,
+          1.000000010913243,
+          0.9999999777295037,
+          1.0000000359217212,
+          0.9999999946564975
+        ],
+        "exactIds": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "quantizedVsFp32": {
+        "minCosine": 0.9805521123436378,
+        "cosines": [
+          0.9811070116758811,
+          0.9805521123436378,
+          0.9819303134627057,
+          0.9866589268178996,
+          0.9826404124230977,
+          0.9875251290660448,
+          0.9805525210477202,
+          0.9853592066674146,
+          0.9832316500311964,
+          0.9821366624315412
+        ],
+        "exactIds": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    "assets": {
+      "onnx/model_q4.onnx": {
+        "bytes": 216630,
+        "sha256": "44363bbe9136c04c79f9ec91e4f576d6e739d522e71ea52f2f71cc4a8a0cc74b"
+      },
+      "onnx/model_q4.onnx_data": {
+        "bytes": 201304576,
+        "sha256": "678454413d42842fa72c285741fa4a0447a890df16436ebde28ef3c82caa3eab"
+      }
+    },
+    "fp32WithFrozenHeadsDev": {
+      "drafts": 48,
+      "tp": 29,
+      "fp": 2,
+      "fn": 21,
+      "precision": 0.9354838709677419,
+      "recall": 0.58,
+      "f1": 0.7160493827160493,
+      "f05": 0.8333333333333333,
+      "negatives": 10,
+      "picksOnNegative": 0,
+      "exact": 28,
+      "byLanguage": {
+        "en": {
+          "drafts": 24,
+          "tp": 15,
+          "fp": 0,
+          "fn": 10,
+          "precision": 1,
+          "recall": 0.6,
+          "f1": 0.7499999999999999,
+          "f05": 0.8823529411764706,
+          "negatives": 5,
+          "picksOnNegative": 0,
+          "exact": 14
+        },
+        "de": {
+          "drafts": 24,
+          "tp": 14,
+          "fp": 2,
+          "fn": 11,
+          "precision": 0.875,
+          "recall": 0.56,
+          "f1": 0.6829268292682927,
+          "f05": 0.7865168539325843,
+          "negatives": 5,
+          "picksOnNegative": 0,
+          "exact": 14
+        }
+      },
+      "blank": 0,
+      "blankOffers": 0
+    },
+    "training": {
+      "request": {
+        "data": {
+          "bytes": 1144429,
+          "sha256": "7fa216064852909c20bc7e66c7d10944f9136eb80027ca6ab149e31983b43dba"
+        },
+        "head": {
+          "bytes": 33603,
+          "sha256": "f0a8f8e5e17db1ecfe95a62dc67b9bb971302aea5eb7b57dcf36ff2ea7920c51"
+        }
+      },
+      "save": {
+        "data": {
+          "bytes": 666426,
+          "sha256": "cf7d18136b5ba9ceaca4748282170acf9972754ad2cee314f821707fa4920cd5"
+        },
+        "head": {
+          "bytes": 33603,
+          "sha256": "3ae53fa5e918be0f5f4ee3689c43796cac19f6f27703b51829e00909afe83752"
+        }
+      }
+    },
+    "node": {
+      "operating": {
+        "floors": [
+          0.42,
+          0.96
+        ],
+        "passedDevPrecisionGate": true
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 32,
+        "fp": 1,
+        "fn": 18,
+        "precision": 0.9696969696969697,
+        "recall": 0.64,
+        "f1": 0.7710843373493975,
+        "f05": 0.8791208791208791,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 30,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 16,
+            "fp": 0,
+            "fn": 9,
+            "precision": 1,
+            "recall": 0.64,
+            "f1": 0.7804878048780487,
+            "f05": 0.8988764044943821,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 15
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 16,
+            "fp": 1,
+            "fn": 9,
+            "precision": 0.9411764705882353,
+            "recall": 0.64,
+            "f1": 0.7619047619047621,
+            "f05": 0.8602150537634409,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 15
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "coldMs": 1087.1591660000001,
+      "firstMs": 82.38563299999987,
+      "indexMs": 6510.020015,
+      "beforeBytes": 62857216,
+      "original": {
+        "drafts": 152,
+        "tp": 85,
+        "fp": 16,
+        "fn": 35,
+        "precision": 0.8415841584158416,
+        "recall": 0.7083333333333334,
+        "f1": 0.7692307692307693,
+        "f05": 0.8110687022900764,
+        "negatives": 52,
+        "picksOnNegative": 11,
+        "exact": 107,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 42,
+            "fp": 10,
+            "fn": 18,
+            "precision": 0.8076923076923077,
+            "recall": 0.7,
+            "f1": 0.75,
+            "f05": 0.7835820895522388,
+            "negatives": 26,
+            "picksOnNegative": 7,
+            "exact": 51
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 43,
+            "fp": 6,
+            "fn": 17,
+            "precision": 0.8775510204081632,
+            "recall": 0.7166666666666667,
+            "f1": 0.7889908256880733,
+            "f05": 0.83984375,
+            "negatives": 26,
+            "picksOnNegative": 4,
+            "exact": 56
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 45,
+        "fp": 6,
+        "fn": 41,
+        "precision": 0.8823529411764706,
+        "recall": 0.5232558139534884,
+        "f1": 0.656934306569343,
+        "f05": 0.7758620689655173,
+        "negatives": 23,
+        "picksOnNegative": 3,
+        "exact": 62,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 24,
+            "fp": 4,
+            "fn": 19,
+            "precision": 0.8571428571428571,
+            "recall": 0.5581395348837209,
+            "f1": 0.676056338028169,
+            "f05": 0.7741935483870966,
+            "negatives": 12,
+            "picksOnNegative": 2,
+            "exact": 33
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 21,
+            "fp": 2,
+            "fn": 22,
+            "precision": 0.9130434782608695,
+            "recall": 0.4883720930232558,
+            "f1": 0.6363636363636364,
+            "f05": 0.7777777777777777,
+            "negatives": 11,
+            "picksOnNegative": 1,
+            "exact": 29
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 74.60689199999979,
+        "p50Ms": 87.0902500000011,
+        "p95Ms": 104.6534470000006
+      },
+      "inferenceLatency": {
+        "firstMs": 74.60689199999979,
+        "p50Ms": 93.12391800000114,
+        "p95Ms": 104.65796700000283
+      },
+      "idleBytes": 538517504,
+      "peakBytes": 538517504
+    },
+    "chromium": {
+      "operating": {
+        "floors": [
+          0.42,
+          0.96
+        ],
+        "passedDevPrecisionGate": true
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 32,
+        "fp": 1,
+        "fn": 18,
+        "precision": 0.9696969696969697,
+        "recall": 0.64,
+        "f1": 0.7710843373493975,
+        "f05": 0.8791208791208791,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 30,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 16,
+            "fp": 0,
+            "fn": 9,
+            "precision": 1,
+            "recall": 0.64,
+            "f1": 0.7804878048780487,
+            "f05": 0.8988764044943821,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 15
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 16,
+            "fp": 1,
+            "fn": 9,
+            "precision": 0.9411764705882353,
+            "recall": 0.64,
+            "f1": 0.7619047619047621,
+            "f05": 0.8602150537634409,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 15
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "original": {
+        "drafts": 152,
+        "tp": 85,
+        "fp": 16,
+        "fn": 35,
+        "precision": 0.8415841584158416,
+        "recall": 0.7083333333333334,
+        "f1": 0.7692307692307693,
+        "f05": 0.8110687022900764,
+        "negatives": 52,
+        "picksOnNegative": 11,
+        "exact": 107,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 42,
+            "fp": 10,
+            "fn": 18,
+            "precision": 0.8076923076923077,
+            "recall": 0.7,
+            "f1": 0.75,
+            "f05": 0.7835820895522388,
+            "negatives": 26,
+            "picksOnNegative": 7,
+            "exact": 51
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 43,
+            "fp": 6,
+            "fn": 17,
+            "precision": 0.8775510204081632,
+            "recall": 0.7166666666666667,
+            "f1": 0.7889908256880733,
+            "f05": 0.83984375,
+            "negatives": 26,
+            "picksOnNegative": 4,
+            "exact": 56
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 45,
+        "fp": 6,
+        "fn": 41,
+        "precision": 0.8823529411764706,
+        "recall": 0.5232558139534884,
+        "f1": 0.656934306569343,
+        "f05": 0.7758620689655173,
+        "negatives": 23,
+        "picksOnNegative": 3,
+        "exact": 62,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 24,
+            "fp": 4,
+            "fn": 19,
+            "precision": 0.8571428571428571,
+            "recall": 0.5581395348837209,
+            "f1": 0.676056338028169,
+            "f05": 0.7741935483870966,
+            "negatives": 12,
+            "picksOnNegative": 2,
+            "exact": 33
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 21,
+            "fp": 2,
+            "fn": 22,
+            "precision": 0.9130434782608695,
+            "recall": 0.4883720930232558,
+            "f1": 0.6363636363636364,
+            "f05": 0.7777777777777777,
+            "negatives": 11,
+            "picksOnNegative": 1,
+            "exact": 29
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 1496.0999999642372,
+        "p50Ms": 1830.1000000238419,
+        "p95Ms": 2075.2999999523163
+      },
+      "inferenceLatency": {
+        "firstMs": 1496.0999999642372,
+        "p50Ms": 1845.5,
+        "p95Ms": 2092.399999976158
+      },
+      "coldMs": 6050.399999976158,
+      "firstMs": 1806.1000000238419,
+      "indexMs": 134747.89999997616,
+      "unpackedBytes": 236906466,
+      "zipBytes": 177307475,
+      "beforeBytes": 771284992,
+      "idleBytes": 1153241088,
+      "peakBytes": 1541361664,
+      "version": "Chrome/151.0.7922.34",
+      "diagnostics": {
+        "origin": "chrome-extension://fclehmjpcdfhfcogclpbbkkjknpcaahk",
+        "runtimeId": "fclehmjpcdfhfcogclpbbkkjknpcaahk",
+        "violations": [],
+        "resources": []
+      }
+    }
+  },
+  "granite97-int8": {
+    "embeddingFidelity": {
+      "fp32VsMaker": {
+        "minCosine": 0.9999999634766897,
+        "cosines": [
+          0.9999999634766897,
+          0.9999999716292971,
+          1.0000000866457168,
+          1.000000052237085,
+          1.0000000301451646,
+          1.0000000027906315,
+          1.000000079168739,
+          1.000000052012154,
+          1.0000000033986478,
+          1.0000000370761286
+        ],
+        "exactIds": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "quantizedVsFp32": {
+        "minCosine": 0.686895729021508,
+        "cosines": [
+          0.737798080321149,
+          0.7038808255040593,
+          0.7458499620785823,
+          0.7549747324734203,
+          0.7200556760104583,
+          0.7217740072361192,
+          0.7380315116386249,
+          0.7195301088073024,
+          0.7426726712628082,
+          0.686895729021508
+        ],
+        "exactIds": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    "ibmCrossLingualProbe": [
+      [
+        0.8941327523054391,
+        0.6657700731424745,
+        0.7225435236707327
+      ],
+      [
+        0.6762111998050656,
+        0.9576824011131886,
+        0.6426781952691694
+      ],
+      [
+        0.7501674191433225,
+        0.6770521624790381,
+        0.9127976524223287
+      ]
+    ],
+    "assets": {
+      "onnx/model_quantized.onnx": {
+        "bytes": 97858099,
+        "sha256": "704c1ebca5fbb7cd83ced41827658ac4c9990c64f7f2874d22b78044e5022e22"
+      }
+    },
+    "fp32WithFrozenHeadsDev": {
+      "drafts": 48,
+      "tp": 6,
+      "fp": 20,
+      "fn": 44,
+      "precision": 0.23076923076923078,
+      "recall": 0.12,
+      "f1": 0.15789473684210525,
+      "f05": 0.19480519480519481,
+      "negatives": 10,
+      "picksOnNegative": 3,
+      "exact": 9,
+      "byLanguage": {
+        "en": {
+          "drafts": 24,
+          "tp": 3,
+          "fp": 11,
+          "fn": 22,
+          "precision": 0.21428571428571427,
+          "recall": 0.12,
+          "f1": 0.15384615384615383,
+          "f05": 0.18518518518518517,
+          "negatives": 5,
+          "picksOnNegative": 2,
+          "exact": 4
+        },
+        "de": {
+          "drafts": 24,
+          "tp": 3,
+          "fp": 9,
+          "fn": 22,
+          "precision": 0.25,
+          "recall": 0.12,
+          "f1": 0.16216216216216217,
+          "f05": 0.2054794520547945,
+          "negatives": 5,
+          "picksOnNegative": 1,
+          "exact": 5
+        }
+      },
+      "blank": 0,
+      "blankOffers": 0
+    },
+    "training": {
+      "request": {
+        "data": {
+          "bytes": 1144429,
+          "sha256": "7fa216064852909c20bc7e66c7d10944f9136eb80027ca6ab149e31983b43dba"
+        },
+        "head": {
+          "bytes": 20547,
+          "sha256": "282cadd8667cd0cbeaf8eb29ceaedaef53ca1fb5f2fc6df54e21b0acee2a72a2"
+        }
+      },
+      "save": {
+        "data": {
+          "bytes": 666426,
+          "sha256": "cf7d18136b5ba9ceaca4748282170acf9972754ad2cee314f821707fa4920cd5"
+        },
+        "head": {
+          "bytes": 20547,
+          "sha256": "dea62d3420950855dcc87fa2ee92cb6d4d16c47cb22f7e83ae5f68dd28b65cf6"
+        }
+      }
+    },
+    "node": {
+      "operating": {
+        "floors": [
+          0.62,
+          1.01
+        ],
+        "passedDevPrecisionGate": false
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 2,
+        "fp": 6,
+        "fn": 48,
+        "precision": 0.25,
+        "recall": 0.04,
+        "f1": 0.06896551724137932,
+        "f05": 0.12195121951219512,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 10,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 1,
+            "fp": 2,
+            "fn": 24,
+            "precision": 0.3333333333333333,
+            "recall": 0.04,
+            "f1": 0.07142857142857142,
+            "f05": 0.13513513513513514,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 5
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 1,
+            "fp": 4,
+            "fn": 24,
+            "precision": 0.2,
+            "recall": 0.04,
+            "f1": 0.06666666666666667,
+            "f05": 0.11111111111111112,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 5
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "coldMs": 994.3786819999999,
+      "firstMs": 11.394138999999996,
+      "indexMs": 493.029998,
+      "beforeBytes": 62566400,
+      "original": {
+        "drafts": 152,
+        "tp": 5,
+        "fp": 20,
+        "fn": 115,
+        "precision": 0.2,
+        "recall": 0.041666666666666664,
+        "f1": 0.06896551724137931,
+        "f05": 0.11363636363636362,
+        "negatives": 52,
+        "picksOnNegative": 9,
+        "exact": 47,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 2,
+            "fp": 9,
+            "fn": 58,
+            "precision": 0.18181818181818182,
+            "recall": 0.03333333333333333,
+            "f1": 0.056338028169014086,
+            "f05": 0.09615384615384615,
+            "negatives": 26,
+            "picksOnNegative": 3,
+            "exact": 25
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 3,
+            "fp": 11,
+            "fn": 57,
+            "precision": 0.21428571428571427,
+            "recall": 0.05,
+            "f1": 0.08108108108108109,
+            "f05": 0.12931034482758622,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 22
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 3,
+        "fp": 99,
+        "fn": 83,
+        "precision": 0.029411764705882353,
+        "recall": 0.03488372093023256,
+        "f1": 0.031914893617021274,
+        "f05": 0.030364372469635626,
+        "negatives": 23,
+        "picksOnNegative": 21,
+        "exact": 4,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 2,
+            "fp": 49,
+            "fn": 41,
+            "precision": 0.0392156862745098,
+            "recall": 0.046511627906976744,
+            "f1": 0.0425531914893617,
+            "f05": 0.04048582995951417,
+            "negatives": 12,
+            "picksOnNegative": 11,
+            "exact": 2
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 1,
+            "fp": 50,
+            "fn": 42,
+            "precision": 0.0196078431372549,
+            "recall": 0.023255813953488372,
+            "f1": 0.02127659574468085,
+            "f05": 0.020242914979757085,
+            "negatives": 11,
+            "picksOnNegative": 10,
+            "exact": 2
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H05"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H05"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [
+            "H05"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [
+            "H05"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H05"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H05"
+          ],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 8.149633999999878,
+        "p50Ms": 7.361308000000008,
+        "p95Ms": 9.983687999999802
+      },
+      "inferenceLatency": {
+        "firstMs": 8.149633999999878,
+        "p50Ms": 7.388257999999951,
+        "p95Ms": 9.995997999999872
+      },
+      "idleBytes": 537104384,
+      "peakBytes": 537104384
+    },
+    "chromium": {
+      "operating": {
+        "floors": [
+          0.62,
+          1.01
+        ],
+        "passedDevPrecisionGate": false
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 6,
+        "fp": 14,
+        "fn": 44,
+        "precision": 0.3,
+        "recall": 0.12,
+        "f1": 0.17142857142857143,
+        "f05": 0.23076923076923075,
+        "negatives": 10,
+        "picksOnNegative": 2,
+        "exact": 10,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 3,
+            "fp": 5,
+            "fn": 22,
+            "precision": 0.375,
+            "recall": 0.12,
+            "f1": 0.18181818181818182,
+            "f05": 0.2631578947368421,
+            "negatives": 5,
+            "picksOnNegative": 1,
+            "exact": 5
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 3,
+            "fp": 9,
+            "fn": 22,
+            "precision": 0.25,
+            "recall": 0.12,
+            "f1": 0.16216216216216217,
+            "f05": 0.2054794520547945,
+            "negatives": 5,
+            "picksOnNegative": 1,
+            "exact": 5
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "original": {
+        "drafts": 152,
+        "tp": 12,
+        "fp": 51,
+        "fn": 108,
+        "precision": 0.19047619047619047,
+        "recall": 0.1,
+        "f1": 0.1311475409836066,
+        "f05": 0.16129032258064516,
+        "negatives": 52,
+        "picksOnNegative": 14,
+        "exact": 44,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 6,
+            "fp": 26,
+            "fn": 54,
+            "precision": 0.1875,
+            "recall": 0.1,
+            "f1": 0.13043478260869568,
+            "f05": 0.15957446808510636,
+            "negatives": 26,
+            "picksOnNegative": 8,
+            "exact": 21
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 6,
+            "fp": 25,
+            "fn": 54,
+            "precision": 0.1935483870967742,
+            "recall": 0.1,
+            "f1": 0.13186813186813187,
+            "f05": 0.1630434782608696,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 23
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 3,
+        "fp": 14,
+        "fn": 83,
+        "precision": 0.17647058823529413,
+        "recall": 0.03488372093023256,
+        "f1": 0.058252427184466014,
+        "f05": 0.09740259740259741,
+        "negatives": 23,
+        "picksOnNegative": 3,
+        "exact": 22,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 2,
+            "fp": 4,
+            "fn": 41,
+            "precision": 0.3333333333333333,
+            "recall": 0.046511627906976744,
+            "f1": 0.08163265306122448,
+            "f05": 0.14925373134328357,
+            "negatives": 12,
+            "picksOnNegative": 1,
+            "exact": 12
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 1,
+            "fp": 10,
+            "fn": 42,
+            "precision": 0.09090909090909091,
+            "recall": 0.023255813953488372,
+            "f1": 0.037037037037037035,
+            "f05": 0.05747126436781609,
+            "negatives": 11,
+            "picksOnNegative": 2,
+            "exact": 10
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H02"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H02"
+          ],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 59.5,
+        "p50Ms": 89.19999998807907,
+        "p95Ms": 121.70000004768372
+      },
+      "inferenceLatency": {
+        "firstMs": 59.5,
+        "p50Ms": 89.40000003576279,
+        "p95Ms": 122.10000002384186
+      },
+      "coldMs": 5917.800000011921,
+      "firstMs": 246.0999999642372,
+      "indexMs": 6023.699999988079,
+      "unpackedBytes": 138207784,
+      "zipBytes": 75028363,
+      "beforeBytes": 768757760,
+      "idleBytes": 1263767552,
+      "peakBytes": 1463152640,
+      "version": "Chrome/151.0.7922.34",
+      "diagnostics": {
+        "origin": "chrome-extension://bpmkaakjoeomoelljdkpakdldgpdkjda",
+        "runtimeId": "bpmkaakjoeomoelljdkpakdldgpdkjda",
+        "violations": [],
+        "resources": []
+      }
+    }
+  },
+  "granite97-dynamic": {
+    "embeddingFidelity": {
+      "fp32VsMaker": {
+        "minCosine": 0.9999999634766897,
+        "cosines": [
+          0.9999999634766897,
+          0.9999999716292971,
+          1.0000000866457168,
+          1.000000052237085,
+          1.0000000301451646,
+          1.0000000027906315,
+          1.000000079168739,
+          1.000000052012154,
+          1.0000000033986478,
+          1.0000000370761286
+        ],
+        "exactIds": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "quantizedVsFp32": {
+        "minCosine": 0.9444337995025821,
+        "cosines": [
+          0.9833478271695711,
+          0.9623157937756046,
+          0.9698829809018832,
+          0.9707239569618233,
+          0.9444337995025821,
+          0.9748455305478012,
+          0.9743767885122133,
+          0.976819776907796,
+          0.9619491027207043,
+          0.959789140557151
+        ],
+        "exactIds": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    "ibmCrossLingualProbe": [
+      [
+        0.8941327523054391,
+        0.6657700731424745,
+        0.7225435236707327
+      ],
+      [
+        0.6762111998050656,
+        0.9576824011131886,
+        0.6426781952691694
+      ],
+      [
+        0.7501674191433225,
+        0.6770521624790381,
+        0.9127976524223287
+      ]
+    ],
+    "assets": {
+      "onnx/model_dynamic.onnx": {
+        "bytes": 98157859,
+        "sha256": "4b5eec447d54bd76e15a7d6c071fbd3359086ab423e71f4ac41f29cf58a68681"
+      }
+    },
+    "fp32WithFrozenHeadsDev": {
+      "drafts": 48,
+      "tp": 23,
+      "fp": 0,
+      "fn": 27,
+      "precision": 1,
+      "recall": 0.46,
+      "f1": 0.6301369863013699,
+      "f05": 0.8098591549295776,
+      "negatives": 10,
+      "picksOnNegative": 0,
+      "exact": 26,
+      "byLanguage": {
+        "en": {
+          "drafts": 24,
+          "tp": 12,
+          "fp": 0,
+          "fn": 13,
+          "precision": 1,
+          "recall": 0.48,
+          "f1": 0.6486486486486487,
+          "f05": 0.821917808219178,
+          "negatives": 5,
+          "picksOnNegative": 0,
+          "exact": 14
+        },
+        "de": {
+          "drafts": 24,
+          "tp": 11,
+          "fp": 0,
+          "fn": 14,
+          "precision": 1,
+          "recall": 0.44,
+          "f1": 0.6111111111111112,
+          "f05": 0.7971014492753624,
+          "negatives": 5,
+          "picksOnNegative": 0,
+          "exact": 12
+        }
+      },
+      "blank": 0,
+      "blankOffers": 0
+    },
+    "training": {
+      "request": {
+        "data": {
+          "bytes": 1144429,
+          "sha256": "7fa216064852909c20bc7e66c7d10944f9136eb80027ca6ab149e31983b43dba"
+        },
+        "head": {
+          "bytes": 20547,
+          "sha256": "6c7aceae9539ef452544369ab63fbc0f6fb55bde6c4f86f1650e664851030388"
+        }
+      },
+      "save": {
+        "data": {
+          "bytes": 666426,
+          "sha256": "cf7d18136b5ba9ceaca4748282170acf9972754ad2cee314f821707fa4920cd5"
+        },
+        "head": {
+          "bytes": 20547,
+          "sha256": "e61faadb5f515ffd8f02ca53612fbdbb06f9d39e2cb3461e0bb45d78e5751dce"
+        }
+      }
+    },
+    "node": {
+      "operating": {
+        "floors": [
+          0.7,
+          0.96
+        ],
+        "passedDevPrecisionGate": true
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 25,
+        "fp": 1,
+        "fn": 25,
+        "precision": 0.9615384615384616,
+        "recall": 0.5,
+        "f1": 0.6578947368421052,
+        "f05": 0.8116883116883116,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 25,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 14,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.56,
+            "f1": 0.717948717948718,
+            "f05": 0.8641975308641976,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 11,
+            "fp": 1,
+            "fn": 14,
+            "precision": 0.9166666666666666,
+            "recall": 0.44,
+            "f1": 0.5945945945945945,
+            "f05": 0.7534246575342465,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 11
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "coldMs": 997.747008,
+      "firstMs": 11.203197000000046,
+      "indexMs": 487.3531539999999,
+      "beforeBytes": 62607360,
+      "original": {
+        "drafts": 152,
+        "tp": 77,
+        "fp": 17,
+        "fn": 43,
+        "precision": 0.8191489361702128,
+        "recall": 0.6416666666666667,
+        "f1": 0.7196261682242991,
+        "f05": 0.776209677419355,
+        "negatives": 52,
+        "picksOnNegative": 13,
+        "exact": 101,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 38,
+            "fp": 8,
+            "fn": 22,
+            "precision": 0.8260869565217391,
+            "recall": 0.6333333333333333,
+            "f1": 0.7169811320754716,
+            "f05": 0.7786885245901638,
+            "negatives": 26,
+            "picksOnNegative": 7,
+            "exact": 49
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 39,
+            "fp": 9,
+            "fn": 21,
+            "precision": 0.8125,
+            "recall": 0.65,
+            "f1": 0.7222222222222223,
+            "f05": 0.7738095238095238,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 52
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 41,
+        "fp": 8,
+        "fn": 45,
+        "precision": 0.8367346938775511,
+        "recall": 0.47674418604651164,
+        "f1": 0.6074074074074074,
+        "f05": 0.7269503546099291,
+        "negatives": 23,
+        "picksOnNegative": 4,
+        "exact": 56,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 20,
+            "fp": 5,
+            "fn": 23,
+            "precision": 0.8,
+            "recall": 0.46511627906976744,
+            "f1": 0.5882352941176471,
+            "f05": 0.6993006993006993,
+            "negatives": 12,
+            "picksOnNegative": 2,
+            "exact": 28
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 21,
+            "fp": 3,
+            "fn": 22,
+            "precision": 0.875,
+            "recall": 0.4883720930232558,
+            "f1": 0.6268656716417911,
+            "f05": 0.7553956834532375,
+            "negatives": 11,
+            "picksOnNegative": 2,
+            "exact": 28
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H05"
+          ],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 5.773755000000165,
+        "p50Ms": 7.4159779999999955,
+        "p95Ms": 10.13863900000024
+      },
+      "inferenceLatency": {
+        "firstMs": 5.773755000000165,
+        "p50Ms": 7.450338000000102,
+        "p95Ms": 10.220569999999952
+      },
+      "idleBytes": 545894400,
+      "peakBytes": 545894400
+    },
+    "chromium": {
+      "operating": {
+        "floors": [
+          0.7,
+          0.96
+        ],
+        "passedDevPrecisionGate": true
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 28,
+        "fp": 1,
+        "fn": 22,
+        "precision": 0.9655172413793104,
+        "recall": 0.56,
+        "f1": 0.7088607594936709,
+        "f05": 0.8433734939759036,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 26,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 15,
+            "fp": 0,
+            "fn": 10,
+            "precision": 1,
+            "recall": 0.6,
+            "f1": 0.7499999999999999,
+            "f05": 0.8823529411764706,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 13,
+            "fp": 1,
+            "fn": 12,
+            "precision": 0.9285714285714286,
+            "recall": 0.52,
+            "f1": 0.6666666666666666,
+            "f05": 0.8024691358024691,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 12
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "original": {
+        "drafts": 152,
+        "tp": 76,
+        "fp": 17,
+        "fn": 44,
+        "precision": 0.8172043010752689,
+        "recall": 0.6333333333333333,
+        "f1": 0.7136150234741783,
+        "f05": 0.7723577235772356,
+        "negatives": 52,
+        "picksOnNegative": 14,
+        "exact": 99,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 38,
+            "fp": 8,
+            "fn": 22,
+            "precision": 0.8260869565217391,
+            "recall": 0.6333333333333333,
+            "f1": 0.7169811320754716,
+            "f05": 0.7786885245901638,
+            "negatives": 26,
+            "picksOnNegative": 8,
+            "exact": 49
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 38,
+            "fp": 9,
+            "fn": 22,
+            "precision": 0.8085106382978723,
+            "recall": 0.6333333333333333,
+            "f1": 0.7102803738317757,
+            "f05": 0.7661290322580644,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 50
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 44,
+        "fp": 5,
+        "fn": 42,
+        "precision": 0.8979591836734694,
+        "recall": 0.5116279069767442,
+        "f1": 0.6518518518518518,
+        "f05": 0.7801418439716311,
+        "negatives": 23,
+        "picksOnNegative": 2,
+        "exact": 61,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 22,
+            "fp": 3,
+            "fn": 21,
+            "precision": 0.88,
+            "recall": 0.5116279069767442,
+            "f1": 0.6470588235294118,
+            "f05": 0.7692307692307694,
+            "negatives": 12,
+            "picksOnNegative": 1,
+            "exact": 31
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 22,
+            "fp": 2,
+            "fn": 21,
+            "precision": 0.9166666666666666,
+            "recall": 0.5116279069767442,
+            "f1": 0.6567164179104478,
+            "f05": 0.7913669064748201,
+            "negatives": 11,
+            "picksOnNegative": 1,
+            "exact": 30
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 64.59999996423721,
+        "p50Ms": 93.29999995231628,
+        "p95Ms": 129.69999998807907
+      },
+      "inferenceLatency": {
+        "firstMs": 64.59999996423721,
+        "p50Ms": 94.80000001192093,
+        "p95Ms": 130.60000002384186
+      },
+      "coldMs": 5952.699999988079,
+      "firstMs": 251.4000000357628,
+      "indexMs": 6130.199999988079,
+      "unpackedBytes": 138507544,
+      "zipBytes": 77915128,
+      "beforeBytes": 767741952,
+      "idleBytes": 1265745920,
+      "peakBytes": 1473888256,
+      "version": "Chrome/151.0.7922.34",
+      "diagnostics": {
+        "origin": "chrome-extension://cocldinnnndemapnnammflgkcdbekeja",
+        "runtimeId": "cocldinnnndemapnnammflgkcdbekeja",
+        "violations": [],
+        "resources": []
+      }
+    }
+  },
+  "granite97-q4": {
+    "embeddingFidelity": {
+      "fp32VsMaker": {
+        "minCosine": 0.9999999634766897,
+        "cosines": [
+          0.9999999634766897,
+          0.9999999716292971,
+          1.0000000866457168,
+          1.000000052237085,
+          1.0000000301451646,
+          1.0000000027906315,
+          1.000000079168739,
+          1.000000052012154,
+          1.0000000033986478,
+          1.0000000370761286
+        ],
+        "exactIds": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "quantizedVsFp32": {
+        "minCosine": 0.9839660532839374,
+        "cosines": [
+          0.9934398938684665,
+          0.9899486811770448,
+          0.9862725213319448,
+          0.9890952545987456,
+          0.9840838892461699,
+          0.9916006175517453,
+          0.9839660532839374,
+          0.9878267988434675,
+          0.9914590879610973,
+          0.9866902403335649
+        ],
+        "exactIds": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    "ibmCrossLingualProbe": [
+      [
+        0.8941327523054391,
+        0.6657700731424745,
+        0.7225435236707327
+      ],
+      [
+        0.6762111998050656,
+        0.9576824011131886,
+        0.6426781952691694
+      ],
+      [
+        0.7501674191433225,
+        0.6770521624790381,
+        0.9127976524223287
+      ]
+    ],
+    "assets": {
+      "onnx/model_q4.onnx": {
+        "bytes": 61277958,
+        "sha256": "61aa54dfbf552fbd48b28e765a54036284f2c4b447f1c4eaa538254e7e787aac"
+      }
+    },
+    "fp32WithFrozenHeadsDev": {
+      "drafts": 48,
+      "tp": 28,
+      "fp": 1,
+      "fn": 22,
+      "precision": 0.9655172413793104,
+      "recall": 0.56,
+      "f1": 0.7088607594936709,
+      "f05": 0.8433734939759036,
+      "negatives": 10,
+      "picksOnNegative": 0,
+      "exact": 27,
+      "byLanguage": {
+        "en": {
+          "drafts": 24,
+          "tp": 15,
+          "fp": 0,
+          "fn": 10,
+          "precision": 1,
+          "recall": 0.6,
+          "f1": 0.7499999999999999,
+          "f05": 0.8823529411764706,
+          "negatives": 5,
+          "picksOnNegative": 0,
+          "exact": 14
+        },
+        "de": {
+          "drafts": 24,
+          "tp": 13,
+          "fp": 1,
+          "fn": 12,
+          "precision": 0.9285714285714286,
+          "recall": 0.52,
+          "f1": 0.6666666666666666,
+          "f05": 0.8024691358024691,
+          "negatives": 5,
+          "picksOnNegative": 0,
+          "exact": 13
+        }
+      },
+      "blank": 0,
+      "blankOffers": 0
+    },
+    "training": {
+      "request": {
+        "data": {
+          "bytes": 1144429,
+          "sha256": "7fa216064852909c20bc7e66c7d10944f9136eb80027ca6ab149e31983b43dba"
+        },
+        "head": {
+          "bytes": 20547,
+          "sha256": "c955b90d23b57d9b3906fa1add8d72a5af9238846bb8c4c95c903f2174c4a349"
+        }
+      },
+      "save": {
+        "data": {
+          "bytes": 666426,
+          "sha256": "cf7d18136b5ba9ceaca4748282170acf9972754ad2cee314f821707fa4920cd5"
+        },
+        "head": {
+          "bytes": 20547,
+          "sha256": "6c523bab80900c25a974a6aae91d373e4d16cd505d26c435bc3ccd4de797f036"
+        }
+      }
+    },
+    "node": {
+      "operating": {
+        "floors": [
+          0.52,
+          0.98
+        ],
+        "passedDevPrecisionGate": true
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 28,
+        "fp": 0,
+        "fn": 22,
+        "precision": 1,
+        "recall": 0.56,
+        "f1": 0.717948717948718,
+        "f05": 0.8641975308641976,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 27,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 14,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.56,
+            "f1": 0.717948717948718,
+            "f05": 0.8641975308641976,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 14,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.56,
+            "f1": 0.717948717948718,
+            "f05": 0.8641975308641976,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 13
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "coldMs": 906.609137,
+      "firstMs": 20.9660530000001,
+      "indexMs": 1263.823386,
+      "beforeBytes": 62971904,
+      "original": {
+        "drafts": 152,
+        "tp": 77,
+        "fp": 21,
+        "fn": 43,
+        "precision": 0.7857142857142857,
+        "recall": 0.6416666666666667,
+        "f1": 0.7064220183486238,
+        "f05": 0.751953125,
+        "negatives": 52,
+        "picksOnNegative": 14,
+        "exact": 101,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 39,
+            "fp": 11,
+            "fn": 21,
+            "precision": 0.78,
+            "recall": 0.65,
+            "f1": 0.709090909090909,
+            "f05": 0.7500000000000001,
+            "negatives": 26,
+            "picksOnNegative": 8,
+            "exact": 49
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 38,
+            "fp": 10,
+            "fn": 22,
+            "precision": 0.7916666666666666,
+            "recall": 0.6333333333333333,
+            "f1": 0.7037037037037038,
+            "f05": 0.753968253968254,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 52
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 41,
+        "fp": 11,
+        "fn": 45,
+        "precision": 0.7884615384615384,
+        "recall": 0.47674418604651164,
+        "f1": 0.5942028985507246,
+        "f05": 0.6972789115646258,
+        "negatives": 23,
+        "picksOnNegative": 4,
+        "exact": 56,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 21,
+            "fp": 6,
+            "fn": 22,
+            "precision": 0.7777777777777778,
+            "recall": 0.4883720930232558,
+            "f1": 0.6000000000000001,
+            "f05": 0.695364238410596,
+            "negatives": 12,
+            "picksOnNegative": 3,
+            "exact": 28
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 20,
+            "fp": 5,
+            "fn": 23,
+            "precision": 0.8,
+            "recall": 0.46511627906976744,
+            "f1": 0.5882352941176471,
+            "f05": 0.6993006993006993,
+            "negatives": 11,
+            "picksOnNegative": 1,
+            "exact": 28
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H02"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H02"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H05"
+          ],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 14.033879999999954,
+        "p50Ms": 17.957570999999916,
+        "p95Ms": 21.739440000000286
+      },
+      "inferenceLatency": {
+        "firstMs": 14.033879999999954,
+        "p50Ms": 18.005890000000363,
+        "p95Ms": 21.791580000000067
+      },
+      "idleBytes": 448245760,
+      "peakBytes": 489365504
+    },
+    "chromium": {
+      "operating": {
+        "floors": [
+          0.52,
+          0.98
+        ],
+        "passedDevPrecisionGate": true
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 29,
+        "fp": 0,
+        "fn": 21,
+        "precision": 1,
+        "recall": 0.58,
+        "f1": 0.7341772151898733,
+        "f05": 0.8734939759036144,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 28,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 14,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1,
+            "recall": 0.56,
+            "f1": 0.717948717948718,
+            "f05": 0.8641975308641976,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 15,
+            "fp": 0,
+            "fn": 10,
+            "precision": 1,
+            "recall": 0.6,
+            "f1": 0.7499999999999999,
+            "f05": 0.8823529411764706,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 14
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "original": {
+        "drafts": 152,
+        "tp": 78,
+        "fp": 20,
+        "fn": 42,
+        "precision": 0.7959183673469388,
+        "recall": 0.65,
+        "f1": 0.7155963302752293,
+        "f05": 0.7617187500000001,
+        "negatives": 52,
+        "picksOnNegative": 14,
+        "exact": 103,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 39,
+            "fp": 10,
+            "fn": 21,
+            "precision": 0.7959183673469388,
+            "recall": 0.65,
+            "f1": 0.7155963302752293,
+            "f05": 0.7617187500000001,
+            "negatives": 26,
+            "picksOnNegative": 8,
+            "exact": 50
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 39,
+            "fp": 10,
+            "fn": 21,
+            "precision": 0.7959183673469388,
+            "recall": 0.65,
+            "f1": 0.7155963302752293,
+            "f05": 0.7617187500000001,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 53
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 45,
+        "fp": 11,
+        "fn": 41,
+        "precision": 0.8035714285714286,
+        "recall": 0.5232558139534884,
+        "f1": 0.6338028169014085,
+        "f05": 0.7258064516129032,
+        "negatives": 23,
+        "picksOnNegative": 4,
+        "exact": 59,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 24,
+            "fp": 5,
+            "fn": 19,
+            "precision": 0.8275862068965517,
+            "recall": 0.5581395348837209,
+            "f1": 0.6666666666666666,
+            "f05": 0.7547169811320755,
+            "negatives": 12,
+            "picksOnNegative": 3,
+            "exact": 30
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 21,
+            "fp": 6,
+            "fn": 22,
+            "precision": 0.7777777777777778,
+            "recall": 0.4883720930232558,
+            "f1": 0.6000000000000001,
+            "f05": 0.695364238410596,
+            "negatives": 11,
+            "picksOnNegative": 1,
+            "exact": 29
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H02"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 311.80000001192093,
+        "p50Ms": 377.89999997615814,
+        "p95Ms": 443.80000001192093
+      },
+      "inferenceLatency": {
+        "firstMs": 311.80000001192093,
+        "p50Ms": 380.19999998807907,
+        "p95Ms": 445.80000001192093
+      },
+      "coldMs": 5217,
+      "firstMs": 585.4000000357628,
+      "indexMs": 28688.30000001192,
+      "unpackedBytes": 101627643,
+      "zipBytes": 58996270,
+      "beforeBytes": 763543552,
+      "idleBytes": 1082916864,
+      "peakBytes": 1364578304,
+      "version": "Chrome/151.0.7922.34",
+      "diagnostics": {
+        "origin": "chrome-extension://nciapmmfhpjdeobcabkfpeficcaogldo",
+        "runtimeId": "nciapmmfhpjdeobcabkfpeficcaogldo",
+        "violations": [],
+        "resources": []
+      }
+    }
+  },
+  "granite311-int8": {
+    "embeddingFidelity": {
+      "fp32VsMaker": {
+        "minCosine": 0.999999919935137,
+        "cosines": [
+          0.9999999696387463,
+          1.000000010039208,
+          1.000000024194784,
+          1.0000000255096433,
+          0.9999999754424984,
+          0.9999999333208871,
+          0.999999919935137,
+          0.9999999601517433,
+          1.0000000724102072,
+          1.0000000158546105
+        ],
+        "exactIds": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "quantizedVsFp32": {
+        "minCosine": 0.9929604237980874,
+        "cosines": [
+          0.9989194002116719,
+          0.9972600926150779,
+          0.9985550369261244,
+          0.9956197259998429,
+          0.9929604237980874,
+          0.9966214518510402,
+          0.9965527173688823,
+          0.9950147050269911,
+          0.9951588839980992,
+          0.9943716017852728
+        ],
+        "exactIds": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    "ibmCrossLingualProbe": [
+      [
+        0.9401499631728688,
+        0.6899100155527176,
+        0.7633170294193582
+      ],
+      [
+        0.6753180375828973,
+        0.9597709017023329,
+        0.7057521039889806
+      ],
+      [
+        0.7780329749386803,
+        0.7342015921496696,
+        0.9203095571306069
+      ]
+    ],
+    "assets": {
+      "onnx/model_quantized.onnx": {
+        "bytes": 312556945,
+        "sha256": "54d33d10f865516eda6770d7b0bbf5eaece861058907da0ad095c62e52958c3d"
+      }
+    },
+    "fp32WithFrozenHeadsDev": {
+      "drafts": 48,
+      "tp": 34,
+      "fp": 0,
+      "fn": 16,
+      "precision": 1,
+      "recall": 0.68,
+      "f1": 0.8095238095238095,
+      "f05": 0.913978494623656,
+      "negatives": 10,
+      "picksOnNegative": 0,
+      "exact": 32,
+      "byLanguage": {
+        "en": {
+          "drafts": 24,
+          "tp": 17,
+          "fp": 0,
+          "fn": 8,
+          "precision": 1,
+          "recall": 0.68,
+          "f1": 0.8095238095238095,
+          "f05": 0.913978494623656,
+          "negatives": 5,
+          "picksOnNegative": 0,
+          "exact": 16
+        },
+        "de": {
+          "drafts": 24,
+          "tp": 17,
+          "fp": 0,
+          "fn": 8,
+          "precision": 1,
+          "recall": 0.68,
+          "f1": 0.8095238095238095,
+          "f05": 0.913978494623656,
+          "negatives": 5,
+          "picksOnNegative": 0,
+          "exact": 16
+        }
+      },
+      "blank": 0,
+      "blankOffers": 0
+    },
+    "training": {
+      "request": {
+        "data": {
+          "bytes": 1144429,
+          "sha256": "7fa216064852909c20bc7e66c7d10944f9136eb80027ca6ab149e31983b43dba"
+        },
+        "head": {
+          "bytes": 40131,
+          "sha256": "bd9993fdc77c9982c2ae59534c1038f54e7e7ec3761952785c077dfcdc6c4cce"
+        }
+      },
+      "save": {
+        "data": {
+          "bytes": 666426,
+          "sha256": "cf7d18136b5ba9ceaca4748282170acf9972754ad2cee314f821707fa4920cd5"
+        },
+        "head": {
+          "bytes": 40131,
+          "sha256": "c34f42b18a1a7c0d1e49eccb0cd22ea9d03a9499e5f3f837b47e48a6f87cdd03"
+        }
+      }
+    },
+    "node": {
+      "operating": {
+        "floors": [
+          0.52,
+          0.88
+        ],
+        "passedDevPrecisionGate": true
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 36,
+        "fp": 0,
+        "fn": 14,
+        "precision": 1,
+        "recall": 0.72,
+        "f1": 0.8372093023255813,
+        "f05": 0.9278350515463917,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 34,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 18,
+            "fp": 0,
+            "fn": 7,
+            "precision": 1,
+            "recall": 0.72,
+            "f1": 0.8372093023255813,
+            "f05": 0.9278350515463917,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 17
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 18,
+            "fp": 0,
+            "fn": 7,
+            "precision": 1,
+            "recall": 0.72,
+            "f1": 0.8372093023255813,
+            "f05": 0.9278350515463917,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 17
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "coldMs": 2170.623923,
+      "firstMs": 21.62435800000003,
+      "indexMs": 1651.4217790000002,
+      "beforeBytes": 62648320,
+      "original": {
+        "drafts": 152,
+        "tp": 88,
+        "fp": 17,
+        "fn": 32,
+        "precision": 0.8380952380952381,
+        "recall": 0.7333333333333333,
+        "f1": 0.7822222222222223,
+        "f05": 0.8148148148148148,
+        "negatives": 52,
+        "picksOnNegative": 11,
+        "exact": 112,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 48,
+            "fp": 10,
+            "fn": 12,
+            "precision": 0.8275862068965517,
+            "recall": 0.8,
+            "f1": 0.8135593220338982,
+            "f05": 0.8219178082191781,
+            "negatives": 26,
+            "picksOnNegative": 7,
+            "exact": 57
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 40,
+            "fp": 7,
+            "fn": 20,
+            "precision": 0.851063829787234,
+            "recall": 0.6666666666666666,
+            "f1": 0.7476635514018691,
+            "f05": 0.8064516129032258,
+            "negatives": 26,
+            "picksOnNegative": 4,
+            "exact": 55
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 55,
+        "fp": 14,
+        "fn": 31,
+        "precision": 0.7971014492753623,
+        "recall": 0.6395348837209303,
+        "f1": 0.7096774193548387,
+        "f05": 0.7596685082872928,
+        "negatives": 23,
+        "picksOnNegative": 7,
+        "exact": 66,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 27,
+            "fp": 9,
+            "fn": 16,
+            "precision": 0.75,
+            "recall": 0.627906976744186,
+            "f1": 0.6835443037974683,
+            "f05": 0.7219251336898396,
+            "negatives": 12,
+            "picksOnNegative": 5,
+            "exact": 31
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 28,
+            "fp": 5,
+            "fn": 15,
+            "precision": 0.8484848484848485,
+            "recall": 0.6511627906976745,
+            "f1": 0.736842105263158,
+            "f05": 0.7999999999999999,
+            "negatives": 11,
+            "picksOnNegative": 2,
+            "exact": 35
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H02"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [
+            "H03"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H05"
+          ],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 16.91029200000048,
+        "p50Ms": 26.744227999999566,
+        "p95Ms": 36.53339500000038
+      },
+      "inferenceLatency": {
+        "firstMs": 16.91029200000048,
+        "p50Ms": 27.50780400000076,
+        "p95Ms": 36.53909499999918
+      },
+      "idleBytes": 814592000,
+      "peakBytes": 826540032
+    },
+    "chromium": {
+      "operating": {
+        "floors": [
+          0.52,
+          0.88
+        ],
+        "passedDevPrecisionGate": true
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 36,
+        "fp": 1,
+        "fn": 14,
+        "precision": 0.972972972972973,
+        "recall": 0.72,
+        "f1": 0.8275862068965518,
+        "f05": 0.9090909090909091,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 33,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 18,
+            "fp": 1,
+            "fn": 7,
+            "precision": 0.9473684210526315,
+            "recall": 0.72,
+            "f1": 0.8181818181818181,
+            "f05": 0.891089108910891,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 16
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 18,
+            "fp": 0,
+            "fn": 7,
+            "precision": 1,
+            "recall": 0.72,
+            "f1": 0.8372093023255813,
+            "f05": 0.9278350515463917,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 17
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "original": {
+        "drafts": 152,
+        "tp": 90,
+        "fp": 17,
+        "fn": 30,
+        "precision": 0.8411214953271028,
+        "recall": 0.75,
+        "f1": 0.7929515418502203,
+        "f05": 0.8211678832116788,
+        "negatives": 52,
+        "picksOnNegative": 11,
+        "exact": 113,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 48,
+            "fp": 10,
+            "fn": 12,
+            "precision": 0.8275862068965517,
+            "recall": 0.8,
+            "f1": 0.8135593220338982,
+            "f05": 0.8219178082191781,
+            "negatives": 26,
+            "picksOnNegative": 7,
+            "exact": 57
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 42,
+            "fp": 7,
+            "fn": 18,
+            "precision": 0.8571428571428571,
+            "recall": 0.7,
+            "f1": 0.7706422018348624,
+            "f05": 0.8203124999999999,
+            "negatives": 26,
+            "picksOnNegative": 4,
+            "exact": 56
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 55,
+        "fp": 14,
+        "fn": 31,
+        "precision": 0.7971014492753623,
+        "recall": 0.6395348837209303,
+        "f1": 0.7096774193548387,
+        "f05": 0.7596685082872928,
+        "negatives": 23,
+        "picksOnNegative": 7,
+        "exact": 66,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 27,
+            "fp": 9,
+            "fn": 16,
+            "precision": 0.75,
+            "recall": 0.627906976744186,
+            "f1": 0.6835443037974683,
+            "f05": 0.7219251336898396,
+            "negatives": 12,
+            "picksOnNegative": 5,
+            "exact": 31
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 28,
+            "fp": 5,
+            "fn": 15,
+            "precision": 0.8484848484848485,
+            "recall": 0.6511627906976745,
+            "f1": 0.736842105263158,
+            "f05": 0.7999999999999999,
+            "negatives": 11,
+            "picksOnNegative": 2,
+            "exact": 35
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H02"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [
+            "H03"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H05"
+          ],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 300.0999999642372,
+        "p50Ms": 312.19999998807907,
+        "p95Ms": 416.9000000357628
+      },
+      "inferenceLatency": {
+        "firstMs": 300.0999999642372,
+        "p50Ms": 312.89999997615814,
+        "p95Ms": 418.19999998807907
+      },
+      "coldMs": 12692.400000035763,
+      "firstMs": 455.0999999642372,
+      "indexMs": 19607.599999964237,
+      "unpackedBytes": 362171588,
+      "zipBytes": 192537037,
+      "beforeBytes": 767303680,
+      "idleBytes": 1783312384,
+      "peakBytes": 2277314560,
+      "version": "Chrome/151.0.7922.34",
+      "diagnostics": {
+        "origin": "chrome-extension://edejfgpjbcnhfcbmhjhenjchcanigcno",
+        "runtimeId": "edejfgpjbcnhfcbmhjhenjchcanigcno",
+        "violations": [],
+        "resources": []
+      }
+    }
+  },
+  "granite311-q4": {
+    "embeddingFidelity": {
+      "fp32VsMaker": {
+        "minCosine": 0.999999919935137,
+        "cosines": [
+          0.9999999696387463,
+          1.000000010039208,
+          1.000000024194784,
+          1.0000000255096433,
+          0.9999999754424984,
+          0.9999999333208871,
+          0.999999919935137,
+          0.9999999601517433,
+          1.0000000724102072,
+          1.0000000158546105
+        ],
+        "exactIds": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "quantizedVsFp32": {
+        "minCosine": 0.9962173467070299,
+        "cosines": [
+          0.9981509443321911,
+          0.9968290570429118,
+          0.9979104875446927,
+          0.9968185486235545,
+          0.9962173467070299,
+          0.9973532989940109,
+          0.9977066727478933,
+          0.9973054875156513,
+          0.997236755760896,
+          0.9969484619296033
+        ],
+        "exactIds": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    "ibmCrossLingualProbe": [
+      [
+        0.9401499631728688,
+        0.6899100155527176,
+        0.7633170294193582
+      ],
+      [
+        0.6753180375828973,
+        0.9597709017023329,
+        0.7057521039889806
+      ],
+      [
+        0.7780329749386803,
+        0.7342015921496696,
+        0.9203095571306069
+      ]
+    ],
+    "assets": {
+      "onnx/model_q4.onnx": {
+        "bytes": 195615992,
+        "sha256": "0148e763d5d0d01ecaa6a2efebcb97a1f361eb53694353ab3fd18679bd514a3c"
+      }
+    },
+    "fp32WithFrozenHeadsDev": {
+      "drafts": 48,
+      "tp": 35,
+      "fp": 0,
+      "fn": 15,
+      "precision": 1,
+      "recall": 0.7,
+      "f1": 0.8235294117647058,
+      "f05": 0.9210526315789475,
+      "negatives": 10,
+      "picksOnNegative": 0,
+      "exact": 33,
+      "byLanguage": {
+        "en": {
+          "drafts": 24,
+          "tp": 17,
+          "fp": 0,
+          "fn": 8,
+          "precision": 1,
+          "recall": 0.68,
+          "f1": 0.8095238095238095,
+          "f05": 0.913978494623656,
+          "negatives": 5,
+          "picksOnNegative": 0,
+          "exact": 16
+        },
+        "de": {
+          "drafts": 24,
+          "tp": 18,
+          "fp": 0,
+          "fn": 7,
+          "precision": 1,
+          "recall": 0.72,
+          "f1": 0.8372093023255813,
+          "f05": 0.9278350515463917,
+          "negatives": 5,
+          "picksOnNegative": 0,
+          "exact": 17
+        }
+      },
+      "blank": 0,
+      "blankOffers": 0
+    },
+    "training": {
+      "request": {
+        "data": {
+          "bytes": 1144429,
+          "sha256": "7fa216064852909c20bc7e66c7d10944f9136eb80027ca6ab149e31983b43dba"
+        },
+        "head": {
+          "bytes": 40131,
+          "sha256": "6f4c36cdbe36e6e633f7d3508024d5adc59080759b18123daa1f2ec0a4152d5f"
+        }
+      },
+      "save": {
+        "data": {
+          "bytes": 666426,
+          "sha256": "cf7d18136b5ba9ceaca4748282170acf9972754ad2cee314f821707fa4920cd5"
+        },
+        "head": {
+          "bytes": 40131,
+          "sha256": "1a09ed15c4631dc2cf9218ae829221a0cd230daf7fd822a969a3dd6ae59e1d34"
+        }
+      }
+    },
+    "node": {
+      "operating": {
+        "floors": [
+          0.42,
+          0.9
+        ],
+        "passedDevPrecisionGate": true
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 36,
+        "fp": 0,
+        "fn": 14,
+        "precision": 1,
+        "recall": 0.72,
+        "f1": 0.8372093023255813,
+        "f05": 0.9278350515463917,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 34,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 18,
+            "fp": 0,
+            "fn": 7,
+            "precision": 1,
+            "recall": 0.72,
+            "f1": 0.8372093023255813,
+            "f05": 0.9278350515463917,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 17
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 18,
+            "fp": 0,
+            "fn": 7,
+            "precision": 1,
+            "recall": 0.72,
+            "f1": 0.8372093023255813,
+            "f05": 0.9278350515463917,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 17
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "coldMs": 1806.7676789999998,
+      "firstMs": 56.563290999999936,
+      "indexMs": 4814.334234,
+      "beforeBytes": 62754816,
+      "original": {
+        "drafts": 152,
+        "tp": 92,
+        "fp": 19,
+        "fn": 28,
+        "precision": 0.8288288288288288,
+        "recall": 0.7666666666666667,
+        "f1": 0.7965367965367967,
+        "f05": 0.8156028368794327,
+        "negatives": 52,
+        "picksOnNegative": 14,
+        "exact": 113,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 48,
+            "fp": 10,
+            "fn": 12,
+            "precision": 0.8275862068965517,
+            "recall": 0.8,
+            "f1": 0.8135593220338982,
+            "f05": 0.8219178082191781,
+            "negatives": 26,
+            "picksOnNegative": 8,
+            "exact": 57
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 44,
+            "fp": 9,
+            "fn": 16,
+            "precision": 0.8301886792452831,
+            "recall": 0.7333333333333333,
+            "f1": 0.7787610619469026,
+            "f05": 0.8088235294117646,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 56
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 58,
+        "fp": 14,
+        "fn": 28,
+        "precision": 0.8055555555555556,
+        "recall": 0.6744186046511628,
+        "f1": 0.7341772151898734,
+        "f05": 0.7754010695187165,
+        "negatives": 23,
+        "picksOnNegative": 7,
+        "exact": 68,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 31,
+            "fp": 8,
+            "fn": 12,
+            "precision": 0.7948717948717948,
+            "recall": 0.7209302325581395,
+            "f1": 0.7560975609756098,
+            "f05": 0.778894472361809,
+            "negatives": 12,
+            "picksOnNegative": 5,
+            "exact": 34
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 27,
+            "fp": 6,
+            "fn": 16,
+            "precision": 0.8181818181818182,
+            "recall": 0.627906976744186,
+            "f1": 0.7105263157894738,
+            "f05": 0.7714285714285714,
+            "negatives": 11,
+            "picksOnNegative": 2,
+            "exact": 34
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H02"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [
+            "H03"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H02"
+          ],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 58.646466000000146,
+        "p50Ms": 70.96508299999914,
+        "p95Ms": 84.16377600000123
+      },
+      "inferenceLatency": {
+        "firstMs": 58.646466000000146,
+        "p50Ms": 71.07567399999971,
+        "p95Ms": 84.4365779999971
+      },
+      "idleBytes": 645853184,
+      "peakBytes": 671948800
+    },
+    "chromium": {
+      "operating": {
+        "floors": [
+          0.42,
+          0.9
+        ],
+        "passedDevPrecisionGate": true
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 36,
+        "fp": 0,
+        "fn": 14,
+        "precision": 1,
+        "recall": 0.72,
+        "f1": 0.8372093023255813,
+        "f05": 0.9278350515463917,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 34,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 18,
+            "fp": 0,
+            "fn": 7,
+            "precision": 1,
+            "recall": 0.72,
+            "f1": 0.8372093023255813,
+            "f05": 0.9278350515463917,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 17
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 18,
+            "fp": 0,
+            "fn": 7,
+            "precision": 1,
+            "recall": 0.72,
+            "f1": 0.8372093023255813,
+            "f05": 0.9278350515463917,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 17
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "original": {
+        "drafts": 152,
+        "tp": 92,
+        "fp": 19,
+        "fn": 28,
+        "precision": 0.8288288288288288,
+        "recall": 0.7666666666666667,
+        "f1": 0.7965367965367967,
+        "f05": 0.8156028368794327,
+        "negatives": 52,
+        "picksOnNegative": 14,
+        "exact": 113,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 48,
+            "fp": 10,
+            "fn": 12,
+            "precision": 0.8275862068965517,
+            "recall": 0.8,
+            "f1": 0.8135593220338982,
+            "f05": 0.8219178082191781,
+            "negatives": 26,
+            "picksOnNegative": 8,
+            "exact": 57
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 44,
+            "fp": 9,
+            "fn": 16,
+            "precision": 0.8301886792452831,
+            "recall": 0.7333333333333333,
+            "f1": 0.7787610619469026,
+            "f05": 0.8088235294117646,
+            "negatives": 26,
+            "picksOnNegative": 6,
+            "exact": 56
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 58,
+        "fp": 14,
+        "fn": 28,
+        "precision": 0.8055555555555556,
+        "recall": 0.6744186046511628,
+        "f1": 0.7341772151898734,
+        "f05": 0.7754010695187165,
+        "negatives": 23,
+        "picksOnNegative": 7,
+        "exact": 68,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 31,
+            "fp": 8,
+            "fn": 12,
+            "precision": 0.7948717948717948,
+            "recall": 0.7209302325581395,
+            "f1": 0.7560975609756098,
+            "f05": 0.778894472361809,
+            "negatives": 12,
+            "picksOnNegative": 5,
+            "exact": 34
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 27,
+            "fp": 6,
+            "fn": 16,
+            "precision": 0.8181818181818182,
+            "recall": 0.627906976744186,
+            "f1": 0.7105263157894738,
+            "f05": 0.7714285714285714,
+            "negatives": 11,
+            "picksOnNegative": 2,
+            "exact": 34
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H02"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [
+            "H03"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [
+            "H02"
+          ],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 1250.2000000476837,
+        "p50Ms": 1490.300000011921,
+        "p95Ms": 1769.5999999642372
+      },
+      "inferenceLatency": {
+        "firstMs": 1250.2000000476837,
+        "p50Ms": 1494.6000000238419,
+        "p95Ms": 1784.5999999642372
+      },
+      "coldMs": 9835.900000035763,
+      "firstMs": 1500.699999988079,
+      "indexMs": 116033,
+      "unpackedBytes": 245230635,
+      "zipBytes": 170574551,
+      "beforeBytes": 764780544,
+      "idleBytes": 1444622336,
+      "peakBytes": 1819078656,
+      "version": "Chrome/151.0.7922.34",
+      "diagnostics": {
+        "origin": "chrome-extension://pglokfbnplbpfoapklkmclbdbgoojdpl",
+        "runtimeId": "pglokfbnplbpfoapklkmclbdbgoojdpl",
+        "violations": [],
+        "resources": []
+      }
+    }
+  },
+  "static-int8": {
+    "training": {
+      "request": {
+        "data": {
+          "bytes": 1144429,
+          "sha256": "7fa216064852909c20bc7e66c7d10944f9136eb80027ca6ab149e31983b43dba"
+        },
+        "head": {
+          "bytes": 418200,
+          "sha256": "690ff7a97eef51c49b1d134489c318fac484db646f376325062dd7abb1742fc0"
+        }
+      },
+      "save": {
+        "data": {
+          "bytes": 666426,
+          "sha256": "cf7d18136b5ba9ceaca4748282170acf9972754ad2cee314f821707fa4920cd5"
+        },
+        "head": {
+          "bytes": 418200,
+          "sha256": "3e701615ed0c9ec3b7aff9aae76c38247a2b76c18bd41d6d075b34add1da6a1c"
+        }
+      }
+    },
+    "node": {
+      "operating": {
+        "floors": [
+          0.18,
+          0.46
+        ],
+        "passedDevPrecisionGate": false
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 13,
+        "fp": 1,
+        "fn": 37,
+        "precision": 0.9285714285714286,
+        "recall": 0.26,
+        "f1": 0.40625,
+        "f05": 0.6132075471698114,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 19,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 7,
+            "fp": 0,
+            "fn": 18,
+            "precision": 1,
+            "recall": 0.28,
+            "f1": 0.43750000000000006,
+            "f05": 0.6603773584905661,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 10
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 6,
+            "fp": 1,
+            "fn": 19,
+            "precision": 0.8571428571428571,
+            "recall": 0.24,
+            "f1": 0.375,
+            "f05": 0.5660377358490566,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 9
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "coldMs": 2.0604350000000053,
+      "firstMs": 1.3119099999999975,
+      "indexMs": 16.812661000000006,
+      "beforeBytes": 62722048,
+      "original": {
+        "drafts": 152,
+        "tp": 35,
+        "fp": 6,
+        "fn": 85,
+        "precision": 0.8536585365853658,
+        "recall": 0.2916666666666667,
+        "f1": 0.4347826086956522,
+        "f05": 0.6161971830985916,
+        "negatives": 52,
+        "picksOnNegative": 2,
+        "exact": 78,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 17,
+            "fp": 2,
+            "fn": 43,
+            "precision": 0.8947368421052632,
+            "recall": 0.2833333333333333,
+            "f1": 0.43037974683544306,
+            "f05": 0.625,
+            "negatives": 26,
+            "picksOnNegative": 1,
+            "exact": 38
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 18,
+            "fp": 4,
+            "fn": 42,
+            "precision": 0.8181818181818182,
+            "recall": 0.3,
+            "f1": 0.43902439024390244,
+            "f05": 0.6081081081081081,
+            "negatives": 26,
+            "picksOnNegative": 1,
+            "exact": 40
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 13,
+        "fp": 3,
+        "fn": 73,
+        "precision": 0.8125,
+        "recall": 0.1511627906976744,
+        "f1": 0.2549019607843137,
+        "f05": 0.4333333333333333,
+        "negatives": 23,
+        "picksOnNegative": 1,
+        "exact": 35,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 8,
+            "fp": 2,
+            "fn": 35,
+            "precision": 0.8,
+            "recall": 0.18604651162790697,
+            "f1": 0.3018867924528302,
+            "f05": 0.4819277108433735,
+            "negatives": 12,
+            "picksOnNegative": 1,
+            "exact": 19
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 5,
+            "fp": 1,
+            "fn": 38,
+            "precision": 0.8333333333333334,
+            "recall": 0.11627906976744186,
+            "f1": 0.20408163265306123,
+            "f05": 0.373134328358209,
+            "negatives": 11,
+            "picksOnNegative": 0,
+            "exact": 16
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 0.10312100000000157,
+        "p50Ms": 0.08443099999999504,
+        "p95Ms": 0.14124099999999373
+      },
+      "inferenceLatency": {
+        "firstMs": 0.10312100000000157,
+        "p50Ms": 0.08589100000000371,
+        "p95Ms": 0.14180100000000095
+      },
+      "idleBytes": 74362880,
+      "peakBytes": 74362880
+    },
+    "chromium": {
+      "operating": {
+        "floors": [
+          0.18,
+          0.46
+        ],
+        "passedDevPrecisionGate": false
+      },
+      "dev": {
+        "drafts": 48,
+        "tp": 13,
+        "fp": 1,
+        "fn": 37,
+        "precision": 0.9285714285714286,
+        "recall": 0.26,
+        "f1": 0.40625,
+        "f05": 0.6132075471698114,
+        "negatives": 10,
+        "picksOnNegative": 0,
+        "exact": 19,
+        "byLanguage": {
+          "en": {
+            "drafts": 24,
+            "tp": 7,
+            "fp": 0,
+            "fn": 18,
+            "precision": 1,
+            "recall": 0.28,
+            "f1": 0.43750000000000006,
+            "f05": 0.6603773584905661,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 10
+          },
+          "de": {
+            "drafts": 24,
+            "tp": 6,
+            "fp": 1,
+            "fn": 19,
+            "precision": 0.8571428571428571,
+            "recall": 0.24,
+            "f1": 0.375,
+            "f05": 0.5660377358490566,
+            "negatives": 5,
+            "picksOnNegative": 0,
+            "exact": 9
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "original": {
+        "drafts": 152,
+        "tp": 35,
+        "fp": 6,
+        "fn": 85,
+        "precision": 0.8536585365853658,
+        "recall": 0.2916666666666667,
+        "f1": 0.4347826086956522,
+        "f05": 0.6161971830985916,
+        "negatives": 52,
+        "picksOnNegative": 2,
+        "exact": 78,
+        "byLanguage": {
+          "en": {
+            "drafts": 76,
+            "tp": 17,
+            "fp": 2,
+            "fn": 43,
+            "precision": 0.8947368421052632,
+            "recall": 0.2833333333333333,
+            "f1": 0.43037974683544306,
+            "f05": 0.625,
+            "negatives": 26,
+            "picksOnNegative": 1,
+            "exact": 38
+          },
+          "de": {
+            "drafts": 76,
+            "tp": 18,
+            "fp": 4,
+            "fn": 42,
+            "precision": 0.8181818181818182,
+            "recall": 0.3,
+            "f1": 0.43902439024390244,
+            "f05": 0.6081081081081081,
+            "negatives": 26,
+            "picksOnNegative": 1,
+            "exact": 40
+          }
+        },
+        "blank": 0,
+        "blankOffers": 0
+      },
+      "fresh": {
+        "drafts": 104,
+        "tp": 13,
+        "fp": 3,
+        "fn": 73,
+        "precision": 0.8125,
+        "recall": 0.1511627906976744,
+        "f1": 0.2549019607843137,
+        "f05": 0.4333333333333333,
+        "negatives": 23,
+        "picksOnNegative": 1,
+        "exact": 35,
+        "byLanguage": {
+          "en": {
+            "drafts": 52,
+            "tp": 8,
+            "fp": 2,
+            "fn": 35,
+            "precision": 0.8,
+            "recall": 0.18604651162790697,
+            "f1": 0.3018867924528302,
+            "f05": 0.4819277108433735,
+            "negatives": 12,
+            "picksOnNegative": 1,
+            "exact": 19
+          },
+          "de": {
+            "drafts": 52,
+            "tp": 5,
+            "fp": 1,
+            "fn": 38,
+            "precision": 0.8333333333333334,
+            "recall": 0.11627906976744186,
+            "f1": 0.20408163265306123,
+            "f05": 0.373134328358209,
+            "negatives": 11,
+            "picksOnNegative": 0,
+            "exact": 16
+          }
+        },
+        "blank": 2,
+        "blankOffers": 0
+      },
+      "demos": [
+        {
+          "id": "H-LIS-en",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-LIS-de",
+          "relevant": [
+            "H01",
+            "H02"
+          ],
+          "selected": [
+            "H01"
+          ],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-en",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-COVER-de",
+          "relevant": [
+            "H03",
+            "H04"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-en",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        },
+        {
+          "id": "H-DINNER-de",
+          "relevant": [
+            "H02",
+            "H05"
+          ],
+          "selected": [],
+          "exact": false
+        }
+      ],
+      "latency": {
+        "firstMs": 0.3999999761581421,
+        "p50Ms": 0.10000002384185791,
+        "p95Ms": 0.800000011920929
+      },
+      "inferenceLatency": {
+        "firstMs": 0.3999999761581421,
+        "p50Ms": 0.10000002384185791,
+        "p95Ms": 0.800000011920929
+      },
+      "coldMs": 23.5,
+      "firstMs": 6.699999988079071,
+      "indexMs": 68.69999998807907,
+      "unpackedBytes": 844021,
+      "zipBytes": 344322,
+      "beforeBytes": 771493888,
+      "idleBytes": 789999616,
+      "peakBytes": 790138880,
+      "version": "Chrome/151.0.7922.34",
+      "diagnostics": {
+        "origin": "chrome-extension://mpahjgllfhdafockiekihiehggljjaai",
+        "runtimeId": "mpahjgllfhdafockiekihiehggljjaai",
+        "violations": [],
+        "resources": []
+      }
+    }
+  }
+}

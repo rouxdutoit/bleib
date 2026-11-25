@@ -1,0 +1,5 @@
+.cache/
+node_modules/
+results/*.json
+!results/sandbox-evidence.json
+results/*.tmp

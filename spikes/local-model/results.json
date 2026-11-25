@@ -1,0 +1,1283 @@
+{
+  "environment": {
+    "baselineRevision": "",
+    "node": "v24.22.2",
+    "platform": "linux/x64",
+    "kernel": "7.0.0-44-generic",
+    "cpu": "AMD Ryzen 5 5600X 6-Core Processor",
+    "logicalCpus": 12,
+    "ramMiB": 30977.2,
+    "fixtures": {
+      "drafts.tsv": "1bea66d769664d46d6a1604d4cdc3cd532e717aebfa1b91a1b838c6b221a6236",
+      "memories.tsv": "55c8ff833a227b145dddf2021e0fde7b268d614e2ff9717ce269e4ecb64547d8"
+    }
+  },
+  "baseline": {
+    "ms": {
+      "firstMs": 8.411145000000005,
+      "p50Ms": 4.498264999999947,
+      "p95Ms": 7.926581999999996
+    },
+    "walletProject": {
+      "en": {
+        "drafts": 76,
+        "tp": 16,
+        "fp": 90,
+        "fn": 44,
+        "precision": 0.1509433962264151,
+        "recall": 0.26666666666666666,
+        "f1": 0.19277108433734938,
+        "f05": 0.1652892561983471,
+        "negatives": 26,
+        "picksOnNegative": 21,
+        "exact": 9
+      },
+      "de": {
+        "drafts": 76,
+        "tp": 9,
+        "fp": 115,
+        "fn": 51,
+        "precision": 0.07258064516129033,
+        "recall": 0.15,
+        "f1": 0.09782608695652173,
+        "f05": 0.08093525179856115,
+        "negatives": 26,
+        "picksOnNegative": 22,
+        "exact": 4
+      },
+      "protectedLabels": 106,
+      "protectedSelected": 201,
+      "protectedCorrect": 25,
+      "adversarialDrafts": 10,
+      "adversarialPicks": 8,
+      "lisbon": {
+        "en": [
+          "M22",
+          "M28"
+        ],
+        "de": [
+          "M21"
+        ]
+      },
+      "hypotheticalAutomaticPicks": 28,
+      "hypotheticalIrrelevantAutomaticPicks": 28
+    },
+    "rawRelevance": {
+      "en": {
+        "drafts": 76,
+        "tp": 21,
+        "fp": 246,
+        "fn": 39,
+        "precision": 0.07865168539325842,
+        "recall": 0.35,
+        "f1": 0.12844036697247707,
+        "f05": 0.09308510638297872,
+        "negatives": 26,
+        "picksOnNegative": 21,
+        "exact": 6
+      },
+      "de": {
+        "drafts": 76,
+        "tp": 28,
+        "fp": 668,
+        "fn": 32,
+        "precision": 0.040229885057471264,
+        "recall": 0.4666666666666667,
+        "f1": 0.07407407407407407,
+        "f05": 0.04922644163150493,
+        "negatives": 26,
+        "picksOnNegative": 22,
+        "exact": 4
+      },
+      "protectedLabels": 106,
+      "protectedSelected": 906,
+      "protectedCorrect": 45,
+      "adversarialDrafts": 10,
+      "adversarialPicks": 8,
+      "lisbon": {
+        "en": [
+          "M22",
+          "M28"
+        ],
+        "de": [
+          "M21"
+        ]
+      },
+      "hypotheticalAutomaticPicks": 56,
+      "hypotheticalIrrelevantAutomaticPicks": 52
+    },
+    "browserProjection": {
+      "en": {
+        "drafts": 76,
+        "tp": 0,
+        "fp": 9,
+        "fn": 60,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0,
+        "f05": 0,
+        "negatives": 26,
+        "picksOnNegative": 5,
+        "exact": 21
+      },
+      "de": {
+        "drafts": 76,
+        "tp": 0,
+        "fp": 19,
+        "fn": 60,
+        "precision": 0,
+        "recall": 0,
+        "f1": 0,
+        "f05": 0,
+        "negatives": 26,
+        "picksOnNegative": 5,
+        "exact": 21
+      },
+      "protectedLabels": 106,
+      "protectedSelected": 0,
+      "protectedCorrect": 0,
+      "adversarialDrafts": 10,
+      "adversarialPicks": 4,
+      "lisbon": {
+        "en": [],
+        "de": []
+      },
+      "hypotheticalAutomaticPicks": 28,
+      "hypotheticalIrrelevantAutomaticPicks": 28
+    }
+  },
+  "candidates": {
+    "e5-int8": {
+      "repository": "Xenova/multilingual-e5-small",
+      "revision": "761b726dd34fb83930e26aab4e9ac3899aa1fa78",
+      "queryPrefix": "query: ",
+      "memoryPrefix": "passage: ",
+      "assets": {
+        "tokenizer.json": {
+          "bytes": 17082730,
+          "sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39"
+        },
+        "onnx/model_quantized.onnx": {
+          "bytes": 118308185,
+          "sha256": "f80102d3f2a1229f387d3c81909990d8945513e347b0eab049f7de3c6f98c193"
+        },
+        "tokenizer_config.json": {
+          "bytes": 443,
+          "sha256": "a1d6bc8734a6f635dc158508bef000f8e2e5a759c7d92f984b2c86e5ff53425b"
+        }
+      },
+      "modelBytes": 135391358,
+      "debPayloadBytes": 93951104,
+      "sharedBytes": 48109017,
+      "floors": [
+        0.83,
+        1.01
+      ],
+      "calibration90PercentAtEightPicksPerLanguage": null,
+      "runtimes": {
+        "node": {
+          "loadMs": 1063.5189870000002,
+          "indexMs": 267.11714099999995,
+          "firstMs": 9.33689400000003,
+          "p50Ms": 7.594299000000092,
+          "p95Ms": 10.784774000000198,
+          "peakRssMiB": 513.1,
+          "peakRssDeltaMiB": 461.8,
+          "processHighWaterRssMiB": 540.6,
+          "quality": {
+            "en": {
+              "drafts": 76,
+              "tp": 12,
+              "fp": 15,
+              "fn": 48,
+              "precision": 0.4444444444444444,
+              "recall": 0.2,
+              "f1": 0.2758620689655173,
+              "f05": 0.35714285714285715,
+              "negatives": 26,
+              "picksOnNegative": 5,
+              "exact": 31
+            },
+            "de": {
+              "drafts": 76,
+              "tp": 14,
+              "fp": 41,
+              "fn": 46,
+              "precision": 0.2545454545454545,
+              "recall": 0.23333333333333334,
+              "f1": 0.2434782608695652,
+              "f05": 0.24999999999999994,
+              "negatives": 26,
+              "picksOnNegative": 15,
+              "exact": 23
+            },
+            "protectedLabels": 106,
+            "protectedSelected": 72,
+            "protectedCorrect": 25,
+            "adversarialDrafts": 10,
+            "adversarialPicks": 6,
+            "lisbon": {
+              "en": [
+                "M17"
+              ],
+              "de": [
+                "M17"
+              ]
+            },
+            "hypotheticalAutomaticPicks": 6,
+            "hypotheticalIrrelevantAutomaticPicks": 5
+          }
+        },
+        "chromium": {
+          "loadMs": 1744.199999988079,
+          "indexMs": 741.7999999523163,
+          "firstMs": 22.80000001192093,
+          "p50Ms": 22,
+          "p95Ms": 28.30000001192093,
+          "peakRssMiB": 1710.9,
+          "peakRssDeltaMiB": 702.7,
+          "version": "159.0.8154.6",
+          "browserZipBytes": 88937762,
+          "offline": true,
+          "extensionScheme": "chrome-extension",
+          "bundledResources": [
+            "/fixture.json",
+            "/tokenizer.json",
+            "/tokenizer_config.json",
+            "/ort-wasm-simd-threaded.wasm",
+            "/onnx/model_quantized.onnx"
+          ],
+          "remoteRequestCount": 0,
+          "cspViolationCount": 0,
+          "nano": {
+            "api": "present",
+            "availability": {
+              "en": "unavailable",
+              "de": "unavailable"
+            }
+          },
+          "testPredictionMismatchesVsNode": 7,
+          "quality": {
+            "en": {
+              "drafts": 76,
+              "tp": 13,
+              "fp": 15,
+              "fn": 47,
+              "precision": 0.4642857142857143,
+              "recall": 0.21666666666666667,
+              "f1": 0.29545454545454547,
+              "f05": 0.37790697674418605,
+              "negatives": 26,
+              "picksOnNegative": 5,
+              "exact": 32
+            },
+            "de": {
+              "drafts": 76,
+              "tp": 16,
+              "fp": 40,
+              "fn": 44,
+              "precision": 0.2857142857142857,
+              "recall": 0.26666666666666666,
+              "f1": 0.2758620689655172,
+              "f05": 0.2816901408450703,
+              "negatives": 26,
+              "picksOnNegative": 15,
+              "exact": 24
+            },
+            "protectedLabels": 106,
+            "protectedSelected": 74,
+            "protectedCorrect": 28,
+            "adversarialDrafts": 10,
+            "adversarialPicks": 6,
+            "lisbon": {
+              "en": [
+                "M09"
+              ],
+              "de": [
+                "M17"
+              ]
+            },
+            "hypotheticalAutomaticPicks": 6,
+            "hypotheticalIrrelevantAutomaticPicks": 5
+          }
+        },
+        "firefox": {
+          "loadMs": 1547,
+          "indexMs": 725,
+          "firstMs": 23,
+          "p50Ms": 23,
+          "p95Ms": 29,
+          "peakRssMiB": 1675.2,
+          "peakRssDeltaMiB": 811.7,
+          "version": "159.0",
+          "browserZipBytes": 88937634,
+          "offline": true,
+          "extensionScheme": "moz-extension",
+          "bundledResources": [
+            "/fixture.json",
+            "/tokenizer.json",
+            "/tokenizer_config.json",
+            "/ort-wasm-simd-threaded.wasm",
+            "/onnx/model_quantized.onnx"
+          ],
+          "remoteRequestCount": 0,
+          "cspViolationCount": 0,
+          "nano": {
+            "api": "missing"
+          },
+          "testPredictionMismatchesVsNode": 7,
+          "quality": {
+            "en": {
+              "drafts": 76,
+              "tp": 13,
+              "fp": 15,
+              "fn": 47,
+              "precision": 0.4642857142857143,
+              "recall": 0.21666666666666667,
+              "f1": 0.29545454545454547,
+              "f05": 0.37790697674418605,
+              "negatives": 26,
+              "picksOnNegative": 5,
+              "exact": 32
+            },
+            "de": {
+              "drafts": 76,
+              "tp": 16,
+              "fp": 40,
+              "fn": 44,
+              "precision": 0.2857142857142857,
+              "recall": 0.26666666666666666,
+              "f1": 0.2758620689655172,
+              "f05": 0.2816901408450703,
+              "negatives": 26,
+              "picksOnNegative": 15,
+              "exact": 24
+            },
+            "protectedLabels": 106,
+            "protectedSelected": 74,
+            "protectedCorrect": 28,
+            "adversarialDrafts": 10,
+            "adversarialPicks": 6,
+            "lisbon": {
+              "en": [
+                "M09"
+              ],
+              "de": [
+                "M17"
+              ]
+            },
+            "hypotheticalAutomaticPicks": 6,
+            "hypotheticalIrrelevantAutomaticPicks": 5
+          }
+        }
+      }
+    },
+    "minilm-int8": {
+      "repository": "Xenova/paraphrase-multilingual-MiniLM-L12-v2",
+      "revision": "2c4055b12046f11709e9df2c122e59ffbdc2f900",
+      "assets": {
+        "tokenizer.json": {
+          "bytes": 17082913,
+          "sha256": "b60b6b43406a48bf3638526314f3d232d97058bc93472ff2de930d43686fa441"
+        },
+        "onnx/model_quantized.onnx": {
+          "bytes": 118308126,
+          "sha256": "66fc00f5f29afcaff34092e1bdd20008ca3918265a82fb9695a551e510cc4ebc"
+        },
+        "tokenizer_config.json": {
+          "bytes": 496,
+          "sha256": "3f5961b9ac86288cccdb97f32fb848d6187c78e1603958c53f3ea1f296b7d8a2"
+        }
+      },
+      "modelBytes": 135391535,
+      "debPayloadBytes": 85032524,
+      "sharedBytes": 48109017,
+      "floors": [
+        0.37,
+        0.53
+      ],
+      "calibration90PercentAtEightPicksPerLanguage": null,
+      "runtimes": {
+        "node": {
+          "loadMs": 1032.612297,
+          "indexMs": 237.2916990000001,
+          "firstMs": 11.557810000000018,
+          "p50Ms": 6.820264000000407,
+          "p95Ms": 9.583444999999756,
+          "peakRssMiB": 513.4,
+          "peakRssDeltaMiB": 462,
+          "processHighWaterRssMiB": 539.4,
+          "quality": {
+            "en": {
+              "drafts": 76,
+              "tp": 29,
+              "fp": 22,
+              "fn": 31,
+              "precision": 0.5686274509803921,
+              "recall": 0.48333333333333334,
+              "f1": 0.5225225225225224,
+              "f05": 0.5492424242424242,
+              "negatives": 26,
+              "picksOnNegative": 9,
+              "exact": 40
+            },
+            "de": {
+              "drafts": 76,
+              "tp": 30,
+              "fp": 30,
+              "fn": 30,
+              "precision": 0.5,
+              "recall": 0.5,
+              "f1": 0.5,
+              "f05": 0.5,
+              "negatives": 26,
+              "picksOnNegative": 11,
+              "exact": 37
+            },
+            "protectedLabels": 106,
+            "protectedSelected": 100,
+            "protectedCorrect": 55,
+            "adversarialDrafts": 10,
+            "adversarialPicks": 8,
+            "lisbon": {
+              "en": [
+                "M35"
+              ],
+              "de": [
+                "M35"
+              ]
+            },
+            "hypotheticalAutomaticPicks": 10,
+            "hypotheticalIrrelevantAutomaticPicks": 6
+          }
+        },
+        "chromium": {
+          "loadMs": 1733.3999999761581,
+          "indexMs": 694.3999999761581,
+          "firstMs": 20.5,
+          "p50Ms": 19.5,
+          "p95Ms": 25.5,
+          "peakRssMiB": 1704.9,
+          "peakRssDeltaMiB": 700.7,
+          "version": "159.0.8154.6",
+          "browserZipBytes": 80880760,
+          "offline": true,
+          "extensionScheme": "chrome-extension",
+          "bundledResources": [
+            "/fixture.json",
+            "/tokenizer.json",
+            "/tokenizer_config.json",
+            "/ort-wasm-simd-threaded.wasm",
+            "/onnx/model_quantized.onnx"
+          ],
+          "remoteRequestCount": 0,
+          "cspViolationCount": 0,
+          "nano": {
+            "api": "present",
+            "availability": {
+              "en": "unavailable",
+              "de": "unavailable"
+            }
+          },
+          "testPredictionMismatchesVsNode": 3,
+          "quality": {
+            "en": {
+              "drafts": 76,
+              "tp": 28,
+              "fp": 23,
+              "fn": 32,
+              "precision": 0.5490196078431373,
+              "recall": 0.4666666666666667,
+              "f1": 0.5045045045045046,
+              "f05": 0.5303030303030303,
+              "negatives": 26,
+              "picksOnNegative": 9,
+              "exact": 39
+            },
+            "de": {
+              "drafts": 76,
+              "tp": 31,
+              "fp": 28,
+              "fn": 29,
+              "precision": 0.5254237288135594,
+              "recall": 0.5166666666666667,
+              "f1": 0.5210084033613446,
+              "f05": 0.5236486486486487,
+              "negatives": 26,
+              "picksOnNegative": 11,
+              "exact": 37
+            },
+            "protectedLabels": 106,
+            "protectedSelected": 99,
+            "protectedCorrect": 55,
+            "adversarialDrafts": 10,
+            "adversarialPicks": 8,
+            "lisbon": {
+              "en": [
+                "M35"
+              ],
+              "de": [
+                "M35"
+              ]
+            },
+            "hypotheticalAutomaticPicks": 10,
+            "hypotheticalIrrelevantAutomaticPicks": 6
+          }
+        },
+        "firefox": {
+          "loadMs": 1301,
+          "indexMs": 640,
+          "firstMs": 21,
+          "p50Ms": 19,
+          "p95Ms": 25,
+          "peakRssMiB": 1668.1,
+          "peakRssDeltaMiB": 806.9,
+          "version": "159.0",
+          "browserZipBytes": 80880632,
+          "offline": true,
+          "extensionScheme": "moz-extension",
+          "bundledResources": [
+            "/fixture.json",
+            "/tokenizer.json",
+            "/tokenizer_config.json",
+            "/ort-wasm-simd-threaded.wasm",
+            "/onnx/model_quantized.onnx"
+          ],
+          "remoteRequestCount": 0,
+          "cspViolationCount": 0,
+          "nano": {
+            "api": "missing"
+          },
+          "testPredictionMismatchesVsNode": 3,
+          "quality": {
+            "en": {
+              "drafts": 76,
+              "tp": 28,
+              "fp": 23,
+              "fn": 32,
+              "precision": 0.5490196078431373,
+              "recall": 0.4666666666666667,
+              "f1": 0.5045045045045046,
+              "f05": 0.5303030303030303,
+              "negatives": 26,
+              "picksOnNegative": 9,
+              "exact": 39
+            },
+            "de": {
+              "drafts": 76,
+              "tp": 31,
+              "fp": 28,
+              "fn": 29,
+              "precision": 0.5254237288135594,
+              "recall": 0.5166666666666667,
+              "f1": 0.5210084033613446,
+              "f05": 0.5236486486486487,
+              "negatives": 26,
+              "picksOnNegative": 11,
+              "exact": 37
+            },
+            "protectedLabels": 106,
+            "protectedSelected": 99,
+            "protectedCorrect": 55,
+            "adversarialDrafts": 10,
+            "adversarialPicks": 8,
+            "lisbon": {
+              "en": [
+                "M35"
+              ],
+              "de": [
+                "M35"
+              ]
+            },
+            "hypotheticalAutomaticPicks": 10,
+            "hypotheticalIrrelevantAutomaticPicks": 6
+          }
+        }
+      }
+    },
+    "static-int8": {
+      "repository": "sentence-transformers/static-similarity-mrl-multilingual-v1",
+      "revision": "b68f4122911bcffcd6e1f695f2d99cd6788972d8",
+      "tokenizer": "0_StaticEmbedding/tokenizer.json",
+      "pooling": "static",
+      "assets": {
+        "0_StaticEmbedding/tokenizer.json": {
+          "bytes": 2563370,
+          "sha256": "11aaf894a4ccf3d95e8830e27c0f8152791fbbff2b988e29a265580b86edd216"
+        },
+        "onnx/model_quantized.onnx": {
+          "bytes": 108424888,
+          "sha256": "9eaf678438a0c2669e7388e90fd8ef25c3138dd3155cb0d62fd8114760405a3a"
+        }
+      },
+      "modelBytes": 110988258,
+      "debPayloadBytes": 85860368,
+      "sharedBytes": 48109017,
+      "floors": [
+        0.26,
+        1.01
+      ],
+      "calibration90PercentAtEightPicksPerLanguage": null,
+      "runtimes": {
+        "node": {
+          "loadMs": 452.047063,
+          "indexMs": 19.519352000000026,
+          "firstMs": 0.7517159999999876,
+          "p50Ms": 0.6063449999999762,
+          "p95Ms": 0.8695470000000114,
+          "peakRssMiB": 244.9,
+          "peakRssDeltaMiB": 193.7,
+          "processHighWaterRssMiB": 343.9,
+          "quality": {
+            "en": {
+              "drafts": 76,
+              "tp": 16,
+              "fp": 14,
+              "fn": 44,
+              "precision": 0.5333333333333333,
+              "recall": 0.26666666666666666,
+              "f1": 0.3555555555555555,
+              "f05": 0.44444444444444436,
+              "negatives": 26,
+              "picksOnNegative": 8,
+              "exact": 31
+            },
+            "de": {
+              "drafts": 76,
+              "tp": 16,
+              "fp": 14,
+              "fn": 44,
+              "precision": 0.5333333333333333,
+              "recall": 0.26666666666666666,
+              "f1": 0.3555555555555555,
+              "f05": 0.44444444444444436,
+              "negatives": 26,
+              "picksOnNegative": 6,
+              "exact": 33
+            },
+            "protectedLabels": 106,
+            "protectedSelected": 53,
+            "protectedCorrect": 31,
+            "adversarialDrafts": 10,
+            "adversarialPicks": 6,
+            "lisbon": {
+              "en": [],
+              "de": [
+                "M09"
+              ]
+            },
+            "hypotheticalAutomaticPicks": 5,
+            "hypotheticalIrrelevantAutomaticPicks": 4
+          }
+        },
+        "chromium": {
+          "loadMs": 899.2000000476837,
+          "indexMs": 26.400000035762787,
+          "firstMs": 0.7999999523162842,
+          "p50Ms": 0.6000000238418579,
+          "p95Ms": 0.800000011920929,
+          "peakRssMiB": 1519.4,
+          "peakRssDeltaMiB": 515,
+          "version": "159.0.8154.6",
+          "browserZipBytes": 79589319,
+          "offline": true,
+          "extensionScheme": "chrome-extension",
+          "bundledResources": [
+            "/fixture.json",
+            "/0_StaticEmbedding/tokenizer.json",
+            "/ort-wasm-simd-threaded.wasm",
+            "/onnx/model_quantized.onnx"
+          ],
+          "remoteRequestCount": 0,
+          "cspViolationCount": 0,
+          "nano": {
+            "api": "present",
+            "availability": {
+              "en": "unavailable",
+              "de": "unavailable"
+            }
+          },
+          "testPredictionMismatchesVsNode": 0,
+          "quality": {
+            "en": {
+              "drafts": 76,
+              "tp": 16,
+              "fp": 14,
+              "fn": 44,
+              "precision": 0.5333333333333333,
+              "recall": 0.26666666666666666,
+              "f1": 0.3555555555555555,
+              "f05": 0.44444444444444436,
+              "negatives": 26,
+              "picksOnNegative": 8,
+              "exact": 31
+            },
+            "de": {
+              "drafts": 76,
+              "tp": 16,
+              "fp": 14,
+              "fn": 44,
+              "precision": 0.5333333333333333,
+              "recall": 0.26666666666666666,
+              "f1": 0.3555555555555555,
+              "f05": 0.44444444444444436,
+              "negatives": 26,
+              "picksOnNegative": 6,
+              "exact": 33
+            },
+            "protectedLabels": 106,
+            "protectedSelected": 53,
+            "protectedCorrect": 31,
+            "adversarialDrafts": 10,
+            "adversarialPicks": 6,
+            "lisbon": {
+              "en": [],
+              "de": [
+                "M09"
+              ]
+            },
+            "hypotheticalAutomaticPicks": 5,
+            "hypotheticalIrrelevantAutomaticPicks": 4
+          }
+        },
+        "firefox": {
+          "loadMs": 563,
+          "indexMs": 20,
+          "firstMs": 0,
+          "p50Ms": 1,
+          "p95Ms": 1,
+          "peakRssMiB": 1465.7,
+          "peakRssDeltaMiB": 603.2,
+          "version": "159.0",
+          "browserZipBytes": 79589191,
+          "offline": true,
+          "extensionScheme": "moz-extension",
+          "bundledResources": [
+            "/fixture.json",
+            "/0_StaticEmbedding/tokenizer.json",
+            "/ort-wasm-simd-threaded.wasm",
+            "/onnx/model_quantized.onnx"
+          ],
+          "remoteRequestCount": 0,
+          "cspViolationCount": 0,
+          "nano": {
+            "api": "missing"
+          },
+          "testPredictionMismatchesVsNode": 0,
+          "quality": {
+            "en": {
+              "drafts": 76,
+              "tp": 16,
+              "fp": 14,
+              "fn": 44,
+              "precision": 0.5333333333333333,
+              "recall": 0.26666666666666666,
+              "f1": 0.3555555555555555,
+              "f05": 0.44444444444444436,
+              "negatives": 26,
+              "picksOnNegative": 8,
+              "exact": 31
+            },
+            "de": {
+              "drafts": 76,
+              "tp": 16,
+              "fp": 14,
+              "fn": 44,
+              "precision": 0.5333333333333333,
+              "recall": 0.26666666666666666,
+              "f1": 0.3555555555555555,
+              "f05": 0.44444444444444436,
+              "negatives": 26,
+              "picksOnNegative": 6,
+              "exact": 33
+            },
+            "protectedLabels": 106,
+            "protectedSelected": 53,
+            "protectedCorrect": 31,
+            "adversarialDrafts": 10,
+            "adversarialPicks": 6,
+            "lisbon": {
+              "en": [],
+              "de": [
+                "M09"
+              ]
+            },
+            "hypotheticalAutomaticPicks": 5,
+            "hypotheticalIrrelevantAutomaticPicks": 4
+          }
+        }
+      }
+    },
+    "granite-ibm-int8": {
+      "repository": "ibm-granite/granite-embedding-97m-multilingual-r2",
+      "revision": "835ad14087e140460703cf0fae09f97d469d65c2",
+      "pooling": "cls",
+      "graph": "onnx/model_quint8_avx2.onnx",
+      "assets": {
+        "tokenizer.json": {
+          "bytes": 25301672,
+          "sha256": "4f2842d568e2724370aec203652a42ac783c7937f8347a1a2cc7506d71f1582f"
+        },
+        "onnx/model_quint8_avx2.onnx": {
+          "bytes": 98247878,
+          "sha256": "a6022dd8220ea6f6595562a1328ee216f4a94faa55362f2f4747c80f1e78772e"
+        },
+        "tokenizer_config.json": {
+          "bytes": 12860,
+          "sha256": "6ed69389e30a8ecabfce2f9ebcdf0c908b34056f24d994340f2f216521c057d5"
+        }
+      },
+      "modelBytes": 123562410,
+      "debPayloadBytes": 83564112,
+      "sharedBytes": 48109017,
+      "floors": [
+        0.8,
+        0.82
+      ],
+      "calibration90PercentAtEightPicksPerLanguage": null,
+      "runtimes": {
+        "node": {
+          "loadMs": 1139.52434,
+          "indexMs": 302.0517940000002,
+          "firstMs": 13.756817000000183,
+          "p50Ms": 9.58942500000012,
+          "p95Ms": 13.448444999999992,
+          "peakRssMiB": 480.4,
+          "peakRssDeltaMiB": 429.1,
+          "processHighWaterRssMiB": 515.6,
+          "quality": {
+            "en": {
+              "drafts": 76,
+              "tp": 16,
+              "fp": 15,
+              "fn": 44,
+              "precision": 0.5161290322580645,
+              "recall": 0.26666666666666666,
+              "f1": 0.3516483516483517,
+              "f05": 0.43478260869565216,
+              "negatives": 26,
+              "picksOnNegative": 5,
+              "exact": 33
+            },
+            "de": {
+              "drafts": 76,
+              "tp": 16,
+              "fp": 8,
+              "fn": 44,
+              "precision": 0.6666666666666666,
+              "recall": 0.26666666666666666,
+              "f1": 0.3809523809523809,
+              "f05": 0.5128205128205128,
+              "negatives": 26,
+              "picksOnNegative": 3,
+              "exact": 36
+            },
+            "protectedLabels": 106,
+            "protectedSelected": 52,
+            "protectedCorrect": 32,
+            "adversarialDrafts": 10,
+            "adversarialPicks": 4,
+            "lisbon": {
+              "en": [
+                "M40"
+              ],
+              "de": []
+            },
+            "hypotheticalAutomaticPicks": 3,
+            "hypotheticalIrrelevantAutomaticPicks": 3
+          }
+        },
+        "chromium": {
+          "loadMs": 1872.300000011921,
+          "indexMs": 826,
+          "firstMs": 23.19999998807907,
+          "p50Ms": 22.399999976158142,
+          "p95Ms": 29.399999976158142,
+          "peakRssMiB": 1654.6,
+          "peakRssDeltaMiB": 645.4,
+          "version": "159.0.8154.6",
+          "browserZipBytes": 78335211,
+          "offline": true,
+          "extensionScheme": "chrome-extension",
+          "bundledResources": [
+            "/fixture.json",
+            "/tokenizer.json",
+            "/tokenizer_config.json",
+            "/ort-wasm-simd-threaded.wasm",
+            "/onnx/model_quint8_avx2.onnx"
+          ],
+          "remoteRequestCount": 0,
+          "cspViolationCount": 0,
+          "nano": {
+            "api": "present",
+            "availability": {
+              "en": "unavailable",
+              "de": "unavailable"
+            }
+          },
+          "testPredictionMismatchesVsNode": 7,
+          "quality": {
+            "en": {
+              "drafts": 76,
+              "tp": 16,
+              "fp": 15,
+              "fn": 44,
+              "precision": 0.5161290322580645,
+              "recall": 0.26666666666666666,
+              "f1": 0.3516483516483517,
+              "f05": 0.43478260869565216,
+              "negatives": 26,
+              "picksOnNegative": 5,
+              "exact": 33
+            },
+            "de": {
+              "drafts": 76,
+              "tp": 16,
+              "fp": 7,
+              "fn": 44,
+              "precision": 0.6956521739130435,
+              "recall": 0.26666666666666666,
+              "f1": 0.3855421686746988,
+              "f05": 0.5263157894736842,
+              "negatives": 26,
+              "picksOnNegative": 3,
+              "exact": 36
+            },
+            "protectedLabels": 106,
+            "protectedSelected": 51,
+            "protectedCorrect": 32,
+            "adversarialDrafts": 10,
+            "adversarialPicks": 4,
+            "lisbon": {
+              "en": [
+                "M40"
+              ],
+              "de": []
+            },
+            "hypotheticalAutomaticPicks": 3,
+            "hypotheticalIrrelevantAutomaticPicks": 3
+          }
+        },
+        "firefox": {
+          "loadMs": 1392,
+          "indexMs": 787,
+          "firstMs": 24,
+          "p50Ms": 24,
+          "p95Ms": 31,
+          "peakRssMiB": 1551.4,
+          "peakRssDeltaMiB": 685.2,
+          "version": "159.0",
+          "browserZipBytes": 78335083,
+          "offline": true,
+          "extensionScheme": "moz-extension",
+          "bundledResources": [
+            "/fixture.json",
+            "/tokenizer.json",
+            "/tokenizer_config.json",
+            "/ort-wasm-simd-threaded.wasm",
+            "/onnx/model_quint8_avx2.onnx"
+          ],
+          "remoteRequestCount": 0,
+          "cspViolationCount": 0,
+          "nano": {
+            "api": "missing"
+          },
+          "testPredictionMismatchesVsNode": 7,
+          "quality": {
+            "en": {
+              "drafts": 76,
+              "tp": 16,
+              "fp": 15,
+              "fn": 44,
+              "precision": 0.5161290322580645,
+              "recall": 0.26666666666666666,
+              "f1": 0.3516483516483517,
+              "f05": 0.43478260869565216,
+              "negatives": 26,
+              "picksOnNegative": 5,
+              "exact": 33
+            },
+            "de": {
+              "drafts": 76,
+              "tp": 16,
+              "fp": 7,
+              "fn": 44,
+              "precision": 0.6956521739130435,
+              "recall": 0.26666666666666666,
+              "f1": 0.3855421686746988,
+              "f05": 0.5263157894736842,
+              "negatives": 26,
+              "picksOnNegative": 3,
+              "exact": 36
+            },
+            "protectedLabels": 106,
+            "protectedSelected": 51,
+            "protectedCorrect": 32,
+            "adversarialDrafts": 10,
+            "adversarialPicks": 4,
+            "lisbon": {
+              "en": [
+                "M40"
+              ],
+              "de": []
+            },
+            "hypotheticalAutomaticPicks": 3,
+            "hypotheticalIrrelevantAutomaticPicks": 3
+          }
+        }
+      }
+    },
+    "granite-int8": {
+      "repository": "onnx-community/granite-embedding-97m-multilingual-r2-ONNX",
+      "revision": "536a9f241cb3f02a9c5995a1e708c784bd274859",
+      "pooling": "cls",
+      "assets": {
+        "tokenizer.json": {
+          "bytes": 25301671,
+          "sha256": "51947676cae1f991fa51c6b9a24e14ee5460e5f0b9f692f13bb3159829d1592a"
+        },
+        "onnx/model_quantized.onnx": {
+          "bytes": 97858099,
+          "sha256": "704c1ebca5fbb7cd83ced41827658ac4c9990c64f7f2874d22b78044e5022e22"
+        },
+        "tokenizer_config.json": {
+          "bytes": 12860,
+          "sha256": "6ed69389e30a8ecabfce2f9ebcdf0c908b34056f24d994340f2f216521c057d5"
+        }
+      },
+      "modelBytes": 123172630,
+      "debPayloadBytes": 80867552,
+      "sharedBytes": 48109017,
+      "floors": [
+        0.99,
+        1.01
+      ],
+      "calibration90PercentAtEightPicksPerLanguage": null,
+      "runtimes": {
+        "node": {
+          "loadMs": 1099.9616310000001,
+          "indexMs": 264.67974200000003,
+          "firstMs": 11.137767000000167,
+          "p50Ms": 8.031091999999944,
+          "p95Ms": 11.137767000000167,
+          "peakRssMiB": 468.8,
+          "peakRssDeltaMiB": 417.6,
+          "processHighWaterRssMiB": 515,
+          "quality": {
+            "en": {
+              "drafts": 76,
+              "tp": 12,
+              "fp": 64,
+              "fn": 48,
+              "precision": 0.15789473684210525,
+              "recall": 0.2,
+              "f1": 0.17647058823529413,
+              "f05": 0.16483516483516483,
+              "negatives": 26,
+              "picksOnNegative": 26,
+              "exact": 8
+            },
+            "de": {
+              "drafts": 76,
+              "tp": 11,
+              "fp": 65,
+              "fn": 49,
+              "precision": 0.14473684210526316,
+              "recall": 0.18333333333333332,
+              "f1": 0.16176470588235292,
+              "f05": 0.1510989010989011,
+              "negatives": 26,
+              "picksOnNegative": 26,
+              "exact": 10
+            },
+            "protectedLabels": 106,
+            "protectedSelected": 148,
+            "protectedCorrect": 23,
+            "adversarialDrafts": 10,
+            "adversarialPicks": 10,
+            "lisbon": {
+              "en": [
+                "M36"
+              ],
+              "de": [
+                "M36"
+              ]
+            },
+            "hypotheticalAutomaticPicks": 2,
+            "hypotheticalIrrelevantAutomaticPicks": 2
+          }
+        },
+        "chromium": {
+          "loadMs": 1787.4000000357628,
+          "indexMs": 825.9000000357628,
+          "firstMs": 22.099999964237213,
+          "p50Ms": 22,
+          "p95Ms": 28.600000023841858,
+          "peakRssMiB": 1648.4,
+          "peakRssDeltaMiB": 639,
+          "version": "159.0.8154.6",
+          "browserZipBytes": 74997202,
+          "offline": true,
+          "extensionScheme": "chrome-extension",
+          "bundledResources": [
+            "/fixture.json",
+            "/tokenizer.json",
+            "/tokenizer_config.json",
+            "/ort-wasm-simd-threaded.wasm",
+            "/onnx/model_quantized.onnx"
+          ],
+          "remoteRequestCount": 0,
+          "cspViolationCount": 0,
+          "nano": {
+            "api": "present",
+            "availability": {
+              "en": "unavailable",
+              "de": "unavailable"
+            }
+          },
+          "testPredictionMismatchesVsNode": 152,
+          "quality": {
+            "en": {
+              "drafts": 76,
+              "tp": 0,
+              "fp": 0,
+              "fn": 60,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 26,
+              "picksOnNegative": 0,
+              "exact": 26
+            },
+            "de": {
+              "drafts": 76,
+              "tp": 0,
+              "fp": 0,
+              "fn": 60,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 26,
+              "picksOnNegative": 0,
+              "exact": 26
+            },
+            "protectedLabels": 106,
+            "protectedSelected": 0,
+            "protectedCorrect": 0,
+            "adversarialDrafts": 10,
+            "adversarialPicks": 0,
+            "lisbon": {
+              "en": [],
+              "de": []
+            },
+            "hypotheticalAutomaticPicks": 0,
+            "hypotheticalIrrelevantAutomaticPicks": 0
+          }
+        },
+        "firefox": {
+          "loadMs": 1348,
+          "indexMs": 771,
+          "firstMs": 23,
+          "p50Ms": 23,
+          "p95Ms": 31,
+          "peakRssMiB": 1539.9,
+          "peakRssDeltaMiB": 676.6,
+          "version": "159.0",
+          "browserZipBytes": 74997074,
+          "offline": true,
+          "extensionScheme": "moz-extension",
+          "bundledResources": [
+            "/fixture.json",
+            "/tokenizer.json",
+            "/tokenizer_config.json",
+            "/ort-wasm-simd-threaded.wasm",
+            "/onnx/model_quantized.onnx"
+          ],
+          "remoteRequestCount": 0,
+          "cspViolationCount": 0,
+          "nano": {
+            "api": "missing"
+          },
+          "testPredictionMismatchesVsNode": 152,
+          "quality": {
+            "en": {
+              "drafts": 76,
+              "tp": 0,
+              "fp": 0,
+              "fn": 60,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 26,
+              "picksOnNegative": 0,
+              "exact": 26
+            },
+            "de": {
+              "drafts": 76,
+              "tp": 0,
+              "fp": 0,
+              "fn": 60,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0,
+              "f05": 0,
+              "negatives": 26,
+              "picksOnNegative": 0,
+              "exact": 26
+            },
+            "protectedLabels": 106,
+            "protectedSelected": 0,
+            "protectedCorrect": 0,
+            "adversarialDrafts": 10,
+            "adversarialPicks": 0,
+            "lisbon": {
+              "en": [],
+              "de": []
+            },
+            "hypotheticalAutomaticPicks": 0,
+            "hypotheticalIrrelevantAutomaticPicks": 0
+          }
+        }
+      }
+    },
+    "granite-q4f16": {
+      "repository": "onnx-community/granite-embedding-97m-multilingual-r2-ONNX",
+      "revision": "536a9f241cb3f02a9c5995a1e708c784bd274859",
+      "pooling": "cls",
+      "graph": "onnx/model_q4f16.onnx",
+      "assets": {
+        "tokenizer.json": {
+          "bytes": 25301671,
+          "sha256": "51947676cae1f991fa51c6b9a24e14ee5460e5f0b9f692f13bb3159829d1592a"
+        },
+        "onnx/model_q4f16.onnx": {
+          "bytes": 154468150,
+          "sha256": "8a8d6fbeca35d4f363fdfd29413169e6690309614820225017853a825c63d7d9"
+        },
+        "tokenizer_config.json": {
+          "bytes": 12860,
+          "sha256": "6ed69389e30a8ecabfce2f9ebcdf0c908b34056f24d994340f2f216521c057d5"
+        }
+      },
+      "modelBytes": 179782681,
+      "debPayloadBytes": 127682556,
+      "sharedBytes": 48109017,
+      "runtimes": {
+        "node": {
+          "error": "Error: Load model from .cache/models/onnx-community/granite-embedding-97m-multilingual-r2-ONNX/onnx/model_q4f16.onnx failed:Type Error: Type (tensor(float16)) of output arg (/layers.0/attn/rotary_emb/Cast_1_output_0) of node (/layers.0/attn/rotary_emb/Cast_1) does not match expected type (tensor(float))."
+        },
+        "chromium": {
+          "error": "Error: page.evaluate: Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: Type Error: Type (tensor(float16)) of output arg (/layers.0/attn/rotary_emb/Cast_1_output_0) of node (/layers.0/attn/rotary_emb/Cast_1) does not match expected type (tensor(float)).",
+          "browserZipBytes": 128209432
+        },
+        "firefox": {
+          "error": "Error: Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: Type Error: Type (tensor(float16)) of output arg (/layers.0/attn/rotary_emb/Cast_1_output_0) of node (/layers.0/attn/rotary_emb/Cast_1) does not match expected type (tensor(float)).",
+          "browserZipBytes": 128209304
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "chrome": "Chrome/158.0.8127.88",
+  "adapter": null,
+  "nvidiaError": "NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.",
+  "availabilityOnFreshProfile": {
+    "en": "downloadable",
+    "de": "downloadable"
+  },
+  "availabilityAfterRequest": {
+    "en": "downloading",
+    "de": "downloading"
+  },
+  "launchFlags": [
+    "--remote-debugging-pipe",
+    "--no-first-run",
+    "--enable-unsafe-extension-debugging",
+    "--no-sandbox"
+  ],
+  "trial": {
+    "seconds": 60,
+    "downloadEvents": [],
+    "completedDrafts": 0,
+    "failure": "The English create() call was aborted at the shared download budget."
+  },
+  "componentStatus": [
+    "- text: \"OnDeviceHeadSuggest - Version: 20251024.824731831.14 Status - Up-to-date\"",
+    "- text: \"Optimization Guide Geolocation Permission Predictions - Version: 2026.11.18.1620 Status - Up-to-date\"",
+    "- text: \"Optimization Guide Manifest Component: nano_v3_cpu_component - Version: 0.0.0.0 Status - Update error\"",
+    "- text: \"Optimization Guide On DeviceModels Manifest - Version: 1.20261108.2 Status - Up-to-date\"",
+    "- text: \"Optimization Hints - Version: 784 Status - Up-to-date\""
+  ],
+  "noPoliciesSet": true,
+  "broker": [
+    "Performance Class ServiceCrash",
+    "Manifest Loaded true",
+    "Enabled by feature flag true",
+    "Enabled by enterprise policy true",
+    "Enabled by user setting true",
+    "Enough VRAM false (0 MiB actual, 3000 MiB required)",
+    "Device Capable true",
+    "Enough disk space to install true (339705 MiB available, 20480 MiB required)",
+    "Enough disk space to retain true (339705 MiB available, 5120 MiB required)",
+    "nano_v3_cpu_component 2025.8.21.1028 Foreground Installing 0 0% None",
+    "prompt_api Pending Assets",
+    "prompt_api_gemma4 Pending Usage",
+    "nano_v3_cpu_model 0 MiB CPU"
+  ]
+}

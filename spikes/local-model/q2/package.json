@@ -1,0 +1,8 @@
+{
+  "name": "bleib-local-reasoning-spike",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "node-llama-cpp": "3.22.3"
+  }
+}

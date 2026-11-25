@@ -1,0 +1,41 @@
+id	kind	policy	text
+M01	preferences	ordinary	I prefer aisle seats.
+M02	preferences	ordinary	Ich esse vegetarisch.
+M03	preferences	ask	Ich nehme für Reisen unter fünf Stunden lieber den Zug als das Flugzeug.
+M04	preferences	ask	I like a quiet hotel room away from the elevator.
+M05	preferences	ask	Für Städtetrips mag ich kleine Kunstmuseen lieber als geführte Touren.
+M06	preferences	ordinary	I prefer mint tea.
+M07	preferences	ask	Ich mag dunkle Schokolade.
+M08	preferences	ask	I cook with a single induction hob and don't own an oven.
+M09	preferences	ask	Unter der Woche koche ich am liebsten in höchstens 25 Minuten.
+M10	preferences	ask	I prefer recipes with grams and millilitres.
+M11	work	ask	Für Merge Requests möchte ich kleine, gut überprüfbare Änderungen.
+M12	work	ask	I write backend services in TypeScript on Node 20.
+M13	work	ask	Meine Projekte testen wir mit Vitest.
+M14	work	ask	When I write to a customer, I use plain language and lead with what happens next.
+M15	work	ask	Ich bewerbe mich auf Stellen als Produktdesignerin. Mein Schwerpunkt ist barrierefreie Software.
+M16	work	ask	I have six years of experience designing civic services.
+M17	work	ask	Mein Team macht den Wochenrückblick freitags.
+M18	preferences	ordinary	I prefer short answers.
+M19	preferences	ask	Ich kaufe Laptops lieber generalüberholt.
+M20	preferences	ask	I wear size EU 39 in everyday shoes.
+M21	preferences	ask	Bei Kleidung kratzt Wolle bei mir. Ich trage lieber Baumwolle.
+M22	preferences	ask	I look for headphones with replaceable ear pads.
+M23	preferences	ask	Für Gastgeber bringe ich gern Verbrauchbares statt Deko mit.
+M24	activities	ask	I like beginner bouldering and usually go on Sundays.
+M25	activities	ask	Zu Hause trainiere ich mit zwei Kurzhanteln und einer Matte.
+M26	health	ask	I have exercise-induced asthma.
+M27	health	ask	Ich habe eine schwere Erdnussallergie.
+M28	health	ask	My left knee is recovering from surgery. My physiotherapist has ruled out jumping for now.
+M29	finances	ask	Ich habe noch 2.400 Euro Kreditkartenschulden mit 17 Prozent Jahreszins.
+M30	finances	ask	My emergency fund covers four months of expenses.
+M31	finances	ask	Für nachhaltige Geldanlagen möchte ich keine fossilen Energien finanzieren.
+M32	relationships	ask	My daughter Lina is six and is fascinated by dinosaurs.
+M33	relationships	ask	Mein Bruder Jan macht gern Sauerteigbrot.
+M34	relationships	ask	My dad is hard of hearing and prefers a quiet table where he can see everyone's face.
+M35	location	ask	Ich wohne in Leipzig-Plagwitz.
+M36	location	ask	I work near Alexanderplatz in Berlin on Wednesdays.
+M37	schedule	ask	Donnerstags bin ich ab 16 Uhr wegen eines festen Termins nicht erreichbar.
+M38	private	ask	I am thinking about changing teams but have not told my manager.
+M39	contact	ask	Meine private Telefonnummer ist +49 30 5550107.
+M40	preferences	ask	I like trips with unhurried mornings and at most one scheduled activity each day.

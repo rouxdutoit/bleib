@@ -1,0 +1,52 @@
+id	en	de
+travel.seat	seat on a plane or long-distance vehicle	Sitzplatz im Flugzeug oder Fernverkehr
+travel.transport	mode of travel for getting there	Verkehrsmittel für die Anreise
+travel.room	hotel room features	Zimmermerkmale im Hotel
+travel.sights	personal interests for tours and sightseeing	Interessen an Sehenswürdigkeiten und Ausflügen
+travel.pace	pace and number of activities on an itinerary	Reisetempo und Zahl der Unternehmungen
+travel.hotel_budget	hotel spending limit	Preisrahmen für Hotels
+travel.loyalty	travel rewards and memberships	Bonusprogramme fürs Reisen
+travel.luggage	personal packing and luggage preferences	Persönliche Vorlieben beim Packen und Gepäck
+food.diet	diet and food exclusions	Ernährungsweise und gemiedene Speisen
+food.allergy	food allergy and safety	Allergien und Sicherheit beim Essen
+food.drink	drink preference	Getränkevorlieben
+food.dessert	dessert and sweets preference	Vorlieben bei Desserts und Süßem
+food.equipment	kitchen equipment available	Vorhandene Küchenausstattung
+food.cook_time	time available for cooking	Verfügbare Zeit zum Kochen
+food.servings	usual number of portions	Übliche Zahl der Portionen
+food.cuisine	favourite cuisines	Bevorzugte Küchen
+format.units	preferred measurement units	Bevorzugte Maßeinheiten
+format.length	preferred answer length	Bevorzugte Antwortlänge
+format.language	preferred reply language	Bevorzugte Antwortsprache
+work.review	code review and change sizing preferences	Vorlieben für Code-Reviews und Umfang von Änderungen
+work.stack	programming languages, runtime and stack	Programmiersprachen und Laufzeitumgebung
+work.testing	preferred test runner and testing tools	Bevorzugte Testwerkzeuge
+work.writing_style	style for writing to clients	Schreibstil für Nachrichten an Kunden
+work.role	profession, specialism and target role	Beruf, Schwerpunkt und gewünschte Stelle
+work.experience	career experience, achievements and tenure	Berufserfahrung, Erfolge und Dauer
+work.rituals	recurring team meetings and rituals	Wiederkehrende Teamtermine
+work.confidential	confidential career plans	Vertrauliche berufliche Pläne
+shopping.laptop	laptop buying preferences	Vorlieben beim Laptopkauf
+shopping.shoe_size	shoe size	Schuhgröße
+shopping.fabric	personal clothing fabric preferences	Bevorzugte Stoffe für Kleidung
+shopping.headphones	headphone buying preferences	Vorlieben beim Kopfhörerkauf
+shopping.host_gift	preferred type of gift for hosts	Bevorzugte Gastgeschenke
+activities.sport	sports and recreation preferences	Vorlieben bei Sport und Freizeit
+activities.home_equipment	fitness gear available at home	Trainingsgeräte für zu Hause
+health.condition	relevant ongoing health condition	Länger bestehende gesundheitliche Einschränkung
+health.injury	current injury and rehabilitation restriction	Verletzung und Einschränkungen in der Reha
+health.medication	medication	Medikamente
+money.debt	debts and repayment terms	Schulden und Rückzahlungsbedingungen
+money.buffer	emergency savings	Notgroschen
+money.investment	investment exclusions and preferences	Vorgaben und Ausschlüsse bei Geldanlagen
+money.budget	personal spending limit or budget	Private Ausgabengrenze oder Haushaltsbudget
+people.child	a particular child's age or interests	Alter oder Interessen eines bestimmten Kindes
+people.sibling	a particular sibling's hobbies or preferences	Hobbys oder Vorlieben eines bestimmten Geschwisters
+people.parent	a particular parent's needs or preferences	Bedürfnisse oder Vorlieben eines bestimmten Elternteils
+people.partner	a partner's preferences or activities	Vorlieben oder Aktivitäten des Partners
+location.home	home area or starting point from home	Wohnort oder Ausgangspunkt von zu Hause
+location.office	location of office or regular workplace	Ort des Büros oder regelmäßigen Arbeitsplatzes
+schedule.availability	usual availability and standing commitments	Übliche Verfügbarkeit und feste Termine
+contact.phone	personal phone number	Eigene Telefonnummer
+contact.email	personal email address	Eigene E-Mail-Adresse
+education.course	current course or study programme	Aktueller Kurs oder Studiengang
