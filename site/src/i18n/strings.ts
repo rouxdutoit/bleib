@@ -81,12 +81,12 @@ const en = {
     scenes: [
       {
         h: ['Control what AI', 'knows about you.'],
-        p: 'Gemini has your aisle seat. Claude has your Friday review. Bring both into your bleib.',
+        p: 'Your memory is scattered across AIs. Bring it into your bleib.',
         more: { to: 'how', hash: '#memory', label: 'One memory, every AI' },
       },
       {
         h: ['You chat.', 'bleib takes notes.'],
-        p: 'Mention you’re learning Spanish. It’s in your bleib. One tap removes it.',
+        p: 'Mention you’re learning Spanish. It’s in your bleib.',
         more: { to: 'how', hash: '#proposals', label: 'Saves as you go' },
       },
       {
@@ -106,7 +106,7 @@ const en = {
       },
       {
         h: ['Turn their memory off.', 'bleib keeps yours.'],
-        p: 'ChatGPT’s memory is off. Your aisle seat stays in your bleib. Only you are in control.',
+        p: 'ChatGPT’s memory is off. Your aisle seat stays with you.',
         more: { to: 'security', hash: '', label: 'Private by design' },
         dark: true,
       },
@@ -252,12 +252,12 @@ const de: Strings = {
     scenes: [
       {
         h: ['Bestimme, was die KI', 'über dich weiß.'],
-        p: 'Gemini hat deinen Gangplatz. Claude hat deine Freitagsrunde. Hol beides in dein bleib.',
+        p: 'Dein Gedächtnis ist über KIs verstreut. Hol es in dein bleib.',
         more: { to: 'how', hash: '#memory', label: 'Ein Gedächtnis, jede KI' },
       },
       {
         h: ['Du chattest.', 'bleib merkt es sich.'],
-        p: 'Erwähn, dass du Spanisch lernst. Es landet in deinem bleib. Ein Tipp entfernt es.',
+        p: 'Erwähn, dass du Spanisch lernst. Es landet in deinem bleib.',
         more: { to: 'how', hash: '#proposals', label: 'Speichert nebenbei' },
       },
       {
@@ -277,7 +277,7 @@ const de: Strings = {
       },
       {
         h: ['Schalte ihr Gedächtnis aus.', 'bleib behält deins.'],
-        p: 'ChatGPTs Gedächtnis ist aus. Dein Gangplatz bleibt in deinem bleib. Nur du hast die Kontrolle.',
+        p: 'ChatGPTs Gedächtnis ist aus. Dein Gangplatz bleibt bei dir.',
         more: { to: 'security', hash: '', label: 'Privat von Grund auf' },
         dark: true,
       },
