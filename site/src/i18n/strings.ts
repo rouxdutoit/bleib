@@ -88,7 +88,7 @@ const en = {
       },
       {
         h: ['Switch anytime.', 'Keep your choices.'],
-        p: 'Your preferences stay in your bleib. The next AI picks up where you left off.',
+        p: 'Plan Lisbon with ChatGPT. Book it with Claude.',
         more: { to: 'works', hash: '', label: 'Works with your AI' },
       },
       {
@@ -274,7 +274,7 @@ const de: Strings = {
       },
       {
         h: ['Jederzeit wechseln.', 'Behalte deine Vorlieben.'],
-        p: 'Alles bleibt in deinem bleib. Die nächste KI macht einfach weiter.',
+        p: 'Plan Lissabon mit ChatGPT. Buch es mit Claude.',
         more: { to: 'works', hash: '', label: 'Funktioniert mit deiner KI' },
       },
       {
