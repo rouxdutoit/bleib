@@ -3,6 +3,7 @@
 import Lines from '../components/Lines.astro';
 import Base from './Base.astro';
 import Rails from '../components/Rails.astro';
+import ProviderLogo from '../components/ProviderLogo.astro';
 import { icon } from '../components/icons';
 import { docs, type Block } from '../i18n/pages';
 import { routes, type Lang, type RouteKey } from '../i18n/strings';
@@ -51,11 +52,11 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
                 ) : is(b, 'tiles') ? (
                   <ul class="tiles">
                     {b.tiles.map((tl) => (
-                      <li class:list={['tile', { 'has-tag': tl.tag }]}>
+                      <li class:list={['tile', { 'has-tag': tl.tag, 'has-ai': tl.ai }]}>
                         {tl.tag && <span class="tag">{tl.tag}</span>}
                         {tl.icon && <span class="ti" set:html={icon(tl.icon)} />}
-                        <p class="tile-t">{tl.t}</p>
-                        <p class="tile-d">{tl.d}</p>
+                        {tl.ai && <span class="tl-ai"><ProviderLogo name={tl.ai} lang={lang} size={24} /></span>}
+                        <div class="tile-x"><p class="tile-t">{tl.t}</p><p class="tile-d">{tl.d}</p></div>
                       </li>
                     ))}
                   </ul>
@@ -127,6 +128,11 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
   .ti :global(svg) { width: 20px; height: 20px; display: block; }
   .tag { position: absolute; top: 16px; right: 16px; padding: 2px 9px; border-radius: 999px; background: #f6e79a; color: #0a0a0a; font-size: 12px; line-height: 18px; font-weight: 600; }
   .tile-t { font-weight: 600; letter-spacing: -0.015em; }
+  /* An AI's tile: its logo in a rounded square exactly as tall as the name and address beside it (22 + 20px). */
+  .has-ai { display: flex; align-items: center; gap: 14px; }
+  .tl-ai { flex: none; width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; background: var(--fill); }
+  .has-ai .tile-t { line-height: 22px; }
+  .has-ai .tile-d { margin-top: 0 !important; line-height: 20px !important; }
   .tile-d { margin-top: 4px !important; color: var(--on-card-muted); font-size: 15px !important; line-height: 1.45 !important; }
 
   pre { margin: 0; padding: 12px 16px; border-radius: 14px; background: var(--card); color: var(--on-card); border: var(--card-border); overflow-x: auto; }

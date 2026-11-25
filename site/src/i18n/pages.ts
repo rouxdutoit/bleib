@@ -8,7 +8,8 @@ import type { IconName } from '../components/icons';
  *   never   icon list with hairlines (commitments)          rows   key / value list
  *   tiles   two-up tiles with an optional tag               address  postal lines
  */
-export type Tile = { t: string; d: string; icon?: IconName; tag?: string };
+/** `ai` shows that AI's own logo beside the title and detail (ProviderLogo). */
+export type Tile = { t: string; d: string; icon?: IconName; tag?: string; ai?: string };
 export type Block =
   | { p: string }
   | { list: string[] }
@@ -107,9 +108,9 @@ const en: Docs = {
         blocks: [
           {
             tiles: [
-              { t: 'ChatGPT', d: 'chatgpt.com' },
-              { t: 'Claude', d: 'claude.ai' },
-              { t: 'Gemini', d: 'gemini.google.com' },
+              { t: 'ChatGPT', d: 'chatgpt.com', ai: 'ChatGPT' },
+              { t: 'Claude', d: 'claude.ai', ai: 'Claude' },
+              { t: 'Gemini', d: 'gemini.google.com', ai: 'Gemini' },
             ],
           },
           { p: 'On these sites bleib can save everyday preferences with Undo and add a line about you to each new chat. If a site changes, bleib pauses until it recognises the page again.' },
@@ -454,9 +455,9 @@ const de: Docs = {
         blocks: [
           {
             tiles: [
-              { t: 'ChatGPT', d: 'chatgpt.com' },
-              { t: 'Claude', d: 'claude.ai' },
-              { t: 'Gemini', d: 'gemini.google.com' },
+              { t: 'ChatGPT', d: 'chatgpt.com', ai: 'ChatGPT' },
+              { t: 'Claude', d: 'claude.ai', ai: 'Claude' },
+              { t: 'Gemini', d: 'gemini.google.com', ai: 'Gemini' },
             ],
           },
           { p: 'Auf diesen Seiten kann bleib alltägliche Vorlieben speichern und eine Zeile über dich in jeden neuen Chat einfügen. Das Speichern kannst du rückgängig machen. Ändert sich eine Seite, pausiert bleib, bis es sie wieder erkennt.' },
