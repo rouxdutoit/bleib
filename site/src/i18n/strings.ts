@@ -111,7 +111,7 @@ const en = {
   },
   cards: {
     wallet: {
-      title: 'Your Memory',
+      title: 'Your bleib',
       rows: [
         { k: 'People', v: 'Marek, Berlin', icon: 'person' },
         { k: 'Travel', v: 'Aisle seat', icon: 'flight' },
@@ -297,7 +297,7 @@ const de: Strings = {
   },
   cards: {
     wallet: {
-      title: 'Dein Gedächtnis',
+      title: 'Dein bleib',
       rows: [
         { k: 'Menschen', v: 'Marek, Berlin', icon: 'person' },
         { k: 'Reisen', v: 'Gangplatz', icon: 'flight' },
