@@ -16,7 +16,6 @@ import darkMode from '@material-symbols/svg-400/rounded/dark_mode-fill.svg?raw';
 import lightMode from '@material-symbols/svg-400/rounded/light_mode-fill.svg?raw';
 import fingerprint from '@material-symbols/svg-400/rounded/fingerprint.svg?raw';
 import chevronRight from '@material-symbols/svg-400/rounded/chevron_right.svg?raw';
-import restaurant from '@material-symbols/svg-400/rounded/restaurant.svg?raw';
 import mail from '@material-symbols/svg-400/rounded/mail.svg?raw';
 import translate from '@material-symbols/svg-400/rounded/translate.svg?raw';
 import close from '@material-symbols/svg-400/rounded/close.svg?raw';
@@ -43,7 +42,6 @@ const raw = {
   light_mode: lightMode,
   fingerprint,
   chevron_right: chevronRight,
-  restaurant,
   mail,
   translate,
   close,

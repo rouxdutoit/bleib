@@ -78,12 +78,12 @@ const en = {
     scenes: [
       {
         h: ['Control what AI', 'knows about you.'],
-        p: "Bring over what your AIs remember. Now it's all in one place, and all yours.",
+        p: 'Gemini has your aisle seat. Claude has your Friday review. Your bleib holds it all.',
         more: { to: 'how', hash: '#memory', label: 'One memory, every AI' },
       },
       {
-        h: ['It remembers', 'as you chat.'],
-        p: 'Mention a preference, and it’s saved. One tap undoes it. Anything sensitive asks first.',
+        h: ['You chat.', 'bleib takes notes.'],
+        p: 'Mention you’re vegetarian. It’s in your bleib, with Undo.',
         more: { to: 'how', hash: '#proposals', label: 'Saves as you go' },
       },
       {
@@ -93,17 +93,17 @@ const en = {
       },
       {
         h: ['It only asks', 'when it matters.'],
-        p: 'Everyday things just work. Health and money always need your yes.',
+        p: 'Travel details are added automatically. Health notes wait for your yes.',
         more: { to: 'permissions', hash: '', label: 'You decide what’s shared' },
       },
       {
-        h: ['Know exactly what', 'each AI was told.'],
-        p: 'Every share leaves a receipt. You always know which AI got what.',
-        more: { to: 'receipts', hash: '', label: 'A receipt for every share' },
+        h: ['A receipt', 'for every share.'],
+        p: 'Claude got your seat and your budget. Your receipt says so.',
+        more: { to: 'receipts', hash: '', label: 'See what was shared' },
       },
       {
         h: ['Turn their memory off.', 'bleib keeps yours.'],
-        p: 'Remember as much as you like. Each chat gets just what it needs. Only you hold the key.',
+        p: 'ChatGPT remembers nothing. Your bleib remembers everything. Only you are in control.',
         more: { to: 'security', hash: '', label: 'Private by design' },
         dark: true,
       },
@@ -160,9 +160,9 @@ const en = {
     off: { setting: 'Memory', note: 'Switched off in each AI’s own settings.' },
     propose: {
       app: 'Claude',
-      said: 'I like green tea.',
+      said: 'I’m vegetarian.',
       title: 'Saved to bleib',
-      fact: 'Likes green tea',
+      fact: 'Vegetarian',
       undo: 'Undo',
       newTag: 'New',
       footer: 'Encrypted on this device.',
@@ -264,12 +264,12 @@ const de: Strings = {
     scenes: [
       {
         h: ['Bestimme, was die KI', 'über dich weiß.'],
-        p: 'Hol dir, was sich deine KIs merken. Jetzt an einem Ort, und alles deins.',
+        p: 'Gemini hat deinen Gangplatz. Claude hat deinen Rückblick am Freitag. Dein bleib bewahrt alles.',
         more: { to: 'how', hash: '#memory', label: 'Ein Gedächtnis, jede KI' },
       },
       {
-        h: ['Du chattest.', 'bleib merkt es sich.'],
-        p: 'bleib speichert Vorlieben aus dem Chat. Ein Tipp macht das rückgängig. Bei sensiblen Angaben fragt bleib vorher.',
+        h: ['Du chattest.', 'bleib schreibt mit.'],
+        p: 'Erwähn, dass du vegetarisch isst. Es landet in deinem bleib, mit Rückgängig.',
         more: { to: 'how', hash: '#proposals', label: 'Speichert nebenbei' },
       },
       {
@@ -278,18 +278,18 @@ const de: Strings = {
         more: { to: 'works', hash: '', label: 'Funktioniert mit deiner KI' },
       },
       {
-        h: ['bleib fragt,', 'wenn es darauf ankommt.'],
-        p: 'Alltägliches läuft von selbst. Gesundheit und Geld brauchen dein Ja.',
+        h: ['bleib fragt,', 'wenn es zählt.'],
+        p: 'Reisedetails kommen automatisch dazu. Gesundheitsnotizen warten auf dein Ja.',
         more: { to: 'permissions', hash: '', label: 'Du entscheidest, was geteilt wird' },
       },
       {
-        h: ['Sieh genau, was', 'jede KI erfahren hat.'],
-        p: 'Für jede Weitergabe gibt es einen Beleg. Du weißt immer, welche KI was bekam.',
-        more: { to: 'receipts', hash: '', label: 'Ein Beleg für jede Weitergabe' },
+        h: ['Ein Beleg', 'für jede Weitergabe.'],
+        p: 'Claude bekam Sitzplatz und Budget. Dein Beleg sagt es.',
+        more: { to: 'receipts', hash: '', label: 'Sieh, was geteilt wurde' },
       },
       {
         h: ['Schalte ihr Gedächtnis aus.', 'bleib behält deins.'],
-        p: 'Merk dir so viel du willst. Jeder Chat bekommt nur, was er braucht. Den Schlüssel hast nur du.',
+        p: 'ChatGPT merkt sich nichts. Dein bleib merkt sich alles. Nur du hast die Kontrolle.',
         more: { to: 'security', hash: '', label: 'Privat von Grund auf' },
         dark: true,
       },
@@ -346,9 +346,9 @@ const de: Strings = {
     off: { setting: 'Gedächtnis', note: 'In den Einstellungen jeder KI ausgeschaltet.' },
     propose: {
       app: 'Claude',
-      said: 'Ich mag grünen Tee.',
+      said: 'Ich esse vegetarisch.',
       title: 'In bleib gespeichert',
-      fact: 'Mag grünen Tee',
+      fact: 'Vegetarisch',
       undo: 'Rückgängig',
       newTag: 'Neu',
       footer: 'Auf diesem Gerät verschlüsselt.',
