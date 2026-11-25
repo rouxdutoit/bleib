@@ -42,7 +42,7 @@ const chat = scene === 1;
             {c.wallet.rows.map((r, i) => (
               <li class={cx(i + 1)}>
                 <div class="reveal-in"><div class="cell">
-                  <span class="ico" set:html={svg(r.icon)} />
+                  <span class="ico ico-2" set:html={svg(r.icon)} />
                   <span class="cell-k"><span class="t-body">{r.k}</span><span class="t-sub c-2 from">{c.wallet.fromLabel} <ProviderLogo name={r.from} lang={lang} />{r.from}</span></span>
                   <span class="t-body c-2 cell-v">{r.locked && <span class="inline-g" set:html={svg('lock')} />}{r.v}</span>
                 </div></div>
@@ -152,7 +152,7 @@ const chat = scene === 1;
           <ul class="group">
             {c.any.providers.map((p, i) => (
               <li class="cell">
-                <img class="app-sm" src={p.color || p.icon} alt="" width="29" height="29" />
+                <img class="app" src={p.color || p.icon} alt="" width="42" height="42" />
                 <span class="cell-k"><span class="t-body">{p.name}</span><span class="t-sub c-2 blk">{c.off.setting}</span></span>
                 <span class="toggle at-1" style={`--delay: ${i * 0.35}s`} />
               </li>
@@ -199,7 +199,11 @@ const chat = scene === 1;
   .group > li + li .cell::before, .group > li.cell + li.cell::before, .group > li.cell + li .cell::before { content: ''; position: absolute; top: 0; right: 0; left: 57px; border-top: 1px solid var(--hairline); }
   .ico { flex: none; width: 29px; height: 29px; border-radius: 7px; display: grid; place-items: center; background: var(--fill); color: var(--label); }
   .ico :global(.g) { width: 17px; height: 17px; }
+  /* Beside two lines of text (a title and a detail), the icon is as tall as both, as in Apple's lists. */
+  .ico-2 { width: 42px; height: 42px; border-radius: 10px; }
+  .ico-2 :global(.g) { width: 22px; height: 22px; }
   .cell-k { flex: 1; min-width: 0; }
+  .cell-k > .t-body { display: block; }
   .blk { display: block; }
   .cell-v { text-align: right; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
   .inline-g { display: inline-flex; }
@@ -262,7 +266,6 @@ const chat = scene === 1;
   .pill-fact { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px 3px 8px; border-radius: 999px; background: var(--fill); color: var(--label); font-weight: 500; }
   .pill-sym { display: grid; color: var(--label-2); }
   .pill-sym :global(.g) { width: 14px; height: 14px; }
-  .app-sm { width: 29px; height: 29px; border-radius: 7px; padding: 4px; background: var(--fill); flex: none; }
   .purpose { margin-top: 12px !important; }
   .group.filled { background: var(--fill); border-radius: 12px; }
   .group.filled .cell { padding: 0 12px; }
@@ -292,11 +295,9 @@ const chat = scene === 1;
 
 </style>
 <style is:global>
-  :root[data-theme='dark'] .sv .app,
-  :root[data-theme='dark'] .sv .app-sm { background: #f5f1e6; }
+  :root[data-theme='dark'] .sv .app { background: #f5f1e6; }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme='light']) .sv .app,
-    :root:not([data-theme='light']) .sv .app-sm { background: #f5f1e6; }
+    :root:not([data-theme='light']) .sv .app { background: #f5f1e6; }
     :root:not([data-theme='light']) .sv .pm { filter: invert(1); }
   }
   :root[data-theme='dark'] .sv .pm { filter: invert(1); }
