@@ -11,7 +11,7 @@ const { typed, sentAt } = Astro.props;
 ---
 <div class="composer" data-sent-at={sentAt}>
   <slot />
-  <p class="t-body input"><span class="field"><span class="typed" data-type={typed}></span><span class="caret"></span></span><span class:list={['send', sentAt && ['press', `at-${sentAt}`]]} set:html={icon('arrow_outward')} /></p>
+  <p class="t-body input"><span class="field"><span class="typed" data-type={typed}></span><span class="caret"></span></span><span class:list={['send', sentAt && ['press', `at-${sentAt}`]]} set:html={icon('arrow_upward')} /></p>
 </div>
 
 <style>
@@ -26,5 +26,5 @@ const { typed, sentAt } = Astro.props;
   .send { flex: none; width: 28px; height: 28px; margin-inline-start: auto; border-radius: 50%; display: grid; place-items: center; background: var(--fill); color: var(--label-2); transition: background-color var(--t-fade) var(--ease), color var(--t-fade) var(--ease); }
   .composer:has(.typed:not(:empty)) .send { background: var(--label); color: var(--cell); }
   :global(.s2) .composer[data-sent-at='2']:has(.typed) .send { background: var(--fill); color: var(--label-2); }
-  .send :global(svg) { width: 16px; height: 16px; display: block; transform: rotate(-45deg); }
+  .send :global(svg) { width: 18px; height: 18px; display: block; }
 </style>
