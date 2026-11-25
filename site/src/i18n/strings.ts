@@ -168,9 +168,8 @@ const en = {
     },
   },
   finale: {
-    prompt: { tab: 'Claude', said: 'I’m allergic to peanuts.', title: 'Save to bleib?', fact: 'Allergic to peanuts', save: 'Save', saved: 'Saved' },
-    h: 'Tell it once.',
-    p: 'Each task gets just what it needs.',
+    h: 'Your memory stays with you.',
+    p: 'Free and open source. Be among the first to try it.',
   },
   form: {
     label: 'Email address',
@@ -353,9 +352,8 @@ const de: Strings = {
     },
   },
   finale: {
-    prompt: { tab: 'Claude', said: 'Ich bin gegen Erdnüsse allergisch.', title: 'In bleib sichern?', fact: 'Erdnussallergie', save: 'Sichern', saved: 'Gesichert' },
-    h: 'Einmal sagen.',
-    p: 'Jede Aufgabe bekommt nur, was sie braucht.',
+    h: 'Dein Gedächtnis bleibt bei dir.',
+    p: 'Kostenlos und quelloffen. Sei von Anfang an dabei.',
   },
   form: {
     label: 'E-Mail-Adresse',

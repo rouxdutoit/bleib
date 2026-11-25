@@ -1,9 +1,10 @@
 ---
 import Lines from './Lines.astro';
-/** The closer: the password-manager moment the hero promises, and one action. */
-import Window from './Window.astro';
-import BleibCard from './BleibCard.astro';
-import Composer from './Composer.astro';
+/**
+ * The closer: like the end of an Apple product page, the app icon, the promise behind the name
+ * ("bleib" is German for "stay") and one action. The icon lands with a small spring as it comes into view.
+ */
+import Mark from './Mark.astro';
 import Rails from './Rails.astro';
 import EarlyAccessForm from './EarlyAccessForm.astro';
 import { t, type Lang } from '../i18n/strings';
@@ -14,16 +15,7 @@ const s = t(lang).finale;
 <section class="finale has-rails" id="early-access" aria-labelledby="finale-title">
   <Rails />
   <div class="wrap inner">
-    <figure class="scene" aria-hidden="true">
-      <Window tabs={[{ ai: s.prompt.tab, icon: 'claude-color' }]}>
-        <div class="body" data-sv data-steps="4" data-interval="900" data-gaps=",900,2200" data-step="0">
-          <p class="t-body bubble appear at-2">{s.prompt.said}</p>
-          <BleibCard title={s.prompt.title} facts={[{ t: s.prompt.fact, icon: 'favorite' }]} action={s.prompt.save} done={s.prompt.saved} at={3} />
-          <Composer typed={s.prompt.said} sentAt={2} />
-        </div>
-      </Window>
-    </figure>
-    <script is:inline>bleibReserve(document.currentScript.previousElementSibling)</script>
+    <span class="app-icon" data-fx aria-hidden="true"><Mark size={56} /></span>
     <h2 id="finale-title" class="title">{s.h}</h2>
     <p class="sub"><Lines text={s.p} /></p>
     <div class="form"><EarlyAccessForm lang={lang} /></div>
@@ -34,14 +26,19 @@ const s = t(lang).finale;
   .finale { padding: clamp(96px, 12vw, 160px) 0 clamp(72px, 9vw, 120px); }
   .inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
 
-  /* A picture, not a control: a chat with bleib's card, styled exactly like the hero's. */
-  .scene { margin: 0 0 clamp(40px, 6vw, 64px); width: min(440px, 100%); }
-  /* Like the hero: you type, you send, bleib offers to save it, Save is pressed (scripts/story.ts). */
-  .body { --bleib-card-margin: 0 0 8px; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
-  /* The message lands just after send is pressed. */
-  .bubble { --delay: 0.15s; align-self: flex-end; max-width: 80%; margin: 0 0 12px; padding: 8px 14px; border-radius: 18px; background: var(--fill); }
+  /* An App Store icon: the bleib mark in gold on the black tile, iOS corner radius (22.37%). */
+  .app-icon {
+    --size: clamp(96px, 10vw, 120px);
+    width: var(--size); height: var(--size); margin: 0 0 clamp(32px, 4vw, 40px);
+    border-radius: calc(var(--size) * 0.2237);
+    display: grid; place-items: center;
+    background: #0a0a0a; color: #f6e79a;
+    box-shadow: 0 12px 32px rgb(0 0 0 / 0.18), 0 2px 6px rgb(0 0 0 / 0.12), inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  }
+  .app-icon :global(svg) { width: 56%; height: auto; display: block; }
+  .app-icon:global(.on) { animation: land 0.6s var(--spring) 0.1s both; }
 
-  .title { font-size: clamp(44px, 7vw, 88px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 700; }
+  .title { margin: 0; font-size: clamp(40px, 6vw, 80px); line-height: 1.04; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance; }
   .sub { margin: 18px 0 0; font-size: clamp(17px, 1.7vw, 21px); line-height: 1.45; color: var(--muted); text-wrap: balance; }
   .form { margin-top: 32px; width: 100%; display: flex; justify-content: center; }
 </style>
