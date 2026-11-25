@@ -99,7 +99,7 @@ const chat = scene === 1;
           {/* Everyday things just work, then something sensitive asks first. */}
           <div class="card note">
             <div class="note-head">
-              <img class="app-sm" src={c.any.providers.find((p) => p.name === c.ask.later.ai)?.icon} alt="" width="29" height="29" />
+              {(() => { const p = c.any.providers.find((x) => x.name === c.ask.later.ai); return p && <img class="app" src={p.color || p.icon} alt="" width="38" height="38" />; })()}
               <div class="note-id"><p class="t-headline">{c.ask.later.title}</p><p class="t-sub c-2">{c.ask.later.sub}</p></div>
               <span class="t-foot auto">{c.ask.later.tag}</span>
             </div>
@@ -123,7 +123,7 @@ const chat = scene === 1;
         <>
           <div class="card note">
             <div class="note-head">
-              <img class="app" src="/providers/claude.svg" alt="" width="38" height="38" />
+              <img class="app" src="/providers/claude-color.svg" alt="" width="38" height="38" />
               <div class="note-id"><p class="t-headline">{c.receipt.who}</p><p class="t-sub c-2">{c.receipt.where}</p></div>
               <p class="t-foot c-2">{c.receipt.time}</p>
             </div>
@@ -153,7 +153,7 @@ const chat = scene === 1;
           <ul class="group">
             {c.any.providers.map((p, i) => (
               <li class="cell">
-                <img class="app-sm" src={p.icon} alt="" width="29" height="29" />
+                <img class="app-sm" src={p.color || p.icon} alt="" width="29" height="29" />
                 <span class="cell-k"><span class="t-body">{p.name}</span><span class="t-sub c-2 blk">{c.off.setting}</span></span>
                 <span class="toggle at-1" style={`--delay: ${i * 0.35}s`} />
               </li>
