@@ -86,7 +86,7 @@ const en = {
       },
       {
         h: ['You chat.', 'bleib takes notes.'],
-        p: 'Mention you’re learning Spanish. It’s in your bleib, with Undo.',
+        p: 'Mention you’re learning Spanish. It’s in your bleib. One tap removes it.',
         more: { to: 'how', hash: '#proposals', label: 'Saves as you go' },
       },
       {
@@ -160,7 +160,6 @@ const en = {
       said: 'I’m learning Spanish.',
       title: 'Saved to bleib',
       fact: 'Learning Spanish',
-      undo: 'Undo',
     },
   },
   finale: {
@@ -238,7 +237,7 @@ const de: Strings = {
   },
   preview: {
     examples: 'Beispiele',
-    title: 'Was {ai} braucht',
+    title: 'Nur das Nötige für {ai}',
     attachment: 'Über mich',
     tabs: [
       {
@@ -265,7 +264,7 @@ const de: Strings = {
       },
       {
         h: ['Du chattest.', 'bleib merkt es sich.'],
-        p: 'Erwähn, dass du Spanisch lernst. Es landet in deinem bleib, und du kannst es widerrufen.',
+        p: 'Erwähn, dass du Spanisch lernst. Es landet in deinem bleib. Ein Tipp entfernt es.',
         more: { to: 'how', hash: '#proposals', label: 'Speichert nebenbei' },
       },
       {
@@ -339,7 +338,6 @@ const de: Strings = {
       said: 'Ich lerne Spanisch.',
       title: 'In bleib gespeichert',
       fact: 'Lernt Spanisch',
-      undo: 'Widerrufen',
     },
   },
   finale: {

@@ -66,7 +66,7 @@ const en: Docs = {
         id: 'proposals',
         h: 'Save as you go',
         blocks: [
-          { p: 'Mention “I prefer aisle seats” in a chat, and bleib saves it quietly, with Undo right there. Everyday preferences like travel, food, budget and work style save this way.' },
+          { p: 'Mention “I prefer aisle seats” in a chat, and bleib saves it quietly, with a × right there to remove it. Everyday preferences like travel, food, budget and work style save this way.' },
           { p: 'Anything sensitive, like health, money, people or location, anything you keep private, or anything bleib isn’t sure about, asks first, in place: “Save to bleib?” Nothing sensitive is ever saved without your yes.' },
           { p: 'You can also bring in what ChatGPT, Claude and Gemini remember. Download your data with each one’s own export (Google Takeout for Gemini) and drop the file into bleib. bleib reads it on your device, and you keep what you like.' },
         ],
@@ -89,7 +89,7 @@ const en: Docs = {
       {
         id: 'limits',
         h: 'Shared when added',
-        blocks: [{ p: 'The site can read the line as soon as bleib adds it. Undo can remove the addition from your draft, but the site may already have seen it.' }],
+        blocks: [{ p: 'The site can read the line as soon as bleib adds it. You can remove it from your draft, but the site may already have seen it.' }],
       },
       {
         id: 'recovery',
@@ -113,7 +113,7 @@ const en: Docs = {
               { t: 'Gemini', d: 'gemini.google.com', ai: 'Gemini' },
             ],
           },
-          { p: 'On these sites bleib can save everyday preferences with Undo and add a line about you to each new chat. If a site changes, bleib pauses until it recognises the page again.' },
+          { p: 'On these sites bleib can save everyday preferences, each removable with one tap, and add a line about you to each new chat. If a site changes, bleib pauses until it recognises the page again.' },
         ],
       },
       {
@@ -142,7 +142,7 @@ const en: Docs = {
       },
       {
         h: 'bleib always asks about sensitive information',
-        blocks: [{ p: 'Health, money, people and location always need your approval for each request. So does anything you keep private or bleib can’t confidently classify. Saving follows the same rule: these ask first, everyday preferences save quietly with Undo.' }],
+        blocks: [{ p: 'Health, money, people and location always need your approval for each request. So does anything you keep private or bleib can’t confidently classify. Saving follows the same rule: these ask first, everyday preferences save quietly, and you remove them with one tap.' }],
       },
       {
         h: 'Change your mind',
@@ -169,7 +169,7 @@ const en: Docs = {
       },
       {
         h: 'In a chat draft',
-        blocks: [{ p: 'The receipt records what bleib released for the draft. If the draft changes at the last moment, bleib may already have saved a receipt. The receipt stays after Undo and is independent of whether you press Send.' }],
+        blocks: [{ p: 'The receipt records what bleib released for the draft. If the draft changes at the last moment, bleib may already have saved a receipt. The receipt stays if you remove the line, and is independent of whether you press Send.' }],
       },
       {
         h: 'Check or export',
@@ -363,7 +363,7 @@ const en: Docs = {
       {
         h: 'What AI providers can see',
         blocks: [
-          { p: 'bleib picks the relevant minimum on your device and saves a receipt before sharing. When it adds text to a draft, the site can read it immediately. Undo can remove text from the draft, but the site may already have seen it. The provider’s privacy policy applies to what it receives.' },
+          { p: 'bleib picks the relevant minimum on your device and saves a receipt before sharing. When it adds text to a draft, the site can read it immediately. You can remove it from the draft, but the site may already have seen it. The provider’s privacy policy applies to what it receives.' },
         ],
       },
       {
@@ -413,7 +413,7 @@ const de: Docs = {
         id: 'proposals',
         h: 'Beim Schreiben speichern',
         blocks: [
-          { p: 'Schreib im Chat zum Beispiel „Ich buche immer einen Gangplatz“, und bleib speichert es im Hintergrund. Du kannst es direkt widerrufen. So speichert bleib alltägliche Vorlieben wie Reisen, Essen, Budget und Arbeitsweise.' },
+          { p: 'Schreib im Chat zum Beispiel „Ich buche immer einen Gangplatz“, und bleib speichert es im Hintergrund. Mit dem × daneben entfernst du es direkt wieder. So speichert bleib alltägliche Vorlieben wie Reisen, Essen, Budget und Arbeitsweise.' },
           { p: 'Alles Sensible wie Gesundheit, Geld, Personen oder Aufenthaltsort, alles, was du privat hältst, und alles, was bleib nicht sicher einordnen kann, fragt vorher, direkt im Chat: „In bleib sichern?“ Nichts Sensibles wird ohne dein Ja gespeichert.' },
           { p: 'Du kannst auch mitnehmen, was ChatGPT, Claude und Gemini über dich gespeichert haben. Lade deine Daten über den Export des jeweiligen Anbieters herunter (bei Gemini über Google Takeout) und zieh die Datei in bleib. bleib liest sie auf deinem Gerät, und du behältst, was dir gefällt.' },
         ],
@@ -436,7 +436,7 @@ const de: Docs = {
       {
         id: 'limits',
         h: 'Geteilt beim Einfügen',
-        blocks: [{ p: 'Die Website kann den Text lesen, sobald bleib ihn einfügt. Mit „Widerrufen“ kannst du ihn aus deinem Entwurf entfernen. Die Website kann ihn dann schon gesehen haben.' }],
+        blocks: [{ p: 'Die Website kann den Text lesen, sobald bleib ihn einfügt. Du kannst ihn aus deinem Entwurf entfernen. Die Website kann ihn dann schon gesehen haben.' }],
       },
       {
         id: 'recovery',
@@ -460,7 +460,7 @@ const de: Docs = {
               { t: 'Gemini', d: 'gemini.google.com', ai: 'Gemini' },
             ],
           },
-          { p: 'Auf diesen Seiten kann bleib alltägliche Vorlieben speichern und eine Zeile über dich in jeden neuen Chat einfügen. Das Speichern kannst du widerrufen. Ändert sich eine Seite, pausiert bleib, bis es sie wieder erkennt.' },
+          { p: 'Auf diesen Seiten kann bleib alltägliche Vorlieben speichern und eine Zeile über dich in jeden neuen Chat einfügen. Jede gespeicherte Angabe entfernst du mit einem Tipp. Ändert sich eine Seite, pausiert bleib, bis es sie wieder erkennt.' },
         ],
       },
       {
@@ -489,7 +489,7 @@ const de: Docs = {
       },
       {
         h: 'Bei sensiblen Angaben fragt bleib jedes Mal',
-        blocks: [{ p: 'Bei Angaben zu Gesundheit, Geld, Personen und Aufenthaltsort braucht bleib für jede Anfrage deine Zustimmung. Das gilt auch für alles, was du privat hältst oder was bleib nicht sicher einordnen kann. Beim Speichern gilt dieselbe Regel: Diese Angaben fragen vorher, alltägliche Vorlieben speichert bleib im Hintergrund, und du kannst es widerrufen.' }],
+        blocks: [{ p: 'Bei Angaben zu Gesundheit, Geld, Personen und Aufenthaltsort braucht bleib für jede Anfrage deine Zustimmung. Das gilt auch für alles, was du privat hältst oder was bleib nicht sicher einordnen kann. Beim Speichern gilt dieselbe Regel: Diese Angaben fragen vorher, alltägliche Vorlieben speichert bleib im Hintergrund, und du entfernst sie mit einem Tipp.' }],
       },
       {
         h: 'Zugriff ändern',
@@ -516,7 +516,7 @@ const de: Docs = {
       },
       {
         h: 'Im Chatentwurf',
-        blocks: [{ p: 'Der Beleg zeigt, was bleib für den Entwurf freigegeben hat. Er kann schon vorliegen, wenn sich der Entwurf vor dem Einfügen ändert. Auch nach „Widerrufen“ bleibt er erhalten, egal ob du den Chat abgeschickt hast.' }],
+        blocks: [{ p: 'Der Beleg zeigt, was bleib für den Entwurf freigegeben hat. Er kann schon vorliegen, wenn sich der Entwurf vor dem Einfügen ändert. Auch wenn du die Zeile entfernst, bleibt er erhalten, egal ob du den Chat abgeschickt hast.' }],
       },
       {
         h: 'Prüfen oder exportieren',
@@ -710,7 +710,7 @@ const de: Docs = {
       {
         h: 'Was KI-Anbieter sehen können',
         blocks: [
-          { p: 'bleib wählt auf deinem Gerät nur das Nötige aus und speichert vor jeder Freigabe einen Beleg. Sobald bleib Text in einen Entwurf einfügt, kann die Website ihn lesen. Mit „Widerrufen“ kannst du den Text aus dem Entwurf entfernen. Die Website kann ihn dann schon gesehen haben. Für erhaltene Daten gilt die Datenschutzerklärung des jeweiligen Anbieters.' },
+          { p: 'bleib wählt auf deinem Gerät nur das Nötige aus und speichert vor jeder Freigabe einen Beleg. Sobald bleib Text in einen Entwurf einfügt, kann die Website ihn lesen. Du kannst den Text aus dem Entwurf entfernen. Die Website kann ihn dann schon gesehen haben. Für erhaltene Daten gilt die Datenschutzerklärung des jeweiligen Anbieters.' },
         ],
       },
       {

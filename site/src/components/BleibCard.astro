@@ -1,19 +1,18 @@
 ---
 /**
  * bleib's card inside a chat, as in the hero and scene 2: what bleib did, each detail as a pill with its own symbol.
- * With `action` (scene 2's Undo for a quiet save) a text button sits top right. With `removable` (the hero) each pill
- * carries a small ×, so you leave out one detail by tapping it; the chip in the message box removes them all.
+ * With `removable` each pill carries a small ×: tap it to take that detail out again (the hero leaves it out of the
+ * message; scene 2 doesn't save it). When the last one goes, the card goes too.
  * It reveals at step `at` (motion kit in global.css). Spacing around it comes from --bleib-card-margin on the parent.
  */
 import Mark from './Mark.astro';
 import { icon, type IconName } from './icons';
-interface Props { title: string; facts: { t: string; icon: string }[]; action?: string; removable?: boolean; at?: 2 | 3 }
-const { title, facts, action, removable = false, at = 2 } = Astro.props;
+interface Props { title: string; facts: { t: string; icon: string }[]; removable?: boolean; at?: 2 | 3 }
+const { title, facts, removable = false, at = 2 } = Astro.props;
 ---
 <div class={`reveal at-${at}`}><div class="reveal-in">
   <div class="fill">
-    <p class:list={['fill-head', { wide: !action }]}><span class="app"><Mark size={12} /></span><span class="t-foot fill-title">{title}</span></p>
-    {action && <span class="b">{action}</span>}
+    <p class="fill-head"><span class="app"><Mark size={12} /></span><span class="t-foot fill-title">{title}</span></p>
     <ul class="facts">{facts.map((f) => (
       <li class="t-foot"><span class="sym" set:html={icon(f.icon as IconName)} />{f.t}{removable && <span class="x" set:html={icon('close')} />}</li>
     ))}</ul>
@@ -21,18 +20,15 @@ const { title, facts, action, removable = false, at = 2 } = Astro.props;
 </div></div>
 
 <style>
-  /* Two rows on every screen: the title (with Undo top right when there is one), then each detail as a pill with its own symbol. */
-  .fill { margin: var(--bleib-card-margin, 0); padding: 10px 10px 10px 12px; border-radius: 14px; background: var(--fill); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; align-items: center; }
+  /* Two rows on every screen: the title, then each detail as a pill with its own symbol. */
+  .fill { margin: var(--bleib-card-margin, 0); padding: 10px 10px 10px 12px; border-radius: 14px; background: var(--fill); display: grid; gap: 8px; }
   .fill-head { margin: 0; min-width: 0; display: flex; align-items: center; gap: 8px; }
   .app { flex: none; width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
   .fill-title { min-width: 0; color: var(--label-2); text-wrap: balance; }
-  .facts { grid-column: 1 / -1; list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .facts { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
   .facts li { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px 4px 8px; border-radius: 999px; background: var(--cell); color: var(--label); font-weight: 500; white-space: nowrap; }
   .sym { display: grid; color: var(--label-2); }
   .sym :global(svg) { width: 14px; height: 14px; display: block; }
-  .fill-head.wide { grid-column: 1 / -1; }
-  /* Undo is a text button, as in Apple's own Undo toasts: no capsule, so it never looks like one of the detail pills. */
-  .b { display: grid; place-items: center; padding: 4px 2px; font-size: 15px; line-height: 1; font-weight: 600; color: var(--label); }
   /* A removable pill ends in a small ×, like a token in Mail's To field: tap it to leave that detail out. */
   .facts li:has(.x) { padding-right: 6px; }
   .x { display: grid; place-items: center; width: 16px; height: 16px; margin-left: 1px; border-radius: 50%; background: var(--fill); color: var(--label-2); }
