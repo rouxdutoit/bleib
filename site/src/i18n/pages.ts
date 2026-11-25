@@ -53,7 +53,7 @@ const en: Docs = {
     hub: [
       { to: 'permissions', t: 'Permissions', d: 'When bleib asks before sharing.', icon: 'check' },
       { to: 'receipts', t: 'Receipts', d: 'What bleib shared and with whom.', icon: 'fingerprint' },
-      { to: 'works', t: 'Works with', d: 'ChatGPT, Claude, Gemini and more.', icon: 'code' },
+      { to: 'works', t: 'Works with', d: 'ChatGPT, Claude and Gemini.', icon: 'code' },
       { to: 'standards', t: 'Standards', d: 'The open formats bleib uses.', icon: 'verified_user' },
     ],
     sections: [
@@ -400,7 +400,7 @@ const de: Docs = {
     hub: [
       { to: 'permissions', t: 'Berechtigungen', d: 'Wann bleib dich vor dem Teilen fragt.', icon: 'check' },
       { to: 'receipts', t: 'Belege', d: 'Was bleib mit wem geteilt hat.', icon: 'fingerprint' },
-      { to: 'works', t: 'Kompatibilität', d: 'ChatGPT, Claude, Gemini und mehr.', icon: 'code' },
+      { to: 'works', t: 'Kompatibilität', d: 'ChatGPT, Claude und Gemini.', icon: 'code' },
       { to: 'standards', t: 'Standards', d: 'Die offenen Formate von bleib.', icon: 'verified_user' },
     ],
     sections: [
