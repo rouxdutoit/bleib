@@ -25,8 +25,12 @@ const GAPS = ['', ',900', '', '2200', '900,1500', ''];
 import { icon, type IconName } from './icons';
 const svg = (name: string, cls = 'g') => icon(name as IconName, cls);
 const cx = (n: number) => `reveal at-${n}`;
+/** What plays the steps (scripts/story.ts) and holds the finished height (scripts/reserve.js). Scene 2 is a chat window,
+ *  so, as in the hero, the window's body plays and holds it, and the message box never moves. */
+const play = { 'data-sv': '', 'data-steps': STEPS[scene], 'data-interval': INTERVAL[scene], 'data-start': START[scene], 'data-gaps': GAPS[scene] || undefined, 'data-step': '0' };
+const chat = scene === 1;
 ---
-<div class:list={['sv', scene === 1 && 'fills']} data-sv data-steps={STEPS[scene]} data-interval={INTERVAL[scene]} data-start={START[scene]} data-gaps={GAPS[scene] || undefined} data-step="0">
+<div class="sv" {...(chat ? {} : play)}>
   <div class={scene === 5 ? undefined : 'tray'}>
     <div class="stack" aria-hidden="true">
       {scene === 0 && (
@@ -64,9 +68,9 @@ const cx = (n: number) => `reveal at-${n}`;
       {scene === 1 && (
         <Window tabs={[{ ai: c.propose.app, icon: 'claude-color' }]}>
           {/* Like the hero: you type, you send, and bleib's card says it's saved, with Undo (scripts/story.ts). */}
-          <div class="chat">
+          <div class="chat" {...play}>
             <p class="t-body bubble appear at-2">{c.propose.said}</p>
-            <BleibCard title={c.propose.title} facts={[{ t: c.propose.fact, icon: 'eco' }]} action={c.propose.undo} at={3} quiet />
+            <BleibCard title={c.propose.title} facts={[{ t: c.propose.fact, icon: 'short_text' }]} action={c.propose.undo} at={3} quiet />
             <Composer typed={c.propose.said} sentAt={2} />
           </div>
         </Window>
@@ -284,13 +288,6 @@ const cx = (n: number) => `reveal at-${n}`;
   /* Quiet saving */
   /* Scene 2: a chat window, as in the hero. The message lands just after send is pressed. */
   .chat { --bleib-card-margin: 0 0 8px; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
-  /* The window holds its finished height from the start, like the hero's: the box sits at the bottom and the
-     message and bleib's card appear above it. */
-  .fills { display: flex; flex-direction: column; }
-  .fills > .tray { flex: 1; display: flex; flex-direction: column; }
-  .fills .stack { flex: 1; }
-  .fills .stack > :global(.window) { flex: 1; display: flex; flex-direction: column; }
-  .fills .chat { flex: 1; }
   .bubble { --delay: 0.15s; align-self: flex-end; max-width: 80%; margin: 0 0 12px; padding: 8px 14px; border-radius: 18px; background: var(--fill); }
   /* Like the hero card: a saved detail is a pill with its own symbol. */
 

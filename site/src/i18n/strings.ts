@@ -68,7 +68,7 @@ const en = {
       },
       {
         ai: 'ChatGPT', icon: 'openai', typed: 'What should I cook tonight?',
-        facts: [{ t: 'Vegetarian', icon: 'eco' }, { t: 'Cooks for two', icon: 'group' }], private: 'Private details stay in your bleib.',
+        facts: [{ t: 'No coriander', icon: 'restaurant' }, { t: 'Cooks for two', icon: 'group' }], private: 'Private details stay in your bleib.',
       },
     ],
   },
@@ -82,7 +82,7 @@ const en = {
       },
       {
         h: ['You chat.', 'bleib takes notes.'],
-        p: 'Mention you’re vegetarian. It’s in your bleib, with Undo.',
+        p: 'Mention you like short answers. It’s in your bleib, with Undo.',
         more: { to: 'how', hash: '#proposals', label: 'Saves as you go' },
       },
       {
@@ -140,7 +140,7 @@ const en = {
       purposeLabel: 'For',
       purpose: 'Lisbon trip',
       sharedLabel: 'Shared',
-      shared: [{ t: 'Prefers aisle seats', icon: 'airline_seat' }, { t: 'Vegetarian', icon: 'eco' }],
+      shared: [{ t: 'Prefers aisle seats', icon: 'airline_seat' }, { t: 'Carry-on only', icon: 'luggage' }],
       notShared: 'Not shared: Health, People',
       weeklyLabel: 'This Week',
       weeklyN: '11',
@@ -159,9 +159,9 @@ const en = {
     off: { setting: 'Memory', note: 'Switched off in each AI’s own settings.' },
     propose: {
       app: 'Claude',
-      said: 'I’m vegetarian.',
+      said: 'I like short answers.',
       title: 'Saved to bleib',
-      fact: 'Vegetarian',
+      fact: 'Short answers',
       undo: 'Undo',
     },
   },
@@ -250,7 +250,7 @@ const de: Strings = {
       },
       {
         ai: 'ChatGPT', icon: 'openai', typed: 'Was soll ich heute Abend kochen?',
-        facts: [{ t: 'Vegetarisch', icon: 'eco' }, { t: 'Kocht für zwei', icon: 'group' }], private: 'Private Angaben bleiben in deinem bleib.',
+        facts: [{ t: 'Kein Koriander', icon: 'restaurant' }, { t: 'Kocht für zwei', icon: 'group' }], private: 'Private Angaben bleiben in deinem bleib.',
       },
     ],
   },
@@ -264,7 +264,7 @@ const de: Strings = {
       },
       {
         h: ['Du chattest.', 'bleib merkt es sich.'],
-        p: 'Erwähn, dass du vegetarisch isst. Es landet in deinem bleib, mit Rückgängig.',
+        p: 'Erwähn, dass du kurze Antworten magst. Es landet in deinem bleib, mit Rückgängig.',
         more: { to: 'how', hash: '#proposals', label: 'Speichert nebenbei' },
       },
       {
@@ -322,7 +322,7 @@ const de: Strings = {
       purposeLabel: 'Für',
       purpose: 'Reise nach Lissabon',
       sharedLabel: 'Geteilt',
-      shared: [{ t: 'Bevorzugt Gangplätze', icon: 'airline_seat' }, { t: 'Vegetarisch', icon: 'eco' }],
+      shared: [{ t: 'Bevorzugt Gangplätze', icon: 'airline_seat' }, { t: 'Nur Handgepäck', icon: 'luggage' }],
       notShared: 'Nicht geteilt: Gesundheit, Menschen',
       weeklyLabel: 'Diese Woche',
       weeklyN: '11',
@@ -341,9 +341,9 @@ const de: Strings = {
     off: { setting: 'Gedächtnis', note: 'In den Einstellungen jeder KI ausgeschaltet.' },
     propose: {
       app: 'Claude',
-      said: 'Ich esse vegetarisch.',
+      said: 'Ich mag kurze Antworten.',
       title: 'In bleib gespeichert',
-      fact: 'Vegetarisch',
+      fact: 'Kurze Antworten',
       undo: 'Rückgängig',
     },
   },

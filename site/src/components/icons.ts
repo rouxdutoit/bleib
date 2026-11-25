@@ -28,6 +28,9 @@ import locationOn from '@material-symbols/svg-400/rounded/location_on-fill.svg?r
 import group from '@material-symbols/svg-400/rounded/group-fill.svg?raw';
 import chatBubble from '@material-symbols/svg-400/rounded/chat_bubble-fill.svg?raw';
 import backHand from '@material-symbols/svg-400/rounded/back_hand-fill.svg?raw';
+import restaurant from '@material-symbols/svg-400/rounded/restaurant-fill.svg?raw';
+import luggage from '@material-symbols/svg-400/rounded/luggage-fill.svg?raw';
+import shortText from '@material-symbols/svg-400/rounded/short_text-fill.svg?raw';
 
 const raw = {
   person,
@@ -55,6 +58,9 @@ const raw = {
   group,
   chat_bubble: chatBubble,
   back_hand: backHand,
+  restaurant,
+  luggage,
+  short_text: shortText,
 } as const;
 
 export type IconName = keyof typeof raw;
