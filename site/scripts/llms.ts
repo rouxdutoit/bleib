@@ -16,7 +16,7 @@ export function renderIndex(site: URL) {
   const sections = languages.map((lang) => {
     const { hero } = t(lang);
     const title = `${hero.h1}`;
-    const description = `${hero.status}. ${hero.eyebrow}. ${hero.sub.join(' ')}`;
+    const description = `${hero.eyebrow}. ${hero.sub.join(' ')}`;
     const links = [
       `- ${link(title, routes.home[lang], site)}: ${description}`,
       ...documentKeys.map((key) => {
@@ -59,7 +59,6 @@ function renderHome(lang: Lang, site: URL) {
   return [
     `### ${hero.h1}`,
     new URL(routes.home[lang], site).href,
-    hero.status,
     hero.eyebrow,
     ...hero.sub,
     `#### ${story.label}`,

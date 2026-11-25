@@ -93,7 +93,7 @@ const en: Docs = {
       {
         id: 'recovery',
         h: 'Get your memory back',
-        blocks: [{ p: 'Keep your recovery kit and an encrypted backup somewhere safe, away from your device. Together they bring your memory back on a new one.' }],
+        blocks: [{ p: 'Keep your recovery kit somewhere safe, away from your device. If you forget your passphrase, it lets you unlock your memory again.' }],
       },
     ],
   },
@@ -450,7 +450,7 @@ const de: Docs = {
       {
         id: 'recovery',
         h: 'Dein Gedächtnis zurückholen',
-        blocks: [{ p: 'Bewahre dein Wiederherstellungs-Kit und eine verschlüsselte Sicherung an einem sicheren Ort außerhalb deines Geräts auf. Zusammen holen sie dein Gedächtnis auf ein neues Gerät zurück.' }],
+        blocks: [{ p: 'Bewahre dein Wiederherstellungs-Kit an einem sicheren Ort außerhalb deines Geräts auf. Wenn du dein Passwort vergisst, entsperrst du damit dein Gedächtnis wieder.' }],
       },
     ],
   },
