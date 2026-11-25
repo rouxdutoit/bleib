@@ -108,18 +108,27 @@ a {
   padding-bottom: 3px;
   transition: background-size 0.5s var(--ease);
 }
-a:hover .lbl,
 a:focus-visible .lbl {
   background-size: 100% 1px;
+}
+@media (hover: hover) {
+  a:hover .lbl { background-size: 100% 1px; }
 }
 .chev {
   display: inline-grid;
   transition: transform 0.25s var(--ease);
 }
 .chev svg { width: 20px; height: 20px; display: block; }
-a:hover .chev,
 a:focus-visible .chev {
   transform: translateX(2px);
+}
+@media (hover: hover) {
+  a:hover .chev { transform: translateX(2px); }
+}
+/* On touch screens, like iOS: a link dims while your finger is on it, with no underline and no grey tap box. */
+@media (hover: none) {
+  a { -webkit-tap-highlight-color: transparent; transition: opacity 0.15s var(--ease); }
+  a:active { opacity: 0.45; transition-duration: 0s; }
 }
 
 button,

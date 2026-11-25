@@ -126,5 +126,7 @@ const deHref = new URL(routes[page].de, site).href;
     <script>
       import '../scripts/theme';
     </script>
-  </body>
+    {/* iOS Safari only shows :active (a link dimming under your finger) when the page listens for touches. */}
+  <script is:inline>document.addEventListener('touchstart', function () {}, { passive: true });</script>
+</body>
 </html>
