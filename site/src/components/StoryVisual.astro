@@ -43,7 +43,7 @@ const chat = scene === 1;
               <li class={cx(i + 1)}>
                 <div class="reveal-in"><div class="cell">
                   <span class="ico ico-2" set:html={svg(r.icon)} />
-                  <span class="cell-k"><span class="t-body">{r.k}</span><span class="t-sub c-2 from">{c.wallet.fromLabel} <ProviderLogo name={r.from} lang={lang} />{r.from}</span></span>
+                  <span class="cell-k"><span class="t-body">{r.k}</span><span class="t-sub c-2 from">{c.wallet.fromLabel} <ProviderLogo name={r.from} lang={lang} /><span class="from-n">{r.from}</span></span></span>
                   <span class="t-body c-2 cell-v">{r.locked && <span class="inline-g" set:html={svg('lock')} />}{r.v}</span>
                 </div></div>
               </li>
@@ -205,7 +205,10 @@ const chat = scene === 1;
   .cell-k { flex: 1; min-width: 0; }
   .cell-k > .t-body { display: block; }
   .blk { display: block; }
-  .cell-v { text-align: right; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+  .cell-v { flex: none; text-align: right; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+  /* On a narrow phone the value keeps its room; the title and source shorten with an ellipsis instead of overlapping. */
+  .cell-k > .t-body, .from-n { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .from-n { min-width: 0; }
   .inline-g { display: inline-flex; }
   .inline-g :global(.g) { width: 13px; height: 13px; }
   .used { padding: 8px 16px 0; }
@@ -233,7 +236,7 @@ const chat = scene === 1;
 
   /* Scene 1: each row says which AI the detail came from, under its kind. */
   .import-card .cell { min-height: 56px; }
-  .from { display: flex; align-items: center; gap: 4px; }
+  .from { display: flex; align-items: center; gap: 4px; min-width: 0; white-space: nowrap; }
 
   /* Alert */
   .alert { padding: 22px 16px 16px; text-align: center; }

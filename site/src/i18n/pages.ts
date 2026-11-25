@@ -413,7 +413,7 @@ const de: Docs = {
         id: 'proposals',
         h: 'Beim Schreiben speichern',
         blocks: [
-          { p: 'Schreib im Chat zum Beispiel „Ich buche immer einen Gangplatz“, und bleib speichert es im Hintergrund, mit Rückgängig direkt daneben. So speichert bleib alltägliche Vorlieben wie Reisen, Essen, Budget und Arbeitsweise.' },
+          { p: 'Schreib im Chat zum Beispiel „Ich buche immer einen Gangplatz“, und bleib speichert es im Hintergrund. Du kannst es direkt widerrufen. So speichert bleib alltägliche Vorlieben wie Reisen, Essen, Budget und Arbeitsweise.' },
           { p: 'Alles Sensible wie Gesundheit, Geld, Personen oder Aufenthaltsort, alles, was du privat hältst, und alles, was bleib nicht sicher einordnen kann, fragt vorher, direkt im Chat: „In bleib sichern?“ Nichts Sensibles wird ohne dein Ja gespeichert.' },
           { p: 'Du kannst auch mitnehmen, was ChatGPT, Claude und Gemini über dich gespeichert haben. Lade deine Daten über den Export des jeweiligen Anbieters herunter (bei Gemini über Google Takeout) und zieh die Datei in bleib. bleib liest sie auf deinem Gerät, und du behältst, was dir gefällt.' },
         ],
@@ -436,7 +436,7 @@ const de: Docs = {
       {
         id: 'limits',
         h: 'Geteilt beim Einfügen',
-        blocks: [{ p: 'Die Website kann den Text lesen, sobald bleib ihn einfügt. Mit „Rückgängig“ kannst du ihn aus deinem Entwurf entfernen. Die Website kann ihn dann schon gesehen haben.' }],
+        blocks: [{ p: 'Die Website kann den Text lesen, sobald bleib ihn einfügt. Mit „Widerrufen“ kannst du ihn aus deinem Entwurf entfernen. Die Website kann ihn dann schon gesehen haben.' }],
       },
       {
         id: 'recovery',
@@ -460,7 +460,7 @@ const de: Docs = {
               { t: 'Gemini', d: 'gemini.google.com', ai: 'Gemini' },
             ],
           },
-          { p: 'Auf diesen Seiten kann bleib alltägliche Vorlieben speichern und eine Zeile über dich in jeden neuen Chat einfügen. Das Speichern kannst du rückgängig machen. Ändert sich eine Seite, pausiert bleib, bis es sie wieder erkennt.' },
+          { p: 'Auf diesen Seiten kann bleib alltägliche Vorlieben speichern und eine Zeile über dich in jeden neuen Chat einfügen. Das Speichern kannst du widerrufen. Ändert sich eine Seite, pausiert bleib, bis es sie wieder erkennt.' },
         ],
       },
       {
@@ -489,7 +489,7 @@ const de: Docs = {
       },
       {
         h: 'Bei sensiblen Angaben fragt bleib jedes Mal',
-        blocks: [{ p: 'Bei Angaben zu Gesundheit, Geld, Personen und Aufenthaltsort braucht bleib für jede Anfrage deine Zustimmung. Das gilt auch für alles, was du privat hältst oder was bleib nicht sicher einordnen kann. Beim Speichern gilt dieselbe Regel: Diese Angaben fragen vorher, alltägliche Vorlieben speichert bleib im Hintergrund, mit Rückgängig.' }],
+        blocks: [{ p: 'Bei Angaben zu Gesundheit, Geld, Personen und Aufenthaltsort braucht bleib für jede Anfrage deine Zustimmung. Das gilt auch für alles, was du privat hältst oder was bleib nicht sicher einordnen kann. Beim Speichern gilt dieselbe Regel: Diese Angaben fragen vorher, alltägliche Vorlieben speichert bleib im Hintergrund, und du kannst es widerrufen.' }],
       },
       {
         h: 'Zugriff ändern',
@@ -516,7 +516,7 @@ const de: Docs = {
       },
       {
         h: 'Im Chatentwurf',
-        blocks: [{ p: 'Der Beleg zeigt, was bleib für den Entwurf freigegeben hat. Er kann schon vorliegen, wenn sich der Entwurf vor dem Einfügen ändert. Auch nach „Rückgängig“ bleibt er erhalten, egal ob du den Chat abgeschickt hast.' }],
+        blocks: [{ p: 'Der Beleg zeigt, was bleib für den Entwurf freigegeben hat. Er kann schon vorliegen, wenn sich der Entwurf vor dem Einfügen ändert. Auch nach „Widerrufen“ bleibt er erhalten, egal ob du den Chat abgeschickt hast.' }],
       },
       {
         h: 'Prüfen oder exportieren',
@@ -574,7 +574,7 @@ const de: Docs = {
     title: 'Für Entwickler',
     description: 'Das Desktop-Add-on von bleib, MCP und offene Formate, demnächst.',
     intro: ['bleib ist kostenlos, quelloffen und in Entwicklung. Es startet als Browser-Erweiterung. Später kommt ein Desktop-Add-on mit MCP, damit sich KI-Tools auf deinem Rechner verbinden können.'],
-    cta: { label: 'Auf GitHub ansehen', href: GITHUB_URL },
+    cta: { label: 'Auf GitHub anzeigen', href: GITHUB_URL },
     sections: [
       {
         h: 'Später: das Desktop-Add-on',
@@ -710,7 +710,7 @@ const de: Docs = {
       {
         h: 'Was KI-Anbieter sehen können',
         blocks: [
-          { p: 'bleib wählt auf deinem Gerät nur das Nötige aus und speichert vor jeder Freigabe einen Beleg. Sobald bleib Text in einen Entwurf einfügt, kann die Website ihn lesen. Mit „Rückgängig“ kannst du den Text aus dem Entwurf entfernen. Die Website kann ihn dann schon gesehen haben. Für erhaltene Daten gilt die Datenschutzerklärung des jeweiligen Anbieters.' },
+          { p: 'bleib wählt auf deinem Gerät nur das Nötige aus und speichert vor jeder Freigabe einen Beleg. Sobald bleib Text in einen Entwurf einfügt, kann die Website ihn lesen. Mit „Widerrufen“ kannst du den Text aus dem Entwurf entfernen. Die Website kann ihn dann schon gesehen haben. Für erhaltene Daten gilt die Datenschutzerklärung des jeweiligen Anbieters.' },
         ],
       },
       {

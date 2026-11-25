@@ -22,7 +22,7 @@ const { title, facts, action, done, at = 2, quiet = false } = Astro.props;
 </div></div>
 
 <style>
-  /* Two rows on every screen: the title with the action at its end, then each detail as a pill with its own symbol. */
+  /* Two rows on every screen: the title with the action at its end (top right), then each detail as a pill with its own symbol. */
   .fill { margin: var(--bleib-card-margin, 0); padding: 10px 10px 10px 12px; border-radius: 14px; background: var(--fill); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; align-items: center; }
   .fill-head { margin: 0; min-width: 0; display: flex; align-items: center; gap: 8px; }
   .app { flex: none; width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
@@ -33,7 +33,8 @@ const { title, facts, action, done, at = 2, quiet = false } = Astro.props;
   .sym :global(svg) { width: 14px; height: 14px; display: block; }
   /* Like the story cards: the action in the label colour, bleib yellow once done; labels crossfade in place. */
   .b { place-items: center; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 13px; line-height: 1; font-weight: 600; background: var(--label); color: var(--cell); transition: background-color var(--t-fade) var(--ease), color var(--t-fade) var(--ease); }
-  .b.quiet { display: grid; background: var(--cell); color: var(--label); }
+  /* Undo is a text button, as in Apple's own Undo toasts: no capsule, so it never looks like one of the detail pills. */
+  .b.quiet { display: grid; height: auto; padding: 4px 2px; background: none; color: var(--label); font-size: 15px; }
   .to-done { display: inline-flex; align-items: center; gap: 4px; }
   :global(.s3) .b.at-3, :global(.s4) .b.at-4 { background: #f6e79a; color: #0a0a0a; }
   .tick { display: grid; }

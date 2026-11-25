@@ -55,7 +55,7 @@ const en = {
     h1: 'Own your AI memory.',
     sub: ['Kept on your device.', 'Shared on your terms.'],
     primary: 'Get early access',
-    secondary: 'View on GitHub',
+    secondary: 'GitHub',
   },
   preview: {
     examples: 'Examples',
@@ -218,7 +218,7 @@ const de: Strings = {
   nav: {
     home: 'bleib Startseite',
     github: 'GitHub',
-    early: 'Frühen Zugang sichern',
+    early: 'Vormerken',
     how: 'So funktioniert’s',
     security: 'Sicherheit',
     developers: 'Entwickler',
@@ -234,13 +234,13 @@ const de: Strings = {
     status: 'In Entwicklung',
     h1: 'Dein KI-Gedächtnis gehört dir.',
     sub: ['Auf deinem Gerät.', 'Geteilt, wie du willst.'],
-    primary: 'Frühen Zugang sichern',
-    secondary: 'Auf GitHub ansehen',
+    primary: 'Vormerken',
+    secondary: 'GitHub',
   },
   preview: {
     examples: 'Beispiele',
-    title: 'Hinzugefügt, was {ai} braucht',
-    undo: 'Rückgängig',
+    title: 'Was {ai} braucht',
+    undo: 'Widerrufen',
     attachment: 'Über mich',
     tabs: [
       {
@@ -262,12 +262,12 @@ const de: Strings = {
     scenes: [
       {
         h: ['Bestimme, was die KI', 'über dich weiß.'],
-        p: 'Gemini hat deinen Gangplatz. Claude hat deinen Rückblick am Freitag. Hol beides in dein bleib.',
+        p: 'Gemini hat deinen Gangplatz. Claude hat deine Freitagsrunde. Hol beides in dein bleib.',
         more: { to: 'how', hash: '#memory', label: 'Ein Gedächtnis, jede KI' },
       },
       {
         h: ['Du chattest.', 'bleib merkt es sich.'],
-        p: 'Erwähn, dass du Spanisch lernst. Es landet in deinem bleib, mit Rückgängig.',
+        p: 'Erwähn, dass du Spanisch lernst. Es landet in deinem bleib, und du kannst es widerrufen.',
         more: { to: 'how', hash: '#proposals', label: 'Speichert nebenbei' },
       },
       {
@@ -299,7 +299,7 @@ const de: Strings = {
       rows: [
         { k: 'Menschen', v: 'Marek, Berlin', icon: 'person', from: 'ChatGPT' },
         { k: 'Reisen', v: 'Gangplatz', icon: 'flight', from: 'Gemini' },
-        { k: 'Arbeit', v: 'Rückblick am Freitag', icon: 'work', from: 'Claude' },
+        { k: 'Arbeit', v: 'Freitagsrunde', icon: 'work', from: 'Claude' },
         { k: 'Gesundheit', v: 'Privat', icon: 'favorite', locked: true, from: 'ChatGPT' },
       ],
       fromLabel: 'Von',
@@ -341,7 +341,7 @@ const de: Strings = {
       said: 'Ich lerne Spanisch.',
       title: 'In bleib gespeichert',
       fact: 'Lernt Spanisch',
-      undo: 'Rückgängig',
+      undo: 'Widerrufen',
     },
   },
   finale: {
