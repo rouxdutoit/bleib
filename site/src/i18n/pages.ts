@@ -66,7 +66,7 @@ const en: Docs = {
         h: 'Save as you go',
         blocks: [
           { p: 'Mention “I prefer aisle seats” in a chat, and bleib saves it quietly, with Undo right there. Everyday preferences like travel, food, budget and work style save this way.' },
-          { p: 'Anything sensitive, like health, money, people or location, anything you keep private, or anything bleib isn’t sure about, asks first, in place: “Save to bleib?” Nothing is ever saved silently.' },
+          { p: 'Anything sensitive, like health, money, people or location, anything you keep private, or anything bleib isn’t sure about, asks first, in place: “Save to bleib?” Nothing sensitive is ever saved without your yes.' },
           { p: 'You can also bring in the visible entries from the memory pages on ChatGPT, Claude and Gemini. bleib shows you what it found, and you keep what you like.' },
         ],
       },
@@ -423,7 +423,7 @@ const de: Docs = {
         h: 'Beim Schreiben speichern',
         blocks: [
           { p: 'Schreib im Chat zum Beispiel „Ich buche immer einen Gangplatz“, und bleib speichert es im Hintergrund, mit Rückgängig direkt daneben. So speichert bleib alltägliche Vorlieben wie Reisen, Essen, Budget und Arbeitsweise.' },
-          { p: 'Alles Sensible wie Gesundheit, Geld, Personen oder Aufenthaltsort, alles, was du privat hältst, und alles, was bleib nicht sicher einordnen kann, fragt vorher, direkt im Chat: „In bleib sichern?“ Nichts wird je heimlich gespeichert.' },
+          { p: 'Alles Sensible wie Gesundheit, Geld, Personen oder Aufenthaltsort, alles, was du privat hältst, und alles, was bleib nicht sicher einordnen kann, fragt vorher, direkt im Chat: „In bleib sichern?“ Nichts Sensibles wird ohne dein Ja gespeichert.' },
           { p: 'Du kannst auch die sichtbaren Einträge von den Gedächtnisseiten bei ChatGPT, Claude und Gemini mitnehmen. bleib zeigt dir, was es gefunden hat, und du behältst, was dir gefällt.' },
         ],
       },
