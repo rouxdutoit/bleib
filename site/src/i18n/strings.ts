@@ -168,7 +168,7 @@ const en = {
     },
   },
   finale: {
-    h: 'Your memory stays with you.',
+    h: 'Your AI memory stays yours.',
     p: 'Free and open source. Be among the first to try it.',
   },
   form: {
@@ -352,7 +352,7 @@ const de: Strings = {
     },
   },
   finale: {
-    h: 'Dein Gedächtnis bleibt bei dir.',
+    h: 'Dein KI-Gedächtnis bleibt deins.',
     p: 'Kostenlos und quelloffen. Sei von Anfang an dabei.',
   },
   form: {
