@@ -60,15 +60,15 @@ const en = {
     tabs: [
       {
         ai: 'Gemini', icon: 'gemini-color', typed: 'Plan a weekend in Lisbon for me.',
-        facts: [{ t: 'Aisle seat', icon: 'airline_seat' }, { t: 'Vegetarian', icon: 'eco' }], private: 'Health and work stay private.',
+        facts: [{ t: 'Aisle seat', icon: 'airline_seat' }, { t: 'Vegetarian', icon: 'eco' }], private: 'Private details stay in your bleib.',
       },
       {
         ai: 'Claude', icon: 'claude-color', typed: 'Write a cover letter for this job.',
-        facts: [{ t: 'Product designer', icon: 'work' }, { t: 'Berlin', icon: 'location_on' }], private: 'Health and money stay private.',
+        facts: [{ t: 'Product designer', icon: 'work' }, { t: 'Berlin', icon: 'location_on' }], private: 'Private details stay in your bleib.',
       },
       {
         ai: 'ChatGPT', icon: 'openai', typed: 'What should I cook tonight?',
-        facts: [{ t: 'Vegetarian', icon: 'eco' }, { t: 'Cooks for two', icon: 'group' }], private: 'Work and travel stay private.',
+        facts: [{ t: 'Vegetarian', icon: 'eco' }, { t: 'Cooks for two', icon: 'group' }], private: 'Private details stay in your bleib.',
       },
     ],
   },
@@ -77,7 +77,7 @@ const en = {
     scenes: [
       {
         h: ['Control what AI', 'knows about you.'],
-        p: 'Gemini has your aisle seat. Claude has your Friday review. Your bleib holds it all.',
+        p: 'Gemini has your aisle seat. Claude has your Friday review. Bring both into your bleib.',
         more: { to: 'how', hash: '#memory', label: 'One memory, every AI' },
       },
       {
@@ -91,8 +91,8 @@ const en = {
         more: { to: 'works', hash: '', label: 'Works with your AI' },
       },
       {
-        h: ['It only asks', 'when it matters.'],
-        p: 'bleib suggests. You tap Add. In time, it adds travel details for you. Health notes always wait for your yes.',
+        h: ['You choose', 'what each chat gets.'],
+        p: 'bleib suggests. You tap Add. Health notes always wait for your yes.',
         more: { to: 'permissions', hash: '', label: 'You decide what’s shared' },
       },
       {
@@ -131,7 +131,7 @@ const en = {
       message: 'For your running plan. Health is sensitive, so bleib asks first.',
       action: 'Allow Once',
       allowed: 'Allowed',
-      later: { title: 'Claude used Travel', sub: 'Hotels in Porto', tag: 'Automatic' },
+      later: { title: 'Claude used Travel', sub: 'Hotels in Porto', tag: 'Added' },
     },
     receipt: {
       who: 'Claude',
@@ -140,7 +140,7 @@ const en = {
       purposeLabel: 'For',
       purpose: 'Lisbon trip',
       sharedLabel: 'Shared',
-      shared: ['Prefers aisle seats', 'Vegetarian'],
+      shared: [{ t: 'Prefers aisle seats', icon: 'airline_seat' }, { t: 'Vegetarian', icon: 'eco' }],
       notShared: 'Not shared: Health, People',
       weeklyLabel: 'This Week',
       weeklyN: '11',
@@ -245,15 +245,15 @@ const de: Strings = {
     tabs: [
       {
         ai: 'Gemini', icon: 'gemini-color', typed: 'Plane ein Wochenende in Lissabon für mich.',
-        facts: [{ t: 'Gangplatz', icon: 'airline_seat' }, { t: 'Vegetarisch', icon: 'eco' }], private: 'Gesundheit und Arbeit bleiben privat.',
+        facts: [{ t: 'Gangplatz', icon: 'airline_seat' }, { t: 'Vegetarisch', icon: 'eco' }], private: 'Private Angaben bleiben in deinem bleib.',
       },
       {
         ai: 'Claude', icon: 'claude-color', typed: 'Schreib ein Anschreiben für diese Stelle.',
-        facts: [{ t: 'Produktdesign', icon: 'work' }, { t: 'Berlin', icon: 'location_on' }], private: 'Gesundheit und Finanzen bleiben privat.',
+        facts: [{ t: 'Produktdesign', icon: 'work' }, { t: 'Berlin', icon: 'location_on' }], private: 'Private Angaben bleiben in deinem bleib.',
       },
       {
         ai: 'ChatGPT', icon: 'openai', typed: 'Was soll ich heute Abend kochen?',
-        facts: [{ t: 'Vegetarisch', icon: 'eco' }, { t: 'Kocht für zwei', icon: 'group' }], private: 'Arbeit und Reisen bleiben privat.',
+        facts: [{ t: 'Vegetarisch', icon: 'eco' }, { t: 'Kocht für zwei', icon: 'group' }], private: 'Private Angaben bleiben in deinem bleib.',
       },
     ],
   },
@@ -262,7 +262,7 @@ const de: Strings = {
     scenes: [
       {
         h: ['Bestimme, was die KI', 'über dich weiß.'],
-        p: 'Gemini hat deinen Gangplatz. Claude hat deinen Rückblick am Freitag. Dein bleib bewahrt alles.',
+        p: 'Gemini hat deinen Gangplatz. Claude hat deinen Rückblick am Freitag. Hol beides in dein bleib.',
         more: { to: 'how', hash: '#memory', label: 'Ein Gedächtnis, jede KI' },
       },
       {
@@ -276,8 +276,8 @@ const de: Strings = {
         more: { to: 'works', hash: '', label: 'Funktioniert mit deiner KI' },
       },
       {
-        h: ['bleib fragt,', 'wenn es zählt.'],
-        p: 'bleib schlägt vor. Du tippst auf Hinzufügen. Später fügt bleib Reisedetails selbst hinzu. Gesundheitsnotizen warten auf dein Ja.',
+        h: ['Du entscheidest,', 'was jeder Chat bekommt.'],
+        p: 'bleib schlägt vor. Du tippst auf Hinzufügen. Gesundheitsnotizen warten auf dein Ja.',
         more: { to: 'permissions', hash: '', label: 'Du entscheidest, was geteilt wird' },
       },
       {
@@ -316,7 +316,7 @@ const de: Strings = {
       message: 'Für deinen Laufplan. Gesundheit ist sensibel, darum fragt bleib vorher.',
       action: 'Einmal erlauben',
       allowed: 'Erlaubt',
-      later: { title: 'Claude nutzte Reisen', sub: 'Hotels in Porto', tag: 'Automatisch' },
+      later: { title: 'Claude nutzte Reisen', sub: 'Hotels in Porto', tag: 'Hinzugefügt' },
     },
     receipt: {
       who: 'Claude',
@@ -325,7 +325,7 @@ const de: Strings = {
       purposeLabel: 'Für',
       purpose: 'Reise nach Lissabon',
       sharedLabel: 'Geteilt',
-      shared: ['Bevorzugt Gangplätze', 'Vegetarisch'],
+      shared: [{ t: 'Bevorzugt Gangplätze', icon: 'airline_seat' }, { t: 'Vegetarisch', icon: 'eco' }],
       notShared: 'Nicht geteilt: Gesundheit, Menschen',
       weeklyLabel: 'Diese Woche',
       weeklyN: '11',

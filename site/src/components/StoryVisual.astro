@@ -164,7 +164,7 @@ const cx = (n: number) => `reveal at-${n}`;
             <p class="t-foot c-2 sec-h inner">{c.receipt.sharedLabel}</p>
             <ul class="group filled">
               {c.receipt.shared.map((x, i) => (
-                <li class={cx(i + 1)}><div class="reveal-in"><div class="cell"><span class="yes" set:html={svg('check')} /><span class="t-body">{x}</span></div></div></li>
+                <li class={cx(i + 1)}><div class="reveal-in"><div class="cell"><span class="row-sym" set:html={svg(x.icon)} /><span class="t-body">{x.t}</span></div></div></li>
               ))}
             </ul>
             <p class="t-foot c-2 not"><span class="inline-g" set:html={svg('lock')} />{c.receipt.notShared}</p>
@@ -299,8 +299,9 @@ const cx = (n: number) => `reveal at-${n}`;
   .group.filled { background: var(--fill); border-radius: 12px; }
   .group.filled .cell { padding: 0 12px; }
   .group.filled > li + li .cell::before { left: 44px; }
-  .yes { flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: #f6e79a; color: #0a0a0a; }
-  .yes :global(.g) { width: 15px; height: 15px; }
+  /* Each shared detail keeps the symbol it had as a pill, as a leading symbol in the row (like Settings). */
+  .row-sym { flex: none; width: 20px; display: grid; place-items: center; color: var(--label-2); }
+  .row-sym :global(.g) { width: 20px; height: 20px; }
   .ok :global(.g) { width: 18px; height: 18px; }
   .ok { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--ok); color: #fff; }
   .not { padding-top: 10px; display: flex; align-items: center; gap: 5px; }
