@@ -65,7 +65,8 @@ const en: Docs = {
         id: 'proposals',
         h: 'Save as you go',
         blocks: [
-          { p: 'Type “I prefer aisle seats” in a chat. The browser extension quietly saves preferences it recognises and gives you an Undo button. Other things you tell the AI can go into review.' },
+          { p: 'Mention “I prefer aisle seats” in a chat, and bleib saves it quietly, with Undo right there. Everyday preferences like travel, food, budget and work style save this way.' },
+          { p: 'Anything sensitive, like health, money, people or location, anything you keep private, or anything bleib isn’t sure about, asks first, in place: “Save to bleib?” Nothing is ever saved silently.' },
           { p: 'You can also bring in the visible entries from the memory pages on ChatGPT, Claude and Gemini. bleib shows you what it found, and you keep what you like.' },
         ],
       },
@@ -139,7 +140,7 @@ const en: Docs = {
       },
       {
         h: 'bleib always asks about sensitive information',
-        blocks: [{ p: 'Health, money, people and location always need your approval for each request. So does anything you keep private or bleib can’t confidently classify.' }],
+        blocks: [{ p: 'Health, money, people and location always need your approval for each request. So does anything you keep private or bleib can’t confidently classify. Saving follows the same rule: these ask first, everyday preferences save quietly with Undo.' }],
       },
       {
         h: 'Change your mind',
@@ -421,7 +422,8 @@ const de: Docs = {
         id: 'proposals',
         h: 'Beim Schreiben speichern',
         blocks: [
-          { p: 'Schreib im Chat zum Beispiel „Ich mag grünen Tee“. Die Erweiterung speichert solche Vorlieben im Hintergrund. Du kannst das Speichern rückgängig machen. Andere Angaben kann bleib dir zur Prüfung vorlegen.' },
+          { p: 'Schreib im Chat zum Beispiel „Ich buche immer einen Gangplatz“, und bleib speichert es im Hintergrund, mit Rückgängig direkt daneben. So speichert bleib alltägliche Vorlieben wie Reisen, Essen, Budget und Arbeitsweise.' },
+          { p: 'Alles Sensible wie Gesundheit, Geld, Personen oder Aufenthaltsort, alles, was du privat hältst, und alles, was bleib nicht sicher einordnen kann, fragt vorher, direkt im Chat: „In bleib sichern?“ Nichts wird je heimlich gespeichert.' },
           { p: 'Du kannst auch die sichtbaren Einträge von den Gedächtnisseiten bei ChatGPT, Claude und Gemini mitnehmen. bleib zeigt dir, was es gefunden hat, und du behältst, was dir gefällt.' },
         ],
       },
@@ -495,7 +497,7 @@ const de: Docs = {
       },
       {
         h: 'Bei sensiblen Angaben fragt bleib jedes Mal',
-        blocks: [{ p: 'Bei Angaben zu Gesundheit, Geld, Personen und Aufenthaltsort braucht bleib für jede Anfrage deine Zustimmung. Das gilt auch für alles, was du privat hältst oder was bleib nicht sicher einordnen kann.' }],
+        blocks: [{ p: 'Bei Angaben zu Gesundheit, Geld, Personen und Aufenthaltsort braucht bleib für jede Anfrage deine Zustimmung. Das gilt auch für alles, was du privat hältst oder was bleib nicht sicher einordnen kann. Beim Speichern gilt dieselbe Regel: Diese Angaben fragen vorher, alltägliche Vorlieben speichert bleib im Hintergrund, mit Rückgängig.' }],
       },
       {
         h: 'Zugriff ändern',
