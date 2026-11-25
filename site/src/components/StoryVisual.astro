@@ -29,6 +29,8 @@ const cx = (n: number) => `reveal at-${n}`;
  *  so, as in the hero, the window's body plays and holds it, and the message box never moves. */
 const play = { 'data-sv': '', 'data-steps': STEPS[scene], 'data-interval': INTERVAL[scene], 'data-start': START[scene], 'data-gaps': GAPS[scene] || undefined, 'data-step': '0' };
 const chat = scene === 1;
+/** An AI's own logo, as on the hero's tabs: Claude and Gemini in colour, ChatGPT's in the label colour. */
+const provider = (name: string) => c.any.providers.find((x) => x.name === name);
 ---
 <div class="sv" {...(chat ? {} : play)}>
   <div class={scene === 5 ? undefined : 'tray'}>
@@ -42,7 +44,9 @@ const chat = scene === 1;
               <li class={cx(i + 1)}>
                 <div class="reveal-in"><div class="cell">
                   <span class="ico" set:html={svg(r.icon)} />
-                  <span class="cell-k"><span class="t-body">{r.k}</span><span class="t-sub c-2 blk">{c.wallet.fromLabel} {r.from}</span></span>
+                  <span class="cell-k"><span class="t-body">{r.k}</span><span class="t-sub c-2 from">{c.wallet.fromLabel} {(() => { const p = provider(r.from); return p?.color
+                    ? <img class="src-logo" src={p.color} alt="" width="14" height="14" />
+                    : p && <span class="src-logo mono" style={`--logo: url(${p.icon})`} />; })()}{r.from}</span></span>
                   <span class="t-body c-2 cell-v">{r.locked && <span class="inline-g" set:html={svg('lock')} />}{r.v}</span>
                 </div></div>
               </li>
@@ -229,6 +233,9 @@ const chat = scene === 1;
 
   /* Scene 1: each row says which AI the detail came from, under its kind. */
   .import-card .cell { min-height: 56px; }
+  .from { display: flex; align-items: center; gap: 4px; }
+  .src-logo { flex: none; display: block; width: 14px; height: 14px; }
+  .src-logo.mono { background: var(--label); mask: var(--logo) center / contain no-repeat; }
 
   /* Alert */
   .alert { padding: 22px 16px 16px; text-align: center; }
