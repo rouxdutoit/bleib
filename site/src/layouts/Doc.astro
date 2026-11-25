@@ -5,6 +5,7 @@ import Base from './Base.astro';
 import Rails from '../components/Rails.astro';
 import ProviderLogo from '../components/ProviderLogo.astro';
 import StoryVisual from '../components/StoryVisual.astro';
+import Mark from '../components/Mark.astro';
 import reserveScenes from '../scripts/reserve.js?raw';
 import { icon } from '../components/icons';
 import { docs, type Block } from '../i18n/pages';
@@ -26,7 +27,7 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
           <>
             {/* The page's homepage card: it holds its finished height (scripts/reserve.js) and plays when seen. */}
             <script is:inline set:html={reserveScenes} />
-            <figure class="doc-visual"><StoryVisual lang={lang} scene={d.visual} /></figure>
+            <figure class="doc-visual"><StoryVisual lang={lang} scene={d.visual} tray /></figure>
             <script is:inline>bleibReserve(document.currentScript.previousElementSibling)</script>
           </>
         )}
@@ -56,13 +57,24 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
                 is(b, 'never') ? (
                   <ul class="never">{b.never.map((x) => <li><span class="ni" set:html={icon('verified_user')} /><span>{x}</span></li>)}</ul>
                 ) : is(b, 'refs') ? (
-                  <dl class="kv refs">{b.refs.map((r) => <div><dt><a href={r.href} rel="noopener">{r.name}</a></dt><dd>{r.v}</dd></div>)}</dl>
+                  <dl class="kv refs">{b.refs.map((r) => <div><dt><a href={r.href} rel="noopener"><span class="lbl">{r.name}</span><span class="chev" set:html={icon('chevron_right')} /></a></dt><dd>{r.v}</dd></div>)}</dl>
                 ) : is(b, 'rows') ? (
                   <dl class="kv">{b.rows.map((r) => <div><dt>{r.k}</dt><dd>{r.v}</dd></div>)}</dl>
                 ) : is(b, 'compare') ? (
                   <table class="cmp">
-                    <thead><tr><td></td><th scope="col" class="us">{b.compare.head[0]}</th><th scope="col">{b.compare.head[1]}</th></tr></thead>
-                    <tbody>{b.compare.rows.map((r) => <tr><th scope="row">{r[0]}</th><td class="us">{r[1]}</td><td>{r[2]}</td></tr>)}</tbody>
+                    <thead><tr>
+                      <td></td>
+                      <th scope="col" class="us"><span class="cmp-logos"><span class="cmp-mark"><Mark size={14} /></span></span>{b.compare.head[0]}</th>
+                      <th scope="col"><span class="cmp-logos">{['ChatGPT', 'Claude', 'Gemini'].map((n) => <ProviderLogo name={n} lang={lang} size={14} />)}</span>{b.compare.head[1]}</th>
+                    </tr></thead>
+                    <tbody>{b.compare.rows.map((r) => (
+                      <tr>
+                        <th scope="row">{r[0]}</th>
+                        {[r[1], r[2]].map((v, i) => (
+                          <td class:list={[v ? 'yes' : 'no', { us: i === 0 }]}><span class="cmp-sym" set:html={icon(v ? 'check' : 'remove')} /><span class="sr-only">{v ? b.compare.yes : b.compare.no}</span></td>
+                        ))}
+                      </tr>
+                    ))}</tbody>
                   </table>
                 ) : is(b, 'tiles') ? (
                   <ul class="tiles">
@@ -131,27 +143,34 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
   .kv div:first-child { border-top: 0; padding-top: 0; }
   .kv dt { color: var(--muted); }
   .kv dd { margin: 0; }
-  .refs dt a { color: var(--ink); font-weight: 500; text-decoration: underline; text-decoration-color: var(--rail); text-underline-offset: 3px; }
-  .refs dt a:hover { text-decoration-color: currentColor; }
+  .refs dt a { display: inline; color: var(--ink); font-weight: 500; text-decoration: none; }
+  .refs dt .chev { vertical-align: -5px; margin-left: -1px; }
   .refs dd { color: var(--muted); }
 
-  /* Comparison: an inset grouped table. bleib's column is in the label colour, the other in the secondary one;
-     every cell is written out, so nothing depends on colour or ticks. On phones each row's question sits above its
-     two answers. */
-  .cmp { width: 100%; border-collapse: collapse; border-radius: 20px; overflow: hidden; background: var(--card); color: var(--on-card); border: var(--card-border); font-size: 15px; line-height: 20px; }
-  .cmp th, .cmp td { padding: 12px 16px; text-align: left; vertical-align: top; }
-  .cmp thead th { font-size: 13px; line-height: 18px; font-weight: 600; color: var(--on-card-muted); padding-bottom: 6px; }
+  /* Comparison as a checklist, like Apple's: each benefit gets the full width, then a tick or a dash for bleib and for
+     each AI's own memory. Ticks and dashes differ in shape (and say Yes/No to screen readers), so nothing depends on
+     colour. Each column is headed by its logo. */
+  .cmp { width: 100%; table-layout: fixed; border-collapse: collapse; border-radius: 20px; overflow: hidden; background: var(--card); color: var(--on-card); border: var(--card-border); }
+  .cmp th, .cmp td { padding: 12px 16px; vertical-align: middle; }
+  .cmp thead th { width: 76px; padding: 16px 8px 10px; text-align: center; font-size: 13px; line-height: 18px; font-weight: 600; color: var(--on-card-muted); }
   .cmp thead .us { color: var(--on-card); }
+  .cmp-logos { display: flex; justify-content: center; align-items: center; gap: 3px; height: 24px; margin-bottom: 4px; }
+  .cmp-mark { width: 24px; height: 24px; border-radius: 6px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
+  :global(:root[data-theme='dark']) .cmp-mark { background: #f6e79a; color: #0a0a0a; }
+  @media (prefers-color-scheme: dark) { :global(:root:not([data-theme='light'])) .cmp-mark { background: #f6e79a; color: #0a0a0a; } }
   .cmp tbody tr { border-top: 1px solid var(--hairline); }
-  .cmp tbody th { font-weight: 600; width: 34%; }
-  .cmp td { color: var(--on-card-muted); }
-  .cmp td.us { color: var(--on-card); font-weight: 500; }
+  .cmp tbody th { text-align: left; font-size: 17px; line-height: 22px; font-weight: 400; }
+  .cmp td { width: 76px; padding: 12px 8px; text-align: center; }
+  .cmp thead td { width: auto; }
+  .cmp-sym { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; vertical-align: middle; }
+  .cmp-sym :global(svg) { width: 17px; height: 17px; display: block; }
+  .yes .cmp-sym { background: #f6e79a; color: #0a0a0a; }
+  .no .cmp-sym { color: var(--on-card-muted); }
   @media (max-width: 560px) {
-    .cmp, .cmp thead, .cmp tbody { display: block; }
-    .cmp tr { display: grid; grid-template-columns: 1fr 1fr; }
-    .cmp thead td { display: none; }
-    .cmp tbody th { grid-column: 1 / -1; width: auto; padding-bottom: 2px; }
-    .cmp tbody td { padding-top: 2px; }
+    .cmp tbody th { padding-right: 4px; font-size: 16px; line-height: 21px; }
+    .cmp thead th, .cmp tbody td { width: 64px; }
+    .cmp thead th { padding-left: 2px; padding-right: 2px; white-space: nowrap; }
+    .cmp tbody th { padding-left: 16px; }
   }
 
   .doc-visual { margin: clamp(40px, 5vw, 56px) 0 0; width: 100%; max-width: 440px; }

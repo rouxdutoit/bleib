@@ -9,6 +9,7 @@ import favorite from '@material-symbols/svg-400/rounded/favorite-fill.svg?raw';
 import lock from '@material-symbols/svg-400/rounded/lock-fill.svg?raw';
 // The check uses weight 700 so it stays legible inside small filled circles.
 import check from '@material-symbols/svg-700/rounded/check.svg?raw';
+import remove from '@material-symbols/svg-700/rounded/remove.svg?raw';
 import verifiedUser from '@material-symbols/svg-400/rounded/verified_user-fill.svg?raw';
 import code from '@material-symbols/svg-400/rounded/code.svg?raw';
 import arrowOutward from '@material-symbols/svg-400/rounded/arrow_outward.svg?raw';
@@ -38,6 +39,7 @@ const raw = {
   favorite,
   lock,
   check,
+  remove,
   verified_user: verifiedUser,
   code,
   arrow_outward: arrowOutward,

@@ -101,6 +101,26 @@ svg {
 a {
   color: inherit;
 }
+/* Text links: the underline draws in from left to right on hover or focus, and a trailing chevron nudges forward
+   (as on the homepage). The label sits in .lbl so the line runs under the words only. */
+.lbl {
+  background: linear-gradient(currentColor, currentColor) left calc(100% - 1px) / 0 1px no-repeat;
+  padding-bottom: 3px;
+  transition: background-size 0.5s var(--ease);
+}
+a:hover .lbl,
+a:focus-visible .lbl {
+  background-size: 100% 1px;
+}
+.chev {
+  display: inline-grid;
+  transition: transform 0.25s var(--ease);
+}
+.chev svg { width: 20px; height: 20px; display: block; }
+a:hover .chev,
+a:focus-visible .chev {
+  transform: translateX(2px);
+}
 
 button,
 input {

@@ -44,7 +44,8 @@ const s = t(lang).finale;
   .logo:global(.on) .eye { animation: blink 6s var(--ease) 0.4s infinite; }
   @keyframes blink { 0%, 5%, 100% { transform: none; } 2.5% { transform: scaleY(0.1); } }
 
-  .title { margin: 0; font-size: clamp(40px, 6vw, 80px); line-height: 1.04; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance; }
+  /* Same size and weight as the hero headline, so the page opens and closes in one voice. */
+  .title { margin: 0; max-width: 22ch; font-size: clamp(38px, 5.4vw, 64px); line-height: 1.07; letter-spacing: -0.03em; font-weight: 600; text-wrap: balance; }
   .sub { margin: 18px 0 0; font-size: clamp(17px, 1.7vw, 21px); line-height: 1.45; color: var(--muted); text-wrap: balance; }
   .form { margin-top: 32px; width: 100%; display: flex; justify-content: center; }
 </style>

@@ -14,8 +14,9 @@ import BleibCard from './BleibCard.astro';
 import Composer from './Composer.astro';
 import ProviderLogo from './ProviderLogo.astro';
 import { t, type Lang } from '../i18n/strings';
-interface Props { lang: Lang; scene: number }
-const { lang, scene } = Astro.props;
+/** `tray` puts scene 6's card on the yellow tray too, as on the subpages (on the homepage it sits on the black band). */
+interface Props { lang: Lang; scene: number; tray?: boolean }
+const { lang, scene, tray = false } = Astro.props;
 const c = t(lang).cards;
 const STEPS = [4, 3, c.any.providers.length - 1, 2, 3, 1];
 const INTERVAL = [900, 900, 1250, 900, 900, 1000];
@@ -32,7 +33,7 @@ const play = { 'data-sv': '', 'data-steps': STEPS[scene], 'data-interval': INTER
 const chat = scene === 1;
 ---
 <div class="sv" {...(chat ? {} : play)}>
-  <div class={scene === 5 ? undefined : 'tray'}>
+  <div class={scene === 5 && !tray ? undefined : 'tray'}>
     <div class="stack" aria-hidden="true">
       {scene === 0 && (
         /* One list fills up: each detail arrives from the AI that had it, so "scattered" shows in the rows themselves. */

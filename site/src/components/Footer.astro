@@ -39,7 +39,7 @@ const cols: { h: string; items: Item[] }[] = [
             <p class="col-h">{c.h}</p>
             <ul>
               {c.items.map((it) => (
-                <li><a href={it.href} aria-current={it.key === page ? 'page' : undefined}>{it.label}</a></li>
+                <li><a href={it.href} aria-current={it.key === page ? 'page' : undefined}><span class="lbl">{it.label}</span></a></li>
               ))}
             </ul>
           </div>
@@ -49,7 +49,7 @@ const cols: { h: string; items: Item[] }[] = [
     <div class="fine">
       <p>{s.footer.fine}</p>
       <div class="end">
-        <a href="https://rouxdutoit.com">rouxdutoit.com</a>
+        <a href="https://rouxdutoit.com"><span class="lbl">rouxdutoit.com</span></a>
         <a class="ico-link" href="mailto:hello@bleib.dev" aria-label={s.footer.email} title={s.footer.email} set:html={icon('mail')} />
         <a class="ico-link lang" href={routes[page][other]} hreflang={other} lang={other} aria-label={s.nav.langSwitchLabel}><span set:html={icon('translate')} />{s.nav.langSwitch}</a>
         <ThemeToggle lang={lang} />

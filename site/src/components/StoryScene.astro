@@ -46,7 +46,7 @@ const [symbol, effect] = SYMBOLS[i];
       )}
       <h2 class="h2"><span>{x.h[0]}</span><br /><span>{x.h[1]}</span></h2>
       <p class="lead"><Lines text={x.p} /></p>
-      <a class="more" href={`${routes[x.more.to as keyof typeof routes][lang]}${x.more.hash}`}>{x.more.label}<span set:html={icon('chevron_right')} /></a>
+      <a class="more" href={`${routes[x.more.to as keyof typeof routes][lang]}${x.more.hash}`}><span class="lbl">{x.more.label}</span><span class="chev" set:html={icon('chevron_right')} /></a>
     </div>
   </div>
 </article>
@@ -95,9 +95,6 @@ const [symbol, effect] = SYMBOLS[i];
   @media (max-width: 480px) { .text .lead { font-size: 16px; line-height: 22px; } }
   /* Apple-style "Learn more ›" */
   .more { display: inline-flex; align-items: center; gap: 1px; margin-top: 14px; font-size: 17px; font-weight: 500; text-decoration: none; color: var(--scene-ink, var(--ink)); }
-  .more :global(svg) { width: 20px; height: 20px; display: block; transition: transform 0.2s var(--ease); }
-  .more:hover { text-decoration: underline; text-underline-offset: 4px; }
-  .more:hover :global(svg) { transform: translateX(2px); }
   :global(:root[data-theme='dark']) .more { color: var(--scene-ink, #f6e79a); }
 
   @media (max-width: 767px) {

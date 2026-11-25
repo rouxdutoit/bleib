@@ -7,7 +7,7 @@ import type { IconName } from '../components/icons';
  *   p       paragraph            list   bullet list         code   command line
  *   never   icon list with hairlines (commitments)          rows   key / value list
  *   tiles   two-up tiles with an optional tag               address  postal lines
- *   compare a three-column comparison (what, bleib, the other way), written out in words
+ *   compare a checklist: each benefit with a tick or a dash for bleib and for the other way
  */
 /** `ai` shows that AI's own logo beside the title and detail (ProviderLogo). */
 export type Tile = { t: string; d: string; icon?: IconName; tag?: string; ai?: string };
@@ -20,7 +20,7 @@ export type Block =
   | { rows: { k: string; v: string }[] }
   | { tiles: Tile[] }
   | { refs: { name: string; href: string; v: string }[] }
-  | { compare: { head: [string, string]; rows: [string, string, string][] } };
+  | { compare: { head: [string, string]; yes: string; no: string; rows: [string, boolean, boolean][] } };
 
 export interface Section {
   id?: string;
@@ -101,14 +101,16 @@ const en: Docs = {
         h: 'bleib and the memory in each AI',
         blocks: [{
           compare: {
-            head: ['bleib', 'Memory in each AI'],
+            head: ['bleib', 'Each AI'],
+            yes: 'Yes',
+            no: 'No',
             rows: [
-              ['Works with ChatGPT, Claude and Gemini', 'One memory for all three', 'Each AI keeps its own'],
-              ['Where it’s kept', 'Encrypted on your device', 'On the provider’s servers'],
-              ['What each chat gets', 'Only the details it needs', 'Whatever the AI decides to use'],
-              ['What was shared', 'A receipt for every share', 'No record per chat'],
-              ['When you switch AI', 'Your memory comes with you', 'It stays behind'],
-              ['Price and code', 'Free and open source', 'Part of each service'],
+              ['One memory for ChatGPT, Claude and Gemini', true, false],
+              ['Kept encrypted on your device', true, false],
+              ['Each chat gets only what it needs', true, false],
+              ['A receipt for every share', true, false],
+              ['Comes with you when you switch AI', true, false],
+              ['Free and open source', true, false],
             ],
           },
         }],
@@ -469,14 +471,16 @@ const de: Docs = {
         h: 'bleib und das Gedächtnis jeder KI',
         blocks: [{
           compare: {
-            head: ['bleib', 'Gedächtnis in jeder KI'],
+            head: ['bleib', 'Jede KI'],
+            yes: 'Ja',
+            no: 'Nein',
             rows: [
-              ['Mit ChatGPT, Claude und Gemini', 'Ein Gedächtnis für alle drei', 'Jede KI hat ihr eigenes'],
-              ['Wo es liegt', 'Verschlüsselt auf deinem Gerät', 'Auf den Servern des Anbieters'],
-              ['Was jeder Chat bekommt', 'Nur die nötigen Angaben', 'Was die KI selbst auswählt'],
-              ['Was geteilt wurde', 'Ein Beleg für jede Weitergabe', 'Kein Nachweis pro Chat'],
-              ['Beim KI-Wechsel', 'Dein Gedächtnis kommt mit', 'Es bleibt zurück'],
-              ['Preis und Code', 'Kostenlos und quelloffen', 'Teil des jeweiligen Dienstes'],
+              ['Ein Gedächtnis für ChatGPT, Claude und Gemini', true, false],
+              ['Verschlüsselt auf deinem Gerät', true, false],
+              ['Jeder Chat bekommt nur das Nötige', true, false],
+              ['Ein Beleg für jede Weitergabe', true, false],
+              ['Kommt mit, wenn du die KI wechselst', true, false],
+              ['Kostenlos und quelloffen', true, false],
             ],
           },
         }],
