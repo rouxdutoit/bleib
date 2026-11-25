@@ -1,0 +1,16 @@
+---
+/**
+ * Body text with its email addresses, phone numbers and GitHub links made clickable, in a heavier weight so they read as links
+ * (the underline draws in on hover, global.css .lbl). Only these kinds are linked; all text stays escaped.
+ */
+interface Props { text: string }
+const { text } = Astro.props;
+const LINK = /([A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}|github\.com\/[A-Za-z0-9_\-./]*[A-Za-z0-9_\-/]|\+\d[\d ]{6,}\d)/g;
+const parts = text.split(LINK).map((part, i) =>
+  i % 2 === 0 ? { text: part } : { text: part, href: part.includes('@') ? `mailto:${part}` : part.startsWith('+') ? `tel:${part.replace(/ /g, '')}` : `https://${part}` });
+---
+{parts.map((p) => p.href ? <a class="inline-link" href={p.href}><span class="lbl">{p.text}</span></a> : p.text)}
+
+<style>
+  .inline-link { font-weight: 600; color: inherit; text-decoration: none; }
+</style>

@@ -65,7 +65,9 @@ cd site/dist
 snapshot=$(mktemp -d)
 trap 'rm -rf -- "$snapshot"' EXIT
 list_remote_files '' > "$snapshot/remote"
-find . -type f -print0 > "$snapshot/local"
+# Assets first, pages last: a page must never go up before the stylesheets and scripts it links to, or a
+# visitor during the deploy can get a page without its styles.
+{ find . -type f ! -name '*.html' -print0; find . -type f -name '*.html' -print0; } > "$snapshot/local"
 declare -A remote_checksums=()
 changed_paths=()
 while IFS= read -r -d '' path && IFS= read -r -d '' checksum; do
@@ -91,17 +93,18 @@ while IFS= read -r -d '' file; do
     --upload-file "$file" --output /dev/null "$url"
 done < "$snapshot/local"
 
+# Pages that will be removed still count as changed for IndexNow.
+stale=()
 for path in "${!remote_checksums[@]}"; do
   if [[ ! -f "$path" ]]; then
-    url=$(storage_url "$path")
-    storage_request --request DELETE --output /dev/null "$url"
+    stale+=("$path")
     if is_page "$path"; then
       changed_paths+=("${path%index.html}")
     fi
   fi
 done
 
-# Clear cached copies after the storage zone is up to date.
+# Clear cached copies once the new files are up, so the CDN serves the new pages before old files go.
 if [[ -n "${BUNNY_API_KEY:-}" ]]; then
   curl "${curl_options[@]}" --request POST --header "AccessKey: $BUNNY_API_KEY" \
     --header 'Content-Type: application/json' --data '{}' --output /dev/null \
@@ -115,3 +118,8 @@ if [[ -n "${BUNNY_API_KEY:-}" ]]; then
 else
   printf '%s\n' '::notice::The CDN cache was not purged because BUNNY_API_KEY is unset.'
 fi
+
+# Only now remove files the new site no longer uses: nothing the CDN serves points at them any more.
+for path in "${stale[@]}"; do
+  storage_request --request DELETE --output /dev/null "$(storage_url "$path")"
+done

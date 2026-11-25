@@ -6,6 +6,7 @@ import Rails from '../components/Rails.astro';
 import ProviderLogo from '../components/ProviderLogo.astro';
 import StoryVisual from '../components/StoryVisual.astro';
 import Mark from '../components/Mark.astro';
+import RichText from '../components/RichText.astro';
 import reserveScenes from '../scripts/reserve.js?raw';
 import { icon } from '../components/icons';
 import { docs, type Block } from '../i18n/pages';
@@ -89,13 +90,13 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
                     ))}
                   </ul>
                 ) : is(b, 'list') ? (
-                  <ul class="bul">{b.list.map((li) => <li>{li}</li>)}</ul>
+                  <ul class="bul">{b.list.map((li) => <li><RichText text={li} /></li>)}</ul>
                 ) : is(b, 'code') ? (
                   <pre><code>{b.code}</code></pre>
                 ) : is(b, 'address') ? (
-                  <address>{b.address.map((line, i) => (<>{line}{i < b.address.length - 1 && <br />}</>))}</address>
+                  <address>{b.address.map((line, i) => (<><RichText text={line} />{i < b.address.length - 1 && <br />}</>))}</address>
                 ) : (
-                  <p>{(b as { p: string }).p}</p>
+                  <p><RichText text={(b as { p: string }).p} /></p>
                 ),
               )}
             </div>
