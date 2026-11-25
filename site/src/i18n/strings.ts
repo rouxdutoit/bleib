@@ -27,7 +27,7 @@ const en = {
   meta: {
     title: 'bleib: your AI memory wallet',
     description:
-      'bleib is your AI memory wallet, encrypted on your device. You decide what each AI can know, and you can always check what it saw. Free and open source.',
+      'bleib is your AI memory wallet: a browser extension that keeps your memory encrypted on your device. You decide what each AI can know, and you can always check what it saw. Free and open source.',
   },
   skip: 'Skip to content',
   nav: {
@@ -45,7 +45,8 @@ const en = {
     themeToLight: 'Switch to light mode',
   },
   hero: {
-    eyebrow: 'In development',
+    eyebrow: 'Browser extension · In development',
+    status: 'In development',
     h1: 'Own your AI memory.',
     sub: ['Kept on your device.', 'Shared on your terms.'],
     primary: 'Get early access',
@@ -167,7 +168,7 @@ const en = {
   },
   finale: {
     h: 'Your AI memory stays yours.',
-    p: 'Free and open source. Be among the first to try it.',
+    p: 'For Chrome and Firefox. Free and open source.',
   },
   form: {
     label: 'Email address',
@@ -209,7 +210,7 @@ const de: Strings = {
   meta: {
     title: 'bleib: dein Wallet für dein KI-Gedächtnis',
     description:
-      'bleib ist dein Wallet für dein KI-Gedächtnis, verschlüsselt auf deinem Gerät. Du entscheidest, was jede KI wissen darf, und kannst jederzeit nachsehen, was sie gesehen hat. Kostenlos und Open Source.',
+      'bleib ist dein Wallet für dein KI-Gedächtnis: eine Browser-Erweiterung, die dein Gedächtnis verschlüsselt auf deinem Gerät bewahrt. Du entscheidest, was jede KI wissen darf, und kannst jederzeit nachsehen, was sie gesehen hat. Kostenlos und Open Source.',
   },
   skip: 'Zum Inhalt springen',
   nav: {
@@ -227,7 +228,8 @@ const de: Strings = {
     themeToLight: 'Helles Design einschalten',
   },
   hero: {
-    eyebrow: 'In Entwicklung',
+    eyebrow: 'Browser-Erweiterung · In Entwicklung',
+    status: 'In Entwicklung',
     h1: 'Dein KI-Gedächtnis gehört dir.',
     sub: ['Auf deinem Gerät.', 'Geteilt, wie du willst.'],
     primary: 'Frühen Zugang sichern',
@@ -349,7 +351,7 @@ const de: Strings = {
   },
   finale: {
     h: 'Dein KI-Gedächtnis bleibt deins.',
-    p: 'Kostenlos und quelloffen. Sei von Anfang an dabei.',
+    p: 'Für Chrome und Firefox. Kostenlos und quelloffen.',
   },
   form: {
     label: 'E-Mail-Adresse',
