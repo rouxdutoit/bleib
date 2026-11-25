@@ -38,7 +38,7 @@ const en = {
   nav: {
     home: 'bleib home',
     github: 'GitHub',
-    early: 'Get early access',
+    early: 'Notify me',
     how: 'How it works',
     security: 'Security',
     developers: 'Developers',
@@ -54,7 +54,7 @@ const en = {
     status: 'In development',
     h1: 'Own your AI memory.',
     sub: ['Kept on your device.', 'Shared on your terms.'],
-    primary: 'Get early access',
+    primary: 'Notify me',
     secondary: 'GitHub',
   },
   preview: {
@@ -168,7 +168,7 @@ const en = {
   },
   form: {
     label: 'Email address',
-    submit: 'Get early access',
+    submit: 'Notify me',
     sending: 'Sending…',
     success: "Thanks, you're on the list.",
     invalid: 'Please enter a valid email address.',

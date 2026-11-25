@@ -117,7 +117,9 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
   /* Like Apple's cards: the symbol top left, a round button top right that says the tile opens a page. */
   .hub a { position: relative; display: grid; gap: 4px; height: 100%; padding: 18px 18px 20px; border-radius: 20px; background: var(--card); color: var(--on-card); border: var(--card-border); text-decoration: none; transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease); }
   .hub a:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-  .hub .ti { margin-bottom: 10px; }
+  /* The symbol stands on its own, without a square behind it, so it never competes with the round button. */
+  .hub .ti { width: 28px; height: 28px; margin-bottom: 10px; background: none; place-items: center start; }
+  .hub .ti :global(svg) { width: 24px; height: 24px; }
   .hub-go { position: absolute; top: 18px; right: 18px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--fill); color: var(--label); transition: transform 0.25s var(--ease); }
   .hub-go :global(svg) { width: 18px; height: 18px; display: block; }
   .hub a:hover .hub-go, .hub a:focus-visible .hub-go { transform: translateX(2px); }
