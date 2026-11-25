@@ -357,7 +357,7 @@ const de: Strings = {
     honeypot: 'Dieses Feld leer lassen',
   },
   footer: {
-    dictionary: { language: 'Deutsch', pronounced: 'Aussprache', meaning: 'Imperativ von „bleiben“.' },
+    dictionary: { language: 'Deutsch', pronounced: 'Aussprache', meaning: 'dableiben; erhalten bleiben.' },
     cols: { product: 'Produkt', project: 'Projekt', legal: 'Rechtliches' },
     fine: 'AGPL-3.0-or-later · Spezifikation Apache-2.0 · Keine Cookies, keine Analyse',
     email: 'E-Mail',
