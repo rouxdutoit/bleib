@@ -47,8 +47,8 @@ const en = {
   hero: {
     eyebrow: 'Free · Open source · Private',
     status: 'In development',
-    h1: 'Your AI memory wallet.',
-    sub: ['Each task gets just what it needs.'],
+    h1: 'Own your AI memory.',
+    sub: ['Kept on your device.', 'Shared on your terms.'],
     primary: 'Get early access',
     secondary: 'View on GitHub',
   },
@@ -171,7 +171,7 @@ const en = {
   finale: {
     prompt: { tab: 'Claude', said: 'I always book an aisle seat.', title: 'Save to bleib?', fact: 'Prefers aisle seats', save: 'Save', saved: 'Saved' },
     h: 'Tell it once.',
-    p: 'Every AI gets what it needs. Nothing more.',
+    p: 'Each task gets just what it needs.',
   },
   form: {
     label: 'Email address',
@@ -233,8 +233,8 @@ const de: Strings = {
   hero: {
     eyebrow: 'Kostenlos · Open Source · Privat',
     status: 'In Entwicklung',
-    h1: 'Dein Wallet für dein KI-Gedächtnis.',
-    sub: ['Jede Aufgabe bekommt nur, was sie braucht.'],
+    h1: 'Dein KI-Gedächtnis gehört dir.',
+    sub: ['Auf deinem Gerät.', 'Geteilt, wie du willst.'],
     primary: 'Frühen Zugang sichern',
     secondary: 'Auf GitHub ansehen',
   },
@@ -357,7 +357,7 @@ const de: Strings = {
   finale: {
     prompt: { tab: 'Claude', said: 'Ich buche immer einen Gangplatz.', title: 'In bleib sichern?', fact: 'Bevorzugt Gangplätze', save: 'Sichern', saved: 'Gesichert' },
     h: 'Einmal sagen.',
-    p: 'Jede KI bekommt, was sie braucht. Mehr nicht.',
+    p: 'Jede Aufgabe bekommt nur, was sie braucht.',
   },
   form: {
     label: 'E-Mail-Adresse',
