@@ -172,7 +172,8 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
   .cmp-mark { width: 24px; height: 24px; border-radius: 6px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
   :global(:root[data-theme='dark']) .cmp-mark { background: #f6e79a; color: #0a0a0a; }
   @media (prefers-color-scheme: dark) { :global(:root:not([data-theme='light'])) .cmp-mark { background: #f6e79a; color: #0a0a0a; } }
-  .cmp tbody tr { border-top: 1px solid var(--hairline); }
+  /* Separators start where the text starts and run to the right edge, as in Apple's inset grouped lists. */
+  .cmp tbody tr { background: linear-gradient(var(--hairline), var(--hairline)) 16px 0 / calc(100% - 16px) 1px no-repeat; }
   .cmp tbody th { text-align: left; font-size: 17px; line-height: 22px; font-weight: 400; }
   .cmp td { width: 76px; padding: 12px 8px; text-align: center; }
   .cmp thead td { width: auto; }
