@@ -163,8 +163,12 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
   .cmp-logos { display: flex; justify-content: center; align-items: center; gap: 3px; height: 24px; margin-bottom: 4px; }
   /* The three AIs as overlapping circles, like a group in Messages, so they sit as neatly as bleib's one mark. */
   .stack { gap: 0; }
-  .cmp-ai { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--fill); box-shadow: 0 0 0 2px var(--card); }
-  .cmp-ai + .cmp-ai { margin-left: -6px; }
+  /* Solid, like Apple's stacked people: the light grey is laid over the card colour so nothing shows through, and a
+     ring in the card colour separates each circle from the one it overlaps. */
+  .cmp-ai { position: relative; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(var(--fill), var(--fill)), var(--card); box-shadow: 0 0 0 2px var(--card); }
+  .cmp-ai:nth-child(1) { z-index: 3; }
+  .cmp-ai:nth-child(2) { z-index: 2; }
+  .cmp-ai + .cmp-ai { margin-left: -7px; }
   .cmp-mark { width: 24px; height: 24px; border-radius: 6px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
   :global(:root[data-theme='dark']) .cmp-mark { background: #f6e79a; color: #0a0a0a; }
   @media (prefers-color-scheme: dark) { :global(:root:not([data-theme='light'])) .cmp-mark { background: #f6e79a; color: #0a0a0a; } }
