@@ -26,8 +26,12 @@ const s = t(lang).finale;
   .finale { padding: clamp(96px, 12vw, 160px) 0 clamp(72px, 9vw, 120px); }
   .inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
 
-  /* The bleib mark on its own, in the label colour, landing with a small spring. */
-  .logo { display: block; width: clamp(48px, 5vw, 56px); margin: 0 0 clamp(24px, 3vw, 32px); color: var(--label); }
+  /* The bleib mark on its own, black on gold and gold in dark mode (like the header), landing with a small spring. */
+  .logo { display: block; width: clamp(48px, 5vw, 56px); margin: 0 0 clamp(24px, 3vw, 32px); color: #0a0a0a; }
+  :global(:root[data-theme='dark']) .logo { color: #f6e79a; }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .logo { color: #f6e79a; }
+  }
   .logo :global(svg) { width: 100%; height: auto; display: block; }
   .logo:global(.on) { animation: land 0.6s var(--spring) 0.1s both; }
 
