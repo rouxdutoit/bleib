@@ -73,12 +73,12 @@ const en: Docs = {
       {
         id: 'permissions',
         h: 'Share just enough',
-        blocks: [{ p: 'bleib finds the smallest useful part of your memory on your device and suggests it. You tap Add to put it in your chat. Sensitive or unclear information always gets its own question.' }],
+        blocks: [{ p: 'bleib finds the smallest useful part of your memory on your device. The first time it shares with an AI, it asks once. After that, everyday details go into each new chat by themselves, as an “About me” line you can remove. Details bleib isn’t sure about wait for a tap, and sensitive information always asks.' }],
       },
       {
         id: 'door',
         h: 'Start a new chat',
-        blocks: [{ p: 'Start typing your first request. If there’s a match, bleib suggests a short “About me” line. Tap Add to put it in your draft, and you decide when to send it. If a site changes, bleib pauses until it recognises the page again.' }],
+        blocks: [{ p: 'Start typing your first request. If there’s a match and sharing is allowed, bleib adds a short “About me” line to your draft. You can remove it, and you decide when to send it. If a site changes, bleib pauses until it recognises the page again.' }],
       },
       {
         id: 'receipts',
@@ -112,7 +112,7 @@ const en: Docs = {
               { t: 'Gemini', d: 'gemini.google.com' },
             ],
           },
-          { p: 'On these sites bleib can save everyday preferences with Undo and suggest a line about you for a new chat. If a site changes, bleib pauses until it recognises the page again.' },
+          { p: 'On these sites bleib can save everyday preferences with Undo and add a line about you to each new chat. If a site changes, bleib pauses until it recognises the page again.' },
         ],
       },
       {
@@ -124,7 +124,7 @@ const en: Docs = {
   permissions: {
     title: 'Permissions',
     description: 'Choose what each AI can get from your memory.',
-    intro: ['bleib checks what a request needs on your device. It suggests only the relevant minimum, and you tap Add to share it.'],
+    intro: ['bleib checks what a request needs on your device. It picks only the relevant minimum and asks once before the first share with each AI.'],
     sections: [
       {
         h: 'Your choices',
@@ -132,7 +132,8 @@ const en: Docs = {
           { p: 'bleib shows what it would share and where it would go. You can decline or choose how to allow it.' },
           {
             rows: [
-              { k: 'Add', v: 'Share the suggested details with this chat.' },
+              { k: 'Always add', v: 'Everyday details go into this AI’s new chats by themselves. You choose this for each AI.' },
+              { k: 'Just this once', v: 'Add them to this message only.' },
               { k: 'Allow Once', v: 'For sensitive details: share for this request only.' },
             ],
           },
@@ -419,12 +420,12 @@ const de: Docs = {
       {
         id: 'permissions',
         h: 'Nur das Nötige teilen',
-        blocks: [{ p: 'bleib sucht auf deinem Gerät den kleinsten nützlichen Teil deines Gedächtnisses und schlägt ihn vor. Mit Hinzufügen kommt er in deinen Chat. Bei sensiblen oder unklaren Angaben fragt bleib jedes Mal eigens nach.' }],
+        blocks: [{ p: 'bleib sucht auf deinem Gerät den kleinsten nützlichen Teil deines Gedächtnisses. Wenn es zum ersten Mal mit einer KI teilt, fragt es einmal. Danach kommen alltägliche Angaben von selbst in jeden neuen Chat, als „Über mich“-Zeile, die du entfernen kannst. Angaben, bei denen bleib unsicher ist, warten auf einen Tipp, und bei sensiblen Angaben fragt bleib immer.' }],
       },
       {
         id: 'door',
         h: 'Einen neuen Chat beginnen',
-        blocks: [{ p: 'Schreib deine erste Anfrage. Wenn etwas passt, schlägt bleib eine kurze „Über mich“-Zeile vor. Mit Hinzufügen kommt sie in deinen Entwurf, und du entscheidest, wann du ihn abschickst. Ändert sich eine Seite, pausiert bleib, bis es sie wieder erkennt.' }],
+        blocks: [{ p: 'Schreib deine erste Anfrage. Wenn etwas passt und die Freigabe vorliegt, ergänzt bleib eine kurze „Über mich“-Zeile im Entwurf. Du kannst sie entfernen, und du entscheidest, wann du ihn abschickst. Ändert sich eine Seite, pausiert bleib, bis es sie wieder erkennt.' }],
       },
       {
         id: 'receipts',
@@ -458,7 +459,7 @@ const de: Docs = {
               { t: 'Gemini', d: 'gemini.google.com' },
             ],
           },
-          { p: 'Auf diesen Seiten kann bleib alltägliche Vorlieben speichern und eine Zeile über dich für einen neuen Chat vorschlagen. Das Speichern kannst du rückgängig machen. Ändert sich eine Seite, pausiert bleib, bis es sie wieder erkennt.' },
+          { p: 'Auf diesen Seiten kann bleib alltägliche Vorlieben speichern und eine Zeile über dich in jeden neuen Chat einfügen. Das Speichern kannst du rückgängig machen. Ändert sich eine Seite, pausiert bleib, bis es sie wieder erkennt.' },
         ],
       },
       {
@@ -470,7 +471,7 @@ const de: Docs = {
   permissions: {
     title: 'Berechtigungen',
     description: 'Entscheide, was jede KI aus deinem Gedächtnis sehen darf.',
-    intro: ['bleib schlägt auf deinem Gerät nur vor, was zur Anfrage passt. Mit Hinzufügen teilst du es.'],
+    intro: ['bleib wählt auf deinem Gerät nur aus, was zur Anfrage passt. Bevor eine KI zum ersten Mal etwas bekommt, fragt bleib dich einmal.'],
     sections: [
       {
         h: 'Du entscheidest',
@@ -478,7 +479,8 @@ const de: Docs = {
           { p: 'bleib zeigt dir, was es teilen würde und wohin es geht. Du kannst ablehnen oder eine Freigabe erteilen.' },
           {
             rows: [
-              { k: 'Hinzufügen', v: 'Teilt die vorgeschlagenen Angaben mit diesem Chat.' },
+              { k: 'Immer hinzufügen', v: 'Alltägliche Angaben kommen von selbst in neue Chats mit dieser KI. Das entscheidest du für jede KI einzeln.' },
+              { k: 'Nur dieses Mal', v: 'Nur für diese Nachricht.' },
               { k: 'Einmal erlauben', v: 'Für sensible Angaben: gilt nur für diese Anfrage.' },
             ],
           },

@@ -91,8 +91,8 @@ const en = {
         more: { to: 'works', hash: '', label: 'Works with your AI' },
       },
       {
-        h: ['You choose', 'what each chat gets.'],
-        p: 'bleib suggests. You tap Add. Health notes always wait for your yes.',
+        h: ['It only asks', 'when it matters.'],
+        p: 'Your aisle seat goes in by itself. Health notes wait for your yes.',
         more: { to: 'permissions', hash: '', label: 'You decide what’s shared' },
       },
       {
@@ -131,7 +131,7 @@ const en = {
       message: 'For your running plan. Health is sensitive, so bleib asks first.',
       action: 'Allow Once',
       allowed: 'Allowed',
-      later: { title: 'Claude used Travel', sub: 'Hotels in Porto', tag: 'Added' },
+      later: { title: 'Claude used Travel', sub: 'Aisle seat', tag: 'Automatic' },
     },
     receipt: {
       who: 'Claude',
@@ -276,8 +276,8 @@ const de: Strings = {
         more: { to: 'works', hash: '', label: 'Funktioniert mit deiner KI' },
       },
       {
-        h: ['Du entscheidest,', 'was jeder Chat bekommt.'],
-        p: 'bleib schlägt vor. Du tippst auf Hinzufügen. Gesundheitsnotizen warten auf dein Ja.',
+        h: ['bleib fragt,', 'wenn es zählt.'],
+        p: 'Dein Gangplatz kommt von selbst dazu. Gesundheitsnotizen warten auf dein Ja.',
         more: { to: 'permissions', hash: '', label: 'Du entscheidest, was geteilt wird' },
       },
       {
@@ -316,7 +316,7 @@ const de: Strings = {
       message: 'Für deinen Laufplan. Gesundheit ist sensibel, darum fragt bleib vorher.',
       action: 'Einmal erlauben',
       allowed: 'Erlaubt',
-      later: { title: 'Claude nutzte Reisen', sub: 'Hotels in Porto', tag: 'Hinzugefügt' },
+      later: { title: 'Claude nutzte Reisen', sub: 'Gangplatz', tag: 'Automatisch' },
     },
     receipt: {
       who: 'Claude',
