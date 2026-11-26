@@ -10,7 +10,7 @@ import { icon } from '../components/icons';
 type Store = { browser: string; url: string };
 
 /** The visitor's browser, from User-Agent Client Hints where the browser offers them, otherwise from the user agent. */
-function detect(): Store | null {
+export function detect(): Store | null {
   const nav = navigator as Navigator & { userAgentData?: { brands: { brand: string }[]; mobile: boolean } };
   const ua = navigator.userAgent;
   const mobile = nav.userAgentData?.mobile ?? /Android|iPhone|iPad|Mobile/i.test(ua);
@@ -28,7 +28,7 @@ function detect(): Store | null {
 }
 
 /** True when bleib answers {type: 'bleib-installed'} within 300 ms (Chromium browsers; the extension lists bleib.dev). */
-function installed(): Promise<boolean> {
+export function installed(): Promise<boolean> {
   const runtime = (window as Window & { chrome?: { runtime?: { sendMessage?: Function } } }).chrome?.runtime;
   if (!INSTALL.extensionId || !runtime?.sendMessage) return Promise.resolve(false);
   return new Promise((resolve) => {

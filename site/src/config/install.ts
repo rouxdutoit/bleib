@@ -17,6 +17,9 @@ export const INSTALL = {
   firefoxStoreUrl: '',
   /** The extension's Chrome ID. The page asks it {type: 'bleib-installed'} and waits 300 ms for {installed: true}. */
   extensionId: '',
+  /** With storeButton on: a slim install banner under the header (desktop Chrome, Edge and Firefox), after the first
+   *  story scene or on a second visit, until it's closed or bleib is installed. */
+  banner: true,
   /** "Connect your desktop AI apps" on the Developers page, once `npx @bleib/wallet connect …` is on npm. */
   walletCli: false,
 } as const;
