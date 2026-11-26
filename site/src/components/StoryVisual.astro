@@ -57,8 +57,9 @@ const chat = scene === 1;
         <Window tabs={[{ ai: c.propose.app, icon: 'claude-color' }]}>
           {/* Like the hero: you type, you send, and bleib's card says it's saved; the pill's × takes it out again (scripts/story.ts). */}
           <div class="chat" {...play}>
-            <p class="t-body bubble appear at-2">{c.propose.said}</p>
+            {/* bleib's card appears above the message, in space the window already holds, so the message never moves. */}
             <BleibCard title={c.propose.title} facts={[{ t: c.propose.fact, icon: 'translate' }]} at={3} removable />
+            <p class="t-body bubble appear at-2">{c.propose.said}</p>
             <Composer typed={c.propose.said} sentAt={2} />
           </div>
         </Window>
