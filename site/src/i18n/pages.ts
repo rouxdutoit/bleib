@@ -409,30 +409,44 @@ const en: Docs = {
       {
         h: 'What the extension reads',
         blocks: [
-          { p: 'On recognised pages on chatgpt.com, claude.ai and gemini.google.com, bleib checks what you type in the draft to find relevant memories or recognise preferences to save.' },
-          { p: 'When you bring in your memories, bleib reads the data export file you choose, on your device. It puts what it finds in review, with its source. The file isn’t uploaded anywhere.' },
+          { p: 'bleib works only on the AI sites you allow. It asks for chatgpt.com, claude.ai and gemini.google.com one at a time, and you can take access back at any time.' },
+          { p: 'On those sites, bleib checks what you type in the draft, on your device. It finds relevant memories, recognises preferences to save and spots likely secrets, such as passwords or card numbers, before you send. This check runs on your device and doesn’t keep what it finds.' },
+          { p: 'When you bring in your memories, bleib reads the export file you choose, or the text you paste with Paste answer. It reads your clipboard only at that moment. Everything is processed on your device, and nothing is uploaded.' },
           { p: 'Suggestions are worked out on your device, by bleib’s own small picker or, if you turn on Smarter suggestions, by IBM’s Granite Embedding model. No model sends what you write anywhere. bleib never reads the AI’s answers on its own.' },
         ],
       },
       {
-        h: 'What bleib keeps in your browser',
+        h: 'What bleib keeps',
         blocks: [
           { list: [
             'Your memories and entries waiting for review, including their source.',
             'Permissions, details of the AIs you use, and receipts for shares.',
           ] },
-          { p: 'bleib encrypts these records and keeps them in your browser profile on your device. Imported files and pasted text are processed on your device too. Nothing is sent to us.' },
+          { p: 'bleib encrypts these records in your browser, on your device. No bleib server receives your memory or your drafts.' },
+          { p: 'If you turn on automatic backup, bleib writes an encrypted backup to a folder you choose. Backups, recovery kits and exports go only where you save them.' },
         ],
       },
       {
         h: 'What AI providers can see',
         blocks: [
-          { p: 'bleib picks the relevant minimum on your device and saves a receipt before sharing. When it adds text to a draft, the site can read it immediately. You can remove it from the draft, but the site may already have seen it. The provider’s privacy policy applies to what it receives.' },
+          { p: 'bleib picks the relevant minimum on your device and saves a receipt before sharing. As soon as it places details in an AI’s message box, the AI provider can read them, even before you press Send. You can remove them from the draft, but the provider may already have seen them. The provider’s privacy policy applies to what it receives.' },
+          { p: 'If you connect a supported AI app, bleib shares only details your choices allow. bleib asks each time before sharing private details. The app may keep or forward what it receives.' },
+        ],
+      },
+      {
+        h: 'What bleib never does',
+        blocks: [
+          { never: [
+            'Sell your data.',
+            'Use it for advertising, or pass it to advertisers or analytics services.',
+            'Use it to decide on loans or creditworthiness.',
+          ] },
+          { p: 'bleib uses your data only to run your wallet for you.' },
         ],
       },
       {
         h: 'Manage your data',
-        blocks: [{ p: 'You can review and change your memory and disconnect an AI in bleib. Removing the extension deletes its data from your browser. Make a backup first. For copies already held by an AI provider, use that provider’s controls.' }],
+        blocks: [{ p: 'You can review and change your memory and disconnect an AI in bleib. Removing the extension deletes its data from your browser. Make a backup first. For copies already held by an AI provider or a connected app, use its own controls.' }],
       },
       {
         h: 'Contact',
@@ -813,30 +827,44 @@ const de: Docs = {
       {
         h: 'Was die Erweiterung liest',
         blocks: [
-          { p: 'Auf erkannten Seiten von chatgpt.com, claude.ai und gemini.google.com prüft bleib, was du in den Entwurf schreibst. So findet es passende Erinnerungen und erkennt Vorlieben, die es speichern kann.' },
-          { p: 'Wenn du deine Erinnerungen mitnimmst, liest bleib die Exportdatei, die du auswählst, auf deinem Gerät. Was es findet, legt es dir mit seiner Herkunft zur Prüfung vor. Die Datei wird nirgendwohin hochgeladen.' },
+          { p: 'bleib arbeitet nur auf den KI-Seiten, die du erlaubst. Es fragt für chatgpt.com, claude.ai und gemini.google.com einzeln, und du kannst den Zugriff jederzeit zurücknehmen.' },
+          { p: 'Auf diesen Seiten prüft bleib auf deinem Gerät, was du in den Entwurf schreibst. So findet es passende Erinnerungen, erkennt Vorlieben, die es speichern kann, und bemerkt vor dem Senden mögliche Geheimnisse wie Passwörter oder Kartennummern. Diese Prüfung läuft auf deinem Gerät und behält nicht, was sie findet.' },
+          { p: 'Wenn du deine Erinnerungen mitnimmst, liest bleib die Exportdatei, die du auswählst, oder den Text, den du mit „Antwort einfügen“ einfügst. Deine Zwischenablage liest es nur in diesem Moment. Alles wird auf deinem Gerät verarbeitet, nichts wird hochgeladen.' },
           { p: 'Vorschläge entstehen auf deinem Gerät, mit bleibs eigener kleiner Auswahl oder, wenn du „Klügere Vorschläge“ einschaltest, mit IBMs Modell Granite Embedding. Kein Modell sendet, was du schreibst, irgendwohin. bleib liest die Antworten der KI nie von sich aus.' },
         ],
       },
       {
-        h: 'Was bleib in deinem Browser speichert',
+        h: 'Was bleib speichert',
         blocks: [
           { list: [
             'Deine Erinnerungen und Einträge zur Prüfung, jeweils mit ihrer Herkunft.',
             'Berechtigungen, Angaben zu den KIs, die du nutzt, und Belege für Freigaben.',
           ] },
-          { p: 'bleib verschlüsselt diese Daten und speichert sie in deinem Browserprofil auf deinem Gerät. Auch importierte Dateien und eingefügten Text verarbeitet bleib auf deinem Gerät. Nichts davon wird an uns gesendet.' },
+          { p: 'bleib verschlüsselt diese Daten in deinem Browser auf deinem Gerät. Kein bleib-Server erhält dein Gedächtnis oder deine Entwürfe.' },
+          { p: 'Wenn du die automatische Sicherung einschaltest, schreibt bleib eine verschlüsselte Sicherung in einen Ordner, den du auswählst. Sicherungen, Wiederherstellungs-Kits und Exporte landen nur dort, wo du sie speicherst.' },
         ],
       },
       {
         h: 'Was KI-Anbieter sehen können',
         blocks: [
-          { p: 'bleib wählt auf deinem Gerät nur das Nötige aus und speichert vor jeder Freigabe einen Beleg. Sobald bleib Text in einen Entwurf einfügt, kann die Website ihn lesen. Du kannst den Text aus dem Entwurf entfernen. Die Website kann ihn dann schon gesehen haben. Für erhaltene Daten gilt die Datenschutzerklärung des jeweiligen Anbieters.' },
+          { p: 'bleib wählt auf deinem Gerät nur das Nötige aus und speichert vor jeder Freigabe einen Beleg. Sobald bleib Angaben in das Nachrichtenfeld einer KI einfügt, kann der Anbieter sie lesen, auch bevor du auf Senden tippst. Du kannst sie aus dem Entwurf entfernen, doch der Anbieter kann sie dann schon gesehen haben. Für erhaltene Daten gilt die Datenschutzerklärung des jeweiligen Anbieters.' },
+          { p: 'Wenn du eine unterstützte KI-App verbindest, gibt bleib nur Angaben weiter, die du freigegeben hast. Bei privaten Angaben fragt bleib jedes Mal. Die App kann die Angaben behalten oder weitergeben.' },
+        ],
+      },
+      {
+        h: 'Was bleib nie tut',
+        blocks: [
+          { never: [
+            'Deine Daten verkaufen.',
+            'Sie für Werbung nutzen oder an Werbetreibende oder Analysedienste weitergeben.',
+            'Sie für Entscheidungen über Kredite oder Kreditwürdigkeit nutzen.',
+          ] },
+          { p: 'bleib nutzt deine Daten nur, um dein Wallet für dich zu betreiben.' },
         ],
       },
       {
         h: 'Deine Daten verwalten',
-        blocks: [{ p: 'Du kannst dein Gedächtnis prüfen und ändern und KI-Verbindungen in bleib trennen. Wenn du die Erweiterung entfernst, löscht der Browser ihre Daten. Mach vorher ein Backup. Für Kopien, die ein KI-Anbieter bereits hat, nutze die Einstellungen dieses Anbieters.' }],
+        blocks: [{ p: 'Du kannst dein Gedächtnis prüfen und ändern und KI-Verbindungen in bleib trennen. Wenn du die Erweiterung entfernst, löscht der Browser ihre Daten. Mach vorher ein Backup. Für Kopien, die ein KI-Anbieter oder eine verbundene App bereits hat, nutze deren eigene Einstellungen.' }],
       },
       {
         h: 'Kontakt',
