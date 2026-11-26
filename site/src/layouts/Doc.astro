@@ -64,7 +64,7 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
                   <dl class="kv">{b.rows.map((r) => <div><dt>{r.k}</dt><dd>{r.v}</dd></div>)}</dl>
                 ) : is(b, 'commands') ? (
                   <ul class="cmds">{b.commands.map((c) => (
-                    <li class="cmd"><code>{c}</code><button type="button" class="copy" data-copy={c} data-done={lang === 'de' ? 'Kopiert' : 'Copied'}>{lang === 'de' ? 'Kopieren' : 'Copy'}</button></li>
+                    <li class="cmd"><code>{c}</code><button type="button" class="copy" data-copy={c} aria-label={lang === 'de' ? 'Kopieren' : 'Copy'} data-done={lang === 'de' ? 'Kopiert' : 'Copied'}><span class="copy-sym" set:html={icon('content_copy')} /><span class="copy-done" set:html={icon('check')} /></button></li>
                   ))}</ul>
                 ) : is(b, 'compare') ? (
                   <table class="cmp">
@@ -197,7 +197,11 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
   .cmds { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
   .cmd { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 4px 4px 4px 16px; border-radius: 999px; background: var(--card); color: var(--on-card); border: var(--card-border); }
   .cmd code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; font-size: 14px; }
-  .copy { flex: none; min-height: 36px; padding: 0 14px; border: 0; border-radius: 999px; background: var(--fill); color: var(--on-card); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
+  /* The copy symbol; after a tap it briefly becomes a tick (and says Copied to screen readers). */
+  .copy { flex: none; width: 36px; height: 36px; border: 0; border-radius: 50%; display: grid; place-items: center; background: var(--fill); color: var(--on-card); cursor: pointer; }
+  .copy :global(svg) { width: 18px; height: 18px; display: block; }
+  .copy-done, .copy.done .copy-sym { display: none; }
+  .copy.done .copy-done { display: block; }
 
   .doc-visual { margin: clamp(40px, 5vw, 56px) 0 0; width: 100%; max-width: 440px; }
 
@@ -233,11 +237,12 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
   import { initStory } from '../scripts/story';
   initStory();
   document.querySelectorAll<HTMLButtonElement>('.copy').forEach((button) => {
-    const label = button.textContent;
+    const label = button.getAttribute('aria-label') ?? '';
     button.addEventListener('click', async () => {
       try { await navigator.clipboard.writeText(button.dataset.copy ?? ''); } catch { return; }
-      button.textContent = button.dataset.done ?? label;
-      setTimeout(() => { button.textContent = label; }, 1600);
+      button.classList.add('done');
+      button.setAttribute('aria-label', button.dataset.done ?? label);
+      setTimeout(() => { button.classList.remove('done'); button.setAttribute('aria-label', label); }, 1600);
     });
   });
 </script>

@@ -31,6 +31,7 @@ import chatBubble from '@material-symbols/svg-400/rounded/chat_bubble-fill.svg?r
 import backHand from '@material-symbols/svg-400/rounded/back_hand-fill.svg?raw';
 import restaurant from '@material-symbols/svg-400/rounded/restaurant-fill.svg?raw';
 import luggage from '@material-symbols/svg-400/rounded/luggage-fill.svg?raw';
+import contentCopy from '@material-symbols/svg-400/rounded/content_copy.svg?raw';
 
 const raw = {
   person,
@@ -61,6 +62,7 @@ const raw = {
   back_hand: backHand,
   restaurant,
   luggage,
+  content_copy: contentCopy,
 } as const;
 
 export type IconName = keyof typeof raw;
