@@ -3,23 +3,26 @@
  * bleib's card inside a chat, as in the hero and scene 2: what bleib did, each detail as a pill with its own symbol.
  * With `removable` each pill carries a small ×: tap it to take that detail out again (the hero leaves it out of the
  * message; scene 2 doesn't save it). When the last one goes, the card goes too.
- * It reveals at step `at` (motion kit in global.css). Spacing around it comes from --bleib-card-margin on the parent.
+ * At step `at` it drops in from above and fades in, like an iPhone banner, into space it already holds, so nothing
+ * around it moves. Spacing around it comes from --bleib-card-margin on the parent.
  */
 import Mark from './Mark.astro';
 import { icon, type IconName } from './icons';
 interface Props { title: string; facts: { t: string; icon: string }[]; removable?: boolean; at?: 2 | 3 }
 const { title, facts, removable = false, at = 2 } = Astro.props;
 ---
-<div class={`reveal at-${at}`}><div class="reveal-in">
+<div class={`drop at-${at}`}>
   <div class="fill">
     <p class="fill-head"><span class="app"><Mark size={12} /></span><span class="t-foot fill-title">{title}</span></p>
     <ul class="facts">{facts.map((f) => (
       <li class="t-foot"><span class="sym" set:html={icon(f.icon as IconName)} />{f.t}{removable && <span class="x" set:html={icon('close')} />}</li>
     ))}</ul>
   </div>
-</div></div>
+</div>
 
 <style>
+  .drop { opacity: 0; transform: translateY(-14px); transition: opacity var(--t-fade) var(--ease), transform var(--t-open) var(--spring); }
+  :global(.s2) .drop.at-2, :global(.s3) .drop.at-3 { opacity: 1; transform: none; }
   /* Two rows on every screen: the title, then each detail as a pill with its own symbol. */
   .fill { margin: var(--bleib-card-margin, 0); padding: 10px 10px 10px 12px; border-radius: 14px; background: var(--fill); display: grid; gap: 8px; }
   .fill-head { margin: 0; min-width: 0; display: flex; align-items: center; gap: 8px; }
