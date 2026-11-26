@@ -56,6 +56,9 @@ const en = {
     sub: ['Kept on your device.', 'Shared on your terms.'],
     primary: 'Notify me',
     secondary: 'GitHub',
+    addTo: 'Add to {browser}',
+    installed: 'bleib is installed',
+    stores: 'Get bleib for',
   },
   preview: {
     examples: 'Examples',
@@ -227,6 +230,9 @@ const de: Strings = {
     sub: ['Auf deinem Gerät.', 'Geteilt, wie du willst.'],
     primary: 'Vormerken',
     secondary: 'GitHub',
+    addTo: 'Zu {browser} hinzufügen',
+    installed: 'bleib ist installiert',
+    stores: 'bleib gibt es für',
   },
   preview: {
     examples: 'Beispiele',

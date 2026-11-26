@@ -62,6 +62,10 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
                   <dl class="kv refs">{b.refs.map((r) => <div><dt><a href={r.href} rel="noopener"><span class="lbl">{r.name}</span><span class="chev" set:html={icon('chevron_right')} /></a></dt><dd>{r.v}</dd></div>)}</dl>
                 ) : is(b, 'rows') ? (
                   <dl class="kv">{b.rows.map((r) => <div><dt>{r.k}</dt><dd>{r.v}</dd></div>)}</dl>
+                ) : is(b, 'commands') ? (
+                  <ul class="cmds">{b.commands.map((c) => (
+                    <li class="cmd"><code>{c}</code><button type="button" class="copy" data-copy={c} data-done={lang === 'de' ? 'Kopiert' : 'Copied'}>{lang === 'de' ? 'Kopieren' : 'Copy'}</button></li>
+                  ))}</ul>
                 ) : is(b, 'compare') ? (
                   <table class="cmp">
                     <thead><tr>
@@ -189,6 +193,12 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
     .cmp tbody th { padding-left: 16px; }
   }
 
+  /* Terminal lines as pills, each with a Copy button that briefly says Copied. */
+  .cmds { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
+  .cmd { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 4px 4px 4px 16px; border-radius: 999px; background: var(--card); color: var(--on-card); border: var(--card-border); }
+  .cmd code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; font-size: 14px; }
+  .copy { flex: none; min-height: 36px; padding: 0 14px; border: 0; border-radius: 999px; background: var(--fill); color: var(--on-card); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
+
   .doc-visual { margin: clamp(40px, 5vw, 56px) 0 0; width: 100%; max-width: 440px; }
 
   .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -222,4 +232,12 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
 <script>
   import { initStory } from '../scripts/story';
   initStory();
+  document.querySelectorAll<HTMLButtonElement>('.copy').forEach((button) => {
+    const label = button.textContent;
+    button.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(button.dataset.copy ?? ''); } catch { return; }
+      button.textContent = button.dataset.done ?? label;
+      setTimeout(() => { button.textContent = label; }, 1600);
+    });
+  });
 </script>

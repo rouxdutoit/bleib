@@ -1,5 +1,6 @@
 import { GITHUB_URL, type Lang, type RouteKey } from './strings';
 import type { IconName } from '../components/icons';
+import { INSTALL } from '../config/install';
 
 /**
  * Subpage content (Fazit-style layout: big title and intro, then two-column sections with
@@ -8,6 +9,7 @@ import type { IconName } from '../components/icons';
  *   never   icon list with hairlines (commitments)          rows   key / value list
  *   tiles   two-up tiles with an optional tag               address  postal lines
  *   compare a checklist: each benefit with a tick or a dash for bleib and for the other way
+ *   commands terminal lines as pills, each with a Copy button
  */
 /** `ai` shows that AI's own logo beside the title and detail (ProviderLogo). */
 export type Tile = { t: string; d: string; icon?: IconName; tag?: string; ai?: string };
@@ -20,6 +22,7 @@ export type Block =
   | { rows: { k: string; v: string }[] }
   | { tiles: Tile[] }
   | { refs: { name: string; href: string; v: string }[] }
+  | { commands: string[] }
   | { compare: { head: [string, string]; yes: string; no: string; rows: [string, boolean, boolean][] } };
 
 export interface Section {
@@ -265,7 +268,14 @@ const en: Docs = {
     intro: ['bleib is free, open source and in development. It starts as a browser extension. A desktop add-on comes later and brings MCP, so AI tools on your computer can connect.'],
     cta: { label: 'View on GitHub', href: GITHUB_URL },
     sections: [
-      {
+      // Once @bleib/wallet is on npm (INSTALL.walletCli), the desktop apps connect with one line instead.
+      INSTALL.walletCli ? {
+        h: 'Connect your desktop AI apps',
+        blocks: [
+          { p: 'Run one line in your terminal to connect an AI app on your computer to your bleib. You choose what each app may see.' },
+          { commands: ['npx @bleib/wallet connect claude-desktop', 'npx @bleib/wallet connect claude-code', 'npx @bleib/wallet connect codex', 'npx @bleib/wallet connect cursor', 'npx @bleib/wallet connect gemini'] },
+        ],
+      } : {
         h: 'Coming later: the desktop add-on',
         blocks: [
           { p: 'The add-on will let Claude Desktop, Claude Code, Cursor, OpenClaw, Hermes and other MCP clients ask bleib for what a task needs. Each tool gets its own connection, and the person approves what it may see.' },
@@ -662,7 +672,14 @@ const de: Docs = {
     intro: ['bleib ist kostenlos, quelloffen und in Entwicklung. Es startet als Browser-Erweiterung. Später kommt ein Desktop-Add-on mit MCP, damit sich KI-Tools auf deinem Rechner verbinden können.'],
     cta: { label: 'Auf GitHub anzeigen', href: GITHUB_URL },
     sections: [
-      {
+      // Once @bleib/wallet is on npm (INSTALL.walletCli), the desktop apps connect with one line instead.
+      INSTALL.walletCli ? {
+        h: 'KI-Apps auf deinem Rechner verbinden',
+        blocks: [
+          { p: 'Mit einer Zeile im Terminal verbindest du eine KI-App auf deinem Rechner mit deinem bleib. Was jede App sehen darf, entscheidest du.' },
+          { commands: ['npx @bleib/wallet connect claude-desktop', 'npx @bleib/wallet connect claude-code', 'npx @bleib/wallet connect codex', 'npx @bleib/wallet connect cursor', 'npx @bleib/wallet connect gemini'] },
+        ],
+      } : {
         h: 'Später: das Desktop-Add-on',
         blocks: [
           { p: 'Mit dem Add-on können Claude Desktop, Claude Code, Cursor, OpenClaw, Hermes und andere MCP-Clients bei bleib anfragen, was eine Aufgabe braucht. Jedes Tool bekommt eine eigene Verbindung, und der Mensch gibt frei, was es sehen darf.' },

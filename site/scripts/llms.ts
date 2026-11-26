@@ -44,6 +44,7 @@ function renderBlock(block: Block, site: URL) {
   if ('never' in block) return bullets(block.never);
   if ('address' in block) return block.address.join('\n');
   if ('code' in block) return ['```', block.code, '```'].join('\n');
+  if ('commands' in block) return ['```', ...block.commands, '```'].join('\n');
   if ('rows' in block) return bullets(block.rows.map(({ k, v }) => `${k}: ${v}`));
   if ('tiles' in block) return bullets(block.tiles.map(({ t, d, tag }) =>
     `${t}${tag ? ` (${tag})` : ''}: ${d}`,
