@@ -9,11 +9,12 @@ const { lang } = Astro.props;
   <span class="logo-word" aria-hidden="true">bleib</span>
 </a>
 <style>
-  .logo { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; min-height: 44px; }
-  .logo-mark { display: grid; place-items: center; color: #0a0a0a; }
-  :global(:root[data-theme='dark']) .logo-mark { color: #f6e79a; }
+  /* One colour for the whole logo, everywhere: black in light mode, bleib yellow in dark mode. */
+  .logo { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; min-height: 44px; color: #0a0a0a; }
+  :global(:root[data-theme='dark']) .logo { color: #f6e79a; }
   @media (prefers-color-scheme: dark) {
-    :global(:root:not([data-theme='light'])) .logo-mark { color: #f6e79a; }
+    :global(:root:not([data-theme='light'])) .logo { color: #f6e79a; }
   }
+  .logo-mark { display: grid; place-items: center; }
   .logo-word { font-size: 21px; font-weight: 600; letter-spacing: -0.04em; line-height: 1; }
 </style>

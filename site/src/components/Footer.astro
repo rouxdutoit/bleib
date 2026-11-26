@@ -61,10 +61,6 @@ const cols: { h: string; items: Item[] }[] = [
   .site-footer { padding: clamp(48px, 6vw, 72px) 0 28px; }
   .in { position: relative; z-index: 1; }
   .top { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: start; }
-  :global(:root[data-theme='dark']) .brand :global(.logo) { color: #f6e79a; }
-  @media (prefers-color-scheme: dark) {
-    :global(:root:not([data-theme='light'])) .brand :global(.logo) { color: #f6e79a; }
-  }
   /* Align with the wordmark after the 22px mark and 8px gap. */
   .dictionary { margin-top: 4px; margin-inline-start: 30px; }
   .pronunciation { margin: 0; color: var(--muted); font-size: 13px; line-height: 18px; }
