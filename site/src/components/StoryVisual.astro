@@ -244,22 +244,25 @@ const chat = scene === 1;
   .s2 .pick-at-2 { background: #f6e79a; color: #0a0a0a; }
 
   /* Notification */
-  /* bleib's notifications are always bleib yellow with black ink, in light and dark mode alike (as in the chat cards).
-     On the light theme's gold tray a hairline edge keeps the card apart from it. */
-  .note { padding: 14px 16px 16px; background: #f6e79a; color: #0a0a0a; box-shadow: 0 0 0 1px rgb(10 10 10 / 0.08), 0 1px 3px rgb(10 10 10 / 0.08); }
-  .note .c-2, .note .auto { color: rgb(10 10 10 / 0.64); }
+  /* On the marketing site the light theme's page and tray are already yellow, so here a notice is a white card like
+     every other; in dark mode it is bleib yellow with black ink, as bleib's notifications are in the product. */
+  .note { padding: 14px 16px 16px; }
+  :root[data-theme='dark'] .note { --cell: #f6e79a; --label: #0a0a0a; --label-2: rgb(10 10 10 / 0.64); --fill: rgb(255 255 255 / 0.6); --tile: #fffbea; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .note { --cell: #f6e79a; --label: #0a0a0a; --label-2: rgb(10 10 10 / 0.64); --fill: rgb(255 255 255 / 0.6); --tile: #fffbea; }
+  }
   .note-head { display: flex; align-items: center; gap: 10px; }
   .note-id { flex: 1; min-width: 0; }
   /* A quiet status capsule, as iOS marks a state. */
   /* A status, not a detail: plain secondary text like Settings' "Automatic", so it never reads as a second pill. */
   .auto { flex: none; color: var(--label-2); }
   /* An AI's icon tile is as tall as the two lines of text beside it (title and detail). */
-  .app { width: 42px; height: 42px; border-radius: 10px; padding: 7px; background: #fffbea; flex: none; }
+  .app { width: 42px; height: 42px; border-radius: 10px; padding: 7px; background: var(--tile, var(--fill)); flex: none; }
   .app-tall { width: 50px; height: 50px; border-radius: 12px; padding: 9px; }
   /* The detail as a pill, with Automatic at the end of the same line, so the title keeps the full width. */
   .later-fact { margin-top: 4px !important; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-  .pill-fact { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px 3px 8px; border-radius: 999px; background: rgb(255 255 255 / 0.6); color: #0a0a0a; font-weight: 500; }
-  .pill-sym { display: grid; color: rgb(10 10 10 / 0.62); }
+  .pill-fact { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px 3px 8px; border-radius: 999px; background: var(--fill); color: var(--label); font-weight: 500; }
+  .pill-sym { display: grid; color: var(--label-2); }
   .pill-sym :global(.g) { width: 14px; height: 14px; }
   /* Receipt: the shared details line up with the title, the private note sits under them. */
   .time { align-self: flex-start; }

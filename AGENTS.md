@@ -20,11 +20,12 @@ Every notification bleib shows is bleib yellow with black ink, in light mode and
 | Detail pills | capsule, `rgb(255 255 255 / 0.6)` background, `#0a0a0a` text at weight 500, Footnote 13/18; leading symbol 14px in `rgb(10 10 10 / 0.62)`. The same in both themes |
 | Remove × on a pill | 18px circle in `rgb(10 10 10 / 0.1)`, 12px close glyph in `rgb(10 10 10 / 0.72)`. Keep circle and glyph sizes an even difference apart so the × lands on whole pixels and sits dead centre |
 | Corner radius | 14px for a card inside a chat window; 22px for a card in a tray (concentric with the tray) |
-| On a yellow surface | where the card sits on yellow (the light theme's gold tray `#efdc7e`), add `box-shadow: 0 0 0 1px rgb(10 10 10 / 0.08), 0 1px 3px rgb(10 10 10 / 0.08)` so it stays apart from it |
 | Motion | drops in from above (opacity 0 and `translateY(-14px)` to rest) into space it already holds, so nothing around it moves; no movement with reduced motion |
+
+Marketing site exception (founder, 26 Nov 2026): the site's light theme already has a yellow page and yellow trays, so there the notices and receipts shown as product mock-ups on a tray ("Claude used Travel", "Shared with Claude") are ordinary white cards in light mode and bleib yellow only in dark mode. bleib's card inside a chat window (hero, scene 2) is yellow in both themes, because the window itself is white or dark. In the product itself the rule above has no exception.
 
 Not a notification: alerts that ask a question (permission prompts such as "Share health notes with Claude?") keep the system card colour (white in light mode, `#1c1c1e` in dark mode). Their chosen capsule button turns bleib yellow when pressed.
 
 Pitfall: never write theme overrides as global selectors that can reach into the notification (for example a dark-mode rule on every `.app` tile). One such rule turned bleib's tile cream on the live site. Give the notification's parts their own class names and keep their colours fixed.
 
-Reference implementation: `site/src/components/BleibCard.astro` (the card in a chat) and the `.note` styles in `site/src/components/StoryVisual.astro` (notices and receipts on a tray).
+Reference implementation: `site/src/components/BleibCard.astro` (the card in a chat) and the `.note` styles in `site/src/components/StoryVisual.astro` (notices and receipts on a tray, with the site's light-theme exception).
