@@ -407,6 +407,19 @@ const en: Docs = {
     intro: ['Only you can read your memory. bleib is in development and starts as a browser extension, with no bleib account, telemetry, analytics or automatic crash reporting.'],
     sections: [
       {
+        h: 'In short',
+        blocks: [
+          {
+            never: [
+              'Your memory is encrypted on your device. No bleib server ever receives it.',
+              'No account, no tracking, no analytics.',
+              'An AI gets only what bleib places in its message box, and private details always ask first.',
+              'Never sold, never used for advertising or credit decisions.',
+            ],
+          },
+        ],
+      },
+      {
         h: 'What the extension reads',
         blocks: [
           { p: 'bleib works only on the AI sites you allow. It asks for chatgpt.com, claude.ai and gemini.google.com one at a time, and you can take access back at any time.' },
@@ -824,6 +837,19 @@ const de: Docs = {
     description: 'Wie bleib und die Browser-Erweiterung mit deinem Gedächtnis umgehen.',
     intro: ['Nur du kannst dein Gedächtnis lesen. bleib ist in Entwicklung und startet als Browser-Erweiterung, ohne bleib-Konto, Telemetrie, Nutzungsanalyse und automatische Absturzberichte.'],
     sections: [
+      {
+        h: 'Kurz gesagt',
+        blocks: [
+          {
+            never: [
+              'Dein Gedächtnis ist auf deinem Gerät verschlüsselt. Kein bleib-Server erhält es je.',
+              'Kein Konto, kein Tracking, keine Nutzungsanalyse.',
+              'Eine KI bekommt nur, was bleib in ihr Nachrichtenfeld einfügt, und bei privaten Angaben fragt bleib immer zuerst.',
+              'Nie verkauft, nie für Werbung oder Kreditentscheidungen genutzt.',
+            ],
+          },
+        ],
+      },
       {
         h: 'Was die Erweiterung liest',
         blocks: [
