@@ -1,0 +1,9 @@
+{
+  "backend": "wasm",
+  "reference": "PyTorch maker checkpoint",
+  "probes": 10,
+  "exact_token_sequences": 10,
+  "minimum_embedding_cosine": 0.9428396434109014,
+  "mean_embedding_cosine": 0.9661808981864309,
+  "sha256": "4b5eec447d54bd76e15a7d6c071fbd3359086ab423e71f4ac41f29cf58a68681"
+}

@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "chromium": "Chrome/153.0.8010.12",
+  "backend": "ONNX Runtime Web WASM",
+  "onnxruntimeWebVersion": "1.31.1",
+  "tokenizerJsVersion": "0.2.0",
+  "wasmThreads": 1,
+  "offline": true,
+  "externalRequests": 0,
+  "checks": [
+    "load encoder and both heads",
+    "index a fabricated saved entry",
+    "abstain on blank input",
+    "score a fabricated request and validate returned offers",
+    "release all inference sessions"
+  ],
+  "profile": {
+    "graphOptimizationLevel": "all",
+    "maxTokens": 96
+  },
+  "encoderSha256": "4b5eec447d54bd76e15a7d6c071fbd3359086ab423e71f4ac41f29cf58a68681",
+  "requestHeadSha256": "e04c477a6de4d39000d7c99672b2311f1d9f6e6f6de6df65eade3e698a98beec",
+  "saveHeadSha256": "5f4c676717991059ff6b47e167836bb436de62a2347b3811d4d81a0561c6703d"
+}

@@ -1,0 +1,34 @@
+{
+  "operating": {
+    "floors": [
+      0.82,
+      0.94
+    ],
+    "passedDevPrecisionGate": false
+  },
+  "calibration": {
+    "byLanguage": {
+      "en": {
+        "tp": 83,
+        "fp": 25,
+        "gold": 146,
+        "precision": 0.7685185185185185,
+        "recall": 0.5684931506849316
+      },
+      "de": {
+        "tp": 73,
+        "fp": 22,
+        "gold": 143,
+        "precision": 0.7684210526315789,
+        "recall": 0.5104895104895105
+      }
+    },
+    "precision": 0.7684729064039408,
+    "recall": 0.5397923875432526,
+    "f05": 0.7084468664850136
+  },
+  "dev_sha256": "e87c7c335f17d5851c74b8105648968571b5af288507cf897394dad72a45c9c1",
+  "examples": 420,
+  "backend": "wasm",
+  "ranking": "top two across full slot taxonomy"
+}

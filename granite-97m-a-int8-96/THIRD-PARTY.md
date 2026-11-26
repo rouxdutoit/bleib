@@ -1,0 +1,5 @@
+# Granite model provenance
+
+The encoder derives from IBM Granite Embedding 97M Multilingual R2 revision `835ad14087e140460703cf0fae09f97d469d65c2`, released under Apache-2.0. The encoder in this package is an ONNX conversion of that checkpoint. `model-config.json` specifies the block count and precision, and `encoder-verification.json` identifies the graph and numerical checks. The request and save heads and rank floors were fitted for the bleib picker. [Pinned IBM release](https://huggingface.co/ibm-granite/granite-embedding-97m-multilingual-r2/tree/835ad14087e140460703cf0fae09f97d469d65c2)
+
+IBM’s bundled tokenizer has a custom pruned vocabulary derived from OpenAI GPT-OSS. The packaged `tokenizer.json` preserves the published IBM JSON and omits its final line feed. The upstream Apache-2.0 licence is included as `UPSTREAM-LICENSE.txt`. [IBM tokenizer lineage](https://arxiv.org/html/2605.13521v1#S2.SS2) · [OpenAI GPT-OSS licence](https://huggingface.co/openai/gpt-oss-20b/blob/main/LICENSE)

@@ -1,0 +1,15 @@
+{
+  "name": "Granite 97M A",
+  "source": "ibm-granite/granite-embedding-97m-multilingual-r2",
+  "sourceRevision": "835ad14087e140460703cf0fae09f97d469d65c2",
+  "round3Variant": "granite-12-int8-96-all",
+  "layers": 12,
+  "encoderPrecision": "int8",
+  "headPrecision": "int8",
+  "profile": "profile.json",
+  "rankFloors": "operating.json",
+  "encoder": "onnx/model_dynamic.onnx",
+  "slots": 51,
+  "harnessCommit": "d6af4fa4be88075ea9febdab76259c034669d1c4",
+  "licence": "Apache-2.0"
+}
