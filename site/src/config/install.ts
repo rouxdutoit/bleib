@@ -7,7 +7,8 @@
  * To show "Connect your desktop AI apps" on the Developers page: publish @bleib/wallet to npm, then set `walletCli: true`.
  */
 export const INSTALL = {
-  /** The hero's main button becomes "Add to Chrome / Edge / Firefox" for that browser, and "bleib is installed" once it is. */
+  /** The hero's and the header's main button become "Add to Chrome / Edge / Firefox" for that browser, and "bleib is
+   *  installed" once it is. */
   storeButton: false,
   /** Chrome Web Store listing. Chrome, Brave, Arc, Opera and Edge (which can install Chrome extensions) use it. */
   chromeStoreUrl: '',
@@ -17,9 +18,6 @@ export const INSTALL = {
   firefoxStoreUrl: '',
   /** The extension's Chrome ID. The page asks it {type: 'bleib-installed'} and waits 300 ms for {installed: true}. */
   extensionId: '',
-  /** With storeButton on: a slim install banner under the header (desktop Chrome, Edge and Firefox), after the first
-   *  story scene or on a second visit, until it's closed or bleib is installed. */
-  banner: true,
   /** "Connect your desktop AI apps" on the Developers page, once `npx @bleib/wallet connect …` is on npm. */
   walletCli: false,
 } as const;

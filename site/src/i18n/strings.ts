@@ -49,7 +49,6 @@ const en = {
     themeToDark: 'Switch to dark mode',
     themeToLight: 'Switch to light mode',
   },
-  banner: { label: 'Get the bleib extension', title: 'bleib for {browser}', line: 'Your AI memory, private to you.', close: 'Close' },
   hero: {
     eyebrow: 'Browser extension · In development',
     status: 'In development',
@@ -224,7 +223,6 @@ const de: Strings = {
     themeToDark: 'Dunkles Design einschalten',
     themeToLight: 'Helles Design einschalten',
   },
-  banner: { label: 'bleib-Erweiterung holen', title: 'bleib für {browser}', line: 'Dein KI-Gedächtnis, privat für dich.', close: 'Schließen' },
   hero: {
     eyebrow: 'Browser-Erweiterung · In Entwicklung',
     status: 'In Entwicklung',

@@ -24,7 +24,7 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
     <h1 id="hero-title" class="hero-h1">{s.h1.split(/(\S+-\S+)/).map((part) => /-/.test(part) ? <span class="whole">{part}</span> : part)}</h1>
     <p class="sub">{s.sub.map((line) => <span>{line.split(/(?<=,) /).map((part, i) => [i > 0 && ' ', <span class="phrase">{part}</span>])}</span>)}</p>
     <div class="cta">
-      <a class="btn btn-primary" id="hero-primary" href="#early-access" data-add={s.addTo} data-installed={s.installed}>{s.primary}</a>
+      <a class="btn btn-primary" id="hero-primary" href="#early-access" data-install data-add={s.addTo} data-installed={s.installed}>{s.primary}</a>
       <a class="btn btn-secondary" href={githubHref}>{s.secondary}</a>
     </div>
     {/* With the store button on (config/install.ts), the plain store links stay available for every browser. */}
@@ -74,8 +74,6 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
   .sub { margin: 22px 0 0; font-size: clamp(17px, 1.6vw, 19px); line-height: 1.5; color: var(--muted); max-width: 40em; text-wrap: balance; }
   .stores { margin: 14px 0 0; font-size: 13px; line-height: 18px; color: var(--muted); }
   .stores a { color: var(--ink); font-weight: 600; text-decoration: none; }
-  .cta :global(.is-installed) { cursor: default; gap: 6px; }
-  .cta :global(.is-installed svg) { width: 18px; height: 18px; }
   .cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 30px; }
   .sub > span { display: block; }
   /* A wrapped line breaks only at its comma, never mid-phrase. */
@@ -106,9 +104,7 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
 
 <script>
   import { play, reset } from '../scripts/story';
-  import { initInstall } from '../scripts/install';
-  const primary = document.getElementById('hero-primary');
-  if (primary instanceof HTMLAnchorElement) void initInstall(primary);
+
   const tabs = [...document.querySelectorAll<HTMLButtonElement>('.preview [role="tab"]')];
   const select = (tab: HTMLButtonElement) => {
     const strip = tab.parentElement;

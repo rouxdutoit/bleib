@@ -230,6 +230,9 @@ h3 {
   transition: background-color 0.2s var(--ease), opacity 0.1s var(--ease);
 }
 /* As on apple.com: hover only eases the colour; pressing dims, nothing moves. */
+/* Once bleib is installed, the main buttons say so with a tick (scripts/install.ts). */
+.btn.is-installed { cursor: default; gap: 6px; }
+.btn.is-installed svg { width: 18px; height: 18px; }
 .btn:active {
   opacity: 0.8;
 }

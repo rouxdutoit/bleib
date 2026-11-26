@@ -1,7 +1,6 @@
 ---
 import Logo from './Logo.astro';
 import { GITHUB_URL, routes, t, type Lang, type RouteKey } from '../i18n/strings';
-import { icon } from './icons';
 interface Props { lang: Lang; page: RouteKey }
 const { lang, page } = Astro.props;
 const s = t(lang).nav;
@@ -13,7 +12,6 @@ const links: { key: RouteKey; label: string }[] = [
   { key: 'developers', label: s.developers },
   { key: 'pricing', label: s.pricing },
 ];
-const arrow = icon('arrow_outward');
 ---
 <header class="site-header" data-header>
   <div class="frame">
@@ -30,7 +28,7 @@ const arrow = icon('arrow_outward');
           ))}
           <li><a href={githubHref}>{s.github}</a></li>
         </ul>
-        <a class="btn btn-primary cta" href={earlyHref}>{s.early}<span set:html={arrow} /></a>
+        <a class="btn btn-primary cta" href={earlyHref} data-install data-add={t(lang).hero.addTo} data-installed={t(lang).hero.installed}>{s.early}</a>
       </div>
     </nav>
   </div>
@@ -44,6 +42,9 @@ const arrow = icon('arrow_outward');
   })();
 </script>
 <script>
+  // The main button names your browser's store once the store listings exist (config/install.ts).
+  import { initInstall } from '../scripts/install';
+  void initInstall();
   // Mobile menu, as on fazit.dev: closes on a link, Escape, focus leaving the header, or a wider screen.
   const header = document.querySelector<HTMLElement>('[data-header]');
   const button = header?.querySelector<HTMLButtonElement>('.menu-btn');
@@ -66,7 +67,7 @@ const arrow = icon('arrow_outward');
         button.focus();
       }
     });
-    matchMedia('(min-width: 861px)').addEventListener('change', () => setOpen(false));
+    matchMedia('(min-width: 961px)').addEventListener('change', () => setOpen(false));
 
     // On phones, like Safari's bars: the header slides away as you scroll down and returns as you scroll up.
     // It stays while the menu is open, near the top, and whenever something in it has keyboard focus.
@@ -121,14 +122,14 @@ const arrow = icon('arrow_outward');
 
   .nav-in { display: flex; align-items: center; gap: clamp(12px, 2.2vw, 30px); }
   .links { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: clamp(12px, 2.2vw, 30px); }
-  .links a { font-size: 15px; text-decoration: none; color: var(--muted); padding: 10px 0; display: inline-flex; align-items: center; gap: 8px; }
+  .links a { font-size: 15px; text-decoration: none; color: var(--muted); padding: 10px 0; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
   .links a:hover, .links a[aria-current='page'] { color: var(--ink); }
-  .cta { gap: 10px; }
-  .cta :global(svg) { width: 14px; height: 14px; }
+  .cta { gap: 10px; white-space: nowrap; }
+  .cta :global(svg) { width: 16px; height: 16px; }
 
   .menu-btn { display: none; }
 
-  @media (max-width: 860px) {
+  @media (max-width: 960px) {
     .site-header { transition: transform 0.3s var(--ease); }
     .site-header[data-hidden] { transform: translateY(-100%); }
     .frame { height: 64px; padding: 0 12px 0 var(--inset); }
