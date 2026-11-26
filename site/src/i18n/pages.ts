@@ -82,6 +82,15 @@ const en: Docs = {
         blocks: [{ p: 'bleib finds the smallest useful part of your memory on your device. The first time it shares with an AI, it asks once. After that, everyday details go into each new chat by themselves, as an “About me” line you can remove. Details bleib isn’t sure about wait for a tap, and sensitive information always asks.' }],
       },
       {
+        id: 'suggestions',
+        h: 'Suggestions on your device',
+        blocks: [
+          { p: 'bleib picks what a chat needs with its own small picker and simple rules for everyday tasks: trips, meals, cover letters, work email, gifts, fitness, shopping, going out, learning and health. It runs in your browser, on your device. Nothing you type is sent anywhere for this.' },
+          { p: 'On capable computers you can turn on Smarter suggestions. It stays off until you choose it. It uses Granite Embedding Multilingual R2 97M by IBM, also on your device. bleib uses IBM’s model unchanged and trained only small extra layers on top, on made-up example drafts, never on anyone’s data.' },
+          { p: 'No model ever sends what you write off your device. bleib never reads the AI’s answers on its own, and the check before you send a message follows fixed rules on your device.' },
+        ],
+      },
+      {
         id: 'door',
         h: 'Start a new chat',
         blocks: [{ p: 'Start typing your first request. If there’s a match and sharing is allowed, bleib adds a short “About me” line to your draft. You can remove it, and you decide when to send it. If a site changes, bleib pauses until it recognises the page again.' }],
@@ -214,7 +223,7 @@ const en: Docs = {
       },
       {
         h: 'Storing your memory',
-        blocks: [{ p: 'bleib stores your memories as Markdown, a plain text format, and encrypts them with age. It reads the data exports from ChatGPT, Claude and Gemini on your device.' }],
+        blocks: [{ p: 'bleib encrypts your memories in your browser with AES-256-GCM, which your browser has built in. Your passphrase is strengthened with Argon2id. It reads the data exports from ChatGPT, Claude and Gemini on your device.' }],
       },
       {
         h: 'Exporting receipts',
@@ -278,9 +287,26 @@ const en: Docs = {
               { name: 'W3C Data Privacy Vocabulary', href: 'https://w3id.org/dpv', v: 'The kinds of personal information.' },
               { name: 'OSAP consent receipts', href: 'https://datatracker.ietf.org/doc/draft-zeng-osap-consent-receipts/', v: 'IETF draft; the receipt export.' },
               { name: 'Memory Projection Record', href: 'https://datatracker.ietf.org/doc/draft-ferro-schrock-memory-projection-record/', v: 'IETF draft; a fingerprint of exactly what was released.' },
-              { name: 'age', href: 'https://age-encryption.org', v: 'By Filippo Valsorda; encrypts your files.' },
+              { name: 'age', href: 'https://age-encryption.org', v: 'By Filippo Valsorda; will encrypt the desktop add-on’s files.' },
             ],
           },
+        ],
+      },
+      {
+        h: 'Open-source software in bleib',
+        blocks: [
+          { p: 'bleib ships with these open parts. Thank you to everyone who made them.' },
+          {
+            refs: [
+              { name: 'Argon2 (argon2-browser)', href: 'https://github.com/antelle/argon2-browser', v: 'By Antelle, MIT licence; the Argon2 reference code is under CC0 1.0 or Apache-2.0. Strengthens your passphrase on your device.' },
+              { name: 'Inter', href: 'https://rsms.me/inter/', v: 'By the Inter Project Authors, SIL Open Font License 1.1. The typeface in bleib and on this site.' },
+              { name: 'Material Symbols Rounded', href: 'https://fonts.google.com/icons', v: 'By Google, Apache-2.0. The symbols in bleib and on this site.' },
+              { name: 'LobeHub Icons', href: 'https://github.com/lobehub/lobe-icons', v: 'By LobeHub, MIT licence. The ChatGPT, Claude and Gemini logos. The logos are trademarks of their owners.' },
+              { name: 'Granite Embedding Multilingual R2 97M', href: 'https://huggingface.co/ibm-granite/granite-embedding-97m-multilingual-r2', v: 'By IBM, licensed under Apache-2.0, including its tokenizer. Used unchanged, in int8, for Smarter suggestions if you turn them on; bleib trained only small layers on top.' },
+              { name: 'ONNX Runtime Web', href: 'https://onnxruntime.ai', v: 'By Microsoft, MIT licence. Runs Smarter suggestions in your browser.' },
+            ],
+          },
+          { p: 'Apache-2.0 licence text: apache.org/licenses/LICENSE-2.0. The full licence files ship with the extension.' },
         ],
       },
       {
@@ -375,6 +401,7 @@ const en: Docs = {
         blocks: [
           { p: 'On recognised pages on chatgpt.com, claude.ai and gemini.google.com, bleib checks what you type in the draft to find relevant memories or recognise preferences to save.' },
           { p: 'When you bring in your memories, bleib reads the data export file you choose, on your device. It puts what it finds in review, with its source. The file isn’t uploaded anywhere.' },
+          { p: 'Suggestions are worked out on your device, by bleib’s own small picker or, if you turn on Smarter suggestions, by IBM’s Granite Embedding model. No model sends what you write anywhere. bleib never reads the AI’s answers on its own.' },
         ],
       },
       {
@@ -399,7 +426,7 @@ const en: Docs = {
       },
       {
         h: 'Contact',
-        blocks: [{ p: 'For questions about bleib and your data, write to privacy@bleib.dev. Last updated 25 November 2026.' }],
+        blocks: [{ p: 'For questions about bleib and your data, write to privacy@bleib.dev. Last updated 26 November 2026.' }],
       },
     ],
   },
@@ -411,7 +438,7 @@ const en: Docs = {
       { h: 'Operator', blocks: [{ address: OPERATOR }] },
       { h: 'Contact', blocks: [{ address: ['Email hello@bleib.dev', 'Telephone +49 162 7850608'] }] },
       { h: 'Responsible for content', blocks: [{ p: 'Under § 18(2) MStV.' }, { address: OPERATOR }] },
-      { h: 'About bleib', blocks: [{ p: 'bleib is free, open source and in development. bleib is licensed under AGPL-3.0-or-later. The file format, specification and SDK are under Apache-2.0.' }] },
+      { h: 'About bleib', blocks: [{ p: 'bleib is free, open source and in development. bleib is licensed under AGPL-3.0-or-later. The file format, specification and SDK are under Apache-2.0. Open-source software and models in bleib are credited on the Developers page.' }] },
     ],
   },
 };
@@ -450,6 +477,15 @@ const de: Docs = {
         id: 'permissions',
         h: 'Nur das Nötige teilen',
         blocks: [{ p: 'bleib sucht auf deinem Gerät den kleinsten nützlichen Teil deines Gedächtnisses. Wenn es zum ersten Mal mit einer KI teilt, fragt es einmal. Danach kommen alltägliche Angaben von selbst in jeden neuen Chat, als „Über mich“-Zeile, die du entfernen kannst. Angaben, bei denen bleib unsicher ist, warten auf einen Tipp, und bei sensiblen Angaben fragt bleib immer.' }],
+      },
+      {
+        id: 'suggestions',
+        h: 'Vorschläge auf deinem Gerät',
+        blocks: [
+          { p: 'bleib wählt mit einer eigenen kleinen Auswahl und einfachen Regeln für Alltagsaufgaben aus, was ein Chat braucht: Reisen, Essen, Bewerbungen, Arbeitsmails, Geschenke, Fitness, Einkaufen, Ausgehen, Lernen und Gesundheit. Das läuft in deinem Browser auf deinem Gerät. Nichts, was du schreibst, wird dafür irgendwohin gesendet.' },
+          { p: 'Auf leistungsstarken Computern kannst du „Klügere Vorschläge“ einschalten. Sie bleiben aus, bis du sie wählst. Sie nutzen Granite Embedding Multilingual R2 97M von IBM, ebenfalls auf deinem Gerät. bleib verwendet IBMs Modell unverändert und hat nur kleine zusätzliche Schichten darauf trainiert, mit erfundenen Beispielentwürfen, nie mit Daten von Menschen.' },
+          { p: 'Kein Modell sendet je, was du schreibst, von deinem Gerät weg. bleib liest die Antworten der KI nie von sich aus, und die Prüfung vor dem Senden folgt festen Regeln auf deinem Gerät.' },
+        ],
       },
       {
         id: 'door',
@@ -584,7 +620,7 @@ const de: Docs = {
       },
       {
         h: 'Dein Gedächtnis speichern',
-        blocks: [{ p: 'bleib speichert deine Erinnerungen als Markdown, ein einfaches Textformat, und verschlüsselt sie mit age. Die Datenexporte von ChatGPT, Claude und Gemini liest es auf deinem Gerät.' }],
+        blocks: [{ p: 'bleib verschlüsselt deine Erinnerungen in deinem Browser mit AES-256-GCM, das dein Browser schon mitbringt. Deine Passphrase wird mit Argon2id gestärkt. Die Datenexporte von ChatGPT, Claude und Gemini liest es auf deinem Gerät.' }],
       },
       {
         h: 'Belege exportieren',
@@ -648,9 +684,26 @@ const de: Docs = {
               { name: 'W3C Data Privacy Vocabulary', href: 'https://w3id.org/dpv', v: 'Die Arten persönlicher Informationen.' },
               { name: 'OSAP consent receipts', href: 'https://datatracker.ietf.org/doc/draft-zeng-osap-consent-receipts/', v: 'IETF-Entwurf; der Export der Belege.' },
               { name: 'Memory Projection Record', href: 'https://datatracker.ietf.org/doc/draft-ferro-schrock-memory-projection-record/', v: 'IETF-Entwurf; ein Fingerabdruck genau dessen, was weitergegeben wurde.' },
-              { name: 'age', href: 'https://age-encryption.org', v: 'Von Filippo Valsorda; verschlüsselt deine Dateien.' },
+              { name: 'age', href: 'https://age-encryption.org', v: 'Von Filippo Valsorda; wird die Dateien des Desktop-Add-ons verschlüsseln.' },
             ],
           },
+        ],
+      },
+      {
+        h: 'Open-Source-Software in bleib',
+        blocks: [
+          { p: 'bleib enthält diese offenen Bausteine. Danke an alle, die sie gebaut haben.' },
+          {
+            refs: [
+              { name: 'Argon2 (argon2-browser)', href: 'https://github.com/antelle/argon2-browser', v: 'Von Antelle, MIT-Lizenz; der Argon2-Referenzcode steht unter CC0 1.0 oder Apache-2.0. Stärkt deine Passphrase auf deinem Gerät.' },
+              { name: 'Inter', href: 'https://rsms.me/inter/', v: 'Von den Inter Project Authors, SIL Open Font License 1.1. Die Schrift in bleib und auf dieser Website.' },
+              { name: 'Material Symbols Rounded', href: 'https://fonts.google.com/icons', v: 'Von Google, Apache-2.0. Die Symbole in bleib und auf dieser Website.' },
+              { name: 'LobeHub Icons', href: 'https://github.com/lobehub/lobe-icons', v: 'Von LobeHub, MIT-Lizenz. Die Logos von ChatGPT, Claude und Gemini. Die Logos sind Marken ihrer Inhaber.' },
+              { name: 'Granite Embedding Multilingual R2 97M', href: 'https://huggingface.co/ibm-granite/granite-embedding-97m-multilingual-r2', v: 'Von IBM, lizenziert unter Apache-2.0, einschließlich Tokenizer. Unverändert in int8 genutzt für „Klügere Vorschläge“, wenn du sie einschaltest; bleib hat nur kleine Schichten darauf trainiert.' },
+              { name: 'ONNX Runtime Web', href: 'https://onnxruntime.ai', v: 'Von Microsoft, MIT-Lizenz. Führt „Klügere Vorschläge“ in deinem Browser aus.' },
+            ],
+          },
+          { p: 'Lizenztext Apache-2.0: apache.org/licenses/LICENSE-2.0. Die vollständigen Lizenzdateien liegen der Erweiterung bei.' },
         ],
       },
       {
@@ -745,6 +798,7 @@ const de: Docs = {
         blocks: [
           { p: 'Auf erkannten Seiten von chatgpt.com, claude.ai und gemini.google.com prüft bleib, was du in den Entwurf schreibst. So findet es passende Erinnerungen und erkennt Vorlieben, die es speichern kann.' },
           { p: 'Wenn du deine Erinnerungen mitnimmst, liest bleib die Exportdatei, die du auswählst, auf deinem Gerät. Was es findet, legt es dir mit seiner Herkunft zur Prüfung vor. Die Datei wird nirgendwohin hochgeladen.' },
+          { p: 'Vorschläge entstehen auf deinem Gerät, mit bleibs eigener kleiner Auswahl oder, wenn du „Klügere Vorschläge“ einschaltest, mit IBMs Modell Granite Embedding. Kein Modell sendet, was du schreibst, irgendwohin. bleib liest die Antworten der KI nie von sich aus.' },
         ],
       },
       {
@@ -769,7 +823,7 @@ const de: Docs = {
       },
       {
         h: 'Kontakt',
-        blocks: [{ p: 'Schreib bei Fragen zu bleib und deinen Daten an privacy@bleib.dev. Stand 25. November 2026.' }],
+        blocks: [{ p: 'Schreib bei Fragen zu bleib und deinen Daten an privacy@bleib.dev. Stand 26. November 2026.' }],
       },
     ],
   },
@@ -781,7 +835,7 @@ const de: Docs = {
       { h: 'Anbieter', blocks: [{ address: OPERATOR_DE }] },
       { h: 'Kontakt', blocks: [{ address: ['E-Mail hello@bleib.dev', 'Telefon +49 162 7850608'] }] },
       { h: 'Verantwortlich für den Inhalt', blocks: [{ p: 'Nach § 18 Abs. 2 MStV.' }, { address: OPERATOR_DE }] },
-      { h: 'Über bleib', blocks: [{ p: 'bleib ist kostenlos, quelloffen und in Entwicklung. bleib steht unter AGPL-3.0-or-later. Dateiformat, Spezifikation und SDK stehen unter Apache-2.0.' }] },
+      { h: 'Über bleib', blocks: [{ p: 'bleib ist kostenlos, quelloffen und in Entwicklung. bleib steht unter AGPL-3.0-or-later. Dateiformat, Spezifikation und SDK stehen unter Apache-2.0. Open-Source-Software und Modelle in bleib sind auf der Seite „Für Entwickler“ genannt.' }] },
     ],
   },
 };
