@@ -33,13 +33,9 @@ try {
   if (!response?.ok()) throw new Error('Build the site before generating the images.');
 
   await page.evaluate(async () => {
-    const logo = document.querySelector('.logo');
-    const wordmark = logo?.querySelector('.logo-word');
-    if (!logo || !wordmark) throw new Error('The header logo is missing.');
-
-    const { fontFamily, fontSize, fontWeight } = getComputedStyle(wordmark);
-    const loaded = await document.fonts.load(`${fontWeight} ${fontSize} ${fontFamily}`, wordmark.textContent);
-    if (!loaded.length) throw new Error('Could not load the wordmark font.');
+    // The header logo is an outlined lockup (paths, no font), so it renders the same here as everywhere.
+    const logo = document.querySelector('a.logo');
+    if (!logo) throw new Error('The header logo is missing.');
 
     document.body.replaceChildren(logo);
     Object.assign(document.body.style, { display: 'grid', placeItems: 'center', height: '100vh' });

@@ -1,20 +1,23 @@
 ---
-import Mark from './Mark.astro';
+/**
+ * The bleib logo: the mark and "bleib" as one outlined lockup (Inter 600, -0.04em, drawn as paths), so it looks the
+ * same on every computer whatever fonts it has. The spec is docs/brand/wordmark.md on the extension branch.
+ * One colour everywhere through currentColor: black in light mode, bleib yellow in dark mode.
+ */
+import lockup from './bleib-lockup-current.svg?raw';
 import { routes, t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 ---
 <a class="logo" href={routes.home[lang]} aria-label={t(lang).nav.home}>
-  <span class="logo-mark" aria-hidden="true"><Mark size={22} /></span>
-  <span class="logo-word" aria-hidden="true">bleib</span>
+  <span class="logo-art" aria-hidden="true" set:html={lockup} />
 </a>
 <style>
-  /* One colour for the whole logo, everywhere: black in light mode, bleib yellow in dark mode. */
-  .logo { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; min-height: 44px; color: #0a0a0a; }
+  .logo { display: inline-flex; align-items: center; text-decoration: none; min-height: 44px; color: #0a0a0a; }
   :global(:root[data-theme='dark']) .logo { color: #f6e79a; }
   @media (prefers-color-scheme: dark) {
     :global(:root:not([data-theme='light'])) .logo { color: #f6e79a; }
   }
-  .logo-mark { display: grid; place-items: center; }
-  .logo-word { font-size: 21px; font-weight: 600; letter-spacing: -0.04em; line-height: 1; }
+  .logo-art { display: inline-grid; }
+  .logo-art :global(svg) { display: block; width: auto; height: 25px; }
 </style>
