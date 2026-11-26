@@ -50,7 +50,7 @@ const en = {
     themeToLight: 'Switch to light mode',
   },
   hero: {
-    eyebrow: 'Free forever · Open source · Private',
+    eyebrow: 'Browser extension · In development',
     status: 'In development',
     h1: 'Own your AI memory.',
     sub: ['Kept on your device.', 'Shared on your terms.'],
@@ -221,7 +221,7 @@ const de: Strings = {
     themeToLight: 'Helles Design einschalten',
   },
   hero: {
-    eyebrow: 'Immer kostenlos · Open Source · Privat',
+    eyebrow: 'Browser-Erweiterung · In Entwicklung',
     status: 'In Entwicklung',
     h1: 'Dein KI-Gedächtnis gehört dir.',
     sub: ['Auf deinem Gerät.', 'Geteilt, wie du willst.'],
