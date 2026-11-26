@@ -12,7 +12,7 @@ All UI, on the website and in the product, follows Apple's Human Interface Guide
 - **Components:** use Apple's own patterns rather than inventing.
   - inset grouped lists (Settings);
   - alerts with capsule buttons (permission prompts);
-  - notifications (app icon, title, time, actions);
+  - notifications (app icon, title, time, actions). bleib's own notifications are always bleib yellow `#f6e79a` with black ink in both themes, with bleib's black tile and yellow mark as the app icon (founder, 26 Nov 2026; full spec in `AGENTS.md`, which Codex reads automatically; put it in every UI brief);
   - widgets (large number, short label);
   - selection lists with a trailing checkmark.
 - **Writing:** never all caps (section labels are sentence case, semibold Footnote); title-case buttons in alerts ("Allow Once", "Don't Allow"), questions as alert titles, sentence case elsewhere.
