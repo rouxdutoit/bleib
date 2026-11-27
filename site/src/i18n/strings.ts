@@ -75,7 +75,7 @@ const en = {
   phone: {
     h: 'On your phone too.',
     sub: 'Use bleib inside ChatGPT and Claude.',
-    note: 'One AI app is free. All of them with bleib everywhere: €40 a year or €5 a month.',
+    note: 'Free for one AI app.',
     more: 'See pricing',
   },
   preview: {
@@ -258,7 +258,7 @@ const de: Strings = {
   phone: {
     h: 'Auch auf deinem Handy.',
     sub: 'Nutze bleib direkt in ChatGPT und Claude.',
-    note: 'Eine KI-App ist kostenlos. Alle mit bleib überall: 40 € im Jahr oder 5 € im Monat.',
+    note: 'Kostenlos für eine KI-App.',
     more: 'Zu den Preisen',
   },
   preview: {
