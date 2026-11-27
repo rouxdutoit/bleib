@@ -63,7 +63,7 @@ function renderBlock(block: Block, site: URL) {
   ));
   if ('plans' in block) {
     const { free, paid } = block.plans;
-    return bullets([`${free.name}: ${free.price} ${free.per}. ${free.points.join('; ')}.`, `${paid.name}: ${paid.options.map((o) => o.price).join(' or ')}. ${paid.points.join('; ')}.`]);
+    return bullets([`${free.name}: ${free.price} ${free.per}. ${free.points.join('; ')}.`, `${paid.name}: ${paid.price} ${paid.per}, ${paid.alt}. ${paid.points.join('; ')}. ${paid.how}`]);
   }
   if ('compare' in block) {
     return bullets(block.compare.rows);

@@ -32,7 +32,4 @@ export const INSTALL = {
   /** Where those two links go (the bleib connector in each AI's own directory). */
   chatgptConnectorUrl: '',
   claudeConnectorUrl: '',
-  /** Checkout for bleib everywhere (Pricing, once `launched` and `connectors` are on): yearly and monthly. */
-  checkoutYearlyUrl: '',
-  checkoutMonthlyUrl: '',
 } as const;

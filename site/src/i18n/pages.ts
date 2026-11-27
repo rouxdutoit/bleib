@@ -26,13 +26,11 @@ export type Block =
   | { compare: { head: string; yes: string; rows: string[] } }
   | { plans: PlansBlock };
 
-/** Launch-day plans on Pricing (components/Plans.astro). Prices are what's billed; `note` is the smaller equivalent. */
+/** Launch-day plans on Pricing (components/Plans.astro). */
 export interface PlansBlock {
   free: { name: string; price: string; per: string; points: string[] };
-  paid: {
-    name: string; lede: string; choose: string; button: string; points: string[];
-    options: { id: 'yearly' | 'monthly'; label: string; price: string; note?: string; badge?: string; fine: string }[];
-  };
+  /** No paywall on the site: prices as information, and `how` says the trial starts in the app. */
+  paid: { name: string; price: string; per: string; alt: string; lede: string; points: string[]; how: string };
 }
 
 export interface Section {
@@ -400,14 +398,12 @@ const en: Docs = {
             },
             paid: {
               name: 'bleib everywhere',
+              price: '€40',
+              per: 'a year',
+              alt: 'or €5 a month',
               lede: 'bleib inside every AI app, and on your phone.',
-              choose: 'Choose how you pay',
-              options: [
-                { id: 'yearly', label: 'Yearly', price: '€40 a year', note: '€3.33 a month', badge: 'Save 33%', fine: 'Free for 14 days, no card needed. Then €40 a year until you cancel. Cancel anytime.' },
-                { id: 'monthly', label: 'Monthly', price: '€5 a month', fine: 'Free for 14 days, no card needed. Then €5 a month until you cancel. Cancel anytime.' },
-              ],
-              button: 'Try free for 14 days',
               points: ['Everything in Free', 'Every AI app you use, on your computer and phone', 'Encrypted on your device before it leaves, so we can’t read it'],
+              how: 'Try it free for 14 days in bleib, no card needed. bleib asks when you first use it.',
             },
           },
         }],
@@ -925,14 +921,12 @@ const de: Docs = {
             },
             paid: {
               name: 'bleib überall',
+              price: '40 €',
+              per: 'im Jahr',
+              alt: 'oder 5 € im Monat',
               lede: 'bleib in jeder KI-App und auf deinem Handy.',
-              choose: 'Wähle, wie du zahlst',
-              options: [
-                { id: 'yearly', label: 'Jährlich', price: '40 € im Jahr', note: '3,33 € im Monat', badge: 'Spare 33 %', fine: '14 Tage kostenlos, ohne Karte. Danach 40 € im Jahr, bis du kündigst. Jederzeit kündbar.' },
-                { id: 'monthly', label: 'Monatlich', price: '5 € im Monat', fine: '14 Tage kostenlos, ohne Karte. Danach 5 € im Monat, bis du kündigst. Jederzeit kündbar.' },
-              ],
-              button: '14 Tage kostenlos testen',
               points: ['Alles aus Kostenlos', 'Jede KI-App, die du nutzt, auf Computer und Handy', 'Auf deinem Gerät verschlüsselt, bevor es das Gerät verlässt, deshalb können wir es nicht lesen'],
+              how: 'Teste es 14 Tage kostenlos in bleib, ohne Karte. bleib fragt, wenn du es zum ersten Mal nutzt.',
             },
           },
         }],
