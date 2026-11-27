@@ -4,9 +4,12 @@
  * A [data-type] element is typed out at step 1, and the first gap starts once typing ends.
  * data-start sets the pause before step 1 and data-gaps="a,b,…" the pause after each step (ms): long enough
  * to read what is on screen (about 0.25 s a word), while each transition itself stays quick.
- * data-sv="scroll" waits for the person's first scroll before playing (the hero, which is in view on arrival).
+ * data-sv="hero" starts as soon as a third of it is in view (the hero, usually in view on arrival); its data-start
+ * gives the visitor a moment to land first. The hero is served finished, so it reads without JavaScript; an inline
+ * script in Hero.astro puts it back to step 0 before the first paint when motion is allowed.
  * Each headline symbol ([data-fx]) plays its effect once, as it comes into view (StoryScene.astro).
- * With reduced motion the final state shows at once.
+ * With reduced motion the final state shows at once, and if reduced motion is turned on while a scene is playing,
+ * every scene jumps to its final state.
  */
 const START = 500;
 const STEP = 900;
@@ -17,6 +20,9 @@ const setStep = (sv: HTMLElement, n: number) => {
 };
 
 const timers = new WeakMap<HTMLElement, number[]>();
+/** Scenes that have started playing, so a change to reduced motion can finish them. */
+const started = new Set<HTMLElement>();
+const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const later = (sv: HTMLElement, fn: () => void, ms: number) => timers.get(sv)?.push(window.setTimeout(fn, ms));
 
 /** Types el's data-type text from `at` ms, with the rhythm of rouxdutoit.com; returns when it ends. */
@@ -39,15 +45,22 @@ export function reset(sv: HTMLElement): void {
   setStep(sv, 0);
 }
 
+/** Shows a scene in its final state at once and cancels anything still scheduled. */
+export function finish(sv: HTMLElement): void {
+  reset(sv);
+  sv.querySelectorAll<HTMLElement>('[data-type]').forEach((el) => (el.textContent = el.dataset.type ?? ''));
+  setStep(sv, Number(sv.dataset.steps ?? '0'));
+}
+
 /** Plays a scene from the start (or shows it finished, with reduced motion). */
 export function play(sv: HTMLElement): void {
-  reset(sv);
-  const steps = Number(sv.dataset.steps ?? '0');
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    sv.querySelectorAll<HTMLElement>('[data-type]').forEach((el) => (el.textContent = el.dataset.type ?? ''));
-    setStep(sv, steps);
+  started.add(sv);
+  if (motion.matches) {
+    finish(sv);
     return;
   }
+  reset(sv);
+  const steps = Number(sv.dataset.steps ?? '0');
   const interval = Number(sv.dataset.interval ?? STEP);
   const gaps = (sv.dataset.gaps ?? '').split(',').map(Number);
   const typer = sv.querySelector<HTMLElement>('[data-type]');
@@ -58,11 +71,18 @@ export function play(sv: HTMLElement): void {
   }
 }
 
-/** Plays every [data-sv] scene once, when it comes into view (and, for data-sv="scroll", once the page has scrolled). */
+// Reduced motion turned on mid-sequence: every scene that has started jumps to its end, and symbols stop where they end.
+motion.addEventListener('change', () => {
+  if (!motion.matches) return;
+  started.forEach(finish);
+  document.querySelectorAll<HTMLElement>('[data-fx]').forEach((el) => el.classList.add('on'));
+});
+
+/** Plays every [data-sv] scene once, when it comes into view (the hero, data-sv="hero", once a third of it shows). */
 export function initStory(): void {
   const scenes = document.querySelectorAll<HTMLElement>('[data-sv]');
   const symbols = document.querySelectorAll<HTMLElement>('[data-fx]');
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (motion.matches) {
     scenes.forEach(play);
     symbols.forEach((el) => el.classList.add('on'));
     return;
@@ -76,18 +96,18 @@ export function initStory(): void {
     { rootMargin: '0px 0px -12% 0px', threshold: 1 },
   );
   symbols.forEach((el) => seen.observe(el));
-  const io = new IntersectionObserver(
-    (entries) => {
+  const onView = (threshold: number) => new IntersectionObserver(
+    (entries, io) => {
       for (const e of entries) {
         if (!e.isIntersecting) continue;
         const sv = e.target as HTMLElement;
         io.unobserve(sv);
-        if (timers.has(sv)) continue;
-        if (sv.dataset.sv !== 'scroll' || window.scrollY > 0) play(sv);
-        else window.addEventListener('scroll', () => !sv.hidden && !timers.has(sv) && play(sv), { once: true, passive: true });
+        if (!started.has(sv)) play(sv);
       }
     },
-    { threshold: 0.6 },
+    { threshold },
   );
-  scenes.forEach((sv) => io.observe(sv));
+  const io = onView(0.6);
+  const hero = onView(0.33);
+  scenes.forEach((sv) => (sv.dataset.sv === 'hero' ? hero : io).observe(sv));
 }

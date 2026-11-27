@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { routes, t, type Lang, type RouteKey } from '../i18n/strings';
+import interUrl from '../assets/fonts/inter-latin-variable.woff2?url';
 interface Props { lang: Lang; page: RouteKey; title?: string; description?: string }
 const { lang, page, title, description } = Astro.props;
 const s = t(lang);
@@ -12,7 +13,16 @@ const desc = description ?? s.meta.description;
 // A shared homepage link shows the hero's promise; subpages share their own title and description.
 const shareTitle = title ? pageTitle : s.meta.share.title;
 const shareDesc = description ?? s.meta.share.description;
-const shareImage = new URL('/og.png', site).href;
+// Share cards (scripts/generate-og.mjs): the lockup above the page's own title, per language. Pages without their own
+// card use the "site" card, which carries the tagline.
+const cards: Partial<Record<RouteKey, string>> = { home: 'home', privacy: 'privacy', appPrivacy: 'app-privacy', receipts: 'receipts' };
+const card = cards[page] ?? 'site';
+const tagline = s.meta.title.replace(/^bleib:\s*/, '');
+const cardText = page === 'home' ? s.hero.h1
+  : card !== 'site' && title ? title
+  : tagline.charAt(0).toLocaleUpperCase(lang) + tagline.slice(1);
+const shareImage = new URL(`/og/${card}-${lang}.png`, site).href;
+const shareAlt = lang === 'de' ? `bleib-Logo über „${cardText}“` : `The bleib logo above “${cardText}”`;
 const canonical = new URL(routes[page][lang], site).href;
 const enHref = new URL(routes[page].en, site).href;
 const deHref = new URL(routes[page].de, site).href;
@@ -47,12 +57,12 @@ const deHref = new URL(routes[page].de, site).href;
         <meta property="og:image" content={shareImage} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content={lang === 'de' ? 'bleib-Logo' : 'bleib logo'} />
+        <meta property="og:image:alt" content={shareAlt} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={shareTitle} />
         <meta name="twitter:description" content={shareDesc} />
         <meta name="twitter:image" content={shareImage} />
-        <meta name="twitter:image:alt" content={lang === 'de' ? 'bleib-Logo' : 'bleib logo'} />
+        <meta name="twitter:image:alt" content={shareAlt} />
         <script is:inline type="application/ld+json" set:html={JSON.stringify({
           '@context': 'https://schema.org',
           ...(page === 'home' ? {
@@ -74,22 +84,37 @@ const deHref = new URL(routes[page].de, site).href;
                 mainEntity: { '@id': new URL('/#software', site).href },
               },
               {
+                // One software entity for both languages; each language's page carries its own URL and language.
+                // In development: no installUrl and no offers until the store listings exist.
                 '@type': 'SoftwareApplication',
                 '@id': new URL('/#software', site).href,
                 name: 'bleib',
-                url: canonical,
-                inLanguage: lang,
+                url: new URL('/', site).href,
                 description: desc,
                 isAccessibleForFree: true,
                 license: 'https://spdx.org/licenses/AGPL-3.0-or-later.html',
                 applicationCategory: 'BrowserApplication',
-                operatingSystem: 'Chrome, Firefox',
+                runtimePlatform: 'Chrome, Edge, Firefox',
+                softwareRequirements: lang === 'de'
+                  ? 'Chrome, Edge oder Firefox auf einem Computer'
+                  : 'Chrome, Edge or Firefox on a computer',
                 creativeWorkStatus: s.hero.status,
                 publisher: { '@id': new URL('/#organization', site).href },
+              },
+              {
+                '@type': 'WebPage',
+                '@id': canonical,
+                url: canonical,
+                name: pageTitle,
+                description: desc,
+                inLanguage: lang,
+                isPartOf: { '@id': new URL('/#website', site).href },
+                about: { '@id': new URL('/#software', site).href },
               },
             ],
           } : {
             '@type': 'WebPage',
+            '@id': canonical,
             url: canonical,
             name: title ?? pageTitle,
             description: desc,
@@ -101,7 +126,9 @@ const deHref = new URL(routes[page].de, site).href;
     )}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
-    <link rel="preload" href="/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin />
+    {/* Inter is the face everyone off Apple sees; preloading it starts the download with the stylesheet, so text swaps
+        earlier. Apple devices use the system font first and fetch it once, cached with its hashed name. */}
+    <link rel="preload" href={interUrl} as="font" type="font/woff2" crossorigin />
     <meta name="theme-color" content="#f6e79a" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
     <script is:inline>

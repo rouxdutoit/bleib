@@ -113,7 +113,10 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
 <style>
   .doc-hero { padding: clamp(140px, 18vh, 190px) 0 clamp(64px, 8vw, 104px); }
   .hero-in { position: relative; z-index: 1; }
-  .doc-h1 { font-size: clamp(40px, 5.2vw, 60px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; max-width: 16ch; }
+  .doc-h1 { font-size: clamp(38px, 5.2vw, 60px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; max-width: 16ch; }
+  /* On the narrowest phones the title steps down to the Large Title size, so a long German word (Berechtigungen)
+     fits whole even where the browser can't hyphenate. */
+  @media (max-width: 359px) { .doc-h1 { font-size: 34px; line-height: 41px; } }
   .doc-intro { margin: 18px 0 0; max-width: 36em; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.5; color: var(--muted); }
   .doc-intro + .doc-intro { margin-top: 10px; }
   .doc-cta { margin-top: 28px; }
@@ -131,13 +134,18 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
   .hub-t { font-weight: 600; letter-spacing: -0.015em; }
   .hub-d { color: var(--on-card-muted); font-size: 15px; line-height: 1.4; }
   @media (max-width: 860px) { .hub { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  /* On the narrowest phones each tile takes the full width, so long German names (Berechtigungen) never collide. */
+  @media (max-width: 360px) { .hub { grid-template-columns: minmax(0, 1fr); } }
+  /* Long German words break at a syllable rather than run past their box (the page sets lang). */
+  .doc-h1, .sec-h, .hub-t, .tile-t, .cmp tbody th { -webkit-hyphens: auto; hyphens: auto; overflow-wrap: break-word; }
 
   /* Each section is its own band: a rail-to-rail divider with joiners on top, like the hero line. */
   .band { scroll-margin-top: 72px; }
   .doc-body .wrap { position: relative; z-index: 1; }
   .sec { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: clamp(24px, 5vw, 72px); padding: clamp(48px, 6vw, 80px) 0; }
   .sec-h { font-size: 22px; line-height: 28px; font-weight: 600; letter-spacing: -0.02em; }
-  .sec-c { min-width: 0; max-width: 680px; }
+  /* A long address (a licence URL) wraps rather than running past the column on a narrow phone. */
+  .sec-c { min-width: 0; max-width: 680px; overflow-wrap: break-word; }
   .sec-c > * + * { margin-top: 16px; }
   .sec-c p, .sec-c li, .sec-c address, .sec-c dd, .sec-c dt { font-size: 17px; line-height: 1.55; font-style: normal; }
   .sec-c p { margin: 0; }
@@ -191,6 +199,12 @@ const is = <K extends string>(b: Block, k: K): b is Extract<Block, Record<K, unk
     .cmp thead th, .cmp tbody td { width: 72px; }
     .cmp thead th { padding-left: 2px; padding-right: 2px; white-space: nowrap; }
     .cmp tbody th { padding-left: 16px; }
+  }
+  /* On the narrowest phones the two answer columns give up some width, so the benefit column has room. */
+  @media (max-width: 400px) {
+    .cmp thead th, .cmp tbody td { width: 64px; }
+    .cmp tbody th { padding-left: 12px; }
+    .cmp-ai + .cmp-ai { margin-left: -9px; }
   }
 
   /* Terminal lines as pills, each with a Copy button that briefly says Copied. */

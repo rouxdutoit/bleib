@@ -13,7 +13,6 @@ const { lang } = Astro.props;
 const s = t(lang).hero;
 const pv = t(lang).preview;
 const githubHref = GITHUB_URL || routes.developers[lang];
-const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
 ---
 {/* Scenes reserve their finished height the moment each is drawn (scripts/reserve.js). */}
 <script is:inline set:html={reserveScenes} />
@@ -37,13 +36,14 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
         {pv.tabs.map((x, i) => {
           const title = pv.title.replace('{ai}', x.ai);
           const facts = x.facts.map((f) => f.t).join(' · ');
-          const gaps = [readFor(x.typed), readFor([title, facts].join(' '))];
+          // Served finished (step 3), so the example reads without JavaScript; the script below rewinds it to step 0
+          // before the first paint when motion is allowed, and it plays in under five seconds (scripts/story.ts).
           return (
-            <div class="body" role="tabpanel" id={`ex-${i}`} aria-labelledby={`ex-tab-${i}`} hidden={i !== 0} data-steps="3" data-start="300" data-gaps={gaps.join(',')} data-step="0" {...(i === 0 ? { 'data-sv': 'scroll' } : {})}>
-              <p class="sr-only">{x.typed} {title}: {x.facts.map((f) => f.t).join(', ')}. {x.private}</p>
+            <div class="body s1 s2 s3" role="tabpanel" id={`ex-${i}`} aria-labelledby={`ex-tab-${i}`} tabindex="0" hidden={i !== 0} data-steps="3" data-start="600" data-gaps="700,1600" data-step="3" {...(i === 0 ? { 'data-sv': 'hero' } : {})}>
+              <p class="sr-only summary" data-typed={x.typed} data-title={title} data-private={x.private}>{x.typed} {title}: {x.facts.map((f) => f.t).join(', ')}. {x.private}</p>
+              <BleibCard title={title} facts={x.facts} controls={s.leaveOut} ask={{ q: pv.ask, add: pv.add }} />
               <div aria-hidden="true">
-                <BleibCard title={title} facts={x.facts} removable />
-                <Composer typed={x.typed}>
+                <Composer typed={x.typed} filled>
                   <div class="attach reveal at-3"><div class="reveal-in">
                     <div class="chip land at-3">
                       <span class="chip-app"><Mark size={14} /></span>
@@ -59,13 +59,29 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
         })}
       </Window>
     </figure>
-    <script is:inline>bleibReserve(document.currentScript.previousElementSibling)</script>
+    <script is:inline>
+      bleibReserve(document.currentScript.previousElementSibling);
+      // When motion is allowed, rewind the served (finished) example to its start before anything is painted, with
+      // transitions held so nothing visibly fades out; scripts/story.ts plays it once it's in view.
+      (function () {
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        document.querySelectorAll('.preview [data-steps]').forEach(function (sv) {
+          sv.classList.add('measuring');
+          sv.classList.remove('s1', 's2', 's3');
+          sv.dataset.step = '0';
+          var typer = sv.querySelector('[data-type]');
+          if (typer) typer.textContent = '';
+          void sv.offsetHeight;
+          sv.classList.remove('measuring');
+        });
+      })();
+    </script>
   </div>
 </section>
 
 <style>
   /* Room to breathe, like fazit.dev: more air above the eyebrow and between the buttons and the demo. */
-  .hero { padding: clamp(160px, 21vh, 208px) 0 clamp(64px, 9vw, 120px); }
+  .hero { padding: clamp(112px, 18vh, 192px) 0 clamp(64px, 9vw, 120px); }
   .hero-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
   .eyebrow { margin: 0 0 18px; font-size: 15px; font-weight: 500; color: var(--muted); }
   /* A hyphenated word (KI-Gedächtnis) never splits at its hyphen. */
@@ -79,12 +95,15 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
   /* A wrapped line breaks only at its comma, never mid-phrase. */
   .phrase { display: inline-block; }
 
-  /* The fill moment: as you type to a new AI, bleib adds just what it needs by itself; tap a pill to leave one out.
-     Plays on the first scroll (scripts/story.ts); each tab is another everyday example and replays when chosen. */
-  .preview { margin: clamp(80px, 10vw, 120px) 0 0; width: 100%; max-width: 520px; text-align: left; }
+  /* The fill moment: as you type to a new AI, bleib offers just what it needs above the box; you tap Add (a pill's ×
+     leaves that detail out), and it goes into your draft as an About me line.
+     Plays once the preview is in view (scripts/story.ts); each tab is another everyday example and replays when chosen. */
+  .preview { margin: clamp(48px, 7vw, 88px) 0 0; width: 100%; max-width: 520px; text-align: left; }
   /* The window keeps its finished height from the start (scripts/story.ts); like a chat, the message box sits at the bottom. */
   .body { --bleib-card-margin: 0 0 8px; padding: 16px; display: flex; flex-direction: column; justify-content: flex-end; }
   .body p { margin: 0; }
+  /* The open panel can be reached with Tab (WAI-ARIA tabs); its ring sits inside the window's rounded corners. */
+  .body:focus-visible { outline-offset: -4px; border-radius: 0 0 16px 16px; }
 
   /* Once bleib's card has been read, the chip lands in the message box. */
   .chip { position: relative; display: flex; align-items: center; gap: 10px; width: fit-content; max-width: calc(100% - 16px); margin: 8px 8px 0; padding: 8px 30px 8px 8px; border-radius: 14px; background: var(--fill); }
@@ -95,7 +114,8 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
   .chip-x { position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: var(--label-3); color: var(--cell); }
   .chip-x :global(svg) { width: 13px; height: 13px; display: block; }
   /* A standing promise, not a step: there from the start, centred under the field. */
-  .private { margin-top: 10px !important; display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--label-2); }
+  .private { margin-top: 10px !important; text-align: center; text-wrap: balance; color: var(--label-2); }
+  .lock { display: inline-block; margin-right: 5px; vertical-align: -2px; }
   .lock :global(svg) { width: 13px; height: 13px; display: block; }
   /* On phones the lines use Callout size; a line that still wraps breaks evenly, at its natural pause. */
   @media (max-width: 480px) { .sub { font-size: 16px; line-height: 21px; } }
@@ -105,30 +125,98 @@ const readFor = (text: string) => text.trim().split(/\s+/).length * 250;
 <script>
   import { play, reset } from '../scripts/story';
 
+  const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const tabs = [...document.querySelectorAll<HTMLButtonElement>('.preview [role="tab"]')];
-  const select = (tab: HTMLButtonElement) => {
-    const strip = tab.parentElement;
-    if (strip) {
-      strip.style.setProperty('--sel', String(tabs.indexOf(tab)));
-      // On narrow screens the strip overflows; slide it so the chosen tab shows in full.
-      const end = tab.offsetLeft + tab.offsetWidth > strip.clientWidth + 1;
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      strip.scrollTo({ left: end ? strip.scrollWidth - strip.clientWidth : 0, behavior: reduced ? 'auto' : 'smooth' });
-      strip.classList.toggle('at-end', end);
+  const panelOf = (tab: HTMLButtonElement) => document.getElementById(tab.getAttribute('aria-controls') ?? '');
+
+  /** The details still in the example, in order. */
+  const kept = (panel: HTMLElement) => [...panel.querySelectorAll<HTMLElement>('.facts li:not([data-out])')];
+
+  /** Keeps the hidden summary and the message box's "About me" chip in step with the pills. */
+  const sync = (panel: HTMLElement) => {
+    const details = kept(panel).map((li) => li.dataset.detail ?? '');
+    const summary = panel.querySelector<HTMLElement>('.summary');
+    if (summary) {
+      const { typed, title, private: note } = summary.dataset;
+      summary.textContent = details.length ? `${typed} ${title}: ${details.join(', ')}. ${note}` : `${typed} ${note}`;
     }
-    for (const t of tabs) {
-      const on = t === tab;
-      const panel = document.getElementById(t.getAttribute('aria-controls') ?? '');
-      t.setAttribute('aria-selected', String(on));
-      t.tabIndex = on ? 0 : -1;
-      if (!panel || panel.hidden !== on) continue;
-      panel.hidden = !on;
-      if (on) play(panel);
-      else reset(panel);
+    const facts = panel.querySelector<HTMLElement>('.chip-facts');
+    if (facts) facts.textContent = details.join(' · ');
+  };
+
+  /** Puts every pill, the card and the chip back as they were. */
+  const restore = (panel: HTMLElement) => {
+    panel.querySelectorAll<HTMLElement>('.facts li, .drop, .attach').forEach((el) => {
+      el.getAnimations().forEach((a) => a.cancel());
+      el.removeAttribute('data-out');
+      el.removeAttribute('style');
+      el.hidden = false;
+    });
+    sync(panel);
+  };
+
+  /** Folds an element away (fade, then its space closes), or at once with reduced motion. */
+  const fold = (el: HTMLElement, frames: Keyframe[], ms: number) => {
+    if (reduced()) { el.hidden = true; return; }
+    el.style.overflow = 'hidden';
+    el.animate(frames, { duration: ms, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)', fill: 'forwards' }).finished
+      .then(() => { if (el.dataset.out !== undefined || el.matches('.drop, .attach')) el.hidden = true; })
+      .catch(() => {});
+  };
+  const collapse = (el: HTMLElement) => fold(el, [{ height: `${el.offsetHeight}px`, opacity: 1 }, { height: '0px', opacity: 0 }], 320);
+
+  /** Leaves one detail out: its pill fades and closes up, the chip drops it, and the last one takes the card along. */
+  const leaveOut = (button: HTMLButtonElement) => {
+    const li = button.closest<HTMLElement>('li');
+    const panel = button.closest<HTMLElement>('[role="tabpanel"]');
+    const drop = button.closest<HTMLElement>('.drop');
+    if (!li || !panel || !drop || li.dataset.out !== undefined) return;
+    li.dataset.out = '';
+    sync(panel);
+    const left = kept(panel);
+    const next = left.find((other) => li.compareDocumentPosition(other) & Node.DOCUMENT_POSITION_FOLLOWING) ?? left.at(-1);
+    (next?.querySelector<HTMLButtonElement>('button') ?? panel).focus();
+    if (left.length) {
+      fold(li, [
+        { opacity: 1, transform: 'scale(1)', maxWidth: `${li.offsetWidth}px` },
+        { opacity: 0, transform: 'scale(0.6)', offset: 0.45 },
+        { opacity: 0, transform: 'scale(0.6)', maxWidth: '0px', paddingLeft: '0px', paddingRight: '0px', marginRight: '-6px' },
+      ], 300);
+    } else {
+      collapse(drop);
+      const attach = panel.querySelector<HTMLElement>('.attach');
+      if (attach) collapse(attach);
     }
   };
+
+  document.querySelectorAll<HTMLButtonElement>('.preview button.x').forEach((button) => button.addEventListener('click', () => leaveOut(button)));
+
+  /** Opens a tab's example; choosing a tab, even the open one, starts its example again from the beginning. */
+  const select = (tab: HTMLButtonElement, replay = false) => {
+    tab.parentElement?.style.setProperty('--sel', String(tabs.indexOf(tab)));
+    for (const t of tabs) {
+      const on = t === tab;
+      const panel = panelOf(t);
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      if (!panel) continue;
+      if (on && (panel.hidden || replay)) {
+        panel.hidden = false;
+        restore(panel);
+        play(panel);
+      } else if (!on && !panel.hidden) {
+        panel.hidden = true;
+        reset(panel);
+        restore(panel);
+      }
+    }
+    // With every detail back, hold the finished height again, in case a resize measured the example with pills left out.
+    const win = tab.closest<HTMLElement>('.window');
+    const reserve = (window as unknown as { bleibReserve?: (root: Element) => void }).bleibReserve;
+    if (win && reserve) reserve(win);
+  };
   tabs.forEach((tab, i) => {
-    tab.addEventListener('click', () => select(tab));
+    tab.addEventListener('click', () => select(tab, true));
     tab.addEventListener('keydown', (e) => {
       const to = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
       if (to === undefined) return;

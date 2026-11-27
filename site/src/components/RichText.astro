@@ -1,13 +1,18 @@
 ---
 /**
- * Body text with its email addresses, phone numbers, GitHub and licence links made clickable, in a heavier weight so they read as links
+ * Body text with its email addresses, phone numbers, GitHub and licence links, and internal links written [label](/path/), made clickable, in a heavier weight so they read as links
  * (the underline draws in on hover, global.css .lbl). Only these kinds are linked; all text stays escaped.
  */
 interface Props { text: string }
 const { text } = Astro.props;
-const LINK = /([A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}|(?:github\.com|apache\.org)\/[A-Za-z0-9_\-./]*[A-Za-z0-9_\-/]|\+\d[\d ]{6,}\d)/g;
-const parts = text.split(LINK).map((part, i) =>
-  i % 2 === 0 ? { text: part } : { text: part, href: part.includes('@') ? `mailto:${part}` : part.startsWith('+') ? `tel:${part.replace(/ /g, '')}` : `https://${part}` });
+const LINK = /(\[[^\]]+\]\(\/[^)\s]*\)|[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}|(?:github\.com|apache\.org)\/[A-Za-z0-9_\-./]*[A-Za-z0-9_\-/]|\+\d[\d ]{6,}\d)/g;
+const parts = text.split(LINK).map((part, i) => {
+  if (i % 2 === 0) return { text: part };
+  // An internal link written as [label](/path/), e.g. from one notice to the other.
+  const inner = part.match(/^\[([^\]]+)\]\((\/[^)\s]*)\)$/);
+  if (inner) return { text: inner[1], href: inner[2] };
+  return { text: part, href: part.includes('@') ? `mailto:${part}` : part.startsWith('+') ? `tel:${part.replace(/ /g, '')}` : `https://${part}` };
+});
 ---
 {parts.map((p) => p.href ? <a class="inline-link" href={p.href}><span class="lbl">{p.text}</span></a> : p.text)}
 

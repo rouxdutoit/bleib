@@ -1,9 +1,10 @@
 ---
 /** Short body text, one sentence per line (like the hero). Splits after . ! ? followed by a space. */
+import RichText from './RichText.astro';
 interface Props { text: string }
 const lines = Astro.props.text.split(/(?<=[.!?])\s+/);
 ---
-{lines.map((l) => <span>{l}</span>)}
+{lines.map((l) => <span><RichText text={l} /></span>)}
 <style>
   span { display: block; }
 </style>

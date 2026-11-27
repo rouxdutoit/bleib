@@ -1,21 +1,32 @@
 ---
 /**
  * bleib's card inside a chat, as in the hero and scene 2: what bleib did, each detail as a pill with its own symbol.
- * With `removable` each pill carries a small ×: tap it to take that detail out again (the hero leaves it out of the
- * message; scene 2 doesn't save it). When the last one goes, the card goes too.
+ * With `removable` each pill carries a small ×. On its own that × is a picture of the control (scene 2 sits inside a
+ * hidden illustration, where nothing may be focusable). With `controls` (the hero) each × is a real button, named
+ * from that text with {detail} filled in; Hero.astro takes the detail out of the example, and when the last one goes,
+ * the card goes too.
+ * With `ask` (the hero) it first appears as bleib's ask above the message box, the question and an Add button, as the
+ * extension shows it; one step later Add is pressed, the button fades and the title becomes what bleib did.
  * At step `at` it drops in from above and fades in, like an iPhone banner, into space it already holds, so nothing
  * around it moves. Spacing around it comes from --bleib-card-margin on the parent.
  */
 import Mark from './Mark.astro';
 import { icon, type IconName } from './icons';
-interface Props { title: string; facts: { t: string; icon: string }[]; removable?: boolean; at?: 2 | 3 }
-const { title, facts, removable = false, at = 2 } = Astro.props;
+interface Props { title: string; facts: { t: string; icon: string }[]; removable?: boolean; controls?: string; at?: 2 | 3; ask?: { q: string; add: string } }
+const { title, facts, removable = false, controls, at = 2, ask } = Astro.props;
+const x = removable || Boolean(controls);
 ---
-<div class={`drop at-${at}`}>
+<div class:list={['drop', `at-${at}`, { 'has-controls': controls, 'has-ask': ask }]}>
   <div class="fill">
-    <p class="fill-head"><span class="tile"><Mark size={12} /></span><span class="t-foot fill-title">{title}</span></p>
+    <p class="fill-head" aria-hidden={controls ? 'true' : undefined}><span class="tile"><Mark size={12} /></span><span class="t-foot fill-title">{ask ? <span class="swap"><span class="q">{ask.q}</span><span class="a">{title}</span></span> : title}</span>{ask && <span class="add t-foot">{ask.add}</span>}</p>
     <ul class="facts">{facts.map((f) => (
-      <li class="t-foot"><span class="sym" set:html={icon(f.icon as IconName)} />{f.t}{removable && <span class="x" set:html={icon('close')} />}</li>
+      <li class="t-foot" data-detail={f.t}>
+        <span class="sym" set:html={icon(f.icon as IconName)} />
+        {controls ? <span aria-hidden="true">{f.t}</span> : f.t}
+        {controls
+          ? <button type="button" class="x" aria-label={controls.replace('{detail}', f.t)} set:html={icon('close')} />
+          : x && <span class="x" aria-hidden="true" set:html={icon('close')} />}
+      </li>
     ))}</ul>
   </div>
 </div>
@@ -23,6 +34,9 @@ const { title, facts, removable = false, at = 2 } = Astro.props;
 <style>
   .drop { opacity: 0; transform: translateY(-14px); transition: opacity var(--t-fade) var(--ease), transform var(--t-open) var(--spring); }
   :global(.s2) .drop.at-2, :global(.s3) .drop.at-3 { opacity: 1; transform: none; }
+  /* With real buttons, the card can't be reached by keyboard until it has dropped in. */
+  .has-controls { visibility: hidden; transition: opacity var(--t-fade) var(--ease), transform var(--t-open) var(--spring), visibility 0s linear var(--t-open); }
+  :global(.s2) .has-controls.at-2, :global(.s3) .has-controls.at-3 { visibility: visible; transition-delay: 0s; }
   /* Two rows on every screen: the title, then each detail as a pill with its own symbol. */
   /* bleib's own notifications are always bleib yellow with black ink, in light and dark mode alike. */
   .fill { margin: var(--bleib-card-margin, 0); padding: 10px 10px 10px 12px; border-radius: 14px; background: #f6e79a; color: #0a0a0a; display: grid; gap: 8px; }
@@ -30,12 +44,29 @@ const { title, facts, removable = false, at = 2 } = Astro.props;
   /* The app icon: bleib's black tile with the yellow mark, as on an iPhone notification. */
   .tile { flex: none; width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
   .fill-title { min-width: 0; color: rgba(10, 10, 10, .72); text-wrap: balance; }
+  /* The ask: question first, then what bleib did, in the same place; the Add button keeps its space so nothing moves. */
+  .swap { display: grid; }
+  .swap > span { grid-area: 1 / 1; transition: opacity var(--t-fade) var(--ease); }
+  .swap .a { opacity: 0; }
+  :global(.s3) .has-ask .swap .q { opacity: 0; }
+  :global(.s3) .has-ask .swap .a { opacity: 1; }
+  .add { flex: none; margin-left: auto; padding: 3px 12px; border-radius: 999px; background: #0a0a0a; color: #f6e79a; font-weight: 600; transition: opacity var(--t-fade) var(--ease), transform var(--t-fade) var(--ease); }
+  :global(.s3) .has-ask .add { opacity: 0; transform: scale(0.92); }
   .facts { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
   .facts li { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px 4px 8px; border-radius: 999px; background: rgba(255, 255, 255, .6); color: #0a0a0a; font-weight: 500; white-space: nowrap; }
   .sym { display: grid; color: rgba(10, 10, 10, .62); }
   .sym :global(svg) { width: 14px; height: 14px; display: block; }
   /* A removable pill ends in a small ×, like a token in Mail's To field: tap it to leave that detail out. */
   .facts li:has(.x) { padding-right: 5px; }
-  .x { display: grid; place-items: center; width: 18px; height: 18px; margin: -1px 0 -1px 1px; border-radius: 50%; background: rgba(10, 10, 10, .1); color: rgba(10, 10, 10, .72); }
+  .x { position: relative; display: grid; place-items: center; width: 18px; height: 18px; margin: -1px 0 -1px 1px; padding: 0; border: 0; border-radius: 50%; background: rgba(10, 10, 10, .1); color: rgba(10, 10, 10, .72); font: inherit; }
   .x :global(svg) { width: 12px; height: 12px; display: block; }
+  /* The button answers a 44px tap around the 18px circle it shows. */
+  button.x { cursor: pointer; -webkit-tap-highlight-color: transparent; transition: background-color 0.15s var(--ease); }
+  button.x::before { content: ''; position: absolute; inset: -13px; border-radius: 50%; }
+  /* Below 768px the hero draws its preview at 92%, so the area grows to 48px to stay 44px on screen. */
+  @media (max-width: 767px) { button.x::before { inset: -15px; } }
+  button.x:active { background: rgba(10, 10, 10, .22); }
+  @media (hover: hover) { button.x:hover { background: rgba(10, 10, 10, .18); } }
+  /* The card is yellow in both themes, so its focus ring is always black. */
+  button.x:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 2px; border-radius: 50%; }
 </style>

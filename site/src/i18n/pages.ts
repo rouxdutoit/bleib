@@ -74,34 +74,33 @@ const en: Docs = {
         id: 'proposals',
         h: 'Save as you go',
         blocks: [
-          { p: 'Mention “I prefer aisle seats” in a chat, and bleib saves it quietly, with a × right there to remove it. Everyday preferences like travel, food, budget and work style save this way.' },
-          { p: 'Anything sensitive, like health, money, people or location, anything you keep private, or anything bleib isn’t sure about, asks first, in place: “Save to bleib?” Nothing sensitive is ever saved without your yes.' },
-          { p: 'You can also bring in what ChatGPT, Claude and Gemini remember. Download your data with each one’s own export (Google Takeout for Gemini) and drop the file into bleib. bleib reads it on your device, and you keep what you like.' },
+          { p: 'Mention “I prefer aisle seats” in a chat, and bleib saves it quietly, with a × right there to undo it. A few everyday preferences save this way: your seat, diet, drinks, units, answer length and tone.' },
+          { p: 'Anything else asks first, in place: “Save to bleib?” That includes health, money, people, places and anything bleib isn’t sure about. What you save this way stays private: bleib asks before it shares it.' },
+          { p: 'You can also bring in what ChatGPT, Claude and Gemini remember about you. bleib opens each one with a question ready. You press Send, copy the answer and choose Paste answer. Or use each one’s own data export (Google Takeout for Gemini) and drop the file into bleib. bleib reads it on your device, and you keep what’s right.' },
         ],
       },
       {
         id: 'permissions',
         h: 'Share just enough',
-        blocks: [{ p: 'bleib finds the smallest useful part of your memory on your device. The first time it shares with an AI, it asks once. After that, everyday details go into each new chat by themselves, as an “About me” line you can remove. Details bleib isn’t sure about wait for a tap, and sensitive information always asks.' }],
+        blocks: [{ p: 'bleib finds the smallest useful part of your memory on your device and suggests it just above the message box. Nothing goes in until you tap Add. Once you’ve added the same kind of detail twice in an account, you can choose Always add, and bleib adds that kind to new chats there by itself. Private and sensitive details always ask.' }],
       },
       {
         id: 'suggestions',
         h: 'Suggestions on your device',
         blocks: [
-          { p: 'bleib picks what a chat needs with its own small picker and simple rules for everyday tasks: trips, meals, cover letters, work email, gifts, fitness, shopping, going out, learning and health. It runs in your browser, on your device. Nothing you type is sent anywhere for this.' },
-          { p: 'On capable computers you can turn on Smarter suggestions. It stays off until you choose it. It uses Granite Embedding Multilingual R2 97M by IBM, also on your device. bleib converted IBM’s model to int8, so it’s smaller and faster, and trained small extra layers on top, on made-up example drafts, never on anyone’s data. bleib didn’t retrain the model itself.' },
-          { p: 'No model ever sends what you write off your device. bleib never reads the AI’s answers on its own, and the check before you send a message follows fixed rules on your device.' },
+          { p: 'bleib picks what a chat needs with a small classifier built into the extension and simple rules for everyday tasks: trips, meals, cover letters, work email, gifts, fitness, shopping, going out, learning and health. It also learns from your choices, on this device. Nothing you type is sent anywhere for this.' },
+          { p: 'Nothing bleib uses to choose sends what you write off your device. bleib never reads the AI’s answers on its own, and the check before you send a message follows fixed rules on your device.' },
         ],
       },
       {
         id: 'door',
         h: 'Start a new chat',
-        blocks: [{ p: 'Start typing your first request. If there’s a match and sharing is allowed, bleib adds a short “About me” line to your draft. You can remove it, and you decide when to send it. If a site changes, bleib pauses until it recognises the page again.' }],
+        blocks: [{ p: 'Start typing your first request in a new chat. If something in your bleib fits, bleib suggests it just above the message box. Tap Add, and it goes into your draft as a short “About me” line you can remove. You decide when to send it. If a site changes, bleib pauses until it recognises the page again.' }],
       },
       {
         id: 'receipts',
         h: 'A receipt for every share',
-        blocks: [{ p: 'Open your receipts to see what bleib shared, with which AI and when.' }],
+        blocks: [{ p: 'Open Activity in bleib to see what bleib added, for which AI and when.' }],
       },
       {
         id: 'limits',
@@ -117,11 +116,11 @@ const en: Docs = {
             yes: 'Yes',
             no: 'No',
             rows: [
-              ['One memory for every AI', true, false],
+              ['One memory for ChatGPT, Claude and Gemini', true, false],
               ['Kept encrypted on your device', true, false],
-              ['Each chat gets only what it needs', true, false],
+              ['You choose what each chat gets', true, false],
               ['A receipt for every share', true, false],
-              ['Comes with you when you switch AI', true, false],
+              ['Use it on all three without importing again', true, false],
               ['Free and open source', true, false],
             ],
           },
@@ -130,14 +129,14 @@ const en: Docs = {
       {
         id: 'recovery',
         h: 'Get your memory back',
-        blocks: [{ p: 'Keep your recovery kit somewhere safe, away from your device. If you forget your passphrase, it lets you unlock your memory again.' }],
+        blocks: [{ p: 'When bleib offers to protect your bleib, save both files: your recovery kit and an encrypted backup. Keep them somewhere other than this computer. You need both to restore your bleib in a new browser. The recovery kit is plain text that opens your bleib, so keep it private. Until you’ve saved them, your memories live only on this device.' }],
       },
     ],
   },
   works: {
     title: 'Works with your AI',
     description: 'Use your memory in ChatGPT, Claude and Gemini.',
-    intro: ['The bleib browser extension is in development for Chrome and Firefox. It works on recognised pages on these three sites.'],
+    intro: ['The bleib browser extension is in development for Chrome, Edge and Firefox on a computer. It works on recognised pages on these three sites.'],
     sections: [
       {
         h: 'In your browser',
@@ -149,12 +148,12 @@ const en: Docs = {
               { t: 'Gemini', d: 'gemini.google.com', ai: 'Gemini' },
             ],
           },
-          { p: 'On these sites bleib can save everyday preferences, each removable with one tap, and add a line about you to each new chat. If a site changes, bleib pauses until it recognises the page again.' },
+          { p: 'On these sites bleib can save everyday preferences, each with a × to undo, and suggest a line about you for each new chat. If a site changes, bleib pauses until it recognises the page again.' },
         ],
       },
       {
-        h: 'Coming later: AI tools on your computer',
-        blocks: [{ p: 'A desktop add-on will connect Claude Desktop, Claude Code, Cursor, OpenClaw and Hermes. Your memory stays in your bleib.' }],
+        h: 'In pilot: AI apps on your computer',
+        blocks: [{ p: 'With the bleib command-line tool, Claude Desktop, Claude Code, Codex, Cursor and Gemini CLI can ask your bleib for what a task needs. Each app starts on Ask, and your memory stays in your bleib. The tool isn’t published yet.' }],
       },
     ],
   },
@@ -162,24 +161,24 @@ const en: Docs = {
     title: 'Permissions',
     visual: 3,
     description: 'Choose what each AI can get from your memory.',
-    intro: ['bleib checks what a request needs on your device. It picks only the relevant minimum and asks once before the first share with each AI.'],
+    intro: ['bleib checks what a request needs on your device and suggests only the relevant minimum. Nothing goes into a chat until you add it.'],
     sections: [
       {
         h: 'Your choices',
         blocks: [
-          { p: 'bleib shows what it would share and where it would go. You can decline or choose how to allow it.' },
+          { p: 'bleib shows the details it would add, just above the message box. You can add them or leave them out.' },
           {
             rows: [
-              { k: 'Always add', v: 'Everyday details go into this AI’s new chats by themselves. You choose this for each AI.' },
-              { k: 'Just this once', v: 'Add them to this message only.' },
-              { k: 'Allow Once', v: 'For sensitive details: share for this request only.' },
+              { k: 'Add', v: 'Adds the details to this message, once. The first time with each AI account, this is the only choice.' },
+              { k: 'Always add', v: 'Offered once you’ve added the same kind of detail twice in the same account and workspace. bleib then adds that kind to new chats there by itself. Unused for 90 days, it switches off.' },
+              { k: 'Allow Once', v: 'For private or sensitive details: you check them in bleib and share them for this request only.' },
             ],
           },
         ],
       },
       {
         h: 'bleib always asks about sensitive information',
-        blocks: [{ p: 'Health, money, people and location always need your approval for each request. So does anything you keep private or bleib can’t confidently classify. Saving follows the same rule: these ask first, everyday preferences save quietly, and you remove them with one tap.' }],
+        blocks: [{ p: 'Health, money, relationships, location, contact details, identity and sign-in details always need your approval for each request. So does anything you mark private or bleib can’t confidently classify. Switching to another account or workspace asks again. Saving follows the same rule: a few everyday preferences save quietly, with a × to undo, and everything else asks first.' }],
       },
       {
         h: 'Change your mind',
@@ -191,7 +190,7 @@ const en: Docs = {
     title: 'Receipts',
     visual: 4,
     description: 'See what bleib shared from your memory.',
-    intro: ['Before every share, bleib saves a receipt on your device. Sharing only happens once the receipt is saved.'],
+    intro: ['Before bleib adds anything, it saves an encrypted receipt on your device. Only then does the text go into your draft.'],
     sections: [
       {
         h: 'What a receipt shows',
@@ -207,7 +206,7 @@ const en: Docs = {
       },
       {
         h: 'In a chat draft',
-        blocks: [{ p: 'The receipt records what bleib released for the draft. If the draft changes at the last moment, bleib may already have saved a receipt. The receipt stays if you remove the line, and is independent of whether you press Send.' }],
+        blocks: [{ p: 'A receipt records what bleib cleared for your draft, not what you sent. If the draft changes at the last moment, bleib may have saved a receipt but couldn’t add the text. Activity then shows “Insertion not confirmed”. The receipt stays if you remove the line, whether or not you press Send.' }],
       },
       {
         h: 'Check or export',
@@ -222,11 +221,11 @@ const en: Docs = {
     sections: [
       {
         h: 'Connecting AI',
-        blocks: [{ p: 'With the desktop add-on, coming later, the Model Context Protocol (MCP) will let AI tools on your computer ask bleib for what a task needs.' }],
+        blocks: [{ p: 'AI apps on your computer connect to bleib through the Model Context Protocol (MCP), using the bleib command-line tool, now in pilot.' }],
       },
       {
         h: 'Storing your memory',
-        blocks: [{ p: 'bleib encrypts your memories in your browser with AES-256-GCM, which your browser has built in. Your passphrase is strengthened with Argon2id. It reads the data exports from ChatGPT, Claude and Gemini on your device.' }],
+        blocks: [{ p: 'bleib seals each memory, your receipts and your backups with age (X25519), in your browser. The key that opens them is stored wrapped with AES-256-GCM, under a key derived from your passphrase with Argon2id, or from your passkey’s PRF output with HKDF-SHA-256. bleib reads the data exports from ChatGPT, Claude and Gemini on your device.' }],
       },
       {
         h: 'Exporting receipts',
@@ -238,7 +237,7 @@ const en: Docs = {
     title: 'Security and privacy',
     visual: 5,
     description: 'How bleib protects your memory and what it trusts on your device.',
-    intro: ['Only you can read your memory. It’s encrypted on your device, with no account and no tracking. Every share leaves a receipt, and the code is open.'],
+    intro: ['Your memory is encrypted on your device, with no account and no tracking. An AI site can read what bleib adds to your draft, even before you send. Every share leaves a receipt.'],
     cta: { label: 'Report a vulnerability', href: SECURITY_MAIL },
     sections: [
       {
@@ -250,6 +249,7 @@ const en: Docs = {
         blocks: [
           { p: 'bleib keeps your memory encrypted in your browser profile and unlocks it only for you. It relies on your browser and your device’s user account. Someone who controls them could see what bleib shows while it’s unlocked.' },
           { p: 'You keep your recovery kit somewhere else. bleib keeps no copy of it.' },
+          { p: 'If you choose a passkey, your password manager or security key keeps it under the name bleib.dev. bleib.dev never sees your memory.' },
         ],
       },
       {
@@ -264,8 +264,8 @@ const en: Docs = {
   },
   developers: {
     title: 'Developers',
-    description: 'The bleib desktop add-on, MCP and open formats, coming later.',
-    intro: ['bleib is free, open source and in development. It starts as a browser extension. A desktop add-on comes later and brings MCP, so AI tools on your computer can connect.'],
+    description: 'Connect AI apps on your computer, MCP and open formats.',
+    intro: ['bleib is free, open source and in development. It starts as a browser extension. AI apps on your computer can connect through MCP, in pilot.'],
     cta: { label: 'View on GitHub', href: GITHUB_URL },
     sections: [
       // Once @bleib/wallet is on npm (INSTALL.walletCli), the desktop apps connect with one line instead.
@@ -276,11 +276,12 @@ const en: Docs = {
           { commands: ['npx @bleib/wallet connect claude-desktop', 'npx @bleib/wallet connect claude-code', 'npx @bleib/wallet connect codex', 'npx @bleib/wallet connect cursor', 'npx @bleib/wallet connect gemini'] },
         ],
       } : {
-        h: 'Coming later: the desktop add-on',
+        h: 'In pilot: connect your AI apps',
         blocks: [
-          { p: 'The add-on will let Claude Desktop, Claude Code, Cursor, OpenClaw, Hermes and other MCP clients ask bleib for what a task needs. Each tool gets its own connection, and the person approves what it may see.' },
-          { p: 'Agents will never unlock bleib, widen their own access or approve themselves.' },
-          { p: 'Follow along on GitHub, and tell us what you need.' },
+          { p: 'The bleib command-line tool connects Claude Desktop, Claude Code, Codex, Cursor and Gemini CLI to your bleib through MCP. Each app gets its own connection and starts on Ask, and you approve what it may see.' },
+          { p: 'Coding tools can also notice instructions you repeat and suggest them as working rules. You approve each one. If you allow it, bleib keeps your everyday rules in the tool’s own rules file, which the tool can read even while your bleib is locked.' },
+          { p: 'Agents never unlock bleib, widen their own access or approve themselves.' },
+          { p: 'The tool is in pilot and not yet published. Follow along on GitHub, and tell us what you need.' },
         ],
       },
       {
@@ -289,7 +290,7 @@ const en: Docs = {
           { p: 'bleib stands on open work by others. Thank you.' },
           {
             refs: [
-              { name: 'Model Context Protocol', href: 'https://modelcontextprotocol.io', v: 'How AI tools will connect to the desktop add-on.' },
+              { name: 'Model Context Protocol', href: 'https://modelcontextprotocol.io', v: 'How AI apps on your computer connect to bleib.' },
               { name: 'OpenClaw', href: 'https://docs.openclaw.ai/concepts/memory', v: 'The workspace memory format bleib reads and writes.' },
               { name: 'Hermes Agent', href: 'https://hermes-agent.nousresearch.com', v: 'By Nous Research; uses the same workspace format.' },
               { name: 'Human Context Protocol', href: 'https://github.com/loyalagents/hcp-spec', v: 'By Loyal Agents (Stanford Digital Economy Lab and Consumer Reports); the model for permissions and logs.' },
@@ -297,7 +298,7 @@ const en: Docs = {
               { name: 'W3C Data Privacy Vocabulary', href: 'https://w3id.org/dpv', v: 'The kinds of personal information.' },
               { name: 'OSAP consent receipts', href: 'https://datatracker.ietf.org/doc/draft-zeng-osap-consent-receipts/', v: 'IETF draft; the receipt export.' },
               { name: 'Memory Projection Record', href: 'https://datatracker.ietf.org/doc/draft-ferro-schrock-memory-projection-record/', v: 'IETF draft; a fingerprint of exactly what was released.' },
-              { name: 'age', href: 'https://age-encryption.org', v: 'By Filippo Valsorda; will encrypt the desktop add-on’s files.' },
+              { name: 'age', href: 'https://age-encryption.org', v: 'By Filippo Valsorda; the format that encrypts your memories, receipts and backups.' },
             ],
           },
         ],
@@ -312,11 +313,22 @@ const en: Docs = {
               { name: 'Inter', href: 'https://rsms.me/inter/', v: 'By the Inter Project Authors, SIL Open Font License 1.1. The typeface in bleib and on this site.' },
               { name: 'Material Symbols Rounded', href: 'https://fonts.google.com/icons', v: 'By Google, Apache-2.0. The symbols in bleib and on this site.' },
               { name: 'LobeHub Icons', href: 'https://github.com/lobehub/lobe-icons', v: 'By LobeHub, MIT licence. The ChatGPT, Claude and Gemini logos. The logos are trademarks of their owners.' },
-              { name: 'Granite Embedding Multilingual R2 97M', href: 'https://huggingface.co/ibm-granite/granite-embedding-97m-multilingual-r2', v: 'By IBM, licensed under Apache-2.0, including its tokenizer. Used for Smarter suggestions if you turn them on. bleib converted it to int8, so it’s smaller and faster, and trained small layers on top; bleib didn’t retrain the model itself.' },
-              { name: 'ONNX Runtime Web', href: 'https://onnxruntime.ai', v: 'By Microsoft, MIT licence. Runs Smarter suggestions in your browser.' },
+              { name: 'age-encryption (typage)', href: 'https://github.com/FiloSottile/typage', v: 'By Filippo Valsorda, BSD-3-Clause. Encrypts your memories, receipts and backups.' },
             ],
           },
-          { p: 'Apache-2.0 licence text: apache.org/licenses/LICENSE-2.0. The full licence files ship with the extension.' },
+          { p: 'Apache-2.0 licence text: apache.org/licenses/LICENSE-2.0.' },
+        ],
+      },
+      {
+        h: 'Optional on-device model',
+        blocks: [
+          { p: 'A separate build, not the store version, can add Smarter suggestions. bleib converted IBM’s model to int8, so it’s smaller and faster, and trained small layers on top, on made-up example drafts, never on anyone’s data. bleib didn’t retrain the model itself.' },
+          {
+            refs: [
+              { name: 'Granite Embedding Multilingual R2 97M', href: 'https://huggingface.co/ibm-granite/granite-embedding-97m-multilingual-r2', v: 'By IBM, Apache-2.0, including its tokenizer.' },
+              { name: 'ONNX Runtime Web', href: 'https://onnxruntime.ai', v: 'By Microsoft, MIT licence. Runs the model in your browser.' },
+            ],
+          },
         ],
       },
       {
@@ -333,7 +345,7 @@ const en: Docs = {
       },
       {
         h: 'Get involved',
-        blocks: [{ p: 'The code is on GitHub at github.com/rouxdutoit/bleib. Open an issue, send a pull request, or write to hello@bleib.dev. Please report security issues to security@bleib.dev, not in public.' }],
+        blocks: [{ p: 'The site, the wallet and the docs are on GitHub at github.com/rouxdutoit/bleib. The extension’s code joins them with its first public release. Open an issue, send a pull request, or write to hello@bleib.dev. Please report security issues to security@bleib.dev, not in public.' }],
       },
 
     ],
@@ -345,7 +357,7 @@ const en: Docs = {
     sections: [
       {
         h: 'Optional sync, later',
-        blocks: [{ p: 'Like Bitwarden, bleib plans to charge only for convenience. The planned hosted sync is optional and end-to-end encrypted. Your device will encrypt your memory before uploading it, so we can’t read it.' }],
+        blocks: [{ p: 'Later we plan to offer optional sync between your devices, for a fee. Your device encrypts your memory before it leaves, so we can’t read it.' }],
       },
     ],
   },
@@ -353,7 +365,7 @@ const en: Docs = {
     title: 'Website privacy',
     description: 'How the bleib website handles your data.',
     intro: [
-      'This notice covers the website and early access. See App privacy for how bleib and its browser extension handle your memory.',
+      'This notice covers the website and early access. See [App privacy](/privacy/app/) for how bleib and its browser extension handle your memory.',
     ],
     sections: [
       {
@@ -379,8 +391,9 @@ const en: Docs = {
               { k: 'Where', v: 'A private Bunny Storage zone in Frankfurt am Main, not replicated (see Hosting)' },
             ],
           },
-          { p: 'To stop automated sign-ups, we count attempts per IP address for up to two minutes. The counter is kept only in the server’s memory, under a shortened one-way hash of the address, never the address itself, and is never written to disk. The legal basis is Article 6(1)(f) GDPR, our legitimate interest in protecting the form.' },
-          { p: 'You can withdraw your consent at any time by writing to privacy@bleib.dev. We delete your entry and confirm by email.' },
+          { p: 'To stop automated sign-ups, we count attempts per IP address for one minute. The counter is kept only in the server’s memory, under a shortened one-way hash of the address, never the address itself. Each count is deleted within two minutes and is never written to disk or logged. The legal basis is Article 6(1)(f) GDPR, our legitimate interest in protecting the form.' },
+          { p: 'Giving us your address is optional. Without it we can’t send you the launch email.' },
+          { p: 'You can withdraw your consent at any time by writing to privacy@bleib.dev. We delete your entry and confirm by email. Withdrawing doesn’t affect what we did with your consent before.' },
         ],
       },
       { h: 'Local storage', blocks: [{ p: 'If you switch between light and dark mode, your browser remembers the choice in its local storage. It stays in your browser and is never sent to us. You can clear it in your browser settings.' }] },
@@ -398,13 +411,13 @@ const en: Docs = {
         h: 'Your rights',
         blocks: [{ p: 'Under the GDPR you can request access (Article 15), rectification (Article 16), erasure (Article 17), restriction of processing (Article 18) and data portability (Article 20). You can object to processing based on legitimate interest (Article 21) and withdraw consent at any time (Article 7(3)). You can lodge a complaint with a supervisory authority (Article 77), for example the Bayerisches Landesamt für Datenschutzaufsicht, Promenade 18, 91522 Ansbach, Germany.' }],
       },
-      { h: 'Changes', blocks: [{ p: 'We update this notice when what we do changes. Last updated: 25 November 2026.' }] },
+      { h: 'Changes', blocks: [{ p: 'We update this notice when what we do changes. Last updated: 27 November 2026.' }] },
     ],
   },
   appPrivacy: {
     title: 'App privacy',
     description: 'How bleib and its browser extension handle your memory.',
-    intro: ['Only you can read your memory. bleib is in development and starts as a browser extension, with no bleib account, telemetry, analytics or automatic crash reporting.'],
+    intro: ['Your memory is encrypted on your device, and you choose what each AI gets. bleib is in development and starts as a browser extension, with no bleib account, telemetry, analytics or automatic crash reporting.'],
     sections: [
       {
         h: 'In short',
@@ -413,7 +426,7 @@ const en: Docs = {
             never: [
               'Your memory is encrypted on your device. No bleib server ever receives it.',
               'No account, no tracking, no analytics.',
-              'An AI gets only what bleib places in its message box, and private details always ask first.',
+              'An AI gets only what bleib adds to its message box, and it can read that before you send. Private details always ask first.',
               'Never sold, never used for advertising or credit decisions.',
             ],
           },
@@ -423,9 +436,10 @@ const en: Docs = {
         h: 'What the extension reads',
         blocks: [
           { p: 'bleib works only on the AI sites you allow. It asks for chatgpt.com, claude.ai and gemini.google.com one at a time, and you can take access back at any time.' },
-          { p: 'On those sites, bleib checks what you type in the draft, on your device. It finds relevant memories, recognises preferences to save and spots likely secrets, such as passwords or card numbers, before you send. This check runs on your device and doesn’t keep what it finds.' },
-          { p: 'When you bring in your memories, bleib reads the export file you choose, or the text you paste with Paste answer. It reads your clipboard only at that moment. Everything is processed on your device, and nothing is uploaded.' },
-          { p: 'Suggestions are worked out on your device, by bleib’s own small picker or, if you turn on Smarter suggestions, by IBM’s Granite Embedding model. No model sends what you write anywhere. bleib never reads the AI’s answers on its own.' },
+          { p: 'On those sites, bleib checks what you type in the draft, on your device. It finds relevant memories, recognises preferences to save and spots likely secrets, such as passwords or card numbers, before you send. This check runs on your device and doesn’t store what it finds. If you tell bleib something isn’t a secret, it keeps a salted fingerprint of it until you close the browser, so it doesn’t ask again.' },
+          { p: 'When you bring in your memories, bleib reads the export file you choose, or the answer you paste with Paste answer. In Chrome and Edge it reads your clipboard for this, if you allow it, and only at that moment. In Firefox you paste the answer yourself. Everything is processed on your device, and nothing is uploaded.' },
+          { p: 'Suggestions are worked out on your device by a small classifier built into bleib, which learns from your choices on this device. Nothing you write is sent anywhere for this. bleib never reads the AI’s answers on its own.' },
+          { p: 'If you choose a passkey, bleib asks for access to bleib.dev, so your browser can save the passkey under that name. Your password manager or security key holds it, and no memory or wallet data goes to bleib.dev. bleib.dev can also ask whether bleib is installed and which version. It learns nothing else.' },
         ],
       },
       {
@@ -434,16 +448,25 @@ const en: Docs = {
           { list: [
             'Your memories and entries waiting for review, including their source.',
             'Permissions, details of the AIs you use, and receipts for shares.',
+            'Working rules you save. If you turn on rule learning for a coding tool, also encrypted matching features and a fingerprint of each conversation’s ID. A rule is kept as text only once you save it.',
           ] },
           { p: 'bleib encrypts these records in your browser, on your device. No bleib server receives your memory or your drafts.' },
-          { p: 'If you turn on automatic backup, bleib writes an encrypted backup to a folder you choose. Backups, recovery kits and exports go only where you save them.' },
+          { p: 'In Chrome and Edge you can turn on automatic backup, and bleib writes an encrypted backup to a folder you choose. In Firefox you save each backup yourself. Backups, recovery kits and exports go only where you save them. Your recovery kit and an export are readable by anyone who opens them, so keep them private.' },
         ],
       },
       {
         h: 'What AI providers can see',
         blocks: [
-          { p: 'bleib picks the relevant minimum on your device and saves a receipt before sharing. As soon as it places details in an AI’s message box, the AI provider can read them, even before you press Send. You can remove them from the draft, but the provider may already have seen them. The provider’s privacy policy applies to what it receives.' },
-          { p: 'If you connect a supported AI app, bleib shares only details your choices allow. bleib asks each time before sharing private details. The app may keep or forward what it receives.' },
+          { p: 'bleib picks the relevant minimum on your device and saves a receipt before adding anything. As soon as it places details in an AI’s message box, the AI provider can read them, even before you press Send. You can remove them from the draft, but the provider may already have seen them. The provider’s privacy policy applies to what it receives.' },
+          { p: 'If you choose Always add for a kind of detail, bleib adds it to new chats in that account by itself. To tell accounts apart, it reads account hints on the page, and the receipt keeps a one-way fingerprint of that hint.' },
+          { p: 'If you connect an AI app on your computer, it starts on Ask and gets only details your choices allow. bleib asks each time before sharing private details. The app may keep or forward what it receives.' },
+        ],
+      },
+      {
+        h: 'Working rules in AI apps',
+        blocks: [
+          { p: 'If you connect a coding tool and turn on rule learning, the tool’s hook passes each prompt you submit to bleib on this device, with a fingerprint of the conversation’s ID. bleib looks for instructions you repeat and suggests them as rules. Nothing leaves your device, and a rule is saved only when you approve it.' },
+          { p: 'If you allow it, bleib keeps your everyday rules in the tool’s own rules file, such as CLAUDE.md or AGENTS.md. That copy is plain text, so the tool can read it even while your bleib is locked. Untick the option to stop future writes, and run bleib sync with --remove to delete the copy.' },
         ],
       },
       {
@@ -459,11 +482,11 @@ const en: Docs = {
       },
       {
         h: 'Manage your data',
-        blocks: [{ p: 'You can review and change your memory and disconnect an AI in bleib. Removing the extension deletes its data from your browser. Make a backup first. For copies already held by an AI provider or a connected app, use its own controls.' }],
+        blocks: [{ p: 'You can review and change your memory and disconnect an AI in bleib. Removing the extension deletes its data from your browser, so save your recovery kit and an encrypted backup first. Files you saved, such as exports and backups, and copies in other tools stay where they are, so delete them there. For copies already held by an AI provider or a connected app, use its own controls.' }],
       },
       {
         h: 'Contact',
-        blocks: [{ p: 'For questions about bleib and your data, write to privacy@bleib.dev. Last updated 26 November 2026.' }],
+        blocks: [{ p: 'For questions about bleib and your data, write to privacy@bleib.dev. Last updated 27 November 2026.' }],
       },
     ],
   },
@@ -505,34 +528,33 @@ const de: Docs = {
         id: 'proposals',
         h: 'Beim Schreiben speichern',
         blocks: [
-          { p: 'Schreib im Chat zum Beispiel „Ich buche immer einen Gangplatz“, und bleib speichert es im Hintergrund. Mit dem × daneben entfernst du es direkt wieder. So speichert bleib alltägliche Vorlieben wie Reisen, Essen, Budget und Arbeitsweise.' },
-          { p: 'Alles Sensible wie Gesundheit, Geld, Personen oder Aufenthaltsort, alles, was du privat hältst, und alles, was bleib nicht sicher einordnen kann, fragt vorher, direkt im Chat: „In bleib sichern?“ Nichts Sensibles wird ohne dein Ja gespeichert.' },
-          { p: 'Du kannst auch mitnehmen, was ChatGPT, Claude und Gemini über dich gespeichert haben. Lade deine Daten über den Export des jeweiligen Anbieters herunter (bei Gemini über Google Takeout) und zieh die Datei in bleib. bleib liest sie auf deinem Gerät, und du behältst, was dir gefällt.' },
+          { p: 'Schreib im Chat zum Beispiel „Ich buche immer einen Gangplatz“, und bleib speichert es im Hintergrund. Mit dem × daneben machst du es direkt rückgängig. So speichert bleib ein paar alltägliche Vorlieben: Sitzplatz, Ernährung, Getränke, Maßeinheiten, Antwortlänge und Ton.' },
+          { p: 'Bei allem anderen fragt bleib vorher, direkt im Chat: „In bleib speichern?“ Das gilt für Gesundheit, Geld, Menschen, Orte und alles, was bleib nicht sicher einordnen kann. Was du so speicherst, bleibt privat: Bevor bleib es teilt, fragt es dich.' },
+          { p: 'Du kannst auch mitnehmen, was ChatGPT, Claude und Gemini über dich wissen. bleib öffnet jede KI mit einer fertigen Frage. Du schickst sie ab, kopierst die Antwort und wählst „Antwort einfügen“. Oder du nutzt den Datenexport des Anbieters (bei Gemini Google Takeout) und ziehst die Datei in bleib. bleib liest alles auf deinem Gerät, und du behältst, was stimmt.' },
         ],
       },
       {
         id: 'permissions',
         h: 'Nur das Nötige teilen',
-        blocks: [{ p: 'bleib sucht auf deinem Gerät den kleinsten nützlichen Teil deines Gedächtnisses. Wenn es zum ersten Mal mit einer KI teilt, fragt es einmal. Danach kommen alltägliche Angaben von selbst in jeden neuen Chat, als „Über mich“-Zeile, die du entfernen kannst. Angaben, bei denen bleib unsicher ist, warten auf einen Tipp, und bei sensiblen Angaben fragt bleib immer.' }],
+        blocks: [{ p: 'bleib sucht auf deinem Gerät den kleinsten nützlichen Teil deines Gedächtnisses und schlägt ihn direkt über dem Nachrichtenfeld vor. Nichts kommt hinein, bevor du auf „Hinzufügen“ tippst. Hast du Angaben derselben Art in einem Konto zweimal hinzugefügt, kannst du „Immer hinzufügen“ wählen. Dann ergänzt bleib diese Art dort in neuen Chats von selbst. Bei privaten und sensiblen Angaben fragt bleib immer.' }],
       },
       {
         id: 'suggestions',
         h: 'Vorschläge auf deinem Gerät',
         blocks: [
-          { p: 'bleib wählt mit einer eigenen kleinen Auswahl und einfachen Regeln für Alltagsaufgaben aus, was ein Chat braucht: Reisen, Essen, Bewerbungen, Arbeitsmails, Geschenke, Fitness, Einkaufen, Ausgehen, Lernen und Gesundheit. Das läuft in deinem Browser auf deinem Gerät. Nichts, was du schreibst, wird dafür irgendwohin gesendet.' },
-          { p: 'Auf leistungsstarken Computern kannst du „Klügere Vorschläge“ einschalten. Sie bleiben aus, bis du sie wählst. Sie nutzen Granite Embedding Multilingual R2 97M von IBM, ebenfalls auf deinem Gerät. bleib hat IBMs Modell in int8 umgewandelt, damit es kleiner und schneller ist, und kleine zusätzliche Schichten darauf trainiert, mit erfundenen Beispielentwürfen, nie mit Daten von Menschen. Das Modell selbst hat bleib nicht neu trainiert.' },
-          { p: 'Kein Modell sendet je, was du schreibst, von deinem Gerät weg. bleib liest die Antworten der KI nie von sich aus, und die Prüfung vor dem Senden folgt festen Regeln auf deinem Gerät.' },
+          { p: 'bleib wählt mit einer kleinen Klassifizierung, die in der Erweiterung steckt, und einfachen Regeln für Alltagsaufgaben aus, was ein Chat braucht: Reisen, Essen, Bewerbungen, Arbeitsmails, Geschenke, Fitness, Einkaufen, Ausgehen, Lernen und Gesundheit. Dabei lernt es aus deinen Entscheidungen, auf diesem Gerät. Nichts, was du schreibst, wird dafür irgendwohin gesendet.' },
+          { p: 'Nichts, womit bleib auswählt, sendet, was du schreibst, von deinem Gerät weg. bleib liest die Antworten der KI nie von sich aus, und die Prüfung vor dem Senden folgt festen Regeln auf deinem Gerät.' },
         ],
       },
       {
         id: 'door',
         h: 'Einen neuen Chat beginnen',
-        blocks: [{ p: 'Schreib deine erste Anfrage. Wenn etwas passt und die Freigabe vorliegt, ergänzt bleib eine kurze „Über mich“-Zeile im Entwurf. Du kannst sie entfernen, und du entscheidest, wann du ihn abschickst. Ändert sich eine Seite, pausiert bleib, bis es sie wieder erkennt.' }],
+        blocks: [{ p: 'Schreib in einem neuen Chat deine erste Anfrage. Passt etwas aus deinem bleib, schlägt bleib es direkt über dem Nachrichtenfeld vor. Tippst du auf „Hinzufügen“, kommt es als kurze „Über mich“-Zeile in deinen Entwurf. Du kannst sie entfernen, und du entscheidest, wann du ihn abschickst. Ändert sich eine Seite, pausiert bleib, bis es sie wieder erkennt.' }],
       },
       {
         id: 'receipts',
         h: 'Ein Beleg für jede Freigabe',
-        blocks: [{ p: 'In deinen Belegen siehst du, was bleib wann mit welcher KI geteilt hat.' }],
+        blocks: [{ p: 'Unter „Aktivitäten“ in bleib siehst du, was bleib wann für welche KI eingefügt hat.' }],
       },
       {
         id: 'limits',
@@ -548,11 +570,11 @@ const de: Docs = {
             yes: 'Ja',
             no: 'Nein',
             rows: [
-              ['Ein Gedächtnis für jede KI', true, false],
+              ['Ein Gedächtnis für ChatGPT, Claude und Gemini', true, false],
               ['Verschlüsselt auf deinem Gerät', true, false],
-              ['Jeder Chat bekommt nur das Nötige', true, false],
+              ['Du bestimmst, was jeder Chat bekommt', true, false],
               ['Ein Beleg für jede Weitergabe', true, false],
-              ['Kommt mit, wenn du die KI wechselst', true, false],
+              ['Auf allen dreien nutzbar, ohne neuen Import', true, false],
               ['Kostenlos und quelloffen', true, false],
             ],
           },
@@ -561,14 +583,14 @@ const de: Docs = {
       {
         id: 'recovery',
         h: 'Dein Gedächtnis zurückholen',
-        blocks: [{ p: 'Bewahre dein Wiederherstellungs-Kit an einem sicheren Ort außerhalb deines Geräts auf. Wenn du dein Passwort vergisst, entsperrst du damit dein Gedächtnis wieder.' }],
+        blocks: [{ p: 'Wenn bleib anbietet, dein bleib zu schützen, speichere beide Dateien: dein Wiederherstellungspaket und eine verschlüsselte Sicherung. Bewahre sie außerhalb dieses Computers auf. Um dein bleib in einem neuen Browser wiederherzustellen, brauchst du beide. Das Wiederherstellungspaket ist eine lesbare Textdatei, die dein bleib öffnet, also halte es privat. Bis du beide gespeichert hast, liegen deine Erinnerungen nur auf diesem Gerät.' }],
       },
     ],
   },
   works: {
     title: 'Funktioniert mit deiner KI',
     description: 'Nutze dein Gedächtnis in ChatGPT, Claude und Gemini.',
-    intro: ['Die Browser-Erweiterung für Chrome und Firefox ist in Entwicklung. Sie funktioniert auf Seiten dieser drei Anbieter, die bleib erkennt.'],
+    intro: ['Die Browser-Erweiterung für Chrome, Edge und Firefox auf dem Computer ist in Entwicklung. Sie funktioniert auf Seiten dieser drei Anbieter, die bleib erkennt.'],
     sections: [
       {
         h: 'Im Browser',
@@ -580,12 +602,12 @@ const de: Docs = {
               { t: 'Gemini', d: 'gemini.google.com', ai: 'Gemini' },
             ],
           },
-          { p: 'Auf diesen Seiten kann bleib alltägliche Vorlieben speichern und eine Zeile über dich in jeden neuen Chat einfügen. Jede gespeicherte Angabe entfernst du mit einem Tipp. Ändert sich eine Seite, pausiert bleib, bis es sie wieder erkennt.' },
+          { p: 'Auf diesen Seiten kann bleib alltägliche Vorlieben speichern, jede mit einem × zum Rückgängigmachen, und für jeden neuen Chat eine Zeile über dich vorschlagen. Ändert sich eine Seite, pausiert bleib, bis es sie wieder erkennt.' },
         ],
       },
       {
-        h: 'Später: KI-Tools auf deinem Rechner',
-        blocks: [{ p: 'Ein Desktop-Add-on verbindet später Claude Desktop, Claude Code, Cursor, OpenClaw und Hermes. Dein Gedächtnis bleibt in deinem bleib.' }],
+        h: 'Im Pilotbetrieb: KI-Apps auf deinem Rechner',
+        blocks: [{ p: 'Mit dem Befehlszeilenprogramm von bleib können Claude Desktop, Claude Code, Codex, Cursor und Gemini CLI bei deinem bleib anfragen, was eine Aufgabe braucht. Anfangs fragt bleib bei jeder App jedes Mal nach, und dein Gedächtnis bleibt in deinem bleib. Das Programm ist noch nicht veröffentlicht.' }],
       },
     ],
   },
@@ -593,24 +615,24 @@ const de: Docs = {
     title: 'Berechtigungen',
     visual: 3,
     description: 'Entscheide, was jede KI aus deinem Gedächtnis sehen darf.',
-    intro: ['bleib wählt auf deinem Gerät nur aus, was zur Anfrage passt. Bevor eine KI zum ersten Mal etwas bekommt, fragt bleib dich einmal.'],
+    intro: ['bleib prüft auf deinem Gerät, was eine Anfrage braucht, und schlägt nur das Nötige vor. In einen Chat kommt nichts, bevor du es hinzufügst.'],
     sections: [
       {
         h: 'Du entscheidest',
         blocks: [
-          { p: 'bleib zeigt dir, was es teilen würde und wohin es geht. Du kannst ablehnen oder eine Freigabe erteilen.' },
+          { p: 'bleib zeigt dir direkt über dem Nachrichtenfeld, welche Angaben es hinzufügen würde. Du kannst sie hinzufügen oder weglassen.' },
           {
             rows: [
-              { k: 'Immer hinzufügen', v: 'Alltägliche Angaben kommen von selbst in neue Chats mit dieser KI. Das entscheidest du für jede KI einzeln.' },
-              { k: 'Nur dieses Mal', v: 'Nur für diese Nachricht.' },
-              { k: 'Einmal erlauben', v: 'Für sensible Angaben: gilt nur für diese Anfrage.' },
+              { k: 'Hinzufügen', v: 'Fügt die Angaben einmal in diese Nachricht ein. Beim ersten Mal mit einem KI-Konto ist das die einzige Wahl.' },
+              { k: 'Immer hinzufügen', v: 'Gibt es, sobald du Angaben derselben Art im selben Konto und Arbeitsbereich zweimal hinzugefügt hast. Dann ergänzt bleib diese Art dort in neuen Chats von selbst. Nach 90 Tagen ohne Nutzung schaltet es sich ab.' },
+              { k: 'Einmal erlauben', v: 'Für private oder sensible Angaben: Du prüfst sie in bleib und teilst sie nur für diese Anfrage.' },
             ],
           },
         ],
       },
       {
         h: 'Bei sensiblen Angaben fragt bleib jedes Mal',
-        blocks: [{ p: 'Bei Angaben zu Gesundheit, Geld, Personen und Aufenthaltsort braucht bleib für jede Anfrage deine Zustimmung. Das gilt auch für alles, was du privat hältst oder was bleib nicht sicher einordnen kann. Beim Speichern gilt dieselbe Regel: Diese Angaben fragen vorher, alltägliche Vorlieben speichert bleib im Hintergrund, und du entfernst sie mit einem Tipp.' }],
+        blocks: [{ p: 'Bei Gesundheit, Geld, Beziehungen, Aufenthaltsort, Kontaktdaten, Identität und Anmeldedaten braucht bleib für jede Anfrage deine Zustimmung. Das gilt auch für alles, was du als privat markierst oder was bleib nicht sicher einordnen kann. Wechselst du zu einem anderen Konto oder Arbeitsbereich, fragt bleib neu. Beim Speichern gilt dieselbe Regel: Ein paar alltägliche Vorlieben speichert bleib im Hintergrund, mit einem × zum Rückgängigmachen. Bei allem anderen fragt es vorher.' }],
       },
       {
         h: 'Zugriff ändern',
@@ -622,7 +644,7 @@ const de: Docs = {
     title: 'Belege',
     visual: 4,
     description: 'Sieh nach, was bleib aus deinem Gedächtnis geteilt hat.',
-    intro: ['Vor jeder Freigabe speichert bleib einen Beleg auf deinem Gerät. Geteilt wird erst, wenn der Beleg gespeichert ist.'],
+    intro: ['Bevor bleib etwas einfügt, speichert es einen verschlüsselten Beleg auf deinem Gerät. Erst dann kommt der Text in deinen Entwurf.'],
     sections: [
       {
         h: 'Was auf dem Beleg steht',
@@ -638,7 +660,7 @@ const de: Docs = {
       },
       {
         h: 'Im Chatentwurf',
-        blocks: [{ p: 'Der Beleg zeigt, was bleib für den Entwurf freigegeben hat. Er kann schon vorliegen, wenn sich der Entwurf vor dem Einfügen ändert. Auch wenn du die Zeile entfernst, bleibt er erhalten, egal ob du den Chat abgeschickt hast.' }],
+        blocks: [{ p: 'Ein Beleg zeigt, was bleib für deinen Entwurf freigegeben hat, nicht, was du gesendet hast. Ändert sich der Entwurf im letzten Moment, kann es einen Beleg geben, obwohl bleib den Text nicht einfügen konnte. Unter „Aktivitäten“ steht dann „Einfügen nicht bestätigt“. Entfernst du die Zeile, bleibt der Beleg erhalten, egal ob du abschickst.' }],
       },
       {
         h: 'Prüfen oder exportieren',
@@ -653,11 +675,11 @@ const de: Docs = {
     sections: [
       {
         h: 'KI verbinden',
-        blocks: [{ p: 'Mit dem Desktop-Add-on, das später kommt, können KI-Tools auf deinem Rechner über das Model Context Protocol (MCP) bei bleib anfragen, was eine Aufgabe braucht.' }],
+        blocks: [{ p: 'KI-Apps auf deinem Rechner verbinden sich über das Model Context Protocol (MCP) mit bleib, mit dem Befehlszeilenprogramm von bleib, das gerade im Pilotbetrieb ist.' }],
       },
       {
         h: 'Dein Gedächtnis speichern',
-        blocks: [{ p: 'bleib verschlüsselt deine Erinnerungen in deinem Browser mit AES-256-GCM, das dein Browser schon mitbringt. Deine Passphrase wird mit Argon2id gestärkt. Die Datenexporte von ChatGPT, Claude und Gemini liest es auf deinem Gerät.' }],
+        blocks: [{ p: 'bleib versiegelt jede Erinnerung, deine Belege und deine Sicherungen in deinem Browser mit age (X25519). Der Schlüssel dazu liegt mit AES-256-GCM verschlüsselt vor, unter einem Schlüssel, den Argon2id aus deiner Passphrase ableitet oder HKDF-SHA-256 aus dem PRF-Ergebnis deines Passkeys. Die Datenexporte von ChatGPT, Claude und Gemini liest bleib auf deinem Gerät.' }],
       },
       {
         h: 'Belege exportieren',
@@ -669,7 +691,7 @@ const de: Docs = {
     title: 'Sicherheit und Datenschutz',
     visual: 5,
     description: 'Wie bleib dein Gedächtnis schützt und worauf es sich auf deinem Gerät verlässt.',
-    intro: ['Nur du kannst dein Gedächtnis lesen. Es ist auf deinem Gerät verschlüsselt, ohne Konto und ohne Tracking. Jede Freigabe hinterlässt einen Beleg, und der Quellcode ist offen.'],
+    intro: ['Dein Gedächtnis ist auf deinem Gerät verschlüsselt, ohne Konto und ohne Tracking. Eine KI-Website kann lesen, was bleib in deinen Entwurf einfügt, schon bevor du sendest. Jede Freigabe hinterlässt einen Beleg.'],
     cta: { label: 'Sicherheitslücke melden', href: SECURITY_MAIL },
     sections: [
       {
@@ -680,7 +702,8 @@ const de: Docs = {
         h: 'Worauf bleib sich verlässt',
         blocks: [
           { p: 'bleib bewahrt dein Gedächtnis verschlüsselt in deinem Browserprofil auf und entsperrt es nur für dich. Es verlässt sich auf deinen Browser und dein Benutzerkonto auf dem Gerät. Wer beides kontrolliert, könnte sehen, was bleib anzeigt, solange es entsperrt ist.' },
-          { p: 'Dein Wiederherstellungs-Kit bewahrst du woanders auf. bleib behält keine Kopie davon.' },
+          { p: 'Dein Wiederherstellungspaket bewahrst du woanders auf. bleib behält keine Kopie davon.' },
+          { p: 'Wenn du einen Passkey wählst, bewahrt ihn dein Passwortmanager oder Sicherheitsschlüssel unter dem Namen bleib.dev auf. bleib.dev sieht dein Gedächtnis dabei nie.' },
         ],
       },
       {
@@ -695,8 +718,8 @@ const de: Docs = {
   },
   developers: {
     title: 'Für Entwickler',
-    description: 'Das Desktop-Add-on von bleib, MCP und offene Formate, demnächst.',
-    intro: ['bleib ist kostenlos, quelloffen und in Entwicklung. Es startet als Browser-Erweiterung. Später kommt ein Desktop-Add-on mit MCP, damit sich KI-Tools auf deinem Rechner verbinden können.'],
+    description: 'KI-Apps auf deinem Rechner verbinden, MCP und offene Formate.',
+    intro: ['bleib ist kostenlos, quelloffen und in Entwicklung. Es startet als Browser-Erweiterung. KI-Apps auf deinem Rechner können sich über MCP verbinden, im Pilotbetrieb.'],
     cta: { label: 'Auf GitHub anzeigen', href: GITHUB_URL },
     sections: [
       // Once @bleib/wallet is on npm (INSTALL.walletCli), the desktop apps connect with one line instead.
@@ -707,11 +730,12 @@ const de: Docs = {
           { commands: ['npx @bleib/wallet connect claude-desktop', 'npx @bleib/wallet connect claude-code', 'npx @bleib/wallet connect codex', 'npx @bleib/wallet connect cursor', 'npx @bleib/wallet connect gemini'] },
         ],
       } : {
-        h: 'Später: das Desktop-Add-on',
+        h: 'Im Pilotbetrieb: KI-Apps verbinden',
         blocks: [
-          { p: 'Mit dem Add-on können Claude Desktop, Claude Code, Cursor, OpenClaw, Hermes und andere MCP-Clients bei bleib anfragen, was eine Aufgabe braucht. Jedes Tool bekommt eine eigene Verbindung, und der Mensch gibt frei, was es sehen darf.' },
-          { p: 'Agents werden bleib nie entsperren, ihren Zugriff nie selbst erweitern und sich nie selbst freigeben.' },
-          { p: 'Verfolge die Entwicklung auf GitHub und sag uns, was du brauchst.' },
+          { p: 'Das Befehlszeilenprogramm von bleib verbindet Claude Desktop, Claude Code, Codex, Cursor und Gemini CLI über MCP mit deinem bleib. Jede App bekommt eine eigene Verbindung, anfangs fragt bleib jedes Mal nach, und du gibst frei, was sie sehen darf.' },
+          { p: 'Programmier-Tools können außerdem Anweisungen erkennen, die du wiederholst, und sie als Arbeitsregeln vorschlagen. Jede gibst du selbst frei. Wenn du es erlaubst, hält bleib deine Alltagsregeln in der Regeldatei des Tools aktuell. Das Tool kann sie auch lesen, wenn dein bleib gesperrt ist.' },
+          { p: 'Agents entsperren bleib nie, erweitern ihren Zugriff nie selbst und geben sich nie selbst frei.' },
+          { p: 'Das Programm ist im Pilotbetrieb und noch nicht veröffentlicht. Verfolge die Entwicklung auf GitHub und sag uns, was du brauchst.' },
         ],
       },
       {
@@ -720,7 +744,7 @@ const de: Docs = {
           { p: 'bleib baut auf offener Arbeit anderer auf. Danke.' },
           {
             refs: [
-              { name: 'Model Context Protocol', href: 'https://modelcontextprotocol.io', v: 'Wie sich KI-Tools mit dem Desktop-Add-on verbinden werden.' },
+              { name: 'Model Context Protocol', href: 'https://modelcontextprotocol.io', v: 'Wie sich KI-Apps auf deinem Rechner mit bleib verbinden.' },
               { name: 'OpenClaw', href: 'https://docs.openclaw.ai/concepts/memory', v: 'Das Workspace-Format für Erinnerungen, das bleib liest und schreibt.' },
               { name: 'Hermes Agent', href: 'https://hermes-agent.nousresearch.com', v: 'Von Nous Research; nutzt dasselbe Workspace-Format.' },
               { name: 'Human Context Protocol', href: 'https://github.com/loyalagents/hcp-spec', v: 'Von Loyal Agents (Stanford Digital Economy Lab und Consumer Reports); das Modell für Berechtigungen und Protokolle.' },
@@ -728,7 +752,7 @@ const de: Docs = {
               { name: 'W3C Data Privacy Vocabulary', href: 'https://w3id.org/dpv', v: 'Die Arten persönlicher Informationen.' },
               { name: 'OSAP consent receipts', href: 'https://datatracker.ietf.org/doc/draft-zeng-osap-consent-receipts/', v: 'IETF-Entwurf; der Export der Belege.' },
               { name: 'Memory Projection Record', href: 'https://datatracker.ietf.org/doc/draft-ferro-schrock-memory-projection-record/', v: 'IETF-Entwurf; ein Fingerabdruck genau dessen, was weitergegeben wurde.' },
-              { name: 'age', href: 'https://age-encryption.org', v: 'Von Filippo Valsorda; wird die Dateien des Desktop-Add-ons verschlüsseln.' },
+              { name: 'age', href: 'https://age-encryption.org', v: 'Von Filippo Valsorda; das Format, das deine Erinnerungen, Belege und Sicherungen verschlüsselt.' },
             ],
           },
         ],
@@ -743,11 +767,22 @@ const de: Docs = {
               { name: 'Inter', href: 'https://rsms.me/inter/', v: 'Von den Inter Project Authors, SIL Open Font License 1.1. Die Schrift in bleib und auf dieser Website.' },
               { name: 'Material Symbols Rounded', href: 'https://fonts.google.com/icons', v: 'Von Google, Apache-2.0. Die Symbole in bleib und auf dieser Website.' },
               { name: 'LobeHub Icons', href: 'https://github.com/lobehub/lobe-icons', v: 'Von LobeHub, MIT-Lizenz. Die Logos von ChatGPT, Claude und Gemini. Die Logos sind Marken ihrer Inhaber.' },
-              { name: 'Granite Embedding Multilingual R2 97M', href: 'https://huggingface.co/ibm-granite/granite-embedding-97m-multilingual-r2', v: 'Von IBM, lizenziert unter Apache-2.0, einschließlich Tokenizer. Genutzt für „Klügere Vorschläge“, wenn du sie einschaltest. bleib hat es in int8 umgewandelt, damit es kleiner und schneller ist, und kleine Schichten darauf trainiert; das Modell selbst hat bleib nicht neu trainiert.' },
-              { name: 'ONNX Runtime Web', href: 'https://onnxruntime.ai', v: 'Von Microsoft, MIT-Lizenz. Führt „Klügere Vorschläge“ in deinem Browser aus.' },
+              { name: 'age-encryption (typage)', href: 'https://github.com/FiloSottile/typage', v: 'Von Filippo Valsorda, BSD-3-Clause. Verschlüsselt deine Erinnerungen, Belege und Sicherungen.' },
             ],
           },
-          { p: 'Lizenztext Apache-2.0: apache.org/licenses/LICENSE-2.0. Die vollständigen Lizenzdateien liegen der Erweiterung bei.' },
+          { p: 'Lizenztext Apache-2.0: apache.org/licenses/LICENSE-2.0.' },
+        ],
+      },
+      {
+        h: 'Optionales Modell auf dem Gerät',
+        blocks: [
+          { p: 'Eine eigene Version, nicht die aus den Stores, kann „Klügere Vorschläge“ mitbringen. bleib hat IBMs Modell in int8 umgewandelt, damit es kleiner und schneller ist, und kleine Schichten darauf trainiert, mit erfundenen Beispielentwürfen, nie mit Daten von Menschen. Das Modell selbst hat bleib nicht neu trainiert.' },
+          {
+            refs: [
+              { name: 'Granite Embedding Multilingual R2 97M', href: 'https://huggingface.co/ibm-granite/granite-embedding-97m-multilingual-r2', v: 'Von IBM, Apache-2.0, einschließlich Tokenizer.' },
+              { name: 'ONNX Runtime Web', href: 'https://onnxruntime.ai', v: 'Von Microsoft, MIT-Lizenz. Führt das Modell in deinem Browser aus.' },
+            ],
+          },
         ],
       },
       {
@@ -764,7 +799,7 @@ const de: Docs = {
       },
       {
         h: 'Mitmachen',
-        blocks: [{ p: 'Der Code liegt auf GitHub unter github.com/rouxdutoit/bleib. Eröffne ein Issue, schick einen Pull Request oder schreib an hello@bleib.dev. Sicherheitslücken bitte an security@bleib.dev melden, nicht öffentlich.' }],
+        blocks: [{ p: 'Die Website, das Wallet und die Dokumentation liegen auf GitHub unter github.com/rouxdutoit/bleib. Der Code der Erweiterung kommt mit ihrer ersten öffentlichen Version dazu. Eröffne ein Issue, schick einen Pull Request oder schreib an hello@bleib.dev. Sicherheitslücken bitte an security@bleib.dev melden, nicht öffentlich.' }],
       },
 
     ],
@@ -776,7 +811,7 @@ const de: Docs = {
     sections: [
       {
         h: 'Später auf Wunsch synchronisieren',
-        blocks: [{ p: 'Wie bei Bitwarden soll nur der zusätzliche Komfort etwas kosten. Geplant ist eine Ende-zu-Ende-verschlüsselte Synchronisierung über unsere Server. Dein Gerät verschlüsselt dein Gedächtnis vor dem Hochladen. Wir können es nicht lesen.' }],
+        blocks: [{ p: 'Später soll es gegen Gebühr eine freiwillige Synchronisierung zwischen deinen Geräten geben. Dein Gerät verschlüsselt dein Gedächtnis, bevor es das Gerät verlässt. Wir können es nicht lesen.' }],
       },
     ],
   },
@@ -784,7 +819,7 @@ const de: Docs = {
     title: 'Datenschutz der Website',
     description: 'Wie die Website von bleib mit deinen Daten umgeht.',
     intro: [
-      'Hier erfährst du, welche Daten die Website verarbeitet, auch bei der Anmeldung für den frühen Zugang. Wie bleib und die Browser-Erweiterung mit deinem Gedächtnis umgehen, steht unter Datenschutz in der App.',
+      'Hier erfährst du, welche Daten die Website verarbeitet, auch bei der Anmeldung für den frühen Zugang. Wie bleib und die Browser-Erweiterung mit deinem Gedächtnis umgehen, steht unter [Datenschutz der App](/de/datenschutz/app/).',
     ],
     sections: [
       {
@@ -810,8 +845,9 @@ const de: Docs = {
               { k: 'Wo', v: 'Ein privater Bunny-Storage-Bereich in Frankfurt am Main, ohne Kopien an anderen Orten (siehe Hosting)' },
             ],
           },
-          { p: 'Um automatisierte Anmeldungen zu verhindern, zählen wir Versuche pro IP-Adresse für höchstens zwei Minuten. Der Zähler liegt nur im Arbeitsspeicher des Servers, unter einem gekürzten Einweg-Hash der Adresse, nie unter der Adresse selbst, und wird nie auf einen Datenträger geschrieben. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, unser berechtigtes Interesse am Schutz des Formulars.' },
-          { p: 'Du kannst deine Einwilligung jederzeit per E-Mail an privacy@bleib.dev widerrufen. Wir löschen deinen Eintrag und bestätigen es per E-Mail.' },
+          { p: 'Um automatisierte Anmeldungen zu verhindern, zählen wir Versuche pro IP-Adresse jeweils eine Minute lang. Der Zähler liegt nur im Arbeitsspeicher des Servers, unter einem gekürzten Einweg-Hash der Adresse, nie unter der Adresse selbst. Jeder Zählerstand wird innerhalb von zwei Minuten gelöscht und nie auf einen Datenträger geschrieben oder protokolliert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, unser berechtigtes Interesse am Schutz des Formulars.' },
+          { p: 'Die Angabe deiner Adresse ist freiwillig. Ohne sie können wir dir zum Start nicht schreiben.' },
+          { p: 'Du kannst deine Einwilligung jederzeit per E-Mail an privacy@bleib.dev widerrufen. Wir löschen deinen Eintrag und bestätigen es per E-Mail. Der Widerruf berührt nicht die Rechtmäßigkeit der Verarbeitung bis dahin.' },
         ],
       },
       { h: 'Lokaler Speicher', blocks: [{ p: 'Wenn du zwischen hellem und dunklem Design wechselst, merkt sich dein Browser die Wahl im lokalen Speicher. Sie bleibt in deinem Browser und wird nie an uns gesendet. Du kannst sie in den Browsereinstellungen löschen.' }] },
@@ -829,13 +865,13 @@ const de: Docs = {
         h: 'Deine Rechte',
         blocks: [{ p: 'Nach der DSGVO hast du das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18) und Datenübertragbarkeit (Art. 20). Du kannst einer Verarbeitung auf Grundlage berechtigter Interessen widersprechen (Art. 21) und eine Einwilligung jederzeit widerrufen (Art. 7 Abs. 3). Du kannst dich bei einer Aufsichtsbehörde beschweren (Art. 77), zum Beispiel beim Bayerischen Landesamt für Datenschutzaufsicht, Promenade 18, 91522 Ansbach.' }],
       },
-      { h: 'Änderungen', blocks: [{ p: 'Wir passen diesen Hinweis an, wenn sich etwas ändert. Stand: 25. November 2026.' }] },
+      { h: 'Änderungen', blocks: [{ p: 'Wir passen diesen Hinweis an, wenn sich etwas ändert. Stand: 27. November 2026.' }] },
     ],
   },
   appPrivacy: {
     title: 'Datenschutz in der App',
     description: 'Wie bleib und die Browser-Erweiterung mit deinem Gedächtnis umgehen.',
-    intro: ['Nur du kannst dein Gedächtnis lesen. bleib ist in Entwicklung und startet als Browser-Erweiterung, ohne bleib-Konto, Telemetrie, Nutzungsanalyse und automatische Absturzberichte.'],
+    intro: ['Dein Gedächtnis ist auf deinem Gerät verschlüsselt, und du bestimmst, was jede KI bekommt. bleib ist in Entwicklung und startet als Browser-Erweiterung, ohne bleib-Konto, Telemetrie, Nutzungsanalyse und automatische Absturzberichte.'],
     sections: [
       {
         h: 'Kurz gesagt',
@@ -844,7 +880,7 @@ const de: Docs = {
             never: [
               'Dein Gedächtnis ist auf deinem Gerät verschlüsselt. Kein bleib-Server erhält es je.',
               'Kein Konto, kein Tracking, keine Nutzungsanalyse.',
-              'Eine KI bekommt nur, was bleib in ihr Nachrichtenfeld einfügt, und bei privaten Angaben fragt bleib immer zuerst.',
+              'Eine KI bekommt nur, was bleib in ihr Nachrichtenfeld einfügt, und kann es lesen, bevor du sendest. Bei privaten Angaben fragt bleib immer zuerst.',
               'Nie verkauft, nie für Werbung oder Kreditentscheidungen genutzt.',
             ],
           },
@@ -854,9 +890,10 @@ const de: Docs = {
         h: 'Was die Erweiterung liest',
         blocks: [
           { p: 'bleib arbeitet nur auf den KI-Seiten, die du erlaubst. Es fragt für chatgpt.com, claude.ai und gemini.google.com einzeln, und du kannst den Zugriff jederzeit zurücknehmen.' },
-          { p: 'Auf diesen Seiten prüft bleib auf deinem Gerät, was du in den Entwurf schreibst. So findet es passende Erinnerungen, erkennt Vorlieben, die es speichern kann, und bemerkt vor dem Senden mögliche Geheimnisse wie Passwörter oder Kartennummern. Diese Prüfung läuft auf deinem Gerät und behält nicht, was sie findet.' },
-          { p: 'Wenn du deine Erinnerungen mitnimmst, liest bleib die Exportdatei, die du auswählst, oder den Text, den du mit „Antwort einfügen“ einfügst. Deine Zwischenablage liest es nur in diesem Moment. Alles wird auf deinem Gerät verarbeitet, nichts wird hochgeladen.' },
-          { p: 'Vorschläge entstehen auf deinem Gerät, mit bleibs eigener kleiner Auswahl oder, wenn du „Klügere Vorschläge“ einschaltest, mit IBMs Modell Granite Embedding. Kein Modell sendet, was du schreibst, irgendwohin. bleib liest die Antworten der KI nie von sich aus.' },
+          { p: 'Auf diesen Seiten prüft bleib auf deinem Gerät, was du in den Entwurf schreibst. So findet es passende Erinnerungen, erkennt Vorlieben, die es speichern kann, und bemerkt vor dem Senden mögliche Geheimnisse wie Passwörter oder Kartennummern. Diese Prüfung läuft auf deinem Gerät und speichert nicht, was sie findet. Sagst du bleib, dass etwas kein Geheimnis ist, behält es bis zum Schließen des Browsers einen gesalzenen Fingerabdruck davon, damit es nicht noch einmal fragt.' },
+          { p: 'Wenn du deine Erinnerungen mitnimmst, liest bleib die Exportdatei, die du auswählst, oder die Antwort, die du mit „Antwort einfügen“ einfügst. In Chrome und Edge liest es dafür deine Zwischenablage, wenn du es erlaubst, und nur in diesem Moment. In Firefox fügst du die Antwort selbst ein. Alles wird auf deinem Gerät verarbeitet, nichts wird hochgeladen.' },
+          { p: 'Vorschläge entstehen auf deinem Gerät, mit einer kleinen Klassifizierung in bleib, die auf diesem Gerät aus deinen Entscheidungen lernt. Nichts, was du schreibst, wird dafür irgendwohin gesendet. bleib liest die Antworten der KI nie von sich aus.' },
+          { p: 'Wählst du einen Passkey, bittet bleib um Zugriff auf bleib.dev, damit dein Browser den Passkey unter diesem Namen speichern kann. Dein Passwortmanager oder Sicherheitsschlüssel bewahrt ihn auf, und keine Daten aus deinem Gedächtnis oder Wallet gehen an bleib.dev. bleib.dev kann außerdem fragen, ob bleib installiert ist und in welcher Version. Mehr erfährt die Website nicht.' },
         ],
       },
       {
@@ -865,16 +902,25 @@ const de: Docs = {
           { list: [
             'Deine Erinnerungen und Einträge zur Prüfung, jeweils mit ihrer Herkunft.',
             'Berechtigungen, Angaben zu den KIs, die du nutzt, und Belege für Freigaben.',
+            'Arbeitsregeln, die du speicherst. Schaltest du für ein Programmier-Tool das Erkennen von Regeln ein, auch verschlüsselte Merkmale zum Abgleich und einen Fingerabdruck der Gesprächs-ID. Als Text behält bleib eine Regel erst, wenn du sie speicherst.',
           ] },
           { p: 'bleib verschlüsselt diese Daten in deinem Browser auf deinem Gerät. Kein bleib-Server erhält dein Gedächtnis oder deine Entwürfe.' },
-          { p: 'Wenn du die automatische Sicherung einschaltest, schreibt bleib eine verschlüsselte Sicherung in einen Ordner, den du auswählst. Sicherungen, Wiederherstellungs-Kits und Exporte landen nur dort, wo du sie speicherst.' },
+          { p: 'In Chrome und Edge kannst du die automatische Sicherung einschalten. Dann schreibt bleib eine verschlüsselte Sicherung in einen Ordner, den du auswählst. In Firefox speicherst du jede Sicherung selbst. Sicherungen, Wiederherstellungspakete und Exporte landen nur dort, wo du sie speicherst. Dein Wiederherstellungspaket und ein Export sind für alle lesbar, die sie öffnen, also halte sie privat.' },
         ],
       },
       {
         h: 'Was KI-Anbieter sehen können',
         blocks: [
-          { p: 'bleib wählt auf deinem Gerät nur das Nötige aus und speichert vor jeder Freigabe einen Beleg. Sobald bleib Angaben in das Nachrichtenfeld einer KI einfügt, kann der Anbieter sie lesen, auch bevor du auf Senden tippst. Du kannst sie aus dem Entwurf entfernen, doch der Anbieter kann sie dann schon gesehen haben. Für erhaltene Daten gilt die Datenschutzerklärung des jeweiligen Anbieters.' },
-          { p: 'Wenn du eine unterstützte KI-App verbindest, gibt bleib nur Angaben weiter, die du freigegeben hast. Bei privaten Angaben fragt bleib jedes Mal. Die App kann die Angaben behalten oder weitergeben.' },
+          { p: 'bleib wählt auf deinem Gerät nur das Nötige aus und speichert einen Beleg, bevor es etwas einfügt. Sobald bleib Angaben in das Nachrichtenfeld einer KI einfügt, kann der Anbieter sie lesen, auch bevor du auf Senden tippst. Du kannst sie aus dem Entwurf entfernen, doch der Anbieter kann sie dann schon gesehen haben. Für erhaltene Daten gilt die Datenschutzerklärung des jeweiligen Anbieters.' },
+          { p: 'Wählst du für eine Art von Angaben „Immer hinzufügen“, ergänzt bleib sie in neuen Chats dieses Kontos von selbst. Um Konten auseinanderzuhalten, liest es Kontohinweise auf der Seite, und der Beleg behält einen Einweg-Fingerabdruck dieses Hinweises.' },
+          { p: 'Wenn du eine KI-App auf deinem Rechner verbindest, fragt bleib anfangs jedes Mal nach, und die App bekommt nur Angaben, die deine Freigaben erlauben. Bei privaten Angaben fragt bleib jedes Mal. Die App kann die Angaben behalten oder weitergeben.' },
+        ],
+      },
+      {
+        h: 'Arbeitsregeln in KI-Apps',
+        blocks: [
+          { p: 'Verbindest du ein Programmier-Tool und schaltest das Erkennen von Regeln ein, gibt der Hook des Tools jede Anfrage, die du abschickst, auf diesem Gerät an bleib weiter, zusammen mit einem Fingerabdruck der Gesprächs-ID. bleib sucht nach Anweisungen, die du wiederholst, und schlägt sie als Regeln vor. Nichts verlässt dein Gerät, und gespeichert wird eine Regel erst, wenn du sie freigibst.' },
+          { p: 'Wenn du es erlaubst, hält bleib deine Alltagsregeln in der Regeldatei des Tools aktuell, etwa CLAUDE.md oder AGENTS.md. Diese Kopie ist lesbarer Text, deshalb kann das Tool sie auch lesen, wenn dein bleib gesperrt ist. Nimm das Häkchen heraus, um künftiges Schreiben zu stoppen, und entferne die Kopie mit bleib sync und --remove.' },
         ],
       },
       {
@@ -890,11 +936,11 @@ const de: Docs = {
       },
       {
         h: 'Deine Daten verwalten',
-        blocks: [{ p: 'Du kannst dein Gedächtnis prüfen und ändern und KI-Verbindungen in bleib trennen. Wenn du die Erweiterung entfernst, löscht der Browser ihre Daten. Mach vorher ein Backup. Für Kopien, die ein KI-Anbieter oder eine verbundene App bereits hat, nutze deren eigene Einstellungen.' }],
+        blocks: [{ p: 'Du kannst dein Gedächtnis prüfen und ändern und KI-Verbindungen in bleib trennen. Wenn du die Erweiterung entfernst, löscht der Browser ihre Daten. Speichere vorher dein Wiederherstellungspaket und eine verschlüsselte Sicherung. Gespeicherte Dateien wie Exporte und Sicherungen und Kopien in anderen Tools bleiben, wo sie sind. Lösche sie dort. Für Kopien, die ein KI-Anbieter oder eine verbundene App bereits hat, nutze deren eigene Einstellungen.' }],
       },
       {
         h: 'Kontakt',
-        blocks: [{ p: 'Schreib bei Fragen zu bleib und deinen Daten an privacy@bleib.dev. Stand 26. November 2026.' }],
+        blocks: [{ p: 'Schreib bei Fragen zu bleib und deinen Daten an privacy@bleib.dev. Stand 27. November 2026.' }],
       },
     ],
   },

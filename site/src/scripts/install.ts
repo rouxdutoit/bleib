@@ -27,14 +27,14 @@ function detect(): Store | null {
   return null;
 }
 
-/** True when bleib answers {type: 'bleib-installed'} within 300 ms (Chromium browsers; the extension lists bleib.dev). */
-function installed(): Promise<boolean> {
+/** Asks one extension ID {type: 'bleib-installed'}; true when it answers {installed: true} within 300 ms. */
+function ask(id: string): Promise<boolean> {
   const runtime = (window as Window & { chrome?: { runtime?: { sendMessage?: Function } } }).chrome?.runtime;
-  if (!INSTALL.extensionId || !runtime?.sendMessage) return Promise.resolve(false);
+  if (!id || !runtime?.sendMessage) return Promise.resolve(false);
   return new Promise((resolve) => {
     const timer = setTimeout(() => resolve(false), 300);
     try {
-      runtime.sendMessage!(INSTALL.extensionId, { type: 'bleib-installed' }, (answer?: { installed?: boolean }) => {
+      runtime.sendMessage!(id, { type: 'bleib-installed' }, (answer?: { installed?: boolean }) => {
         clearTimeout(timer);
         void (window as Window & { chrome?: { runtime?: { lastError?: unknown } } }).chrome?.runtime?.lastError;
         resolve(answer?.installed === true);
@@ -44,6 +44,15 @@ function installed(): Promise<boolean> {
       resolve(false);
     }
   });
+}
+
+/** True when bleib is installed. Chrome and Edge answer a message (each store gives the extension its own ID); Firefox
+ *  can't, so after its optional bleib.dev permission it marks the page with data-bleib-installed="true". The page
+ *  could set that itself, so it only ever changes the button's label. */
+async function installed(): Promise<boolean> {
+  if (document.documentElement.dataset.bleibInstalled === 'true') return true;
+  const answers = await Promise.all([INSTALL.extensionId, INSTALL.edgeExtensionId].filter(Boolean).map(ask));
+  return answers.some(Boolean);
 }
 
 /** Turns every [data-install] link (the hero's and the header's main button) into the store button, once. */

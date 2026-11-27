@@ -2,7 +2,7 @@
 import Lines from './Lines.astro';
 /**
  * The closer: like the end of an Apple product page, the bleib mark, the promise behind the name
- * ("bleib" is German for "stay") and one action. The mark blinks as it comes into view, and now and then after.
+ * ("bleib" is German for "stay") and one action. The mark blinks once as it comes into view, then stays still.
  */
 import { MARK_BODY, MARK_EYES, MARK_VIEWBOX } from './markPath';
 import Rails from './Rails.astro';
@@ -38,11 +38,12 @@ const s = t(lang).finale;
     :global(:root:not([data-theme='light'])) .logo { color: #f6e79a; }
   }
   .logo :global(svg) { width: 100%; height: auto; display: block; }
-  /* The eyes are the page colour over the body, so they read as the mark's holes; a blink squeezes them shut for a
-     moment, once as the mark comes into view and then every few seconds. Reduced motion keeps them open. */
+  /* The eyes are the page colour over the body, so they read as the mark's holes; one blink squeezes them shut for a
+     moment as the mark comes into view (scripts/story.ts adds .on), and then they stay open. Reduced motion: no blink. */
   .eye { fill: var(--page); transform-box: fill-box; transform-origin: center; }
-  .logo:global(.on) .eye { animation: blink 6s var(--ease) 0.4s infinite; }
-  @keyframes blink { 0%, 5%, 100% { transform: none; } 2.5% { transform: scaleY(0.1); } }
+  .logo:global(.on) .eye { animation: blink 0.3s var(--ease) 0.4s 1; }
+  @keyframes blink { 0%, 100% { transform: none; } 50% { transform: scaleY(0.1); } }
+  @media (prefers-reduced-motion: reduce) { .logo:global(.on) .eye { animation: none; } }
 
   /* Same size and weight as the hero headline, so the page opens and closes in one voice. */
   .title { margin: 0; max-width: 22ch; font-size: clamp(38px, 5.4vw, 64px); line-height: 1.07; letter-spacing: -0.03em; font-weight: 600; text-wrap: balance; }

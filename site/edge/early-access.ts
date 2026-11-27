@@ -6,8 +6,8 @@
  * address. Every other request passes through to the static site in the `bleib-site` zone.
  *
  * Abuse protection: a honeypot field and a small per-IP rate limit kept only in memory. The IP
- * address is never stored or logged; the counter is keyed by a truncated hash and dropped after
- * two minutes.
+ * address is never stored or logged; the counter is keyed by a truncated hash, counts one clock
+ * minute, and is deleted when that minute ends (checked on every request and every 30 seconds).
  *
  * Needs the script secret SIGNUPS_STORAGE_KEY (the bleib-signups zone password). Mode
  * "Run script before cache" must be on so POSTs always reach the script.
@@ -19,7 +19,18 @@ const PATH = '/api/early-access';
 const STORAGE = 'https://storage.bunnycdn.com/bleib-signups/';
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const LIMIT_PER_MINUTE = 5;
-const counters = new Map<string, number>();
+/** Truncated IP hash -> requests in the current clock minute, and when that minute ends. */
+const counters = new Map<string, { count: number; expires: number }>();
+
+/** Drops every counter whose minute has ended. Runs on each request and every 30 seconds, so none outlives two minutes. */
+function prune(now = Date.now()) {
+  for (const [key, entry] of counters) if (entry.expires <= now) counters.delete(key);
+}
+try {
+  setInterval(prune, 30_000);
+} catch {
+  // A runtime without timers at start-up still prunes on every request, and never reads an ended minute.
+}
 
 const hex = (buf: ArrayBuffer, bytes?: number) =>
   [...new Uint8Array(buf).slice(0, bytes)].map((b) => b.toString(16).padStart(2, '0')).join('');
@@ -42,12 +53,16 @@ async function readBody(request: Request): Promise<Record<string, string>> {
 }
 
 async function rateLimited(ip: string): Promise<boolean> {
-  const minute = Math.floor(Date.now() / 60000);
-  for (const key of counters.keys()) if (Number(key.split(':')[1]) < minute - 1) counters.delete(key);
-  const key = `${hex(await sha256(`bleib-rl:${ip}`), 8)}:${minute}`;
-  const count = counters.get(key) ?? 0;
-  if (count >= LIMIT_PER_MINUTE) return true;
-  counters.set(key, count + 1);
+  const key = hex(await sha256(`bleib-rl:${ip}`), 8);
+  const now = Date.now();
+  prune(now);
+  const entry = counters.get(key);
+  if (!entry) {
+    counters.set(key, { count: 1, expires: (Math.floor(now / 60000) + 1) * 60000 });
+    return false;
+  }
+  if (entry.count >= LIMIT_PER_MINUTE) return true;
+  entry.count += 1;
   return false;
 }
 
@@ -96,6 +111,7 @@ async function signup(request: Request): Promise<Response> {
 BunnySDK.net.http
   .servePullZone()
   .onClientRequest(async (ctx) => {
+    prune();
     const path = new URL(ctx.request.url).pathname.replace(/\/+$/, '');
     if (path === PATH) return signup(ctx.request);
     return ctx.request;

@@ -94,7 +94,9 @@ const [symbol, effect] = SYMBOLS[i];
   /* On phones, Callout size like the hero, so each sentence sits on its own line. */
   @media (max-width: 480px) { .text .lead { font-size: 16px; line-height: 22px; } }
   /* Apple-style "Learn more ›" */
-  .more { display: inline-flex; align-items: center; gap: 1px; margin-top: 14px; font-size: 17px; font-weight: 500; text-decoration: none; color: var(--scene-ink, var(--ink)); }
+  .more { position: relative; display: inline-flex; align-items: center; gap: 1px; margin-top: 14px; font-size: 17px; font-weight: 500; text-decoration: none; color: var(--scene-ink, var(--ink)); }
+  /* A 44px tap area, centred on the link, that changes nothing you see. */
+  .more::after { content: ''; position: absolute; left: -4px; right: -4px; top: calc(50% - 22px); bottom: calc(50% - 22px); }
 
   @media (max-width: 767px) {
     .scene { min-height: 0; padding: 72px 0 40px; }

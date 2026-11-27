@@ -1,6 +1,6 @@
 ---
 /**
- * A Safari window, as in the hero and the closer: traffic lights, then equal tabs. The open tab is a raised
+ * A Safari window, as in the hero and the closer: traffic lights, then equal tabs (on phones, just the tabs). The open tab is a raised
  * tile; others sit flat on the bar in the secondary colour, with hairlines between them. With `tablist`
  * the tabs are buttons that switch panels (Hero.astro does the switching); otherwise it's one open tab.
  * The window's contents go in the slot.
@@ -54,10 +54,17 @@ const { tabs, tablist, id = 'tab' } = Astro.props;
   .fav { flex: none; display: block; width: 14px; height: 14px; }
   .mono { background: currentColor; mask: var(--fav) center / contain no-repeat; }
   .tab[aria-selected='false'] .fav { opacity: 0.7; }
-  /* Like Safari on a narrow screen: the tabs keep their size and the strip runs off the edge with a fade;
-     choosing a tab slides the strip so it shows in full (Hero.astro). */
+  /* Each switchable tab answers taps across the bar's full height and a little below it: 44px, while the tile
+     itself stays 28px. The focus ring is drawn inside the tab, so nothing around it can clip it. */
+  button.tab::after { content: ''; position: absolute; left: 0; right: 0; top: -7px; bottom: -9px; }
+  button.tab:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; border-radius: 8px; }
+  /* Below 768px the hero draws the preview at 92% (Hero.astro), so the area grows to 48px to stay 44px on screen. */
+  @media (max-width: 767px) { button.tab::after { bottom: -13px; } }
+  /* On phones the three tabs share the bar as equal segments, all in full view; the traffic lights step aside
+     to make room. */
   @media (max-width: 480px) {
-    .tabs[role='tablist'] { --tab-w: 40%; overflow: hidden; -webkit-mask-image: linear-gradient(to right, #000 78%, transparent); mask-image: linear-gradient(to right, #000 78%, transparent); }
-    .tabs[role='tablist'].at-end { -webkit-mask-image: linear-gradient(to left, #000 78%, transparent); mask-image: linear-gradient(to left, #000 78%, transparent); }
+    .bar:has([role='tablist']) { padding: 0 7px; }
+    .bar:has([role='tablist']) .lights { display: none; }
+    .tabs[role='tablist'] .tab { gap: 5px; padding: 0 4px; }
   }
 </style>

@@ -16,8 +16,10 @@ export const INSTALL = {
   edgeStoreUrl: '',
   /** Firefox Add-ons (AMO) listing; Firefox shows its own install prompt from there. */
   firefoxStoreUrl: '',
-  /** The extension's Chrome ID. The page asks it {type: 'bleib-installed'} and waits 300 ms for {installed: true}. */
+  /** The extension's Chrome Web Store ID. The page asks it {type: 'bleib-installed'} and waits 300 ms for {installed: true}. */
   extensionId: '',
+  /** Its Edge Add-ons ID, which differs from the Chrome one. Firefox needs no ID: it marks the page instead. */
+  edgeExtensionId: '',
   /** "Connect your desktop AI apps" on the Developers page, once `npx @bleib/wallet connect …` is on npm. */
   walletCli: false,
 } as const;

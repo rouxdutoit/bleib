@@ -3,15 +3,16 @@
  * A chat message box, as in the hero and the closer. `typed` is typed out at step 1 (scripts/story.ts),
  * with a macOS caret that blinks once focused. Anything that sits in the box above the text goes in the slot.
  * Like a chat app, the send button lights up while there is text; with `sentAt` it is pressed at that step and dims
- * again once the box is empty.
+ * again once the box is empty. With `filled` the text is already there in the page as served (the hero, whose
+ * finished state is what shows without JavaScript); the script clears it before it plays.
  */
 import { icon } from './icons';
-interface Props { typed: string; sentAt?: 2 }
-const { typed, sentAt } = Astro.props;
+interface Props { typed: string; sentAt?: 2; filled?: boolean }
+const { typed, sentAt, filled = false } = Astro.props;
 ---
 <div class="composer" data-sent-at={sentAt}>
   <slot />
-  <p class="t-body input"><span class="field"><span class="typed" data-type={typed}></span><span class="caret"></span></span><span class:list={['send', sentAt && ['press', `at-${sentAt}`]]} set:html={icon('arrow_upward')} /></p>
+  <p class="t-body input"><span class="field"><span class="typed" data-type={typed}>{filled && typed}</span><span class="caret"></span></span><span class:list={['send', sentAt && ['press', `at-${sentAt}`]]} set:html={icon('arrow_upward')} /></p>
 </div>
 
 <style>

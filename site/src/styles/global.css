@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Inter';
-  src: url('/fonts/inter-latin-variable.woff2') format('woff2');
+  src: url('../assets/fonts/inter-latin-variable.woff2') format('woff2'); /* built to /_astro/…[hash].woff2 */
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -430,10 +430,11 @@ h3 {
     --joint: #62625d;
   }
 }
+/* Phones: content sits at Apple's 16pt margin from the screen edge, with the rails halfway out. */
 @media (max-width: 767px) {
   :root {
-    --rail-gap: 16px;
-    --inset: 16px;
+    --rail-gap: 8px;
+    --inset: 8px;
   }
 }
 .has-rails {
@@ -488,7 +489,9 @@ h3 {
   --font-ui: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, sans-serif;
   --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
   --label: #000000;
-  --label-2: rgb(60 60 67 / 0.6);
+  /* Opaque, so 13px secondary text passes 4.5:1 on white (6.6:1), the grey fill (5.8:1), the yellow page (5.3:1)
+     and the tray (4.8:1); Apple's translucent secondaryLabel only reached about 3.4:1 on white. */
+  --label-2: #5c5c63;
   --label-3: rgb(60 60 67 / 0.3);
   --hairline: rgb(60 60 67 / 0.16);
   --fill: rgb(118 118 128 / 0.12);

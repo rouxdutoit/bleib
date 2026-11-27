@@ -3,31 +3,37 @@
 // the browser is still drawing the rest or restoring the scroll position on reload (scripts/story.ts plays them).
 // Scenes that share a parent (the hero's tabs) hold the tallest one's height.
 (function () {
-  function finalHeight(sv) {
-    var hidden = sv.hidden, className = sv.className, typer = sv.querySelector('[data-type]');
-    var typed = typer ? typer.textContent : '';
-    sv.hidden = false;
-    sv.classList.add('measuring');
-    for (var k = 1; k <= Number(sv.dataset.steps || 0); k++) sv.classList.add('s' + k);
-    if (typer) typer.textContent = typer.dataset.type || '';
-    var height = parseFloat(getComputedStyle(sv).height) || 0;
-    sv.className = className + ' measuring';
-    if (typer) typer.textContent = typed;
-    sv.hidden = hidden;
-    void sv.offsetHeight; // settle the current state before transitions return, so nothing animates back
-    sv.classList.remove('measuring');
-    return height;
-  }
+  // Batched so the browser lays the page out once per call, however many scenes it measures: every scene takes its
+  // finished state, all are read together, then all go back and take their reserved height.
   function reserve(root) {
-    var groups = new Map();
-    root.querySelectorAll('[data-steps]').forEach(function (sv) {
-      groups.set(sv.parentElement, (groups.get(sv.parentElement) || []).concat(sv));
+    var scenes = Array.prototype.slice.call(root.querySelectorAll('[data-steps]'));
+    if (!scenes.length) return;
+    var saved = scenes.map(function (sv) {
+      var typer = sv.querySelector('[data-type]');
+      var state = { hidden: sv.hidden, className: sv.className, typer: typer, typed: typer ? typer.textContent : '' };
+      sv.style.minHeight = '';
+      sv.hidden = false;
+      sv.classList.add('measuring');
+      for (var k = 1; k <= Number(sv.dataset.steps || 0); k++) sv.classList.add('s' + k);
+      if (typer) typer.textContent = typer.dataset.type || '';
+      return state;
     });
-    groups.forEach(function (scenes) {
-      scenes.forEach(function (sv) { sv.style.minHeight = ''; });
-      var height = Math.ceil(Math.max.apply(null, scenes.map(finalHeight))) + 'px';
-      scenes.forEach(function (sv) { sv.style.minHeight = height; });
+    var heights = scenes.map(function (sv) { return parseFloat(getComputedStyle(sv).height) || 0; });
+    // Scenes that share a parent (the hero's tabs) hold the tallest one's height.
+    var tallest = new Map();
+    scenes.forEach(function (sv, i) {
+      tallest.set(sv.parentElement, Math.max(tallest.get(sv.parentElement) || 0, heights[i]));
     });
+    scenes.forEach(function (sv, i) {
+      var state = saved[i];
+      sv.className = state.className + ' measuring';
+      if (state.typer) state.typer.textContent = state.typed;
+      sv.hidden = state.hidden;
+      sv.style.minHeight = Math.ceil(tallest.get(sv.parentElement)) + 'px';
+    });
+    // Settle styles in the current state before transitions return, so nothing animates back (no layout needed).
+    scenes.forEach(function (sv) { void getComputedStyle(sv).opacity; });
+    scenes.forEach(function (sv) { sv.classList.remove('measuring'); });
   }
   window.bleibReserve = reserve;
   document.fonts.ready.then(function () { reserve(document); });

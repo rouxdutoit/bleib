@@ -12,11 +12,19 @@ function link(label: string, path: string, site: URL) {
   return `[${label}](${new URL(path, site).href})`;
 }
 
+/** Where bleib stands, so an agent doesn't tell people they can install it yet. */
+function availability(lang: Lang, site: URL) {
+  const signup = link(new URL(`${routes.home[lang]}#early-access`, site).href, `${routes.home[lang]}#early-access`, site);
+  return lang === 'de'
+    ? `In Entwicklung für Chrome, Edge und Firefox. Lass dich zum Start per E-Mail benachrichtigen: ${signup}`
+    : `In development for Chrome, Edge and Firefox. Get an email at launch: ${signup}`;
+}
+
 export function renderIndex(site: URL) {
   const sections = languages.map((lang) => {
     const { hero } = t(lang);
     const title = `${hero.h1}`;
-    const description = `${hero.eyebrow}. ${hero.sub.join(' ')}`;
+    const description = `${hero.eyebrow}. ${hero.sub.join(' ')} ${availability(lang, site)}`;
     const links = [
       `- ${link(title, routes.home[lang], site)}: ${description}`,
       ...documentKeys.map((key) => {
@@ -66,6 +74,7 @@ function renderHome(lang: Lang, site: URL) {
     new URL(routes.home[lang], site).href,
     hero.eyebrow,
     ...hero.sub,
+    availability(lang, site),
     `#### ${story.label}`,
     ...story.scenes.flatMap(({ h, p, more }) => [
       `##### ${h.join(' ')}`,
