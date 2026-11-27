@@ -170,7 +170,7 @@ const en = {
       ],
       caption: 'Different AI. Same memory.',
     },
-    off: { setting: 'Memory', note: 'Switched off in each AI’s own settings.', imported: 'Imported to your bleib', from: 'From Claude, Gemini and ChatGPT' },
+    off: { setting: 'Memory', note: 'Switched off in each AI’s own settings.', import: 'Import to your bleib', imported: 'Imported to your bleib', from: 'From Claude, Gemini and ChatGPT' },
     propose: {
       app: 'Claude',
       said: 'I’m vegetarian.',
@@ -353,7 +353,7 @@ const de: Strings = {
       ],
       caption: 'Andere KI. Dasselbe Gedächtnis.',
     },
-    off: { setting: 'Gedächtnis', note: 'In den Einstellungen jeder KI ausgeschaltet.', imported: 'In dein bleib importiert', from: 'Von Claude, Gemini und ChatGPT' },
+    off: { setting: 'Gedächtnis', note: 'In den Einstellungen jeder KI ausgeschaltet.', import: 'In dein bleib importieren', imported: 'In dein bleib importiert', from: 'Von Claude, Gemini und ChatGPT' },
     propose: {
       app: 'Claude',
       said: 'Ich esse vegetarisch.',

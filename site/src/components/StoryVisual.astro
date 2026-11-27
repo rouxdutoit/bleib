@@ -148,14 +148,15 @@ const caption = [
       )}
 
       {scene === 5 && (
-        /* Import first, then switch off: "Your bleib" arrives with a drawn tick, then each AI's own switch goes off. */
+        /* Import first, then switch off: bleib's row is there from the start; its import symbol becomes a drawn tick, then
+           each AI's own switch goes off. */
         <div class="card list-card switch-card">
           <ul class="group">
-            <li class="reveal at-1 imp"><div class="reveal-in"><div class="cell">
+            <li class="cell imp">
               <span class="btile"><Mark size={20} /></span>
-              <span class="cell-k"><span class="t-body">{c.off.imported}</span><span class="t-sub c-2 blk">{c.off.from}</span></span>
-              <span class="ok crossfade at-1"><span></span><span><DrawTick /></span></span>
-            </div></div></li>
+              <span class="cell-k"><span class="t-body crossfade at-1"><span>{c.off.import}</span><span>{c.off.imported}</span></span><span class="t-sub c-2 blk">{c.off.from}</span></span>
+              <span class="ok crossfade at-1"><span class="dl" set:html={svg('download')} /><span><DrawTick /></span></span>
+            </li>
             {c.any.providers.map((p, i) => (
               <li class="cell">
                 <img class:list={['app', { mono: !p.color }]} src={p.color || p.icon} alt="" width="42" height="42" />
@@ -198,9 +199,11 @@ const caption = [
   .sec-h.inner { padding: 14px 0 6px; }
   /* Each AI's own memory switch, as it sits in that AI's settings. */
   .switch-card .cell { min-height: 56px; }
+  .dl { display: grid; }
+  .dl :global(svg) { width: 22px; height: 22px; display: block; }
   .group > li.imp + li.cell::before { content: ''; position: absolute; top: 0; right: 0; left: 57px; border-top: 1px solid var(--hairline); }
   /* bleib's own row: its black tile with the yellow mark, at the size of the AIs' icons. */
-  .btile { flex: none; width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; box-shadow: inset 0 0 0 1px var(--hairline); }
+  .btile { flex: none; width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
   .ok { margin-left: auto; color: var(--label); }
   .ok :global(.draw-tick) { width: 20px; height: 20px; }
   .sec-f { padding: 8px 16px 0; display: flex; align-items: center; justify-content: center; gap: 5px; }
@@ -215,6 +218,8 @@ const caption = [
   .ico-2 :global(.g) { width: 22px; height: 22px; }
   .cell-k { flex: 1; min-width: 0; }
   .cell-k > .t-body { display: block; }
+  /* A title that changes (Import → Imported) keeps both words in one place. */
+  .cell-k > .t-body.crossfade { display: grid; justify-items: start; }
   .blk { display: block; }
   .cell-v { flex: none; text-align: right; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
   /* On a narrow phone the value keeps its room; the title and source shorten with an ellipsis instead of overlapping. */

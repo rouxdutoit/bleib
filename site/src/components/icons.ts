@@ -32,6 +32,7 @@ import backHand from '@material-symbols/svg-400/rounded/back_hand-fill.svg?raw';
 import restaurant from '@material-symbols/svg-400/rounded/restaurant-fill.svg?raw';
 import luggage from '@material-symbols/svg-400/rounded/luggage-fill.svg?raw';
 import contentCopy from '@material-symbols/svg-400/rounded/content_copy.svg?raw';
+import download from '@material-symbols/svg-400/rounded/download.svg?raw';
 
 const raw = {
   person,
@@ -54,6 +55,7 @@ const raw = {
   send,
   arrow_upward: arrowUpward,
   sync,
+  download,
   airline_seat: airlineSeat,
   eco,
   location_on: locationOn,
