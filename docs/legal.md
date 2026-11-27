@@ -24,13 +24,17 @@ Same operator as Fazit. Use these for `/impressum` and `/privacy` (EN and DE).
 - **Early access (differs from Fazit):** when you join early access, we store your email address, chosen language and signup time to tell you when bleib is available.
   - Legal basis: Article 6(1)(a) GDPR (consent).
   - You can withdraw at any time by emailing hello@rouxdutoit.com, and we delete the entry.
-  - It's stored in Cloudflare Workers KV.
-- **Hosting (differs from Fazit, which uses Bunny in the EU):** Cloudflare Pages / Workers, Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA.
-  - Cloudflare receives IP address and request details to deliver the site and protect it from attacks.
+  - It's stored in a private Bunny Storage zone in Frankfurt am Main, not replicated.
+- **Hosting:** BunnyWay d.o.o., Dunajska cesta 165, Ljubljana, Slovenia (bunny.net), as for Fazit.
+  - Files in Frankfurt am Main with a copy in Stockholm, delivered only from EU data centres.
+  - Bunny receives IP address and request details to deliver the site and protect it from attacks; it shortens IPs in logs and deletes logs after three days.
   - Data processing agreement under Article 28 GDPR.
-  - Transfers to the USA are covered by the EU-US Data Privacy Framework (Cloudflare is certified) and Standard Contractual Clauses.
-  - Legal basis for hosting: Article 6(1)(f) GDPR.
-  - FOUNDER TO CONFIRM: the DPA is accepted in the Cloudflare dashboard, and whether to move hosting to Bunny (EU) for parity with Fazit.
+  - Legal basis: Article 6(1)(f) GDPR.
+- **DNS (since 27 Nov 2026):** Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA, runs the name servers for bleib.dev (DNS only, no proxying).
+  - The pages never pass through Cloudflare; it answers address lookups, usually from the visitor's DNS resolver rather than the visitor.
+  - Transfers to the USA are covered by the EU-US Data Privacy Framework (Cloudflare is certified).
+  - Legal basis: Article 6(1)(f) GDPR.
+  - FOUNDER TO CONFIRM: Cloudflare's DPA (part of its self-serve terms) covers the account, and whether the site itself moves to Cloudflare later; if it does, Hosting changes too.
 - **Controller:** Ruan "Roux" du Toit, Emeranstraße 23, 85622 Feldkirchen, Germany; hello@rouxdutoit.com; +49 162 7850608.
 - **Contact data:** as on fazit.dev (Article 6(1)(b) or (f) GDPR; deleted when no longer needed).
 - **Links to other sites:** their privacy policy applies.
