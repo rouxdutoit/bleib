@@ -60,11 +60,16 @@ const { tabs, tablist, id = 'tab' } = Astro.props;
   button.tab:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; border-radius: 8px; }
   /* Below 768px the hero draws the preview at 92% (Hero.astro), so the area grows to 48px to stay 44px on screen. */
   @media (max-width: 767px) { button.tab::after { bottom: -13px; } }
-  /* On phones the three tabs share the bar as equal segments, all in full view; the traffic lights step aside
-     to make room. */
+  /* On phones the window keeps its controls, a little smaller, and the three tabs share the rest of the bar as
+     equal segments, all in full view. */
   @media (max-width: 480px) {
-    .bar:has([role='tablist']) { padding: 0 7px; }
-    .bar:has([role='tablist']) .lights { display: none; }
-    .tabs[role='tablist'] .tab { gap: 5px; padding: 0 4px; }
+    .bar:has([role='tablist']) { padding: 0 7px 0 10px; gap: 8px; }
+    .bar:has([role='tablist']) .lights { gap: 5px; }
+    .bar:has([role='tablist']) .lights i { width: 8px; height: 8px; }
+    .tabs[role='tablist'] .tab { gap: 4px; padding: 0 3px; }
+  }
+  /* The narrowest phones: only the open tab keeps its icon, so every name fits in full. */
+  @media (max-width: 360px) {
+    .tabs[role='tablist'] .tab[aria-selected='false'] .fav { display: none; }
   }
 </style>
