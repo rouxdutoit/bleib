@@ -93,9 +93,9 @@ const en: Docs = {
       },
       {
         id: 'off',
-        h: 'Turn their memory off',
+        h: 'Switch their memory off',
         blocks: [
-          { p: 'Once your memories are in your bleib, you can switch off the memory in ChatGPT, Claude and Gemini. bleib opens that AI’s memory settings and shows you the switch. You turn it off yourself, and bleib checks that it’s really off.' },
+          { p: 'Once your memories are in your bleib, you can switch off the memory in ChatGPT, Claude and Gemini. bleib opens that AI’s memory settings and shows you the switch. You switch it off yourself, and bleib checks that it’s really off.' },
           { p: 'Bring your memories in first, so nothing is lost. Switching off isn’t deleting: what that AI already saved stays in your account there until you delete it in its settings. bleib never deletes anything for you.' },
         ],
       },
@@ -515,7 +515,7 @@ const en: Docs = {
       {
         h: 'What the extension reads',
         blocks: [
-          { p: 'bleib reads your drafts only on the AI sites you allow. It asks for chatgpt.com, claude.ai and gemini.google.com one at a time, and you can take access back at any time. While you import or turn off an AI’s Memory, it also reads the settings page it guides you through.' },
+          { p: 'bleib reads your drafts only on the AI sites you allow. It asks for chatgpt.com, claude.ai and gemini.google.com one at a time, and you can take access back at any time. While you import or switch off an AI’s Memory, it also reads the settings page it guides you through.' },
           { p: 'On those sites, bleib checks what you type in the draft, on your device. It finds relevant memories, recognises preferences to save and spots likely secrets, such as passwords or card numbers, before you send. This check runs on your device and doesn’t store what it finds. If you tell bleib something isn’t a secret, it keeps a salted fingerprint of it until you close the browser, so it doesn’t ask again.' },
           { p: 'When you bring in your memories, bleib reads the export file you choose, or the answer you paste with Paste answer. Chrome and Edge read the clipboard, if you allow it, only when you choose Paste answer. bleib hands the permission back when the import ends. In Firefox you paste the answer yourself. Everything is processed on your device, and nothing is uploaded.' },
           { p: 'Suggestions are worked out on your device by a small classifier built into bleib, which learns from your choices on this device. Nothing you write is sent anywhere for this. bleib never reads the AI’s answers on its own.' },

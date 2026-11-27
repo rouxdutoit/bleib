@@ -29,10 +29,10 @@ const en = {
     /** What a shared link shows (the homepage): the hero's promise, not the category. */
     share: {
       title: 'bleib: Own your AI memory.',
-      description: 'Encrypted and secure with you. Shared on your terms. Turn their memory off. A free browser extension, in development for Chrome, Edge and Firefox.',
+      description: 'Encrypted and secure with you. Shared on your terms. Switch their memory off. A free browser extension, in development for Chrome, Edge and Firefox.',
     },
     description:
-      'Own your AI memory. Encrypted and secure with you, shared on your terms. bleib is your AI memory wallet: a browser extension, in development for Chrome, Edge and Firefox, that keeps your memory encrypted on your device. Bring in what ChatGPT, Claude and Gemini know about you, then turn their memory off. You decide what each AI gets, and every share leaves a receipt. Free and open source.',
+      'Own your AI memory. Encrypted and secure with you, shared on your terms. bleib is your AI memory wallet: a browser extension, in development for Chrome, Edge and Firefox, that keeps your memory encrypted on your device. Bring in what ChatGPT, Claude and Gemini know about you, then switch their memory off. You decide what each AI gets, and every share leaves a receipt. Free and open source.',
   },
   skip: 'Skip to content',
   nav: {
@@ -128,9 +128,9 @@ const en = {
         more: { to: 'receipts', hash: '', label: 'See what bleib added' },
       },
       {
-        h: ['Turn their memory off.', 'Your bleib keeps yours.'],
-        p: 'Bring in what ChatGPT remembers, then switch its memory off. Your aisle seat stays with you.',
-        more: { to: 'how', hash: '#off', label: 'How to turn it off' },
+        h: ['Switch their memory off.', 'Your bleib keeps yours.'],
+        p: 'Move your memories to your bleib. They stay with you forever.',
+        more: { to: 'how', hash: '#off', label: 'How to switch it off' },
         dark: true,
       },
     ],
@@ -325,7 +325,7 @@ const de: Strings = {
       },
       {
         h: ['Schalte ihr Gedächtnis aus.', 'Dein bleib behält deins.'],
-        p: 'Hol dir, was ChatGPT über dich weiß, dann schalte sein Gedächtnis aus. Dein Gangplatz bleibt bei dir.',
+        p: 'Bring deine Erinnerungen in dein bleib. Dort bleiben sie für immer bei dir.',
         more: { to: 'how', hash: '#off', label: 'So schaltest du es aus' },
         dark: true,
       },
