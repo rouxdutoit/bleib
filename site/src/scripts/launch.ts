@@ -63,6 +63,7 @@ export async function initLaunch(): Promise<void> {
   const header = document.querySelector<HTMLAnchorElement>('header a[data-install]');
   const primaries = [...document.querySelectorAll<HTMLAnchorElement>('[data-l-primary]'), ...(header ? [header] : [])];
   if (!store) { if (header) header.hidden = true; return; }
+  if (header) header.hidden = false;
   // The browser's own colour logo beside its name (browser-logos; see CREDITS.md).
   const logo = ({ Chrome: '/browsers/chrome.svg', Edge: '/browsers/edge.svg', Firefox: '/browsers/firefox.svg' } as Record<string, string>)[store.browser];
   /** Writes the label; with a logo, it sits just before the browser's name: "Add to [logo] Chrome". */

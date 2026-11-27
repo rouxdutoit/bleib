@@ -38,7 +38,7 @@ const en = {
   nav: {
     home: 'bleib home',
     github: 'GitHub',
-    early: 'Notify me',
+    early: 'Get bleib',
     how: 'How it works',
     security: 'Security',
     developers: 'Developers',
@@ -57,7 +57,7 @@ const en = {
     status: 'In development',
     h1: 'Own your AI memory.',
     sub: ['Encrypted and secure with you.', 'Shared on your terms.'],
-    primary: 'Notify me',
+    primary: 'How it works',
     secondary: 'GitHub',
     addTo: 'Add to {browser}',
     installed: 'bleib is installed',
@@ -109,7 +109,7 @@ const en = {
       },
       {
         h: ['You chat.', 'bleib takes notes.'],
-        p: 'Mention you’re vegetarian. It’s in your bleib. You decide what’s remembered.',
+        p: 'Mention you’re vegetarian. Saved to your bleib.',
         more: { to: 'how', hash: '#proposals', label: 'Saves as you go' },
       },
       {
@@ -119,17 +119,17 @@ const en = {
       },
       {
         h: ['It only asks', 'when it matters.'],
-        p: 'Each chat gets just what it needs. Health notes always wait for your yes.',
+        p: 'Each chat gets just what it needs. Health notes always wait for approval.',
         more: { to: 'permissions', hash: '', label: 'You decide what’s shared' },
       },
       {
         h: ['A receipt', 'for every share.'],
-        p: 'bleib added your aisle seat for Claude. Your receipt shows exactly that.',
+        p: 'See exactly what each AI got, and what it didn’t.',
         more: { to: 'receipts', hash: '', label: 'See what bleib added' },
       },
       {
-        h: ['Switch their memory off.', 'Your bleib keeps yours.'],
-        p: 'Move your memories to your bleib. They stay with you forever.',
+        h: ['Import your memories to your bleib.', 'Switch their memory off.'],
+        p: 'Your bleib keeps yours. They stay with you forever.',
         more: { to: 'how', hash: '#off', label: 'How to switch it off' },
         dark: true,
       },
@@ -181,20 +181,7 @@ const en = {
   },
   finale: {
     h: 'Your AI memory stays yours.',
-    p: 'For Chrome, Edge and Firefox. Works in the EU. Free and open source.',
-  },
-  form: {
-    label: 'Email address',
-    placeholder: 'name@example.com',
-    submit: 'Notify me',
-    sending: 'Sending…',
-    success: "Thanks, you're on the list.",
-    invalid: 'Please enter a valid email address.',
-    rate: 'Too many tries. Please wait a minute and try again.',
-    error: 'Something went wrong. Please try again.',
-    note: 'One email when bleib launches. Then we delete your address, or sooner if you ask.',
-    privacy: 'Privacy',
-    honeypot: 'Leave this field empty',
+    p: 'Free, local, and open source.',
   },
   footer: {
     dictionary: { language: 'German', pronounced: 'pronounced', meaning: 'stay; remain.' },
@@ -235,7 +222,7 @@ const de: Strings = {
   nav: {
     home: 'bleib Startseite',
     github: 'GitHub',
-    early: 'Vormerken',
+    early: 'Hol dir bleib',
     how: 'So funktioniert’s',
     security: 'Sicherheit',
     developers: 'Entwickler',
@@ -253,7 +240,7 @@ const de: Strings = {
     status: 'In Entwicklung',
     h1: 'Dein KI-Gedächtnis gehört dir.',
     sub: ['Verschlüsselt und sicher bei dir.', 'Geteilt, wie du willst.'],
-    primary: 'Vormerken',
+    primary: 'So funktioniert’s',
     secondary: 'GitHub',
     addTo: 'Zu {browser} hinzufügen',
     installed: 'bleib ist installiert',
@@ -305,7 +292,7 @@ const de: Strings = {
       },
       {
         h: ['Du chattest.', 'bleib merkt es sich.'],
-        p: 'Erwähn, dass du vegetarisch isst. Schon steht es in deinem bleib. Was bleibt, entscheidest du.',
+        p: 'Erwähn, dass du vegetarisch isst. In deinem bleib gespeichert.',
         more: { to: 'how', hash: '#proposals', label: 'Speichert nebenbei' },
       },
       {
@@ -315,17 +302,17 @@ const de: Strings = {
       },
       {
         h: ['bleib fragt,', 'wenn es zählt.'],
-        p: 'Jeder Chat bekommt nur, was er braucht. Gesundheitsnotizen warten immer auf dein Ja.',
+        p: 'Jeder Chat bekommt nur, was er braucht. Gesundheitsnotizen warten immer auf deine Freigabe.',
         more: { to: 'permissions', hash: '', label: 'Du entscheidest, was geteilt wird' },
       },
       {
         h: ['Ein Beleg', 'für jede Weitergabe.'],
-        p: 'bleib hat deinen Gangplatz für Claude eingefügt. Genau das steht in deinem Beleg.',
+        p: 'Sieh genau, was jede KI bekommen hat, und was nicht.',
         more: { to: 'receipts', hash: '', label: 'Sieh, was bleib eingefügt hat' },
       },
       {
-        h: ['Schalte ihr Gedächtnis aus.', 'Dein bleib behält deins.'],
-        p: 'Bring deine Erinnerungen in dein bleib. Dort bleiben sie für immer bei dir.',
+        h: ['Importiere deine Erinnerungen in dein bleib.', 'Schalte ihr Gedächtnis aus.'],
+        p: 'Dein bleib behält sie. Sie bleiben für immer bei dir.',
         more: { to: 'how', hash: '#off', label: 'So schaltest du es aus' },
         dark: true,
       },
@@ -377,20 +364,7 @@ const de: Strings = {
   },
   finale: {
     h: 'Dein KI-Gedächtnis bleibt deins.',
-    p: 'Für Chrome, Edge und Firefox. Funktioniert in der EU. Kostenlos und quelloffen.',
-  },
-  form: {
-    label: 'E-Mail-Adresse',
-    placeholder: 'name@beispiel.de',
-    submit: 'Vormerken',
-    sending: 'Wird gesendet…',
-    success: 'Danke, du stehst auf der Liste.',
-    invalid: 'Bitte gib eine gültige E-Mail-Adresse ein.',
-    rate: 'Zu viele Versuche. Bitte warte eine Minute und versuch es dann erneut.',
-    error: 'Etwas ist schiefgelaufen. Bitte versuch es noch einmal.',
-    note: 'Eine E-Mail, wenn bleib startet. Danach löschen wir deine Adresse, auf Wunsch auch früher.',
-    privacy: 'Datenschutz',
-    honeypot: 'Dieses Feld leer lassen',
+    p: 'Kostenlos, lokal und Open Source.',
   },
   footer: {
     dictionary: { language: 'Deutsch', pronounced: 'Aussprache', meaning: 'dableiben; erhalten bleiben.' },

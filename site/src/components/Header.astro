@@ -1,4 +1,5 @@
 ---
+import { INSTALL } from '../config/install';
 import Logo from './Logo.astro';
 import { GITHUB_URL, routes, t, otherLang, type Lang, type RouteKey } from '../i18n/strings';
 interface Props { lang: Lang; page: RouteKey }
@@ -7,7 +8,9 @@ const s = t(lang).nav;
 const githubHref = GITHUB_URL || routes.developers[lang];
 // The same page in the other language, as in the footer.
 const other = otherLang(lang);
-const earlyHref = Astro.url.pathname === routes.home[lang] ? '#early-access' : `${routes.home[lang]}#early-access`; // only the homepage has the form (the 404 renders as page "home")
+// The header's main button exists for launch day only (scripts/launch.ts names the browser's store); until then the
+// nav carries the links.
+const earlyHref = routes.how[lang];
 const links: { key: RouteKey; label: string }[] = [
   { key: 'how', label: s.how },
   { key: 'security', label: s.security },
@@ -31,7 +34,7 @@ const links: { key: RouteKey; label: string }[] = [
           <li><a href={githubHref}>{s.github}</a></li>
           <li><a class="lang" href={routes[page][other]} hreflang={other} lang={other} aria-label={s.langSwitchLabel}>{s.langSwitch}</a></li>
         </ul>
-        <a class="btn btn-primary cta" href={earlyHref} data-install data-add={t(lang).hero.addTo} data-installed={t(lang).hero.installed} data-open={t(lang).launch.open}>{s.early}</a>
+        <a class="btn btn-primary cta" href={earlyHref} hidden={!INSTALL.launched} data-install data-add={t(lang).hero.addTo} data-installed={t(lang).hero.installed} data-open={t(lang).launch.open}>{s.early}</a>
       </div>
     </nav>
   </div>

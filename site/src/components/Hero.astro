@@ -24,7 +24,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
     <h1 id="hero-title" class="hero-h1">{s.h1.split(/(?<=\.)\s+/).map((line, i) => [i > 0 && ' ', <span class="line">{line.split(/(\S+-\S+)/).map((part) => /-/.test(part) ? <span class="whole">{part}</span> : part)}</span>])}</h1>
     <p class="sub">{s.sub.map((line) => <span>{line.split(/(?<=,) /).map((part, i) => [i > 0 && ' ', <span class="phrase">{part}</span>])}</span>)}</p>
     <div class="cta" data-prelaunch hidden={INSTALL.launched}>
-      <a class="btn btn-primary" id="hero-primary" href="#early-access" data-install data-add={s.addTo} data-installed={s.installed}>{s.primary}</a>
+      <a class="btn btn-primary" id="hero-primary" href={routes.how[lang]} data-install data-add={s.addTo} data-installed={s.installed}>{s.primary}</a>
       <a class="btn btn-secondary" href={githubHref}>{s.secondary}</a>
     </div>
     <div class="cta-launch"><LaunchCta lang={lang} /></div>

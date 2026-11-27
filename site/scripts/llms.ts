@@ -14,11 +14,10 @@ function link(label: string, path: string, site: URL) {
 }
 
 /** Where bleib stands, so an agent doesn't tell people they can install it yet. */
-function availability(lang: Lang, site: URL) {
-  const signup = link(new URL(`${routes.home[lang]}#early-access`, site).href, `${routes.home[lang]}#early-access`, site);
+function availability(lang: Lang, _site: URL) {
   return lang === 'de'
-    ? `In Entwicklung für Chrome und Edge ab Version 116 und Firefox ab Version 140. Lass dich zum Start per E-Mail benachrichtigen: ${signup}`
-    : `In development for Chrome and Edge 116 or later and Firefox 140 or later. Get an email at launch: ${signup}`;
+    ? 'In Entwicklung für Chrome und Edge ab Version 116 und Firefox ab Version 140.'
+    : 'In development for Chrome and Edge 116 or later and Firefox 140 or later.';
 }
 
 export function renderIndex(site: URL) {
