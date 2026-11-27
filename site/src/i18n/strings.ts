@@ -119,7 +119,7 @@ const en = {
       },
       {
         h: ['It only asks', 'when it matters.'],
-        p: 'Choose Always add, and your aisle seat goes in by itself. Health notes always wait for your yes.',
+        p: 'Each chat gets just what it needs. Health notes always wait for your yes.',
         more: { to: 'permissions', hash: '', label: 'You decide what’s shared' },
       },
       {
@@ -315,7 +315,7 @@ const de: Strings = {
       },
       {
         h: ['bleib fragt,', 'wenn es zählt.'],
-        p: 'Wähl „Immer hinzufügen“, und dein Gangplatz kommt von selbst dazu. Gesundheitsnotizen warten immer auf dein Ja.',
+        p: 'Jeder Chat bekommt nur, was er braucht. Gesundheitsnotizen warten immer auf dein Ja.',
         more: { to: 'permissions', hash: '', label: 'Du entscheidest, was geteilt wird' },
       },
       {
