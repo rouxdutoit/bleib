@@ -3,7 +3,7 @@
  * Launch-day actions, for the hero and the finale (config/install.ts: `launched`, `connectors`). Rendered hidden until
  * launch; scripts/launch.ts shows the right one for the visitor's device:
  * - a computer with Chrome, Edge or Firefox: one capsule, "Add to {browser}" (or "Open bleib" once installed), and a
- *   the browser's own logo just before its name (Chrome, Firefox; Edge has none to use), then a line of information,
+ *   the browser's own colour logo just before its name, then a line of information,
  *   not links: "Works with ChatGPT Claude Gemini", each with its own colour logo at text size;
  * - a phone or Safari, where no extension can run: with connectors, "Use it in" and two capsules, ChatGPT and Claude,
  *   then "Get it for your computer" as text; without them, "Get bleib for your computer" as the one capsule. That link
@@ -58,7 +58,7 @@ const apps = [
   .ai { display: inline-flex; align-items: center; gap: 5px; margin-left: 6px; color: var(--label); font-weight: 500; white-space: nowrap; }
   .logo { flex: none; width: 0.95em; height: 0.95em; display: block; }
   /* The browser's logo inside the main capsule, set by scripts/launch.ts. */
-  :global(.btn .blogo) { display: inline-block; width: 0.95em; height: 0.95em; margin-right: 5px; vertical-align: -0.12em; background: currentColor; mask: var(--logo) center / contain no-repeat; -webkit-mask: var(--logo) center / contain no-repeat; }
+  :global(.btn .blogo) { display: inline-block; width: 1.05em; height: 1.05em; margin: 0 5px 0 3px; vertical-align: -0.18em; }
   .mono { flex: none; width: 0.95em; height: 0.95em; align-self: center; background: currentColor; mask: var(--logo) center / contain no-repeat; -webkit-mask: var(--logo) center / contain no-repeat; }
   .use { margin: 0 0 12px; color: var(--muted); }
   .caps { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }

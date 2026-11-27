@@ -59,15 +59,14 @@ export async function initLaunch(): Promise<void> {
   const header = document.querySelector<HTMLAnchorElement>('header a[data-install]');
   const primaries = [...document.querySelectorAll<HTMLAnchorElement>('[data-l-primary]'), ...(header ? [header] : [])];
   if (!store) { if (header) header.hidden = true; return; }
-  // The browser's own logo beside its name (Simple Icons, CC0); Edge has no mark we can use, so it stays text.
-  const logo = ({ Chrome: '/browsers/chrome.svg', Firefox: '/browsers/firefox.svg' } as Record<string, string>)[store.browser];
+  // The browser's own colour logo beside its name (browser-logos; see CREDITS.md).
+  const logo = ({ Chrome: '/browsers/chrome.svg', Edge: '/browsers/edge.svg', Firefox: '/browsers/firefox.svg' } as Record<string, string>)[store.browser];
   /** Writes the label; with a logo, it sits just before the browser's name: "Add to [logo] Chrome". */
   const label = (a: HTMLAnchorElement, template: string) => {
     const [before, after = ''] = template.split('{browser}');
     a.textContent = '';
     if (!template.includes('{browser}')) { a.textContent = template; return; }
-    const mark = logo ? Object.assign(document.createElement('span'), { className: 'blogo' }) : null;
-    if (mark) { mark.setAttribute('aria-hidden', 'true'); mark.style.setProperty('--logo', `url(${logo})`); }
+    const mark = logo ? Object.assign(document.createElement('img'), { className: 'blogo', src: logo, alt: '', width: 16, height: 16 }) : null;
     // One inline run inside the button, so its flex gap doesn't push the logo away from the name.
     const run = document.createElement('span');
     run.append(before, ...(mark ? [mark] : []), store.browser, after);
