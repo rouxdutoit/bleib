@@ -51,6 +51,9 @@ export async function initLaunch(): Promise<void> {
     root.querySelectorAll<HTMLButtonElement>('[data-share]').forEach((b) => b.addEventListener('click', () => void share(root)));
   }
 
+  // "On your phone too." further down, only with connectors.
+  document.querySelectorAll<HTMLElement>('[data-phone-too]').forEach((el) => { el.hidden = !connectors; });
+
   // The header's main button follows the hero: the same store button on a computer, gone on a phone or Safari.
   const header = document.querySelector<HTMLAnchorElement>('header a[data-install]');
   const primaries = [...document.querySelectorAll<HTMLAnchorElement>('[data-l-primary]'), ...(header ? [header] : [])];

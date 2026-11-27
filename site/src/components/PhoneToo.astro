@@ -1,0 +1,41 @@
+---
+/**
+ * "On your phone too." Launch day with connectors only (config/install.ts: `launched` and `connectors`, or the
+ * ?launch=1&connectors=1 preview, which scripts/launch.ts reveals): bleib inside ChatGPT and Claude, and honestly
+ * which part is paid. Gemini isn't offered, because its app takes no outside apps.
+ */
+import Rails from './Rails.astro';
+import { INSTALL } from '../config/install';
+import { routes, t, type Lang } from '../i18n/strings';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang).phone;
+const apps = [
+  { name: 'ChatGPT', icon: '/providers/openai.svg', href: INSTALL.chatgptConnectorUrl },
+  { name: 'Claude', icon: '/providers/claude.svg', href: INSTALL.claudeConnectorUrl },
+];
+---
+<section class="phone-too has-rails" data-phone-too hidden={!(INSTALL.launched && INSTALL.connectors)} aria-labelledby="phone-title">
+  <Rails />
+  <div class="wrap inner">
+    <h2 id="phone-title" class="title">{s.h}</h2>
+    <p class="sub">{s.sub}</p>
+    <div class="caps">
+      {apps.map((a) => <a class="btn btn-primary cap" href={a.href || '#'} rel="noopener"><span class="mono" aria-hidden="true" style={`--logo: url(${a.icon})`} />{a.name}</a>)}
+    </div>
+    <p class="note t-foot">{s.note} <a href={routes.pricing[lang]}>{s.more}</a></p>
+  </div>
+</section>
+
+<style>
+  .phone-too { padding: clamp(80px, 10vw, 136px) 0; }
+  .phone-too[hidden] { display: none; }
+  .inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .title { margin: 0; max-width: 20ch; font-size: clamp(28px, 4vw, 48px); line-height: 1.1; letter-spacing: -0.025em; font-weight: 600; text-wrap: balance; }
+  .sub { margin: 14px 0 0; font-size: clamp(17px, 1.7vw, 21px); line-height: 1.45; color: var(--muted); text-wrap: balance; }
+  .caps { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; }
+  .cap { gap: 8px; }
+  .mono { flex: none; width: 1em; height: 1em; background: currentColor; mask: var(--logo) center / contain no-repeat; -webkit-mask: var(--logo) center / contain no-repeat; }
+  .note { margin: 20px 0 0; max-width: 36ch; color: var(--muted); text-wrap: balance; }
+  .note a { color: var(--label); font-weight: 500; }
+</style>

@@ -64,12 +64,19 @@ const en = {
   },
   launch: {
     open: 'Open bleib',
-    also: 'Also in',
+    free: 'Free',
+    worksWith: 'Works with',
     useIn: 'Use it in',
     share: 'Get it for your computer',
     shareAlone: 'Get bleib for your computer',
     copied: 'Link copied',
     shareText: 'bleib: Own your AI memory.',
+  },
+  phone: {
+    h: 'On your phone too.',
+    sub: 'Use bleib inside ChatGPT and Claude.',
+    note: 'One AI is free. Every AI comes with bleib everywhere, our paid plan.',
+    more: 'See pricing',
   },
   preview: {
     examples: 'Examples',
@@ -254,12 +261,19 @@ const de: Strings = {
   },
   launch: {
     open: 'bleib öffnen',
-    also: 'Auch in',
+    free: 'Kostenlos',
+    worksWith: 'Funktioniert mit',
     useIn: 'Nutze es in',
     share: 'Hol es dir für deinen Computer',
     shareAlone: 'Hol dir bleib für deinen Computer',
     copied: 'Link kopiert',
     shareText: 'bleib: Dein KI-Gedächtnis gehört dir.',
+  },
+  phone: {
+    h: 'Auch auf deinem Handy.',
+    sub: 'Nutze bleib direkt in ChatGPT und Claude.',
+    note: 'Eine KI ist kostenlos. Alle KIs gibt es mit bleib überall, unserem Bezahltarif.',
+    more: 'Zu den Preisen',
   },
   preview: {
     examples: 'Beispiele',

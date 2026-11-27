@@ -2,11 +2,11 @@
 /**
  * Launch-day actions, for the hero and the finale (config/install.ts: `launched`, `connectors`). Rendered hidden until
  * launch; scripts/launch.ts shows the right one for the visitor's device:
- * - a computer with Chrome, Edge or Firefox: one capsule, "Add to {browser}" (or "Open bleib" once installed), and,
- *   with connectors, a quiet "Also in ChatGPT · Claude" line;
+ * - a computer with Chrome, Edge or Firefox: one capsule, "Add to {browser}" (or "Open bleib" once installed), and a
+ *   quiet line, "Free · Works with ChatGPT Claude Gemini" (information, not links: the extension is the one action);
  * - a phone or Safari, where no extension can run: with connectors, "Use it in" and two capsules, ChatGPT and Claude,
  *   then "Get it for your computer" as text; without them, "Get bleib for your computer" as the one capsule. That link
- *   opens the share sheet with bleib.dev, or copies the link.
+ *   opens the share sheet with bleib.dev, or copies the link. Gemini has no capsule: its app takes no outside apps.
  */
 import { INSTALL } from '../config/install';
 import { routes, t, type Lang } from '../i18n/strings';
@@ -15,6 +15,11 @@ const { lang } = Astro.props;
 const s = t(lang).launch;
 const h = t(lang).hero;
 const shareUrl = new URL(routes.home[lang], Astro.site ?? 'https://bleib.dev').href;
+const works = [
+  { name: 'ChatGPT', icon: '/providers/openai.svg' },
+  { name: 'Claude', icon: '/providers/claude.svg' },
+  { name: 'Gemini', icon: '/providers/gemini.svg' },
+];
 const apps = [
   { name: 'ChatGPT', icon: '/providers/openai.svg', href: INSTALL.chatgptConnectorUrl },
   { name: 'Claude', icon: '/providers/claude.svg', href: INSTALL.claudeConnectorUrl },
@@ -23,9 +28,8 @@ const apps = [
 <div class="launch" data-launch hidden={!INSTALL.launched} data-share-url={shareUrl} data-share-text={s.shareText} data-copied={s.copied}>
   <div class="desk" data-l="desktop">
     <a class="btn btn-primary" data-l-primary href="#" data-add={h.addTo} data-open={s.open}>{h.addTo.replace('{browser}', 'Chrome')}</a>
-    <p class="also t-sub" data-l-connectors hidden={!INSTALL.connectors}>
-      {s.also}{' '}
-      {apps.map((a, i) => [i > 0 && <span class="dot" aria-hidden="true"> · </span>, <a class="app" href={a.href || '#'} rel="noopener"><span class="mono" aria-hidden="true" style={`--logo: url(${a.icon})`} />{a.name}</a>])}
+    <p class="info t-sub">
+      {s.free} · {s.worksWith}{works.map((a) => [' ', <span class="ai"><span class="mono" aria-hidden="true" style={`--logo: url(${a.icon})`} />{a.name}</span>])}
     </p>
   </div>
   <div class="phone" data-l="mobile" hidden>
@@ -47,10 +51,9 @@ const apps = [
   .launch { display: flex; flex-direction: column; align-items: center; text-align: center; }
   .launch[hidden], .launch [hidden] { display: none !important; }
   .desk, .phone, .with, .without { display: flex; flex-direction: column; align-items: center; }
-  /* The quiet line under the capsule: text size, each AI a link with its own small logo on the baseline. */
-  .also { margin: 14px 0 0; color: var(--muted); }
-  .app { display: inline-flex; align-items: baseline; gap: 5px; color: var(--label); text-decoration: none; font-weight: 500; }
-  .app:hover { text-decoration: underline; }
+  /* The quiet line under the capsule: text size, each AI with its own small logo, centred on the text. */
+  .info { margin: 14px 0 0; color: var(--muted); text-wrap: balance; }
+  .ai { display: inline-flex; align-items: center; gap: 5px; margin-left: 4px; color: var(--label); font-weight: 500; white-space: nowrap; }
   .mono { flex: none; width: 0.95em; height: 0.95em; align-self: center; background: currentColor; mask: var(--logo) center / contain no-repeat; -webkit-mask: var(--logo) center / contain no-repeat; }
   .use { margin: 0 0 12px; color: var(--muted); }
   .caps { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
@@ -58,5 +61,4 @@ const apps = [
   /* A text link, as Apple sets a secondary action; the tap area still reaches 44px. */
   .link { margin-top: 14px; min-height: 44px; padding: 0 8px; border: 0; background: none; color: var(--label); font: inherit; font-weight: 500; cursor: pointer; }
   .link:hover { text-decoration: underline; }
-  @media (pointer: coarse) { .app { min-height: 44px; align-items: center; } }
 </style>
