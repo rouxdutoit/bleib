@@ -31,7 +31,7 @@ const links: { key: RouteKey; label: string }[] = [
           <li><a href={githubHref}>{s.github}</a></li>
           <li><a class="lang" href={routes[page][other]} hreflang={other} lang={other} aria-label={s.langSwitchLabel}>{s.langSwitch}</a></li>
         </ul>
-        <a class="btn btn-primary cta" href={earlyHref} data-install data-add={t(lang).hero.addTo} data-installed={t(lang).hero.installed}>{s.early}</a>
+        <a class="btn btn-primary cta" href={earlyHref} data-install data-add={t(lang).hero.addTo} data-installed={t(lang).hero.installed} data-open={t(lang).launch.open}>{s.early}</a>
       </div>
     </nav>
   </div>
@@ -50,6 +50,8 @@ const links: { key: RouteKey; label: string }[] = [
   // Loaded only when that switch is on, so the header ships without it until then.
   import { INSTALL } from '../config/install';
   if (INSTALL.storeButton) void import('../scripts/install').then((m) => m.initInstall());
+  // Launch day (or a ?launch=1 preview): the hero's and the finale's actions change (scripts/launch.ts).
+  if (INSTALL.launched || /[?&]launch=1\b/.test(location.search)) void import('../scripts/launch').then((m) => m.initLaunch());
   // Mobile menu, as on fazit.dev: closes on a link, Escape, focus leaving the header, or a wider screen.
   const header = document.querySelector<HTMLElement>('[data-header]');
   const button = header?.querySelector<HTMLButtonElement>('.menu-btn');

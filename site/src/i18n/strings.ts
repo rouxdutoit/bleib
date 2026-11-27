@@ -62,6 +62,15 @@ const en = {
     stores: 'Get bleib for',
     leaveOut: 'Leave out {detail}',
   },
+  launch: {
+    open: 'Open bleib',
+    also: 'Also in',
+    useIn: 'Use it in',
+    share: 'Get it for your computer',
+    shareAlone: 'Get bleib for your computer',
+    copied: 'Link copied',
+    shareText: 'bleib: Own your AI memory.',
+  },
   preview: {
     examples: 'Examples',
     ask: 'Add to your message?',
@@ -242,6 +251,15 @@ const de: Strings = {
     installed: 'bleib ist installiert',
     stores: 'bleib gibt es für',
     leaveOut: '{detail} weglassen',
+  },
+  launch: {
+    open: 'bleib öffnen',
+    also: 'Auch in',
+    useIn: 'Nutze es in',
+    share: 'Hol es dir für deinen Computer',
+    shareAlone: 'Hol dir bleib für deinen Computer',
+    copied: 'Link kopiert',
+    shareText: 'bleib: Dein KI-Gedächtnis gehört dir.',
   },
   preview: {
     examples: 'Beispiele',

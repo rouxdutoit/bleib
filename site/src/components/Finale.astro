@@ -7,6 +7,8 @@ import Lines from './Lines.astro';
 import { MARK_BODY, MARK_EYES, MARK_VIEWBOX } from './markPath';
 import Rails from './Rails.astro';
 import EarlyAccessForm from './EarlyAccessForm.astro';
+import LaunchCta from './LaunchCta.astro';
+import { INSTALL } from '../config/install';
 import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -23,7 +25,8 @@ const s = t(lang).finale;
     </span>
     <h2 id="finale-title" class="title">{s.h}</h2>
     <p class="sub"><Lines text={s.p} /></p>
-    <div class="form"><EarlyAccessForm lang={lang} /></div>
+    <div class="form" data-prelaunch hidden={INSTALL.launched}><EarlyAccessForm lang={lang} /></div>
+    <div class="form"><LaunchCta lang={lang} /></div>
   </div>
 </section>
 
@@ -49,4 +52,5 @@ const s = t(lang).finale;
   .title { margin: 0; max-width: 22ch; font-size: clamp(38px, 5.4vw, 64px); line-height: 1.07; letter-spacing: -0.03em; font-weight: 600; text-wrap: balance; }
   .sub { margin: 18px 0 0; font-size: clamp(17px, 1.7vw, 21px); line-height: 1.45; color: var(--muted); text-wrap: balance; }
   .form { margin-top: 32px; width: 100%; display: flex; justify-content: center; }
+  .form[hidden], .form:has(> [hidden]) { display: none; }
 </style>

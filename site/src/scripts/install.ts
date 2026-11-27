@@ -9,22 +9,26 @@ import { icon } from '../components/icons';
 
 type Store = { browser: string; url: string };
 
-/** The visitor's browser, from User-Agent Client Hints where the browser offers them, otherwise from the user agent. */
-function detect(): Store | null {
+/** The visitor's browser on a computer, from User-Agent Client Hints where the browser offers them, otherwise from the
+ *  user agent, with its store URL ('' until that listing exists). Null on phones and in browsers bleib doesn't run in. */
+export function browser(): Store | null {
   const nav = navigator as Navigator & { userAgentData?: { brands: { brand: string }[]; mobile: boolean } };
   const ua = navigator.userAgent;
   const mobile = nav.userAgentData?.mobile ?? /Android|iPhone|iPad|Mobile/i.test(ua);
   if (mobile) return null;
   const brands = nav.userAgentData?.brands.map((b) => b.brand) ?? [];
   const chrome = INSTALL.chromeStoreUrl;
-  if (/Firefox\//.test(ua) && !/Seamonkey/i.test(ua)) return INSTALL.firefoxStoreUrl ? { browser: 'Firefox', url: INSTALL.firefoxStoreUrl } : null;
-  if (brands.includes('Microsoft Edge') || /Edg\//.test(ua)) {
-    const url = INSTALL.edgeStoreUrl || chrome;
-    return url ? { browser: 'Edge', url } : null;
-  }
+  if (/Firefox\//.test(ua) && !/Seamonkey/i.test(ua)) return { browser: 'Firefox', url: INSTALL.firefoxStoreUrl };
+  if (brands.includes('Microsoft Edge') || /Edg\//.test(ua)) return { browser: 'Edge', url: INSTALL.edgeStoreUrl || chrome };
   const chromium = brands.some((b) => /Chrom|Opera|Brave/.test(b)) || (/Chrome\//.test(ua) && !/Edg\//.test(ua));
-  if (chromium) return chrome ? { browser: 'Chrome', url: chrome } : null;
+  if (chromium) return { browser: 'Chrome', url: chrome };
   return null;
+}
+
+/** The same, only once that browser's store listing exists. */
+function detect(): Store | null {
+  const store = browser();
+  return store?.url ? store : null;
 }
 
 /** Asks one extension ID {type: 'bleib-installed'}; true when it answers {installed: true} within 300 ms. */
@@ -49,7 +53,7 @@ function ask(id: string): Promise<boolean> {
 /** True when bleib is installed. Chrome and Edge answer a message (each store gives the extension its own ID); Firefox
  *  can't, so after its optional bleib.dev permission it marks the page with data-bleib-installed="true". The page
  *  could set that itself, so it only ever changes the button's label. */
-async function installed(): Promise<boolean> {
+export async function installed(): Promise<boolean> {
   if (document.documentElement.dataset.bleibInstalled === 'true') return true;
   const answers = await Promise.all([INSTALL.extensionId, INSTALL.edgeExtensionId].filter(Boolean).map(ask));
   return answers.some(Boolean);
