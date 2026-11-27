@@ -111,7 +111,7 @@ const caption = [
           {/* Everyday things just work, then something sensitive asks first. */}
           <div class="card note">
             <div class="note-head">
-              {(() => { const p = c.any.providers.find((x) => x.name === c.ask.later.ai); return p && <img class="app app-tall" src={p.color || p.icon} alt="" width="50" height="50" />; })()}
+              {(() => { const p = c.any.providers.find((x) => x.name === c.ask.later.ai); return p && <img class:list={['app app-tall', { mono: !p.color }]} src={p.color || p.icon} alt="" width="50" height="50" />; })()}
               <div class="note-id"><p class="t-headline">{c.ask.later.title}</p><p class="later-fact"><span class="pill-fact t-foot"><span class="pill-sym" set:html={svg(c.ask.later.icon)} />{c.ask.later.sub}</span><span class="t-foot auto">{c.ask.later.tag}</span></p></div>
             </div>
           </div>
@@ -151,7 +151,7 @@ const caption = [
           <ul class="group">
             {c.any.providers.map((p, i) => (
               <li class="cell">
-                <img class="app" src={p.color || p.icon} alt="" width="42" height="42" />
+                <img class:list={['app', { mono: !p.color }]} src={p.color || p.icon} alt="" width="42" height="42" />
                 <span class="cell-k"><span class="t-body">{p.name}</span><span class="t-sub c-2 blk">{c.off.setting}</span></span>
                 <span class="toggle at-1" style={`--delay: ${i * 0.35}s`} />
               </li>
@@ -295,6 +295,9 @@ const caption = [
 
 </style>
 <style is:global>
+  /* A one-colour logo (ChatGPT's) is black; on the dark theme's grey tiles it turns white, as the brand does on dark. */
+  :root[data-theme='dark'] .sv .app.mono { filter: invert(1); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .sv .app.mono { filter: invert(1); } }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme='light']) .sv .pm { filter: invert(1); }
   }
