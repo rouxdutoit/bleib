@@ -81,6 +81,14 @@ const en: Docs = {
         ],
       },
       {
+        id: 'off',
+        h: 'Turn their memory off',
+        blocks: [
+          { p: 'Once your memories are in your bleib, you can switch off the memory in ChatGPT, Claude and Gemini. bleib opens that AI’s memory settings and shows you the switch. You turn it off yourself, and bleib checks that it’s really off.' },
+          { p: 'Bring your memories in first, so nothing is lost. Switching off isn’t deleting: what that AI already saved stays in your account there until you delete it in its settings. bleib never deletes anything for you.' },
+        ],
+      },
+      {
         id: 'permissions',
         h: 'Share just enough',
         blocks: [{ p: 'bleib finds the smallest useful part of your memory on your device and suggests it just above the message box. Nothing goes in until you tap Add. Once you’ve added the same kind of detail twice in an account, you can choose Always add, and bleib adds that kind to new chats there by itself. Private and sensitive details always ask.' }],
@@ -556,6 +564,14 @@ const de: Docs = {
           { p: 'Manches KI-Gedächtnis schreibt sich aus deinen Chats von selbst. In bleib wird nichts gespeichert, ohne dass du es siehst, und du entscheidest, was bleibt.' },
           { p: 'Bei allem anderen fragt bleib vorher, direkt im Chat: „In bleib speichern?“ Das gilt für Gesundheit, Geld, Menschen, Orte und alles, was bleib nicht sicher einordnen kann. Was du so speicherst, bleibt privat: Bevor bleib es teilt, fragt es dich.' },
           { p: 'Du kannst auch mitnehmen, was ChatGPT, Claude und Gemini über dich wissen. bleib öffnet jede KI mit einer fertigen Frage. Du schickst sie ab, kopierst die Antwort und wählst „Antwort einfügen“. Oder du nutzt den Datenexport des Anbieters (bei Gemini Google Takeout) und ziehst die Datei in bleib. bleib liest alles auf deinem Gerät, und du behältst, was stimmt.' },
+        ],
+      },
+      {
+        id: 'off',
+        h: 'Schalte ihr Gedächtnis aus',
+        blocks: [
+          { p: 'Sind deine Erinnerungen in deinem bleib, kannst du das Gedächtnis in ChatGPT, Claude und Gemini ausschalten. bleib öffnet die Gedächtnis-Einstellungen der KI und zeigt dir den Schalter. Du schaltest es selbst aus, und bleib prüft, ob es wirklich aus ist.' },
+          { p: 'Hol deine Erinnerungen zuerst in dein bleib, dann geht nichts verloren. Ausschalten ist nicht löschen: Was die KI schon gespeichert hat, bleibt dort in deinem Konto, bis du es in ihren Einstellungen löschst. bleib löscht nie etwas für dich.' },
         ],
       },
       {

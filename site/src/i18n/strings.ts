@@ -113,8 +113,8 @@ const en = {
       },
       {
         h: ['Turn their memory off.', 'bleib keeps yours.'],
-        p: 'ChatGPT’s memory is off. Your aisle seat stays with you.',
-        more: { to: 'security', hash: '', label: 'Private by design' },
+        p: 'Bring in what ChatGPT remembers, then switch its memory off. Your aisle seat stays with you.',
+        more: { to: 'how', hash: '#off', label: 'How to turn it off' },
         dark: true,
       },
     ],
@@ -294,8 +294,8 @@ const de: Strings = {
       },
       {
         h: ['Schalte ihr Gedächtnis aus.', 'bleib behält deins.'],
-        p: 'ChatGPTs Gedächtnis ist aus. Dein Gangplatz bleibt bei dir.',
-        more: { to: 'security', hash: '', label: 'Privat von Grund auf' },
+        p: 'Hol dir, was ChatGPT über dich weiß, dann schalte sein Gedächtnis aus. Dein Gangplatz bleibt bei dir.',
+        more: { to: 'how', hash: '#off', label: 'So schaltest du es aus' },
         dark: true,
       },
     ],
