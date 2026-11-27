@@ -180,7 +180,7 @@ const en = {
     },
   },
   finale: {
-    h: 'Secure your memories for life.',
+    h: 'Your AI memory stays yours.',
     p: 'Free, local, and open source.',
   },
   footer: {
@@ -363,7 +363,7 @@ const de: Strings = {
     },
   },
   finale: {
-    h: 'Sichere deine Erinnerungen fürs Leben.',
+    h: 'Dein KI-Gedächtnis bleibt deins.',
     p: 'Kostenlos, lokal und Open Source.',
   },
   footer: {
