@@ -8,7 +8,7 @@ import { INSTALL } from '../config/install';
  *   p       paragraph            list   bullet list         code   command line
  *   never   icon list with hairlines (commitments)          rows   key / value list
  *   tiles   two-up tiles with an optional tag               address  postal lines
- *   compare a checklist: each benefit with a tick or a dash for bleib and for the other way
+ *   compare a checklist: what bleib does, each with a tick (no claims about other products)
  *   commands terminal lines as pills, each with a Copy button
  */
 /** `ai` shows that AI's own logo beside the title and detail (ProviderLogo). */
@@ -23,7 +23,7 @@ export type Block =
   | { tiles: Tile[] }
   | { refs: { name: string; href: string; v: string }[] }
   | { commands: string[] }
-  | { compare: { head: [string, string]; yes: string; no: string; rows: [string, boolean, boolean][] } };
+  | { compare: { head: string; yes: string; rows: string[] } };
 
 export interface Section {
   id?: string;
@@ -109,19 +109,17 @@ const en: Docs = {
       },
       {
         id: 'compare',
-        h: 'bleib and the memory in each AI',
+        h: 'What bleib does',
         blocks: [{
           compare: {
-            head: ['bleib', 'Each AI'],
+            head: 'bleib',
             yes: 'Yes',
-            no: 'No',
             rows: [
-              ['One memory for ChatGPT, Claude and Gemini', true, false],
-              ['Kept encrypted on your device', true, false],
-              ['You choose what each chat gets', true, false],
-              ['A receipt for every share', true, false],
-              ['Use it on all three without importing again', true, false],
-              ['Free and open source', true, false],
+              'One memory for ChatGPT, Claude and Gemini',
+              'Encrypted on your device',
+              'You choose per chat',
+              'A receipt for every share',
+              'Free and open source',
             ],
           },
         }],
@@ -136,7 +134,7 @@ const en: Docs = {
   works: {
     title: 'Works with your AI',
     description: 'Use your memory in ChatGPT, Claude and Gemini.',
-    intro: ['The bleib browser extension is in development for Chrome, Edge and Firefox on a computer. It works on recognised pages on these three sites.'],
+    intro: ['The bleib browser extension is in development for Chrome and Edge 116 or later and Firefox 140 or later, on a computer. Passkeys in Firefox need version 150 or later. It works on recognised pages on these three sites.'],
     sections: [
       {
         h: 'In your browser',
@@ -249,7 +247,7 @@ const en: Docs = {
         blocks: [
           { p: 'bleib keeps your memory encrypted in your browser profile and unlocks it only for you. It relies on your browser and your device’s user account. Someone who controls them could see what bleib shows while it’s unlocked.' },
           { p: 'You keep your recovery kit somewhere else. bleib keeps no copy of it.' },
-          { p: 'If you choose a passkey, your password manager or security key keeps it under the name bleib.dev. bleib.dev never sees your memory.' },
+          { p: 'If you choose a passkey, your password manager or security key keeps it under the name bleib.dev. bleib.dev never sees your memory. In Firefox, passkeys need version 150 or later.' },
         ],
       },
       {
@@ -435,11 +433,11 @@ const en: Docs = {
       {
         h: 'What the extension reads',
         blocks: [
-          { p: 'bleib works only on the AI sites you allow. It asks for chatgpt.com, claude.ai and gemini.google.com one at a time, and you can take access back at any time.' },
+          { p: 'bleib reads your drafts only on the AI sites you allow. It asks for chatgpt.com, claude.ai and gemini.google.com one at a time, and you can take access back at any time. While you import or turn off an AI’s Memory, it also reads the settings page it guides you through.' },
           { p: 'On those sites, bleib checks what you type in the draft, on your device. It finds relevant memories, recognises preferences to save and spots likely secrets, such as passwords or card numbers, before you send. This check runs on your device and doesn’t store what it finds. If you tell bleib something isn’t a secret, it keeps a salted fingerprint of it until you close the browser, so it doesn’t ask again.' },
-          { p: 'When you bring in your memories, bleib reads the export file you choose, or the answer you paste with Paste answer. In Chrome and Edge it reads your clipboard for this, if you allow it, and only at that moment. In Firefox you paste the answer yourself. Everything is processed on your device, and nothing is uploaded.' },
+          { p: 'When you bring in your memories, bleib reads the export file you choose, or the answer you paste with Paste answer. Chrome and Edge read the clipboard, if you allow it, only when you choose Paste answer. bleib hands the permission back when the import ends. In Firefox you paste the answer yourself. Everything is processed on your device, and nothing is uploaded.' },
           { p: 'Suggestions are worked out on your device by a small classifier built into bleib, which learns from your choices on this device. Nothing you write is sent anywhere for this. bleib never reads the AI’s answers on its own.' },
-          { p: 'If you choose a passkey, bleib asks for access to bleib.dev, so your browser can save the passkey under that name. Your password manager or security key holds it, and no memory or wallet data goes to bleib.dev. bleib.dev can also ask whether bleib is installed and which version. It learns nothing else.' },
+          { p: 'bleib has access to bleib.dev from install, so your passkey works. It reads nothing there. If you choose a passkey, your browser saves it under the name bleib.dev, and your password manager or security key holds it. No memory or wallet data goes to bleib.dev. bleib.dev can also ask whether bleib is installed and which version. It learns nothing else.' },
         ],
       },
       {
@@ -563,19 +561,17 @@ const de: Docs = {
       },
       {
         id: 'compare',
-        h: 'bleib und das Gedächtnis jeder KI',
+        h: 'Was bleib macht',
         blocks: [{
           compare: {
-            head: ['bleib', 'Jede KI'],
+            head: 'bleib',
             yes: 'Ja',
-            no: 'Nein',
             rows: [
-              ['Ein Gedächtnis für ChatGPT, Claude und Gemini', true, false],
-              ['Verschlüsselt auf deinem Gerät', true, false],
-              ['Du bestimmst, was jeder Chat bekommt', true, false],
-              ['Ein Beleg für jede Weitergabe', true, false],
-              ['Auf allen dreien nutzbar, ohne neuen Import', true, false],
-              ['Kostenlos und quelloffen', true, false],
+              'Ein Gedächtnis für ChatGPT, Claude und Gemini',
+              'Verschlüsselt auf deinem Gerät',
+              'Du entscheidest pro Chat',
+              'Ein Beleg für jede Freigabe',
+              'Kostenlos und quelloffen',
             ],
           },
         }],
@@ -590,7 +586,7 @@ const de: Docs = {
   works: {
     title: 'Funktioniert mit deiner KI',
     description: 'Nutze dein Gedächtnis in ChatGPT, Claude und Gemini.',
-    intro: ['Die Browser-Erweiterung für Chrome, Edge und Firefox auf dem Computer ist in Entwicklung. Sie funktioniert auf Seiten dieser drei Anbieter, die bleib erkennt.'],
+    intro: ['Die Browser-Erweiterung ist in Entwicklung, für Chrome und Edge ab Version 116 und Firefox ab Version 140 auf dem Computer. Passkeys in Firefox brauchen Version 150 oder neuer. Sie funktioniert auf Seiten dieser drei Anbieter, die bleib erkennt.'],
     sections: [
       {
         h: 'Im Browser',
@@ -703,7 +699,7 @@ const de: Docs = {
         blocks: [
           { p: 'bleib bewahrt dein Gedächtnis verschlüsselt in deinem Browserprofil auf und entsperrt es nur für dich. Es verlässt sich auf deinen Browser und dein Benutzerkonto auf dem Gerät. Wer beides kontrolliert, könnte sehen, was bleib anzeigt, solange es entsperrt ist.' },
           { p: 'Dein Wiederherstellungspaket bewahrst du woanders auf. bleib behält keine Kopie davon.' },
-          { p: 'Wenn du einen Passkey wählst, bewahrt ihn dein Passwortmanager oder Sicherheitsschlüssel unter dem Namen bleib.dev auf. bleib.dev sieht dein Gedächtnis dabei nie.' },
+          { p: 'Wenn du einen Passkey wählst, bewahrt ihn dein Passwortmanager oder Sicherheitsschlüssel unter dem Namen bleib.dev auf. bleib.dev sieht dein Gedächtnis dabei nie. In Firefox brauchen Passkeys Version 150 oder neuer.' },
         ],
       },
       {
@@ -889,11 +885,11 @@ const de: Docs = {
       {
         h: 'Was die Erweiterung liest',
         blocks: [
-          { p: 'bleib arbeitet nur auf den KI-Seiten, die du erlaubst. Es fragt für chatgpt.com, claude.ai und gemini.google.com einzeln, und du kannst den Zugriff jederzeit zurücknehmen.' },
+          { p: 'bleib liest deine Entwürfe nur auf den KI-Seiten, die du erlaubst. Es fragt für chatgpt.com, claude.ai und gemini.google.com einzeln, und du kannst den Zugriff jederzeit zurücknehmen. Während du importierst oder das Gedächtnis einer KI ausschaltest, liest es auch die Einstellungsseite, durch die es dich führt.' },
           { p: 'Auf diesen Seiten prüft bleib auf deinem Gerät, was du in den Entwurf schreibst. So findet es passende Erinnerungen, erkennt Vorlieben, die es speichern kann, und bemerkt vor dem Senden mögliche Geheimnisse wie Passwörter oder Kartennummern. Diese Prüfung läuft auf deinem Gerät und speichert nicht, was sie findet. Sagst du bleib, dass etwas kein Geheimnis ist, behält es bis zum Schließen des Browsers einen gesalzenen Fingerabdruck davon, damit es nicht noch einmal fragt.' },
-          { p: 'Wenn du deine Erinnerungen mitnimmst, liest bleib die Exportdatei, die du auswählst, oder die Antwort, die du mit „Antwort einfügen“ einfügst. In Chrome und Edge liest es dafür deine Zwischenablage, wenn du es erlaubst, und nur in diesem Moment. In Firefox fügst du die Antwort selbst ein. Alles wird auf deinem Gerät verarbeitet, nichts wird hochgeladen.' },
+          { p: 'Wenn du deine Erinnerungen mitnimmst, liest bleib die Exportdatei, die du auswählst, oder die Antwort, die du mit „Antwort einfügen“ einfügst. Chrome und Edge lesen die Zwischenablage, wenn du es erlaubst, nur dann, wenn du „Antwort einfügen“ wählst. Wenn der Import fertig ist, gibt bleib die Berechtigung zurück. In Firefox fügst du die Antwort selbst ein. Alles wird auf deinem Gerät verarbeitet, nichts wird hochgeladen.' },
           { p: 'Vorschläge entstehen auf deinem Gerät, mit einer kleinen Klassifizierung in bleib, die auf diesem Gerät aus deinen Entscheidungen lernt. Nichts, was du schreibst, wird dafür irgendwohin gesendet. bleib liest die Antworten der KI nie von sich aus.' },
-          { p: 'Wählst du einen Passkey, bittet bleib um Zugriff auf bleib.dev, damit dein Browser den Passkey unter diesem Namen speichern kann. Dein Passwortmanager oder Sicherheitsschlüssel bewahrt ihn auf, und keine Daten aus deinem Gedächtnis oder Wallet gehen an bleib.dev. bleib.dev kann außerdem fragen, ob bleib installiert ist und in welcher Version. Mehr erfährt die Website nicht.' },
+          { p: 'Auf bleib.dev hat bleib ab der Installation Zugriff, damit dein Passkey funktioniert. Dort liest es nichts. Wählst du einen Passkey, speichert dein Browser ihn unter dem Namen bleib.dev, und dein Passwortmanager oder Sicherheitsschlüssel bewahrt ihn auf. Keine Daten aus deinem Gedächtnis oder Wallet gehen an bleib.dev. bleib.dev kann außerdem fragen, ob bleib installiert ist und in welcher Version. Mehr erfährt die Website nicht.' },
         ],
       },
       {

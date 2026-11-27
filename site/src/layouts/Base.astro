@@ -94,10 +94,10 @@ const deHref = new URL(routes[page].de, site).href;
                 isAccessibleForFree: true,
                 license: 'https://spdx.org/licenses/AGPL-3.0-or-later.html',
                 applicationCategory: 'BrowserApplication',
-                runtimePlatform: 'Chrome, Edge, Firefox',
+                runtimePlatform: 'Chrome 116+, Edge 116+, Firefox 140+',
                 softwareRequirements: lang === 'de'
-                  ? 'Chrome, Edge oder Firefox auf einem Computer'
-                  : 'Chrome, Edge or Firefox on a computer',
+                  ? 'Chrome oder Edge ab Version 116, Firefox ab Version 140, auf einem Computer'
+                  : 'Chrome or Edge 116 or later, or Firefox 140 or later, on a computer',
                 creativeWorkStatus: s.hero.status,
                 publisher: { '@id': new URL('/#organization', site).href },
               },

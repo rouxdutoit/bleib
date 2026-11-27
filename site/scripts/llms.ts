@@ -16,8 +16,8 @@ function link(label: string, path: string, site: URL) {
 function availability(lang: Lang, site: URL) {
   const signup = link(new URL(`${routes.home[lang]}#early-access`, site).href, `${routes.home[lang]}#early-access`, site);
   return lang === 'de'
-    ? `In Entwicklung für Chrome, Edge und Firefox. Lass dich zum Start per E-Mail benachrichtigen: ${signup}`
-    : `In development for Chrome, Edge and Firefox. Get an email at launch: ${signup}`;
+    ? `In Entwicklung für Chrome und Edge ab Version 116 und Firefox ab Version 140. Lass dich zum Start per E-Mail benachrichtigen: ${signup}`
+    : `In development for Chrome and Edge 116 or later and Firefox 140 or later. Get an email at launch: ${signup}`;
 }
 
 export function renderIndex(site: URL) {
@@ -61,8 +61,7 @@ function renderBlock(block: Block, site: URL) {
     `${link(name, href, site)}: ${v}`,
   ));
   if ('compare' in block) {
-    const { head: [us, them], yes, no } = block.compare;
-    return bullets(block.compare.rows.map(([k, a, b]) => `${k}: ${us} ${a ? yes : no}, ${them} ${b ? yes : no}.`));
+    return bullets(block.compare.rows);
   }
   return block.p;
 }
