@@ -40,6 +40,7 @@ export async function initLaunch(): Promise<void> {
   const store = browser();
 
   document.documentElement.dataset.launched = 'true';
+  document.querySelectorAll<HTMLElement>('[data-eyebrow-launch]').forEach((el) => { el.textContent = el.dataset.eyebrowLaunch ?? el.textContent; });
   document.querySelectorAll<HTMLElement>('[data-prelaunch]').forEach((el) => { el.hidden = true; });
   const roots = [...document.querySelectorAll<HTMLElement>('[data-launch]')];
   for (const root of roots) {
@@ -58,17 +59,31 @@ export async function initLaunch(): Promise<void> {
   const header = document.querySelector<HTMLAnchorElement>('header a[data-install]');
   const primaries = [...document.querySelectorAll<HTMLAnchorElement>('[data-l-primary]'), ...(header ? [header] : [])];
   if (!store) { if (header) header.hidden = true; return; }
+  // The browser's own logo beside its name (Simple Icons, CC0); Edge has no mark we can use, so it stays text.
+  const logo = ({ Chrome: '/browsers/chrome.svg', Firefox: '/browsers/firefox.svg' } as Record<string, string>)[store.browser];
+  /** Writes the label; with a logo, it sits just before the browser's name: "Add to [logo] Chrome". */
+  const label = (a: HTMLAnchorElement, template: string) => {
+    const [before, after = ''] = template.split('{browser}');
+    a.textContent = '';
+    if (!template.includes('{browser}')) { a.textContent = template; return; }
+    const mark = logo ? Object.assign(document.createElement('span'), { className: 'blogo' }) : null;
+    if (mark) { mark.setAttribute('aria-hidden', 'true'); mark.style.setProperty('--logo', `url(${logo})`); }
+    // One inline run inside the button, so its flex gap doesn't push the logo away from the name.
+    const run = document.createElement('span');
+    run.append(before, ...(mark ? [mark] : []), store.browser, after);
+    a.append(run);
+  };
   for (const a of primaries) {
     a.href = store.url || '#';
     a.rel = 'noopener';
-    a.textContent = (a.dataset.add ?? 'Add to {browser}').replace('{browser}', store.browser);
+    label(a, a.dataset.add ?? 'Add to {browser}');
   }
   if (!(await installed())) return;
   for (const a of primaries) {
     a.removeAttribute('href');
     a.setAttribute('role', 'button');
     a.tabIndex = 0;
-    a.textContent = a.dataset.open ?? 'Open bleib';
+    label(a, a.dataset.open ?? 'Open bleib');
     a.addEventListener('click', openBleib);
     a.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openBleib(); } });
   }

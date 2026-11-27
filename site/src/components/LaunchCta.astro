@@ -3,7 +3,8 @@
  * Launch-day actions, for the hero and the finale (config/install.ts: `launched`, `connectors`). Rendered hidden until
  * launch; scripts/launch.ts shows the right one for the visitor's device:
  * - a computer with Chrome, Edge or Firefox: one capsule, "Add to {browser}" (or "Open bleib" once installed), and a
- *   quiet line, "Free · Works with ChatGPT Claude Gemini" (information, not links: the extension is the one action);
+ *   the browser's own logo just before its name (Chrome, Firefox; Edge has none to use), then a line of information,
+ *   not links: "Works with ChatGPT Claude Gemini", each with its own colour logo at text size;
  * - a phone or Safari, where no extension can run: with connectors, "Use it in" and two capsules, ChatGPT and Claude,
  *   then "Get it for your computer" as text; without them, "Get bleib for your computer" as the one capsule. That link
  *   opens the share sheet with bleib.dev, or copies the link. Gemini has no capsule: its app takes no outside apps.
@@ -15,10 +16,11 @@ const { lang } = Astro.props;
 const s = t(lang).launch;
 const h = t(lang).hero;
 const shareUrl = new URL(routes.home[lang], Astro.site ?? 'https://bleib.dev').href;
+/* Colour logos where the AI has one; ChatGPT's mark is single-colour, so it takes the text colour. */
 const works = [
-  { name: 'ChatGPT', icon: '/providers/openai.svg' },
-  { name: 'Claude', icon: '/providers/claude.svg' },
-  { name: 'Gemini', icon: '/providers/gemini.svg' },
+  { name: 'ChatGPT', mono: '/providers/openai.svg' },
+  { name: 'Claude', color: '/providers/claude-color.svg' },
+  { name: 'Gemini', color: '/providers/gemini-color.svg' },
 ];
 const apps = [
   { name: 'ChatGPT', icon: '/providers/openai.svg', href: INSTALL.chatgptConnectorUrl },
@@ -28,8 +30,8 @@ const apps = [
 <div class="launch" data-launch hidden={!INSTALL.launched} data-share-url={shareUrl} data-share-text={s.shareText} data-copied={s.copied}>
   <div class="desk" data-l="desktop">
     <a class="btn btn-primary" data-l-primary href="#" data-add={h.addTo} data-open={s.open}>{h.addTo.replace('{browser}', 'Chrome')}</a>
-    <p class="info t-sub">
-      {s.free} · {s.worksWith}{works.map((a) => [' ', <span class="ai"><span class="mono" aria-hidden="true" style={`--logo: url(${a.icon})`} />{a.name}</span>])}
+    <p class="works t-sub">
+      {s.worksWith}{works.map((a) => [' ', <span class="ai">{a.color ? <img class="logo" src={a.color} alt="" width="16" height="16" /> : <span class="mono" aria-hidden="true" style={`--logo: url(${a.mono})`} />}{a.name}</span>])}
     </p>
   </div>
   <div class="phone" data-l="mobile" hidden>
@@ -51,9 +53,12 @@ const apps = [
   .launch { display: flex; flex-direction: column; align-items: center; text-align: center; }
   .launch[hidden], .launch [hidden] { display: none !important; }
   .desk, .phone, .with, .without { display: flex; flex-direction: column; align-items: center; }
-  /* The quiet line under the capsule: text size, each AI with its own small logo, centred on the text. */
-  .info { margin: 14px 0 0; color: var(--muted); text-wrap: balance; }
-  .ai { display: inline-flex; align-items: center; gap: 5px; margin-left: 4px; color: var(--label); font-weight: 500; white-space: nowrap; }
+  /* Under the one primary capsule, where it works: information, not links, with each AI's logo at text size. */
+  .works { margin: 14px 0 0; color: var(--muted); text-wrap: balance; }
+  .ai { display: inline-flex; align-items: center; gap: 5px; margin-left: 6px; color: var(--label); font-weight: 500; white-space: nowrap; }
+  .logo { flex: none; width: 0.95em; height: 0.95em; display: block; }
+  /* The browser's logo inside the main capsule, set by scripts/launch.ts. */
+  :global(.btn .blogo) { display: inline-block; width: 0.95em; height: 0.95em; margin-right: 5px; vertical-align: -0.12em; background: currentColor; mask: var(--logo) center / contain no-repeat; -webkit-mask: var(--logo) center / contain no-repeat; }
   .mono { flex: none; width: 0.95em; height: 0.95em; align-self: center; background: currentColor; mask: var(--logo) center / contain no-repeat; -webkit-mask: var(--logo) center / contain no-repeat; }
   .use { margin: 0 0 12px; color: var(--muted); }
   .caps { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }

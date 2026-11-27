@@ -52,6 +52,8 @@ const en = {
   },
   hero: {
     eyebrow: 'In development',
+    /** On launch day (config/install.ts `launched`). */
+    eyebrowLaunch: 'Free forever · Open source · Private',
     status: 'In development',
     h1: 'Own your AI memory.',
     sub: ['Encrypted and secure with you.', 'Shared on your terms.'],
@@ -64,7 +66,6 @@ const en = {
   },
   launch: {
     open: 'Open bleib',
-    free: 'Free',
     worksWith: 'Works with',
     useIn: 'Use it in',
     share: 'Get it for your computer',
@@ -249,6 +250,7 @@ const de: Strings = {
   },
   hero: {
     eyebrow: 'In Entwicklung',
+    eyebrowLaunch: 'Immer kostenlos · Open Source · Privat',
     status: 'In Entwicklung',
     h1: 'Dein KI-Gedächtnis gehört dir.',
     sub: ['Verschlüsselt und sicher bei dir.', 'Geteilt, wie du willst.'],
@@ -261,7 +263,6 @@ const de: Strings = {
   },
   launch: {
     open: 'bleib öffnen',
-    free: 'Kostenlos',
     worksWith: 'Funktioniert mit',
     useIn: 'Nutze es in',
     share: 'Hol es dir für deinen Computer',

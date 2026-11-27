@@ -20,7 +20,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
 <section class="hero has-rails" aria-labelledby="hero-title">
   <Rails top={false} />
   <div class="wrap hero-inner">
-    <p class="eyebrow">{s.eyebrow}</p>
+    <p class="eyebrow" data-eyebrow-launch={s.eyebrowLaunch}>{INSTALL.launched ? s.eyebrowLaunch : s.eyebrow}</p>
     <h1 id="hero-title" class="hero-h1">{s.h1.split(/(?<=\.)\s+/).map((line, i) => [i > 0 && ' ', <span class="line">{line.split(/(\S+-\S+)/).map((part) => /-/.test(part) ? <span class="whole">{part}</span> : part)}</span>])}</h1>
     <p class="sub">{s.sub.map((line) => <span>{line.split(/(?<=,) /).map((part, i) => [i > 0 && ' ', <span class="phrase">{part}</span>])}</span>)}</p>
     <div class="cta" data-prelaunch hidden={INSTALL.launched}>
