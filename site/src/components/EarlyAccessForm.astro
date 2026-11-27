@@ -46,16 +46,15 @@ const f = t(lang).form;
   </p>
 </form>
 <style>
-  .ea { --field-line: #76767a; width: 100%; max-width: 480px; text-align: left; }
+  .ea { width: 100%; max-width: 480px; text-align: left; }
   .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
   /* The label stays in view above the field, aligned with the text inside it (Footnote, semibold). */
   .ea-label-field { display: block; margin: 0 0 8px; padding-inline-start: 19px; font-size: 13px; line-height: 18px; font-weight: 600; color: var(--ink); }
   .ea-row { display: flex; gap: 8px; }
-  /* A persistent 1px edge (#76767a) holds at least 3:1 against both the page and the field, in light and dark mode
-     (3.6:1 on yellow, 4.5:1 on white; 4.4:1 on black, 3.9:1 on the dark field); focus adds its own ring outside it. */
+  /* No edge (founder's call): the visible label above names the field; focus adds its own ring, an error a red edge. */
   .ea-input {
     flex: 1 1 auto; min-width: 0; min-height: 48px; padding: 10px 18px; border-radius: 999px;
-    border: 1px solid var(--field-line); background: var(--card); color: var(--on-card);
+    border: 1px solid transparent; background: var(--card); color: var(--on-card);
   }
   .ea-input::placeholder { color: var(--on-card-muted); opacity: 1; }
   .ea-input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 999px; }
