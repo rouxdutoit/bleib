@@ -5,12 +5,13 @@
  * - a computer with Chrome, Edge or Firefox: one capsule, "Add to {browser}" (or "Open bleib" once installed), and a
  *   the browser's own colour logo just before its name, then a line of information,
  *   not links: "Works with ChatGPT Claude Gemini", each with its own colour logo at text size;
- * - a phone or Safari, where no extension can run: with connectors, "Use it in" and two capsules, ChatGPT and Claude,
- *   then "Get it for your computer" as text; without them, "Get bleib for your computer" as the one capsule. That link
+ * - a phone or Safari, where no extension can run: with connectors, two capsules, ChatGPT and Claude,
+ *   then "Get it for your computer ›" as text, 20px below (the capsules' logos say where they go, so no label); without them, "Get bleib for your computer" as the one capsule. That link
  *   opens the share sheet with bleib.dev, or copies the link. Gemini has no capsule: its app takes no outside apps.
  */
 import { INSTALL } from '../config/install';
 import { routes, t, type Lang } from '../i18n/strings';
+import { icon } from './icons';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang).launch;
@@ -23,8 +24,9 @@ const works = [
   { name: 'Gemini', color: '/providers/gemini-color.svg' },
 ];
 const apps = [
-  { name: 'ChatGPT', icon: '/providers/openai.svg', href: INSTALL.chatgptConnectorUrl },
-  { name: 'Claude', icon: '/providers/claude.svg', href: INSTALL.claudeConnectorUrl },
+  // Claude in colour; ChatGPT's mark is single-colour, so it takes the capsule's ink.
+  { name: 'ChatGPT', icon: '/providers/openai.svg', color: '', href: INSTALL.chatgptConnectorUrl },
+  { name: 'Claude', icon: '/providers/claude.svg', color: '/providers/claude-color.svg', href: INSTALL.claudeConnectorUrl },
 ];
 ---
 <div class="launch" data-launch hidden={!INSTALL.launched} data-share-url={shareUrl} data-share-text={s.shareText} data-copied={s.copied}>
@@ -36,11 +38,10 @@ const apps = [
   </div>
   <div class="phone" data-l="mobile" hidden>
     <div class="with" data-l-connectors hidden={!INSTALL.connectors}>
-      <p class="use t-sub">{s.useIn}</p>
       <div class="caps">
-        {apps.map((a) => <a class="btn btn-primary cap" href={a.href || '#'} rel="noopener"><span class="mono" aria-hidden="true" style={`--logo: url(${a.icon})`} />{a.name}</a>)}
+        {apps.map((a) => <a class="btn btn-primary cap" href={a.href || '#'} rel="noopener">{a.color ? <img class="clogo" src={a.color} alt="" width="18" height="18" /> : <span class="mono" aria-hidden="true" style={`--logo: url(${a.icon})`} />}{a.name}</a>)}
       </div>
-      <button type="button" class="link t-sub" data-share>{s.share}</button>
+      <button type="button" class="link t-sub" data-share><span class="lbl">{s.share}</span><span class="chev" set:html={icon('chevron_right')} /></button>
     </div>
     <div class="without" data-l-noconnectors hidden={INSTALL.connectors}>
       <button type="button" class="btn btn-primary" data-share>{s.shareAlone}</button>
@@ -54,16 +55,18 @@ const apps = [
   .launch[hidden], .launch [hidden] { display: none !important; }
   .desk, .phone, .with, .without { display: flex; flex-direction: column; align-items: center; }
   /* Under the one primary capsule, where it works: information, not links, with each AI's logo at text size. */
-  .works { margin: 14px 0 0; color: var(--muted); text-wrap: balance; }
+  .works { margin: 20px 0 0; color: var(--muted); text-wrap: balance; }
   .ai { display: inline-flex; align-items: center; gap: 5px; margin-left: 6px; color: var(--label); font-weight: 500; white-space: nowrap; }
   .logo { flex: none; width: 0.95em; height: 0.95em; display: block; }
   /* The browser's logo inside the main capsule, set by scripts/launch.ts. */
   :global(.btn .blogo) { display: inline-block; width: 1.05em; height: 1.05em; margin: 0 5px 0 3px; vertical-align: -0.18em; }
   .mono { flex: none; width: 0.95em; height: 0.95em; align-self: center; background: currentColor; mask: var(--logo) center / contain no-repeat; -webkit-mask: var(--logo) center / contain no-repeat; }
-  .use { margin: 0 0 12px; color: var(--muted); }
   .caps { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
   .cap { gap: 8px; }
-  /* A text link, as Apple sets a secondary action; the tap area still reaches 44px. */
-  .link { margin-top: 14px; min-height: 44px; padding: 0 8px; border: 0; background: none; color: var(--label); font: inherit; font-weight: 500; cursor: pointer; }
-  .link:hover { text-decoration: underline; }
+  .clogo { flex: none; width: 1.05em; height: 1.05em; display: block; }
+  /* Apple's "Learn more ›": Subheadline text with a chevron, quieter than the capsules; the tap area still reaches 44px. */
+  .link { display: inline-flex; align-items: center; gap: 1px; margin-top: 8px; min-height: 44px; padding: 0 8px; border: 0; background: none; color: var(--label); font-family: inherit; font-weight: 500; cursor: pointer; }
+  .link:hover .lbl { text-decoration: underline; }
+  .chev { display: grid; }
+  .chev :global(svg) { width: 1em; height: 1em; display: block; }
 </style>

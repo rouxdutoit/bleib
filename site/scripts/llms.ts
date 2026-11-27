@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 import { docs, type Block } from '../src/i18n/pages';
+import { INSTALL } from '../src/config/install';
 import { routes, t, type Lang, type RouteKey } from '../src/i18n/strings';
 
 const languages = ['en', 'de'] as const;
@@ -60,6 +61,10 @@ function renderBlock(block: Block, site: URL) {
   if ('refs' in block) return bullets(block.refs.map(({ name, href, v }) =>
     `${link(name, href, site)}: ${v}`,
   ));
+  if ('plans' in block) {
+    const { free, paid } = block.plans;
+    return bullets([`${free.name}: ${free.price} ${free.per}. ${free.points.join('; ')}.`, `${paid.name}: ${paid.options.map((o) => o.price).join(' or ')}. ${paid.points.join('; ')}.`]);
+  }
   if ('compare' in block) {
     return bullets(block.compare.rows);
   }
@@ -97,7 +102,8 @@ export function renderFullText(site: URL) {
       if (doc.hub) parts.push(bullets(doc.hub.map(({ to, t, d }) =>
         `${link(t, routes[to][lang], site)}: ${d}`,
       )));
-      for (const { h, blocks } of doc.sections) {
+      for (const { h, blocks, when } of doc.sections) {
+        if (when && (when === 'paid') !== (INSTALL.launched && INSTALL.connectors)) continue;
         parts.push(`#### ${h}`, ...blocks.map((block) => renderBlock(block, site)));
       }
       return parts;

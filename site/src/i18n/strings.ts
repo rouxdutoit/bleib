@@ -53,7 +53,7 @@ const en = {
   hero: {
     eyebrow: 'In development',
     /** On launch day (config/install.ts `launched`). */
-    eyebrowLaunch: 'Free forever · Open source · Private',
+    eyebrowLaunch: 'Free · Open source · Private',
     status: 'In development',
     h1: 'Own your AI memory.',
     sub: ['Encrypted and secure with you.', 'Shared on your terms.'],
@@ -67,7 +67,6 @@ const en = {
   launch: {
     open: 'Open bleib',
     worksWith: 'Works with',
-    useIn: 'Use it in',
     share: 'Get it for your computer',
     shareAlone: 'Get bleib for your computer',
     copied: 'Link copied',
@@ -76,7 +75,7 @@ const en = {
   phone: {
     h: 'On your phone too.',
     sub: 'Use bleib inside ChatGPT and Claude.',
-    note: 'One AI is free. Every AI comes with bleib everywhere, our paid plan.',
+    note: 'One AI app is free. All of them with bleib everywhere: €40 a year or €5 a month.',
     more: 'See pricing',
   },
   preview: {
@@ -250,7 +249,7 @@ const de: Strings = {
   },
   hero: {
     eyebrow: 'In Entwicklung',
-    eyebrowLaunch: 'Immer kostenlos · Open Source · Privat',
+    eyebrowLaunch: 'Kostenlos · Open Source · Privat',
     status: 'In Entwicklung',
     h1: 'Dein KI-Gedächtnis gehört dir.',
     sub: ['Verschlüsselt und sicher bei dir.', 'Geteilt, wie du willst.'],
@@ -264,7 +263,6 @@ const de: Strings = {
   launch: {
     open: 'bleib öffnen',
     worksWith: 'Funktioniert mit',
-    useIn: 'Nutze es in',
     share: 'Hol es dir für deinen Computer',
     shareAlone: 'Hol dir bleib für deinen Computer',
     copied: 'Link kopiert',
@@ -273,7 +271,7 @@ const de: Strings = {
   phone: {
     h: 'Auch auf deinem Handy.',
     sub: 'Nutze bleib direkt in ChatGPT und Claude.',
-    note: 'Eine KI ist kostenlos. Alle KIs gibt es mit bleib überall, unserem Bezahltarif.',
+    note: 'Eine KI-App ist kostenlos. Alle mit bleib überall: 40 € im Jahr oder 5 € im Monat.',
     more: 'Zu den Preisen',
   },
   preview: {

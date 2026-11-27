@@ -23,10 +23,23 @@ export type Block =
   | { tiles: Tile[] }
   | { refs: { name: string; href: string; v: string }[] }
   | { commands: string[] }
-  | { compare: { head: string; yes: string; rows: string[] } };
+  | { compare: { head: string; yes: string; rows: string[] } }
+  | { plans: PlansBlock };
+
+/** Launch-day plans on Pricing (components/Plans.astro). Prices are what's billed; `note` is the smaller equivalent. */
+export interface PlansBlock {
+  free: { name: string; price: string; per: string; points: string[] };
+  paid: {
+    name: string; lede: string; choose: string; button: string; points: string[];
+    options: { id: 'yearly' | 'monthly'; label: string; price: string; note?: string; badge?: string; fine: string }[];
+  };
+}
 
 export interface Section {
   id?: string;
+  /** 'before': until the paid plan exists; 'paid': once it does (config/install.ts `launched` and `connectors`,
+   *  or the ?launch=1&connectors=1 preview). Unset: always. */
+  when?: 'before' | 'paid';
   h: string;
   blocks: Block[];
 }
@@ -375,10 +388,49 @@ const en: Docs = {
     intro: ['bleib is free and open source. Your memory, AI connections, permissions, receipts, imports and backups are free.'],
     sections: [
       {
+        when: 'paid',
+        h: 'Plans',
+        blocks: [{
+          plans: {
+            free: {
+              name: 'Free',
+              price: '€0',
+              per: 'forever',
+              points: ['The extension for Chrome, Edge and Firefox', 'ChatGPT, Claude and Gemini on the web', 'One AI app, such as ChatGPT on your phone', 'Receipts, backups and export'],
+            },
+            paid: {
+              name: 'bleib everywhere',
+              lede: 'bleib inside every AI app, and on your phone.',
+              choose: 'Choose how you pay',
+              options: [
+                { id: 'yearly', label: 'Yearly', price: '€40 a year', note: '€3.33 a month', badge: 'Save 33%', fine: 'Free for 14 days, no card needed. Then €40 a year until you cancel. Cancel anytime.' },
+                { id: 'monthly', label: 'Monthly', price: '€5 a month', fine: 'Free for 14 days, no card needed. Then €5 a month until you cancel. Cancel anytime.' },
+              ],
+              button: 'Try free for 14 days',
+              points: ['Everything in Free', 'Every AI app you use, on your computer and phone', 'Encrypted on your device before it leaves, so we can’t read it'],
+            },
+          },
+        }],
+      },
+      {
+        when: 'paid',
+        h: 'Our promises',
+        blocks: [
+          { never: [
+            'The extension stays free, forever.',
+            'We give you 60 days’ notice before any price change.',
+            'Your 14-day trial needs no card.',
+            'If you stop paying, your export keeps working.',
+          ] },
+        ],
+      },
+      {
+        when: 'before',
         h: 'Coming: bleib everywhere',
         blocks: [{ p: 'A paid plan will bring your bleib into every AI app and onto your phone. Your device will encrypt your memory before it leaves, so we can’t read it.' }],
       },
       {
+        when: 'before',
         h: 'Our promises',
         blocks: [
           { p: 'When the paid plan comes, we promise:' },
@@ -861,10 +913,49 @@ const de: Docs = {
     intro: ['bleib ist kostenlos und quelloffen. Dein Gedächtnis, KI-Verbindungen, Berechtigungen, Belege, Importe und Sicherungen sind kostenlos.'],
     sections: [
       {
+        when: 'paid',
+        h: 'Tarife',
+        blocks: [{
+          plans: {
+            free: {
+              name: 'Kostenlos',
+              price: '0 €',
+              per: 'für immer',
+              points: ['Die Erweiterung für Chrome, Edge und Firefox', 'ChatGPT, Claude und Gemini im Web', 'Eine KI-App, etwa ChatGPT auf deinem Handy', 'Belege, Sicherungen und Export'],
+            },
+            paid: {
+              name: 'bleib überall',
+              lede: 'bleib in jeder KI-App und auf deinem Handy.',
+              choose: 'Wähle, wie du zahlst',
+              options: [
+                { id: 'yearly', label: 'Jährlich', price: '40 € im Jahr', note: '3,33 € im Monat', badge: 'Spare 33 %', fine: '14 Tage kostenlos, ohne Karte. Danach 40 € im Jahr, bis du kündigst. Jederzeit kündbar.' },
+                { id: 'monthly', label: 'Monatlich', price: '5 € im Monat', fine: '14 Tage kostenlos, ohne Karte. Danach 5 € im Monat, bis du kündigst. Jederzeit kündbar.' },
+              ],
+              button: '14 Tage kostenlos testen',
+              points: ['Alles aus Kostenlos', 'Jede KI-App, die du nutzt, auf Computer und Handy', 'Auf deinem Gerät verschlüsselt, bevor es das Gerät verlässt, deshalb können wir es nicht lesen'],
+            },
+          },
+        }],
+      },
+      {
+        when: 'paid',
+        h: 'Unsere Versprechen',
+        blocks: [
+          { never: [
+            'Die Erweiterung bleibt kostenlos, für immer.',
+            'Vor jeder Preisänderung sagen wir dir 60 Tage vorher Bescheid.',
+            'Für deine 14 Tage zum Testen brauchst du keine Karte.',
+            'Wenn du nicht mehr zahlst, funktioniert dein Export weiter.',
+          ] },
+        ],
+      },
+      {
+        when: 'before',
         h: 'Bald: bleib überall',
         blocks: [{ p: 'Ein Bezahltarif wird dein bleib in jede KI-App und auf dein Handy bringen. Dein Gerät wird dein Gedächtnis verschlüsseln, bevor es das Gerät verlässt, deshalb können wir es nicht lesen.' }],
       },
       {
+        when: 'before',
         h: 'Unsere Versprechen',
         blocks: [
           { p: 'Für den Bezahltarif versprechen wir:' },

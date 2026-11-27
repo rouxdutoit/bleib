@@ -26,9 +26,10 @@ async function share(root: HTMLElement): Promise<void> {
   try { await navigator.clipboard.writeText(url); } catch { return; }
   if (status) status.textContent = root.dataset.copied ?? '';
   for (const b of root.querySelectorAll<HTMLButtonElement>('[data-share]')) {
-    const label = b.textContent;
-    b.textContent = root.dataset.copied ?? '';
-    setTimeout(() => { b.textContent = label; }, 2000);
+    const target = b.querySelector<HTMLElement>('.lbl') ?? b;
+    const label = target.textContent;
+    target.textContent = root.dataset.copied ?? '';
+    setTimeout(() => { target.textContent = label; }, 2000);
   }
 }
 
@@ -54,6 +55,9 @@ export async function initLaunch(): Promise<void> {
 
   // "On your phone too." further down, only with connectors.
   document.querySelectorAll<HTMLElement>('[data-phone-too]').forEach((el) => { el.hidden = !connectors; });
+  // Pricing: the plans replace "Coming" once the paid plan exists, which is when the connectors do.
+  document.querySelectorAll<HTMLElement>('[data-when="paid"]').forEach((el) => { el.hidden = !connectors; });
+  document.querySelectorAll<HTMLElement>('[data-when="before"]').forEach((el) => { el.hidden = connectors; });
 
   // The header's main button follows the hero: the same store button on a computer, gone on a phone or Safari.
   const header = document.querySelector<HTMLAnchorElement>('header a[data-install]');
