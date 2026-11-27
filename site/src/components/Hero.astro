@@ -40,7 +40,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
           // before the first paint when motion is allowed, and it plays in under five seconds (scripts/story.ts).
           return (
             <div class="body s1 s2 s3" role="tabpanel" id={`ex-${i}`} aria-labelledby={`ex-tab-${i}`} tabindex="0" hidden={i !== 0} data-steps="3" data-start="600" data-gaps="700,1600" data-step="3" {...(i === 0 ? { 'data-sv': 'hero' } : {})}>
-              <p class="sr-only summary" data-typed={x.typed} data-title={title} data-private={x.private}>{x.typed} {title}: {x.facts.map((f) => f.t).join(', ')}. {x.private}</p>
+              <p class="sr-only summary" data-typed={x.typed} data-title={title}>{x.typed} {title}: {x.facts.map((f) => f.t).join(', ')}.</p>
               <BleibCard title={title} facts={x.facts} controls={s.leaveOut} ask={{ q: pv.ask, add: pv.add }} />
               <div aria-hidden="true">
                 <Composer typed={x.typed} filled>
@@ -52,7 +52,6 @@ const githubHref = GITHUB_URL || routes.developers[lang];
                     </div>
                   </div></div>
                 </Composer>
-                <p class="t-foot private"><span class="lock" set:html={icon('lock')} />{x.private}</p>
               </div>
             </div>
           );
@@ -114,9 +113,6 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   .chip-x { position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: var(--label-3); color: var(--cell); }
   .chip-x :global(svg) { width: 13px; height: 13px; display: block; }
   /* A standing promise, not a step: there from the start, centred under the field. */
-  .private { margin-top: 10px !important; text-align: center; text-wrap: balance; color: var(--label-2); }
-  .lock { display: inline-block; margin-right: 5px; vertical-align: -2px; }
-  .lock :global(svg) { width: 13px; height: 13px; display: block; }
   /* On phones the lines use Callout size; a line that still wraps breaks evenly, at its natural pause. */
   @media (max-width: 480px) { .sub { font-size: 16px; line-height: 21px; } }
   @media (max-width: 767px) { .preview { zoom: 0.92; } }
@@ -137,8 +133,8 @@ const githubHref = GITHUB_URL || routes.developers[lang];
     const details = kept(panel).map((li) => li.dataset.detail ?? '');
     const summary = panel.querySelector<HTMLElement>('.summary');
     if (summary) {
-      const { typed, title, private: note } = summary.dataset;
-      summary.textContent = details.length ? `${typed} ${title}: ${details.join(', ')}. ${note}` : `${typed} ${note}`;
+      const { typed, title } = summary.dataset;
+      summary.textContent = details.length ? `${typed} ${title}: ${details.join(', ')}.` : `${typed}`;
     }
     const facts = panel.querySelector<HTMLElement>('.chip-facts');
     if (facts) facts.textContent = details.join(' · ');

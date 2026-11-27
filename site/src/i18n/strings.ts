@@ -71,15 +71,15 @@ const en = {
     tabs: [
       {
         ai: 'Gemini', icon: 'gemini-color', typed: 'Plan a weekend in Lisbon for me.',
-        facts: [{ t: 'Aisle seat', icon: 'airline_seat' }, { t: 'Vegetarian', icon: 'eco' }], private: 'The chat site can read what you add, even before you send.',
+        facts: [{ t: 'Aisle seat', icon: 'airline_seat' }, { t: 'Vegetarian', icon: 'eco' }],
       },
       {
         ai: 'Claude', icon: 'claude-color', typed: 'Write a cover letter for this job.',
-        facts: [{ t: 'Product designer', icon: 'work' }, { t: 'Warm, direct tone', icon: 'chat_bubble' }], private: 'The chat site can read what you add, even before you send.',
+        facts: [{ t: 'Product designer', icon: 'work' }, { t: 'Warm, direct tone', icon: 'chat_bubble' }],
       },
       {
         ai: 'ChatGPT', icon: 'openai', typed: 'What should I cook tonight?',
-        facts: [{ t: 'Loves spicy food', icon: 'restaurant' }, { t: 'Cooks for two', icon: 'group' }], private: 'The chat site can read what you add, even before you send.',
+        facts: [{ t: 'Loves spicy food', icon: 'restaurant' }, { t: 'Cooks for two', icon: 'group' }],
       },
     ],
   },
@@ -252,15 +252,15 @@ const de: Strings = {
     tabs: [
       {
         ai: 'Gemini', icon: 'gemini-color', typed: 'Plane ein Wochenende in Lissabon für mich.',
-        facts: [{ t: 'Gangplatz', icon: 'airline_seat' }, { t: 'Vegetarisch', icon: 'eco' }], private: 'Die Chatseite kann Hinzugefügtes lesen, schon bevor du sendest.',
+        facts: [{ t: 'Gangplatz', icon: 'airline_seat' }, { t: 'Vegetarisch', icon: 'eco' }],
       },
       {
         ai: 'Claude', icon: 'claude-color', typed: 'Schreib ein Anschreiben für diese Stelle.',
-        facts: [{ t: 'Produktdesign', icon: 'work' }, { t: 'Warmer, direkter Ton', icon: 'chat_bubble' }], private: 'Die Chatseite kann Hinzugefügtes lesen, schon bevor du sendest.',
+        facts: [{ t: 'Produktdesign', icon: 'work' }, { t: 'Warmer, direkter Ton', icon: 'chat_bubble' }],
       },
       {
         ai: 'ChatGPT', icon: 'openai', typed: 'Was soll ich heute Abend kochen?',
-        facts: [{ t: 'Mag es scharf', icon: 'restaurant' }, { t: 'Kocht für zwei', icon: 'group' }], private: 'Die Chatseite kann Hinzugefügtes lesen, schon bevor du sendest.',
+        facts: [{ t: 'Mag es scharf', icon: 'restaurant' }, { t: 'Kocht für zwei', icon: 'group' }],
       },
     ],
   },
