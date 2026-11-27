@@ -93,7 +93,7 @@ const en = {
       },
       {
         h: ['You chat.', 'bleib takes notes.'],
-        p: 'Mention you’re vegetarian. It’s in your bleib.',
+        p: 'Mention you’re vegetarian. It’s in your bleib. You decide what’s remembered.',
         more: { to: 'how', hash: '#proposals', label: 'Saves as you go' },
       },
       {
@@ -165,7 +165,7 @@ const en = {
   },
   finale: {
     h: 'Your AI memory stays yours.',
-    p: 'For Chrome, Edge and Firefox. Free and open source.',
+    p: 'For Chrome, Edge and Firefox. Works in the EU. Free and open source.',
   },
   form: {
     label: 'Email address',
@@ -274,7 +274,7 @@ const de: Strings = {
       },
       {
         h: ['Du chattest.', 'bleib merkt es sich.'],
-        p: 'Erwähn, dass du vegetarisch isst. Schon steht es in deinem bleib.',
+        p: 'Erwähn, dass du vegetarisch isst. Schon steht es in deinem bleib. Was bleibt, entscheidest du.',
         more: { to: 'how', hash: '#proposals', label: 'Speichert nebenbei' },
       },
       {
@@ -346,7 +346,7 @@ const de: Strings = {
   },
   finale: {
     h: 'Dein KI-Gedächtnis bleibt deins.',
-    p: 'Für Chrome, Edge und Firefox. Kostenlos und quelloffen.',
+    p: 'Für Chrome, Edge und Firefox. Funktioniert in der EU. Kostenlos und quelloffen.',
   },
   form: {
     label: 'E-Mail-Adresse',

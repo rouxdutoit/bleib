@@ -75,6 +75,7 @@ const en: Docs = {
         h: 'Save as you go',
         blocks: [
           { p: 'Mention “I prefer aisle seats” in a chat, and bleib saves it quietly, with a × right there to undo it. A few everyday preferences save this way: your seat, diet, drinks, units, answer length and tone.' },
+          { p: 'Some AI memory writes itself from your chats. In bleib, nothing is saved without you seeing it, and you decide what stays.' },
           { p: 'Anything else asks first, in place: “Save to bleib?” That includes health, money, people, places and anything bleib isn’t sure about. What you save this way stays private: bleib asks before it shares it.' },
           { p: 'You can also bring in what ChatGPT, Claude and Gemini remember about you. bleib opens each one with a question ready. You press Send, copy the answer and choose Paste answer. Or use each one’s own data export (Google Takeout for Gemini) and drop the file into bleib. bleib reads it on your device, and you keep what’s right.' },
         ],
@@ -134,7 +135,7 @@ const en: Docs = {
   works: {
     title: 'Works with your AI',
     description: 'Use your memory in ChatGPT, Claude and Gemini.',
-    intro: ['The bleib browser extension is in development for Chrome and Edge 116 or later and Firefox 140 or later, on a computer. Passkeys in Firefox need version 150 or later. It works on recognised pages on these three sites.'],
+    intro: ['The bleib browser extension is in development for Chrome and Edge 116 or later and Firefox 140 or later, on a computer. Passkeys in Firefox need version 150 or later. It works on recognised pages on these three sites, and it works in the EU.'],
     sections: [
       {
         h: 'In your browser',
@@ -234,21 +235,33 @@ const en: Docs = {
   security: {
     title: 'Security and privacy',
     visual: 5,
-    description: 'How bleib protects your memory and what it trusts on your device.',
-    intro: ['Your memory is encrypted on your device, with no account and no tracking. An AI site can read what bleib adds to your draft, even before you send. Every share leaves a receipt.'],
+    description: 'How bleib keeps your memory yours: encryption, passkeys, receipts and backups, in plain words.',
+    intro: ['Nobody can take your memory from you. It lives on your device, encrypted, and bleib works without a server of ours. Every share leaves a receipt.'],
     cta: { label: 'Report a vulnerability', href: SECURITY_MAIL },
     sections: [
       {
-        h: 'On your device',
-        blocks: [{ p: 'bleib encrypts your memories, permissions and receipts. It picks what a request needs on your device and asks every time about sensitive information.' }],
+        h: 'Encrypted on your device',
+        blocks: [{ p: 'bleib locks each memory, your permissions and your receipts with age, an open encryption format, before it writes them to your browser. Only your passphrase or passkey opens them. No bleib server ever receives your memory.' }],
+      },
+      {
+        h: 'Passphrase or passkey',
+        blocks: [{ p: 'You open your bleib with a passphrase, a passkey or both. A passkey lives in your password manager or on your security key, under the name bleib.dev. bleib.dev never sees your memory. In Firefox, passkeys need version 150 or later.' }],
+      },
+      {
+        h: 'A receipt for every share',
+        blocks: [{ p: 'Before bleib adds anything to a chat, it writes a receipt: what went to which AI, and when. Each receipt is linked to the one before, so bleib can tell if one was changed or removed.' }],
+      },
+      {
+        h: 'Backups you hold',
+        blocks: [{ p: 'Your recovery kit and an encrypted backup are files you save yourself, somewhere other than this computer. You need both to restore your bleib in a new browser, and bleib keeps no copy of either. In Chrome and Edge, bleib can also back up to a folder you choose. The recovery kit opens your bleib, so keep it private.' }],
+      },
+      {
+        h: 'If bleib disappears',
+        blocks: [{ p: 'bleib needs no server of ours to work. If bleib stopped tomorrow, the extension on your computer would keep working. Export everything saves your memories and receipts as a readable file. Your backup uses age, so the free age tool can open it with your recovery kit. The site, the wallet and the docs are on GitHub, and the extension’s code joins them with its first public release.' }],
       },
       {
         h: 'What bleib trusts',
-        blocks: [
-          { p: 'bleib keeps your memory encrypted in your browser profile and unlocks it only for you. It relies on your browser and your device’s user account. Someone who controls them could see what bleib shows while it’s unlocked.' },
-          { p: 'You keep your recovery kit somewhere else. bleib keeps no copy of it.' },
-          { p: 'If you choose a passkey, your password manager or security key keeps it under the name bleib.dev. bleib.dev never sees your memory. In Firefox, passkeys need version 150 or later.' },
-        ],
+        blocks: [{ p: 'bleib keeps your memory encrypted in your browser profile and unlocks it only for you. It relies on your browser and your device’s user account. Someone who controls them could see what bleib shows while it’s unlocked.' }],
       },
       {
         h: 'On an AI site',
@@ -350,12 +363,24 @@ const en: Docs = {
   },
   pricing: {
     title: 'Pricing',
-    description: 'bleib is free and open source. Pay only for convenience later.',
-    intro: ['bleib is free and open source. Your memory, AI connections, permissions, receipts and imports are free.'],
+    description: 'The extension is free and stays free. A paid plan for every AI app and your phone is coming.',
+    intro: ['bleib is free and open source. Your memory, AI connections, permissions, receipts, imports and backups are free.'],
     sections: [
       {
-        h: 'Optional sync, later',
-        blocks: [{ p: 'Later we plan to offer optional sync between your devices, for a fee. Your device encrypts your memory before it leaves, so we can’t read it.' }],
+        h: 'Coming: bleib everywhere',
+        blocks: [{ p: 'A paid plan will bring your bleib into every AI app and onto your phone. Your device will encrypt your memory before it leaves, so we can’t read it.' }],
+      },
+      {
+        h: 'Our promises',
+        blocks: [
+          { p: 'When the paid plan comes, we promise:' },
+          { never: [
+            'The extension will stay free, forever.',
+            'We’ll give you 60 days’ notice before any price change.',
+            'You’ll get a 14-day trial, with no card needed.',
+            'If you stop paying, your export will keep working.',
+          ] },
+        ],
       },
     ],
   },
@@ -416,7 +441,7 @@ const en: Docs = {
   appPrivacy: {
     title: 'App privacy',
     description: 'How bleib and its browser extension handle your memory.',
-    intro: ['Your memory is encrypted on your device, and you choose what each AI gets. bleib is in development and starts as a browser extension, with no bleib account, telemetry, analytics or automatic crash reporting.'],
+    intro: ['Your memory is encrypted on your device, and you choose what each AI gets. bleib is in development and starts as a browser extension, with no bleib account, telemetry, analytics or automatic crash reporting. See [Security](/security/) for how encryption, passkeys, receipts and backups work.'],
     sections: [
       {
         h: 'In short',
@@ -528,6 +553,7 @@ const de: Docs = {
         h: 'Beim Schreiben speichern',
         blocks: [
           { p: 'Schreib im Chat zum Beispiel „Ich buche immer einen Gangplatz“, und bleib speichert es im Hintergrund. Mit dem × daneben machst du es direkt rückgängig. So speichert bleib ein paar alltägliche Vorlieben: Sitzplatz, Ernährung, Getränke, Maßeinheiten, Antwortlänge und Ton.' },
+          { p: 'Manches KI-Gedächtnis schreibt sich aus deinen Chats von selbst. In bleib wird nichts gespeichert, ohne dass du es siehst, und du entscheidest, was bleibt.' },
           { p: 'Bei allem anderen fragt bleib vorher, direkt im Chat: „In bleib speichern?“ Das gilt für Gesundheit, Geld, Menschen, Orte und alles, was bleib nicht sicher einordnen kann. Was du so speicherst, bleibt privat: Bevor bleib es teilt, fragt es dich.' },
           { p: 'Du kannst auch mitnehmen, was ChatGPT, Claude und Gemini über dich wissen. bleib öffnet jede KI mit einer fertigen Frage. Du schickst sie ab, kopierst die Antwort und wählst „Antwort einfügen“. Oder du nutzt den Datenexport des Anbieters (bei Gemini Google Takeout) und ziehst die Datei in bleib. bleib liest alles auf deinem Gerät, und du behältst, was stimmt.' },
         ],
@@ -587,7 +613,7 @@ const de: Docs = {
   works: {
     title: 'Funktioniert mit deiner KI',
     description: 'Nutze dein Gedächtnis in ChatGPT, Claude und Gemini.',
-    intro: ['Die Browser-Erweiterung ist in Entwicklung, für Chrome und Edge ab Version 116 und Firefox ab Version 140 auf dem Computer. Passkeys in Firefox brauchen Version 150 oder neuer. Sie funktioniert auf Seiten dieser drei Anbieter, die bleib erkennt.'],
+    intro: ['Die Browser-Erweiterung ist in Entwicklung, für Chrome und Edge ab Version 116 und Firefox ab Version 140 auf dem Computer. Passkeys in Firefox brauchen Version 150 oder neuer. Sie funktioniert auf Seiten dieser drei Anbieter, die bleib erkennt, auch in der EU.'],
     sections: [
       {
         h: 'Im Browser',
@@ -687,21 +713,33 @@ const de: Docs = {
   security: {
     title: 'Sicherheit und Datenschutz',
     visual: 5,
-    description: 'Wie bleib dein Gedächtnis schützt und worauf es sich auf deinem Gerät verlässt.',
-    intro: ['Dein Gedächtnis ist auf deinem Gerät verschlüsselt, ohne Konto und ohne Tracking. Eine KI-Website kann lesen, was bleib in deinen Entwurf einfügt, schon bevor du sendest. Jede Freigabe hinterlässt einen Beleg.'],
+    description: 'Wie bleib dein Gedächtnis bei dir hält: Verschlüsselung, Passkeys, Belege und Sicherungen, in einfachen Worten.',
+    intro: ['Niemand kann dir dein Gedächtnis nehmen. Es liegt verschlüsselt auf deinem Gerät, und bleib funktioniert ohne einen Server von uns. Jede Freigabe hinterlässt einen Beleg.'],
     cta: { label: 'Sicherheitslücke melden', href: SECURITY_MAIL },
     sections: [
       {
-        h: 'Auf deinem Gerät',
-        blocks: [{ p: 'bleib verschlüsselt deine Erinnerungen, Berechtigungen und Belege. Es wählt auf deinem Gerät aus, was die KI für ihre Anfrage braucht. Bei sensiblen Angaben fragt es jedes Mal.' }],
+        h: 'Verschlüsselt auf deinem Gerät',
+        blocks: [{ p: 'bleib verschließt jede Erinnerung, deine Berechtigungen und deine Belege mit age, einem offenen Verschlüsselungsformat, bevor es sie in deinem Browser speichert. Nur deine Passphrase oder dein Passkey öffnet sie. Kein bleib-Server erhält je dein Gedächtnis.' }],
+      },
+      {
+        h: 'Passphrase oder Passkey',
+        blocks: [{ p: 'Du öffnest dein bleib mit einer Passphrase, einem Passkey oder beidem. Ein Passkey liegt in deinem Passwortmanager oder auf deinem Sicherheitsschlüssel, unter dem Namen bleib.dev. bleib.dev sieht dein Gedächtnis nie. In Firefox brauchen Passkeys Version 150 oder neuer.' }],
+      },
+      {
+        h: 'Ein Beleg für jede Freigabe',
+        blocks: [{ p: 'Bevor bleib etwas in einen Chat einfügt, schreibt es einen Beleg: was an welche KI ging und wann. Jeder Beleg ist mit dem vorigen verknüpft, so merkt bleib, wenn einer verändert oder entfernt wurde.' }],
+      },
+      {
+        h: 'Sicherungen in deiner Hand',
+        blocks: [{ p: 'Dein Wiederherstellungspaket und eine verschlüsselte Sicherung sind Dateien, die du selbst speicherst, nicht auf diesem Computer. Um dein bleib in einem neuen Browser wiederherzustellen, brauchst du beide, und bleib behält von keiner eine Kopie. In Chrome und Edge kann bleib auch in einen Ordner sichern, den du auswählst. Das Wiederherstellungspaket öffnet dein bleib, also halte es privat.' }],
+      },
+      {
+        h: 'Wenn es bleib nicht mehr gibt',
+        blocks: [{ p: 'bleib braucht keinen Server von uns, um zu funktionieren. Gäbe es bleib morgen nicht mehr, liefe die Erweiterung auf deinem Computer weiter. „Alles exportieren“ speichert deine Erinnerungen und Belege als lesbare Datei. Deine Sicherung nutzt age, deshalb öffnet das freie Programm age sie mit deinem Wiederherstellungspaket. Die Website, das Wallet und die Dokumentation liegen auf GitHub, der Code der Erweiterung kommt mit ihrer ersten öffentlichen Version dazu.' }],
       },
       {
         h: 'Worauf bleib sich verlässt',
-        blocks: [
-          { p: 'bleib bewahrt dein Gedächtnis verschlüsselt in deinem Browserprofil auf und entsperrt es nur für dich. Es verlässt sich auf deinen Browser und dein Benutzerkonto auf dem Gerät. Wer beides kontrolliert, könnte sehen, was bleib anzeigt, solange es entsperrt ist.' },
-          { p: 'Dein Wiederherstellungspaket bewahrst du woanders auf. bleib behält keine Kopie davon.' },
-          { p: 'Wenn du einen Passkey wählst, bewahrt ihn dein Passwortmanager oder Sicherheitsschlüssel unter dem Namen bleib.dev auf. bleib.dev sieht dein Gedächtnis dabei nie. In Firefox brauchen Passkeys Version 150 oder neuer.' },
-        ],
+        blocks: [{ p: 'bleib bewahrt dein Gedächtnis verschlüsselt in deinem Browserprofil auf und entsperrt es nur für dich. Es verlässt sich auf deinen Browser und dein Benutzerkonto auf dem Gerät. Wer beides kontrolliert, könnte sehen, was bleib anzeigt, solange es entsperrt ist.' }],
       },
       {
         h: 'Auf der Website eines KI-Anbieters',
@@ -803,12 +841,24 @@ const de: Docs = {
   },
   pricing: {
     title: 'Preise',
-    description: 'bleib ist kostenlos und quelloffen. Später zahlst du nur für Komfort.',
-    intro: ['bleib ist kostenlos und quelloffen. Dein Gedächtnis, KI-Verbindungen, Berechtigungen, Belege und Importe sind kostenlos.'],
+    description: 'Die Erweiterung ist kostenlos und bleibt es. Ein Bezahltarif für jede KI-App und dein Handy kommt später.',
+    intro: ['bleib ist kostenlos und quelloffen. Dein Gedächtnis, KI-Verbindungen, Berechtigungen, Belege, Importe und Sicherungen sind kostenlos.'],
     sections: [
       {
-        h: 'Später auf Wunsch synchronisieren',
-        blocks: [{ p: 'Später soll es gegen Gebühr eine freiwillige Synchronisierung zwischen deinen Geräten geben. Dein Gerät verschlüsselt dein Gedächtnis, bevor es das Gerät verlässt. Wir können es nicht lesen.' }],
+        h: 'Bald: bleib überall',
+        blocks: [{ p: 'Ein Bezahltarif wird dein bleib in jede KI-App und auf dein Handy bringen. Dein Gerät wird dein Gedächtnis verschlüsseln, bevor es das Gerät verlässt, deshalb können wir es nicht lesen.' }],
+      },
+      {
+        h: 'Unsere Versprechen',
+        blocks: [
+          { p: 'Für den Bezahltarif versprechen wir:' },
+          { never: [
+            'Die Erweiterung bleibt kostenlos, für immer.',
+            'Vor jeder Preisänderung sagen wir dir 60 Tage vorher Bescheid.',
+            'Du bekommst 14 Tage zum Testen, ohne Karte.',
+            'Wenn du nicht mehr zahlst, funktioniert dein Export weiter.',
+          ] },
+        ],
       },
     ],
   },
@@ -869,7 +919,7 @@ const de: Docs = {
   appPrivacy: {
     title: 'Datenschutz in der App',
     description: 'Wie bleib und die Browser-Erweiterung mit deinem Gedächtnis umgehen.',
-    intro: ['Dein Gedächtnis ist auf deinem Gerät verschlüsselt, und du bestimmst, was jede KI bekommt. bleib ist in Entwicklung und startet als Browser-Erweiterung, ohne bleib-Konto, Telemetrie, Nutzungsanalyse und automatische Absturzberichte.'],
+    intro: ['Dein Gedächtnis ist auf deinem Gerät verschlüsselt, und du bestimmst, was jede KI bekommt. bleib ist in Entwicklung und startet als Browser-Erweiterung, ohne bleib-Konto, Telemetrie, Nutzungsanalyse und automatische Absturzberichte. Wie Verschlüsselung, Passkeys, Belege und Sicherungen funktionieren, steht unter [Sicherheit](/de/sicherheit/).'],
     sections: [
       {
         h: 'Kurz gesagt',
