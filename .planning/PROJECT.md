@@ -69,7 +69,7 @@ You can change AI without losing who you are to it, and you can always see exact
 - **Privacy**: local first, no telemetry, we never hold keys that let us read data, fail closed
 - **Language**: plain words in the interface; German and English written natively
 - **Accessibility**: WCAG 2.2 AA / BITV 2.0 from day one
-- **Hosting**: Bunny.net in the EU (storage in Frankfurt with a Stockholm copy, EU-only delivery, Bunny DNS for bleib.dev), deployed by GitHub Actions like Fazit
+- **Hosting**: Bunny.net in the EU (storage in Frankfurt with a Stockholm copy, EU-only delivery; DNS for bleib.dev at Cloudflare since 27 Nov 2026, DNS only), deployed by GitHub Actions like Fazit
 - **Brand**: keep the bleib mark (gold #f6e79a, black tile) and name; trademark still to be checked
 - **Website licensing**: follow Roze's structure and feel, but no copying of its text, images, code or assets
 
