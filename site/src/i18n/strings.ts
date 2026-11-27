@@ -155,7 +155,7 @@ const en = {
       later: { ai: 'Claude', title: 'Added for Claude', sub: 'Aisle seat', icon: 'airline_seat', tag: 'Always on' },
     },
     receipt: {
-      title: 'Added for Claude',
+      title: 'Added for ChatGPT',
       purpose: 'For your Lisbon trip',
       time: '14:32',
       shared: [{ t: 'Aisle seat', icon: 'airline_seat' }, { t: 'Carry-on only', icon: 'luggage' }],
@@ -338,7 +338,7 @@ const de: Strings = {
       later: { ai: 'Claude', title: 'Für Claude hinzugefügt', sub: 'Gangplatz', icon: 'airline_seat', tag: 'Immer an' },
     },
     receipt: {
-      title: 'Für Claude hinzugefügt',
+      title: 'Für ChatGPT hinzugefügt',
       purpose: 'Für deine Lissabon-Reise',
       time: '14:32',
       shared: [{ t: 'Gangplatz', icon: 'airline_seat' }, { t: 'Nur Handgepäck', icon: 'luggage' }],
