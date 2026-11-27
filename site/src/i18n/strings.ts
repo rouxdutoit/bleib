@@ -128,7 +128,7 @@ const en = {
         more: { to: 'receipts', hash: '', label: 'See what bleib added' },
       },
       {
-        h: ['Import your memories.', 'Switch their memory off.'],
+        h: ['Import your memories.', 'Switch theirs off.'],
         p: 'Your bleib keeps yours. They stay with you forever.',
         more: { to: 'how', hash: '#off', label: 'How to switch it off' },
         dark: true,
@@ -180,7 +180,7 @@ const en = {
     },
   },
   finale: {
-    h: 'Your AI memory stays yours.',
+    h: 'Secure your memories for life.',
     p: 'Free, local, and open source.',
   },
   footer: {
@@ -311,7 +311,7 @@ const de: Strings = {
         more: { to: 'receipts', hash: '', label: 'Sieh, was bleib eingefügt hat' },
       },
       {
-        h: ['Importiere deine Erinnerungen.', 'Schalte ihr Gedächtnis aus.'],
+        h: ['Importiere deine Erinnerungen.', 'Schalte ihres aus.'],
         p: 'Dein bleib behält sie. Sie bleiben für immer bei dir.',
         more: { to: 'how', hash: '#off', label: 'So schaltest du es aus' },
         dark: true,
@@ -363,7 +363,7 @@ const de: Strings = {
     },
   },
   finale: {
-    h: 'Dein KI-Gedächtnis bleibt deins.',
+    h: 'Sichere deine Erinnerungen fürs Leben.',
     p: 'Kostenlos, lokal und Open Source.',
   },
   footer: {
