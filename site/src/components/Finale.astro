@@ -23,7 +23,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
         {MARK_EYES.map((d) => <path class="eye" d={d} />)}
       </svg>
     </span>
-    <h2 id="finale-title" class="title">{s.h}</h2>
+    <h2 id="finale-title" class="title">{s.h.split(/(?<=\.)\s+/).map((line, i) => [i > 0 && ' ', <span class="line">{line}</span>])}</h2>
     <p class="sub">{s.p}</p>
     {/* The hero's actions again: today How it works and GitHub; on launch day the same launch buttons. */}
     <div class="form cta" data-prelaunch hidden={INSTALL.launched}>
@@ -54,6 +54,8 @@ const githubHref = GITHUB_URL || routes.developers[lang];
 
   /* Same size and weight as the hero headline, so the page opens and closes in one voice. */
   .title { margin: 0; max-width: 22ch; font-size: clamp(38px, 5.4vw, 64px); line-height: 1.07; letter-spacing: -0.03em; font-weight: 600; text-wrap: balance; }
+  /* Each sentence on its own line: "One memory." then "Every AI." */
+  .title .line { display: block; }
   .sub { margin: 18px 0 0; font-size: clamp(17px, 1.7vw, 21px); line-height: 1.45; color: var(--muted); text-wrap: balance; }
   .form { margin-top: 32px; width: 100%; display: flex; justify-content: center; }
   .cta { flex-wrap: wrap; gap: 10px; }

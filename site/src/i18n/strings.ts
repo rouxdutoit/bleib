@@ -180,7 +180,7 @@ const en = {
     },
   },
   finale: {
-    h: 'Your AI memory stays yours.',
+    h: 'One memory. Every AI.',
     p: 'Free, local, and open source.',
   },
   footer: {
@@ -363,7 +363,7 @@ const de: Strings = {
     },
   },
   finale: {
-    h: 'Dein KI-Gedächtnis bleibt deins.',
+    h: 'Ein Gedächtnis. Jede KI.',
     p: 'Kostenlos, lokal und Open Source.',
   },
   footer: {
