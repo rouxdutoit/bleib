@@ -6,19 +6,21 @@
  * from that text with {detail} filled in; Hero.astro takes the detail out of the example, and when the last one goes,
  * the card goes too.
  * With `ask` (the hero) it first appears as bleib's ask above the message box, the question and an Add button, as the
- * extension shows it; one step later Add is pressed, the button fades and the title becomes what bleib did.
+ * extension shows it; one step later Add dips as if tapped, turns into a drawn tick with “Added”, and the title becomes
+ * what bleib did.
  * At step `at` it drops in from above and fades in, like an iPhone banner, into space it already holds, so nothing
  * around it moves. Spacing around it comes from --bleib-card-margin on the parent.
  */
 import Mark from './Mark.astro';
+import DrawTick from './DrawTick.astro';
 import { icon, type IconName } from './icons';
-interface Props { title: string; facts: { t: string; icon: string }[]; removable?: boolean; controls?: string; at?: 2 | 3; ask?: { q: string; add: string } }
+interface Props { title: string; facts: { t: string; icon: string }[]; removable?: boolean; controls?: string; at?: 2 | 3; ask?: { q: string; add: string; added: string } }
 const { title, facts, removable = false, controls, at = 2, ask } = Astro.props;
 const x = removable || Boolean(controls);
 ---
 <div class:list={['drop', `at-${at}`, { 'has-controls': controls, 'has-ask': ask }]}>
   <div class="fill">
-    <p class="fill-head" aria-hidden={controls ? 'true' : undefined}><span class="tile"><Mark size={12} /></span><span class="t-foot fill-title">{ask ? <span class="swap"><span class="q">{ask.q}</span><span class="a">{title}</span></span> : title}</span>{ask && <span class="add t-foot">{ask.add}</span>}</p>
+    <p class="fill-head" aria-hidden={controls ? 'true' : undefined}><span class="tile"><Mark size={12} /></span><span class="t-foot fill-title">{ask ? <span class="swap"><span class="q">{ask.q}</span><span class="a">{title}</span></span> : title}</span>{ask && <span class="add t-foot crossfade press at-3"><span>{ask.add}</span><span class="added"><DrawTick />{ask.added}</span></span>}</p>
     <ul class="facts">{facts.map((f) => (
       <li class="t-foot" data-detail={f.t}>
         <span class="sym" set:html={icon(f.icon as IconName)} />
@@ -50,8 +52,10 @@ const x = removable || Boolean(controls);
   .swap .a { opacity: 0; }
   :global(.s3) .has-ask .swap .q { opacity: 0; }
   :global(.s3) .has-ask .swap .a { opacity: 1; }
-  .add { flex: none; margin-left: auto; padding: 3px 12px; border-radius: 999px; background: #0a0a0a; color: #f6e79a; font-weight: 600; transition: opacity var(--t-fade) var(--ease), transform var(--t-fade) var(--ease); }
-  :global(.s3) .has-ask .add { opacity: 0; transform: scale(0.92); }
+  /* Add dips when tapped (Press), then gives way to a drawn tick and “Added” (Crossfade) as its fill settles to a pill's. */
+  .add { --delay: 0.18s; flex: none; margin-left: auto; padding: 3px 12px; border-radius: 999px; background: #0a0a0a; color: #f6e79a; font-weight: 600; white-space: nowrap; transition: background-color var(--t-fade) var(--ease) var(--delay), color var(--t-fade) var(--ease) var(--delay); }
+  .added { display: inline-flex; align-items: center; gap: 4px; }
+  :global(.s3) .has-ask .add { background: rgba(255, 255, 255, .6); color: #0a0a0a; }
   .facts { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
   .facts li { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px 4px 8px; border-radius: 999px; background: rgba(255, 255, 255, .6); color: #0a0a0a; font-weight: 500; white-space: nowrap; }
   .sym { display: grid; color: rgba(10, 10, 10, .62); }

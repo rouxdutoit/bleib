@@ -41,7 +41,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
           return (
             <div class="body s1 s2 s3" role="tabpanel" id={`ex-${i}`} aria-labelledby={`ex-tab-${i}`} tabindex="0" hidden={i !== 0} data-steps="3" data-start="600" data-gaps="700,1600" data-step="3" {...(i === 0 ? { 'data-sv': 'hero' } : {})}>
               <p class="sr-only summary" data-typed={x.typed} data-title={title} data-private={x.private}>{x.typed} {title}: {x.facts.map((f) => f.t).join(', ')}. {x.private}</p>
-              <BleibCard title={title} facts={x.facts} controls={s.leaveOut} ask={{ q: pv.ask, add: pv.add }} />
+              <BleibCard title={title} facts={x.facts} controls={s.leaveOut} ask={{ q: pv.ask, add: pv.add, added: pv.added }} />
               <div aria-hidden="true">
                 <Composer typed={x.typed} filled>
                   <div class="attach reveal at-3"><div class="reveal-in">
