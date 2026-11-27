@@ -18,7 +18,7 @@ import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang; scene: number; tray?: boolean }
 const { lang, scene, tray = false } = Astro.props;
 const c = t(lang).cards;
-const STEPS = [4, 3, c.any.providers.length - 1, 2, 0, 4];
+const STEPS = [4, 3, c.any.providers.length - 1, 2, 0, 3];
 const INTERVAL = [900, 900, 1250, 900, 900, 1000];
 /** Reading time: before step 1, the card as it first appears; GAPS, what a step reveals (see scripts/story.ts). */
 const START = [900, 1000, 2200, 1500, 1000, 1600];
@@ -39,7 +39,7 @@ const caption = [
   `${c.wallet.title}: ${c.wallet.rows.slice(0, 3).map((r) => `${r.k}, ${r.v}`).join('; ')}. ${c.any.usedBy} ${names}. ${c.any.caption}`,
   `${c.ask.later.title}: ${c.ask.later.sub}, ${c.ask.later.tag}. ${c.ask.title} ${c.ask.message} ${c.ask.allowed}.`,
   `${c.receipt.title}, ${c.receipt.time}. ${c.receipt.purpose}. ${c.receipt.shared.map((x) => x.t).join(', ')}. ${c.receipt.notShared}.`,
-  `${c.off.imported}: ${names}. ${c.off.setting}: off. ${c.off.note}`,
+  `${c.off.imported}, ${c.off.from}. ${names}: ${c.off.setting} off. ${c.off.note}`,
 ][scene];
 ---
 <div class="sv" {...(chat ? {} : play)}>
@@ -148,28 +148,29 @@ const caption = [
       )}
 
       {scene === 5 && (
-        /* Import first, then switch off, the App Store way: each AI's row ends in a capsule the size of its switch.
-           The import glyph (an arrow down into a tray: the memories come into bleib) fills with a progress ring,
-           turns into a drawn tick, then becomes that AI's Memory switch, which goes off. Rows play one after another. */
+        /* Import first, then switch off. bleib's row ends in a capsule the size of the switches below, like the App
+           Store's Get button: its download symbol fills with a progress ring and becomes a centred tick; then each AI's
+           own Memory switch goes off. */
         <div class="card list-card switch-card">
-          <p class="head"><span class="t-headline crossfade at-2 ttl"><span>{c.off.import}</span><span>{c.off.imported}</span></span></p>
           <ul class="group">
+            <li class="cell imp">
+              <span class="btile"><Mark size={20} /></span>
+              <span class="cell-k"><span class="t-body crossfade at-2 ttl"><span>{c.off.import}</span><span>{c.off.imported}</span></span><span class="t-sub c-2 blk">{c.off.from}</span></span>
+              <span class="get">
+                <span class="crossfade at-1">
+                  <span class="dl" set:html={svg('download')} />
+                  <span class="crossfade at-2">
+                    <svg class="ring" viewBox="0 0 24 24" aria-hidden="true"><circle class="track" cx="12" cy="12" r="8.5" /><circle class="prog" cx="12" cy="12" r="8.5" pathLength="1" /></svg>
+                    <span class="tk"><DrawTick /></span>
+                  </span>
+                </span>
+              </span>
+            </li>
             {c.any.providers.map((p, i) => (
               <li class="cell">
                 <img class:list={['app', { mono: !p.color }]} src={p.color || p.icon} alt="" width="42" height="42" />
                 <span class="cell-k"><span class="t-body">{p.name}</span><span class="t-sub c-2 blk">{c.off.setting}</span></span>
-                <span class="slot crossfade at-3" style={`--delay: ${i * 0.35}s`}>
-                  <span class="get">
-                    <span class="crossfade at-1">
-                      <svg class="gl" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v9.5M8 9l4 4 4-4M4.5 13.5v4a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-4" /></svg>
-                      <span class="crossfade at-2">
-                        <svg class="ring" viewBox="0 0 24 24" aria-hidden="true"><circle class="track" cx="12" cy="12" r="8.5" /><circle class="prog" cx="12" cy="12" r="8.5" pathLength="1" /></svg>
-                        <span class="tk"><DrawTick /></span>
-                      </span>
-                    </span>
-                  </span>
-                  <span class="toggle at-4" />
-                </span>
+                <span class="toggle at-3" style={`--delay: ${i * 0.35}s`} />
               </li>
             ))}
           </ul>
@@ -209,12 +210,12 @@ const caption = [
   .switch-card .cell { min-height: 56px; }
   /* The Get → progress → done capsule: exactly the switch's size, on the same centre line, its symbol centred. */
   .ttl { display: inline-grid; }
-  .slot { flex: none; margin-inline-start: auto; }
-  .slot > * { justify-self: end; align-self: center; }
-  .get { width: 51px; height: 31px; border-radius: 999px; background: var(--fill); color: var(--label); display: grid; place-items: center; }
+  .get { flex: none; margin-inline-start: auto; width: 51px; height: 31px; border-radius: 999px; background: var(--fill); color: var(--label); display: grid; place-items: center; }
   .get .crossfade { place-items: center; }
-  .gl, .ring, .tk :global(.draw-tick) { width: 18px; height: 18px; display: block; }
-  .gl path { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .dl, .tk { display: grid; }
+  .dl :global(svg), .ring, .tk :global(.draw-tick) { width: 18px; height: 18px; display: block; }
+  .group > li.imp + li.cell::before { content: ''; position: absolute; top: 0; right: 0; left: 57px; border-top: 1px solid var(--hairline); }
+  .btile { flex: none; width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
   .ring { transform: rotate(-90deg); }
   .ring circle { fill: none; stroke-width: 2.2; }
   .ring .track { stroke: var(--hairline); }
