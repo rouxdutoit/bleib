@@ -20,7 +20,7 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   <Rails top={false} />
   <div class="wrap hero-inner">
     <p class="eyebrow">{s.eyebrow}</p>
-    <h1 id="hero-title" class="hero-h1">{s.h1.split(/(\S+-\S+)/).map((part) => /-/.test(part) ? <span class="whole">{part}</span> : part)}</h1>
+    <h1 id="hero-title" class="hero-h1">{s.h1.split(/(?<=\.)\s+/).map((line, i) => [i > 0 && ' ', <span class="line">{line.split(/(\S+-\S+)/).map((part) => /-/.test(part) ? <span class="whole">{part}</span> : part)}</span>])}</h1>
     <p class="sub">{s.sub.map((line) => <span>{line.split(/(?<=,) /).map((part, i) => [i > 0 && ' ', <span class="phrase">{part}</span>])}</span>)}</p>
     <div class="cta">
       <a class="btn btn-primary" id="hero-primary" href="#early-access" data-install data-add={s.addTo} data-installed={s.installed}>{s.primary}</a>
@@ -86,6 +86,8 @@ const githubHref = GITHUB_URL || routes.developers[lang];
   /* A hyphenated word (KI-Gedächtnis) never splits at its hyphen. */
   .whole { white-space: nowrap; }
   .hero-h1 { font-size: clamp(38px, 5.4vw, 64px); font-weight: 600; line-height: 1.07; letter-spacing: -0.03em; max-width: 22ch; text-wrap: balance; }
+  /* Each sentence starts its own line: “Own your AI memory.” then “Turn theirs off.” */
+  .hero-h1 .line { display: block; }
   .sub { margin: 22px 0 0; font-size: clamp(17px, 1.6vw, 19px); line-height: 1.5; color: var(--muted); max-width: 40em; text-wrap: balance; }
   .stores { margin: 14px 0 0; font-size: 13px; line-height: 18px; color: var(--muted); }
   .stores a { color: var(--ink); font-weight: 600; text-decoration: none; }

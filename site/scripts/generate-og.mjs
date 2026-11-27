@@ -85,7 +85,8 @@ try {
         document.documentElement.removeAttribute('data-theme');
         const card = document.createElement('div');
         const heading = document.createElement('p');
-        heading.textContent = title;
+        // Each sentence on its own line, as in the hero.
+        heading.append(...title.split(/(?<=\.)\s+/).map((line) => Object.assign(document.createElement('span'), { textContent: line, style: 'display: block' })));
         logo.removeAttribute('aria-hidden');
         card.append(logo, heading);
         document.body.replaceChildren(card);
