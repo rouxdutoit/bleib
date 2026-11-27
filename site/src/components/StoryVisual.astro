@@ -260,9 +260,9 @@ const caption = [
   /* On the marketing site the light theme's page and tray are already yellow, so here a notice is a white card like
      every other; in dark mode it is bleib yellow with black ink, as bleib's notifications are in the product. */
   .note { padding: 14px 16px 16px; }
-  :root[data-theme='dark'] .note { --cell: #f6e79a; --label: #0a0a0a; --label-2: rgb(10 10 10 / 0.64); --fill: rgb(255 255 255 / 0.6); --tile: #fffbea; }
+  :root[data-theme='dark'] .note { --cell: #f6e79a; --label: #0a0a0a; --label-2: rgb(10 10 10 / 0.64); --fill: rgb(255 255 255 / 0.85); --tile: #fffbea; }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme='light']) .note { --cell: #f6e79a; --label: #0a0a0a; --label-2: rgb(10 10 10 / 0.64); --fill: rgb(255 255 255 / 0.6); --tile: #fffbea; }
+    :root:not([data-theme='light']) .note { --cell: #f6e79a; --label: #0a0a0a; --label-2: rgb(10 10 10 / 0.64); --fill: rgb(255 255 255 / 0.85); --tile: #fffbea; }
   }
   .note-head { display: flex; align-items: center; gap: 10px; }
   .note-id { flex: 1; min-width: 0; }

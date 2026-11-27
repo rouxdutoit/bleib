@@ -17,6 +17,8 @@ import { icon, type IconName } from './icons';
 interface Props { title: string; facts: { t: string; icon: string }[]; removable?: boolean; controls?: string; at?: 2 | 3; ask?: { q: string; add: string } }
 const { title, facts, removable = false, controls, at = 2, ask } = Astro.props;
 const x = removable || Boolean(controls);
+/* A geometric ×: two strokes crossing at the exact centre of a 12px box, so it sits dead centre in its 18px circle. */
+const cross = '<svg viewBox="0 0 12 12" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 3l6 6M9 3l-6 6"/></svg>';
 ---
 <div class:list={['drop', `at-${at}`, { 'has-controls': controls, 'has-ask': ask }]}>
   <div class="fill">
@@ -26,8 +28,8 @@ const x = removable || Boolean(controls);
         <span class="sym" set:html={icon(f.icon as IconName)} />
         {controls ? <span aria-hidden="true">{f.t}</span> : f.t}
         {controls
-          ? <button type="button" class="x" aria-label={controls.replace('{detail}', f.t)} set:html={icon('close')} />
-          : x && <span class="x" aria-hidden="true" set:html={icon('close')} />}
+          ? <button type="button" class="x" aria-label={controls.replace('{detail}', f.t)} set:html={cross} />
+          : x && <span class="x" aria-hidden="true" set:html={cross} />}
       </li>
     ))}</ul>
   </div>
@@ -56,22 +58,23 @@ const x = removable || Boolean(controls);
   .add { --delay: 0.18s; flex: none; margin-left: auto; padding: 3px 12px; border-radius: 999px; background: #0a0a0a; color: #f6e79a; font-weight: 600; white-space: nowrap; transition: background-color var(--t-fade) var(--ease) var(--delay), color var(--t-fade) var(--ease) var(--delay); }
   .add > * { justify-self: center; }
   .added { display: grid; place-items: center; }
-  :global(.s3) .has-ask .add { background: rgba(255, 255, 255, .6); color: #0a0a0a; }
+  :global(.s3) .has-ask .add { background: rgba(255, 255, 255, .85); color: #0a0a0a; }
   .facts { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
-  .facts li { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px 4px 8px; border-radius: 999px; background: rgba(255, 255, 255, .6); color: #0a0a0a; font-weight: 500; white-space: nowrap; }
+  .facts li { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px 4px 8px; border-radius: 999px; background: rgba(255, 255, 255, .85); color: #0a0a0a; font-weight: 500; white-space: nowrap; }
   .sym { display: grid; color: rgba(10, 10, 10, .62); }
   .sym :global(svg) { width: 14px; height: 14px; display: block; }
   /* A removable pill ends in a small ×, like a token in Mail's To field: tap it to leave that detail out. */
-  .facts li:has(.x) { padding-right: 5px; }
-  .x { position: relative; display: grid; place-items: center; width: 18px; height: 18px; margin: -1px 0 -1px 1px; padding: 0; border: 0; border-radius: 50%; background: rgba(10, 10, 10, .1); color: rgba(10, 10, 10, .72); font: inherit; }
+  /* 4px on the right, as above and below, so the circle sits centred in the pill's rounded end. */
+  .facts li:has(.x) { padding-right: 4px; }
+  .x { position: relative; display: grid; place-items: center; width: 18px; height: 18px; margin: -1px 0 -1px 1px; padding: 0; border: 0; border-radius: 50%; background: rgba(10, 10, 10, .14); color: rgba(10, 10, 10, .85); font: inherit; }
   .x :global(svg) { width: 12px; height: 12px; display: block; }
   /* The button answers a 44px tap around the 18px circle it shows. */
   button.x { cursor: pointer; -webkit-tap-highlight-color: transparent; transition: background-color 0.15s var(--ease); }
   button.x::before { content: ''; position: absolute; inset: -13px; border-radius: 50%; }
   /* Below 768px the hero draws its preview at 92%, so the area grows to 48px to stay 44px on screen. */
   @media (max-width: 767px) { button.x::before { inset: -15px; } }
-  button.x:active { background: rgba(10, 10, 10, .22); }
-  @media (hover: hover) { button.x:hover { background: rgba(10, 10, 10, .18); } }
+  button.x:active { background: rgba(10, 10, 10, .26); }
+  @media (hover: hover) { button.x:hover { background: rgba(10, 10, 10, .20); } }
   /* The card is yellow in both themes, so its focus ring is always black. */
   button.x:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 2px; border-radius: 50%; }
 </style>
