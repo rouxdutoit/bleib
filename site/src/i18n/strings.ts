@@ -128,7 +128,7 @@ const en = {
         more: { to: 'receipts', hash: '', label: 'See what bleib added' },
       },
       {
-        h: ['Import your memories to your bleib.', 'Switch their memory off.'],
+        h: ['Import your memories.', 'Switch their memory off.'],
         p: 'Your bleib keeps yours. They stay with you forever.',
         more: { to: 'how', hash: '#off', label: 'How to switch it off' },
         dark: true,
@@ -311,7 +311,7 @@ const de: Strings = {
         more: { to: 'receipts', hash: '', label: 'Sieh, was bleib eingefügt hat' },
       },
       {
-        h: ['Importiere deine Erinnerungen in dein bleib.', 'Schalte ihr Gedächtnis aus.'],
+        h: ['Importiere deine Erinnerungen.', 'Schalte ihr Gedächtnis aus.'],
         p: 'Dein bleib behält sie. Sie bleiben für immer bei dir.',
         more: { to: 'how', hash: '#off', label: 'So schaltest du es aus' },
         dark: true,
