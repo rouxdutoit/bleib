@@ -124,7 +124,7 @@ const en = {
       },
       {
         h: ['A receipt', 'for every share.'],
-        p: 'See exactly what each AI got, and what it didn’t.',
+        p: 'See exactly what AIs receive. Stay in control of your data.',
         more: { to: 'receipts', hash: '', label: 'See what bleib added' },
       },
       {
@@ -307,7 +307,7 @@ const de: Strings = {
       },
       {
         h: ['Ein Beleg', 'für jede Weitergabe.'],
-        p: 'Sieh genau, was jede KI bekommen hat, und was nicht.',
+        p: 'Sieh genau, was KIs bekommen. Behalte die Kontrolle über deine Daten.',
         more: { to: 'receipts', hash: '', label: 'Sieh, was bleib eingefügt hat' },
       },
       {
