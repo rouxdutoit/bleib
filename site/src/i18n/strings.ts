@@ -66,7 +66,6 @@ const en = {
     examples: 'Examples',
     ask: 'Add to your message?',
     add: 'Add',
-    added: 'Added',
     title: 'Added just what {ai} needs',
     attachment: 'About me',
     tabs: [
@@ -248,7 +247,6 @@ const de: Strings = {
     examples: 'Beispiele',
     ask: 'Zum Entwurf hinzufügen?',
     add: 'Hinzufügen',
-    added: 'Hinzugefügt',
     title: 'Nur das Nötige für {ai}',
     attachment: 'Über mich',
     tabs: [

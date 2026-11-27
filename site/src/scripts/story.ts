@@ -4,8 +4,8 @@
  * A [data-type] element is typed out at step 1, and the first gap starts once typing ends.
  * data-start sets the pause before step 1 and data-gaps="a,b,…" the pause after each step (ms): long enough
  * to read what is on screen (about 0.25 s a word), while each transition itself stays quick.
- * data-sv="hero" starts as soon as a third of it is in view (the hero, usually in view on arrival); its data-start
- * gives the visitor a moment to land first. The hero is served finished, so it reads without JavaScript; an inline
+ * data-sv="hero" waits for the visitor's first scroll (the hero is usually in view on arrival), then plays once a
+ * third of it is in view; choosing one of its tabs plays it at once. The hero is served finished, so it reads without JavaScript; an inline
  * script in Hero.astro puts it back to step 0 before the first paint when motion is allowed.
  * Each headline symbol ([data-fx]) plays its effect once, as it comes into view (StoryScene.astro).
  * With reduced motion the final state shows at once, and if reduced motion is turned on while a scene is playing,
@@ -78,7 +78,7 @@ motion.addEventListener('change', () => {
   document.querySelectorAll<HTMLElement>('[data-fx]').forEach((el) => el.classList.add('on'));
 });
 
-/** Plays every [data-sv] scene once, when it comes into view (the hero, data-sv="hero", once a third of it shows). */
+/** Plays every [data-sv] scene once, when it comes into view (the hero, data-sv="hero", after the first scroll). */
 export function initStory(): void {
   const scenes = document.querySelectorAll<HTMLElement>('[data-sv]');
   const symbols = document.querySelectorAll<HTMLElement>('[data-fx]');
@@ -109,5 +109,10 @@ export function initStory(): void {
   );
   const io = onView(0.6);
   const hero = onView(0.33);
-  scenes.forEach((sv) => (sv.dataset.sv === 'hero' ? hero : io).observe(sv));
+  scenes.forEach((sv) => {
+    if (sv.dataset.sv !== 'hero') return io.observe(sv);
+    // The hero waits for the first scroll, so it plays while the visitor is looking, not before.
+    if (window.scrollY > 0) return hero.observe(sv);
+    window.addEventListener('scroll', () => hero.observe(sv), { once: true, passive: true });
+  });
 }
