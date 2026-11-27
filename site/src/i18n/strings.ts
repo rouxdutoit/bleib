@@ -109,7 +109,7 @@ const en = {
       },
       {
         h: ['You chat.', 'bleib takes notes.'],
-        p: 'Mention you’re vegetarian. Saved to your bleib.',
+        p: 'Mention you’re vegetarian. It’s saved to your bleib.',
         more: { to: 'how', hash: '#proposals', label: 'Saves as you go' },
       },
       {
@@ -292,7 +292,7 @@ const de: Strings = {
       },
       {
         h: ['Du chattest.', 'bleib merkt es sich.'],
-        p: 'Erwähn, dass du vegetarisch isst. In deinem bleib gespeichert.',
+        p: 'Erwähn, dass du vegetarisch isst. Es wird in deinem bleib gespeichert.',
         more: { to: 'how', hash: '#proposals', label: 'Speichert nebenbei' },
       },
       {
