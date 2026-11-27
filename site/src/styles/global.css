@@ -25,6 +25,8 @@
   --shadow: 0 30px 80px -30px rgb(10 10 10 / 0.32), 0 2px 6px rgb(10 10 10 / 0.06);
   --card-border: 1px solid transparent;
   --focus: #0a0a0a;
+  /* The current page's link: black on the yellow page, bleib yellow on black. */
+  --current: #0a0a0a;
   --radius-card: 22px;
   --radius-tray: 28px;
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -46,6 +48,7 @@
   --shadow: none;
   --card-border: 1px solid rgb(255 255 255 / 0.07);
   --focus: #f6e79a;
+  --current: #f6e79a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -65,6 +68,8 @@
     --shadow: none;
     --card-border: 1px solid rgb(255 255 255 / 0.07);
     --focus: #f6e79a;
+    --current: #f6e79a;
+  --current: #f6e79a;
   }
 }
 
@@ -430,11 +435,11 @@ h3 {
     --joint: #62625d;
   }
 }
-/* Phones: content sits at Apple's 16pt margin from the screen edge, with the rails halfway out. */
+/* Phones: content sits 24px from the screen edge, with the rails 8px in, so text never crowds the glass. */
 @media (max-width: 767px) {
   :root {
     --rail-gap: 8px;
-    --inset: 8px;
+    --inset: 16px;
   }
 }
 .has-rails {

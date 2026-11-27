@@ -70,9 +70,10 @@ const cols: { h: string; items: Item[] }[] = [
   ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
   a { color: var(--muted); text-decoration: none; }
   ul a { font-size: 13px; line-height: 18px; }
-  a:hover, a[aria-current='page'] { color: var(--ink); }
-  /* The current page keeps its underline, so it never depends on colour alone. */
-  a[aria-current='page'] .lbl { background-size: 100% 1px; }
+  a:hover { color: var(--ink); }
+  /* The current page: black on yellow, yellow on black, one weight heavier (not colour alone), no underline. */
+  a[aria-current='page'] { color: var(--current); font-weight: 600; }
+  a[aria-current='page'] .lbl { background-size: 0 1px; }
   /* Every link answers a tap 44px tall, centred on its text, without changing what you see. In the columns, rows sit
      28px apart, so with a mouse each link's area reaches halfway to its neighbours; on touch screens the rows open up
      to 44px apart, so no tap area overlaps (and steals taps from) the link above. */
