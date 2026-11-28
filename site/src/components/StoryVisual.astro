@@ -7,6 +7,7 @@
  * Moves come from the motion kit in global.css (Reveal, Crossfade, Settle via .at-N and .dim-N);
  *   .pick-at-N  a choice is pressed at step N and turns bleib yellow, done
  */
+import DrawTick from './DrawTick.astro';
 import Window from './Window.astro';
 import BleibCard from './BleibCard.astro';
 import Composer from './Composer.astro';
@@ -17,11 +18,11 @@ import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang; scene: number; tray?: boolean }
 const { lang, scene, tray = false } = Astro.props;
 const c = t(lang).cards;
-const STEPS = [5, 3, c.any.providers.length - 1, 3, 0, 4];
+const STEPS = [5, 3, c.any.providers.length - 1, 3, 0, 3];
 const INTERVAL = [900, 900, 1250, 900, 900, 1000];
 /** Reading time: before step 1, the card as it first appears; GAPS, what a step reveals (see scripts/story.ts). */
 const START = [900, 1000, 2200, 1500, 1000, 1600];
-const GAPS = [',,,1800', ',900', '', '900,1400', '', '3200,2200,1800'];
+const GAPS = [',,,1800', ',900', '', '900,1400', '', ''];
 
 import { icon, type IconName } from './icons';
 const svg = (name: string, cls = 'g') => icon(name as IconName, cls);
@@ -38,7 +39,7 @@ const caption = [
   `${c.wallet.title}: ${c.wallet.rows.slice(0, 3).map((r) => `${r.k}, ${r.v}`).join('; ')}. ${c.any.usedBy} ${names}. ${c.any.caption}`,
   `${c.wallet.title}: ${c.need.rows.map((r) => `${r.k}, ${r.v}`).join('; ')}. ${c.need.draft} ${t(lang).preview.attachment}: ${c.need.rows.filter((r) => r.use).map((r) => r.v).join(', ')}. ${c.need.rows.filter((r) => r.locked).map((r) => r.k).join('')}: ${c.need.asks}.`,
   `${c.receipt.title}, ${c.receipt.time}. ${c.receipt.purpose}. ${c.receipt.shared.map((x) => x.t).join(', ')}. ${c.receipt.notShared}.`,
-  `${c.reveal.theirs}: ${c.reveal.items.join('; ')}. ${c.reveal.see} ${c.reveal.own} ChatGPT ${c.off.setting}: off.`,
+  `${c.off.imported}, ${c.off.from}. ${names}: ${c.off.setting} off. ${c.off.note}`,
 ][scene];
 ---
 <div class="sv" {...(chat ? {} : play)}>
@@ -149,30 +150,33 @@ const caption = [
       )}
 
       {scene === 5 && (
-        /* The reveal: ChatGPT's memory of you fills in, line by line, the things it inferred; then "Now you see what ChatGPT
-           owns of yours."; then the list moves into your bleib (its header and a tick on each line) and "Now you own it
-           all."; last, ChatGPT's own Memory switch goes off. */
-        <div class="card list-card reveal-card">
-          <p class="head rv-head">
-            <span class="crossfade at-3 rv-who">
-              <span class="rv-id"><img class="rv-logo mono" src="/providers/openai.svg" alt="" width="22" height="22" /><span class="t-headline">{c.reveal.theirs}</span></span>
-              <span class="rv-id"><span class="rv-tile"><Mark size={13} /></span><span class="t-headline">{c.wallet.title}</span></span>
-            </span>
-          </p>
+        /* Import first, then switch off. bleib's row ends in a capsule the size of the switches below, like the App
+           Store's Get button: its download symbol fills with a progress ring and becomes a centred tick; then each AI's
+           own Memory switch goes off. */
+        <div class="card list-card switch-card">
           <ul class="group">
-            {c.reveal.items.map((x, i) => (
-              <li class="cell rv-item appear at-1" style={`--delay: ${i * 0.45}s`}>
-                <span class="t-body cell-k">{x}</span>
-                <span class="rv-ok appear at-3" style={`--delay: ${i * 0.12}s`} set:html={svg('check')} />
+            <li class="cell imp">
+              <span class="btile"><Mark size={20} /></span>
+              <span class="cell-k"><span class="t-body crossfade at-2 ttl"><span>{c.off.import}</span><span>{c.off.imported}</span></span><span class="t-sub c-2 blk">{c.off.from}</span></span>
+              <span class="get">
+                <span class="crossfade at-1">
+                  <span class="dl" set:html={svg('download')} />
+                  <span class="crossfade at-2">
+                    <svg class="ring" viewBox="0 0 24 24" aria-hidden="true"><circle class="track" cx="12" cy="12" r="8.5" /><circle class="prog" cx="12" cy="12" r="8.5" pathLength="1" /></svg>
+                    <span class="tk"><DrawTick /></span>
+                  </span>
+                </span>
+              </span>
+            </li>
+            {c.any.providers.map((p, i) => (
+              <li class="cell">
+                <img class:list={['app', { mono: !p.color }]} src={p.color || p.icon} alt="" width="42" height="42" />
+                <span class="cell-k"><span class="t-body">{p.name}</span><span class="t-sub c-2 blk">{c.off.setting}</span></span>
+                <span class="toggle at-3" style={`--delay: ${i * 0.35}s`} />
               </li>
             ))}
           </ul>
-          <p class="rv-line t-headline crossfade at-3"><span class="appear at-2">{c.reveal.see}</span><span>{c.reveal.own}</span></p>
-          <div class="cell rv-switch">
-            <img class="app mono" src="/providers/openai.svg" alt="" width="42" height="42" />
-            <span class="cell-k"><span class="t-body">ChatGPT</span><span class="t-sub c-2 blk">{c.off.setting}</span></span>
-            <span class="toggle at-4" />
-          </div>
+          <p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.off.note}</p>
         </div>
       )}
     </div>
@@ -206,6 +210,20 @@ const caption = [
   .sec-h.inner { padding: 14px 0 6px; }
   /* Each AI's own memory switch, as it sits in that AI's settings. */
   .switch-card .cell { min-height: 56px; }
+  /* The Get → progress → done capsule: exactly the switch's size, on the same centre line, its symbol centred. */
+  .ttl { display: inline-grid; }
+  .get { flex: none; margin-inline-start: auto; width: 51px; height: 31px; border-radius: 999px; background: var(--fill); color: var(--label); display: grid; place-items: center; }
+  .get .crossfade { place-items: center; }
+  .dl, .tk { display: grid; }
+  .dl :global(svg), .ring, .tk :global(.draw-tick) { width: 18px; height: 18px; display: block; }
+  .group > li.imp + li.cell::before { content: ''; position: absolute; top: 0; right: 0; left: 57px; border-top: 1px solid var(--hairline); }
+  .btile { flex: none; width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
+  .ring { transform: rotate(-90deg); }
+  .ring circle { fill: none; stroke-width: 2.2; }
+  .ring .track { stroke: var(--hairline); }
+  .ring .prog { stroke: currentColor; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 0.75s var(--ease) calc(var(--delay, 0s) + 0.1s); }
+  :global(.s1) .ring .prog { stroke-dashoffset: 0; }
+  .tk :global(path) { stroke-width: 3; }
   .sec-f { padding: 8px 16px 0; display: flex; align-items: center; justify-content: center; gap: 5px; }
   .group { list-style: none; margin: 0; padding: 0; }
   /* A border, not a 1px box: phones always draw it, even on the slightly scaled-down cards. */
@@ -229,19 +247,6 @@ const caption = [
   @media (max-width: 360px) { .from-l { display: none; } }
   .inline-g { display: inline-flex; }
   .inline-g :global(.g) { width: 13px; height: 13px; }
-  /* Scene 6, the reveal. */
-  .rv-who { display: inline-grid; }
-  .rv-id { display: inline-flex; align-items: center; gap: 8px; }
-  .rv-logo { width: 22px; height: 22px; display: block; }
-  .rv-tile { width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
-  .rv-item { min-height: 40px; }
-  .rv-ok { margin-left: auto; color: var(--label); display: grid; }
-  .rv-ok :global(svg) { width: 18px; height: 18px; display: block; }
-  .rv-line { display: grid; padding: 12px 16px 4px; text-wrap: balance; }
-  .rv-line > * { grid-area: 1 / 1; }
-  .rv-switch { margin-top: 8px; border-top: 1px solid var(--hairline); padding-top: 8px; }
-  :root[data-theme='dark'] .sv .rv-logo.mono, :root[data-theme='dark'] .sv .rv-switch .app.mono { filter: invert(1); }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .sv .rv-logo.mono, :root:not([data-theme='light']) .sv .rv-switch .app.mono { filter: invert(1); } }
   /* Scene 1, as fazit.dev's wordmark: while a character scrambles, its letter keeps its place unseen and a glyph flickers
      over it in the monospaced face; then it settles on a dot (scripts/story.ts). */
   .seal { white-space: pre; }

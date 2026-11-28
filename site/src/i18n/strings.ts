@@ -177,13 +177,7 @@ const en = {
       /** One request per AI, in the providers' order (Claude, Gemini, ChatGPT); each gets the same bleib chip. */
       drafts: ['Find a dinner spot in Lisbon.', 'Plan a weekend in Lisbon for me.', 'What should I cook tonight?'],
     },
-    reveal: {
-      theirs: 'ChatGPT remembers',
-      items: ['Lives in Berlin with James', 'Vegetarian', 'Struggles with anxiety', 'Looking for a new job', 'Planning a trip to Lisbon'],
-      see: 'Now you see what ChatGPT owns of yours.',
-      own: 'Now you own it all.',
-    },
-    off: { setting: 'Memory' },
+    off: { setting: 'Memory', note: 'Switched off in each AI’s own settings.', import: 'Import to your bleib', imported: 'Imported to your bleib', from: 'From Claude, Gemini and ChatGPT' },
     propose: {
       app: 'Claude',
       said: 'I’m vegetarian.',
@@ -372,13 +366,7 @@ const de: Strings = {
       added: 'Aus deinem bleib hinzugefügt',
       drafts: ['Such mir ein Restaurant in Lissabon.', 'Plane ein Wochenende in Lissabon für mich.', 'Was soll ich heute Abend kochen?'],
     },
-    reveal: {
-      theirs: 'ChatGPT erinnert sich',
-      items: ['Lebt mit Rieke in Berlin', 'Isst vegetarisch', 'Kämpft mit Angst', 'Sucht einen neuen Job', 'Plant eine Reise nach Lissabon'],
-      see: 'Jetzt siehst du, was ChatGPT von dir besitzt.',
-      own: 'Jetzt gehört dir alles.',
-    },
-    off: { setting: 'Gedächtnis' },
+    off: { setting: 'Gedächtnis', note: 'In den Einstellungen jeder KI ausgeschaltet.', import: 'In dein bleib importieren', imported: 'In dein bleib importiert', from: 'Von Claude, Gemini und ChatGPT' },
     propose: {
       app: 'Claude',
       said: 'Ich esse vegetarisch.',
