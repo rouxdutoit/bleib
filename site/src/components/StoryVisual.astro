@@ -18,14 +18,16 @@ import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang; scene: number; tray?: boolean }
 const { lang, scene, tray = false } = Astro.props;
 const c = t(lang).cards;
-const STEPS = [4, 3, c.any.providers.length - 1, 2, 0, 3];
+const STEPS = [5, 3, c.any.providers.length - 1, 2, 2, 3];
 const INTERVAL = [900, 900, 1700, 900, 900, 1000];
 /** Reading time: before step 1, the card as it first appears; GAPS, what a step reveals (see scripts/story.ts). */
 const START = [900, 1000, 2200, 1500, 1000, 1600];
-const GAPS = ['', ',900', '', '2200', '', ''];
+const GAPS = ['', ',900', '', '1400', '', ''];
 
 import { icon, type IconName } from './icons';
 const svg = (name: string, cls = 'g') => icon(name as IconName, cls);
+/** Scene 1: what each value looks like sealed, before bleib opens it on this device. */
+const CIPHER = ['9f2c·71ab', 'e04d·5a3e', '3b8f·c26d', 'a71e·0d94'];
 const cx = (n: number) => `reveal at-${n}`;
 /** What plays the steps (scripts/story.ts) and holds the finished height (scripts/reserve.js). Scene 2 is a chat window,
  *  so, as in the hero, the window's body plays and holds it, and the message box never moves. */
@@ -37,7 +39,7 @@ const caption = [
   `${c.wallet.title}: ${c.wallet.rows.map((r) => `${r.k}, ${r.v}, ${c.wallet.fromLabel} ${r.from}`).join('; ')}. ${c.wallet.footer}`,
   `${c.propose.app}: “${c.propose.said}” ${c.propose.title}: ${c.propose.fact}.`,
   `${c.any.providers.map((p, i) => `${p.name}: “${c.any.drafts[i]}” ${t(lang).preview.attachment}: ${c.propose.fact}`).join('. ')}. ${c.any.caption}`,
-  `${c.ask.later.title}: ${c.ask.later.sub}, ${c.ask.later.tag}. ${c.ask.title} ${c.ask.message} ${c.ask.allowed}.`,
+  `${c.wallet.title}: ${c.need.rows.map((r) => `${r.k}, ${r.v}`).join('; ')}. ${c.need.draft} ${t(lang).preview.attachment}: ${c.need.rows.filter((r) => r.use).map((r) => r.v).join(', ')}. ${c.need.rows.filter((r) => r.locked).map((r) => r.k).join('')}: ${c.need.asks}.`,
   `${c.receipt.title}, ${c.receipt.time}. ${c.receipt.purpose}. ${c.receipt.shared.map((x) => x.t).join(', ')}. ${c.receipt.notShared}.`,
   `${c.off.imported}, ${c.off.from}. ${names}: ${c.off.setting} off. ${c.off.note}`,
 ][scene];
@@ -47,7 +49,8 @@ const caption = [
     <p class="sr-only">{caption}</p>
     <div class="stack" aria-hidden="true">
       {scene === 0 && (
-        /* One list fills up: each detail arrives from the AI that had it, so "scattered" shows in the rows themselves. */
+        /* One list fills up: each detail arrives from the AI that had it, sealed (it is stored encrypted), then bleib opens
+           it for you on this device, and the padlock in the footer closes. */
         <div class="card list-card import-card">
           <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2 cnt">{[0, 1, 2, 3, 4].map((n) => <span class={`c${n}`}>{n}</span>)}</span></p>
           <ul class="group">
@@ -56,12 +59,12 @@ const caption = [
                 <div class="reveal-in"><div class="cell">
                   <span class="ico ico-2" set:html={svg(r.icon)} />
                   <span class="cell-k"><span class="t-body">{r.k}</span><span class="t-sub c-2 from"><span class="from-l">{c.wallet.fromLabel} </span><ProviderLogo name={r.from} lang={lang} /><span class="from-n">{r.from}</span></span></span>
-                  <span class="t-body c-2 cell-v">{r.locked && <span class="inline-g" set:html={svg('lock')} />}{r.v}</span>
+                  <span class="t-body c-2 cell-v crossfade at-5"><span class="ciph">{CIPHER[i]}</span><span class="plain">{r.locked && <span class="inline-g" set:html={svg('lock')} />}{r.v}</span></span>
                 </div></div>
               </li>
             ))}
           </ul>
-          <p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.wallet.footer}</p>
+          <p class="t-foot c-2 sec-f seal"><span class="inline-g" set:html={svg('lock')} />{c.wallet.footer}</p>
         </div>
       )}
 
@@ -79,7 +82,7 @@ const caption = [
 
       {scene === 2 && (
         /* One memory, every AI: the window's tabs move from Claude to Gemini to ChatGPT; each gets a different request,
-           and the same bleib chip lands in every draft. The row under it lights up each AI it has reached. */
+           and the same bleib chip lands in every draft. The row under it lights the AI that's open. */
         <>
           <Window tabs={c.any.providers.map((p) => ({ ai: p.name, icon: p.color ? p.color.replace('/providers/', '').replace('.svg', '') : 'openai' }))} cycle>
             <div class="xs">
@@ -103,42 +106,43 @@ const caption = [
       )}
 
       {scene === 3 && (
+        /* Only what it needs: your whole memory is there, but for a Lisbon weekend only the seat and the diet light up and go
+           into the draft; work stays put, and health is locked and asks first. */
         <>
-          {/* Everyday things just work, then something sensitive asks first. */}
-          <div class="card note">
-            <div class="note-head">
-              <span class="app app-tall ntile"><Mark size={26} /></span>
-              <div class="note-id"><p class="t-headline">{c.ask.later.title}</p><p class="later-fact"><span class="pill-fact t-foot"><span class="pill-sym" set:html={svg(c.ask.later.icon)} />{c.ask.later.sub}</span><span class="t-foot auto">{c.ask.later.tag}</span></p></div>
-            </div>
+          <div class="card list-card need-card">
+            <p class="head"><span class="t-headline">{c.wallet.title}</span></p>
+            <ul class="group">
+              {c.need.rows.map((r) => (
+                <li class:list={['cell', r.use ? 'use' : r.locked ? 'held' : 'dim-1']}>
+                  <span class="ico" set:html={svg(r.icon)} />
+                  <span class="t-body cell-k">{r.k}</span>
+                  <span class="t-body c-2 cell-v">{r.locked ? <span class="crossfade at-1"><span>{<span class="inline-g" set:html={svg('lock')} />}{r.v}</span><span class="asks">{c.need.asks}</span></span> : r.v}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-          <div class={cx(1)}>
-            <div class="reveal-in">
-              <div class="card alert">
-                <span class="alert-sym" set:html={svg('favorite')} />
-                <p class="t-headline">{c.ask.title}</p>
-                <p class="t-foot msg">{c.ask.message}</p>
-                <div class="pills">
-                  <span class="pill t-body crossfade press pick-at-2 at-2"><span>{c.ask.action}</span><span class="done"><span class="tick"><DrawTick /></span>{c.ask.allowed}</span></span>
-                </div>
-              </div>
-            </div>
+          <div class="card need-draft">
+            <div class={cx(2)}><div class="reveal-in">
+              <div class="att"><span class="att-tile"><Mark size={14} /></span><span class="att-t"><span class="t-foot att-h">{t(lang).preview.attachment}</span><span class="t-foot c-2">{c.need.rows.filter((r) => r.use).map((r) => r.v).join(' · ')}</span></span></div>
+            </div></div>
+            <p class="t-body xdraft">{c.need.draft}</p>
           </div>
         </>
       )}
 
       {scene === 4 && (
-        /* One receipt, like a notification: who and what for, the details shared as pills, and what stayed private.
-           A record of something already done, so it doesn't move. */
+        /* One receipt, like a notification: who and what for, then the details that went, one by one, and last what
+           stayed private: the proof. */
         <div class="card note">
           <div class="note-head">
             <span class="app ntile"><Mark size={22} /></span>
             <div class="note-id"><p class="t-headline">{c.receipt.title}</p><p class="t-sub c-2">{c.receipt.purpose}</p></div>
             <p class="t-foot c-2 time">{c.receipt.time}</p>
           </div>
-          <p class="receipt-facts">{c.receipt.shared.map((x) => (
-            <span class="pill-fact t-foot"><span class="pill-sym" set:html={svg(x.icon)} />{x.t}</span>
+          <p class="receipt-facts">{c.receipt.shared.map((x, i) => (
+            <span class="pill-fact t-foot appear at-1" style={`--delay: ${i * 0.25}s`}><span class="pill-sym" set:html={svg(x.icon)} />{x.t}</span>
           ))}</p>
-          <p class="t-foot c-2 not"><span class="inline-g" set:html={svg('lock')} />{c.receipt.notShared}</p>
+          <p class="t-foot c-2 not appear at-2"><span class="inline-g" set:html={svg('lock')} />{c.receipt.notShared}</p>
         </div>
       )}
 
@@ -251,11 +255,25 @@ const caption = [
   .att-t { display: grid; }
   .att-h { font-weight: 600; color: var(--label); }
   .xdraft { margin: 10px 8px 0 !important; }
+  /* Scene 1: sealed values in a monospaced face, then the readable value in the same place. */
+  .ciph { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; letter-spacing: 0.02em; color: var(--label-3); }
+  .cell-v.crossfade { display: inline-grid; justify-items: end; }
+  .cell-v .plain { display: inline-flex; align-items: center; gap: 4px; }
+  /* Scene 4: the rows a request needs light up in bleib yellow; the rest step back (dim-1); health says it asks first. */
+  .need-card .cell.use .ico { background: #f6e79a; color: #0a0a0a; transition: background-color var(--t-fade) var(--ease); }
+  .need-card .cell.use .ico { background: var(--fill); color: var(--label); }
+  :global(.s1) .need-card .cell.use .ico { background: #f6e79a; color: #0a0a0a; }
+  .asks { color: var(--label); font-weight: 600; }
+  .need-draft { padding: 12px 14px 14px; }
+  .need-draft .att { opacity: 1; transform: none; margin-bottom: 4px; }
   .reach { padding: 14px 16px 12px; }
   .reach-row { display: flex; justify-content: space-around; }
-  .rc { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--label-3); opacity: 0.45; transition: opacity var(--t-fade) var(--ease) 0.45s, color var(--t-fade) var(--ease) 0.45s; }
+  .rc { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--label-3); opacity: 0.45; transition: opacity var(--t-fade) var(--ease) 0.45s, color var(--t-fade) var(--ease) 0.45s, filter var(--t-fade) var(--ease) 0.45s; }
   .rlogo { width: 22px; height: 22px; display: block; }
-  [data-step='0'] .rc-0, .s1 .rc-0, .s1 .rc-1, .s2 .rc-2 { opacity: 1; color: var(--label); }
+  /* Only the AI whose tab is open is lit; the others wait in grey. */
+  [data-step='0'] .rc-0, [data-step='1'] .rc-1, [data-step='2'] .rc-2 { opacity: 1; color: var(--label); }
+  .rc { filter: grayscale(1); }
+  [data-step='0'] .rc-0, [data-step='1'] .rc-1, [data-step='2'] .rc-2 { filter: none; }
   .reach-cap { padding-top: 10px; text-align: center; }
   .tag { padding: 2px 8px; border-radius: 999px; background: #f6e79a; color: #0a0a0a; font-weight: 600; }
 

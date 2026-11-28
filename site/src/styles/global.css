@@ -106,19 +106,9 @@ svg {
 a {
   color: inherit;
 }
-/* Text links: the underline draws in from left to right on hover or focus, and a trailing chevron nudges forward
-   (as on the homepage). The label sits in .lbl so the line runs under the words only. */
-.lbl {
-  background: linear-gradient(currentColor, currentColor) left calc(100% - 1px) / 0 1px no-repeat;
-  padding-bottom: 3px;
-  transition: background-size 0.5s var(--ease);
-}
-a:focus-visible .lbl {
-  background-size: 100% 1px;
-}
-@media (hover: hover) {
-  a:hover .lbl { background-size: 100% 1px; }
-}
+/* Text links (founder, 28 Nov 2026): never underlined. On hover or focus the trailing chevron nudges forward, and
+   keyboard focus gets a ring (a:focus-visible below). The label sits in .lbl. */
+a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
 .chev {
   display: inline-grid;
   transition: transform 0.25s var(--ease);

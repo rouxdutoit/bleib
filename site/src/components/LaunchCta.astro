@@ -59,7 +59,6 @@ const apps = [
      extension works, its logo at text size and centred on the text with "Works with". */
   .works { margin: 20px 0 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; column-gap: 14px; row-gap: 4px; color: var(--muted); }
   .ai { position: relative; display: inline-flex; align-items: center; gap: 5px; color: var(--label); font-weight: 500; text-decoration: none; white-space: nowrap; }
-  .ai:hover .lbl { text-decoration: underline; }
   .ai::after { content: ''; position: absolute; left: -4px; right: -4px; top: calc(50% - 22px); bottom: calc(50% - 22px); }
   .ai .chev { margin-left: -3px; }
   .logo { flex: none; width: 0.95em; height: 0.95em; display: block; }
@@ -71,7 +70,6 @@ const apps = [
   .clogo { flex: none; width: 1.05em; height: 1.05em; display: block; }
   /* Apple's "Learn more ›": Subheadline text with a chevron, quieter than the capsules; the tap area still reaches 44px. */
   .link { display: inline-flex; align-items: center; gap: 1px; margin-top: 8px; min-height: 44px; padding: 0 8px; border: 0; background: none; color: var(--label); font-family: inherit; font-weight: 500; cursor: pointer; }
-  .link:hover .lbl { text-decoration: underline; }
   .chev { display: grid; }
   .chev :global(svg) { width: 1em; height: 1em; display: block; }
 </style>

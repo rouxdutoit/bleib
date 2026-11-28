@@ -154,11 +154,21 @@ const en = {
       allowed: 'Allowed',
       later: { ai: 'Claude', title: 'Added for Claude', sub: 'Aisle seat', icon: 'airline_seat', tag: 'Always on' },
     },
+    need: {
+      rows: [
+        { k: 'Travel', v: 'Aisle seat', icon: 'flight', use: true },
+        { k: 'Food', v: 'Vegetarian', icon: 'eco', use: true },
+        { k: 'Work', v: 'Friday review', icon: 'work' },
+        { k: 'Health', v: 'Private', icon: 'favorite', locked: true },
+      ],
+      asks: 'Asks first',
+      draft: 'Plan a weekend in Lisbon for me.',
+    },
     receipt: {
       title: 'Added for ChatGPT',
       purpose: 'For your Lisbon trip',
       time: '14:32',
-      shared: [{ t: 'Aisle seat', icon: 'airline_seat' }, { t: 'Carry-on only', icon: 'luggage' }],
+      shared: [{ t: 'Aisle seat', icon: 'airline_seat' }, { t: 'Vegetarian', icon: 'eco' }],
       notShared: 'Not shared: Health, People',
     },
     any: {
@@ -339,11 +349,21 @@ const de: Strings = {
       allowed: 'Erlaubt',
       later: { ai: 'Claude', title: 'Für Claude hinzugefügt', sub: 'Gangplatz', icon: 'airline_seat', tag: 'Immer an' },
     },
+    need: {
+      rows: [
+        { k: 'Reisen', v: 'Gangplatz', icon: 'flight', use: true },
+        { k: 'Essen', v: 'Vegetarisch', icon: 'eco', use: true },
+        { k: 'Arbeit', v: 'Freitagsrunde', icon: 'work' },
+        { k: 'Gesundheit', v: 'Privat', icon: 'favorite', locked: true },
+      ],
+      asks: 'Fragt zuerst',
+      draft: 'Plane ein Wochenende in Lissabon für mich.',
+    },
     receipt: {
       title: 'Für ChatGPT hinzugefügt',
       purpose: 'Für deine Lissabon-Reise',
       time: '14:32',
-      shared: [{ t: 'Gangplatz', icon: 'airline_seat' }, { t: 'Nur Handgepäck', icon: 'luggage' }],
+      shared: [{ t: 'Gangplatz', icon: 'airline_seat' }, { t: 'Vegetarisch', icon: 'eco' }],
       notShared: 'Nicht geteilt: Gesundheit, Menschen',
     },
     any: {
