@@ -44,13 +44,13 @@ const scramble = (el: HTMLElement) => {
     if (chars[0].parentElement !== el) return;
     start ||= now;
     const elapsed = now - start;
-    const swap = now - last > 75;
+    const swap = now - last > 42;
     if (swap) last = now;
     let done = 0;
     chars.forEach((ch, i) => {
-      const from = i * 45;
+      const from = i * 18;
       if (ch.classList.contains('ct')) done += 1;
-      else if (elapsed >= from + 700 && ch.dataset.g) {
+      else if (elapsed >= from + 200 && ch.dataset.g) {
         setChar(ch, 'ch ct', cipher[i] ?? '');
         done += 1;
       } else if (elapsed >= from && (swap || !ch.dataset.g)) {

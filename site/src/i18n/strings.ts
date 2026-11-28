@@ -104,7 +104,7 @@ const en = {
     scenes: [
       {
         h: ['Control what AI', 'knows about you.'],
-        p: 'Everything your AIs should know, in one place you hold.',
+        p: 'Everything your AIs should know, in one place you keep.',
         more: { to: 'how', hash: '#memory', label: 'One memory, every AI' },
       },
       {
@@ -179,6 +179,7 @@ const en = {
         { name: 'ChatGPT', icon: '/providers/openai.svg', color: '' },
       ],
       caption: 'Different AI. Same memory.',
+      added: 'Added from your bleib',
       /** One request per AI, in the providers' order (Claude, Gemini, ChatGPT); each gets the same bleib chip. */
       drafts: ['Find a dinner spot in Lisbon.', 'Plan a weekend in Lisbon for me.', 'What should I cook tonight?'],
     },
@@ -299,7 +300,7 @@ const de: Strings = {
     scenes: [
       {
         h: ['Bestimme, was die KI', 'über dich weiß.'],
-        p: 'Alles, was deine KIs wissen sollen, an einem Ort in deiner Hand.',
+        p: 'Alles, was deine KIs wissen sollen, an einem Ort, der bei dir bleibt.',
         more: { to: 'how', hash: '#memory', label: 'Ein Gedächtnis, jede KI' },
       },
       {
@@ -374,6 +375,7 @@ const de: Strings = {
         { name: 'ChatGPT', icon: '/providers/openai.svg', color: '' },
       ],
       caption: 'Andere KI. Dasselbe Gedächtnis.',
+      added: 'Aus deinem bleib hinzugefügt',
       drafts: ['Such mir ein Restaurant in Lissabon.', 'Plane ein Wochenende in Lissabon für mich.', 'Was soll ich heute Abend kochen?'],
     },
     off: { setting: 'Gedächtnis', note: 'In den Einstellungen jeder KI ausgeschaltet.', import: 'In dein bleib importieren', imported: 'In dein bleib importiert', from: 'Von Claude, Gemini und ChatGPT' },

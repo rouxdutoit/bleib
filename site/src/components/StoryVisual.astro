@@ -36,7 +36,7 @@ const names = c.any.providers.map((p) => p.name).join(', ');
 const caption = [
   `${c.wallet.title}: ${c.wallet.rows.map((r) => `${r.k}, ${r.v}, ${c.wallet.fromLabel} ${r.from}`).join('; ')}. ${c.wallet.footer}`,
   `${c.propose.app}: “${c.propose.said}” ${c.propose.title}: ${c.propose.fact}.`,
-  `${c.any.providers.map((p, i) => `${p.name}: “${c.any.drafts[i]}” ${t(lang).preview.attachment}: ${c.propose.fact}`).join('. ')}. ${c.any.caption}`,
+  `“${c.any.drafts[0]}” ${c.any.added}: ${c.propose.fact}. ${names}. ${c.any.caption}`,
   `${c.wallet.title}: ${c.need.rows.map((r) => `${r.k}, ${r.v}`).join('; ')}. ${c.need.draft} ${t(lang).preview.attachment}: ${c.need.rows.filter((r) => r.use).map((r) => r.v).join(', ')}. ${c.need.rows.filter((r) => r.locked).map((r) => r.k).join('')}: ${c.need.asks}.`,
   `${c.receipt.title}, ${c.receipt.time}. ${c.receipt.purpose}. ${c.receipt.shared.map((x) => x.t).join(', ')}. ${c.receipt.notShared}.`,
   `${c.off.imported}, ${c.off.from}. ${names}: ${c.off.setting} off. ${c.off.note}`,
@@ -57,7 +57,7 @@ const caption = [
                 <div class="reveal-in"><div class="cell">
                   <span class="ico ico-2" set:html={svg(r.icon)} />
                   <span class="cell-k"><span class="t-body">{r.k}</span><span class="t-sub c-2 from"><span class="from-l">{c.wallet.fromLabel} </span><ProviderLogo name={r.from} lang={lang} /><span class="from-n">{r.from}</span></span></span>
-                  <span class="t-body c-2 cell-v">{r.locked && <span class="inline-g" set:html={svg('lock')} />}<span class="seal" data-scramble-at="5" data-cipher={'•'.repeat(8)}>{r.v}</span></span>
+                  <span class="t-body c-2 cell-v"><span class="seal" data-scramble-at="5" data-cipher={'•'.repeat(8)}>{r.v}</span></span>
                 </div></div>
               </li>
             ))}
@@ -79,13 +79,13 @@ const caption = [
       )}
 
       {scene === 2 && (
-        /* One memory, every AI, calmly: you type to Claude and bleib's notification lands once; then only the tab moves on,
-           Gemini, then ChatGPT, each request typing in and the AI's name changing in place. */
+        /* One memory, every AI, calmly: you type once and bleib's notification lands once; then only the tab moves on,
+           Gemini, then ChatGPT. Same message, same notification, a different AI. */
         <>
           <Window tabs={c.any.providers.map((p) => ({ ai: p.name, icon: p.color ? p.color.replace('/providers/', '').replace('.svg', '') : 'openai' }))} cycle>
             <div class="xs">
-              <div class="yc appear at-2"><p class="yc-h"><span class="yc-tile"><Mark size={12} /></span><span class="t-foot yc-t xn">{c.any.providers.map((p, i) => <span class={`xi xi-${i}`}>{t(lang).preview.title.replace('{ai}', p.name)}</span>)}</span></p><p class="yc-pills"><span class="ycp t-foot"><span class="ycs" set:html={svg(c.propose.icon)} />{c.propose.fact}</span></p></div>
-              <Composer lines={c.any.drafts.map((d, i) => ({ text: d, at: i === 0 ? 1 : i + 2, on: i === 0 ? [0, 1, 2] : [i + 2] }))} />
+              <div class="yc appear at-2"><p class="yc-h"><span class="yc-tile"><Mark size={12} /></span><span class="t-foot yc-t">{c.any.added}</span></p><p class="yc-pills"><span class="ycp t-foot"><span class="ycs" set:html={svg(c.propose.icon)} />{c.propose.fact}</span></p></div>
+              <Composer typed={c.any.drafts[0]} filled />
             </div>
           </Window>
           <p class="t-foot c-2 reach-cap">{c.any.caption}</p>
