@@ -1,13 +1,12 @@
 ---
 import { INSTALL } from '../config/install';
 import Logo from './Logo.astro';
-import { GITHUB_URL, routes, t, otherLang, type Lang, type RouteKey } from '../i18n/strings';
+import { GITHUB_URL, routes, t, type Lang, type RouteKey } from '../i18n/strings';
 interface Props { lang: Lang; page: RouteKey }
 const { lang, page } = Astro.props;
 const s = t(lang).nav;
 const githubHref = GITHUB_URL || routes.developers[lang];
 // The same page in the other language, as in the footer.
-const other = otherLang(lang);
 // The header's main button exists for launch day only (scripts/launch.ts names the browser's store); until then the
 // nav carries the links.
 const earlyHref = routes.how[lang];
@@ -32,7 +31,6 @@ const links: { key: RouteKey; label: string }[] = [
             <li><a href={routes[l.key][lang]} aria-current={l.key === page ? 'page' : undefined}>{l.label}</a></li>
           ))}
           <li><a href={githubHref}>{s.github}</a></li>
-          <li><a class="lang" href={routes[page][other]} hreflang={other} lang={other} aria-label={s.langSwitchLabel}>{s.langSwitch}</a></li>
         </ul>
         <a class="btn btn-primary cta" href={earlyHref} hidden={!INSTALL.launched} data-install data-add={t(lang).hero.addTo} data-installed={t(lang).hero.installed} data-open={t(lang).launch.open}>{s.early}</a>
       </div>
