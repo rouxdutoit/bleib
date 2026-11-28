@@ -16,52 +16,48 @@ const START = 500;
 const STEP = 900;
 
 const GLYPHS = '-_/\\|<>~^*+=:;!?#%&@0123456789';
-const glyph = () => GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+const CHAR_STEP_MS = 18;
+const GLYPH_SWAP_MS = 42;
+const GLYPH_SETTLE_MS = 200;
+const DOT = '•';
 
-/** Lets a character's space grow or shrink without shifting the rest of the line at once. */
-const setChar = (ch: HTMLElement, className: string, text: string) => {
-  const width = getComputedStyle(ch).width;
-  ch.getAnimations().forEach((animation) => animation.cancel());
-  ch.className = className;
-  ch.textContent = text;
-  const nextWidth = getComputedStyle(ch).width;
-  if (width !== nextWidth) ch.animate({ width: [width, nextWidth] }, { duration: 140, easing: 'ease-out' });
-};
-
-/** Cycles each character of el through glyphs, left to right, until it settles on its data-cipher character. */
+/** fazit.dev's wordmark decode, run the other way: left to right, each character of el flickers through glyphs for
+ *  200ms (a new one every 42ms, 18ms after the one before), then settles on a dot, as the value is stored encrypted.
+ *  Each character's space eases from its letter's width to the dot's, so the line closes up smoothly. */
 const scramble = (el: HTMLElement) => {
-  const text = [...(el.dataset.text ??= el.textContent ?? '')];
-  const cipher = [...(el.dataset.cipher ?? '')];
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const chars = Array.from({ length: reduced ? cipher.length : Math.max(text.length, cipher.length) }, (_, i) =>
-    Object.assign(document.createElement('span'), { className: reduced ? 'ch ct' : 'ch', textContent: (reduced ? cipher : text)[i] ?? '' }),
-  );
-  el.replaceChildren(...chars);
-  if (reduced || !chars.length) return;
-  let start = 0;
-  let last = 0;
-  const frame = (now: number) => {
-    if (chars[0].parentElement !== el) return;
-    start ||= now;
-    const elapsed = now - start;
-    const swap = now - last > 42;
-    if (swap) last = now;
-    let done = 0;
-    chars.forEach((ch, i) => {
-      const from = i * 18;
-      if (ch.classList.contains('ct')) done += 1;
-      else if (elapsed >= from + 200 && ch.dataset.g) {
-        setChar(ch, 'ch ct', cipher[i] ?? '');
-        done += 1;
-      } else if (elapsed >= from && (swap || !ch.dataset.g)) {
-        if (i < text.length) ch.classList.add('sg');
-        else if (!ch.dataset.g) setChar(ch, 'ch sg', cipher[i] ?? '');
-        ch.dataset.g = glyph();
-      }
-    });
-    if (done < chars.length) requestAnimationFrame(frame);
-  };
-  requestAnimationFrame(frame);
+  const text = (el.dataset.text ??= el.textContent ?? '');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = DOT.repeat([...text].length); return; }
+  requestAnimationFrame((start) => {
+    const chars = [...text].map((char) => Object.assign(document.createElement('span'), { className: 'ch', textContent: char }));
+    el.replaceChildren(...chars);
+    let lastSwap = 0;
+    const frame = (now: number) => {
+      if (chars[0]?.parentElement !== el) return;
+      const elapsed = now - start;
+      const swap = now - lastSwap > GLYPH_SWAP_MS;
+      if (swap) lastSwap = now;
+      let done = 0;
+      chars.forEach((span, index) => {
+        const from = index * CHAR_STEP_MS;
+        if (elapsed >= from + GLYPH_SETTLE_MS) {
+          if (span.textContent !== DOT) {
+            const width = span.getBoundingClientRect().width;
+            span.className = 'ch';
+            span.textContent = DOT;
+            const next = span.getBoundingClientRect().width;
+            span.animate({ width: [`${width}px`, `${next}px`] }, { duration: 140, easing: 'ease-out' });
+          }
+          done += 1;
+        } else if (elapsed >= from && (swap || !span.classList.contains('sg'))) {
+          span.className = 'ch sg';
+          span.dataset.g = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+        }
+      });
+      if (done < chars.length) requestAnimationFrame(frame);
+      else window.setTimeout(() => { if (chars[0]?.parentElement === el) el.textContent = DOT.repeat(chars.length); }, 160);
+    };
+    frame(start);
+  });
 };
 
 const setStep = (sv: HTMLElement, n: number) => {
@@ -69,8 +65,8 @@ const setStep = (sv: HTMLElement, n: number) => {
   for (let k = 1; k <= 6; k++) sv.classList.toggle(`s${k}`, k <= n);
   sv.querySelectorAll<HTMLElement>('[data-scramble-at]').forEach((el) => {
     if (Number(el.dataset.scrambleAt) <= n) {
-      if (!el.querySelector('.ch')) scramble(el);
-    } else if (el.dataset.text !== undefined) el.textContent = el.dataset.text;
+      if (el.dataset.sealed !== 'true') { el.dataset.sealed = 'true'; scramble(el); }
+    } else if (el.dataset.text !== undefined) { el.dataset.sealed = 'false'; el.textContent = el.dataset.text; }
   });
 };
 

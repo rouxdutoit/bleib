@@ -57,12 +57,12 @@ const caption = [
                 <div class="reveal-in"><div class="cell">
                   <span class="ico ico-2" set:html={svg(r.icon)} />
                   <span class="cell-k"><span class="t-body">{r.k}</span><span class="t-sub c-2 from"><span class="from-l">{c.wallet.fromLabel} </span><ProviderLogo name={r.from} lang={lang} /><span class="from-n">{r.from}</span></span></span>
-                  <span class="t-body c-2 cell-v"><span class="seal" data-scramble-at="5" data-cipher={'•'.repeat(8)}>{r.v}</span></span>
+                  <span class="t-body c-2 cell-v"><span class="seal" data-scramble-at="5">{r.v}</span></span>
                 </div></div>
               </li>
             ))}
           </ul>
-          <p class="t-foot c-2 sec-f seal"><span class="inline-g" set:html={svg('lock')} />{c.wallet.footer}</p>
+          <p class="t-foot c-2 sec-f"><span class="inline-g" set:html={svg('lock')} />{c.wallet.footer}</p>
         </div>
       )}
 
@@ -231,6 +231,12 @@ const caption = [
   @media (max-width: 360px) { .from-l { display: none; } }
   .inline-g { display: inline-flex; }
   .inline-g :global(.g) { width: 13px; height: 13px; }
+  /* Scene 1, as fazit.dev's wordmark: while a character scrambles, its letter keeps its place unseen and a glyph flickers
+     over it in the monospaced face; then it settles on a dot (scripts/story.ts). */
+  .seal { white-space: pre; }
+  .seal :global(.ch) { position: relative; display: inline-block; text-align: center; }
+  .seal :global(.ch.sg) { visibility: hidden; }
+  .seal :global(.ch.sg::after) { position: absolute; inset-block-start: 0; inset-inline-start: 50%; transform: translateX(-50%); visibility: visible; color: var(--label-2); font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-weight: 400; line-height: normal; letter-spacing: 0; content: attr(data-g); }
   /* bleib's own notification, as in the hero: yellow in both themes, black tile, each detail a white pill. */
   .yc { margin-bottom: 8px; padding: 10px 10px 10px 12px; border-radius: 14px; background: #f6e79a; color: #0a0a0a; display: grid; gap: 8px; }
   .yc-h { display: flex; align-items: center; gap: 8px; }
