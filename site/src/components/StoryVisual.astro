@@ -119,7 +119,7 @@ const caption = [
                 <li class:list={['cell', r.use ? 'use' : r.locked ? 'held' : 'dim-2']}>
                   <span class="ico" set:html={svg(r.icon)} />
                   <span class="t-body cell-k">{r.k}</span>
-                  <span class="t-body c-2 cell-v">{r.locked ? <span class="crossfade at-2"><span>{<span class="inline-g" set:html={svg('lock')} />}{r.v}</span><span class="asks">{c.need.asks}</span></span> : r.v}</span>
+                  <span class="t-body c-2 cell-v">{r.locked ? <span class="crossfade at-2"><span class="lockv"><span class="inline-g" set:html={svg('lock')} />{r.v}</span><span class="asks">{c.need.asks}</span></span> : r.v}</span>
                 </li>
               ))}
             </ul>
@@ -266,6 +266,7 @@ const caption = [
   .need-card .cell.use .ico { background: var(--fill); color: var(--label); transition: background-color var(--t-fade) var(--ease), color var(--t-fade) var(--ease); }
   :global(.s2) .need-card .cell.use .ico { background: #f6e79a; color: #0a0a0a; }
   .asks { color: var(--label); font-weight: 600; }
+  .lockv { display: inline-flex; align-items: center; gap: 4px; justify-self: end; }
   .need-draft { padding: 12px 14px 14px; }
   .used { padding: 8px 16px 0; }
   /* The provider's name crossfades in step with the strip. */
