@@ -29,10 +29,10 @@ const en = {
     /** What a shared link shows (the homepage): the hero's promise, not the category. */
     share: {
       title: 'bleib: Own your AI memory.',
-      description: 'Encrypted on your device. You choose what’s shared. Switch their memory off. A free browser extension, in development for Chrome, Edge and Firefox.',
+      description: 'Encrypted on your device. Shared only as needed. Switch their memory off. A free browser extension, in development for Chrome, Edge and Firefox.',
     },
     description:
-      'Own your AI memory. Encrypted on your device, and you choose what’s shared. bleib is your AI memory wallet: a browser extension, in development for Chrome, Edge and Firefox, that keeps your memory encrypted on your device. Bring in what ChatGPT, Claude and Gemini know about you, then switch their memory off. You decide what each AI gets, and every share leaves a receipt. Free and open source.',
+      'Own your AI memory. Encrypted on your device, shared only as needed. bleib is your AI memory wallet: a browser extension, in development for Chrome, Edge and Firefox, that keeps your memory encrypted on your device. Bring in what ChatGPT, Claude and Gemini know about you, then switch their memory off. You decide what each AI gets, and every share leaves a receipt. Free and open source.',
   },
   skip: 'Skip to content',
   nav: {
@@ -56,7 +56,7 @@ const en = {
     eyebrowLaunch: 'Free · Open source · Private',
     status: 'In development',
     h1: 'Own your AI memory.',
-    sub: ['Encrypted on your device.', 'You choose what’s shared.'],
+    sub: ['Encrypted on your device.', 'Shared only as needed.'],
     primary: 'How it works',
     secondary: 'GitHub',
     addTo: 'Add to {browser}',
@@ -226,10 +226,10 @@ const de: Strings = {
     title: 'bleib: dein Wallet für dein KI-Gedächtnis',
     share: {
       title: 'bleib: Dein KI-Gedächtnis gehört dir.',
-      description: 'Verschlüsselt auf deinem Gerät. Du entscheidest, was geteilt wird. Schalte ihr Gedächtnis aus. Eine kostenlose Browser-Erweiterung, in Entwicklung für Chrome, Edge und Firefox.',
+      description: 'Verschlüsselt auf deinem Gerät. Geteilt wird nur, was nötig ist. Schalte ihr Gedächtnis aus. Eine kostenlose Browser-Erweiterung, in Entwicklung für Chrome, Edge und Firefox.',
     },
     description:
-      'Dein KI-Gedächtnis gehört dir. Verschlüsselt auf deinem Gerät, und du entscheidest, was geteilt wird. bleib ist dein Wallet für dein KI-Gedächtnis: eine Browser-Erweiterung, in Entwicklung für Chrome, Edge und Firefox, die dein Gedächtnis verschlüsselt auf deinem Gerät bewahrt. Hol dir, was ChatGPT, Claude und Gemini über dich wissen, dann schalte ihr Gedächtnis aus. Du entscheidest, was jede KI bekommt, und jede Weitergabe hinterlässt einen Beleg. Kostenlos und Open Source.',
+      'Dein KI-Gedächtnis gehört dir. Verschlüsselt auf deinem Gerät, geteilt wird nur, was nötig ist. bleib ist dein Wallet für dein KI-Gedächtnis: eine Browser-Erweiterung, in Entwicklung für Chrome, Edge und Firefox, die dein Gedächtnis verschlüsselt auf deinem Gerät bewahrt. Hol dir, was ChatGPT, Claude und Gemini über dich wissen, dann schalte ihr Gedächtnis aus. Du entscheidest, was jede KI bekommt, und jede Weitergabe hinterlässt einen Beleg. Kostenlos und Open Source.',
   },
   skip: 'Zum Inhalt springen',
   nav: {
@@ -252,7 +252,7 @@ const de: Strings = {
     eyebrowLaunch: 'Kostenlos · Open Source · Privat',
     status: 'In Entwicklung',
     h1: 'Dein KI-Gedächtnis gehört dir.',
-    sub: ['Verschlüsselt auf deinem Gerät.', 'Du entscheidest, was geteilt wird.'],
+    sub: ['Verschlüsselt auf deinem Gerät.', 'Geteilt wird nur, was nötig ist.'],
     primary: 'So funktioniert’s',
     secondary: 'GitHub',
     addTo: 'Zu {browser} hinzufügen',
