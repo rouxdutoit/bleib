@@ -53,8 +53,6 @@ export async function initLaunch(): Promise<void> {
     root.querySelectorAll<HTMLButtonElement>('[data-share]').forEach((b) => b.addEventListener('click', () => void share(root)));
   }
 
-  // "On your phone too." further down, only with connectors.
-  document.querySelectorAll<HTMLElement>('[data-phone-too]').forEach((el) => { el.hidden = !connectors; });
   // Pricing: the plans replace "Coming" once the paid plan exists, which is when the connectors do.
   document.querySelectorAll<HTMLElement>('[data-when="paid"]').forEach((el) => { el.hidden = !connectors; });
   document.querySelectorAll<HTMLElement>('[data-when="before"]').forEach((el) => { el.hidden = connectors; });

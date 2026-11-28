@@ -2,7 +2,6 @@
 /** The story: one scene per idea, then the privacy scene in its own black section. */
 import StoryScene from './StoryScene.astro';
 import Rails from './Rails.astro';
-import PhoneToo from './PhoneToo.astro';
 import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -13,8 +12,6 @@ const all = s.scenes.map((x, i) => ({ i, dark: 'dark' in x }));
   <Rails />
   {all.filter((x) => !x.dark).map((x) => <StoryScene lang={lang} i={x.i} />)}
 </section>
-{/* Launch day with connectors only: bleib on your phone, before the closing black scene. */}
-<PhoneToo lang={lang} />
 {all.filter((x) => x.dark).map((x) => (
   <section class="story story-dark has-rails"><Rails /><StoryScene lang={lang} i={x.i} /></section>
 ))}

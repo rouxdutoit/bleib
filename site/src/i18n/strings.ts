@@ -72,12 +72,6 @@ const en = {
     copied: 'Link copied',
     shareText: 'bleib: Own your AI memory.',
   },
-  phone: {
-    h: 'On your phone too.',
-    sub: 'Use bleib inside ChatGPT and Claude.',
-    note: 'Free for one AI app.',
-    more: 'See pricing',
-  },
   preview: {
     examples: 'Examples',
     ask: 'Add to your message?',
@@ -114,7 +108,7 @@ const en = {
       },
       {
         h: ['Switch anytime.', 'Keep your choices.'],
-        p: 'Tell bleib once. Every AI knows.',
+        p: 'Tell bleib once. Take it wherever you go.',
         more: { to: 'works', hash: '', label: 'Works with your AI' },
       },
       {
@@ -268,12 +262,6 @@ const de: Strings = {
     copied: 'Link kopiert',
     shareText: 'bleib: Dein KI-Gedächtnis gehört dir.',
   },
-  phone: {
-    h: 'Auch auf deinem Handy.',
-    sub: 'Nutze bleib direkt in ChatGPT und Claude.',
-    note: 'Kostenlos für eine KI-App.',
-    more: 'Zu den Preisen',
-  },
   preview: {
     examples: 'Beispiele',
     ask: 'Zum Entwurf hinzufügen?',
@@ -310,7 +298,7 @@ const de: Strings = {
       },
       {
         h: ['Jederzeit wechseln.', 'Behalte deine Vorlieben.'],
-        p: 'Sag es bleib einmal. Jede KI weiß es.',
+        p: 'Sag es bleib einmal. Nimm es überall mit.',
         more: { to: 'works', hash: '', label: 'Funktioniert mit deiner KI' },
       },
       {
