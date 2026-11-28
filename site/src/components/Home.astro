@@ -3,7 +3,6 @@ import Base from '../layouts/Base.astro';
 import Hero from './Hero.astro';
 import Story from './Story.astro';
 import Finale from './Finale.astro';
-import PhoneToo from './PhoneToo.astro';
 import type { Lang } from '../i18n/strings';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -11,6 +10,5 @@ const { lang } = Astro.props;
 <Base lang={lang} page="home">
   <Hero lang={lang} />
   <Story lang={lang} />
-  <PhoneToo lang={lang} />
   <Finale lang={lang} />
 </Base>

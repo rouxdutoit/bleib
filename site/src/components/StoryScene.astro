@@ -54,16 +54,16 @@ const [symbol, effect] = SYMBOLS[i];
 
 <style>
   /* Calm, like a printed spread: each scene stays put; only the card inside it changes. */
-  .scene { position: relative; z-index: 1; min-height: min(88vh, 860px); display: flex; align-items: center; padding: clamp(40px, 6vw, 72px) 0; }
+  .scene { position: relative; z-index: 1; min-height: min(78vh, 760px); display: flex; align-items: center; padding: clamp(40px, 6vw, 72px) 0; }
   .pair {
-    width: min(calc(min(420px, 34vw) + clamp(48px, 6vw, 104px) + min(500px, 44vw)), var(--colw));
+    width: min(calc(min(440px, 36vw) + clamp(48px, 6vw, 104px) + min(540px, 46vw)), var(--colw));
     margin: 0 auto;
     display: grid;
-    grid-template-columns: min(500px, 44vw) min(420px, 34vw);
+    grid-template-columns: min(540px, 46vw) min(440px, 36vw);
     justify-content: space-between;
     align-items: center;
   }
-  .scene[data-side='card-right'] .pair { grid-template-columns: min(420px, 34vw) min(500px, 44vw); }
+  .scene[data-side='card-right'] .pair { grid-template-columns: min(440px, 36vw) min(540px, 46vw); }
   .scene[data-side='card-right'] .visual { order: 2; }
   /* --scene-ink and --scene-muted let a section recolour its scenes (the black privacy section). */
   .text { color: var(--scene-ink, inherit); }

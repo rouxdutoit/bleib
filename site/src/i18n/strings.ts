@@ -104,7 +104,7 @@ const en = {
     scenes: [
       {
         h: ['Control what AI', 'knows about you.'],
-        p: 'Your memory is scattered across AIs. Bring it into your bleib.',
+        p: 'Everything your AIs should know, in one place you hold.',
         more: { to: 'how', hash: '#memory', label: 'One memory, every AI' },
       },
       {
@@ -114,7 +114,7 @@ const en = {
       },
       {
         h: ['Switch anytime.', 'Keep your choices.'],
-        p: 'Plan Lisbon in ChatGPT. Ask Claude for a packing list.',
+        p: 'Tell bleib once. Every AI knows.',
         more: { to: 'works', hash: '', label: 'Works with your AI' },
       },
       {
@@ -169,6 +169,8 @@ const en = {
         { name: 'ChatGPT', icon: '/providers/openai.svg', color: '' },
       ],
       caption: 'Different AI. Same memory.',
+      /** One request per AI, in the providers' order (Claude, Gemini, ChatGPT); each gets the same bleib chip. */
+      drafts: ['Find a dinner spot in Lisbon.', 'Plan a weekend in Lisbon for me.', 'What should I cook tonight?'],
     },
     off: { setting: 'Memory', note: 'Switched off in each AI’s own settings.', import: 'Import to your bleib', imported: 'Imported to your bleib', from: 'From Claude, Gemini and ChatGPT' },
     propose: {
@@ -287,7 +289,7 @@ const de: Strings = {
     scenes: [
       {
         h: ['Bestimme, was die KI', 'über dich weiß.'],
-        p: 'Dein Gedächtnis ist über KIs verstreut. Hol es in dein bleib.',
+        p: 'Alles, was deine KIs wissen sollen, an einem Ort in deiner Hand.',
         more: { to: 'how', hash: '#memory', label: 'Ein Gedächtnis, jede KI' },
       },
       {
@@ -297,7 +299,7 @@ const de: Strings = {
       },
       {
         h: ['Jederzeit wechseln.', 'Behalte deine Vorlieben.'],
-        p: 'Plane Lissabon mit ChatGPT. Lass dir von Claude die Packliste schreiben.',
+        p: 'Sag es bleib einmal. Jede KI weiß es.',
         more: { to: 'works', hash: '', label: 'Funktioniert mit deiner KI' },
       },
       {
@@ -352,6 +354,7 @@ const de: Strings = {
         { name: 'ChatGPT', icon: '/providers/openai.svg', color: '' },
       ],
       caption: 'Andere KI. Dasselbe Gedächtnis.',
+      drafts: ['Such mir ein Restaurant in Lissabon.', 'Plane ein Wochenende in Lissabon für mich.', 'Was soll ich heute Abend kochen?'],
     },
     off: { setting: 'Gedächtnis', note: 'In den Einstellungen jeder KI ausgeschaltet.', import: 'In dein bleib importieren', imported: 'In dein bleib importiert', from: 'Von Claude, Gemini und ChatGPT' },
     propose: {

@@ -5,8 +5,9 @@
  * the tabs are buttons that switch panels (Hero.astro does the switching); otherwise it's one open tab.
  * The window's contents go in the slot.
  */
-interface Props { tabs: { ai: string; icon: string }[]; tablist?: string; id?: string }
-const { tabs, tablist, id = 'tab' } = Astro.props;
+/** `cycle`: a picture whose open tab follows the story's steps (data-step 0, 1, 2 on an ancestor). */
+interface Props { tabs: { ai: string; icon: string }[]; tablist?: string; id?: string; cycle?: boolean }
+const { tabs, tablist, id = 'tab', cycle = false } = Astro.props;
 ---
 <div class="window">
   <div class="bar" aria-hidden={tablist ? undefined : 'true'}>
@@ -21,7 +22,7 @@ const { tabs, tablist, id = 'tab' } = Astro.props;
             {fav}<span class="tab-t">{x.ai}</span>
           </button>
         ) : (
-          <span class="tab t-foot on">{fav}<span class="tab-t">{x.ai}</span></span>
+          <span class:list={['tab t-foot', cycle ? `cyc cyc-${i}` : 'on']}>{fav}<span class="tab-t">{x.ai}</span></span>
         );
       })}
     </div>
@@ -44,6 +45,8 @@ const { tabs, tablist, id = 'tab' } = Astro.props;
   /* A window with one open tab sizes it to its name, so it never cuts "Claude" short on a narrow phone. */
   .tab.on:only-child { flex: 0 0 auto; padding: 0 12px; }
   .tab.on { background: var(--cell); box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 2px rgb(0 0 0 / 0.08); }
+  .tab.cyc { transition: background-color var(--t-fade) var(--ease), box-shadow var(--t-fade) var(--ease), color var(--t-fade) var(--ease); }
+  :global([data-step='0']) .cyc-0, :global([data-step='1']) .cyc-1, :global([data-step='2']) .cyc-2 { background: var(--cell); box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 2px rgb(0 0 0 / 0.08); color: var(--label); }
   .tab.on, .tab[aria-selected='true'] { color: var(--label); cursor: default; }
   .tab[aria-selected='true']::before, .tab[aria-selected='true'] + .tab::before { opacity: 0; }
   @media (hover: hover) {
@@ -68,6 +71,16 @@ const { tabs, tablist, id = 'tab' } = Astro.props;
     .bar:has([role='tablist']) .lights i { width: 8px; height: 8px; }
     .tabs[role='tablist'] .tab { gap: 4px; padding: 0 3px; }
   }
+  /* The story's three-tab window gets the same room-making on phones; only its open tab keeps an icon. */
+  @media (max-width: 480px) {
+    .bar:has(.cyc) { padding: 0 7px 0 10px; gap: 8px; }
+    .bar:has(.cyc) .lights { gap: 5px; }
+    .bar:has(.cyc) .lights i { width: 8px; height: 8px; }
+    .tab.cyc { gap: 4px; padding: 0 3px; }
+    .tab.cyc .fav { display: none; }
+    :global([data-step='0']) .cyc-0 .fav, :global([data-step='1']) .cyc-1 .fav, :global([data-step='2']) .cyc-2 .fav { display: block; }
+  }
+  @media (max-width: 400px) { :global([data-step]) .tab.cyc .fav { display: none; } }
   /* The narrowest phones: only the open tab keeps its icon, so every name fits in full. */
   @media (max-width: 360px) {
     .tabs[role='tablist'] .tab[aria-selected='false'] .fav { display: none; }

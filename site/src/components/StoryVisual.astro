@@ -19,7 +19,7 @@ interface Props { lang: Lang; scene: number; tray?: boolean }
 const { lang, scene, tray = false } = Astro.props;
 const c = t(lang).cards;
 const STEPS = [4, 3, c.any.providers.length - 1, 2, 0, 3];
-const INTERVAL = [900, 900, 1250, 900, 900, 1000];
+const INTERVAL = [900, 900, 1700, 900, 900, 1000];
 /** Reading time: before step 1, the card as it first appears; GAPS, what a step reveals (see scripts/story.ts). */
 const START = [900, 1000, 2200, 1500, 1000, 1600];
 const GAPS = ['', ',900', '', '2200', '', ''];
@@ -36,7 +36,7 @@ const names = c.any.providers.map((p) => p.name).join(', ');
 const caption = [
   `${c.wallet.title}: ${c.wallet.rows.map((r) => `${r.k}, ${r.v}, ${c.wallet.fromLabel} ${r.from}`).join('; ')}. ${c.wallet.footer}`,
   `${c.propose.app}: “${c.propose.said}” ${c.propose.title}: ${c.propose.fact}.`,
-  `${c.wallet.title}: ${c.wallet.rows.slice(0, 3).map((r) => `${r.k}, ${r.v}`).join('; ')}. ${c.any.usedBy} ${names}. ${c.any.caption}`,
+  `${c.any.providers.map((p, i) => `${p.name}: “${c.any.drafts[i]}” ${t(lang).preview.attachment}: ${c.propose.fact}`).join('. ')}. ${c.any.caption}`,
   `${c.ask.later.title}: ${c.ask.later.sub}, ${c.ask.later.tag}. ${c.ask.title} ${c.ask.message} ${c.ask.allowed}.`,
   `${c.receipt.title}, ${c.receipt.time}. ${c.receipt.purpose}. ${c.receipt.shared.map((x) => x.t).join(', ')}. ${c.receipt.notShared}.`,
   `${c.off.imported}, ${c.off.from}. ${names}: ${c.off.setting} off. ${c.off.note}`,
@@ -78,31 +78,26 @@ const caption = [
       )}
 
       {scene === 2 && (
+        /* One memory, every AI: the window's tabs move from Claude to Gemini to ChatGPT; each gets a different request,
+           and the same bleib chip lands in every draft. The row under it lights up each AI it has reached. */
         <>
-          <div class="card list-card">
-            <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2">3</span></p>
-            <ul class="group">
-              {c.wallet.rows.slice(0, 3).map((r) => (
-                <li class="cell"><span class="ico" set:html={svg(r.icon)} /><span class="t-body cell-k">{r.k}</span><span class="t-body c-2 cell-v">{r.v}</span></li>
+          <Window tabs={c.any.providers.map((p) => ({ ai: p.name, icon: p.color ? p.color.replace('/providers/', '').replace('.svg', '') : 'openai' }))} cycle>
+            <div class="xs">
+              {c.any.providers.map((_, i) => (
+                <div class={`xp xp-${i}`}>
+                  <div class="xbox">
+                    <div class="att"><span class="att-tile"><Mark size={14} /></span><span class="att-t"><span class="t-foot att-h">{t(lang).preview.attachment}</span><span class="t-foot c-2">{c.propose.fact}</span></span></div>
+                    <p class="t-body xdraft">{c.any.drafts[i]}</p>
+                  </div>
+                </div>
               ))}
-            </ul>
-            <p class="t-foot c-2 used">{c.any.usedBy} <span class="swap">{c.any.providers.map((p, i) => <span class={`u${i}`}><ProviderLogo name={p.name} lang={lang} size={12} /> {p.name}</span>)}</span></p>
-          </div>
-          <div class="card strip">
-            <div class="pwin">
-              <div class="ptrack">
-                {c.any.providers.map((p, i) => (
-                  <span class={`pi pi-${i}`}>
-                    <span class="picon">
-                      <img class="pm" src={p.icon} alt="" width="28" height="28" draggable="false" />
-                      {p.color && <img class="pc" src={p.color} alt="" width="28" height="28" draggable="false" />}
-                    </span>
-                    <span class="t-foot pname">{p.name}</span>
-                  </span>
-                ))}
-              </div>
             </div>
-            <p class="t-foot c-2 strip-cap">{c.any.caption}</p>
+          </Window>
+          <div class="card reach">
+            <p class="reach-row">{c.any.providers.map((p, i) => (
+              <span class={`rc rc-${i}`}><img class:list={['rlogo', { mono: !p.color }]} src={p.color || p.icon} alt="" width="22" height="22" /><span class="t-foot">{p.name}</span></span>
+            ))}</p>
+            <p class="t-foot c-2 reach-cap">{c.any.caption}</p>
           </div>
         </>
       )}
@@ -245,27 +240,23 @@ const caption = [
   @media (max-width: 360px) { .from-l { display: none; } }
   .inline-g { display: inline-flex; }
   .inline-g :global(.g) { width: 13px; height: 13px; }
-  .used { padding: 8px 16px 0; }
-  /* The provider's name crossfades in step with the strip. */
-  .swap { display: inline-grid; }
-  .swap span { grid-area: 1 / 1; opacity: 0; color: var(--label); font-weight: 600; transition: opacity var(--t-fade) var(--ease); }
-  [data-step='0'] .swap .u0, [data-step='1'] .swap .u1, [data-step='2'] .swap .u2 { opacity: 1; }
-
-  /* Provider strip: models step past; the wallet above never moves. */
-  .strip { padding: 14px 0 12px; }
-  .pwin { width: 330px; max-width: 100%; margin: 0 auto; overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, #000 26%, #000 74%, transparent); mask-image: linear-gradient(to right, transparent, #000 26%, #000 74%, transparent); }
-  .ptrack { display: flex; width: max-content; position: relative; left: calc(50% - 55px); transform: translateX(calc(var(--i, 0) * -110px)); transition: transform var(--t-open) var(--ease); }
-  [data-step='1'] .ptrack { --i: 1; } [data-step='2'] .ptrack { --i: 2; }
-  .pi { flex: 0 0 110px; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 64px; justify-content: center; }
-  .picon { position: relative; width: 28px; height: 28px; }
-  .picon img { position: absolute; inset: 0; width: 28px; height: 28px; object-fit: contain; transition: opacity var(--t-fade) var(--ease); }
-  .pm { opacity: 0.25; }
-  .pc { opacity: 0; }
-  .pname { color: var(--label-3); transition: color var(--t-fade) var(--ease); }
-  [data-step='0'] .pi-0 .pc, [data-step='1'] .pi-1 .pc, [data-step='2'] .pi-2 .pm { opacity: 1; }
-  [data-step='0'] .pi-0 .pm, [data-step='1'] .pi-1 .pm { opacity: 0; }
-  [data-step='0'] .pi-0 .pname, [data-step='1'] .pi-1 .pname, [data-step='2'] .pi-2 .pname { color: var(--label); font-weight: 600; }
-  .strip-cap { padding: 6px 16px 0; text-align: center; }
+  /* Scene 3: one draft per AI, in one place, each shown in turn; the chip lands a beat after its tab opens. */
+  .xs { display: grid; padding: 14px; }
+  .xp { grid-area: 1 / 1; opacity: 0; transition: opacity var(--t-fade) var(--ease); }
+  [data-step='0'] .xp-0, [data-step='1'] .xp-1, [data-step='2'] .xp-2 { opacity: 1; }
+  .xbox { border-radius: 22px; box-shadow: inset 0 0 0 1px var(--hairline); padding: 8px 8px 12px; }
+  .att { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px 8px 8px; border-radius: 14px; background: var(--fill); opacity: 0; transform: translateY(-6px) scale(0.98); transition: opacity var(--t-fade) var(--ease) 0.45s, transform var(--t-open) var(--spring) 0.45s; }
+  [data-step='0'] .xp-0 .att, [data-step='1'] .xp-1 .att, [data-step='2'] .xp-2 .att { opacity: 1; transform: none; }
+  .att-tile { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; flex: none; }
+  .att-t { display: grid; }
+  .att-h { font-weight: 600; color: var(--label); }
+  .xdraft { margin: 10px 8px 0 !important; }
+  .reach { padding: 14px 16px 12px; }
+  .reach-row { display: flex; justify-content: space-around; }
+  .rc { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--label-3); opacity: 0.45; transition: opacity var(--t-fade) var(--ease) 0.45s, color var(--t-fade) var(--ease) 0.45s; }
+  .rlogo { width: 22px; height: 22px; display: block; }
+  [data-step='0'] .rc-0, .s1 .rc-0, .s1 .rc-1, .s2 .rc-2 { opacity: 1; color: var(--label); }
+  .reach-cap { padding-top: 10px; text-align: center; }
   .tag { padding: 2px 8px; border-radius: 999px; background: #f6e79a; color: #0a0a0a; font-weight: 600; }
 
   /* Scene 1: each row says which AI the detail came from, under its kind. */
@@ -331,8 +322,8 @@ const caption = [
 </style>
 <style is:global>
   /* A one-colour logo (ChatGPT's) is black; on the dark theme's grey tiles it turns white, as the brand does on dark. */
-  :root[data-theme='dark'] .sv .app.mono { filter: invert(1); }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .sv .app.mono { filter: invert(1); } }
+  :root[data-theme='dark'] .sv .app.mono, :root[data-theme='dark'] .sv .rlogo.mono { filter: invert(1); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .sv .app.mono, :root:not([data-theme='light']) .sv .rlogo.mono { filter: invert(1); } }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme='light']) .sv .pm { filter: invert(1); }
   }
