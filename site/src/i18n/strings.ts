@@ -99,7 +99,7 @@ const en = {
       {
         h: ['Control what AI', 'knows about you.'],
         p: 'Everything your AIs are allowed to know, in one place you keep.',
-        more: { to: 'how', hash: '#memory', label: 'One memory, every AI' },
+        more: { to: 'how', hash: '#memory', label: 'How it works' },
       },
       {
         h: ['You chat.', 'bleib takes notes.'],
@@ -289,7 +289,7 @@ const de: Strings = {
       {
         h: ['Bestimme, was die KI', 'über dich weiß.'],
         p: 'Alles, was deine KIs wissen dürfen, an einem Ort, der bei dir bleibt.',
-        more: { to: 'how', hash: '#memory', label: 'Ein Gedächtnis, jede KI' },
+        more: { to: 'how', hash: '#memory', label: 'So funktioniert’s' },
       },
       {
         h: ['Du chattest.', 'bleib merkt es sich.'],
