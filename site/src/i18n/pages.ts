@@ -952,12 +952,12 @@ const de: Docs = {
         when: 'before',
         h: 'Unsere Versprechen',
         blocks: [
-          { p: 'Für den Bezahltarif versprechen wir:' },
+          { p: 'Wenn der Bezahltarif kommt, versprechen wir:' },
           { never: [
-            'Die Erweiterung bleibt kostenlos, für immer.',
-            'Vor jeder Preisänderung sagen wir dir 60 Tage vorher Bescheid.',
-            'Du bekommst 14 Tage zum Testen, ohne Karte.',
-            'Wenn du nicht mehr zahlst, funktioniert dein Export weiter.',
+            'Die Erweiterung wird kostenlos bleiben, für immer.',
+            'Vor jeder Preisänderung werden wir dir 60 Tage vorher Bescheid sagen.',
+            'Du wirst 14 Tage ohne Karte testen können.',
+            'Wenn du nicht mehr zahlst, wird dein Export weiter funktionieren.',
           ] },
         ],
       },
