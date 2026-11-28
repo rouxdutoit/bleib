@@ -88,10 +88,8 @@ const caption = [
             <div class="xs">
               {c.any.providers.map((_, i) => (
                 <div class={`xp xp-${i}`}>
-                  <div class="xbox">
-                    <div class="att"><span class="att-tile"><Mark size={14} /></span><span class="att-t"><span class="t-foot att-h">{t(lang).preview.attachment}</span><span class="t-foot c-2">{c.propose.fact}</span></span></div>
-                    <p class="t-body xdraft">{c.any.drafts[i]}</p>
-                  </div>
+                  <div class="yc att"><p class="yc-h"><span class="yc-tile"><Mark size={12} /></span><span class="t-foot yc-t">{t(lang).preview.title.replace('{ai}', c.any.providers[i].name)}</span></p><p class="yc-pills"><span class="ycp t-foot"><span class="ycs" set:html={svg(c.propose.icon)} />{c.propose.fact}</span></p></div>
+                  <div class="xbox"><p class="t-body xdraft">{c.any.drafts[i]}</p></div>
                 </div>
               ))}
             </div>
@@ -123,7 +121,7 @@ const caption = [
           </div>
           <div class="card need-draft">
             <div class={cx(2)}><div class="reveal-in">
-              <div class="att"><span class="att-tile"><Mark size={14} /></span><span class="att-t"><span class="t-foot att-h">{t(lang).preview.attachment}</span><span class="t-foot c-2">{c.need.rows.filter((r) => r.use).map((r) => r.v).join(' · ')}</span></span></div>
+              <div class="yc"><p class="yc-h"><span class="yc-tile"><Mark size={12} /></span><span class="t-foot yc-t">{t(lang).preview.title.replace('{ai}', 'ChatGPT')}</span></p><p class="yc-pills">{c.need.rows.filter((r) => r.use).map((r) => <span class="ycp t-foot"><span class="ycs" set:html={svg(r.icon === 'flight' ? 'airline_seat' : r.icon)} />{r.v}</span>)}</p></div>
             </div></div>
             <p class="t-body xdraft">{c.need.draft}</p>
           </div>
@@ -248,9 +246,19 @@ const caption = [
   .xs { display: grid; padding: 14px; }
   .xp { grid-area: 1 / 1; opacity: 0; transition: opacity var(--t-fade) var(--ease); }
   [data-step='0'] .xp-0, [data-step='1'] .xp-1, [data-step='2'] .xp-2 { opacity: 1; }
-  .xbox { border-radius: 22px; box-shadow: inset 0 0 0 1px var(--hairline); padding: 8px 8px 12px; }
+  .xbox { border-radius: 22px; box-shadow: inset 0 0 0 1px var(--hairline); padding: 4px 8px 12px; }
   .att { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px 8px 8px; border-radius: 14px; background: var(--fill); opacity: 0; transform: translateY(-6px) scale(0.98); transition: opacity var(--t-fade) var(--ease) 0.45s, transform var(--t-open) var(--spring) 0.45s; }
   [data-step='0'] .xp-0 .att, [data-step='1'] .xp-1 .att, [data-step='2'] .xp-2 .att { opacity: 1; transform: none; }
+  /* bleib's own notification, as in the hero: yellow in both themes, black tile, each detail a white pill. */
+  .yc { margin-bottom: 8px; padding: 10px 10px 10px 12px; border-radius: 14px; background: #f6e79a; color: #0a0a0a; display: grid; gap: 8px; }
+  .yc-h { display: flex; align-items: center; gap: 8px; }
+  .yc-tile { flex: none; width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; }
+  .yc-t { color: rgba(10, 10, 10, .72); }
+  .yc-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ycp { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px 4px 8px; border-radius: 999px; background: rgba(255, 255, 255, .85); color: #0a0a0a; font-weight: 500; white-space: nowrap; }
+  .ycs { display: grid; color: rgba(10, 10, 10, .62); }
+  .ycs :global(svg) { width: 14px; height: 14px; display: block; }
+  .yc.att { display: grid; padding: 10px 10px 10px 12px; background: #f6e79a; border-radius: 14px; }
   .att-tile { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; background: #0a0a0a; color: #f6e79a; flex: none; }
   .att-t { display: grid; }
   .att-h { font-weight: 600; color: var(--label); }
