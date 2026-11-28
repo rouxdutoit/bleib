@@ -123,7 +123,7 @@ const en = {
       },
       {
         h: ['Import your memories.', 'Switch theirs off.'],
-        p: 'Your bleib keeps yours. With you wherever you go.',
+        p: 'Your bleib keeps yours. Finally, you own your AI memory.',
         more: { to: 'how', hash: '#off', label: 'How to switch it off' },
         dark: true,
       },
@@ -313,7 +313,7 @@ const de: Strings = {
       },
       {
         h: ['Importiere deine Erinnerungen.', 'Schalte ihres aus.'],
-        p: 'Dein bleib behält sie. Bei dir, wohin du auch gehst.',
+        p: 'Dein bleib behält sie. Endlich gehört dein KI-Gedächtnis dir.',
         more: { to: 'how', hash: '#off', label: 'So schaltest du es aus' },
         dark: true,
       },
