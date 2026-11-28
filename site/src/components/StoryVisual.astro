@@ -18,11 +18,11 @@ import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang; scene: number; tray?: boolean }
 const { lang, scene, tray = false } = Astro.props;
 const c = t(lang).cards;
-const STEPS = [5, 3, 4, 3, 0, 3];
-const INTERVAL = [900, 900, 2400, 900, 900, 1000];
+const STEPS = [5, 3, c.any.providers.length - 1, 3, 0, 3];
+const INTERVAL = [900, 900, 1250, 900, 900, 1000];
 /** Reading time: before step 1, the card as it first appears; GAPS, what a step reveals (see scripts/story.ts). */
-const START = [900, 1000, 1400, 1500, 1000, 1600];
-const GAPS = [',,,1800', ',900', '900,1400', '900,1400', '', ''];
+const START = [900, 1000, 2200, 1500, 1000, 1600];
+const GAPS = [',,,1800', ',900', '', '900,1400', '', ''];
 
 import { icon, type IconName } from './icons';
 const svg = (name: string, cls = 'g') => icon(name as IconName, cls);
@@ -36,7 +36,7 @@ const names = c.any.providers.map((p) => p.name).join(', ');
 const caption = [
   `${c.wallet.title}: ${c.wallet.rows.map((r) => `${r.k}, ${r.v}, ${c.wallet.fromLabel} ${r.from}`).join('; ')}. ${c.wallet.footer}`,
   `${c.propose.app}: “${c.propose.said}” ${c.propose.title}: ${c.propose.fact}.`,
-  `“${c.any.drafts[0]}” ${c.any.added}: ${c.propose.fact}. ${names}. ${c.any.caption}`,
+  `${c.wallet.title}: ${c.wallet.rows.slice(0, 3).map((r) => `${r.k}, ${r.v}`).join('; ')}. ${c.any.usedBy} ${names}. ${c.any.caption}`,
   `${c.wallet.title}: ${c.need.rows.map((r) => `${r.k}, ${r.v}`).join('; ')}. ${c.need.draft} ${t(lang).preview.attachment}: ${c.need.rows.filter((r) => r.use).map((r) => r.v).join(', ')}. ${c.need.rows.filter((r) => r.locked).map((r) => r.k).join('')}: ${c.need.asks}.`,
   `${c.receipt.title}, ${c.receipt.time}. ${c.receipt.purpose}. ${c.receipt.shared.map((x) => x.t).join(', ')}. ${c.receipt.notShared}.`,
   `${c.off.imported}, ${c.off.from}. ${names}: ${c.off.setting} off. ${c.off.note}`,
@@ -79,16 +79,32 @@ const caption = [
       )}
 
       {scene === 2 && (
-        /* One memory, every AI, calmly: you type once and bleib's notification lands once; then only the tab moves on,
-           Gemini, then ChatGPT. Same message, same notification, a different AI. */
         <>
-          <Window tabs={c.any.providers.map((p) => ({ ai: p.name, icon: p.color ? p.color.replace('/providers/', '').replace('.svg', '') : 'openai' }))} cycle>
-            <div class="xs">
-              <div class="yc appear at-2"><p class="yc-h"><span class="yc-tile"><Mark size={12} /></span><span class="t-foot yc-t">{c.any.added}</span></p><p class="yc-pills"><span class="ycp t-foot"><span class="ycs" set:html={svg(c.propose.icon)} />{c.propose.fact}</span></p></div>
-              <Composer typed={c.any.drafts[0]} filled />
+          <div class="card list-card">
+            <p class="head"><span class="t-headline">{c.wallet.title}</span><span class="t-sub c-2">3</span></p>
+            <ul class="group">
+              {c.wallet.rows.slice(0, 3).map((r) => (
+                <li class="cell"><span class="ico" set:html={svg(r.icon)} /><span class="t-body cell-k">{r.k}</span><span class="t-body c-2 cell-v">{r.v}</span></li>
+              ))}
+            </ul>
+            <p class="t-foot c-2 used">{c.any.usedBy} <span class="swap">{c.any.providers.map((p, i) => <span class={`u${i}`}><ProviderLogo name={p.name} lang={lang} size={12} /> {p.name}</span>)}</span></p>
+          </div>
+          <div class="card strip">
+            <div class="pwin">
+              <div class="ptrack">
+                {c.any.providers.map((p, i) => (
+                  <span class={`pi pi-${i}`}>
+                    <span class="picon">
+                      <img class="pm" src={p.icon} alt="" width="28" height="28" draggable="false" />
+                      {p.color && <img class="pc" src={p.color} alt="" width="28" height="28" draggable="false" />}
+                    </span>
+                    <span class="t-foot pname">{p.name}</span>
+                  </span>
+                ))}
+              </div>
             </div>
-          </Window>
-          <p class="t-foot c-2 reach-cap">{c.any.caption}</p>
+            <p class="t-foot c-2 strip-cap">{c.any.caption}</p>
+          </div>
         </>
       )}
 
@@ -251,14 +267,27 @@ const caption = [
   :global(.s2) .need-card .cell.use .ico { background: #f6e79a; color: #0a0a0a; }
   .asks { color: var(--label); font-weight: 600; }
   .need-draft { padding: 12px 14px 14px; }
-  /* Scene 3: the notification lands at step 1; the open AI's name and request swap in place at steps 2 and 3. */
-  .xs { display: grid; padding: 14px; }
-  .xn { display: grid; }
-  .xi { grid-area: 1 / 1; opacity: 0; transition: opacity 0.6s var(--ease); }
-  [data-step='0'] .xi-0, [data-step='1'] .xi-0, [data-step='2'] .xi-0, [data-step='3'] .xi-1, [data-step='4'] .xi-2 { opacity: 1; }
-  .xbox { border-radius: 22px; box-shadow: inset 0 0 0 1px var(--hairline); padding: 4px 8px 12px; }
-  .xdraft { margin: 10px 8px 0 !important; }
-  .reach-cap { padding-top: 12px; text-align: center; }
+  .used { padding: 8px 16px 0; }
+  /* The provider's name crossfades in step with the strip. */
+  .swap { display: inline-grid; }
+  .swap span { grid-area: 1 / 1; opacity: 0; color: var(--label); font-weight: 600; transition: opacity var(--t-fade) var(--ease); }
+  [data-step='0'] .swap .u0, [data-step='1'] .swap .u1, [data-step='2'] .swap .u2 { opacity: 1; }
+
+  /* Provider strip: models step past; the wallet above never moves. */
+  .strip { padding: 14px 0 12px; }
+  .pwin { width: 330px; max-width: 100%; margin: 0 auto; overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, #000 26%, #000 74%, transparent); mask-image: linear-gradient(to right, transparent, #000 26%, #000 74%, transparent); }
+  .ptrack { display: flex; width: max-content; position: relative; left: calc(50% - 55px); transform: translateX(calc(var(--i, 0) * -110px)); transition: transform var(--t-open) var(--ease); }
+  [data-step='1'] .ptrack { --i: 1; } [data-step='2'] .ptrack { --i: 2; }
+  .pi { flex: 0 0 110px; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 64px; justify-content: center; }
+  .picon { position: relative; width: 28px; height: 28px; }
+  .picon img { position: absolute; inset: 0; width: 28px; height: 28px; object-fit: contain; transition: opacity var(--t-fade) var(--ease); }
+  .pm { opacity: 0.25; }
+  .pc { opacity: 0; }
+  .pname { color: var(--label-3); transition: color var(--t-fade) var(--ease); }
+  [data-step='0'] .pi-0 .pc, [data-step='1'] .pi-1 .pc, [data-step='2'] .pi-2 .pm { opacity: 1; }
+  [data-step='0'] .pi-0 .pm, [data-step='1'] .pi-1 .pm { opacity: 0; }
+  [data-step='0'] .pi-0 .pname, [data-step='1'] .pi-1 .pname, [data-step='2'] .pi-2 .pname { color: var(--label); font-weight: 600; }
+  .strip-cap { padding: 6px 16px 0; text-align: center; }
   .tag { padding: 2px 8px; border-radius: 999px; background: #f6e79a; color: #0a0a0a; font-weight: 600; }
 
   /* Scene 1: each row says which AI the detail came from, under its kind. */
