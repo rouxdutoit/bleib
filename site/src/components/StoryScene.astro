@@ -56,18 +56,18 @@ const [symbol, effect] = SYMBOLS[i];
   /* Calm, like a printed spread: each scene stays put; only the card inside it changes. */
   .scene { position: relative; z-index: 1; min-height: min(78vh, 760px); display: flex; align-items: center; padding: clamp(40px, 6vw, 72px) 0; }
   .pair {
-    width: min(calc(980px + clamp(48px, 6vw, 104px)), var(--colw));
+    width: min(calc(840px + clamp(48px, 6vw, 104px)), var(--colw));
     margin: 0 auto;
     display: grid;
-    /* The card takes up to 540px; the text column is only as wide as its words (up to 420px), so the two sit at one
+    /* The card takes up to 420px; the text column is only as wide as its words (up to 420px), so the two sit at one
        distance whichever side the card is on. */
-    grid-template-columns: minmax(340px, 540px) fit-content(420px);
+    grid-template-columns: minmax(320px, 420px) fit-content(420px);
     /* A real gap, so the card and the text never touch, however narrow the window; the columns shrink instead. */
     column-gap: clamp(40px, 5vw, 80px);
     justify-content: center;
     align-items: center;
   }
-  .scene[data-side='card-right'] .pair { grid-template-columns: fit-content(420px) minmax(340px, 540px); }
+  .scene[data-side='card-right'] .pair { grid-template-columns: fit-content(420px) minmax(320px, 420px); }
   /* Tablets: the card takes what the text leaves, and the text (up to 45%) still hugs its words. */
   @media (min-width: 768px) and (max-width: 1023px) {
     .pair { grid-template-columns: minmax(0, 1fr) fit-content(45%); }

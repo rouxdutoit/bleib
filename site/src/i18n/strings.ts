@@ -87,7 +87,7 @@ const en = {
     tabs: [
       {
         ai: 'Gemini', icon: 'gemini-color', typed: 'Plan a weekend in Lisbon for me.',
-        facts: [{ t: 'Aisle seat', icon: 'airline_seat' }, { t: 'Vegetarian', icon: 'eco' }],
+        facts: [{ t: 'Aisle seat', icon: 'airline_seat' }, { t: 'Carry-on only', icon: 'luggage' }],
       },
       {
         ai: 'Claude', icon: 'claude-color', typed: 'Write a cover letter for this job.',
@@ -157,7 +157,7 @@ const en = {
     need: {
       rows: [
         { k: 'Travel', v: 'Aisle seat', icon: 'flight', use: true },
-        { k: 'Food', v: 'Vegetarian', icon: 'eco', use: true },
+        { k: 'Luggage', v: 'Carry-on only', icon: 'luggage', use: true },
         { k: 'Work', v: 'Friday review', icon: 'work' },
         { k: 'Health', v: 'Private', icon: 'favorite', locked: true },
       ],
@@ -168,7 +168,7 @@ const en = {
       title: 'Added for ChatGPT',
       purpose: 'For your Lisbon trip',
       time: '14:32',
-      shared: [{ t: 'Aisle seat', icon: 'airline_seat' }, { t: 'Vegetarian', icon: 'eco' }],
+      shared: [{ t: 'Aisle seat', icon: 'airline_seat' }, { t: 'Carry-on only', icon: 'luggage' }],
       notShared: 'Not shared: Health, People',
     },
     any: {
@@ -352,7 +352,7 @@ const de: Strings = {
     need: {
       rows: [
         { k: 'Reisen', v: 'Gangplatz', icon: 'flight', use: true },
-        { k: 'Essen', v: 'Vegetarisch', icon: 'eco', use: true },
+        { k: 'Gepäck', v: 'Nur Handgepäck', icon: 'luggage', use: true },
         { k: 'Arbeit', v: 'Freitagsrunde', icon: 'work' },
         { k: 'Gesundheit', v: 'Privat', icon: 'favorite', locked: true },
       ],
@@ -363,7 +363,7 @@ const de: Strings = {
       title: 'Für ChatGPT hinzugefügt',
       purpose: 'Für deine Lissabon-Reise',
       time: '14:32',
-      shared: [{ t: 'Gangplatz', icon: 'airline_seat' }, { t: 'Vegetarisch', icon: 'eco' }],
+      shared: [{ t: 'Gangplatz', icon: 'airline_seat' }, { t: 'Nur Handgepäck', icon: 'luggage' }],
       notShared: 'Nicht geteilt: Gesundheit, Menschen',
     },
     any: {

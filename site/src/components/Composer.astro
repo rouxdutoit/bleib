@@ -7,18 +7,26 @@
  * finished state is what shows without JavaScript); the script clears it before it plays.
  */
 import { icon } from './icons';
-interface Props { typed: string; sentAt?: 2; filled?: boolean }
-const { typed, sentAt, filled = false } = Astro.props;
+/** `lines`: several requests in one box, one per tab (the story's three-AI window). Each is typed at its step `at` and
+ *  shows while the story's step is in `on`. */
+interface Props { typed?: string; sentAt?: 2; filled?: boolean; lines?: { text: string; at: number; on: number[] }[] }
+const { typed = '', sentAt, filled = false, lines } = Astro.props;
 ---
 <div class="composer" data-sent-at={sentAt}>
   <slot />
-  <p class="t-body input"><span class="field"><span class="typed" data-type={typed}>{filled && typed}</span><span class="caret"></span></span><span class:list={['send', sentAt && ['press', `at-${sentAt}`]]} set:html={icon('arrow_upward')} /></p>
+  <p class="t-body input">{lines
+    ? <span class="field lines">{lines.map((l) => <span class="typed" data-type={l.text} data-type-at={l.at} data-on={l.on.join(' ')}>{l.text}</span>)}</span>
+    : <span class="field"><span class="typed" data-type={typed}>{filled && typed}</span><span class="caret"></span></span>}<span class:list={['send', sentAt && ['press', `at-${sentAt}`]]} set:html={icon('arrow_upward')} /></p>
 </div>
 
 <style>
   .composer { border-radius: 22px; box-shadow: inset 0 0 0 1px var(--hairline); }
   .input { margin: 0; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 8px 8px 16px; }
   .field { flex: 1; min-width: 0; }
+  .lines { display: grid; }
+  .lines .typed { grid-area: 1 / 1; opacity: 0; transition: opacity 0.3s var(--ease); }
+  :global([data-step='0']) .lines .typed[data-on~='0'], :global([data-step='1']) .lines .typed[data-on~='1'], :global([data-step='2']) .lines .typed[data-on~='2'],
+  :global([data-step='3']) .lines .typed[data-on~='3'], :global([data-step='4']) .lines .typed[data-on~='4'], :global([data-step='5']) .lines .typed[data-on~='5'] { opacity: 1; }
   .caret { display: inline-block; width: 2px; height: 1.15em; margin-left: 1px; vertical-align: -0.2em; border-radius: 1px; background: var(--label); opacity: 0; }
   /* The caret shows only while the message is typed, so the finished box never looks like it is waiting for you. */
   :global(.s1:not(.s2)) .caret { opacity: 1; animation: caret 1.06s steps(1, end) infinite; }

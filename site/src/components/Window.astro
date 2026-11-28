@@ -5,7 +5,7 @@
  * the tabs are buttons that switch panels (Hero.astro does the switching); otherwise it's one open tab.
  * The window's contents go in the slot.
  */
-/** `cycle`: a picture whose open tab follows the story's steps (data-step 0, 1, 2 on an ancestor). */
+/** `cycle`: a picture whose open tab follows the story's steps: tab 1 at steps 0–2, tab 2 at step 3, tab 3 at step 4. */
 interface Props { tabs: { ai: string; icon: string }[]; tablist?: string; id?: string; cycle?: boolean }
 const { tabs, tablist, id = 'tab', cycle = false } = Astro.props;
 ---
@@ -45,8 +45,8 @@ const { tabs, tablist, id = 'tab', cycle = false } = Astro.props;
   /* A window with one open tab sizes it to its name, so it never cuts "Claude" short on a narrow phone. */
   .tab.on:only-child { flex: 0 0 auto; padding: 0 12px; }
   .tab.on { background: var(--cell); box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 2px rgb(0 0 0 / 0.08); }
-  .tab.cyc { transition: background-color var(--t-fade) var(--ease), box-shadow var(--t-fade) var(--ease), color var(--t-fade) var(--ease); }
-  :global([data-step='0']) .cyc-0, :global([data-step='1']) .cyc-1, :global([data-step='2']) .cyc-2 { background: var(--cell); box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 2px rgb(0 0 0 / 0.08); color: var(--label); }
+  .tab.cyc { transition: background-color 0.6s var(--ease), box-shadow 0.6s var(--ease), color 0.6s var(--ease); }
+  :global([data-step='0']) .cyc-0, :global([data-step='1']) .cyc-0, :global([data-step='2']) .cyc-0, :global([data-step='3']) .cyc-1, :global([data-step='4']) .cyc-2 { background: var(--cell); box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 2px rgb(0 0 0 / 0.08); color: var(--label); }
   .tab.on, .tab[aria-selected='true'] { color: var(--label); cursor: default; }
   .tab[aria-selected='true']::before, .tab[aria-selected='true'] + .tab::before { opacity: 0; }
   @media (hover: hover) {
@@ -78,7 +78,7 @@ const { tabs, tablist, id = 'tab', cycle = false } = Astro.props;
     .bar:has(.cyc) .lights i { width: 8px; height: 8px; }
     .tab.cyc { gap: 4px; padding: 0 3px; }
     .tab.cyc .fav { display: none; }
-    :global([data-step='0']) .cyc-0 .fav, :global([data-step='1']) .cyc-1 .fav, :global([data-step='2']) .cyc-2 .fav { display: block; }
+    :global([data-step='0']) .cyc-0 .fav, :global([data-step='1']) .cyc-0 .fav, :global([data-step='2']) .cyc-0 .fav, :global([data-step='3']) .cyc-1 .fav, :global([data-step='4']) .cyc-2 .fav { display: block; }
   }
   @media (max-width: 400px) { :global([data-step]) .tab.cyc .fav { display: none; } }
   /* The narrowest phones: only the open tab keeps its icon, so every name fits in full. */
