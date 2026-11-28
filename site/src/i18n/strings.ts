@@ -103,7 +103,7 @@ const en = {
       },
       {
         h: ['You chat.', 'bleib takes notes.'],
-        p: 'Mention you’re vegetarian. It’s saved to your bleib.',
+        p: 'Mention you like short answers. It’s saved to your bleib.',
         more: { to: 'how', hash: '#proposals', label: 'Saves as you go' },
       },
       {
@@ -133,9 +133,9 @@ const en = {
     wallet: {
       title: 'Your bleib',
       rows: [
-        { k: 'People', v: 'James, Berlin', icon: 'person', from: 'ChatGPT' },
-        { k: 'Travel', v: 'Aisle seat', icon: 'flight', from: 'Gemini' },
-        { k: 'Work', v: 'Friday review', icon: 'work', from: 'Claude' },
+        { k: 'Family', v: 'Two kids, 4 and 7', icon: 'family_restroom', from: 'ChatGPT' },
+        { k: 'Fitness', v: 'Training for a 10k', icon: 'directions_run', from: 'Gemini' },
+        { k: 'Work', v: 'Product designer', icon: 'work', from: 'Claude' },
         { k: 'Health', v: 'Private', icon: 'favorite', locked: true, from: 'ChatGPT' },
       ],
       fromLabel: 'From',
@@ -150,20 +150,20 @@ const en = {
     },
     need: {
       rows: [
-        { k: 'Travel', v: 'Aisle seat', icon: 'flight', use: true },
-        { k: 'Luggage', v: 'Carry-on only', icon: 'luggage', use: true },
-        { k: 'Work', v: 'Friday review', icon: 'work' },
+        { k: 'Fitness', v: 'Training for a 10k', icon: 'directions_run', use: true },
+        { k: 'Time', v: 'Free before 8am', icon: 'schedule', use: true },
+        { k: 'Work', v: 'Product designer', icon: 'work' },
         { k: 'Health', v: 'Private', icon: 'favorite', locked: true },
       ],
       asks: 'Asks first',
-      draft: 'Plan a weekend in Lisbon for me.',
+      draft: 'Make me a training plan for my 10k.',
     },
     receipt: {
       title: 'Added for ChatGPT',
-      purpose: 'For your Lisbon trip',
-      time: '14:32',
-      shared: [{ t: 'Aisle seat', icon: 'airline_seat' }, { t: 'Carry-on only', icon: 'luggage' }],
-      notShared: 'Not shared: Health, People',
+      purpose: 'For your training plan',
+      time: '07:12',
+      shared: [{ t: 'Training for a 10k', icon: 'directions_run' }, { t: 'Free before 8am', icon: 'schedule' }],
+      notShared: 'Not shared: Health, Family',
     },
     any: {
       usedBy: 'Now used by',
@@ -180,10 +180,10 @@ const en = {
     off: { setting: 'Memory', note: 'Switched off in each AI’s own settings.', import: 'Import to your bleib', imported: 'Imported to your bleib', from: 'From Claude, Gemini and ChatGPT' },
     propose: {
       app: 'Claude',
-      said: 'I’m vegetarian.',
+      said: 'I prefer short answers.',
       title: 'Saved to bleib',
-      fact: 'Vegetarian',
-      icon: 'eco',
+      fact: 'Short answers',
+      icon: 'short_text',
     },
   },
   finale: {
@@ -293,7 +293,7 @@ const de: Strings = {
       },
       {
         h: ['Du chattest.', 'bleib merkt es sich.'],
-        p: 'Erwähn, dass du vegetarisch isst. Es wird in deinem bleib gespeichert.',
+        p: 'Erwähn, dass du kurze Antworten magst. Es wird in deinem bleib gespeichert.',
         more: { to: 'how', hash: '#proposals', label: 'Speichert nebenbei' },
       },
       {
@@ -323,9 +323,9 @@ const de: Strings = {
     wallet: {
       title: 'Dein bleib',
       rows: [
-        { k: 'Menschen', v: 'Rieke, Berlin', icon: 'person', from: 'ChatGPT' },
-        { k: 'Reisen', v: 'Gangplatz', icon: 'flight', from: 'Gemini' },
-        { k: 'Arbeit', v: 'Freitagsrunde', icon: 'work', from: 'Claude' },
+        { k: 'Familie', v: 'Zwei Kinder', icon: 'family_restroom', from: 'ChatGPT' },
+        { k: 'Fitness', v: 'Trainiert für 10 km', icon: 'directions_run', from: 'Gemini' },
+        { k: 'Arbeit', v: 'Produktdesign', icon: 'work', from: 'Claude' },
         { k: 'Gesundheit', v: 'Privat', icon: 'favorite', locked: true, from: 'ChatGPT' },
       ],
       fromLabel: 'Von',
@@ -340,20 +340,20 @@ const de: Strings = {
     },
     need: {
       rows: [
-        { k: 'Reisen', v: 'Gangplatz', icon: 'flight', use: true },
-        { k: 'Gepäck', v: 'Nur Handgepäck', icon: 'luggage', use: true },
-        { k: 'Arbeit', v: 'Freitagsrunde', icon: 'work' },
+        { k: 'Fitness', v: 'Trainiert für 10 km', icon: 'directions_run', use: true },
+        { k: 'Zeit', v: 'Frei vor 8 Uhr', icon: 'schedule', use: true },
+        { k: 'Arbeit', v: 'Produktdesign', icon: 'work' },
         { k: 'Gesundheit', v: 'Privat', icon: 'favorite', locked: true },
       ],
       asks: 'Fragt zuerst',
-      draft: 'Plane ein Wochenende in Lissabon für mich.',
+      draft: 'Mach mir einen Trainingsplan für meine 10 km.',
     },
     receipt: {
       title: 'Für ChatGPT hinzugefügt',
-      purpose: 'Für deine Lissabon-Reise',
-      time: '14:32',
-      shared: [{ t: 'Gangplatz', icon: 'airline_seat' }, { t: 'Nur Handgepäck', icon: 'luggage' }],
-      notShared: 'Nicht geteilt: Gesundheit, Menschen',
+      purpose: 'Für deinen Trainingsplan',
+      time: '07:12',
+      shared: [{ t: 'Trainiert für 10 km', icon: 'directions_run' }, { t: 'Frei vor 8 Uhr', icon: 'schedule' }],
+      notShared: 'Nicht geteilt: Gesundheit, Familie',
     },
     any: {
       usedBy: 'Gerade genutzt von',
@@ -369,10 +369,10 @@ const de: Strings = {
     off: { setting: 'Gedächtnis', note: 'In den Einstellungen jeder KI ausgeschaltet.', import: 'In dein bleib importieren', imported: 'In dein bleib importiert', from: 'Von Claude, Gemini und ChatGPT' },
     propose: {
       app: 'Claude',
-      said: 'Ich esse vegetarisch.',
+      said: 'Ich mag kurze Antworten.',
       title: 'In bleib gespeichert',
-      fact: 'Vegetarisch',
-      icon: 'eco',
+      fact: 'Kurze Antworten',
+      icon: 'short_text',
     },
   },
   finale: {

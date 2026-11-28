@@ -33,6 +33,10 @@ import restaurant from '@material-symbols/svg-400/rounded/restaurant-fill.svg?ra
 import luggage from '@material-symbols/svg-400/rounded/luggage-fill.svg?raw';
 import contentCopy from '@material-symbols/svg-400/rounded/content_copy.svg?raw';
 import download from '@material-symbols/svg-400/rounded/download.svg?raw';
+import familyRestroom from '@material-symbols/svg-400/rounded/family_restroom-fill.svg?raw';
+import directionsRun from '@material-symbols/svg-400/rounded/directions_run-fill.svg?raw';
+import schedule from '@material-symbols/svg-400/rounded/schedule-fill.svg?raw';
+import shortText from '@material-symbols/svg-400/rounded/short_text.svg?raw';
 
 const raw = {
   person,
@@ -56,6 +60,10 @@ const raw = {
   arrow_upward: arrowUpward,
   sync,
   download,
+  family_restroom: familyRestroom,
+  directions_run: directionsRun,
+  schedule,
+  short_text: shortText,
   airline_seat: airlineSeat,
   eco,
   location_on: locationOn,
