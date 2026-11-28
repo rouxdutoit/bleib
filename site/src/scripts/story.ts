@@ -23,10 +23,12 @@ const DOT = '•';
 
 /** fazit.dev's wordmark decode, run the other way: left to right, each character of el flickers through glyphs for
  *  200ms (a new one every 42ms, 18ms after the one before), then settles on a dot, as the value is stored encrypted.
+ *  With data-dots every value ends on the same number of dots (the rest close up), so none gives away its length.
  *  Each character's space eases from its letter's width to the dot's, so the line closes up smoothly. */
 const scramble = (el: HTMLElement) => {
   const text = (el.dataset.text ??= el.textContent ?? '');
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = DOT.repeat([...text].length); return; }
+  const dots = Number(el.dataset.dots ?? [...text].length);
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = DOT.repeat(dots); return; }
   requestAnimationFrame((start) => {
     const chars = [...text].map((char) => Object.assign(document.createElement('span'), { className: 'ch', textContent: char }));
     el.replaceChildren(...chars);
@@ -40,10 +42,11 @@ const scramble = (el: HTMLElement) => {
       chars.forEach((span, index) => {
         const from = index * CHAR_STEP_MS;
         if (elapsed >= from + GLYPH_SETTLE_MS) {
-          if (span.textContent !== DOT) {
+          const settled = index < dots ? DOT : '';
+          if (span.className !== 'ch done') {
             const width = span.getBoundingClientRect().width;
-            span.className = 'ch';
-            span.textContent = DOT;
+            span.className = 'ch done';
+            span.textContent = settled;
             const next = span.getBoundingClientRect().width;
             span.animate({ width: [`${width}px`, `${next}px`] }, { duration: 140, easing: 'ease-out' });
           }
@@ -54,7 +57,7 @@ const scramble = (el: HTMLElement) => {
         }
       });
       if (done < chars.length) requestAnimationFrame(frame);
-      else window.setTimeout(() => { if (chars[0]?.parentElement === el) el.textContent = DOT.repeat(chars.length); }, 160);
+      else window.setTimeout(() => { if (chars[0]?.parentElement === el) el.textContent = DOT.repeat(dots); }, 160);
     };
     frame(start);
   });

@@ -18,7 +18,7 @@ import { t, type Lang } from '../i18n/strings';
 interface Props { lang: Lang; scene: number; tray?: boolean }
 const { lang, scene, tray = false } = Astro.props;
 const c = t(lang).cards;
-const STEPS = [5, 3, 4, 3, 2, 3];
+const STEPS = [5, 3, 4, 3, 0, 3];
 const INTERVAL = [900, 900, 2400, 900, 900, 1000];
 /** Reading time: before step 1, the card as it first appears; GAPS, what a step reveals (see scripts/story.ts). */
 const START = [900, 1000, 1400, 1500, 1000, 1600];
@@ -57,7 +57,7 @@ const caption = [
                 <div class="reveal-in"><div class="cell">
                   <span class="ico ico-2" set:html={svg(r.icon)} />
                   <span class="cell-k"><span class="t-body">{r.k}</span><span class="t-sub c-2 from"><span class="from-l">{c.wallet.fromLabel} </span><ProviderLogo name={r.from} lang={lang} /><span class="from-n">{r.from}</span></span></span>
-                  <span class="t-body c-2 cell-v"><span class="seal" data-scramble-at="5">{r.v}</span></span>
+                  <span class="t-body c-2 cell-v"><span class="seal" data-scramble-at="5" data-dots={Math.min(...c.wallet.rows.map((x) => [...x.v].length))}>{r.v}</span></span>
                 </div></div>
               </li>
             ))}
@@ -118,18 +118,18 @@ const caption = [
       )}
 
       {scene === 4 && (
-        /* One receipt, like a notification: who and what for, then the details that went, one by one, and last what
-           stayed private: the proof. */
+        /* One receipt, like a notification: who and what for, the details that went, and what stayed private. A record of
+           something already done, so it doesn't move. */
         <div class="card note">
           <div class="note-head">
             <span class="app ntile"><Mark size={22} /></span>
             <div class="note-id"><p class="t-headline">{c.receipt.title}</p><p class="t-sub c-2">{c.receipt.purpose}</p></div>
             <p class="t-foot c-2 time">{c.receipt.time}</p>
           </div>
-          <p class="receipt-facts">{c.receipt.shared.map((x, i) => (
-            <span class="pill-fact t-foot appear at-1" style={`--delay: ${i * 0.25}s`}><span class="pill-sym" set:html={svg(x.icon)} />{x.t}</span>
+          <p class="receipt-facts">{c.receipt.shared.map((x) => (
+            <span class="pill-fact t-foot"><span class="pill-sym" set:html={svg(x.icon)} />{x.t}</span>
           ))}</p>
-          <p class="t-foot c-2 not appear at-2"><span class="inline-g" set:html={svg('lock')} />{c.receipt.notShared}</p>
+          <p class="t-foot c-2 not"><span class="inline-g" set:html={svg('lock')} />{c.receipt.notShared}</p>
         </div>
       )}
 
