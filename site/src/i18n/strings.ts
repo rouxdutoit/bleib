@@ -104,7 +104,7 @@ const en = {
     scenes: [
       {
         h: ['Control what AI', 'knows about you.'],
-        p: 'Everything your AIs should know, in one place you keep.',
+        p: 'Everything your AIs are allowed to know, in one place you keep.',
         more: { to: 'how', hash: '#memory', label: 'One memory, every AI' },
       },
       {
@@ -300,7 +300,7 @@ const de: Strings = {
     scenes: [
       {
         h: ['Bestimme, was die KI', 'über dich weiß.'],
-        p: 'Alles, was deine KIs wissen sollen, an einem Ort, der bei dir bleibt.',
+        p: 'Alles, was deine KIs wissen dürfen, an einem Ort, der bei dir bleibt.',
         more: { to: 'how', hash: '#memory', label: 'Ein Gedächtnis, jede KI' },
       },
       {
